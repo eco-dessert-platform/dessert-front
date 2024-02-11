@@ -16,7 +16,7 @@ const getSearchResultQuery = async (keyword: string): Promise<getSearchResultQue
 
 export const useGetSearchResultQuery = (keyword: string) => {
     return useQuery<getSearchResultQueryProps, Error>({
-        queryKey: ['wishlists'],
+        queryKey: ['searchResult'],
         queryFn: () => getSearchResultQuery(keyword)
     });
 };

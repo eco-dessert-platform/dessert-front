@@ -7,12 +7,23 @@ import SearchResult from '../SearchResult';
 import { useGetSearchResultQuery } from '../../hooks/useGetSearchResultQuery';
 import SearchInput from '@/components/commons/inputs/SearchInput';
 import Back from '@/components/commons/header/assets/back_arrow.svg';
+import { ISearchType } from '../../types';
+import { useAddSearchKeywordQuery } from '../../hooks/useAddSearchKeyword';
 
-const ResultContainer = () => {
+interface recentDataProp {
+    recentData: ISearchType[];
+    bestData: ISearchType[];
+}
+
+const ResultContainer = ({ recentData, bestData }: recentDataProp) => {
+    console.log('recentData:', recentData);
+
     const [keyword, setKeyword] = useState<string>('');
     const { data, refetch } = useGetSearchResultQuery(keyword);
+    const save = useAddSearchKeywordQuery();
 
     console.log('검색결과', JSON.stringify(data?.boards));
+    console.log('검색 결과', JSON.stringify(save.mutate(keyword)));
 
     const goBackHandler = () => {
         window.history.back();
@@ -20,8 +31,9 @@ const ResultContainer = () => {
 
     useEffect(() => {
         refetch();
+        save.mutate(keyword);
         console.log(keyword);
-    }, [keyword]);
+    }, [keyword, refetch, save]);
 
     return (
         <>
@@ -40,8 +52,8 @@ const ResultContainer = () => {
                 />
             ) : (
                 <>
-                    <ServerRecentKeyword />
-                    <ServerPopularKeyword />
+                    <ServerRecentKeyword recentKeywordList={recentData} />
+                    <ServerPopularKeyword bestKeywordList={bestData} />
                 </>
             )}
         </>

@@ -1,9 +1,14 @@
 import ResultContainer from '../client/ResultContainer';
+import { ISearchType } from '../types';
 
-const ServerHome = () => {
+interface recentDataProp {
+    recentData: ISearchType[];
+    bestData: ISearchType[];
+}
+const ServerHome = async ({ recentData, bestData }: recentDataProp) => {
     return (
         <>
-            <ResultContainer />
+            <ResultContainer recentData={recentData} bestData={bestData} />
         </>
     );
 };

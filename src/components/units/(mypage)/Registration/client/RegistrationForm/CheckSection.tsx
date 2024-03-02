@@ -50,10 +50,10 @@ const CheckSection = () => {
         <span className="text-base text-gray-900">모두 동의합니다.</span>
       </CheckBox>
       <hr />
-      <CheckBox isChecked={agree.isTermsOfServiceAccepted} onChange={onChangeService}>
+      <CheckBox required isChecked={agree.isTermsOfServiceAccepted} onChange={onChangeService}>
         [필수] 서비스 이용약관
       </CheckBox>
-      <CheckBox isChecked={agree.isPersonalInfoConsented} onChange={onChangePersonalInfo}>
+      <CheckBox required isChecked={agree.isPersonalInfoConsented} onChange={onChangePersonalInfo}>
         [필수] 개인 정보 처리방침 및 수집이용 동의
       </CheckBox>
       <CheckBox isChecked={agree.isAllowingMarketing} onChange={onChangeMarketing}>

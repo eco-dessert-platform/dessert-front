@@ -3,6 +3,8 @@ import { IProductType } from '@/commons/types/productType';
 import BtnHeart from '@/components/commons/button/client/Btn_heart';
 import ToastPop from '@/components/commons/toasts/ToastPop';
 import { Dispatch, SetStateAction } from 'react';
+import { useRouter } from 'next/navigation';
+import { isLoggedIn } from '@/commons/utils/isLoggedIn';
 
 interface ProductImageProps {
   product: IProductType;
@@ -11,9 +13,12 @@ interface ProductImageProps {
 }
 export const ProductImage = ({ product, setIsModal, setProductId }: ProductImageProps) => {
   const { openPopup } = usePopup();
+  const router = useRouter();
 
   const handleClickHeart = (id: number) => (e: any) => {
     e.preventDefault();
+
+    if (!isLoggedIn()) return router.push('/login');
 
     if (product.isWished) {
       openPopup(<ToastPop content="이미 찜한 상품 입니다." />);

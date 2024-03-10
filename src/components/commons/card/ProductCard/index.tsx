@@ -10,6 +10,7 @@ import { ProductImage } from './client/ProductImage';
 import { ProductSummary } from './client/ProductSummary';
 import { ChooseWishListModal } from './client/ChooseWishListModal';
 import { BundleBadge } from '../../badge/BundleBadge';
+import { isLoggedIn } from '@/commons/utils/isLoggedIn';
 
 interface ProductCardProps {
   product: IProductType;
@@ -32,7 +33,7 @@ const ProductCard = ({ product, popular, ranking }: ProductCardProps) => {
         </div>
         <ProductSummary product={product} />
       </Link>
-      {isModal && (
+      {isModal && isLoggedIn() && (
         <ChooseWishListModal isModal={isModal} setIsModal={setIsModal} productId={productId} />
       )}
     </>

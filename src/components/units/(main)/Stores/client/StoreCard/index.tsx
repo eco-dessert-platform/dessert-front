@@ -3,12 +3,18 @@ import BtnStar from '@/components/commons/button/client/Btn_start';
 import { useAddWishStoreMutation } from '@/components/units/(main)/Stores/hooks/useAddWishStoreMutation';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import { isLoggedIn } from '@/commons/utils/isLoggedIn';
 
 const StoreCard = ({ data }: { data: WishStore }) => {
   const { mutate } = useAddWishStoreMutation();
+  const router = useRouter();
 
   const handleAddWishStore = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (!isLoggedIn()) return router.push('/login');
+
     mutate(data.storeId);
   };
 

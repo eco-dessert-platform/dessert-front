@@ -14,7 +14,9 @@ interface ServerMoreInfoItemProps {
   content: string;
 }
 
-const isLoggedIn = true;
+interface ServerMoreInfoProps {
+  isLoggedIn: boolean;
+}
 
 const INFOS = [
   { href: '/notifications', icon: <IconBell />, content: '공지사항' },
@@ -32,7 +34,7 @@ const ServerMoreInfoItem = ({ icon, content }: ServerMoreInfoItemProps) => {
   );
 };
 
-const ServerMoreInfo = () => {
+const ServerMoreInfo = ({ isLoggedIn }: ServerMoreInfoProps) => {
   const information = isLoggedIn ? INFOS : INFOS.slice(0, INFOS.length - 1);
 
   return (

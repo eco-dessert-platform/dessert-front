@@ -15,7 +15,7 @@ export const useWishStoreListQuery = () => {
     queryFn: ({ pageParam = 0 }: { pageParam: number }) => getWishStoreList({ pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, __, lastPageParam) => {
-      const nextPageParam = lastPage.lastPage === lastPageParam ? undefined : lastPageParam + 1;
+      const nextPageParam = lastPage.lastPage === lastPageParam - 1 ? undefined : lastPageParam + 1;
       return nextPageParam;
     },
     refetchOnMount: false,

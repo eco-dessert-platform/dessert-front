@@ -1,15 +1,30 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import * as API from '@/api';
 import { IWishStoreList } from '@/components/units/WishListDetail/types';
 
-const getWishStoreList = async (): Promise<IWishStoreList[]> => {
-  const result = await API.get<{ data: IWishStoreList[] }>('/likes/stores');
-  return result.data;
+const SIZE = 10;
+
+const getWishStoreList = async ({ pageParam }: { pageParam: number }) => {
+  const result = await API.get(`/likes/stores?size=${SIZE}&page=${pageParam}`);
+  return result.data as IWishStoreList;
 };
 
 export const useWishStoreListQuery = () => {
-  return useQuery<IWishStoreList[], Error>({
+  const { data, ...rest } = useInfiniteQuery({
     queryKey: ['wishStoreList'],
-    queryFn: getWishStoreList
+    queryFn: ({ pageParam = 0 }: { pageParam: number }) => getWishStoreList({ pageParam }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, __, lastPageParam) => {
+      const nextPageParam = lastPage.lastPage === lastPageParam ? undefined : lastPageParam + 1;
+      return nextPageParam;
+    },
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false
   });
+
+  const wishStoreList = data?.pages.map(page => page.contents).flat();
+
+  console.log(wishStoreList);
+  return { wishStoreList, ...rest };
 };

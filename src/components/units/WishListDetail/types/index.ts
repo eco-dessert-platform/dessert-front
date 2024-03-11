@@ -28,6 +28,12 @@ export interface IWishProductList {
 }
 
 export interface IWishStoreList {
+  contents: IWishStore[];
+  lastPage: number;
+  nextPage: number;
+}
+
+export interface IWishStore {
   storeId: number;
   storeName: string;
   introduce: string;

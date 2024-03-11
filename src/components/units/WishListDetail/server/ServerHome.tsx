@@ -8,7 +8,7 @@ interface ServerHomeProps {
 const ServerHome = async ({ folderId }: ServerHomeProps) => {
   return (
     <>
-      <Header title="찜 상세(임시)" />
+      <Header title="찜 상세" back />
       <WishDetail folderId={folderId} />
     </>
   );

@@ -1,9 +1,9 @@
 import * as API from '@/api/index';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
 interface WishData {
-  data: { folderId: number };
+  data?: { folderId: number };
   borderId: number | undefined;
 }
 
@@ -12,12 +12,17 @@ interface WishListReturn {
 }
 
 const addWish = async (data: WishData): Promise<AxiosResponse<WishListReturn>> => {
-  return API.patch<WishListReturn, WishData['data']>(`/boards/${data.borderId}/wish`, data.data);
+  return API.patch(`/boards/${data.borderId}/wish`, data.data);
 };
 
 export const useAddWishMutation = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['wishAdd'],
-    mutationFn: addWish
+    mutationFn: addWish,
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    }
   });
 };

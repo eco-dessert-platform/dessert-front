@@ -25,6 +25,5 @@ export const useWishStoreListQuery = () => {
 
   const wishStoreList = data?.pages.map(page => page.contents).flat();
 
-  console.log(wishStoreList);
   return { wishStoreList, ...rest };
 };

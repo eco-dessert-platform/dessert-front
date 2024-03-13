@@ -7,7 +7,6 @@ interface WishListReturn {
 }
 
 const deleteWish = async (boardId: number): Promise<AxiosResponse<WishListReturn>> => {
-  console.log(boardId);
   return API.put(`/boards/${boardId}/wish`, null);
 };
 

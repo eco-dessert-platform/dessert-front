@@ -28,6 +28,5 @@ export const useWishProductListQuery = (folderId: number, sort: string) => {
 
   const wishProductList = data?.pages.map(page => page.content).flat();
 
-  console.log(wishProductList);
   return { wishProductList, ...rest };
 };

@@ -58,7 +58,6 @@ const WishProducts = () => {
       );
     }
   };
-  console.log(wishStoreList);
   useEffect(() => {
     if (!inView) return;
     fetchNextPage();

@@ -6,7 +6,7 @@ import { revalidateTag } from 'next/cache';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
 
-const StoreCard = ({ data }: any) => {
+const StoreCard = ({ data, isWished }: any) => {
   const { mutate } = useAddWishStoreMutation();
   const { openToast } = useToast();
 
@@ -40,7 +40,7 @@ const StoreCard = ({ data }: any) => {
               <div className="text-sm font-semibold grow shrink basis-0 text-neutral-800 ">
                 {data.storeName}
               </div>
-              <BtnStar isLiked={data.isLiked} onClick={handleAddWishStore} />
+              <BtnStar isLiked={isWished ? isWished : data.isLiked} onClick={handleAddWishStore} />
             </div>
             <div className="text-xs font-normal text-neutral-500">{data.introduce}</div>
           </div>

@@ -121,7 +121,7 @@ const WishProducts = () => {
       ) : (
         <>
           <div className="w-full">
-            {wishStoreList?.map((data, i) => <StoreCard data={data} key={i} />)}
+            {wishStoreList?.map((data, i) => <StoreCard data={data} key={i} isWished />)}
           </div>
           {isFetchingNextPage ? <Loading /> : <div ref={ref}></div>}
         </>

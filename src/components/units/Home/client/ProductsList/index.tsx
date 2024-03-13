@@ -8,6 +8,7 @@ interface ProductsListProps {
 }
 
 const ProductsList = ({ bestProducts }: ProductsListProps) => {
+  console.log(bestProducts);
   return (
     <div className="flex flex-wrap w-[92%] m-auto  gap-x-[4%] gap-y-4">
       {bestProducts?.content?.map(product => (

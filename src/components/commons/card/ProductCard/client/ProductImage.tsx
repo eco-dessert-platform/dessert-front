@@ -1,9 +1,9 @@
 import useToast from '@/commons/hooks/useToast';
 import { IProductType } from '@/commons/types/productType';
 import BtnHeart from '@/components/commons/button/client/Btn_heart';
-import { useAddWishMutation } from '@/components/commons/card/ProductCard/hooks/useAddWishMutation';
+import { useDeleteWishMutation } from '@/components/commons/card/ProductCard/hooks/useDeleteWishMutation';
 import ToastPop from '@/components/commons/toasts/ToastPop';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
 
 interface ProductImageProps {
   product: IProductType;
@@ -13,20 +13,17 @@ interface ProductImageProps {
 export const ProductImage = ({ product, setIsModal, setProductId }: ProductImageProps) => {
   const { openToast } = useToast();
 
-  const { mutate: addWishMutate } = useAddWishMutation();
+  const { mutate: deleteWishMutate } = useDeleteWishMutation();
 
-  const handleClickHeart = (id: number) => (e: any) => {
+  const handleClickHeart = (id: number) => (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (product.isWished) {
-      addWishMutate(
-        { borderId: id },
-        {
-          onSuccess: () => {
-            openToast(<ToastPop content="찜한 상품이 삭제 되었습니다." />);
-          }
+      deleteWishMutate(id, {
+        onSuccess: () => {
+          openToast(<ToastPop content="찜한 상품이 삭제 되었습니다." />);
         }
-      );
+      });
     } else {
       setIsModal(true);
       setProductId(id);

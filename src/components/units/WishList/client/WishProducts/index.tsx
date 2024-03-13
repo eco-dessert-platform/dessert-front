@@ -58,7 +58,7 @@ const WishProducts = () => {
       );
     }
   };
-
+  console.log(wishStoreList);
   useEffect(() => {
     if (!inView) return;
     fetchNextPage();
@@ -84,8 +84,8 @@ const WishProducts = () => {
             </div>
 
             <div className="flex flex-wrap gap-x-[5%] gap-y-4">
-              {wishList?.map(wish => (
-                <WishFolder key={wish.folderId} wish={wish} isEdit={isEdit} />
+              {wishList?.map((wish, index) => (
+                <WishFolder key={wish.folderId} index={index} wish={wish} isEdit={isEdit} />
               ))}
             </div>
           </div>

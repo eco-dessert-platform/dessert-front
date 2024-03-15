@@ -4,12 +4,12 @@ const serverUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1`;
 const TMP_TOKEN =
   'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYmFuZ2xlYmJhbmdsZSIsImlhdCI6MTcxMDA2MzkyMSwiZXhwIjoxNzEwMDc0NzIxLCJpZCI6MTR9.mz9RqjBHd06sRYA7seuJeM29Go53i3yMTroLughoGPk';
 
-
+// 아래 모든 함수에서 accessToken 값을 인자로 받아서
 async function get(endpoint: string, init?: RequestInit | undefined) {
   const res = await fetch(`${serverUrl}${endpoint}`, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: TMP_TOKEN
+      Authorization: TMP_TOKEN // 여기로 넣어줌
     },
     ...init
   });

@@ -29,3 +29,13 @@ export const isWishModalState = atom<boolean>({
   key: 'isWishModalState',
   default: false
 });
+
+export const accessTokenState = atom<string>({
+  key: 'accessTokenState',
+  default: ''
+});
+
+export const isLoggedInState = atom<boolean>({
+  key: 'isLoggedInState',
+  default: false
+});

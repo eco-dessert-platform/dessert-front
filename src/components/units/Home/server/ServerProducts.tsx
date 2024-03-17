@@ -3,8 +3,18 @@ import ProductsList from '../client/ProductsList';
 import * as API from '@/api';
 
 const getBestProducts = async () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      Authorization:
+        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYmFuZ2xlYmJhbmdsZSIsImlhdCI6MTcxMDY1Mzk5OSwiZXhwIjoxNzEwNjY0Nzk5LCJpZCI6MjZ9.jr7QPtgTPVMD3vqrZJBeu9RilV2dwF0eWOv4w34FAGM',
+      'Content-Type': 'application/json',
+      cache: 'no-store'
+    }
+  };
+
   try {
-    const res = await fetch(`${API.serverUrl}/boards`, { cache: 'no-store' });
+    const res = await fetch(`${API.serverUrl}/boards`, requestOptions);
     const data = res.json();
     return data;
   } catch (err) {

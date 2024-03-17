@@ -10,7 +10,6 @@ interface LoginProps {
 const Login = ({ title, subTitle }: LoginProps) => {
   return (
     <div className="w-[91%] m-auto">
-      <div>헤더</div>
       <LogoBox />
       <div className="mb-20">
         <p className="text-base font-semibold text-center text-neutral-800 ">{title}</p>

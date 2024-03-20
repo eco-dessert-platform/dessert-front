@@ -2,6 +2,7 @@
 
 import { isCategoryTabState } from '@/atoms/atom';
 import CategoryTab from '@/components/commons/CategoryTab';
+import Loading from '@/components/commons/Loading';
 import Input from '@/components/commons/inputs/Input';
 import UpModal from '@/components/commons/modal/UpModal';
 import StoreCard from '@/components/units/(main)/Stores/client/StoreCard';
@@ -10,7 +11,8 @@ import WishFolder from '@/components/units/WishList/client/WishFolder';
 import { useAddWishListMutation } from '@/components/units/WishList/hooks/useAddWishListMutation';
 import { useGetWishListQuery } from '@/components/units/WishList/hooks/useGetWishListQuery';
 import { useWishStoreListQuery } from '@/components/units/WishListDetail/hooks/useWishStoreListQuery';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { useRecoilState } from 'recoil';
 
 const WishProducts = () => {
@@ -21,7 +23,10 @@ const WishProducts = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const { data: wishList, refetch } = useGetWishListQuery();
-  const { data: wishStoreList } = useWishStoreListQuery();
+  const { wishStoreList, isLoading, isError, fetchNextPage, isFetchingNextPage } =
+    useWishStoreListQuery();
+
+  const { ref, inView } = useInView();
 
   const { mutate } = useAddWishListMutation();
 
@@ -53,6 +58,18 @@ const WishProducts = () => {
       );
     }
   };
+  useEffect(() => {
+    if (!inView) return;
+    fetchNextPage();
+  }, [inView, fetchNextPage]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <div className="p-[16px]">Error</div>;
+  }
 
   return (
     <>
@@ -66,8 +83,8 @@ const WishProducts = () => {
             </div>
 
             <div className="flex flex-wrap gap-x-[5%] gap-y-4">
-              {wishList?.map(wish => (
-                <WishFolder key={wish.folderId} wish={wish} isEdit={isEdit} />
+              {wishList?.map((wish, index) => (
+                <WishFolder key={wish.folderId} index={index} wish={wish} isEdit={isEdit} />
               ))}
             </div>
           </div>
@@ -103,8 +120,9 @@ const WishProducts = () => {
       ) : (
         <>
           <div className="w-full">
-            {wishStoreList?.map((data, i) => <StoreCard data={data} key={i} />)}
+            {wishStoreList?.map((data, i) => <StoreCard data={data} key={i} isWished />)}
           </div>
+          {isFetchingNextPage ? <Loading /> : <div ref={ref}></div>}
         </>
       )}
     </>

@@ -1,18 +1,20 @@
 'use client';
 
-import { useState } from 'react';
 import Select from '@/components/commons/selects/Select';
+
+interface WishListSortSelectProps {
+  sort: string;
+  setSort: (_s: string) => void;
+}
 
 const OPTIONS = ['담은순', '인기순', '저가순'];
 
-const WishListSortSelect = () => {
-  const [selectedOption, setSelectedOption] = useState('담은순');
-
+const WishListSortSelect = ({ sort, setSort }: WishListSortSelectProps) => {
   const handleSelectChange = (newSelectedOption: string) => {
-    setSelectedOption(newSelectedOption);
+    setSort(newSelectedOption);
   };
 
-  return <Select options={OPTIONS} selectedOption={selectedOption} onChange={handleSelectChange} />;
+  return <Select options={OPTIONS} selectedOption={sort} onChange={handleSelectChange} />;
 };
 
 export default WishListSortSelect;

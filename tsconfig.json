@@ -23,6 +23,13 @@
     },
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/commons/icons/index.tss", "src/commons/hooks/usePopup.tsㅌ"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/commons/icons/index.tss",
+    "src/commons/hooks/usePopup.ts"
+  ],
   "exclude": ["node_modules"]
 }

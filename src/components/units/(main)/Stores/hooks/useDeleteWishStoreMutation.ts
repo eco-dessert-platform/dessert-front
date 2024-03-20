@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addWishStore } from '../api/addWishStore';
+import { deleteWishStore } from '@/components/units/(main)/Stores/api/deleteWishStore';
 
-export const useAddWishStoreMutation = () => {
+export const useDeleteWishStoreMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['wishStoreAdd'],
-    mutationFn: addWishStore,
+    mutationKey: ['wishStoreDelete'],
+    mutationFn: deleteWishStore,
     onSuccess: () => {
       queryClient.invalidateQueries();
     }

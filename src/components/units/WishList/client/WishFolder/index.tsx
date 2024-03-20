@@ -14,9 +14,10 @@ import Input from '@/components/commons/inputs/Input';
 interface WishFolderProps {
   wish: IWishList;
   isEdit: boolean;
+  index: number;
 }
 
-const WishFolder = ({ wish, isEdit }: WishFolderProps) => {
+const WishFolder = ({ wish, isEdit, index }: WishFolderProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [title, setTitle] = useState('');
   const [folderId, setFolderId] = useState(0);
@@ -27,7 +28,7 @@ const WishFolder = ({ wish, isEdit }: WishFolderProps) => {
   const { refetch } = useGetWishListQuery();
 
   const handleToggleEditModal = (folderId?: number) => (e: MouseEvent<HTMLElement>) => {
-    if (!isEdit) {
+    if (!isEdit || index === 0) {
       return;
     }
 
@@ -103,7 +104,7 @@ const WishFolder = ({ wish, isEdit }: WishFolderProps) => {
                 <WishLogo />
               </div>
             )}
-            {isEdit && (
+            {isEdit && index !== 0 && (
               <button
                 className="absolute top-3 right-3"
                 onClick={handleDeleteWishList(wish.folderId)}
@@ -116,7 +117,9 @@ const WishFolder = ({ wish, isEdit }: WishFolderProps) => {
             className="flex items-center justify-between mt-1.5"
             onClick={handleToggleEditModal(wish.folderId)}
           >
-            <h3 className={`text-sm font-semibold text-color-Gray900 ${isEdit && 'underline'}`}>
+            <h3
+              className={`text-sm font-semibold text-color-Gray900 ${isEdit && index !== 0 && 'underline'}`}
+            >
               {wish.title}
             </h3>
             <span className="text-xs font-normal text-color-Gray500">({wish.count})</span>

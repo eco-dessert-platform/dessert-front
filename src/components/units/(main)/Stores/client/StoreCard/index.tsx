@@ -5,19 +5,40 @@ import ToastPop from '@/components/commons/toasts/ToastPop';
 import { revalidateTag } from 'next/cache';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
+import { useDeleteWishStoreMutation } from '@/components/units/(main)/Stores/hooks/useDeleteWishStoreMutation';
 
-const StoreCard = ({ data }: any) => {
-  const { mutate } = useAddWishStoreMutation();
+const StoreCard = ({ data, isWished }: any) => {
+  const { mutate: addWishStore } = useAddWishStoreMutation();
+  const { mutate: deleteWishStore } = useDeleteWishStoreMutation();
   const { openToast } = useToast();
 
   const handleAddWishStore = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      mutate(
+      addWishStore(
         { storeId: data.storeId },
         {
           onSuccess: () => {
             openToast(<ToastPop content="💖 스토어가 찜 목록에 추가 되었습니다." isAddWish />);
+            revalidateTag('storeWish');
+          }
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  console.log(data.isWished);
+
+  const handleDeleteWishStore = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      deleteWishStore(
+        { storeId: data.storeId },
+        {
+          onSuccess: () => {
+            openToast(<ToastPop content="스토어가 찜 목록에서 삭제 되었습니다." />);
             revalidateTag('storeWish');
           }
         }
@@ -40,7 +61,10 @@ const StoreCard = ({ data }: any) => {
               <div className="text-sm font-semibold grow shrink basis-0 text-neutral-800 ">
                 {data.storeName}
               </div>
-              <BtnStar isLiked={data.isLiked} onClick={handleAddWishStore} />
+              <BtnStar
+                isLiked={isWished ? isWished : data.isWished}
+                onClick={data.isWished || isWished ? handleDeleteWishStore : handleAddWishStore}
+              />
             </div>
             <div className="text-xs font-normal text-neutral-500">{data.introduce}</div>
           </div>

@@ -2,25 +2,20 @@ import * as API from '@/api/index';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
-interface WishData {
-  data?: { folderId: number };
-  borderId: number | undefined;
-}
-
 interface WishListReturn {
   message: string;
 }
 
-const addWish = async (data: WishData): Promise<AxiosResponse<WishListReturn>> => {
-  return API.post(`/boards/${data.borderId}/wish`, data.data);
+const deleteWish = async (boardId: number): Promise<AxiosResponse<WishListReturn>> => {
+  return API.put(`/boards/${boardId}/wish`, null);
 };
 
-export const useAddWishMutation = () => {
+export const useDeleteWishMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['wishAdd'],
-    mutationFn: addWish,
+    mutationKey: ['wishDelete'],
+    mutationFn: deleteWish,
     onSuccess: () => {
       queryClient.invalidateQueries();
     }

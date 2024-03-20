@@ -21,6 +21,7 @@ export const ChooseWishListModal = ({
   const [isAddView, setIsAddView] = useState(false);
   const [title, setTitle] = useState('');
   const { data, refetch } = useGetWishListQuery();
+
   const { mutate: addWishListMutate } = useAddWishListMutation();
   const { mutate: addWishMutate } = useAddWishMutation();
   const { openToast } = useToast();
@@ -45,7 +46,6 @@ export const ChooseWishListModal = ({
       { borderId: productId, data: { folderId: id } },
       {
         onSuccess: () => {
-          refetch();
           setIsModal(false);
           openToast(<ToastPop content="💖 찜한 상품이 추가 되었습니다." isAddWish />);
         }
@@ -69,6 +69,7 @@ export const ChooseWishListModal = ({
       );
     }
   };
+
   return (
     <UpModal isVisible={isModal} title="찜 추가" toggleModal={handleModalToggle}>
       {isAddView ? (

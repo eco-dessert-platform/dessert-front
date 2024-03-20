@@ -24,7 +24,8 @@ const nextConfig = {
     remotePatterns: [
       { hostname: 'bbangle-bucket.kr.object.ncloudstorage.com' },
       { hostname: 'firebasestorage.googleapis.com' },
-      { hostname: 'k.kakaocdn.net' }
+      { hostname: 'k.kakaocdn.net' },
+      { hostname: 'bbangree-oven.cdn.ntruss.com' }
     ]
   }
 };

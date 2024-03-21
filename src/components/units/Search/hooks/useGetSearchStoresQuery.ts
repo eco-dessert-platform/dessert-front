@@ -1,48 +1,9 @@
-import * as API from '@/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { IAllStoreType } from '@/commons/types/allstoreType';
-
-interface GetSearchStoresProps {
-  keyword: string;
-  pageParam: number;
-}
+import { getSearchStores } from '@/components/units/Search/api/getSearchStores';
 
 interface UseGetSearchStoresQueryProps {
   keyword: string;
 }
-
-const getSearchStores = async ({
-  keyword,
-  pageParam
-}: GetSearchStoresProps): Promise<IAllStoreType> => {
-  try {
-    if (!keyword)
-      return {
-        content: [],
-        itemAllCount: 0,
-        limitItemCount: 0,
-        currentItemCount: 0,
-        pageNumber: 0,
-        existNextPage: false
-      };
-
-    const { data } = await API.get<IAllStoreType>(
-      `/search/stores?keyword=${keyword}&page=${pageParam}`
-    );
-
-    return data;
-  } catch (error) {
-    console.error(error);
-    return {
-      content: [],
-      itemAllCount: 0,
-      limitItemCount: 0,
-      currentItemCount: 0,
-      pageNumber: 0,
-      existNextPage: false
-    };
-  }
-};
 
 export const useGetSearchStoresQuery = ({ keyword }: UseGetSearchStoresQueryProps) => {
   const { data, ...rest } = useInfiniteQuery({

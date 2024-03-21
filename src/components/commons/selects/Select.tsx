@@ -30,27 +30,26 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
 
   return (
     <div
-      className="selectEl relative inline-block text-gray-900 text-xs font-medium"
+      className="selectEl relative inline-block text-gray-900 text-[12px] font-medium leading-150 tracking-tight-2"
       onClick={handleSelectClick}
     >
-      <div className="flex items-center p-[8px] pl-[12px] border-solid border-[1px] border-gray-200 rounded-[50px] cursor-pointer">
-        <span className="mr-[4px]">{selectedOption}</span>
+      <div className="flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] border-gray-200 rounded-[50px] cursor-pointer">
+        {selectedOption}
         <span className={`${isExpended ? 'rotate-180 transition-all' : ''}`}>
           <DownBtn />
         </span>
       </div>
       {isExpended && (
-        <ul className="absolute mt-1 top-full z-[101] rounded-[10px] shadow bg-color-White">
+        <ul className="absolute mt-[8px] top-full left-1/2 -translate-x-2/4 z-[101] w-max rounded-[10px] shadow bg-white">
           {options.map((option, index) => {
             const firstOption = index === 0;
             const lastOption = index === options.length - 1;
 
             const borderStyle = lastOption ? 'border-b-0' : 'border-b-[1px]';
-            const hoverRoundedStyle = firstOption
-              ? 'hover:rounded-t-[10px]'
-              : lastOption
-                ? 'hover:rounded-b-[10px]'
-                : '';
+
+            let hoverRoundedStyle = '';
+            if (firstOption) hoverRoundedStyle = 'hover:rounded-t-[10px]';
+            if (lastOption) hoverRoundedStyle = 'hover:rounded-b-[10px]';
 
             return (
               <li

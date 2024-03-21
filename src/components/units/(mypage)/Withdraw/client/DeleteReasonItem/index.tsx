@@ -15,7 +15,12 @@ const DeleteReasonItem = ({ content }: DeleteReasonItemProps) => {
   };
 
   return (
-    <CheckBox isChecked={isChecked} onChange={handleCheckClick}>
+    <CheckBox
+      name="delete-reason"
+      value={content}
+      isChecked={isChecked}
+      onChange={handleCheckClick}
+    >
       {content}
     </CheckBox>
   );

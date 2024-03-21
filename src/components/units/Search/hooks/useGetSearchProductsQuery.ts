@@ -1,54 +1,11 @@
-import * as API from '@/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { IFilterType } from '@/components/units/(main)/Products/types';
-import { IAllProductsType } from '@/commons/types/allProductsType';
-import { transformFilterValueToQueryString } from '@/commons/utils/transformFilterValueToQueryString';
-
-interface GetSearchProductsProps {
-  keyword: string;
-  filterValue: IFilterType;
-  pageParam: number;
-}
+import { getSearchProducts } from '@/components/units/Search/api/getSearchProducts';
 
 interface UseGetSearchProductsQueryProps {
   keyword: string;
   filterValue: IFilterType;
 }
-
-const getSearchProducts = async ({
-  keyword,
-  filterValue,
-  pageParam
-}: GetSearchProductsProps): Promise<IAllProductsType> => {
-  try {
-    if (!keyword)
-      return {
-        content: [],
-        itemAllCount: 0,
-        limitItemCount: 0,
-        currentItemCount: 0,
-        pageNumber: 0,
-        existNextPage: false
-      };
-
-    const queryString = transformFilterValueToQueryString(filterValue);
-    const { data } = await API.get<IAllProductsType>(
-      `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
-    );
-
-    return data;
-  } catch (error) {
-    console.error(error);
-    return {
-      content: [],
-      itemAllCount: 0,
-      limitItemCount: 0,
-      currentItemCount: 0,
-      pageNumber: 0,
-      existNextPage: false
-    };
-  }
-};
 
 export const useGetSearchProductsQuery = ({
   keyword,

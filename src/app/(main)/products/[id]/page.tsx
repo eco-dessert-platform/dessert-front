@@ -1,19 +1,14 @@
 import DetailHome from '@/components/units/Detail/server/DetailHome';
-import * as API from '@/api';
+import API from '@/api';
+import { IProductDetailType } from '@/components/units/Detail/types';
 
-async function GetDetail(params: { id: string }) {
-  try {
-    const res = await fetch(`${API.serverUrl}/boards/${params.id}`);
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
+async function getDetail(params: { id: string }) {
+  const data: IProductDetailType = await API.get(`/boards/${params.id}`);
+  return data;
 }
 
-const ProductDetail = async ({ params }: { params?: any }) => {
-  const data = await GetDetail(params);
+const ProductDetail = async ({ params }: { params: { id: string } }) => {
+  const data = await getDetail(params);
   return <DetailHome data={data} />;
 };
 

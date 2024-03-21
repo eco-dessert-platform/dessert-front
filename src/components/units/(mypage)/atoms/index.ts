@@ -26,8 +26,8 @@ export const nicknameState = atom<string>({
   default: undefined
 });
 
-export const birthdateState = atom<string>({
-  key: 'birthdate',
+export const birthDateState = atom<string>({
+  key: 'birthDate',
   default: undefined
 });
 
@@ -38,13 +38,13 @@ export const registrationFormState = selector<RegistrationRequest>({
     const profileImg = get(profileImgState);
     const nickname = get(nicknameState);
     const phoneNumber = get(phoneNumberState);
-    const birthdate = get(birthdateState);
+    const birthDate = get(birthDateState);
     const agree = get(agreeState);
 
     return {
       profileImg,
       nickname,
-      birthdate,
+      birthDate,
       phoneNumber,
       ...agree
     };
@@ -58,7 +58,7 @@ export const updateFormState = selector<MyProfileUpdateRequest>({
     const profileImg = get(profileImgState);
     const nickname = get(nicknameState);
     const phoneNumber = get(phoneNumberState);
-    const birthDate = get(birthdateState);
+    const birthDate = get(birthDateState);
 
     return {
       profileImg,

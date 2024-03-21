@@ -46,19 +46,19 @@ export function transformTagToKr(tag: string): string {
 }
 export function transformTagToEng(tag: string): string {
   if (tag === '글루텐프리') {
-    return 'glutenFree';
+    return 'glutenFreeTag';
   }
   if (tag === '고단백') {
-    return 'highProtein';
+    return 'highProteinTag';
   }
   if (tag === '비건') {
-    return 'vegan';
+    return 'veganTag';
   }
   if (tag === '무설탕') {
-    return 'sugarFree';
+    return 'sugarFreeTag';
   }
   if (tag === '키토제닉') {
-    return 'ketogenic';
+    return 'ketogenicTag';
   }
   return tag;
 }

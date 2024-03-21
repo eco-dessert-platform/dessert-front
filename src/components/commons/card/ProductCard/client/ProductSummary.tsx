@@ -7,17 +7,17 @@ interface ProductSummaryProps {
 
 export const ProductSummary = ({ product }: ProductSummaryProps) => {
   return (
-    <>
-      <p className="text-xs font-normal text-color-Gray400 mt-[6px] mb-[3px]">
+    <div className="mt-[6px]">
+      <p className="mb-[2px] text-12 font-medium text-gray-400 leading-130 tracking-tight-2">
         {product?.storeName}
       </p>
-      <h3 className="w-full mb-1 overflow-hidden text-xs font-normal overflow-ellipsis whitespace-nowrap">
+      <h3 className="mb-[2px] overflow-hidden text-12 font-normal overflow-ellipsis whitespace-nowrap leading-130 tracking-tight-2">
         {product.title}
       </h3>
-      <p className="mb-1 text-sm font-medium text-color-Gray900 ">
+      <p className="mb-[4px] text-14 font-medium text-gray-900 leading-120 tracking-tight-4">
         {product.price.toLocaleString()}원
       </p>
       {product.tags && <TagSwiper tag={product.tags} />}
-    </>
+    </div>
   );
 };

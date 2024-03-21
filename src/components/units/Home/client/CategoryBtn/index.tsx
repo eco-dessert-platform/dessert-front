@@ -22,11 +22,11 @@ const CategoryBtn = ({ name, icon, isCategoryTab }: CategoryProps) => {
   return (
     <Link
       href="/products"
-      className="flex flex-col justify-start items-center gap-1 py-3"
+      className="flex flex-col justify-between items-center gap-1 py-[11px]"
       onClick={handleClickBtn}
     >
       <div>{icon}</div>
-      <div className="text-sm font-normal leading-tight text-gray-900">{name}</div>
+      <div className="text-14 font-normal leading-140 tracking-tight-4 text-gray-800">{name}</div>
     </Link>
   );
 };

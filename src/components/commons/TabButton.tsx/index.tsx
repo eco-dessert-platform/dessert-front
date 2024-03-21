@@ -10,21 +10,13 @@ interface TabButtonProps {
 const TabButton = ({ name, ProductName, handleClickBtn }: TabButtonProps) => {
   return (
     <button
-      className="inline-flex flex-col items-start self-stretch justify-start grow shrink basis-0"
+      className={`inline-block w-1/2 h-full text-center text-14 leading-150 tracking-tight-2 ${
+        ProductName === name ? 'text-gray-900 font-medium' : 'text-gray-500 font-normal'
+      }`}
       onClick={handleClickBtn}
       name={name}
     >
-      <div className="self-stretch grow shrink basis-0 py-2.5 justify-center items-center inline-flex">
-        <div
-          className={`${
-            ProductName === name
-              ? 'text-color-Gray900 font-medium'
-              : 'text-color-Gray500 font-nomal'
-          } text-sm leading-[21px]`}
-        >
-          {name}
-        </div>
-      </div>
+      {name}
     </button>
   );
 };

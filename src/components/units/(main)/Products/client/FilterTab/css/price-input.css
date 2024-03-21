@@ -1,0 +1,11 @@
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  background-color: #f04c28;
+  box-sizing: border-box;
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+}

@@ -1,17 +1,18 @@
 'use client';
 
-import Logo from '@/commons/assets/logo.svg';
 import Link from 'next/link';
+import Logo from '@/commons/assets/logo.svg';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 const LogoContainer = () => {
   return (
-    <div className="w-[92%] m-auto pt-2.5 bg-color-White">
+    <PaddingWrapper className="pt-[10px] bg-white">
       <h1>
         <Link href="/">
           <Logo />
         </Link>
       </h1>
-    </div>
+    </PaddingWrapper>
   );
 };
 

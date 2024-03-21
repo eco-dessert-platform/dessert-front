@@ -1,11 +1,12 @@
 import UpModal from '@/components/commons/modal/UpModal';
 import { useAddWishListMutation } from '@/components/units/WishList/hooks/useAddWishListMutation';
-import { useGetWishListQuery } from '@/components/units/WishList/hooks/useGetWishListQuery';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { useAddWishMutation } from '../hooks/useAddWishMutation';
 import PlusIcon from '../assets/plus-icon.svg';
-import ToastPop from '@/components/commons/toasts/ToastPop';
+import ToastPop from '@/components/commons/ToastPop';
 import useToast from '@/commons/hooks/useToast';
+import Link from 'next/link';
+import { useGetWishListQuery } from '@/components/units/WishList/hooks/useGetWishListQuery';
 
 interface ChooseWishListModalProps {
   isModal: boolean;
@@ -21,7 +22,6 @@ export const ChooseWishListModal = ({
   const [isAddView, setIsAddView] = useState(false);
   const [title, setTitle] = useState('');
   const { data, refetch } = useGetWishListQuery();
-
   const { mutate: addWishListMutate } = useAddWishListMutation();
   const { mutate: addWishMutate } = useAddWishMutation();
   const { openToast } = useToast();
@@ -47,7 +47,14 @@ export const ChooseWishListModal = ({
       {
         onSuccess: () => {
           setIsModal(false);
-          openToast(<ToastPop content="💖 찜한 상품이 추가 되었습니다." isAddWish />);
+          openToast(
+            <ToastPop>
+              <div className="flex justify-between">
+                <span>💖 찜한 상품이 추가 되었습니다.</span>
+                <Link href="/wishlist">편집</Link>
+              </div>
+            </ToastPop>
+          );
         }
       }
     );
@@ -62,7 +69,7 @@ export const ChooseWishListModal = ({
             refetch();
             setIsAddView(false);
           },
-          onError: (err: any) => {
+          onError: err => {
             alert(err.response.data.message);
           }
         }

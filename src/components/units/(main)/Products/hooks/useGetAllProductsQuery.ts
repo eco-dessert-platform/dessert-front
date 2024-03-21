@@ -18,6 +18,7 @@ export const useGetAllProductsQuery = (query: IFilterType) => {
   });
 
   const products = data?.pages.map(page => page.content).flat();
+  const itemCount = data?.pages[0]?.numberOfElements || 0;
 
-  return { products, ...rest };
+  return { products, itemCount, ...rest };
 };

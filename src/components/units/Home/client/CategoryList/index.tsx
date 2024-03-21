@@ -1,6 +1,8 @@
 'use client';
 
 import { useRecoilState } from 'recoil';
+import { isCategoryTabStateNew } from '@/atoms/atom';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 import CategoryBtn from '../CategoryBtn';
 import AllIcon from './assets/all-icon.svg';
 import BigenIcon from './assets/bigen-icon.svg';
@@ -15,7 +17,6 @@ import NoSugarIcon from './assets/noSugar-icon.svg';
 import ProteinIcon from './assets/protein-icon.svg';
 import TartIcon from './assets/tart-icon.svg';
 import YogurtIcon from './assets/yogurt.svg';
-import { isCategoryTabStateNew } from '@/atoms/atom';
 
 const categoryMenu = [
   {
@@ -122,7 +123,7 @@ const CategoryList = () => {
   const [isCategoryTab] = useRecoilState(isCategoryTabStateNew);
 
   return (
-    <div className={`grid w-[92%] m-auto py-4 ${isCategoryTab ? 'grid-cols-4' : 'grid-cols-3'}`}>
+    <PaddingWrapper className={`grid pt-[16px] ${isCategoryTab ? 'grid-cols-4' : 'grid-cols-3'}`}>
       {categoryMenu
         .filter(category => category.category === (isCategoryTab ? '상품별' : '성분별'))
         .map(category => (
@@ -133,7 +134,7 @@ const CategoryList = () => {
             isCategoryTab={isCategoryTab}
           />
         ))}
-    </div>
+    </PaddingWrapper>
   );
 };
 

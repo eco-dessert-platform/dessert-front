@@ -2,14 +2,15 @@
 
 import Image from 'next/image';
 import LoadingGif from '@/../public/assets/loading.gif';
+import BackDrop from '../backgrounds/BackDrop';
 
 const Loading = () => {
   return (
-    <div className="fixed inset-0 z-[5000] bg-black bg-opacity-50 flex justify-center items-center">
+    <BackDrop isVisible={true}>
       <div className="relative w-[50px] h-[50px]">
         <Image src={LoadingGif} alt="Loading..." layout="fill" objectFit="contain" />
       </div>
-    </div>
+    </BackDrop>
   );
 };
 

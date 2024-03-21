@@ -37,4 +37,5 @@ export interface IWishStore {
   storeId: number;
   storeName: string;
   introduce: string;
+  profile: string;
 }

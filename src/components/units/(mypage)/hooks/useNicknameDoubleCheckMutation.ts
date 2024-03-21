@@ -1,10 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
-import * as API from '@/api';
+import API from '@/api';
 import { NicknameDoubleCheckResponse } from '../Update/types';
 
 const useNicknameDoubleCheckMutation = () => {
-  const mutationFn = (nickname: string) =>
-    API.post<NicknameDoubleCheckResponse, null>(`/profile/doublecheck?nickname=${nickname}`, null);
+  const mutationFn = async (nickname: string) => {
+    const data: NicknameDoubleCheckResponse = await API.get(
+      `/profile/doublecheck?nickname=${nickname}`
+    );
+    return data;
+  };
 
   return useMutation({
     mutationFn

@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { fetchPopularKeywords } from '@/components/units/Search/api/fetchPopularKeywords';
+import { getPopularKeywords } from '@/components/units/Search/api/getPopularKeywords';
 
 const PopularKeyword = async () => {
-  const popularKeywords = await fetchPopularKeywords();
+  const popularKeywords = await getPopularKeywords();
 
   return (
     <div className="flex flex-col gap-[16px]">

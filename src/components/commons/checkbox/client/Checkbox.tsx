@@ -30,7 +30,7 @@ const CheckBox = ({
     <label
       htmlFor={id}
       className={twMerge(
-        'flex text-gray-800 text-xs font-normal cursor-pointer items-center',
+        'flex items-center gap-[6px] text-gray-900 text-14 font-normal leading-150 tracking-tight-2 cursor-pointer',
         className
       )}
     >
@@ -45,7 +45,7 @@ const CheckBox = ({
         hidden
       />
 
-      <span className="mr-[0.5rem]">{isChecked ? <On /> : <Off />}</span>
+      <span>{isChecked ? <On /> : <Off />}</span>
       {children}
     </label>
   );

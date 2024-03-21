@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import Icon from '../../Icon';
+import { CloseIcon } from '../../Icon';
 import useModal from '@/commons/hooks/useModal';
 import { motion } from 'framer-motion';
 
@@ -18,12 +18,14 @@ const UpModalNewVer = ({ title, children }: UpModalProps) => {
       initial={{ bottom: '-100%' }}
       animate={{ bottom: 0 }}
       exit={{ bottom: '-100%' }}
-      className="absolute w-full max-w-[600px] max-h-[76vh] bg-white z-[5001] rounded-t-2xl pb-4"
+      className="absolute w-full max-w-[600px] bg-white z-[5001] rounded-t-[12px]"
     >
-      <div className="relative py-4">
-        <h4 className="text-center">{title}</h4>
-        <button className="absolute -translate-y-1/2 right-5 top-1/2" onClick={closeModal}>
-          <Icon.close />
+      <div className="flex items-center px-[16px] py-[10px]">
+        <h4 className="flex-1 text-center font-medium text-16 leading-150 tracking-tight-2">
+          {title}
+        </h4>
+        <button onClick={closeModal}>
+          <CloseIcon className="cursor-pointer" />
         </button>
       </div>
       {children}

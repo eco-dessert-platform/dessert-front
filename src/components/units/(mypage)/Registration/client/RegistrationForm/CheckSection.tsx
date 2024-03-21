@@ -46,17 +46,31 @@ const CheckSection = () => {
 
   return (
     <div className="flex flex-col gap-[16px] w-full">
-      <CheckBox isChecked={allChecked} onChange={checkAll}>
+      <CheckBox name="" isChecked={allChecked} onChange={checkAll}>
         <span className="text-base text-gray-900">모두 동의합니다.</span>
       </CheckBox>
       <hr />
-      <CheckBox required isChecked={agree.isTermsOfServiceAccepted} onChange={onChangeService}>
+      <CheckBox
+        name="isTermsOfServiceAccepted"
+        required
+        isChecked={agree.isTermsOfServiceAccepted}
+        onChange={onChangeService}
+      >
         [필수] 서비스 이용약관
       </CheckBox>
-      <CheckBox required isChecked={agree.isPersonalInfoConsented} onChange={onChangePersonalInfo}>
+      <CheckBox
+        name="isPersonalInfoConsented"
+        required
+        isChecked={agree.isPersonalInfoConsented}
+        onChange={onChangePersonalInfo}
+      >
         [필수] 개인 정보 처리방침 및 수집이용 동의
       </CheckBox>
-      <CheckBox isChecked={agree.isAllowingMarketing} onChange={onChangeMarketing}>
+      <CheckBox
+        name="isAllowingMarketing"
+        isChecked={agree.isAllowingMarketing}
+        onChange={onChangeMarketing}
+      >
         [선택] 마케팅 수신 정보 및 이용 동의
       </CheckBox>
     </div>

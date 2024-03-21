@@ -1,8 +1,8 @@
 'use client';
 
-import BackDrop from '@/components/commons/backgrounds/BackDrop';
 import { MouseEvent, ReactNode } from 'react';
-import { GrClose } from 'react-icons/gr';
+import BackDrop from '@/components/commons/backgrounds/BackDrop';
+import { CloseIcon } from '@/components/commons/Icon';
 
 interface UpModalProps {
   title: string;
@@ -20,14 +20,16 @@ const UpModal = ({ title, children, isVisible, toggleModal }: UpModalProps) => {
     <>
       <BackDrop isVisible={isVisible} onClick={handleToggle} />
       <div
-        className={`w-full max-w-[600px] max-h-[76vh] bg-color-White fixed left-1/2 -translate-x-1/2 ${
+        className={`w-full max-w-[600px] max-h-[76vh] bg-white fixed left-1/2 -translate-x-1/2 ${
           isVisible ? 'bottom-0' : '-bottom-full'
-        } z-[5001] rounded-tl-2xl rounded-tr-2xl transition-all pb-4`}
+        } z-[9999] rounded-t-[12px] transition-all pb-4`}
       >
-        <div className="relative py-4">
-          <h4 className="text-center">{title}</h4>
-          <button className="absolute -translate-y-1/2 right-5 top-1/2" onClick={handleToggle}>
-            <GrClose />
+        <div className="flex items-center px-[16px] py-[10px]">
+          <h4 className="flex-1 text-center font-medium text-16 leading-150 tracking-tight-2">
+            {title}
+          </h4>
+          <button onClick={handleToggle}>
+            <CloseIcon className="cursor-pointer" />
           </button>
         </div>
         {children}

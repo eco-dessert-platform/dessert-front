@@ -1,6 +1,5 @@
-import * as API from '@/api/index';
+import API from '@/api';
 import { useMutation } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
 
 interface WishListData {
   folderId: number;
@@ -13,8 +12,11 @@ interface WishListReturn {
   message: string;
 }
 
-const updateWishList = async (data: WishListData): Promise<AxiosResponse<WishListReturn>> => {
-  return API.patch<WishListReturn, WishListData['data']>(`/wishLists/${data.folderId}`, data.data);
+const updateWishList = async (wishList: WishListData): Promise<WishListReturn> => {
+  const data: WishListReturn = await API.patch(`/wishLists/${wishList.folderId}`, {
+    body: JSON.stringify(wishList.data)
+  });
+  return data;
 };
 
 export const useUpdateWishListMutation = () => {

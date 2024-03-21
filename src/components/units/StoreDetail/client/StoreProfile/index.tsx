@@ -16,12 +16,12 @@ function StoreProfile({ data }: StoreProfileProps) {
         className="w-[46px] h-[46px] bg-cover bg-center rounded-md"
         style={{ backgroundImage: `url(${data?.store.profile})` }}
       ></div>
-      <div className=" flex flex-col gap-[4px]">
+      <div className="flex flex-col gap-[4px]">
         <div className="w-full flex items-center justify-center gap-[2px]">
-          <div className="text-neutral-800 text-base font-semibold">{data?.store.storeName}</div>
+          <div className="text-gray-900 text-16 font-bold">{data?.store.storeName}</div>
           <BtnStar isLiked={isLiked} onClick={() => setIsLiked(!isLiked)} />
         </div>
-        <p className="text-center text-neutral-500 text-xs font-normal">{data?.store.introduce}</p>
+        <p className="text-center text-gray-600 text-12 font-normal">{data?.store.introduce}</p>
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ const WishProducts = () => {
             refetch();
             handleModalToggle();
           },
-          onError: (err: any) => {
+          onError: err => {
             alert(err.response.data.message);
           }
         }

@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   button?: ReactNode;
-  label: string;
+  label?: string;
 }
 
 const Input = ({ id, label, button, required, className, ...props }: Props) => {
@@ -12,9 +12,11 @@ const Input = ({ id, label, button, required, className, ...props }: Props) => {
 
   return (
     <div id={id} className="w-full">
-      <label className="inline-block mb-[6px]" htmlFor={inputId}>
-        {label} {required && <span className="text-primaryOrangeRed">*</span>}
-      </label>
+      {label && (
+        <label className="inline-block mb-[6px]" htmlFor={inputId}>
+          {label} {required && <span className="text-primaryOrangeRed">*</span>}
+        </label>
+      )}
       <div className="relative w-full">
         <input
           id={inputId}

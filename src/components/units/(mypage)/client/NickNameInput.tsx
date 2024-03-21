@@ -22,7 +22,10 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
   };
 
   const checkDouble = () => {
-    if (nickname) mutate(nickname);
+    if (!nickname) {
+    }
+
+    mutate(nickname);
   };
 
   return (
@@ -42,7 +45,7 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
           </Button>
         }
       />
-      {data && <div className="text-xs mt-[4px] text-gray-600">{data?.data.message}</div>}
+      {data?.message && <div className="h-4 text-xs mt-[4px] text-gray-600">{data.message}</div>}
     </div>
   );
 };

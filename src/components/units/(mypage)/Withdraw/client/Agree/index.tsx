@@ -1,17 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import CheckBox from '@/components/commons/checkbox/client/Checkbox';
 
-const Agree = () => {
-  const [isChecked, setIsChecked] = useState(false);
+interface AgreeProps {
+  isChecked: boolean;
+  onChange: () => void;
+}
 
-  const handleCheckClick = () => {
-    setIsChecked(!isChecked);
-  };
-
+const Agree = ({ isChecked, onChange }: AgreeProps) => {
   return (
-    <CheckBox isChecked={isChecked} onChange={handleCheckClick}>
+    <CheckBox isChecked={isChecked} onChange={onChange}>
       <div
         className={`underline underline-offset-2 text-[12px] font-medium ${
           isChecked ? 'text-primaryOrangeRed' : 'text-gray-900'

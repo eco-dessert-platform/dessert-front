@@ -10,7 +10,8 @@
     "prepare": "husky install",
     "postinstall": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "check-types": "tsc --noemit"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -21,7 +22,6 @@
   "dependencies": {
     "@tanstack/react-query": "^5.8.4",
     "@tanstack/react-query-devtools": "^5.25.0",
-    "axios": "^1.6.5",
     "framer-motion": "^11.0.1",
     "next": "^14.1.1",
     "react": "^18.2.0",

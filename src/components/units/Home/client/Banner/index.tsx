@@ -1,5 +1,11 @@
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
+
 const Banner = () => {
-  return <div className="w-[92%] pb-[40%] bg-slate-100 rounded-[10px] m-auto" />;
+  return (
+    <PaddingWrapper className="pt-[16px]">
+      <div className="w-full h-[164px] bg-blueGray-30 rounded-[10px]"></div>
+    </PaddingWrapper>
+  );
 };
 
 export default Banner;

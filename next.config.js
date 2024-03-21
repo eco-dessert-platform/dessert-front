@@ -25,6 +25,7 @@ const nextConfig = {
       { hostname: 'bbangle-bucket.kr.object.ncloudstorage.com' },
       { hostname: 'firebasestorage.googleapis.com' },
       { hostname: 'k.kakaocdn.net' },
+      { hostname: 't1.kakaocdn.net' },
       { hostname: 'bbangree-oven.cdn.ntruss.com' }
     ]
   }

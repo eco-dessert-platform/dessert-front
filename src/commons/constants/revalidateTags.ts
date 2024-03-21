@@ -1,3 +1,4 @@
 export const REAVALIDATE_TAG = {
-  profile: 'profile'
+  profile: 'profile',
+  notificationDetail: 'notificationDetail'
 };

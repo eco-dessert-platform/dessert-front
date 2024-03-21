@@ -9,11 +9,9 @@ interface ButtonProps {
 
 function BtnStar({ isLiked, onClick }: ButtonProps) {
   return (
-    <div className=" text-center">
-      <button onClick={onClick}>
-        <div className={isLiked ? 'animate-pop' : ''}>{isLiked ? <Yellow /> : <Gray />}</div>
-      </button>
-    </div>
+    <button onClick={onClick} className={isLiked ? 'animate-pop' : ''}>
+      {isLiked ? <Yellow /> : <Gray />}
+    </button>
   );
 }
 

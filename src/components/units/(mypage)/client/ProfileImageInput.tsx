@@ -1,6 +1,6 @@
 'use client';
 
-import Icon from '@/components/commons/Icon';
+import { BbangleSmileIcon } from '@/components/commons/Icon';
 import { ChangeEventHandler, memo, useEffect, useId, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { profileImgState } from '../atoms';
@@ -41,7 +41,7 @@ const ProfileImageInput = ({ defaultValue }: ProfileImageInputProps) => {
       {imgSrc ? (
         <Image src={imgSrc} alt="profile preview" width={100} height={100} />
       ) : (
-        <Icon.bbangleSmile />
+        <BbangleSmileIcon className="w-[80px] h-[80px] fill-gray-300" />
       )}
       <div className="absolute h-[26px] leading-[26px] bottom-0 w-full text-center text-white bg-gray-800/50">
         편집

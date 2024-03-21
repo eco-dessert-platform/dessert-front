@@ -12,7 +12,7 @@ const FIRST_IDX = 0;
 
 const TabContainer = ({ names, activeTabIdx, onChange }: TabContainerProps) => {
   return (
-    <div className="w-full h-[43px] bg-white justify-start items-start inline-flex relative">
+    <div className="w-full h-[44px] bg-white justify-start items-start inline-flex relative">
       {names.map((name, idx) => (
         <TabButton
           key={name}
@@ -22,9 +22,9 @@ const TabContainer = ({ names, activeTabIdx, onChange }: TabContainerProps) => {
         />
       ))}
 
-      <div className="w-full h-0.5 bg-color-Gray100 flex absolute left-0 bottom-0">
+      <div className="w-full h-[2px] bg-gray-100 flex absolute left-0 bottom-0">
         <div
-          className={`w-1/2  h-0.5 bg-[#7E7475] duration-[0.5s] transform ${
+          className={`w-1/2 h-[2px] bg-[#7E7475] duration-[0.5s] transform ${
             activeTabIdx === FIRST_IDX ? 'translate-x-0' : 'translate-x-full'
           }`}
         />

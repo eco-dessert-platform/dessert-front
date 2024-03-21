@@ -1,4 +1,5 @@
 import ProductAndStoreTabWithCount from '@/components/units/Search/client/ProductAndStoreTabWithCount';
+import { Suspense } from 'react';
 
 interface SearchResultLayout {
   children: React.ReactNode;
@@ -7,7 +8,9 @@ interface SearchResultLayout {
 const SearchResultLayout = ({ children }: SearchResultLayout) => {
   return (
     <>
-      <ProductAndStoreTabWithCount />
+      <Suspense>
+        <ProductAndStoreTabWithCount />
+      </Suspense>
       {children}
     </>
   );

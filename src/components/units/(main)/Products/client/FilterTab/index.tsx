@@ -8,12 +8,26 @@ import useModal from '@/commons/hooks/useModal';
 import { filterValueState } from '../../atoms';
 import { FILTER_VALUES } from '@/commons/constants/filterValues';
 import OrderAvailableCheckBox from '@/components/units/(main)/Products/client/FilterTab/OrderAvailableCheckBox';
+import { LIMIT_MIN_PRICE, LIMIT_MAX_PRICE } from '@/commons/constants/priceLimit';
+
+const getIngredientTag = (ingredients: Array<string>) => {
+  if (ingredients.length === 1) return ingredients[0];
+  if (ingredients.length > 1) return `${ingredients[0]} 외 ${ingredients.length - 1}개`;
+};
+
+const getPriceTag = ({ minPrice, maxPrice }: { minPrice: number; maxPrice: number }) => {
+  if (minPrice === LIMIT_MIN_PRICE && maxPrice === LIMIT_MAX_PRICE) return;
+  return `${minPrice.toLocaleString()}~${maxPrice.toLocaleString()}원`;
+};
 
 const FilterTab = () => {
-  const FILTER_LIST = FILTER_VALUES.categories;
-
   const [filterValue, setFilterValue] = useRecoilState(filterValueState);
   const { openModal } = useModal();
+
+  const categoryTags = FILTER_VALUES.categories;
+  const ingredientTag = filterValue.tags && getIngredientTag(filterValue.tags);
+  const priceTag = getPriceTag(filterValue.price);
+  const filterTagList = [ingredientTag, priceTag, ...categoryTags];
 
   const handleFilterClick = (newCategory: string) => {
     setFilterValue(prev => ({
@@ -29,22 +43,24 @@ const FilterTab = () => {
   return (
     <div className="w-full relative">
       <div className="flex gap-[6px] m-auto pr-[40px] w-[92%] my-[16px] overflow-x-scroll scrollbar-hide ">
-        {FILTER_VALUES.categories.map((item, index) => {
-          const isTagActive = filterValue.category === item;
-          const isNewTag = FILTER_LIST[0] !== '전체';
+        {filterTagList.map((item, index) => {
+          if (!item) return;
+
+          const isCategoryTagActive = filterValue.category === item;
+          const isNewTag = !FILTER_VALUES.categories.includes(item); // ingredientTag, priceTag
 
           return (
             <button
               key={index}
               className={`h-[34px] flex-shrink-0 px-3 py-2 rounded-[50px] bg-white ${
-                isTagActive || isNewTag ? 'border-red-500' : 'border-gray-200'
+                isCategoryTagActive || isNewTag ? 'border-red-500' : 'border-gray-200'
               } border justify-center items-center gap-1 inline-flex`}
               onClick={() => handleFilterClick(item)}
               disabled={isNewTag}
             >
               <p
                 className={`text-xs font-medium font-['Pretendard'] leading-[18px] ${
-                  isTagActive || isNewTag ? 'text-red-500  ' : 'text-neutral-800'
+                  isCategoryTagActive || isNewTag ? 'text-red-500  ' : 'text-neutral-800'
                 }`}
               >
                 {item}

@@ -7,9 +7,7 @@ export interface IFilterType {
 }
 export interface FilterTypes {
   selectedTags: IFilterType[];
-  setSelectedTags: any;
   isModalOpen: boolean;
-  setIsModalOpen: any;
 }
 
 export const navItem: IFilterType[] = [

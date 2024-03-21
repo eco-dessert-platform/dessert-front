@@ -1,12 +1,30 @@
+'use client';
+
+import { useState } from 'react';
 import Header from '@/components/commons/header/client/Header';
 import { IconSadCharacter } from '@/components/units/(mypage)/Withdraw/client/Icons';
 import DeleteReasonList from '@/components/units/(mypage)/Withdraw/client/DeleteReasonList';
 import Agree from '@/components/units/(mypage)/Withdraw/client/Agree';
 import WithdrawButton from '@/components/units/(mypage)/Withdraw/client/WithdrawButton';
+import { useWithdrawMutation } from '@/components/units/(mypage)/Withdraw/hooks/useWithdrawMutation';
 
 const Withdraw = () => {
+  const [isAgreeChecked, setIsAgreeChecked] = useState(false);
+  const { mutate } = useWithdrawMutation();
+
+  const handleAgreeChange = () => {
+    setIsAgreeChecked(!isAgreeChecked);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    mutate({ formData });
+  };
+
   return (
-    <form id="withdraw-form" action="">
+    <form id="withdraw-form" onSubmit={handleFormSubmit}>
       <Header title="회원 탈퇴" back />
       <div className="p-4 text-gray-900">
         <div className="mb-[40px] flex flex-col items-center">
@@ -27,12 +45,12 @@ const Withdraw = () => {
           </p>
           <DeleteReasonList />
           <div className="flex justify-center mt-[20px]">
-            <Agree />
+            <Agree isChecked={isAgreeChecked} onChange={handleAgreeChange} />
           </div>
         </div>
       </div>
       <div className="mt-[10px] p-4">
-        <WithdrawButton />
+        <WithdrawButton disabled={!isAgreeChecked} />
       </div>
     </form>
   );

@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 interface BackDropProps {
   isVisible: boolean;
-  onClick: MouseEventHandler<HTMLDivElement>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
   children?: ReactNode;
   className?: string;
 }
@@ -19,7 +19,7 @@ const BackDrop = ({ isVisible, onClick, children, className = '' }: BackDropProp
         // ${isVisible ? "flex": "hidden"} 나중에 지워야함
         `${
           isVisible ? 'flex' : 'hidden'
-        } justify-center items-center fixed top-0 left-1/2 z-[5000] -translate-x-1/2 w-full max-w-[600px] h-full bg-black bg-opacity-50`,
+        } justify-center items-center fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] h-full bg-black bg-opacity-50 z-backdrop`,
         className
       )}
       onClick={onClick}

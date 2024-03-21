@@ -1,13 +1,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import * as API from '@/api';
-import { IWishProductList } from '@/components/units/WishListDetail/types';
+import API from '@/api';
 
 const SIZE = 10;
 
 const getWishProductList = async (pageParam: number, folderId: number, sort: string) => {
-  const { data } = await API.get<IWishProductList>(
+  const { data } = await API.get(
     `/boards/folders/${folderId}?sort=${sort}&page=${pageParam}&size=${SIZE}`
   );
+
   return data;
 };
 

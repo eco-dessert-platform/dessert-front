@@ -1,21 +1,17 @@
 'use client';
 import ProductCard from '@/components/commons/card/ProductCard';
-import { IProductType } from '@/commons/types/productType';
-import { IStoreType } from '@/commons/types/storeType';
+import { IStoreDetailAllType } from '../../types';
 
 interface AllProductProps {
-  data: {
-    allProducts: IProductType[];
-    store: IStoreType;
-  };
+  data: IStoreDetailAllType | undefined;
 }
 
 function AllProducts({ data }: AllProductProps) {
   return (
     <div className="flex w-full flex-wrap m-auto gap-x-[4%] gap-y-4">
-      {data.allProducts.map((item, i) => (
+      {data?.content?.map((item, i) => (
         <div key={i} className="w-[48%]">
-          <ProductCard product={item} storeData={data?.store} />
+          <ProductCard product={item} />
         </div>
       ))}
     </div>

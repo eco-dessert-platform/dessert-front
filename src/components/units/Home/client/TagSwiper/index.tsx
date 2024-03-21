@@ -1,5 +1,6 @@
 import { IProductType } from '@/commons/types/productType';
 import { useEffect, useState } from 'react';
+import { transformTagToKr } from '@/commons/constants/transfromTag';
 
 interface TagSwiperProps {
   tag: IProductType['tags'];
@@ -8,28 +9,7 @@ interface TagSwiperProps {
 const TagSwiper = ({ tag }: TagSwiperProps) => {
   const [maxTagsToShow, setMaxTagsToShow] = useState(4);
   const tagFilter = tag.map((item: string) => {
-    let translatedItem = item;
-
-    switch (item) {
-      case 'glutenFree':
-        translatedItem = '글루텐프리';
-        break;
-      case 'sugarFree':
-        translatedItem = '무설탕';
-        break;
-      case 'ketogenic':
-        translatedItem = '키토제닉';
-        break;
-      case 'vegan':
-        translatedItem = '비건';
-        break;
-      case 'highProtein':
-        translatedItem = '고단백';
-        break;
-      default:
-        break;
-    }
-
+    const translatedItem = transformTagToKr(item);
     return translatedItem;
   });
 
@@ -46,23 +26,21 @@ const TagSwiper = ({ tag }: TagSwiperProps) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between w-full space-x-2 overflow-x-auto">
-      <div className="flex gap-1 ">
+    <div className="flex items-center justify-between gap-[2px] w-full overflow-x-auto leading-150 tracking-tight-2">
+      <div className="flex gap-[4px]">
         {tagsToShow.map((tag, index) => {
           return (
             <div
               key={index}
               style={{ flex: 'auto' }}
-              className="h-[21px] px-1.5 py-0.5 bg-color-White rounded border border-solid border-color-Gray200 justify-center items-center gap-1 inline-flex"
+              className="px-[6px] py-[2px] bg-white rounded-[4px] border border-solid border-gray-200 text-gray-600 text-[11px] font-normal"
             >
-              <span className="inline-block text-color-Gray600 text-[11px] font-normal leading-none line">
-                {tag}
-              </span>
+              {tag}
             </div>
           );
         })}
       </div>
-      <span className="text-[11px] font-semibold text-color-Gray400">
+      <span className="text-11 font-semibold text-gray-400">
         {maxTagsToShow < tag.length && `${tag.length - maxTagsToShow}+`}
       </span>
     </div>

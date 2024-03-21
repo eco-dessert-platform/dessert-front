@@ -15,10 +15,18 @@ const TAB_NAMES = {
 const PRODUCT_IDX = 0;
 const STORE_IDX = 1;
 
+// count가 100 이상이면 '99+'를 반환
+const checkCount = (count: number) => {
+  const COUNT_LIMIT = 100;
+
+  if (count >= COUNT_LIMIT) return '99+';
+  return count;
+};
+
 const ProductAndStoreTab = ({ productCount, storeCount }: ProductAndStoreTabProps) => {
-  const productCountStr = typeof productCount === 'number' ? `(${productCount})` : '';
-  const storeCountStr = typeof storeCount === 'number' ? `(${storeCount})` : '';
-  const names = [`${TAB_NAMES.product} ${productCountStr}`, `${TAB_NAMES.store} ${storeCountStr}`];
+  const productCountStr = typeof productCount === 'number' ? `(${checkCount(productCount)})` : '';
+  const storeCountStr = typeof storeCount === 'number' ? `(${checkCount(storeCount)})` : '';
+  const names = [`${TAB_NAMES.product}${productCountStr}`, `${TAB_NAMES.store}${storeCountStr}`];
 
   const router = useRouter();
   const pathname = usePathname();

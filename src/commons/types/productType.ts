@@ -8,4 +8,5 @@ export interface IProductType {
   isBundled: boolean;
   isWished: boolean;
   tags: string[];
+  view: number;
 }

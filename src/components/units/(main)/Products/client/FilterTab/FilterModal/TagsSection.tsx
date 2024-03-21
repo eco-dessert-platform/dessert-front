@@ -33,7 +33,7 @@ const TagsSection = () => {
 
   return (
     <div className="flex flex-col gap-[10px] pt-[16px] pb-[26px]">
-      <div className='text-sm"'>성분</div>
+      <div className="text-sm">성분</div>
       <div className="flex gap-[10px] flex-wrap">
         {FILTER_VALUES.tags.map(tag => {
           const isSelected = !!selectedTags?.includes(tag);

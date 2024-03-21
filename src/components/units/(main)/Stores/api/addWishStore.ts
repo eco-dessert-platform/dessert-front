@@ -1,10 +1,7 @@
-import * as API from '@/api';
+import API from '@/api';
+import { WishStoreListReturn } from '../../types';
 
-import { WishStoreData, WishStoreListReturn } from '../../types';
-import { AxiosResponse } from 'axios';
-
-export const addWishStore = async (
-  data: WishStoreData
-): Promise<AxiosResponse<WishStoreListReturn>> => {
-  return API.post<WishStoreListReturn, null>(`/likes/store/${data.storeId}`, null);
+export const addWishStore = async (storeId: number) => {
+  const data: WishStoreListReturn = await API.post(`/likes/store/${String(storeId)}`);
+  return data;
 };

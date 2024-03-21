@@ -1,12 +1,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import * as API from '@/api';
+import API from '@/api';
 import { IWishStoreList } from '@/components/units/WishListDetail/types';
 
 const SIZE = 10;
 
 const getWishStoreList = async ({ pageParam }: { pageParam: number }) => {
   const result = await API.get(`/likes/stores?size=${SIZE}&page=${pageParam}`);
-  return result.data as IWishStoreList;
+  console.log(result);
+  return result as IWishStoreList;
 };
 
 export const useWishStoreListQuery = () => {
@@ -15,6 +16,7 @@ export const useWishStoreListQuery = () => {
     queryFn: ({ pageParam = 0 }: { pageParam: number }) => getWishStoreList({ pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, __, lastPageParam) => {
+      console.log(lastPage);
       const nextPageParam = lastPage.lastPage === lastPageParam - 1 ? undefined : lastPageParam + 1;
       return nextPageParam;
     },

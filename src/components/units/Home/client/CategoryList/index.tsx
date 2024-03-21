@@ -123,7 +123,7 @@ const CategoryList = () => {
   const [isCategoryTab] = useRecoilState(isCategoryTabStateNew);
 
   return (
-    <PaddingWrapper className={`grid pt-[16px] ${isCategoryTab ? 'grid-cols-4' : 'grid-cols-3'}`}>
+    <PaddingWrapper className={`grid pb-[0px] ${isCategoryTab ? 'grid-cols-4' : 'grid-cols-3'}`}>
       {categoryMenu
         .filter(category => category.category === (isCategoryTab ? '상품별' : '성분별'))
         .map(category => (

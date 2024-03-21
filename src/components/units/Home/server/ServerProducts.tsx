@@ -6,7 +6,7 @@ import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 const ServerProducts = async () => {
   return (
-    <PaddingWrapper className="pt-[16px] pb-[36px]">
+    <PaddingWrapper className="pb-[36px]">
       <div className="flex justify-between items-end py-[10px] ">
         <div className="font-semibold text-gray-500 text-20 leading-150 tracking-tight-2">Best</div>
         <Link

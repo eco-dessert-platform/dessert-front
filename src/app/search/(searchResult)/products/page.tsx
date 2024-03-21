@@ -7,10 +7,10 @@ interface SearchProductsProps {
 
 const SearchProducts = ({ searchParams: { query } }: SearchProductsProps) => {
   return (
-    <div className="flex flex-wrap m-auto">
+    <>
       <FilterTab />
       <ProductList keyword={query || ''} />
-    </div>
+    </>
   );
 };
 

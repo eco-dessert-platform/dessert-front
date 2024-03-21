@@ -8,6 +8,7 @@ import ProductCard from '@/components/commons/card/ProductCard';
 import NoSearchResult from '@/components/units/Search/client/NoSearchResult';
 import Loading from '@/components/commons/Loading';
 import { filterValueState } from '@/components/units/(main)/Products/atoms';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 interface ProductListProps {
   keyword: string;
@@ -27,20 +28,18 @@ const ProductList = ({ keyword }: ProductListProps) => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="flex flex-wrap w-[92%] m-auto gap-x-[4%] gap-y-4">
+    <PaddingWrapper className="pb-[36px]">
       {products && itemCount > 0 ? (
-        <>
+        <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px]">
           {products.map(product => (
-            <div key={product.boardId} className="w-[48%]">
-              <ProductCard product={product} />
-            </div>
+            <ProductCard key={product.boardId} product={product} />
           ))}
           {isFetchingNextPage ? <Loading /> : <div ref={ref}></div>}
-        </>
+        </div>
       ) : (
         <NoSearchResult />
       )}
-    </div>
+    </PaddingWrapper>
   );
 };
 

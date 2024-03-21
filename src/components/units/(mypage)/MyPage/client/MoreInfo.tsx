@@ -18,9 +18,9 @@ interface MoreInfoItemProps {
 const isLoggedIn = true;
 
 const INFOS = [
-  { href: '/notifications', icon: <IconBell />, content: '공지사항' },
-  { href: '/service-terms', icon: <IconDoc />, content: '서비스 이용 약관' },
-  { href: '/privacy-policy', icon: <IconLock />, content: '개인정보 수집 및 이용' },
+  { href: '/mypage/notifications', icon: <IconBell />, content: '공지사항' },
+  { href: '/mypage/service-terms', icon: <IconDoc />, content: '서비스 이용 약관' },
+  { href: '/mypage/privacy-policy', icon: <IconLock />, content: '개인정보 수집 및 이용' },
   { href: '#', icon: <IconInquiry />, content: '문의하기' }
 ];
 

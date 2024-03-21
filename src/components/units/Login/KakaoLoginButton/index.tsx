@@ -14,7 +14,9 @@ const KakaoLoginButton = () => {
       onClick={handleKakaLogin}
     >
       <KakaoIcon />
-      <div className="text-black text-16 leading-150 tracking-tight-2">카카오톡 시작하기</div>
+      <div className="text-black/[0.85] text-16 leading-150 tracking-tight-2">
+        카카오톡 시작하기
+      </div>
     </button>
   );
 };

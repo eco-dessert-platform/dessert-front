@@ -7,6 +7,7 @@ import { useGetAllProductsQuery } from '../../hooks/useGetAllProductsQuery';
 import { filterValueState } from '@/components/units/(main)/Products/atoms';
 import ProductCard from '@/components/commons/card/ProductCard';
 import Loading from '@/components/commons/Loading';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 const ProductsTab = () => {
   const filterValue = useRecoilValue(filterValueState);
@@ -27,15 +28,10 @@ const ProductsTab = () => {
   }
 
   return (
-    <div className="flex flex-wrap w-[92%] m-auto gap-x-[4%] gap-y-4">
-      {products &&
-        products.map(product => (
-          <div key={product.boardId} className="w-[48%]">
-            <ProductCard product={product} />
-          </div>
-        ))}
+    <PaddingWrapper className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] pb-[36px]">
+      {products && products.map(product => <ProductCard key={product.boardId} product={product} />)}
       {isFetchingNextPage ? <Loading /> : <div ref={ref}></div>}
-    </div>
+    </PaddingWrapper>
   );
 };
 

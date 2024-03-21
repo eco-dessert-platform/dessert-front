@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import { priceTempState } from '@/components/units/(main)/Products/atoms';
 import PriceInputContainer from '@/components/units/(main)/Products/client/FilterTab/FilterModal/PriceSection/PriceInputContainer';
 import PriceSlide from '@/components/units/(main)/Products/client/FilterTab/FilterModal/PriceSection/PriceSlide';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 const PriceSection = () => {
   const [price, setPrice] = useRecoilState(priceTempState);
@@ -25,8 +26,8 @@ const PriceSection = () => {
   };
 
   return (
-    <div className="flex flex-col gap-[10px] pt-[16px] pb-[26px]">
-      <div className="text-sm">가격</div>
+    <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
+      <div className="text-14 font-semibold leading-150 tracking-tight-2">가격</div>
       <PriceInputContainer
         minPrice={price.minPrice}
         maxPrice={price.maxPrice}
@@ -39,7 +40,7 @@ const PriceSection = () => {
         onMinValueChange={handleMinPriceChange}
         onMaxValueChange={handleMaxPriceChange}
       />
-    </div>
+    </PaddingWrapper>
   );
 };
 

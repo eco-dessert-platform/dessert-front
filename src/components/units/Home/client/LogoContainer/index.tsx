@@ -6,7 +6,7 @@ import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 const LogoContainer = () => {
   return (
-    <PaddingWrapper className="pt-[10px] bg-white">
+    <PaddingWrapper className="pt-[10px] pb-[0px] bg-white">
       <h1>
         <Link href="/">
           <Logo />

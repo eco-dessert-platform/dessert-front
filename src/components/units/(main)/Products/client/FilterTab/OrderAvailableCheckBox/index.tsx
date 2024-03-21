@@ -14,7 +14,7 @@ const OrderAvailableCheckBox = () => {
 
   return (
     <CheckBox isChecked={isChecked} onChange={handleCheckChange}>
-      주문가능한 상품 보기
+      <p className="text-gray-800">주문 가능 상품만 보기</p>
     </CheckBox>
   );
 };

@@ -16,17 +16,17 @@ interface RecentChipProps {
 
 const RecentChip = ({ title, onClick }: RecentChipProps) => {
   return (
-    <p className="flex items-center justify-center gap-[4px]">
+    <div className="flex items-center justify-center gap-[4px] pl-[12px] pr-[8px] py-[8px] min-w-max bg-white border border-solid border-gray-200 rounded-[50px]">
       <Link
         href={`/search/products?query=${title}`}
-        className="text-xs font-medium font-Pretendard leading-[18px] text-zinc-600 "
+        className="text-12 font-medium leading-150 tracking-tight-2"
       >
         {title}
       </Link>
       <button onClick={onClick}>
         <XX />
       </button>
-    </p>
+    </div>
   );
 };
 
@@ -39,17 +39,10 @@ const RecentKeyword = () => {
   };
 
   return (
-    <div className="w-full relative">
-      <div className="flex gap-[8px] w-92% overflow-x-auto scrollbar-hide ">
-        {recentKeywords?.map(item => (
-          <span
-            key={item.keyword}
-            className="h-34px flex-shrink-0 px-3 py-2 bg-white border border-solid border-gray-200 gap-1 inline-flex rounded-[50px] "
-          >
-            <RecentChip title={item.keyword} onClick={() => handleDelete(item)} />
-          </span>
-        ))}
-      </div>
+    <div className="flex gap-[8px] overflow-x-auto scrollbar-hide">
+      {recentKeywords?.map(item => (
+        <RecentChip key={item.keyword} title={item.keyword} onClick={() => handleDelete(item)} />
+      ))}
     </div>
   );
 };

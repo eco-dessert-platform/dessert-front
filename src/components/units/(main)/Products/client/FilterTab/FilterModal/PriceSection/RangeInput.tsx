@@ -1,5 +1,6 @@
 'use client';
 
+import '@/components/units/(main)/Products/client/FilterTab/css/price-input.css';
 import { LIMIT_MIN_PRICE, LIMIT_MAX_PRICE, PRICE_RANGE_STEP } from '@/commons/constants/priceLimit';
 
 interface RageInputProps {

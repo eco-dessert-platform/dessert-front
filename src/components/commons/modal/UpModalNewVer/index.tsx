@@ -18,7 +18,7 @@ const UpModalNewVer = ({ title, children }: UpModalProps) => {
       initial={{ bottom: '-100%' }}
       animate={{ bottom: 0 }}
       exit={{ bottom: '-100%' }}
-      className="absolute w-full max-w-[600px] bg-white z-[5001] rounded-t-[12px]"
+      className="absolute w-full max-w-[600px] max-h-[100vh] overflow-y-scroll scrollbar-hide bg-white z-[5001] rounded-t-[12px]"
     >
       <div className="flex items-center px-[16px] py-[10px]">
         <h4 className="flex-1 text-center font-medium text-16 leading-150 tracking-tight-2">

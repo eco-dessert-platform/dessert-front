@@ -11,9 +11,9 @@ const BtnBack = () => {
   };
 
   return (
-    <div onClick={goBackHandler}>
+    <button className="mr-[17px] my-[6px]" onClick={goBackHandler}>
       <Back />
-    </div>
+    </button>
   );
 };
 

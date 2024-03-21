@@ -2,6 +2,7 @@ import CheckBox from '@/components/commons/checkbox/client/Checkbox';
 import { FILTER_VALUES } from '@/commons/constants/filterValues';
 import { useRecoilState } from 'recoil';
 import { tagsTempState } from '../../../atoms';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 const TagsSection = () => {
   const [selectedTags, setSelectedTags] = useRecoilState(tagsTempState);
@@ -32,21 +33,21 @@ const TagsSection = () => {
   };
 
   return (
-    <div className="flex flex-col gap-[10px] pt-[16px] pb-[26px]">
-      <div className="text-sm">성분</div>
+    <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
+      <div className="text-14 font-semibold leading-150 tracking-tight-2">성분</div>
       <div className="flex gap-[10px] flex-wrap">
         {FILTER_VALUES.tags.map(tag => {
           const isSelected = !!selectedTags?.includes(tag);
           return (
             <CheckBox
               key={tag}
-              className={`h-[37px] p-2 rounded-lg ${isSelected ? 'bg-red-50' : 'bg-slate-100'}`}
+              className={`h-[37px] p-[8px] rounded-[8px] ${isSelected ? 'bg-[#FDF1EE]' : 'bg-blueGray-30'}`}
               name="category"
               isChecked={isSelected}
               onChange={() => handleClick(tag)}
             >
               <span
-                className={`text-gray-800 text-xs ${isSelected ? 'font-semibold' : 'font-normal'}`}
+                className={`text-gray-800 text-14 leading-150 tracking-tight-2 ${isSelected ? 'font-semibold' : 'font-normal'}`}
               >
                 {tag}
               </span>
@@ -54,7 +55,7 @@ const TagsSection = () => {
           );
         })}
       </div>
-    </div>
+    </PaddingWrapper>
   );
 };
 

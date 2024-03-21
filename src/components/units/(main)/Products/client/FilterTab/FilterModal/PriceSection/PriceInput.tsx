@@ -1,5 +1,6 @@
 'use client';
 
+import { twMerge } from 'tailwind-merge';
 import { INPUT_STYLE } from '@/commons/constants/inputStyle';
 import { LIMIT_MIN_PRICE, LIMIT_MAX_PRICE, PRICE_RANGE_STEP } from '@/commons/constants/priceLimit';
 import Input from '@/components/commons/inputs/Input';
@@ -29,14 +30,19 @@ const PriceInput = ({ value, onChange }: PriceInputProps) => {
   };
 
   return (
-    <div className={`flex items-center ${INPUT_STYLE}`}>
+    <div
+      className={twMerge(
+        `flex items-center ${INPUT_STYLE} font-bold text-14 leading-150 tracking-tight-2`,
+        'py-[8px]'
+      )}
+    >
       <Input
         value={`${value.toLocaleString()}`}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        className={`p-0 pr-[5px] border-none text-right ${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}
+        className={`p-0 border-none text-right ${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}
       />
-      <span className="text-gray-500">원</span>
+      <span className={`${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}>원</span>
     </div>
   );
 };

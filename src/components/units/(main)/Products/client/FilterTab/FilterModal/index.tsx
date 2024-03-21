@@ -9,6 +9,7 @@ import CategorySection from './CategorySection';
 import { categoryTempState, filterValueState, tagsTempState, priceTempState } from '../../../atoms';
 import TagsSection from './TagsSection';
 import PriceSection from '@/components/units/(main)/Products/client/FilterTab/FilterModal/PriceSection';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 function FilterModal() {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState);
@@ -41,21 +42,27 @@ function FilterModal() {
 
   return (
     <UpModalNewVer title="필터">
-      <div className="px-[16px]">
-        <CategorySection />
-        <hr />
-        <TagsSection />
-        <hr />
-        <PriceSection />
-        <div className="flex gap-[10px] justify-center items-center p-[16px]">
-          <Button variants="primary-white" onClick={handleCancel}>
-            취소
-          </Button>
-          <Button variants="primary-black" onClick={handleConfirm}>
-            확인
-          </Button>
-        </div>
-      </div>
+      <CategorySection />
+      <hr className="bg-gray-100" />
+      <TagsSection />
+      <hr className="bg-gray-100" />
+      <PriceSection />
+      <PaddingWrapper className="flex gap-[10px] justify-center items-center">
+        <Button
+          variants="primary-white"
+          className="font-medium text-16 leading-150 tracking-tight-2"
+          onClick={handleCancel}
+        >
+          취소
+        </Button>
+        <Button
+          variants="primary-black"
+          className="font-medium text-16 leading-150 tracking-tight-2 text-white"
+          onClick={handleConfirm}
+        >
+          확인
+        </Button>
+      </PaddingWrapper>
     </UpModalNewVer>
   );
 }

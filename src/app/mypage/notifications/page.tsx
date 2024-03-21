@@ -24,14 +24,17 @@ const Notifications = () => {
     return <div className="p-[16px]">Error</div>;
   }
 
+  if (!notifications) {
+    return <div>데이터 x</div>;
+  }
+
   return (
     <div>
-      {notifications &&
-        notifications.map((item, idx) => (
-          <Link key={idx} href={`/notifications/${item.id}`}>
-            <NotificationTitle title={item.title} date={item.createdAt} />
-          </Link>
-        ))}
+      {notifications.map((item, idx) => (
+        <Link key={idx} href={`/mypage/notifications/${item.id}`}>
+          <NotificationTitle title={item.title} date={item.createdAt} />
+        </Link>
+      ))}
       {isFetchingNextPage ? <Loading /> : <div ref={ref}></div>}
     </div>
   );

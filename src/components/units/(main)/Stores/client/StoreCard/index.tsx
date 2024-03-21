@@ -6,6 +6,8 @@ import { useDeleteWishStoreMutation } from '@/components/units/(main)/Stores/hoo
 import useToast from '@/commons/hooks/useToast';
 import ToastPop from '@/components/commons/ToastPop';
 import { revalidateTag } from 'next/cache';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
+
 
 const StoreCard = ({ data, isWished }) => {
   const { mutate: addWishStore } = useAddWishStoreMutation();
@@ -56,26 +58,23 @@ const StoreCard = ({ data, isWished }) => {
 
   return (
     <Link href={`/stores/${data.storeId}`}>
-      <div className="flex flex-col justify-between w-full py-5 m-auto border-b border-gray-100 border-solid ">
-        <div className="flex  justify-between w-[92%] m-auto items-center gap-[10px] ">
-          <div
-            className="w-[40px] h-[40px] rounded-md bg-cover bg-center flex flex-shrink-0"
-            style={{ backgroundImage: `url(${data?.profile})` }}
-          ></div>
-          <div className="inline-flex flex-col items-start justify-start grow shrink basis-0">
-            <div className="inline-flex items-center self-stretch justify-start gap-1">
-              <div className="text-sm font-semibold grow shrink basis-0 text-neutral-800 ">
-                {data.storeName}
-              </div>
-              <BtnStar
-                isLiked={isWished ? isWished : data.isWished}
-                onClick={data.isWished || isWished ? handleDeleteWishStore : handleAddWishStore}
-              />
-            </div>
-            <div className="text-xs font-normal text-neutral-500">{data.introduce}</div>
+      <PaddingWrapper className="flex justify-between items-center gap-[10px] w-full border-b border-gray-100 border-solid">
+        <div
+          className="flex-none w-[40px] h-[40px] rounded-[6px] bg-cover bg-center"
+          style={{ backgroundImage: `url(${data?.profile})` }}
+        />
+        <div className="flex-1 overflow-auto">
+          <div className="flex justify-between items-center gap-[4px]">
+            <h4 className="text-14 font-semibold text-gray-900 leading-150 tracking-tight-2 truncate">
+              {data.storeName}
+            </h4>
+            <BtnStar className="flex-none" isLiked={false} onClick={handleAddWishStore} />
+          </div>
+          <div className="text-12 font-normal text-gray-600 leading-130 tracking-tight-2 truncate">
+            {data.introduce}
           </div>
         </div>
-      </div>
+      </PaddingWrapper>
     </Link>
   );
 };

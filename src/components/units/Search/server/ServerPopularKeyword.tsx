@@ -1,13 +1,14 @@
 import PopularKeyword from '../client/PopularKeyword';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
 
 function ServerPopularKeyword() {
   return (
-    <>
-      <div className="w-[92%] m-auto  py-[16px]">
-        <div className="text-neutral-400 text-sm font-semibold mb-[10px]">인기 검색어</div>
-        <PopularKeyword />
+    <PaddingWrapper className="flex flex-col gap-[10px]">
+      <div className="text-gray-500 text-14 font-semibold leading-150 tracking-tight-2">
+        인기 검색어
       </div>
-    </>
+      <PopularKeyword />
+    </PaddingWrapper>
   );
 }
 

@@ -24,13 +24,13 @@ const AutoCompleteSearchItem = ({ text, keyword }: AutoCompleteSearchItemProps) 
 
   return (
     <Link href={`/search/products?query=${text}`}>
-      <div className="p-[10px] border-b border-solid border-color-Gray100 bg-white text-[14px] text-color-Gray900">
+      <div className="p-[16px] border-b border-solid border-gray-100 bg-white text-14 font-medium text-gray-900 leading-150 tracking-tight-2">
         {noMatched ? (
           text
         ) : (
           <>
             {startText}
-            <span className="text-[14px] text-color-PrimaryOrangeRed">{highlightedText}</span>
+            <span className="text-primaryOrangeRed">{highlightedText}</span>
             {endText}
           </>
         )}
@@ -43,7 +43,7 @@ const AutoCompleteSearchContainer = ({ keyword }: AutoCompleteSearchContainerPro
   const { data: autoCompleteSearchTexts } = useGetAutoCompleteSearchTextsQuery(keyword);
 
   return (
-    <div className="shadow-md shadow-color-Gray100">
+    <div className="shadow-md shadow-gray-100 overflow-y-scroll scrollbar-hide">
       {!!autoCompleteSearchTexts?.length &&
         autoCompleteSearchTexts.map(text => {
           return <AutoCompleteSearchItem key={text} text={text} keyword={keyword} />;

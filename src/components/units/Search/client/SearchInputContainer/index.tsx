@@ -1,15 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useAddRecentSearchKeywordMutation } from '@/components/units/Search/hooks/useAddRecentSearchKeywordMutation';
 import { useDebounce } from '@/components/units/Search/hooks/useDebounce';
 import SearchInput from '@/components/commons/inputs/SearchInput';
 import AutoCompleteSearchContainer from '@/components/units/Search/client/AutoCompleteSearchContainer';
+import PaddingWrapper from '@/components/commons/PaddingWrapper';
+import BtnBack from '@/components/commons/button/client/Btn_back';
+
+const SEARCH_DETAIL_PAGE_PATHNAMES = ['/search/products', '/search/stores'];
 
 const SearchInputContainer = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const isSearchDetailPage = SEARCH_DETAIL_PAGE_PATHNAMES.includes(pathname);
   const query = searchParams.get('query');
 
   const [text, setText] = useState(query || '');
@@ -46,19 +53,22 @@ const SearchInputContainer = () => {
   };
 
   return (
-    <div className="relative w-[92%] m-auto">
-      <SearchInput
-        value={text}
-        onChange={handleInputChange}
-        onEnter={handleInputEnter}
-        placeholder="궁금한 상품을 찾아보세요!"
-      />
-      {showAutoComplete && (
-        <div className="absolute z-[1] w-full">
-          <AutoCompleteSearchContainer keyword={debouncedText} />
-        </div>
-      )}
-    </div>
+    <PaddingWrapper className="relative py-[10px]">
+      <div className="relative flex items-center">
+        {isSearchDetailPage && <BtnBack />}
+        <SearchInput
+          value={text}
+          onChange={handleInputChange}
+          onEnter={handleInputEnter}
+          placeholder="궁금한 상품을 찾아보세요!"
+        />
+        {showAutoComplete && (
+          <div className="absolute top-full z-[1] w-full">
+            <AutoCompleteSearchContainer keyword={debouncedText} />
+          </div>
+        )}
+      </div>
+    </PaddingWrapper>
   );
 };
 

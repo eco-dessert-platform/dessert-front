@@ -9,6 +9,7 @@ import ModalContainer from '@/components/commons/ModalContainer';
 import ToastContainer from '@/components/commons/ToastContainer';
 import KaKaoChatScript from '@/components/commons/KaKaoChatScript';
 import FlareLaneScript from '@/global/FlareLaneScript';
+import RegisterServiceWorker from '@/global/RegisterServiceWorker';
 
 const pretendard = localFont({
   src: '../commons/assets/PretendardVariable.woff2'
@@ -27,10 +28,13 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
         <ModalContainer />
         <PopupContainer />
         <ToastContainer />
-        <div className="sm:w-[600px] w-full m-auto pb-24 min-h-screen relative shadow-lg">{children}</div>
+        <div className="sm:w-[600px] w-full m-auto pb-24 min-h-screen relative shadow-lg">
+          {children}
+        </div>
         <Footer />
       </RootLayoutProvider>
       <KaKaoChatScript />
+      <RegisterServiceWorker />
       <FlareLaneScript />
     </body>
   </html>

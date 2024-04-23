@@ -30,6 +30,16 @@ export const birthDateState = atom<string>({
   default: undefined
 });
 
+export const recommendState = atom({
+  key: 'recommend',
+  default: {
+    isDiet: false,
+    isMuscle: false,
+    isHealth: false,
+    isVegan: false
+  }
+});
+
 export const registrationFormState = selector<RegistrationRequest>({
   key: 'registrationForm',
 

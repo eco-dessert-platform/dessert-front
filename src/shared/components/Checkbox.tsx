@@ -10,7 +10,7 @@ interface CheckBoxProps {
   name?: string;
   value?: string;
   required?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 

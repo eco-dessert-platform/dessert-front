@@ -11,7 +11,7 @@ const AutoCompleteSearchContainer = ({ keyword }: AutoCompleteSearchContainerPro
   const { data: autoCompleteSearchTexts } = useGetAutoCompleteSearchTextsQuery(keyword);
 
   return (
-    <div className="shadow-md shadow-gray-100 overflow-y-scroll scrollbar-hide">
+    <div className="max-h-[calc(100vh-192px)] shadow-md shadow-gray-100 overflow-y-scroll scrollbar-hide">
       {!!autoCompleteSearchTexts?.length &&
         autoCompleteSearchTexts.map((text) => (
           <AutoCompleteSearchItem key={text} text={text} keyword={keyword} />

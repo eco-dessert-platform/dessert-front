@@ -5,8 +5,8 @@ import { twMerge } from 'tailwind-merge';
 import { CheckIcon } from './icons';
 
 interface CheckBoxProps {
-  isChecked: boolean;
-  onChange: (_e: ChangeEvent<HTMLInputElement>) => void;
+  isChecked?: boolean;
+  onChange?: (_e: ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string;
   required?: boolean;

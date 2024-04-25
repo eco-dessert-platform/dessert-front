@@ -84,6 +84,8 @@
     "blocks": "Container",
     "domains": "Views",
     "actions": "Lib",
-    "atoms": "Database"
+    "atoms": "Database",
+    "queries": "Api",
+    "alert-box": "Messages"
   }
 }

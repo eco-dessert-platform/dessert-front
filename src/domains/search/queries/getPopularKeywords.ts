@@ -5,9 +5,7 @@ interface PopularKeywordResultType {
 }
 
 export const getPopularKeywords = async () => {
-  const res = await fetchExtend.get('/search/best-keyword', {
-    cache: 'no-store'
-  });
+  const res = await fetchExtend.get('/search/best-keyword', { next: { revalidate: 60 * 60 } });
   if (!res.ok) {
     console.error('인기 검색어 조회 실패');
     return [];

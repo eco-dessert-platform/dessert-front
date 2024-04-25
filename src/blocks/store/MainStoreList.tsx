@@ -1,14 +1,16 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { useInView } from 'react-intersection-observer';
-import { useGetAllStoresQuery } from '@/domains/store/queries/useGetAllStoresQuery';
-import Loading from '@/shared/components/Loading';
+
+import SkeletonStoreList from '@/domains/store/components/SkeletonStoreCardList';
 import StoreCard from '@/domains/store/components/StoreCard';
+import { useGetAllStoresQuery } from '@/domains/store/queries/useGetAllStoresQuery';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const MainStoreList = () => {
-  const { data, isError, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllStoresQuery();
+  const { data, isError, isLoading, fetchNextPage, hasNextPage } = useGetAllStoresQuery();
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -17,11 +19,7 @@ const MainStoreList = () => {
   }, [inView, fetchNextPage]);
 
   if (isLoading) {
-    return (
-      <div className="p-[16px]">
-        <Loading />
-      </div>
-    );
+    return <SkeletonStoreList row={10} />;
   }
   if (isError) {
     return (
@@ -50,7 +48,11 @@ const MainStoreList = () => {
           imgSrc={profile}
         />
       ))}
-      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
+      {hasNextPage && (
+        <div ref={ref} className="pb-[36px]">
+          <SkeletonStoreList row={1} />
+        </div>
+      )}
     </div>
   );
 };

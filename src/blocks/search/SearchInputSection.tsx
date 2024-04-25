@@ -19,6 +19,7 @@ const SearchInputSection = () => {
   const isSearchDetailPage = SEARCH_DETAIL_PAGE_PATHNAMES.includes(pathname);
   const query = searchParams.get('query');
 
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const [text, setText] = useState(query || '');
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const debouncedText = useDebounce<string>({ value: text, delay: 300 });
@@ -56,22 +57,24 @@ const SearchInputSection = () => {
   };
 
   return (
-    <PaddingWrapper className="relative py-[10px]">
-      <div className="relative flex items-center">
+    <div className="relative">
+      <PaddingWrapper className="flex items-center py-[10px]">
         {isSearchDetailPage && <BackButton />}
         <SearchInput
           value={text}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="궁금한 상품을 찾아보세요!"
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
+          placeholder={isInputFocused ? '' : '궁금한 상품을 찾아보세요!'}
         />
-        {showAutoComplete && (
-          <div className="absolute top-full z-[1] w-full">
-            <AutoCompleteSearchContainer keyword={debouncedText} />
-          </div>
-        )}
-      </div>
-    </PaddingWrapper>
+      </PaddingWrapper>
+      {showAutoComplete && (
+        <div className="absolute top-full z-[20] w-full">
+          <AutoCompleteSearchContainer keyword={debouncedText} />
+        </div>
+      )}
+    </div>
   );
 };
 

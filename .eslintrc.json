@@ -14,6 +14,13 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/stories/**", "**/*.test.**", "**/*.spec.**", "**/__tests__/**"],
+        "optionalDependencies": false
+      }
+    ],
 
     // airbnb off (필요 없다고 생각하는 옵션 off)
     "import/prefer-default-export": "off",
@@ -54,15 +61,7 @@
     "@typescript-eslint/no-use-before-define": "warn",
     "object-shorthand": "warn",
     "spaced-comment": "warn",
-    "jsx-a11y/html-has-lang": "warn",
-
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": ["**/stories/**", "**/*.test.**", "**/*.spec.**"],
-        "optionalDependencies": false
-      }
-    ]
+    "jsx-a11y/html-has-lang": "warn"
   },
   "ignorePatterns": ["*.config.*", "node_modules", "*.d.ts", "public/sw.js"]
 }

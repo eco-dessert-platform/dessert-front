@@ -24,13 +24,6 @@
     },
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "svg.d.ts",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "next.config.js"
-  ],
-  "exclude": ["node_modules", "vitest.config.mts"]
+  "include": ["svg.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

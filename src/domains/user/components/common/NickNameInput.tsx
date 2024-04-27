@@ -25,8 +25,6 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
     mutate(nickname);
   };
 
-  console.log(data);
-
   return (
     <div className="w-full">
       <Input

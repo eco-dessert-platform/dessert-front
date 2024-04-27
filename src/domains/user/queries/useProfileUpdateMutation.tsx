@@ -8,7 +8,7 @@ import QUERY_KEY from '@/shared/constants/queryKey';
 import PATH from '@/shared/constants/path';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import { DefaultResponse } from '@/shared/types/response';
-import { throwError } from '@/shared/utils/error';
+import { throwApiError } from '@/shared/utils/error';
 import { MyProfileUpdateRequest } from '../types/profile';
 
 const useProfileUpdateMutation = () => {
@@ -29,7 +29,7 @@ const useProfileUpdateMutation = () => {
 
     if (!res.ok || !success) {
       console.error(fieldErrors);
-      throwError({ code, message });
+      throwApiError({ code, message });
     }
   };
 

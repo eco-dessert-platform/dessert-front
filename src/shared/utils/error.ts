@@ -3,6 +3,6 @@ interface Props {
   message: string;
 }
 
-export function throwError({ code, message }: Props) {
+export function throwApiError({ code, message }: Props) {
   throw new Error(`[ERROR ${code}] ${message}`);
 }

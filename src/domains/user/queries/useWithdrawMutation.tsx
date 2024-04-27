@@ -6,7 +6,7 @@ import ToastPop from '@/shared/components/ToastPop';
 import PATH from '@/shared/constants/path';
 import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
-import { throwError } from '@/shared/utils/error';
+import { throwApiError } from '@/shared/utils/error';
 
 interface WithdrawResponse {
   message: string;
@@ -28,7 +28,7 @@ const useWithdrawMutation = () => {
     const { result, success, message, code }: ResultResponse<WithdrawResponse> = await res.json();
 
     if (!res.ok || !success) {
-      throwError({ code, message });
+      throwApiError({ code, message });
     }
 
     return result;

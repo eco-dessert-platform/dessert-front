@@ -8,7 +8,7 @@ import PATH from '@/shared/constants/path';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import { DefaultResponse } from '@/shared/types/response';
-import { throwError } from '@/shared/utils/error';
+import { throwApiError } from '@/shared/utils/error';
 import { RegistrationRequest } from '../types/profile';
 
 const useRegistrationMutation = () => {
@@ -28,7 +28,7 @@ const useRegistrationMutation = () => {
     const { success, message, code }: DefaultResponse = await res.json();
 
     if (!res.ok || !success) {
-      throwError({ code, message });
+      throwApiError({ code, message });
     }
 
     return message;

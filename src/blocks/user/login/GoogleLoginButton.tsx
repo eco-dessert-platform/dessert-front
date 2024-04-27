@@ -1,6 +1,6 @@
 'use client';
 
-import GoogleIcon from '../assets/google_logo.svg';
+import GoogleIcon from '@/domains/user/assets/google_logo.svg';
 
 const GoogleLoginButton = () => (
   <button

@@ -7,6 +7,7 @@ import PATH from '@/shared/constants/path';
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
 import { setCookie } from '@/shared/actions/cookie';
+import { ResultResponse } from '@/shared/types/response';
 import { expToDate, parseJwt } from '../utils/jwt';
 
 interface LoginResponse {
@@ -28,9 +29,10 @@ const useLoginMutation = () => {
 
   const mutationFn = async (accessToken: string) => {
     const res = await fetchExtend.get(`/oauth/login/kakao?token=${accessToken}`);
-    const data: LoginResponse = await res.json();
-    if (!res.ok) throw new Error('백엔드 로그인 실패');
-    return data;
+    const { success, result, message }: ResultResponse<LoginResponse> = await res.json();
+
+    if (!res.ok || !success) throw new Error(message);
+    return result;
   };
 
   const onSuccess = async ({ accessToken, refreshToken }: LoginResponse) => {

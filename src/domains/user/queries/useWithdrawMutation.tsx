@@ -6,6 +6,7 @@ import ToastPop from '@/shared/components/ToastPop';
 import PATH from '@/shared/constants/path';
 import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
+import { throwError } from '@/shared/utils/error';
 
 interface WithdrawResponse {
   message: string;
@@ -24,10 +25,10 @@ const useWithdrawMutation = () => {
     const res = await fetchExtend.patch('/members', {
       body: JSON.stringify(rawFormData)
     });
-    const { result, success, code }: ResultResponse<WithdrawResponse> = await res.json();
+    const { result, success, message, code }: ResultResponse<WithdrawResponse> = await res.json();
 
     if (!res.ok || !success) {
-      throw new Error(`[ERROR ${code}] 회원 탈퇴 중 에러가 발생했어요.`);
+      throwError({ code, message });
     }
 
     return result;

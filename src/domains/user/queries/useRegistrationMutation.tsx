@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
 import fetchExtend from '@/shared/utils/api';
@@ -7,6 +8,7 @@ import PATH from '@/shared/constants/path';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import { DefaultResponse } from '@/shared/types/response';
+import { throwError } from '@/shared/utils/error';
 import { RegistrationRequest } from '../types/profile';
 
 const useRegistrationMutation = () => {
@@ -26,7 +28,7 @@ const useRegistrationMutation = () => {
     const { success, message, code }: DefaultResponse = await res.json();
 
     if (!res.ok || !success) {
-      throw Error(`[ERROR ${code}] 회원 정보 등록 중 오류가 발생했어요.`);
+      throwError({ code, message });
     }
 
     return message;

@@ -30,7 +30,6 @@ const useLoginMutation = () => {
   const mutationFn = async (accessToken: string) => {
     const res = await fetchExtend.get(`/oauth/login/kakao?token=${accessToken}`);
     const { success, result, message }: ResultResponse<LoginResponse> = await res.json();
-
     if (!res.ok || !success) throw new Error(message);
     return result;
   };

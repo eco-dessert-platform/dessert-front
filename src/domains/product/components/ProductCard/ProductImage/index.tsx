@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { IProductType } from '@/domains/product/types/productType';
 import { BundleBadge } from '@/domains/product/components/ProductCard/ProductImage/BundleBadge';
 import { RankingBadge } from '@/domains/product/components/ProductCard/ProductImage/RankingBadge';
-import useAddWishMutation from '@/domains/wish/queries/useAddWishMutation';
+import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
 
@@ -21,7 +21,7 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
   const BLUR_DATA_URL =
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==';
 
-  const { mutate: addMutate } = useAddWishMutation();
+  const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {

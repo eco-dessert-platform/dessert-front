@@ -10,10 +10,9 @@ const useDeleteWishProductMutation = () => {
 
   const mutationFn = async ({ productId }: { productId: string }) => {
     const res = await fetchExtend.patch(`/boards/${productId}/wish`);
-    if (!res.ok) throw new Error('상품 찜 실패');
 
     const { success, code, message }: DefaultResponse = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = () => {

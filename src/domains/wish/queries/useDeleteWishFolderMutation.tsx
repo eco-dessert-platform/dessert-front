@@ -14,9 +14,8 @@ const useDeleteWishFolderMutation = () => {
     const res = await fetchExtend.delete(`/wishLists/${folderId}`, {
       method: 'DELETE'
     });
-    if (!res.ok) throw new Error('찜 폴더 삭제 실패');
     const { success, code, message }: DefaultResponse = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

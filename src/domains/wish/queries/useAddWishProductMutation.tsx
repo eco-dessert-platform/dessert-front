@@ -17,10 +17,9 @@ const useAddWishProductMutation = () => {
     const res = await fetchExtend.post(`/boards/${productId}/wish`, {
       body: JSON.stringify({ folderId })
     });
-    if (!res.ok) throw Error('찜 추가 실패');
 
     const { success, code, message }: DefaultResponse = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

@@ -12,10 +12,8 @@ const useAddWishStoreMutation = () => {
 
   const mutationFn = async ({ storeId }: { storeId: string }) => {
     const res = await fetchExtend.post(`/likes/store/${storeId}`);
-    if (!res.ok) throw new Error('스토어 찜 실패');
-
     const { success, code, message }: DefaultResponse = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

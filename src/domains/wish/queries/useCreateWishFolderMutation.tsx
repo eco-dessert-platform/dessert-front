@@ -14,9 +14,8 @@ const useCreateWishFolderMutation = () => {
     const res = await fetchExtend.post('/wishLists', {
       body: JSON.stringify({ title })
     });
-    if (!res.ok) throw new Error('찜 폴더 생성 실패');
     const { success, code, message }: DefaultResponse = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

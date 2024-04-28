@@ -12,10 +12,9 @@ const useDeleteWishStoreMutation = () => {
 
   const mutationFn = async ({ storeId }: { storeId: string }) => {
     const res = await fetchExtend.patch(`/likes/store/${storeId}`);
-    if (!res.ok) throw new Error('찜 실패');
 
     const { code, message, success }: DefaultResponse = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

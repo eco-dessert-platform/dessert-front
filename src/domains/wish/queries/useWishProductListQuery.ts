@@ -10,9 +10,8 @@ const useWishProductListQuery = (folderId: string) => {
 
   const queryFn = async ({ pageParam }: { pageParam: number }) => {
     const res = await fetchExtend.get(`/boards/folders/${folderId}?page=${pageParam}`);
-    if (!res.ok) throw new Error('찜 상품 목록 조회 오류');
     const { result, code, message, success }: ResultResponse<WishProductsDetail> = await res.json();
-    if (!success) throwApiError({ code, message });
+    if (!res.ok || !success) throwApiError({ code, message });
     return result;
   };
 

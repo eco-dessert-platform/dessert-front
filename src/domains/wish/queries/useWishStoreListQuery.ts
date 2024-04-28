@@ -2,6 +2,8 @@ import QUERY_KEY from '@/shared/constants/queryKey';
 import fetchExtend from '@/shared/utils/api';
 import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 import { WishStoreList } from '../types/wishStore';
 
 const useWishStoreListQuery = () => {
@@ -12,8 +14,10 @@ const useWishStoreListQuery = () => {
   const queryFn = async ({ pageParam }: { pageParam: number }) => {
     const res = await fetchExtend.get(`/likes/stores?page=${pageParam}&size=10`);
     if (!res.ok) throw new Error('위시 스토어 조회 오류');
-    const data: WishStoreList = await res.json();
-    return data;
+    const { result, success, code, message }: ResultResponse<WishStoreList> = await res.json();
+    if (!success) throwApiError({ code, message });
+
+    return result;
   };
 
   const getNextPageParam: GetNextPageParamFunction<number, WishStoreList> = (

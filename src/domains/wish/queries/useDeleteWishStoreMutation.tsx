@@ -3,6 +3,8 @@ import fetchExtend from '@/shared/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import ToastPop from '@/shared/components/ToastPop';
 import QUERY_KEY from '@/shared/constants/queryKey';
+import { DefaultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 const useDeleteWishStoreMutation = () => {
   const { openToast } = useToast();
@@ -10,15 +12,10 @@ const useDeleteWishStoreMutation = () => {
 
   const mutationFn = async ({ storeId }: { storeId: string }) => {
     const res = await fetchExtend.patch(`/likes/store/${storeId}`);
+    if (!res.ok) throw new Error('찜 실패');
 
-    const contentType = res.headers.get('Content-Type');
-    if (!res.ok && contentType && contentType.includes('application/json')) {
-      const errorData = await res.json();
-      throw new Error(errorData.message);
-    }
-    if (!res.ok) {
-      throw new Error('찜 실패');
-    }
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

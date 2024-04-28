@@ -3,11 +3,11 @@
 import Modal from '@/shared/components/Modal';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { PlusIcon } from '@/shared/components/icons';
-import useWishFolderList from '../../queries/useWishFolderList';
 import FolderThumbnail from '../common/FolderThumbnail';
+import useWishFolderListQuery from '../../queries/useWishFolderListQuery';
 
 const WishFolderSelectModal = () => {
-  const { data } = useWishFolderList();
+  const { data } = useWishFolderListQuery();
 
   if (!data || data.length === 0) return <>임시</>;
 

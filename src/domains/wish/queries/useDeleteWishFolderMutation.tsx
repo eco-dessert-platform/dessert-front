@@ -4,6 +4,8 @@ import { revalidatePath } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';
 import fetchExtend from '@/shared/utils/api';
 import { useMutation } from '@tanstack/react-query';
+import { DefaultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 const useDeleteWishFolderMutation = () => {
   const { openToast } = useToast();
@@ -12,8 +14,9 @@ const useDeleteWishFolderMutation = () => {
     const res = await fetchExtend.delete(`/wishLists/${folderId}`, {
       method: 'DELETE'
     });
-
     if (!res.ok) throw new Error('찜 폴더 삭제 실패');
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {

@@ -7,7 +7,6 @@ export { default as CheckIcon } from './CheckIcon';
 export { default as StarIcon } from './StarIcon';
 
 export { default as BackArrowIcon } from '@public/assets/icons/back-arrow.svg';
-export { default as ForwardkArrowIcon } from '@public/assets/icons/forward-arrow.svg';
 export { default as DownArrowIcon } from '@public/assets/icons/down-arrow.svg';
 
 export { default as CloseIcon } from '@public/assets/icons/btn-remove.svg';

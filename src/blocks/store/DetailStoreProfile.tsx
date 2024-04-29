@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { useGetStoreDetailQuery } from '@/domains/store/hooks/useGetStoreDetailQuery';
-import StarButton from '@/shared/components/StartButton';
+import StarButton from '@/shared/components/StarButton';
 
 interface StoreProfileProps {
   storeId: number;

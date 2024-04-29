@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { IProductDetailType } from '@/domains/product/types/productDetailType';
-import StarButton from '@/shared/components/StartButton';
+import StarButton from '@/shared/components/StarButton';
 
 interface ProductsProps {
   store: IProductDetailType['store'];

@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
-import StartButton from '@/shared/components/StartButton';
+import StarButton from '@/shared/components/StarButton';
 
-const meta: Meta<typeof StartButton> = {
-  component: StartButton,
+const meta: Meta<typeof StarButton> = {
+  component: StarButton,
   title: 'StartButton'
 };
 
 export default meta;
 
-type Story = StoryObj<typeof StartButton>;
+type Story = StoryObj<typeof StarButton>;
 
 const Template = () => {
   const [isActive, setIsActive] = useState(false);
 
-  return <StartButton isAcive={isActive} onClick={() => setIsActive(!isActive)} />;
+  return <StarButton isAcive={isActive} onClick={() => setIsActive(!isActive)} />;
 };
 
 export const Default: Story = {

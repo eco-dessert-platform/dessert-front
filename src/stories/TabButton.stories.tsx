@@ -5,7 +5,14 @@ import TabButton from '@/shared/components/TabButton';
 
 const meta: Meta<typeof TabButton> = {
   component: TabButton,
-  title: 'TabButton'
+  title: 'TabButton',
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[600px] h-screen m-auto shadow-lg shadow-slate-100">
+        <Story />
+      </div>
+    )
+  ]
 };
 
 export default meta;
@@ -16,7 +23,7 @@ const Template = () => {
   const [isActive, setIsActive] = useState(true);
 
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <TabButton active={isActive} onClick={() => setIsActive(true)}>
         상품별
       </TabButton>

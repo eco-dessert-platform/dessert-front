@@ -12,7 +12,7 @@ type Story = StoryObj<typeof SadBbangleBox>;
 
 export const Default: Story = {};
 
-export const WithChildren: Story = {
+export const WithText: Story = {
   args: {
     children: '슬픈 빵그리'
   }

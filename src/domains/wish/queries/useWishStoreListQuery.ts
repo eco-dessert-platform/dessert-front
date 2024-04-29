@@ -13,7 +13,6 @@ const useWishStoreListQuery = () => {
     const res = await fetchExtend.get(`/likes/stores?page=${pageParam}&size=10`);
     if (!res.ok) throw new Error('위시 스토어 조회 오류');
     const data: WishStoreList = await res.json();
-    console.log('here', data);
     return data;
   };
 
@@ -21,21 +20,18 @@ const useWishStoreListQuery = () => {
     lastPage,
     _,
     lastPageParam
-  ) => {
-    return lastPage.nextPage ? undefined : lastPageParam + 1;
-  };
+  ) => (lastPage.nextPage ? undefined : lastPageParam + 1);
 
   return useInfiniteQuery({
     queryKey,
     queryFn,
     initialPageParam: 0,
     getNextPageParam,
-    select: ({ pages }) => {
-      return pages
+    select: ({ pages }) =>
+      pages
         .map(({ content }) => content)
-        .filter(value => value !== undefined)
-        .flat();
-    }
+        .filter((value) => value !== undefined)
+        .flat()
   });
 };
 

@@ -13,123 +13,110 @@ const getApiUrl = (endpoint: string) => {
   return `${API_V1_URL}${endpoint}`;
 };
 
-async function get(endpoint: string, init?: RequestInit | undefined) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function post(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function formPost(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'POST',
-    headers: {
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function put(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function formPut(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'PUT',
-    headers: {
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function patch(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function formPatch(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'PATCH',
-    headers: {
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
-async function _delete(endpoint: string, init?: RequestInit) {
-  const accessToken = await getAccessToken();
-  const bearerToken = `Bearer ${accessToken}`;
-
-  return fetch(getApiUrl(endpoint), {
-    method: 'DELETE',
-    headers: {
-      Authorization: bearerToken
-    },
-    ...init
-  });
-}
-
 const fetchExtend = {
-  get,
-  post,
-  formPost,
-  put,
-  patch,
-  formPatch,
-  formPut,
-  delete: _delete
+  get: async (endpoint: string, init?: RequestInit | undefined) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+
+  post: async (endpoint: string, init?: RequestInit) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+  formPost: async (endpoint: string, init?: RequestInit) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'POST',
+      headers: {
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+
+  put: async (endpoint: string, init?: RequestInit) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+  patch: async function patch(endpoint: string, init?: RequestInit) {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+  formPatch: async (endpoint: string, init?: RequestInit) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'PATCH',
+      headers: {
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+
+  formPut: async (endpoint: string, init?: RequestInit) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'PUT',
+      headers: {
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  },
+  delete: async (endpoint: string, init?: RequestInit) => {
+    const accessToken = await getAccessToken();
+    const bearerToken = `Bearer ${accessToken}`;
+
+    return fetch(getApiUrl(endpoint), {
+      method: 'DELETE',
+      headers: {
+        Authorization: bearerToken
+      },
+      ...init
+    });
+  }
 };
 
 export default fetchExtend;

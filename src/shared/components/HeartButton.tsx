@@ -4,12 +4,12 @@ import { ButtonHTMLAttributes } from 'react';
 import { HeartIcon } from './icons';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isAcive: boolean;
+  isActive: boolean;
   shape?: 'shadow' | 'nav' | 'default';
 }
 
-const HeartButton = ({ isAcive, shape = 'default', onClick, ...rest }: Props) => {
-  const activeClass = isAcive ? 'on' : 'off';
+const HeartButton = ({ isActive, shape = 'default', onClick, ...rest }: Props) => {
+  const activeClass = isActive ? 'on' : 'off';
 
   return (
     <button type="button" onClick={onClick} {...rest}>

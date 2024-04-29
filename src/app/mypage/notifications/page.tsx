@@ -43,8 +43,8 @@ const Notifications = () => {
 
   return (
     <div>
-      {notifications.map((item, idx) => (
-        <Link key={idx} href={`/mypage/notifications/${item.id}`}>
+      {notifications.map((item) => (
+        <Link key={item.id} href={`/mypage/notifications/${item.id}`}>
           <NotificationTitle title={item.title} date={item.createdAt} />
         </Link>
       ))}

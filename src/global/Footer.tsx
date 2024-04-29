@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import PATH from '@/shared/constants/path';
+
 import {
   CategoryIcon,
   CategoryRedIcon,
@@ -14,6 +14,7 @@ import {
   Search24Icon,
   Search24RedIcon
 } from '@/shared/components/icons';
+import PATH from '@/shared/constants/path';
 
 const Footer = () => {
   const pathname = usePathname();
@@ -36,7 +37,7 @@ const Footer = () => {
       title: '전체',
       defaultIcon: <CategoryIcon />,
       activeIcon: <CategoryRedIcon />,
-      href: PATH.allProductList
+      href: PATH.category
     },
     {
       title: '찜',

@@ -15,7 +15,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "chromatic": "npx chromatic --project-token=chpt_913dc3d440094a3"
+    "chromatic": "bash scripts/chromatic_publish.sh"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

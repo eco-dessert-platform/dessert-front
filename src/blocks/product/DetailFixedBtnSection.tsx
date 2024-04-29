@@ -18,7 +18,7 @@ const DetailFixedBtnSection = ({ data }: DetailFixedBtnSectionProps) => {
   return (
     <div className="bg-white z-[5000] max-w-[600px] w-full mx-auto p-[16px] fixed flex items-center gap-[10px] left-[0%] right-[0%] bottom-0 ">
       <div>
-        <HeartButton isAcive={data.board.isWished} onClick={handleClickHeart} />
+        <HeartButton isActive={data.board.isWished} onClick={handleClickHeart} />
       </div>
       <div className="flex-1">
         <Button onClick={gotoPurchaseUrl}>구매하러 가기</Button>

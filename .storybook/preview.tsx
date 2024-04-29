@@ -3,6 +3,7 @@ import '@/global/global.css';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import ModalContainer from '../src/global/ModalContainer';
+import ToastContainer from '../src/global/ToastContainer';
 
 const preview: Preview = {
   parameters: {
@@ -18,6 +19,7 @@ const preview: Preview = {
       <RecoilRoot>
         <Story />
         <ModalContainer />
+        <ToastContainer />
       </RecoilRoot>
     )
   ]

@@ -1,9 +1,9 @@
 'use client';
 
 import { useRecoilState } from 'recoil';
-import { recommendState } from '@/domains/user/atoms/profile';
+import { personalizedRecommendationState } from '@/domains/user/atoms/profile';
 
-import RecommmendItem from './ReccomendItem';
+import RecommendItem from './RecommendItem';
 
 const ITEMS = [
   {
@@ -33,12 +33,12 @@ const ITEMS = [
 ] as const;
 
 const CheckSection = () => {
-  const [isChecked, setIsChecked] = useRecoilState(recommendState);
+  const [isRecommendations, setIsRecommendations] = useRecoilState(personalizedRecommendationState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = e.target;
 
-    setIsChecked((prev) => ({
+    setIsRecommendations((prev) => ({
       ...prev,
       [name]: checked
     }));
@@ -47,13 +47,13 @@ const CheckSection = () => {
   return (
     <div className="flex flex-col gap-[8px]">
       {ITEMS.map((item) => (
-        <RecommmendItem
+        <RecommendItem
           key={item.id}
           name={item.name}
           title={item.title}
           description={item.description}
           onChange={handleChange}
-          isChecked={isChecked[item.name]}
+          isChecked={isRecommendations[item.name]}
         />
       ))}
     </div>

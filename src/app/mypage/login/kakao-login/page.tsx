@@ -1,4 +1,4 @@
-import KakaoLoginLoading from '@/domains/user/components/KakaoLoginLoading';
+import KakaoLoginLoading from '@/blocks/user/login/KakaoLoginLoading';
 import { Suspense } from 'react';
 
 const KakaoLoginLoadingPage = () => (

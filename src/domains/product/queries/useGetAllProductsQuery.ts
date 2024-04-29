@@ -1,35 +1,49 @@
-import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
-import QUERY_KEY from '@/shared/constants/queryKey';
-import { IFilterType } from '@/domains/product/types/filterType';
 import { IAllProductsType } from '@/domains/product/types/allProductsType';
+import { IFilterType } from '@/domains/product/types/filterType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
+import QUERY_KEY from '@/shared/constants/queryKey';
+import { ResultResponse } from '@/shared/types/response';
 import fetchExtend from '@/shared/utils/api';
+import { throwApiError } from '@/shared/utils/error';
+import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 export const useGetAllProductsQuery = (query: IFilterType) => {
   const queryKey = [QUERY_KEY.product, QUERY_KEY.main, { query }];
 
-  const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
-    const firstPage = cursorId === -1;
-    const cursorIdQueryString = firstPage ? '' : `&cursorId=${cursorId}`;
+  const queryFn = async ({
+    pageParam
+  }: {
+    pageParam: { cursorId: number; cursorScore: number };
+  }) => {
+    const firstPage = pageParam.cursorId === -1;
+    const cursorIdQueryString = firstPage ? '' : `&targetId=${pageParam.cursorId}`;
+    const cursorScoreQueryString = `&targetScore=${pageParam.cursorScore}`;
     const filterValueQueryString = transformFilterValueToQueryString(query);
 
-    const res = await fetchExtend.get(`/boards?${filterValueQueryString}${cursorIdQueryString}`);
-    if (!res.ok) throw new Error('전체 상품 조회 실패');
+    const res = await fetchExtend.get(
+      `/boards?${filterValueQueryString}${cursorIdQueryString}${cursorScoreQueryString}`
+    );
 
-    const data: IAllProductsType = await res.json();
-    return data;
+    const { success, result, code, message }: ResultResponse<IAllProductsType> = await res.json();
+
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+    return result;
   };
 
-  const getNextPageParam: GetNextPageParamFunction<number, IAllProductsType> = (lastPage) => {
+  const getNextPageParam: GetNextPageParamFunction<
+    { cursorId: number; cursorScore: number },
+    IAllProductsType
+  > = (lastPage) => {
     if (!lastPage.hasNext) return undefined;
-    const nextCursorId = lastPage.content.at(-1)?.boardId;
-    return nextCursorId;
+    return { cursorId: lastPage.nextCursor, cursorScore: lastPage.cursorScore };
   };
 
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: -1,
+    initialPageParam: { cursorId: -1, cursorScore: 0 },
     getNextPageParam,
     refetchOnMount: false,
     refetchOnReconnect: false,
@@ -37,8 +51,8 @@ export const useGetAllProductsQuery = (query: IFilterType) => {
     staleTime: Infinity,
     select: ({ pages }) => {
       const products = pages.map((page) => page.content).flat();
-      const productCount = pages[0]?.boardCnt || 0;
-      const storeCount = pages[0]?.storeCnt || 0;
+      const productCount = pages[0]?.boardCount || 0;
+      const storeCount = pages[0]?.storeCount || 0;
       return { products, productCount, storeCount };
     }
   });

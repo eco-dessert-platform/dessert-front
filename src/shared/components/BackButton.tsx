@@ -1,7 +1,8 @@
 'use client';
 
-import { BackArrowIcon } from '@/shared/components/icons';
 import { useRouter } from 'next/navigation';
+
+import ArrowIcons from './icons/ArrowIcons';
 
 const BackButton = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const BackButton = () => {
       onClick={goBackHandler}
       aria-label="back button"
     >
-      <BackArrowIcon />
+      <ArrowIcons shape="back" />
     </button>
   );
 };

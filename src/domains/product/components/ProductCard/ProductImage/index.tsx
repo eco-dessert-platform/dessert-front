@@ -47,7 +47,7 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
       />
       <div className="absolute bottom-[9px] right-[9px] h-[20px]">
         <HeartButton
-          isAcive={product.isWished}
+          isActive={product.isWished}
           shape="shadow"
           onClick={product.isWished ? hate : like}
         />

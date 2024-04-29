@@ -1,5 +1,5 @@
-import { IProductType } from '@/domains/product/types/productType';
 import TagSwiper from '@/domains/product/components/ProductCard/ProductSummary/TagSwiper';
+import { IProductType } from '@/domains/product/types/productType';
 
 interface ProductSummaryProps {
   product: IProductType;
@@ -14,7 +14,7 @@ const ProductSummary = ({ product }: ProductSummaryProps) => (
       {product.title}
     </h3>
     <p className="mb-[4px] text-14 font-medium text-gray-900 leading-120 tracking-tight-4">
-      {product.price.toLocaleString()}원
+      {product.price}원
     </p>
     {product.tags && <TagSwiper tag={product.tags} />}
   </div>

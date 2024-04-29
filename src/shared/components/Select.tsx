@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { DownArrowIcon } from './icons';
+import { useEffect, useState } from 'react';
+
+import ArrowIcons from './icons/ArrowIcons';
 
 interface SelectProps {
   options: Array<string>;
@@ -29,14 +30,15 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
   };
 
   return (
-    <div
+    <button
+      type="button"
       className="selectEl relative inline-block text-gray-900 text-[12px] font-medium leading-150 tracking-tight-2"
       onClick={handleSelectClick}
     >
       <div className="flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] border-gray-200 rounded-[50px] cursor-pointer">
         {selectedOption}
         <span className={`${isExpended ? 'rotate-180 transition-all' : ''}`}>
-          <DownArrowIcon />
+          <ArrowIcons shape="down" />
         </span>
       </div>
       {isExpended && (
@@ -54,16 +56,17 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
             return (
               <li
                 key={option}
-                onClick={() => onChange(option)}
                 className={`px-[16px] py-[10px] border-gray-100 cursor-pointer hover:bg-gray-50 ${borderStyle} ${hoverRoundedStyle}`}
               >
-                {option}
+                <button type="button" onClick={() => onChange(option)}>
+                  {option}
+                </button>
               </li>
             );
           })}
         </ul>
       )}
-    </div>
+    </button>
   );
 };
 

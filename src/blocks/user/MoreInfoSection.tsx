@@ -25,7 +25,11 @@ interface MoreInfoItemProps {
 const INFOS = [
   { href: PATH.notification, icon: <BellIcon />, content: '공지사항' },
   { href: PATH.serviceTerm, icon: <DocIcon />, content: '서비스 이용 약관' },
-  { href: PATH.privacyPolicy, icon: <LockIcon />, content: '개인정보 수집 및 이용' }
+  {
+    href: PATH.privacyPolicy,
+    icon: <LockIcon />,
+    content: '개인정보 수집 및 이용'
+  }
 ];
 
 const LOGGEDIN_INFOS = [

@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { ErrorResponse } from '@/shared/types/errorType';
+
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
 import fetchExtend from '@/shared/utils/api';
 import PATH from '@/shared/constants/path';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import { revalidateTag } from '@/shared/actions/revalidate';
+import { DefaultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 import { RegistrationRequest } from '../types/profile';
 
 const useRegistrationMutation = () => {
@@ -23,7 +25,13 @@ const useRegistrationMutation = () => {
     }
 
     const res = await fetchExtend.formPut('/members/additional-information', { body: formData });
-    if (!res.ok) throw Error('회원 등록 실패');
+    const { success, message, code }: DefaultResponse = await res.json();
+
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+
+    return message;
   };
 
   const onSuccess = async () => {
@@ -36,7 +44,7 @@ const useRegistrationMutation = () => {
     push(PATH.home);
   };
 
-  const onError = (e: ErrorResponse) => {
+  const onError = (e: Error) => {
     const message = e.message || '알 수 없는 이유로 등록에 실패했어요.';
 
     openToast(

@@ -7,6 +7,7 @@
   "plugins": ["@typescript-eslint/eslint-plugin"],
   "rules": {
     // airbnb custom
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "react/function-component-definition": [
       "warn",
       {
@@ -26,42 +27,7 @@
     "import/prefer-default-export": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/react-in-jsx-scope": "off",
-
-    // 리팩토링 기간에만 warn (airbnb 설정에서 기본값 error)
-    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
-    "import/no-duplicates": "warn",
-    "arrow-body-style": "warn",
-    "arrow-parens": "warn",
-    "react/button-has-type": "warn",
-    "import/order": "warn",
-    "consistent-return": "warn",
-    "react/jsx-curly-brace-presence": "warn",
-    "no-underscore-dangle": "warn",
-    "@typescript-eslint/naming-convention": "warn",
-    "react/self-closing-comp": "warn",
-    "react/no-unknown-property": "warn",
-    "no-restricted-globals": "warn",
-    "jsx-a11y/click-events-have-key-events": "warn",
-    "jsx-a11y/no-static-element-interactions": "warn",
-    "react/no-array-index-key": "warn",
-    "jsx-a11y/control-has-associated-label": "warn",
-    "@typescript-eslint/no-unused-expressions": "warn",
-    "no-empty": "warn",
-    "react/jsx-boolean-value": "warn",
-    "prefer-template": "warn",
-    "no-useless-concat": "warn",
-    "no-param-reassign": "warn",
-    "lines-around-directive": "warn",
-    "@typescript-eslint/no-redeclare": "warn",
-    "prefer-destructuring": "warn",
-    "@typescript-eslint/no-shadow": "warn",
-    "jsx-a11y/no-noninteractive-element-interactions": "warn",
-    "react/jsx-no-useless-fragment": "warn",
-    "@typescript-eslint/no-use-before-define": "warn",
-    "object-shorthand": "warn",
-    "spaced-comment": "warn",
-    "jsx-a11y/html-has-lang": "warn"
+    "react/react-in-jsx-scope": "off"
   },
   "ignorePatterns": ["*.config.*", "node_modules", "*.d.ts", "public/sw.js"]
 }

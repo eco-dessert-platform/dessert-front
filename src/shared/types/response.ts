@@ -1,11 +1,8 @@
-interface DefaultResponse {
+export interface DefaultResponse {
   success: boolean;
   code: number;
   message: string;
-}
-
-export interface ErrorResponse extends DefaultResponse {
-  fieldErrors: [
+  fieldErrors?: [
     {
       field: string;
       msg: string;

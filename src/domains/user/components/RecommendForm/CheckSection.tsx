@@ -9,7 +9,7 @@ const ITEMS = [
   {
     id: 1,
     title: '다이어트',
-    description: '건강 디저트를 먹어서, 체중조절이 필요해요.',
+    description: '건강 디저트를 먹으며, 체중조절이 필요해요.',
     name: 'isDiet'
   },
   {

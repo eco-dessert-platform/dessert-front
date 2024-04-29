@@ -1,3 +1,7 @@
+export interface IProductListType {
+  content: IProductType[];
+}
+
 export interface IProductType {
   boardId: number;
   storeId: number;

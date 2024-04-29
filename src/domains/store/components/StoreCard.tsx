@@ -35,12 +35,12 @@ const StoreCard = ({ id, imgSrc, title, desc, isWished = false }: WishStroeProps
         )}
       </div>
 
-      <div className="flex w-full flex-col overflow-hidden">
+      <div className="flex flex-col w-full overflow-hidden">
         <div className="flex justify-between">
           <div className="font-semibold leading-150 tracking-tight-2 text-14">{title}</div>
-          <StarButton isAcive={isWished} onClick={isWished ? hate : like} />
+          <StarButton isActive={isWished} onClick={isWished ? hate : like} />
         </div>
-        <p className="truncate text-gray-600 leading-130 tracking-tight-2 text-12">{desc}</p>
+        <p className="text-gray-600 truncate leading-130 tracking-tight-2 text-12">{desc}</p>
       </div>
     </PaddingWrapper>
   );

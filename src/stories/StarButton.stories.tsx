@@ -15,7 +15,7 @@ type Story = StoryObj<typeof StarButton>;
 const Template = () => {
   const [isActive, setIsActive] = useState(false);
 
-  return <StarButton isAcive={isActive} onClick={() => setIsActive(!isActive)} />;
+  return <StarButton isActive={isActive} onClick={() => setIsActive(!isActive)} />;
 };
 
 export const Default: Story = {

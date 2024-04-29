@@ -21,10 +21,10 @@ const DetailStoreProfile = ({ storeId }: StoreProfileProps) => {
       />
       <div className="flex flex-col gap-[4px]">
         <div className="w-full flex items-center justify-center gap-[2px]">
-          <div className="text-gray-900 text-16 font-bold">{data?.store.storeName}</div>
-          <StarButton isAcive={isLiked} onClick={() => setIsLiked(!isLiked)} />
+          <div className="font-bold text-gray-900 text-16">{data?.store.storeName}</div>
+          <StarButton isActive={isLiked} onClick={() => setIsLiked(!isLiked)} />
         </div>
-        <p className="text-center text-gray-600 text-12 font-normal">{data?.store.introduce}</p>
+        <p className="font-normal text-center text-gray-600 text-12">{data?.store.introduce}</p>
       </div>
     </div>
   );

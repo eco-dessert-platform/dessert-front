@@ -9,10 +9,16 @@ import { IProductDetailType } from '@/domains/product/types/productDetailType';
 import DetailStoreInfo from '@/domains/store/components/DetailStoreInfo';
 import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 async function getDetail(params: { id: string }) {
   const res = await fetchExtend.get(`/boards/${params.id}`);
-  const { result }: ResultResponse<IProductDetailType> = await res.json();
+  const { result, success, message, code }: ResultResponse<IProductDetailType> = await res.json();
+
+  if (!success) {
+    throwApiError({ code, message });
+  }
+
   return result;
 }
 

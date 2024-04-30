@@ -3,6 +3,7 @@ import { IProductListType, IProductType } from '@/domains/product/types/productT
 import ProductCard from '@/domains/product/components/ProductCard';
 import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
 import fetchExtend from '@/shared/utils/api';
+import { throwApiError } from '@/shared/utils/error';
 
 const getBestProducts = async () => {
   const res = await fetchExtend.get('/boards', {
@@ -10,7 +11,12 @@ const getBestProducts = async () => {
       tags: [REAVALIDATE_TAG.product]
     }
   });
-  const { result }: ResultResponse<IProductListType> = await res.json();
+  const { result, success, message, code }: ResultResponse<IProductListType> = await res.json();
+
+  if (!success) {
+    throwApiError({ code, message });
+  }
+
   return result;
 };
 

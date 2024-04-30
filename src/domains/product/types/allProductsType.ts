@@ -1,9 +1,10 @@
-import { IProductType } from '@/domains/product/types/productType';
+import { IProductType } from './productType';
 
 export interface IAllProductsType {
   content: IProductType[];
-  requestCursor: number | null;
+  nextCursor: number;
   hasNext: boolean;
-  boardCnt: number;
-  storeCnt: number;
+  boardCount: number;
+  storeCount: number;
+  cursorScore: number;
 }

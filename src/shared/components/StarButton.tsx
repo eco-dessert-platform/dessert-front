@@ -2,12 +2,12 @@ import { ButtonHTMLAttributes } from 'react';
 import { StarIcon } from './icons';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isAcive: boolean;
+  isActive: boolean;
 }
 
-const StarButton = ({ isAcive, onClick, ...rest }: Props) => (
+const StarButton = ({ isActive, onClick, ...rest }: Props) => (
   <button type="button" onClick={onClick} {...rest}>
-    <StarIcon shape={isAcive ? 'on' : 'off'} />
+    <StarIcon shape={isActive ? 'on' : 'off'} />
   </button>
 );
 

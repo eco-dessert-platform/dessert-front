@@ -1,5 +1,5 @@
-import StarOn from '@public/assets/icons/star-gray.svg';
-import StarOff from '@public/assets/icons/star-yellow.svg';
+import StarOff from '@public/assets/icons/star-gray.svg';
+import StarOn from '@public/assets/icons/star-yellow.svg';
 
 interface Props {
   shape: 'off' | 'on';

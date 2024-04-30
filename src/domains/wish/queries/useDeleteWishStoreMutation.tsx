@@ -12,7 +12,6 @@ const useDeleteWishStoreMutation = () => {
 
   const mutationFn = async ({ storeId }: { storeId: string }) => {
     const res = await fetchExtend.patch(`/likes/store/${storeId}`);
-
     const { code, message, success }: DefaultResponse = await res.json();
     if (!res.ok || !success) throwApiError({ code, message });
   };

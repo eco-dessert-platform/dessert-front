@@ -1,11 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
 import fetchExtend from '@/shared/utils/api';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import PATH from '@/shared/constants/path';
 import { revalidateTag } from '@/shared/actions/revalidate';
+import { DefaultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 import { MyProfileUpdateRequest } from '../types/profile';
 
 const useProfileUpdateMutation = () => {
@@ -22,7 +25,12 @@ const useProfileUpdateMutation = () => {
     }
 
     const res = await fetchExtend.formPut('/profile', { body: formData });
-    if (!res.ok) throw new Error('프로필 업데이트 실패');
+    const { success, code, message, fieldErrors }: DefaultResponse = await res.json();
+
+    if (!res.ok || !success) {
+      console.error(fieldErrors);
+      throwApiError({ code, message });
+    }
   };
 
   const onSuccess = async () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, FormEventHandler } from 'react';
 import Input from '@/shared/components/Input';
 import Button from '@/shared/components/Button';
 import { useSetRecoilState } from 'recoil';
@@ -13,9 +13,21 @@ interface PhoneNumberInputProps {
 const PhoneNumberInput = ({ defaultValue }: PhoneNumberInputProps) => {
   const setPhoneNumber = useSetRecoilState(phoneNumberState);
 
+  const toPhoneNumberFormat = (phoneNumber: string) =>
+    phoneNumber
+      .replace(/[^0-9]/g, '')
+      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+      .replace(/(-{1,2})$/g, '');
+
+  const fromPhoneNumberFormat = (phoneNumber: string) => phoneNumber.replaceAll('-', '');
+
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    setPhoneNumber(value);
+    setPhoneNumber(fromPhoneNumberFormat(value));
+  };
+
+  const onInput: FormEventHandler<HTMLInputElement> = (e) => {
+    e.currentTarget.value = toPhoneNumberFormat(e.currentTarget.value);
   };
 
   return (
@@ -23,15 +35,17 @@ const PhoneNumberInput = ({ defaultValue }: PhoneNumberInputProps) => {
       <Input
         type="tel"
         label="휴대폰 번호"
-        placeholder="-를 제외한 휴대폰 번호를 입력해 주세요."
+        placeholder="010-1234-5678"
         button={
           <Button disabled type="button" variants="input" onClick={() => {}}>
             인증하기
           </Button>
         }
-        defaultValue={defaultValue}
+        maxLength={13}
+        defaultValue={defaultValue && toPhoneNumberFormat(defaultValue)}
         onChange={onChange}
         required
+        onInput={onInput}
       />
     </div>
   );

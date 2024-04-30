@@ -66,10 +66,10 @@ export function transformTagToEng(tag: string): string {
 
 export function transformSortToEng(sort: string): string {
   if (sort === '추천순') {
-    return 'recommend';
+    return 'RECOMMEND';
   }
   if (sort === '인기순') {
-    return 'popular';
+    return 'POPULAR';
   }
   return sort;
 }

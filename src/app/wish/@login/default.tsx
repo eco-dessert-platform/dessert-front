@@ -1,5 +1,5 @@
 import LoginLogoSection from '@/blocks/user/login/LoginLogoSection';
-import GoogleLoginButton from '@/domains/user/components/GoogleLoginButton';
+import GoogleLoginButton from '@/blocks/user/login/GoogleLoginButton';
 import KakaoLoginButton from '@/domains/user/components/KakaoLoginButton';
 
 const WishLoginPage = () => (

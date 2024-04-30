@@ -55,7 +55,10 @@ module.exports = {
         kakao: '#FEE500',
         primaryOrangeRed: '#F04C28',
         subColorPink: '#FEEDEA',
-        secondaryOrangeRed: '#ED5F5F'
+        secondaryOrangeRed: '#ED5F5F',
+        redGray: {
+          30: '#F8F8F8'
+        }
       },
       // ex) text-11
       fontSize: {

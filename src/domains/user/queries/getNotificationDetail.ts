@@ -12,7 +12,6 @@ const getNotificationDetail = async (id: number) => {
     next: { tags: [`${QUERY_KEY.notification}:${id}`] }
   });
   if (!res.ok) throw new Error('공지사항 조회 실패');
-
   const data: NotificationType = await res.json();
   return data;
 };

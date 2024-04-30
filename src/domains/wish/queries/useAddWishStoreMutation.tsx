@@ -18,7 +18,6 @@ const useAddWishStoreMutation = () => {
 
   const onSuccess = async () => {
     queryClient.invalidateQueries({ queryKey: [QUERY_KEY.store] });
-
     openToast(
       <ToastPop>
         <div>💖 찜한 스토어에 추가했어요</div>

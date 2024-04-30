@@ -6,6 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useRecoilValue } from 'recoil';
 
 const ToastContainer = () => {
+  console.log('ToastContainer');
   const toast = useRecoilValue(toastState);
 
   const toastVisible = !!toast;

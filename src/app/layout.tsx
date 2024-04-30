@@ -6,11 +6,9 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import KaKaoChatScript from '@/global/KaKaoChatScript';
-import ModalContainer from '@/global/ModalContainer';
-import PopupContainer from '@/global/PopupContainer';
 import RootLayoutProvider from '@/global/RootLayoutProvider';
-import ToastContainer from '@/global/ToastContainer';
 import Footer from '@/global/Footer';
+import AlertContainer from '@/global/AlertContainer';
 // import FlareLaneScript from '@/global/FlareLaneScript';
 // import RegisterServiceWorker from '@/global/RegisterServiceWorker';
 
@@ -28,9 +26,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ko">
     <body className={pretendard.className}>
       <RootLayoutProvider>
-        <ModalContainer />
-        <PopupContainer />
-        <ToastContainer />
+        <AlertContainer />
         <div className="sm:w-[600px] w-full m-auto pb-24 min-h-screen relative shadow-lg">
           {children}
         </div>

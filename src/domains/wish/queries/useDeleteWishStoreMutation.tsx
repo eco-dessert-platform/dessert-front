@@ -16,7 +16,7 @@ const useDeleteWishStoreMutation = () => {
     if (!res.ok || !success) throwApiError({ code, message });
   };
 
-  const onSuccess = async () => {
+  const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: [QUERY_KEY.store] });
 
     openToast(

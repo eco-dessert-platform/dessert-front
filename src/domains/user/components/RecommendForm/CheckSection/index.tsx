@@ -33,12 +33,12 @@ const ITEMS = [
 ] as const;
 
 const CheckSection = () => {
-  const [isRecommendations, setIsRecommendations] = useRecoilState(personalizedRecommendationState);
+  const [recommendations, setRecommendations] = useRecoilState(personalizedRecommendationState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = e.target;
 
-    setIsRecommendations((prev) => ({
+    setRecommendations((prev) => ({
       ...prev,
       [name]: checked
     }));
@@ -53,7 +53,7 @@ const CheckSection = () => {
           title={item.title}
           description={item.description}
           onChange={handleChange}
-          isChecked={isRecommendations[item.name]}
+          isChecked={recommendations[item.name]}
         />
       ))}
     </div>

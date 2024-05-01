@@ -12,7 +12,7 @@ const useToast = () => {
 
     setTimeout(() => {
       closeToast();
-    }, 3000);
+    }, 5000);
   };
 
   return { openToast, closeToast };

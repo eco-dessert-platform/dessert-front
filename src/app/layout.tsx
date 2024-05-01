@@ -26,8 +26,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ko">
     <body className={pretendard.className}>
       <RootLayoutProvider>
-        <AlertContainer />
         <div className="sm:w-[600px] w-full m-auto pb-24 min-h-screen relative shadow-lg">
+          <AlertContainer />
           {children}
         </div>
         <Footer />

@@ -4,6 +4,12 @@ import fetchExtend from '@/shared/utils/api';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
+
+interface DeleteRecentSearchKeyword {
+  content: boolean;
+}
 
 type ContextType = {
   previousKeywords?: SearchKeywordsType;
@@ -19,7 +25,11 @@ export const useDeleteRecentSearchKeywordMutation = () => {
 
   const mutationFn = async (keyword: string) => {
     const res = await fetchExtend.delete(`/search/recency?keyword=${keyword}`);
-    if (!res.ok) throw new Error('최근 검색어 삭제 실패');
+    const { success, code, message }: ResultResponse<DeleteRecentSearchKeyword> = await res.json();
+
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
   };
 
   const onMutate = async (keywordToDelete: string): Promise<ContextType> => {

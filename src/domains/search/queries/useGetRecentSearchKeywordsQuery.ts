@@ -23,5 +23,10 @@ export const useGetRecentSearchKeywordsQuery = () => {
     errorMessage: '최근 검색어 조회에 실패했습니다'
   };
 
-  return useQuery({ queryKey, queryFn, meta });
+  return useQuery({
+    queryKey,
+    queryFn,
+    meta,
+    enabled: isLoggedIn
+  });
 };

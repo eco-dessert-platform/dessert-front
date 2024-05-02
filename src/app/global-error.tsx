@@ -2,9 +2,10 @@
 
 import Button from '@/shared/components/Button';
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
+import Link from 'next/link';
+import PATH from '@/shared/constants/path';
 
 const GlobalError = ({
   error,
@@ -13,8 +14,6 @@ const GlobalError = ({
   error: Error & { digest?: string };
   reset: () => void;
 }) => {
-  const router = useRouter();
-
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -34,9 +33,9 @@ const GlobalError = ({
               </Button>
             </div>
             <div className="flex-1">
-              <Button onClick={() => router.push('/')} variants="primary-white">
-                홈으로 가기
-              </Button>
+              <Link href={PATH.home}>
+                <Button variants="primary-white">홈으로 가기</Button>
+              </Link>
             </div>
           </div>
         </PaddingWrapper>

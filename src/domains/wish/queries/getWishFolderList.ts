@@ -5,10 +5,8 @@ import { throwApiError } from '@/shared/utils/error';
 
 const getWishFolderList = async () => {
   const res = await fetchExtend.get('/wishLists');
-
   const { list, success, code, message }: ListResponse<WishFolderType[]> = await res.json();
   if (!res.ok || !success) throwApiError({ code, message });
-
   return list;
 };
 

@@ -10,7 +10,6 @@ const useDeleteWishProductMutation = () => {
 
   const mutationFn = async ({ productId }: { productId: string }) => {
     const res = await fetchExtend.patch(`/boards/${productId}/wish`);
-
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throwApiError({ code, message });
   };

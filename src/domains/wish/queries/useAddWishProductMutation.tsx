@@ -17,7 +17,6 @@ const useAddWishProductMutation = () => {
     const res = await fetchExtend.post(`/boards/${productId}/wish`, {
       body: JSON.stringify({ folderId })
     });
-
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throwApiError({ code, message });
   };

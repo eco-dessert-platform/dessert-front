@@ -41,8 +41,8 @@ export const useDeleteRecentSearchKeywordMutation = () => {
     return { previousKeywords };
   };
 
-  const onSuccess = () => {
-    queryClient.invalidateQueries({ queryKey });
+  const onSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey });
     openToast(<ToastPop>최근 검색어 삭제에 성공했어요</ToastPop>);
   };
 

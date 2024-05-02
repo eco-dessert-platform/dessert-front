@@ -13,7 +13,6 @@ import ToastContainer from '@/global/ToastContainer';
 import Footer from '@/global/Footer';
 // import FlareLaneScript from '@/global/FlareLaneScript';
 // import RegisterServiceWorker from '@/global/RegisterServiceWorker';
-import SilentLogin from '@/global/SilentLogin';
 
 const pretendard = localFont({
   src: '../../public/assets/fonts/PretendardVariable.woff2'
@@ -29,7 +28,6 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ko">
     <body className={pretendard.className}>
       <RootLayoutProvider>
-        <SilentLogin />
         <ModalContainer />
         <PopupContainer />
         <ToastContainer />

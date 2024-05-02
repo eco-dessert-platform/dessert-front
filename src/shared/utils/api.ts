@@ -1,11 +1,10 @@
-import { TOKEN } from '@/shared/constants/token';
 import { getCookie } from '../actions/cookie';
 import { API_URL } from '../constants/api';
 
 const API_V1_URL = `${API_URL}/api/v1`;
 
 const getAccessToken = async () => {
-  const accessToken = await getCookie(TOKEN.accessToken);
+  const accessToken = await getCookie('accessToken');
   return accessToken?.value;
 };
 

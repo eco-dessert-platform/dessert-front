@@ -3,10 +3,9 @@ import UserInfoSection from '@/blocks/user/UserInfoSection';
 import MoreInfoSection from '@/blocks/user/MoreInfoSection';
 import { getCookie } from '@/shared/actions/cookie';
 import LoginSection from '@/blocks/user/LoginSection';
-import { TOKEN } from '@/shared/constants/token';
 
 const MyPage = async () => {
-  const accessToken = await getCookie(TOKEN.accessToken);
+  const accessToken = await getCookie('accessToken');
   const isLoggedIn = !!accessToken;
 
   return (

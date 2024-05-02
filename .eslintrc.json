@@ -22,7 +22,6 @@
         "optionalDependencies": false
       }
     ],
-    "@typescript-eslint/no-use-before-define": "off",
 
     // airbnb off (필요 없다고 생각하는 옵션 off)
     "import/prefer-default-export": "off",

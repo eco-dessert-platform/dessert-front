@@ -11,15 +11,15 @@ import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
 
 interface CategoryItemProps {
-  icon: JSX.Element;
+  shape: string;
   title: string;
   subCategories: string[];
 }
 
-const CategoryItemSection = ({ icon, title, subCategories }: CategoryItemProps) => {
+const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps) => {
   const router = useRouter();
 
-  const { isActive, toggleCategory: toggle } = useToggle();
+  const { isActive, toggle } = useToggle();
 
   const handleCategoryClick = () => {
     toggle();
@@ -30,7 +30,7 @@ const CategoryItemSection = ({ icon, title, subCategories }: CategoryItemProps) 
   return (
     <>
       <MainCategoryItem
-        icon={icon}
+        shape={shape}
         title={title}
         hasSubCategory={subCategories.length > 0}
         onClick={handleCategoryClick}

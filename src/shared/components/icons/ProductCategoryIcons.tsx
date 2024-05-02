@@ -8,7 +8,7 @@ import TartIcon from '@public/assets/icons/categories/tart-icon.svg';
 import YogurtIcon from '@public/assets/icons/categories/yogurt.svg';
 
 interface Props {
-  shape: 'all' | 'yogurt' | 'bread' | 'cake' | 'cookie' | 'etc' | 'jam' | 'tart';
+  shape: string;
 }
 
 const ProductCategoryIcons = ({ shape }: Props) => {

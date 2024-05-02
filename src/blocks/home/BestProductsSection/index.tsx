@@ -8,8 +8,8 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductsList from './ProductsList';
 
 const BestProductsSection = async () => (
-  <PaddingWrapper className="pb-[36px] px-0">
-    <div className="flex justify-between px-[16px] items-end py-[10px] ">
+  <PaddingWrapper className="pb-[36px]">
+    <div className="flex justify-between items-end py-[10px] ">
       <div className="font-semibold text-gray-500 text-20 leading-150 tracking-tight-2">Best</div>
       <Link
         href="/products"

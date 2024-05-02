@@ -7,7 +7,7 @@ const useToggle = () => {
     setIsActive((prev) => !prev);
   };
 
-  return { toggleCategory: toggle, isActive };
+  return { toggle, isActive };
 };
 
 export default useToggle;

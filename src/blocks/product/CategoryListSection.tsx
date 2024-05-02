@@ -10,7 +10,7 @@ const CategoryListSection = () => (
     {MAIN_CATEGORIES_TYPE.map((mainCategory) => (
       <CategoryItemSection
         key={mainCategory.id}
-        icon={mainCategory.icon}
+        shape={mainCategory.shape}
         title={mainCategory.title}
         subCategories={mainCategory.subCategories}
       />

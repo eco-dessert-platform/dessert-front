@@ -14,7 +14,7 @@ export const setCookie = async ({
 }: {
   name: string;
   value: string;
-  expires?: Date;
+  expires?: number; // 단위: ms
 }) => {
   cookies().set({
     name,

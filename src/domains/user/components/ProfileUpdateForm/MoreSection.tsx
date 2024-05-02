@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSetRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
+import { TOKEN } from '@/shared/constants/token';
 
 interface Props {
   className?: string;
@@ -15,7 +16,7 @@ const MoreSection = ({ className }: Props) => {
   const setLogin = useSetRecoilState(isLoggedinState);
   const { push } = useRouter();
   const logout = async () => {
-    await Promise.all([deleteCookie('accessToken'), deleteCookie('refreshToken')]);
+    await Promise.all([deleteCookie(TOKEN.accessToken), deleteCookie(TOKEN.refreshToken)]);
     setLogin(false);
     push('/mypage');
   };

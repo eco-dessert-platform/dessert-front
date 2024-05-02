@@ -1,5 +1,6 @@
 import { getCookie } from '@/shared/actions/cookie';
 import { ReactNode } from 'react';
+import { TOKEN } from '@/shared/constants/token';
 
 interface Props {
   children: ReactNode;
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const Layout = async ({ children, login }: Props) => {
-  const accessToken = await getCookie('accessToken');
+  const accessToken = await getCookie(TOKEN.accessToken);
   const isLoggedIn = !!accessToken;
 
   return isLoggedIn ? children : login;

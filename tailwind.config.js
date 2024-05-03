@@ -48,6 +48,9 @@ module.exports = {
           800: '#424242',
           900: '#212121'
         },
+        redGray: {
+          30: '#F8F8F8'
+        },
         blueGray: {
           30: '#F4F7F9',
           50: '#ECEFF1'
@@ -55,6 +58,7 @@ module.exports = {
         kakao: '#FEE500',
         primaryOrangeRed: '#F04C28',
         subColorPink: '#FEEDEA',
+        secondaryPink: '#FDF1EE',
         secondaryOrangeRed: '#ED5F5F',
         redGray: {
           30: '#F8F8F8'

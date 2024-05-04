@@ -3,3 +3,10 @@ export interface NotificationType {
   title: string;
   createdAt: string;
 }
+
+export interface NotificationDetailType {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+}

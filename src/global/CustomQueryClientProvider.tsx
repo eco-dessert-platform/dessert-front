@@ -1,34 +1,30 @@
 'use client';
 
-import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SECOND } from '@/shared/constants/time';
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
 
-const CustomQueryClientProvider = ({ children }: { children: React.ReactNode }) => {
-  const { openToast } = useToast();
+let browserQueryClient: QueryClient | undefined;
 
-  const queryClient = new QueryClient({
+function makeQueryClient() {
+  return new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 60 * SECOND
       }
-    },
-    queryCache: new QueryCache({
-      onError: (error, query) => {
-        console.error(error);
-
-        const message = query.meta?.errorMessage;
-        if (!message) return;
-
-        openToast(
-          <ToastPop>
-            <div>{message}</div>
-          </ToastPop>
-        );
-      }
-    })
+    }
   });
+}
+
+function getQueryClient() {
+  if (typeof window === 'undefined') {
+    return makeQueryClient();
+  }
+  if (!browserQueryClient) browserQueryClient = makeQueryClient();
+  return browserQueryClient;
+}
+
+const CustomQueryClientProvider = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = getQueryClient();
 
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };

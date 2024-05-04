@@ -1,5 +1,5 @@
 import NotificationTitle from '@/domains/user/components/NotificationTitle';
-import policyService from '@/domains/user/queries/service';
+import userService from '@/domains/user/queries/service';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface NotificationDetailProps {
@@ -9,7 +9,7 @@ interface NotificationDetailProps {
 }
 
 const NotificationDetail = async ({ params: { id } }: NotificationDetailProps) => {
-  const notification = await policyService.getNotificationDetail(id);
+  const notification = await userService.getNotificationDetail(id);
 
   return (
     <>

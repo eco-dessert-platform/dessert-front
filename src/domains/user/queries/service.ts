@@ -4,7 +4,7 @@ import { throwApiError } from '@/shared/utils/error';
 import Service from '@/shared/queries/service';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 
-class PolicyService extends Service {
+class UserService extends Service {
   async getNotifications(cursorId: number) {
     const res = await this.fetchExtend.get(`/notification?cursorId=${cursorId}`);
     const { result, success, code, message }: ResultResponse<Cursor<NotificationType>> =
@@ -24,4 +24,6 @@ class PolicyService extends Service {
   }
 }
 
-export default PolicyService;
+const userService = new UserService();
+
+export default userService;

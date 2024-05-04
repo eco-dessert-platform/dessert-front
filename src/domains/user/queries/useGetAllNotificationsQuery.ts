@@ -1,19 +1,13 @@
 import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
-import QUERY_KEY from '@/shared/constants/queryKey';
 import { NotificationType } from '@/domains/user/types/notification';
-import fetchExtend from '@/shared/utils/api';
-import { Cursor, ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { Cursor } from '@/shared/types/response';
+import policyService from './service';
+import { notificationQueryKey } from './queryKey';
 
 export const useGetAllNotificationsQuery = () => {
-  const queryKey = [QUERY_KEY.notification];
-
   const queryFn = async ({ pageParam }: { pageParam: number }) => {
-    const res = await fetchExtend.get(`/notification?cursorId=${pageParam}`);
-    const { result, success, code, message }: ResultResponse<Cursor<NotificationType>> =
-      await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
-    return result;
+    const data = await policyService.getNotifications(pageParam);
+    return data;
   };
 
   const getNextPageParam: GetNextPageParamFunction<number, Cursor<NotificationType>> = (
@@ -26,7 +20,7 @@ export const useGetAllNotificationsQuery = () => {
   };
 
   return useInfiniteQuery({
-    queryKey,
+    queryKey: notificationQueryKey.all,
     queryFn,
     initialPageParam: 1,
     getNextPageParam,

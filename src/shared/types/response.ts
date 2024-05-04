@@ -17,3 +17,9 @@ export interface ListResponse<T> extends DefaultResponse {
 export interface ResultResponse<T> extends DefaultResponse {
   result: T;
 }
+
+export interface Cursor<T> {
+  nextCursor: number;
+  hasNext: boolean;
+  content: T;
+}

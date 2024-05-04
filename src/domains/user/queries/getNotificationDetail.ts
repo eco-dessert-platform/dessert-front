@@ -1,19 +1,19 @@
 import fetchExtend from '@/shared/utils/api';
 import QUERY_KEY from '@/shared/constants/queryKey';
-
-interface NotificationType {
-  title: string;
-  content: string;
-  createdAt: string;
-}
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
+import { NotificationDetailType } from '../types/notification';
 
 const getNotificationDetail = async (id: number) => {
-  const res = await fetchExtend.get(`/notice/${id}`, {
-    next: { tags: [`${QUERY_KEY.notification}:${id}`] }
+  const res = await fetchExtend.get(`/notification/${id}`, {
+    next: { tags: [QUERY_KEY.notification, String(id)] }
   });
-  if (!res.ok) throw new Error('공지사항 조회 실패');
-  const data: NotificationType = await res.json();
-  return data;
+  const { result, success, code, message }: ResultResponse<NotificationDetailType> =
+    await res.json();
+  if (!res.ok || !success) {
+    throwApiError({ code, message });
+  }
+  return result;
 };
 
 export default getNotificationDetail;

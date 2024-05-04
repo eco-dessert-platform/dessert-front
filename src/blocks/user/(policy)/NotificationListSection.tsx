@@ -10,7 +10,6 @@ import SadBbangleBox from '@/shared/components/SadBbangleBox';
 const NotificationListSection = () => {
   const {
     data: notifications,
-    isLoading,
     isError,
     fetchNextPage,
     hasNextPage
@@ -21,10 +20,6 @@ const NotificationListSection = () => {
     if (!inView) return;
     fetchNextPage();
   }, [inView, fetchNextPage]);
-
-  if (isLoading) {
-    return <NotificationTitle.Skeleton />;
-  }
 
   if (isError) {
     return (

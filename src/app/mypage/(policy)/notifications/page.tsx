@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useGetAllNotificationsQuery } from '@/domains/user/queries/useGetAllNotificationsQuery';
 import NotificationTitle from '@/domains/user/components/NotificationTitle';
-import Loading from '@/shared/components/Loading';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const Notifications = () => {
@@ -14,7 +13,7 @@ const Notifications = () => {
     isLoading,
     isError,
     fetchNextPage,
-    isFetchingNextPage
+    hasNextPage
   } = useGetAllNotificationsQuery();
   const { ref, inView } = useInView();
 
@@ -24,8 +23,9 @@ const Notifications = () => {
   }, [inView, fetchNextPage]);
 
   if (isLoading) {
-    return <Loading />;
+    return <NotificationTitle.Skeleton />;
   }
+
   if (isError) {
     return (
       <SadBbangleBox>
@@ -33,6 +33,7 @@ const Notifications = () => {
       </SadBbangleBox>
     );
   }
+
   if (!notifications) {
     return (
       <SadBbangleBox>
@@ -48,7 +49,11 @@ const Notifications = () => {
           <NotificationTitle title={item.title} date={item.createdAt} />
         </Link>
       ))}
-      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
+      {hasNextPage && (
+        <div ref={ref}>
+          <NotificationTitle.Skeleton />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import Skeleton from '@/shared/components/Skeleton';
 
 interface NotificationTitleProps {
   title: string;
@@ -12,5 +13,14 @@ const NotificationTitle = ({ title, date, isBigTitle = false }: NotificationTitl
     <p className="text-12 text-gray-500 tracking-2 leading-150">{date}</p>
   </PaddingWrapper>
 );
+
+const NotificationTitleSkeleton = () => (
+  <PaddingWrapper className="flex flex-col gap-[2px] border-solid border-b border-gray-100 h-[74px]">
+    <Skeleton className="w-2/3" />
+    <Skeleton className="h-3 w-32" />
+  </PaddingWrapper>
+);
+
+NotificationTitle.Skeleton = NotificationTitleSkeleton;
 
 export default NotificationTitle;

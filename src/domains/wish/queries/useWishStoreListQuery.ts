@@ -1,19 +1,20 @@
+import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
+
 import QUERY_KEY from '@/shared/constants/queryKey';
 import fetchExtend from '@/shared/utils/api';
-import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
+
 import { WishStoreList } from '../types/wishStore';
 
 const useWishStoreListQuery = () => {
-  const { folderId } = useParams<{ folderId: string }>();
-
-  const queryKey = [QUERY_KEY.wishProducts, folderId];
+  const queryKey = [QUERY_KEY.store];
 
   const queryFn = async ({ pageParam }: { pageParam: number }) => {
     const res = await fetchExtend.get(`/likes/stores?page=${pageParam}&size=10`);
-    if (!res.ok) throw new Error('위시 스토어 조회 오류');
-    const data: WishStoreList = await res.json();
-    return data;
+    const { result, success, code, message }: ResultResponse<WishStoreList> = await res.json();
+    if (!res.ok || !success) throwApiError({ code, message });
+    return result;
   };
 
   const getNextPageParam: GetNextPageParamFunction<number, WishStoreList> = (
@@ -29,7 +30,7 @@ const useWishStoreListQuery = () => {
     getNextPageParam,
     select: ({ pages }) =>
       pages
-        .map(({ content }) => content)
+        .map(({ contents }) => contents)
         .filter((value) => value !== undefined)
         .flat()
   });

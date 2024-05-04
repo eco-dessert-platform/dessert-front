@@ -4,6 +4,8 @@ import { IAllProductsType } from '@/domains/search/types';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import fetchExtend from '@/shared/utils/api';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 interface QueryHookProps {
   keyword: string;
@@ -28,10 +30,13 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
     const res = await fetchExtend.get(
       `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
     );
-    if (!res.ok) throw new Error('검색 결과 상품 조회 실패');
+    const { result, code, message, success }: ResultResponse<IAllProductsType> = await res.json();
 
-    const data: IAllProductsType = await res.json();
-    return data;
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+
+    return result;
   };
 
   const getNextPageParam: GetNextPageParamFunction<number, IAllProductsType> = (

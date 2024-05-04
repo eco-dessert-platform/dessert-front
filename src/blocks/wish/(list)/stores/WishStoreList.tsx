@@ -1,15 +1,24 @@
 'use client';
 
-import Loading from '@/shared/components/Loading';
+import SkeletonStoreList from '@/domains/store/components/SkeletonStoreCardList';
 import StoreCard from '@/domains/store/components/StoreCard';
 import useWishStoreListQuery from '@/domains/wish/queries/useWishStoreListQuery';
 import { BbangleIcon } from '@/shared/components/icons';
+import { memo, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const WishStroeList = () => {
-  const { data, isLoading } = useWishStoreListQuery();
+  const { data, hasNextPage, isLoading, fetchNextPage } = useWishStoreListQuery();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage]);
 
   if (isLoading) {
-    return <Loading />;
+    return <SkeletonStoreList />;
   }
 
   if (!data || data.length === 0)
@@ -32,8 +41,13 @@ const WishStroeList = () => {
           isWished={isWished}
         />
       ))}
+      {hasNextPage && (
+        <div ref={ref}>
+          <SkeletonStoreList />
+        </div>
+      )}
     </div>
   );
 };
 
-export default WishStroeList;
+export default memo(WishStroeList);

@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import fetchExtend from '@/shared/utils/api';
 import QUERY_KEY from '@/shared/constants/queryKey';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 interface AutoCompleteResultType {
   content: Array<string>;
@@ -13,10 +15,14 @@ export const useGetAutoCompleteSearchTextsQuery = (keyword: string) => {
     if (!keyword) return [];
 
     const res = await fetchExtend.get(`/search/auto-keyword?keyword=${keyword}`);
-    if (!res.ok) throw new Error('자동 완성 검색어 조회 실패');
+    const { success, code, message, result }: ResultResponse<AutoCompleteResultType> =
+      await res.json();
 
-    const data: AutoCompleteResultType = await res.json();
-    return data.content;
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+
+    return result.content;
   };
 
   return useQuery({

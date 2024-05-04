@@ -1,4 +1,5 @@
 import fetchExtend from '@/shared/utils/api';
+import { ResultResponse } from '@/shared/types/response';
 
 interface PopularKeywordResultType {
   content: Array<string>;
@@ -6,11 +7,13 @@ interface PopularKeywordResultType {
 
 export const getPopularKeywords = async () => {
   const res = await fetchExtend.get('/search/best-keyword', { next: { revalidate: 60 * 60 } });
-  if (!res.ok) {
-    console.error('인기 검색어 조회 실패');
+  const { success, code, message, result }: ResultResponse<PopularKeywordResultType> =
+    await res.json();
+
+  if (!res.ok || !success) {
+    console.error(`[ERROR ${code}] ${message}`);
     return [];
   }
 
-  const data: PopularKeywordResultType = await res.json();
-  return data.content;
+  return result.content;
 };

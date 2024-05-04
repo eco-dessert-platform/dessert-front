@@ -10,10 +10,10 @@ interface WishStroeProps {
   imgSrc: string;
   title: string;
   desc: string;
-  isWished?: boolean; // default false로 임시 처리 (백엔드에서 안 줌)
+  isWished: boolean;
 }
 
-const StoreCard = ({ id, imgSrc, title, desc, isWished = false }: WishStroeProps) => {
+const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
   const { mutate: addMutate } = useAddWishStoreMutation();
   const { mutate: deleteMutate } = useDeleteWishStoreMutation();
 

@@ -1,9 +1,9 @@
 import { toastState } from '@/shared/atoms/alert';
 import { ReactNode } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 const useToast = () => {
-  const [, setToast] = useRecoilState(toastState);
+  const setToast = useSetRecoilState(toastState);
 
   const closeToast = () => setToast(null);
 
@@ -12,7 +12,7 @@ const useToast = () => {
 
     setTimeout(() => {
       closeToast();
-    }, 3000);
+    }, 5000);
   };
 
   return { openToast, closeToast };

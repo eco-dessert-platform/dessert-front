@@ -2,6 +2,8 @@ import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-quer
 import { IAllStoreType } from '@/domains/search/types';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import fetchExtend from '@/shared/utils/api';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 interface QueryHookProps {
   keyword: string;
@@ -22,10 +24,13 @@ export const useGetSearchStoresQuery = ({ keyword }: QueryHookProps) => {
       };
 
     const res = await fetchExtend.get(`/search/stores?keyword=${keyword}&page=${pageParam}`);
-    if (!res.ok) throw new Error('검색 결과 스토어 조회 실패');
+    const { result, code, message, success }: ResultResponse<IAllStoreType> = await res.json();
 
-    const data: IAllStoreType = await res.json();
-    return data;
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+
+    return result;
   };
 
   const getNextPageParam: GetNextPageParamFunction<number, IAllStoreType> = (

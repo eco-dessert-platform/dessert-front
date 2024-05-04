@@ -4,6 +4,8 @@ import { isLoggedinState } from '@/shared/atoms/login';
 import { SearchResultType } from '@/domains/search/types';
 import fetchExtend from '@/shared/utils/api';
 import QUERY_KEY from '@/shared/constants/queryKey';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 export const useGetRecentSearchKeywordsQuery = () => {
   const isLoggedIn = useRecoilValue(isLoggedinState);
@@ -13,10 +15,13 @@ export const useGetRecentSearchKeywordsQuery = () => {
     if (!isLoggedIn) return [];
 
     const res = await fetchExtend.get('/search/recency');
-    if (!res.ok) throw new Error('최근 검색어 조회 실패');
+    const { success, code, message, result }: ResultResponse<SearchResultType> = await res.json();
 
-    const data: SearchResultType = await res.json();
-    return data.content;
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+
+    return result.content;
   };
 
   const meta = {

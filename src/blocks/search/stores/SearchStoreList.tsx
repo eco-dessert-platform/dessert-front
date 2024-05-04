@@ -3,16 +3,16 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useGetSearchStoresQuery } from '@/domains/search/queries/useGetSearchStoresQuery';
-import Loading from '@/shared/components/Loading';
 import StoreCard from '@/domains/store/components/StoreCard';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
+import SkeletonStoreList from '@/domains/store/components/SkeletonStoreCardList';
 
 interface SearchStoreListProps {
   keyword?: string;
 }
 
 const SearchStoreList = ({ keyword = '' }: SearchStoreListProps) => {
-  const { data, isLoading, isError, fetchNextPage, isFetchingNextPage } = useGetSearchStoresQuery({
+  const { data, isLoading, isError, fetchNextPage, hasNextPage } = useGetSearchStoresQuery({
     keyword
   });
   const { ref, inView } = useInView();
@@ -23,7 +23,7 @@ const SearchStoreList = ({ keyword = '' }: SearchStoreListProps) => {
   }, [inView, fetchNextPage]);
 
   if (isLoading) {
-    return <Loading />;
+    return <SkeletonStoreList row={10} />;
   }
   if (isError) {
     return (
@@ -53,7 +53,11 @@ const SearchStoreList = ({ keyword = '' }: SearchStoreListProps) => {
           isWished={isWished}
         />
       ))}
-      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
+      {hasNextPage && (
+        <div ref={ref}>
+          <SkeletonStoreList row={1} />
+        </div>
+      )}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import Modal from '@/shared/components/Modal';
 import useInput from '@/shared/hooks/useInput';
-import useUpdateWishListMutation from '../../queries/useUpdateWishListMutation';
+import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
 
 interface UpdateWishFolderModalProps {
   folderId: number;
@@ -15,7 +15,7 @@ interface UpdateWishFolderModalProps {
 const UpdateWishFolderModal = ({ folderId }: UpdateWishFolderModalProps) => {
   const { closeModal } = useModal();
   const { value, onChange } = useInput('');
-  const { mutate } = useUpdateWishListMutation();
+  const { mutate } = useUpdateWishFolderMutation();
 
   const updateWishFolder = () => {
     mutate({ folderId, title: value });

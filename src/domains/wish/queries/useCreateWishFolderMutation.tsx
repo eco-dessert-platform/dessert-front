@@ -4,14 +4,18 @@ import { revalidatePath } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';
 import fetchExtend from '@/shared/utils/api';
 import { useMutation } from '@tanstack/react-query';
+import { DefaultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
-const useCreateWishListMutation = () => {
+const useCreateWishFolderMutation = () => {
   const { openToast } = useToast();
+
   const mutationFn = async (title: string) => {
     const res = await fetchExtend.post('/wishLists', {
       body: JSON.stringify({ title })
     });
-    if (!res.ok) throw new Error('찜 폴더 추가 실패');
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
   const onSuccess = async () => {
@@ -30,4 +34,4 @@ const useCreateWishListMutation = () => {
   });
 };
 
-export default useCreateWishListMutation;
+export default useCreateWishFolderMutation;

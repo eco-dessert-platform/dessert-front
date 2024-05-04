@@ -1,61 +1,12 @@
-'use client';
+import NotificationListSection from '@/blocks/user/(policy)/NotificationListSection';
+import PolicyService from '@/domains/user/queries/service';
 
-import Link from 'next/link';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { useGetAllNotificationsQuery } from '@/domains/user/queries/useGetAllNotificationsQuery';
-import NotificationTitle from '@/domains/user/components/NotificationTitle';
-import SadBbangleBox from '@/shared/components/SadBbangleBox';
+const Notifications = async () => {
+  const { getNotifications } = new PolicyService();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const notifications = await getNotifications(1);
 
-const Notifications = () => {
-  const {
-    data: notifications,
-    isLoading,
-    isError,
-    fetchNextPage,
-    hasNextPage
-  } = useGetAllNotificationsQuery();
-  const { ref, inView } = useInView();
-
-  useEffect(() => {
-    if (!inView) return;
-    fetchNextPage();
-  }, [inView, fetchNextPage]);
-
-  if (isLoading) {
-    return <NotificationTitle.Skeleton />;
-  }
-
-  if (isError) {
-    return (
-      <SadBbangleBox>
-        <p>오류가 발생했어요!</p>
-      </SadBbangleBox>
-    );
-  }
-
-  if (!notifications) {
-    return (
-      <SadBbangleBox>
-        <p>공지사항이 없어요!</p>
-      </SadBbangleBox>
-    );
-  }
-
-  return (
-    <div>
-      {notifications.map((item) => (
-        <Link key={item.id} href={`/mypage/notifications/${item.id}`}>
-          <NotificationTitle title={item.title} date={item.createdAt} />
-        </Link>
-      ))}
-      {hasNextPage && (
-        <div ref={ref}>
-          <NotificationTitle.Skeleton />
-        </div>
-      )}
-    </div>
-  );
+  return <NotificationListSection />;
 };
 
 export default Notifications;

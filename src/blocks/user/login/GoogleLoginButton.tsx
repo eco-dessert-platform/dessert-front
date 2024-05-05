@@ -9,7 +9,7 @@ const GoogleLoginButton = () => (
     onClick={() => {}}
   >
     <GoogleIcon />
-    <div className="text-black text-16 leading-150 tracking-tight-2">구글 시작하기</div>
+    <div className="text-black typo-title-16-medium">구글 시작하기</div>
   </button>
 );
 

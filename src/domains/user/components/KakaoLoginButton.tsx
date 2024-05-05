@@ -22,9 +22,7 @@ const KakaoLoginButton = () => {
       onClick={redirectToKakaoLoginPage}
     >
       <KakaoIcon />
-      <div className="text-black/[0.85] text-16 leading-150 tracking-tight-2">
-        카카오톡 시작하기
-      </div>
+      <div className="text-black/[0.85] typo-title-16-medium">카카오톡 시작하기</div>
     </button>
   );
 };

@@ -64,7 +64,7 @@ module.exports = {
       letterSpacing: {
         'tight-6': '-0.06em',
         'tight-4': '-0.04em',
-        'tight-2': '-0.02em'
+        'tight-2': '-0.00.02em'
       }
     }
   },
@@ -79,101 +79,101 @@ module.exports = {
           'font-size': '20px',
           'font-weight': 600,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-title-16-regular': {
           'font-size': '16px',
           'font-weight': 400,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-title-16-medium': {
           'font-size': '16px',
           'font-weight': 500,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-title-16-semibold': {
           'font-size': '16px',
           'font-weight': 600,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
 
         '.typo-title-14-regular': {
           'font-size': '14px',
           'font-weight': 400,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-title-14-medium': {
           'font-size': '14px',
           'font-weight': 500,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-title-14-semibold': {
           'font-size': '14px',
           'font-weight': 600,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-title-14-bold': {
           'font-size': '14px',
           'font-weight': 700,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
 
         '.typo-body-12-regular': {
           'font-size': '12px',
           'font-weight': 400,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-body-12-medium': {
           'font-size': '12px',
           'font-weight': 500,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-body-12-semibold': {
           'font-size': '12px',
           'font-weight': 600,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-body-12-bold': {
           'font-size': '12px',
           'font-weight': 700,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-body-12-regular-underline': {
           'font-size': '12px',
           'font-weight': 500,
           'text-decoration': 'underline',
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
 
         '.typo-body-11-regular': {
           'font-size': '11px',
           'font-weight': 500,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-body-11-semibold': {
           'font-size': '11px',
           'font-weight': 600,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         },
         '.typo-body-11-bold': {
           'font-size': '11px',
           'font-weight': 700,
           'line-height': '150%',
-          'letter-spacing': '-2em'
+          'letter-spacing': '-0.02em'
         }
       };
       addUtilities(typoUtilities);

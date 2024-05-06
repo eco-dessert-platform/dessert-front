@@ -58,7 +58,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
             aria-label="update folder"
             type="button"
             onClick={updateFolderName}
-            className="font-semibold text-14 tracking-tight-4 leading-120, underline"
+            className="typo-body-12-regular-underline"
           >
             {name}
           </button>

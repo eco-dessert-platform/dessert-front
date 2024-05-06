@@ -2,8 +2,8 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import useAddWishStoreMutation from '@/domains/wish/queries/useAddWishStoreMutation';
 import useDeleteWishStoreMutation from '@/domains/wish/queries/useDeleteWishStoreMutation';
 import Image from 'next/image';
-import StarButton from '@/shared/components/StarButton';
 import { BbangleIcon } from '@/shared/components/icons';
+import HeartButton from '@/shared/components/HeartButton';
 
 interface WishStroeProps {
   id: number;
@@ -37,10 +37,10 @@ const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
 
       <div className="flex flex-col w-full overflow-hidden">
         <div className="flex justify-between">
-          <div className="font-semibold leading-150 tracking-tight-2 text-14">{title}</div>
-          <StarButton isActive={isWished} onClick={isWished ? hate : like} />
+          <div className="typo-title-14-semibold">{title}</div>
+          <HeartButton isActive={isWished} onClick={isWished ? hate : like} />
         </div>
-        <p className="text-gray-600 truncate leading-130 tracking-tight-2 text-12">{desc}</p>
+        <p className="text-gray-600 truncate typo-body-12-regular">{desc}</p>
       </div>
     </PaddingWrapper>
   );

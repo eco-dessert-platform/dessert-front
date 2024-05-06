@@ -63,10 +63,10 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
             {name}
           </button>
         ) : (
-          <div className="font-semibold text-14 tracking-tight-4 leading-120">{name}</div>
+          <div className="typo-title-14-medium">{name}</div>
         )}
 
-        <div className="text-gray-500">({count})</div>
+        <div className="text-gray-500 typo-body-12-regular">({count})</div>
       </div>
     </div>
   );

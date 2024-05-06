@@ -9,6 +9,7 @@ import ToastPop from '@/shared/components/ToastPop';
 import { setCookie } from '@/shared/actions/cookie';
 import { ResultResponse } from '@/shared/types/response';
 import { throwApiError } from '@/shared/utils/error';
+import { TOKEN } from '@/shared/constants/token';
 import { expToDate, parseJwt } from '../utils/jwt';
 
 interface LoginResponse {
@@ -46,12 +47,12 @@ const useLoginMutation = () => {
 
     await Promise.all([
       setCookie({
-        name: 'accessToken',
+        name: TOKEN.accessToken,
         value: accessToken,
         expires: accessTokenExpireDate
       }),
       setCookie({
-        name: 'refreshToken',
+        name: TOKEN.refreshToken,
         value: refreshToken,
         expires: refreshTokenExpireDate
       })

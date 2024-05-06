@@ -14,7 +14,7 @@ const Template: StoryObj<typeof Popup> = {
   render: (args) => (
     <BackDrop isVisible>
       <Popup {...args}>
-        <div style={{ padding: '20px' }}>팝업예시입니다</div>
+        <div className="p-[20px]">팝업예시입니다</div>
       </Popup>
     </BackDrop>
   )

@@ -26,13 +26,13 @@ const TagSwiper = ({ tag }: TagSwiperProps) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between gap-[2px] w-full overflow-x-auto leading-150 tracking-tight-2">
+    <div className="flex items-center justify-between gap-[2px] w-full overflow-x-auto ">
       <div className="flex gap-[4px]">
         {tagsToShow.map((item) => (
           <div
             key={item}
             style={{ flex: 'auto' }}
-            className="px-[6px] py-[2px] bg-white rounded-[4px] border border-solid border-gray-200 text-gray-600 text-[11px] font-normal"
+            className="px-[6px] py-[2px] bg-white rounded-[4px] border border-solid border-gray-200 text-gray-600 typo-body-11-regular"
           >
             {item}
           </div>

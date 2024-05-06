@@ -4,7 +4,7 @@ import SkeletonStoreList from '@/domains/store/components/SkeletonStoreCardList'
 import StoreCard from '@/domains/store/components/StoreCard';
 import useWishStoreListQuery from '@/domains/wish/queries/useWishStoreListQuery';
 import { BbangleIcon } from '@/shared/components/icons';
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const WishStroeList = () => {
@@ -50,4 +50,4 @@ const WishStroeList = () => {
   );
 };
 
-export default memo(WishStroeList);
+export default WishStroeList;

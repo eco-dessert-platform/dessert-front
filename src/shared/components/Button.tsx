@@ -7,6 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'primary-black'
     | 'primary-white'
     | 'primary-orange'
+    | 'primary-bd'
     | 'secondary-white'
     | 'secondary-black'
     | 'input'
@@ -20,6 +21,8 @@ const VARIANT_CLASS = {
     'w-full h-[52px] py-[14px] text-center rounded-full text-gray-900 bg-white border border-solid border-gray-200',
   'primary-orange':
     'w-full py-[14px] text-center rounded-full bg-primaryOrangeRed border text-white border-solid border-gray-200',
+  'primary-bd':
+    'w-full py-[14px] text-center rounded-full bg-white border text-primaryOrangeRed border-solid border-primaryOrangeRed',
   'secondary-white': 'px-[10px] py-[6px] bg-gray-100 rounded-full text-12',
   'secondary-black': 'px-[10px] py-[6px] bg-gray-800 rounded-full text-[12px] text-white ',
   input:

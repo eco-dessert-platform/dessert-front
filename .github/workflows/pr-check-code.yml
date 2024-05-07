@@ -11,10 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
 
-      - name: Install packages
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+
+      - name: Set Yarn Version & install
         run: |
-          corepack enable && corepack prepare yarn@4.1.1
-          yarn
+          yarn set version 4.1.1
+          yarn install
 
       - name: Check lint
         run: yarn run lint-staged

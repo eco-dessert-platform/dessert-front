@@ -14,6 +14,7 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "test:ui": "vitest --ui",
+    "test:no-watch": "vitest run",
     "coverage": "vitest run --coverage",
     "chromatic": "bash scripts/chromatic_publish.sh"
   },

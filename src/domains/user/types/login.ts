@@ -11,3 +11,10 @@ export interface KakaoAuthResponse {
   scope: string;
   refresh_token_expires_in: number;
 }
+
+export interface ParsedJWT {
+  exp: number;
+  iat: number;
+  id: number;
+  iss: number;
+}

@@ -11,6 +11,7 @@ import Footer from '@/global/Footer';
 import AlertContainer from '@/global/AlertContainer';
 // import FlareLaneScript from '@/global/FlareLaneScript';
 // import RegisterServiceWorker from '@/global/RegisterServiceWorker';
+import SilentLogin from '@/global/SilentLogin';
 
 const pretendard = localFont({
   src: '../../public/assets/fonts/PretendardVariable.woff2'
@@ -26,6 +27,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ko">
     <body className={pretendard.className}>
       <RootLayoutProvider>
+        <SilentLogin />
         <div className="sm:w-[600px] w-full m-auto pb-24 min-h-screen relative shadow-lg">
           <AlertContainer />
           {children}

@@ -1,13 +1,7 @@
-import { TOKEN } from '@/shared/constants/token';
-import { getCookie } from '../actions/cookie';
+import { getAccessToken } from '@/shared/utils/token';
 import { API_URL } from '../constants/api';
 
 const API_V1_URL = `${API_URL}/api/v1`;
-
-const getAccessToken = async () => {
-  const accessToken = await getCookie(TOKEN.accessToken);
-  return accessToken?.value;
-};
 
 const getApiUrl = (endpoint: string) => {
   if (endpoint.startsWith('https://') || endpoint.startsWith('http://')) return endpoint;

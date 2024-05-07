@@ -16,7 +16,7 @@ const useWishStoreListQuery = () => {
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: 1,
+    initialPageParam: -1,
     getNextPageParam,
     select: ({ pages }) => pages.flatMap(({ content }) => content)
   });

@@ -5,7 +5,9 @@ import { IStoreType } from '@/domains/store/types/store';
 
 class WishService extends Service {
   async getWishStoreList(cursorId: number) {
-    const res = await this.fetchExtend.get(`/likes/stores?cursorId=${cursorId}`);
+    const isFirstPage = cursorId === -1;
+    const params = isFirstPage ? '' : `cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(`/likes/stores?${params}`);
     const { result, success, code, message }: ResultResponse<Cursor<IStoreType>> = await res.json();
     if (!res.ok || !success) throwApiError({ code, message });
     return result;

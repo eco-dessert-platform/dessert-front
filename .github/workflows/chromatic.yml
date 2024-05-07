@@ -5,19 +5,23 @@ on:
   push:
     branches: ['master']
 
-# List of jobs
 jobs:
-  test:
-    # Operating System
+  deploy:
     runs-on: ubuntu-latest
-    # Job steps
     steps:
-      - uses: actions/checkout@v1
-      - run: yarn
-        #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@v1
-        # Options required for Chromatic's GitHub Action
+      - name: 환경 변수를 설정합니다.
+        run: echo "CHROMATIC_PROJECT_TOKEN=$CHROMATIC_PROJECT_TOKEN" >> .env
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+      - name: 최신 버전을 다운로드 받습니다.
+        uses: actions/checkout@v4.1.1
+
+      - name: package 설치
+        run: yarn
+
+      - name: 크로마틱에 배포합니다.
+        uses: chromaui/action@v1
         with:
-          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}

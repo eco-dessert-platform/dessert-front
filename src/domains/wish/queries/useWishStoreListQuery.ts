@@ -1,38 +1,24 @@
 import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
-
+import { IStoreType } from '@/domains/store/types/store';
 import QUERY_KEY from '@/shared/constants/queryKey';
-import fetchExtend from '@/shared/utils/api';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
-
-import { WishStoreList } from '../types/wishStore';
+import { Cursor } from '@/shared/types/response';
+import wishService from './service';
 
 const useWishStoreListQuery = () => {
   const queryKey = [QUERY_KEY.store];
 
-  const queryFn = async ({ pageParam }: { pageParam: number }) => {
-    const res = await fetchExtend.get(`/likes/stores?page=${pageParam}&size=10`);
-    const { result, success, code, message }: ResultResponse<WishStoreList> = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
-    return result;
-  };
+  const queryFn = async ({ pageParam }: { pageParam: number }) =>
+    wishService.getWishStoreList(pageParam);
 
-  const getNextPageParam: GetNextPageParamFunction<number, WishStoreList> = (
-    lastPage,
-    _,
-    lastPageParam
-  ) => (lastPage.nextPage ? undefined : lastPageParam + 1);
+  const getNextPageParam: GetNextPageParamFunction<number, Cursor<IStoreType>> = (lastPage) =>
+    lastPage.hasNext ? lastPage.nextCursor : undefined;
 
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam,
-    select: ({ pages }) =>
-      pages
-        .map(({ contents }) => contents)
-        .filter((value) => value !== undefined)
-        .flat()
+    select: ({ pages }) => pages.flatMap(({ content }) => content)
   });
 };
 

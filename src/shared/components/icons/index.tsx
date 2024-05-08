@@ -21,3 +21,5 @@ export { default as ProfileRedIcon } from '@public/assets/icons/profile-red.svg'
 export { default as Search24RedIcon } from '@public/assets/icons/search-24-red.svg';
 export { default as Search24Icon } from '@public/assets/icons/search-24.svg';
 export { default as Search16Icon } from '@public/assets/icons/search.svg';
+
+export { default as RefreshIcon } from '@public/assets/icons/refresh.svg';

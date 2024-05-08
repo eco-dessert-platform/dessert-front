@@ -7,10 +7,10 @@ import usePopup from '@/shared/hooks/usePopup';
 import useModal from '@/shared/hooks/useModal';
 import { CloseIcon } from '@/shared/components/icons';
 import PATH from '@/shared/constants/path';
-import DeleteWishFolderPopup from './alert-box/DeleteWishFolderPopup';
-import UpdateWishFolderModal from './alert-box/UpdateWishFolderModal';
-import { isWishFolderEditingState } from '../atoms/wishFolder';
-import FolderThumbnail from './common/FolderThumbnail';
+import DeleteWishFolderPopup from '../alert-box/DeleteWishFolderPopup';
+import { isWishFolderEditingState } from '../../atoms/wishFolder';
+import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
+import FolderThumbnail from '../common/FolderThumbnail';
 
 interface WishFolderProps {
   id: number;

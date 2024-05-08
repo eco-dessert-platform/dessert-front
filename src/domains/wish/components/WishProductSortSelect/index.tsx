@@ -2,8 +2,8 @@
 
 import Select from '@/shared/components/Select';
 import { useRecoilState } from 'recoil';
-import { SORT_OPTIONS } from '../constants';
-import { wishProductSortState } from '../atoms/sort';
+import { wishProductSortState } from '../../atoms/sort';
+import { SORT_OPTIONS } from '../../constants';
 
 const WishProductSortSelect = () => {
   const [sort, setSort] = useRecoilState(wishProductSortState);

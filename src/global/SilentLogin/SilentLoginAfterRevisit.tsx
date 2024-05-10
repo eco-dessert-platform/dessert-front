@@ -6,7 +6,7 @@ import useSilentLoginMutation from '@/domains/user/queries/useSilentLoginMutatio
 import { getExpFromToken, expToMaxAge } from '@/domains/user/utils/jwt';
 import { MINUTE } from '@/shared/constants/time';
 
-const SilentLogin = () => {
+const SilentLoginAfterRevisit = () => {
   const [refreshToken, setRefreshToken] = useState<string>();
   const { mutate: silentLogin, data: tokenData } = useSilentLoginMutation();
 
@@ -34,4 +34,4 @@ const SilentLogin = () => {
   return null;
 };
 
-export default SilentLogin;
+export default SilentLoginAfterRevisit;

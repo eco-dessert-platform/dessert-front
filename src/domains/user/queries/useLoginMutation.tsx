@@ -12,7 +12,7 @@ import { throwApiError } from '@/shared/utils/error';
 import { TOKEN } from '@/shared/constants/token';
 import { getExpFromToken } from '@/domains/user/utils/jwt';
 
-interface LoginResponse {
+export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
 }
@@ -58,7 +58,7 @@ const useLoginMutation = () => {
     replace(PATH.mypage);
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({ mutationKey: ['login'], mutationFn, onSuccess, onError });
 };
 
 export default useLoginMutation;

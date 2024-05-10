@@ -17,7 +17,7 @@ const AutoCompleteSearchItem = ({ text, keyword }: AutoCompleteSearchItemProps) 
 
   return (
     <Link href={`/search/products?query=${text}`}>
-      <div className="p-[16px] border-b border-solid border-gray-100 bg-white text-14 font-medium text-gray-900 leading-150 tracking-tight-2">
+      <div className="p-[16px] border-b border-solid border-gray-100 bg-white text-gray-900 typo-title-14-regular">
         {noMatched ? (
           text
         ) : (

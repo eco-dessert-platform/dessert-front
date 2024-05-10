@@ -8,15 +8,11 @@ interface SearchIntroLayoutProps {
 const SearchIntroLayout = ({ recentKeyword, popularKeyword }: SearchIntroLayoutProps) => (
   <>
     <PaddingWrapper className="flex flex-col gap-[10px]">
-      <div className="text-gray-500 text-14 font-semibold leading-150 tracking-tight-2">
-        최근 검색어
-      </div>
+      <h3 className="text-gray-500 typo-title-14-semibold">최근 검색어</h3>
       {recentKeyword}
     </PaddingWrapper>
     <PaddingWrapper className="flex flex-col gap-[10px]">
-      <div className="text-gray-500 text-14 font-semibold leading-150 tracking-tight-2">
-        인기 검색어
-      </div>
+      <h3 className="text-gray-500 typo-title-14-semibold">인기 검색어</h3>
       {popularKeyword}
     </PaddingWrapper>
   </>

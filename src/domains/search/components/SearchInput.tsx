@@ -14,7 +14,7 @@ const SearchInput = ({ value, onChange, onKeyDown, ...rest }: SearchInputProps) 
     <Search16Icon />
     <Input
       type="text"
-      className="flex-1 p-0 font-medium text-gray-400 border-none rounded-none outline-none bg-redGray-30 text-14 leading-150 tracking-tight-2"
+      className="flex-1 p-0 text-gray-400 border-none rounded-none outline-none bg-redGray-30 typo-title-14-medium"
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}

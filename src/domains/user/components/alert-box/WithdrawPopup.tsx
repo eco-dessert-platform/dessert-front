@@ -2,6 +2,7 @@
 
 import Popup from '@/shared/components/Popup';
 import usePopup from '@/shared/hooks/usePopup';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 const WithdrawPopup = () => {
   const { closePopup } = usePopup();
@@ -12,24 +13,30 @@ const WithdrawPopup = () => {
 
   return (
     <Popup>
-      <div className="leading-normal tracking-tight">
-        <p className="p-4 text-center font-medium">정말로 탈퇴 하시겠어요?</p>
-        <p className="p-4 text-center text-[14px]">
+      <div>
+        <PaddingWrapper className="text-center typo-title-16-medium">
+          정말로 탈퇴 하시겠어요?
+        </PaddingWrapper>
+        <PaddingWrapper className="text-center typo-title-14-regular">
           탈퇴 버튼 선택시,
           <br />
           계정은 삭제되며 복구되지 않습니다.
-        </p>
-        <div className="flex justify-around p-4">
+        </PaddingWrapper>
+        <PaddingWrapper className="flex justify-around">
+          <button
+            type="button"
+            className="typo-title-14-medium cursor-pointer"
+            onClick={handleClickCancel}
+          >
+            취소
+          </button>
           <input
             type="submit"
             form="withdraw-form"
             value="탈퇴하기"
-            className="text-primaryOrangeRed text-[14px] underline underline-offset-2 cursor-pointer"
+            className="text-primaryOrangeRed typo-title-14-medium cursor-pointer"
           />
-          <button type="button" className="text-[14px] cursor-pointer" onClick={handleClickCancel}>
-            취소
-          </button>
-        </div>
+        </PaddingWrapper>
       </div>
     </Popup>
   );

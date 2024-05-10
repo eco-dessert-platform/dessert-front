@@ -43,7 +43,7 @@ const ProfileImageInput = ({ defaultValue }: ProfileImageInputProps) => {
       ) : (
         <BbangleIcon shape="smile" className="w-[80px] h-[80px] fill-gray-300" />
       )}
-      <div className="absolute h-[26px] leading-[26px] bottom-0 w-full text-center text-white bg-gray-800/50">
+      <div className="absolute h-[26px] bottom-0 w-full text-center text-white bg-gray-800/50 typo-title-14-medium">
         편집
       </div>
     </label>

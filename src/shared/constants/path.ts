@@ -16,8 +16,7 @@ const PATH = {
   serviceTerm: '/mypage/service-terms',
   privacyPolicy: '/mypage/privacy-policy',
   login: '/mypage/login',
-  mypage: '/mypage',
-  token: '/token'
+  mypage: '/mypage'
 };
 
 export default PATH;

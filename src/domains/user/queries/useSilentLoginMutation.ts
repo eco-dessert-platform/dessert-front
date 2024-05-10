@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState } from 'recoil';
 import { isLoggedinState } from '@/shared/atoms/login';
-import PATH from '@/shared/constants/path';
 import { TOKEN } from '@/shared/constants/token';
 import fetchExtend from '@/shared/utils/api';
 import { setCookie } from '@/shared/actions/cookie';
@@ -17,7 +16,7 @@ const useSilentLoginMutation = () => {
   const setLogin = useSetRecoilState(isLoggedinState);
 
   const mutationFn = async (refreshToken: string) => {
-    const res = await fetchExtend.post(PATH.token, {
+    const res = await fetchExtend.post('/token', {
       body: JSON.stringify({ refreshToken })
     });
     const { result, success, code, message }: ResultResponse<ResultType> = await res.json();

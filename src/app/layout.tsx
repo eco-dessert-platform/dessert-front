@@ -9,6 +9,7 @@ import KaKaoChatScript from '@/global/KaKaoChatScript';
 import RootLayoutProvider from '@/global/RootLayoutProvider';
 import Footer from '@/global/Footer';
 import AlertContainer from '@/global/AlertContainer';
+import GAScript from '@/global/GAScript';
 // import FlareLaneScript from '@/global/FlareLaneScript';
 // import RegisterServiceWorker from '@/global/RegisterServiceWorker';
 
@@ -35,6 +36,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       <KaKaoChatScript />
       {/* <RegisterServiceWorker /> */}
       {/* <FlareLaneScript /> */}
+      <GAScript />
     </body>
   </html>
 );

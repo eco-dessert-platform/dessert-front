@@ -12,6 +12,7 @@ import AlertContainer from '@/global/AlertContainer';
 // import FlareLaneScript from '@/global/FlareLaneScript';
 // import RegisterServiceWorker from '@/global/RegisterServiceWorker';
 import SilentLogin from '@/global/SilentLogin';
+import GAScript from '@/global/GAScript';
 
 const pretendard = localFont({
   src: '../../public/assets/fonts/PretendardVariable.woff2'
@@ -38,6 +39,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       {/* <RegisterServiceWorker /> */}
       {/* <FlareLaneScript /> */}
     </body>
+    <GAScript />
   </html>
 );
 

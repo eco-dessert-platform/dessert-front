@@ -1,6 +1,6 @@
 name: Auto deploy to NCP
 
-on: 
+on:
   push:
     branches: ['master']
 
@@ -16,19 +16,19 @@ jobs:
       - name: 환경 변수를 설정합니다.
         run: |
           echo "NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL" >> .env
-          
+
           echo "NEXT_PUBLIC_KAKAO_JS_KEY=$NEXT_PUBLIC_KAKAO_JS_KEY" >> .env
           echo "NEXT_PUBLIC_KAKAO_CHANNEL_PROFILE_ID=$NEXT_PUBLIC_KAKAO_CHANNEL_PROFILE_ID" >> .env
-          
+
           echo "NEXT_PUBLIC_GOOGLE_AUTH_REDIRECT_URI=$NEXT_PUBLIC_GOOGLE_AUTH_REDIRECT_URI" >> .env
           echo "NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID" >> .env
-          
+
           echo "NEXT_PUBLIC_KAKAO_AUTH_CLIENT_ID=$NEXT_PUBLIC_KAKAO_AUTH_CLIENT_ID" >> .env
           echo "NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI" >> .env
-          
-          echo "NEXT_PUBLIC_FLARELANE_PROJECT_ID=$NEXT_PUBLIC_FLARELANE_PROJECT_ID" >> .env
 
-        
+          echo "NEXT_PUBLIC_FLARELANE_PROJECT_ID=$NEXT_PUBLIC_FLARELANE_PROJECT_ID" >> .env
+          echo "NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID" >> .env
+
         env:
           NEXT_PUBLIC_SERVER_URL: ${{ secrets.NEXT_PUBLIC_SERVER_URL }}
           NEXT_PUBLIC_KAKAO_JS_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_JS_KEY }}
@@ -38,7 +38,8 @@ jobs:
           NEXT_PUBLIC_KAKAO_AUTH_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_KAKAO_AUTH_CLIENT_ID }}
           NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI }}
           NEXT_PUBLIC_FLARELANE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FLARELANE_PROJECT_ID }}
-          
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
+
       - name: 도커 이미지를 생성하고 도커 허브에 업로드합니다.
         run: |
           docker login -u $DOCKER_ID -p $DOCKER_TOKEN
@@ -48,7 +49,7 @@ jobs:
           DOCKER_ID: ${{ secrets.DOCKER_ID }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
           DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
-          
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -66,7 +67,4 @@ jobs:
             sudo docker stop bbangle-frontend
             sudo docker rm bbangle-frontend
             sudo docker pull ${{ secrets.DOCKER_REPO }}
-            sudo docker run -d -p 3000:3000 --name bbangle-frontend ${{ secrets.DOCKER_REPO }} 
-
-            
-        
+            sudo docker run -d -p 3000:3000 --name bbangle-frontend ${{ secrets.DOCKER_REPO }}

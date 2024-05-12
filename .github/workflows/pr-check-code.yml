@@ -16,7 +16,6 @@ jobs:
 
       - name: Set Yarn Version & install
         run: |
-          yarn set version 4.1.1
           yarn install --immutable
 
       - name: Check lint

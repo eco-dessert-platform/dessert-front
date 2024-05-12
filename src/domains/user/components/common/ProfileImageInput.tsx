@@ -41,9 +41,12 @@ const ProfileImageInput = ({ defaultValue }: ProfileImageInputProps) => {
       {imgSrc ? (
         <Image src={imgSrc} alt="profile preview" width={100} height={100} />
       ) : (
-        <BbangleIcon shape="smile" className="w-[80px] h-[80px] fill-gray-300" />
+        <BbangleIcon
+          shape="smile"
+          className="w-[80px] h-[80px] fill-gray-300 translate-y-[-10px]"
+        />
       )}
-      <div className="absolute h-[26px] bottom-0 w-full text-center text-white bg-gray-800/50 typo-title-14-medium">
+      <div className="absolute bottom-0 flex justify-center items-center h-[26px] w-full text-white bg-gray-800/50 typo-title-14-semibold">
         편집
       </div>
     </label>

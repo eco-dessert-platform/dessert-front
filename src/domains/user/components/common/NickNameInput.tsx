@@ -36,8 +36,14 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
         required
         maxLength={20}
         defaultValue={defaultValue}
+        className="typo-title-14-medium"
         button={
-          <Button type="button" variants="input" onClick={checkDouble}>
+          <Button
+            type="button"
+            variants="input"
+            className="typo-body-12-medium"
+            onClick={checkDouble}
+          >
             중복확인
           </Button>
         }

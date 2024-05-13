@@ -10,7 +10,7 @@ const LoginSection = () => (
     <Link href={PATH.login} className="w-full">
       <Button variants="primary-orange">로그인/회원가입</Button>
     </Link>
-    <p className="text-14 tracking-tight-2 leading-150 text-gray-800">
+    <p className="text-gray-800 typo-title-14-regular">
       회원가입 및 로그인을 하고 더 많은 정보들을 받아보세요! 🎉
     </p>
   </PaddingWrapper>

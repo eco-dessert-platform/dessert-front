@@ -3,9 +3,15 @@
 import { ChangeEvent } from 'react';
 import CheckBox from '@/shared/components/Checkbox';
 import { useRecoilState } from 'recoil';
+import { twMerge } from 'tailwind-merge';
+import GrayDivider from '@/shared/components/GrayDivider';
 import { agreeState } from '../../atoms/profile';
 
-const CheckSection = () => {
+interface Props {
+  className?: string;
+}
+
+const CheckSection = ({ className }: Props) => {
   const [agree, setAgree] = useRecoilState(agreeState);
 
   const checkAll = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,11 +51,12 @@ const CheckSection = () => {
     agree.isAllowingMarketing && agree.isPersonalInfoConsented && agree.isTermsOfServiceAccepted;
 
   return (
-    <div className="flex flex-col gap-[16px] w-full">
+    <div className={twMerge('flex flex-col gap-[16px] w-full', className)}>
       <CheckBox name="" isChecked={allChecked} onChange={checkAll}>
-        <span className="text-base text-gray-900">모두 동의합니다.</span>
+        <span className="typo-title-16-medium text-gray-900">모두 동의합니다.</span>
       </CheckBox>
-      <hr />
+      <GrayDivider color="gray100" />
+      <p className="typo-body-12-regular text-primaryOrangeRed">유효성체크문구영역</p>
       <CheckBox
         name="isTermsOfServiceAccepted"
         required

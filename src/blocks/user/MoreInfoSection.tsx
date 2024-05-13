@@ -43,7 +43,7 @@ const LOGGEDIN_INFOS = [
 const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (
   <PaddingWrapper className="flex items-center gap-[8px] border-solid border-b-[1px] border-gray-100">
     {icon}
-    <p className="text-[14px] font-medium">{content}</p>
+    <p className="typo-title-14-medium">{content}</p>
   </PaddingWrapper>
 );
 

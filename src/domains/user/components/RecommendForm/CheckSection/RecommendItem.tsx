@@ -19,11 +19,13 @@ const RecommendItem = ({ name, title, description, isChecked, onChange }: Props)
   >
     <div className="flex flex-col">
       <p
-        className={`${isChecked ? 'text-primaryOrangeRed' : 'text-gray-900'} text-[14px] font-medium`}
+        className={`${isChecked ? 'text-primaryOrangeRed typo-title-14-semibold' : 'text-gray-900 typo-title-14-medium'}`}
       >
         {title}
       </p>
-      <p className={`${isChecked ? 'text-primaryOrangeRed' : 'text-gray-700'} text-[14px]`}>
+      <p
+        className={`${isChecked ? 'text-primaryOrangeRed typo-title-14-semibold' : 'text-gray-700 typo-title-14-regular'}`}
+      >
         {description}
       </p>
     </div>

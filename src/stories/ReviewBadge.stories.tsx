@@ -38,12 +38,17 @@ const ClickStory = () => {
       {BADGE_SHAPES.map((shape) => {
         const kind = BADGE[shape].kind as BadgeKindType;
         return (
-          <ReviewBadge
-            shape={shape}
-            isActive={activeBadge[kind] === shape}
-            className="cursor-pointer"
+          <button
+            type="button"
+            aria-label={`review badge ${shape}`}
             onClick={() => handleClick(kind, shape)}
-          />
+          >
+            <ReviewBadge
+              shape={shape}
+              isActive={activeBadge[kind] === shape}
+              className="cursor-pointer"
+            />
+          </button>
         );
       })}
     </div>

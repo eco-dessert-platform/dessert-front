@@ -4,7 +4,7 @@ import SweetIcon from '@public/assets/icons/reviewBadge/badge-sweet.svg';
 import PlainIcon from '@public/assets/icons/reviewBadge/badge-plain.svg';
 import SoftIcon from '@public/assets/icons/reviewBadge/badge-soft.svg';
 import DryIcon from '@public/assets/icons/reviewBadge/badge-dry.svg';
-import { BadgeShapeType } from '@/shared/types/badge';
+import { BadgeShapeType } from '@/domains/review/types/badge';
 
 interface Props {
   shape: BadgeShapeType;

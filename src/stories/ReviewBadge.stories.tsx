@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import BADGE from '@/shared/constants/badge';
-import { BadgeShapeType, BadgeKindType } from '@/shared/types/badge';
-import ReviewBadge from '@/shared/components/ReviewBadge';
+import BADGE from '@/domains/review/constants/badge';
+import { BadgeShapeType, BadgeKindType } from '@/domains/review/types/badge';
+import ReviewBadge from '@/domains/review/components/ReviewBadge';
 
 const meta: Meta<typeof ReviewBadge> = {
   component: ReviewBadge,

@@ -5,7 +5,7 @@ import StarButton from '@/shared/components/StarButton';
 
 const meta: Meta<typeof StarButton> = {
   component: StarButton,
-  title: 'StartButton'
+  title: 'StarButton'
 };
 
 export default meta;

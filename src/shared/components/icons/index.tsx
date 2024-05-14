@@ -5,6 +5,7 @@ export { default as BbangleIcon } from './BbangleIcon';
 
 export { default as CheckIcon } from './CheckIcon';
 export { default as StarIcon } from './StarIcon';
+export { default as ReviewBadgeIcon } from './ReviewBadgeIcon';
 
 export { default as CloseIcon } from '@public/assets/icons/btn-remove.svg';
 export { default as PlusIcon } from '@public/assets/icons/plus.svg';

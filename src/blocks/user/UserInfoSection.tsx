@@ -25,13 +25,13 @@ const UserInfoSection = async () => {
               <BbangleIcon shape="smile" className="w-[30px] h-[30px]" />
             )}
           </div>
-          <p className="text-18 text-gray-900 font-bold tracking-tight">{nickname}</p>
+          <p className="text-gray-900 typo-title-16-semibold">{nickname}</p>
         </div>
         <Link href={PATH.profileUpdate}>
-          <p className="text-11 text-gray-500 tracking-tight-2 leading-150">프로필 수정</p>
+          <p className="text-gray-500 typo-body-11-regular">프로필 수정</p>
         </Link>
       </div>
-      <p className="text-14 text-gray-800 tracking-tight-2">반가워요 :) 무엇을 도와드릴까요?</p>
+      <p className="text-gray-800 typo-title-14-regular">반가워요 :) 무엇을 도와드릴까요?</p>
     </PaddingWrapper>
   );
 };

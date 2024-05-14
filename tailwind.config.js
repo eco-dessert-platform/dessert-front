@@ -37,10 +37,7 @@ module.exports = {
         primaryOrangeRed: '#F04C28',
         subColorPink: '#FEEDEA',
         secondaryPink: '#FDF1EE',
-        secondaryOrangeRed: '#ED5F5F',
-        redGray: {
-          30: '#F8F8F8'
-        }
+        secondaryOrangeRed: '#ED5F5F'
       },
 
       // fontSize, lineHeight,letterSpacing 삭제 예정

@@ -28,7 +28,7 @@ const Header = ({ title, back = false }: HeaderProps) => {
           <ArrowIcons shape="back" />
         </button>
       )}
-      <h2 className="text-16 font-medium leading-[16px] tracking-tight-2">{title}</h2>
+      <h2 className="typo-title-16-medium">{title}</h2>
     </PaddingWrapper>
   );
 };

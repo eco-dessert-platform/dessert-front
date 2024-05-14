@@ -12,9 +12,9 @@ const TabButton = ({ children, active = false, ...props }: TabButtonProps) => (
   <button
     type="button"
     className={`flex items-center justify-center 
-        relative h-[44px] w-full text-14 leading-150 tracking-tight-2 
+        relative h-[44px] w-full
         border-b-2 border-gray-100 bg-white
-        ${active ? 'text-gray-900' : 'text-gray-500'} 
+        ${active ? 'text-gray-900 typo-title-14-semibold' : 'text-gray-500 typo-title-14-regular'} 
       `}
     {...props}
   >

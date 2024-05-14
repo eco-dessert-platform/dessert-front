@@ -78,6 +78,11 @@
       "emoji": "➖ Remove: ",
       "code": "➖",
       "description": "파일 삭제"
+    },
+    {
+      "emoji": "📖 Storybook: ",
+      "code": "📖",
+      "description": "스토리북 생성"
     }
   ],
   "material-icon-theme.folders.associations": {

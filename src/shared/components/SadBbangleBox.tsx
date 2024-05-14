@@ -14,9 +14,7 @@ const SadBbangleBox = ({ className, children }: SadBbangleBoxProps) => (
     )}
   >
     <BbangleIcon shape="cry" />
-    <div className="text-gray-500 text-center font-normal text-14 leading-150 tracking-tight-2">
-      {children}
-    </div>
+    <div className="text-gray-500 text-center typo-title-14-regular">{children}</div>
   </div>
 );
 

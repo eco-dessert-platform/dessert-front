@@ -7,7 +7,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => (
   <>
-    <Header title="회원 수정" back />
+    <Header title="프로필 수정" back />
     {children}
   </>
 );

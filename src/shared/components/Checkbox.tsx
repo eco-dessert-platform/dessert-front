@@ -29,7 +29,7 @@ const CheckBox = ({
     <label
       htmlFor={id}
       className={twMerge(
-        'flex items-center gap-[6px] text-gray-900 text-14 font-normal leading-150 tracking-tight-2 cursor-pointer',
+        'flex items-center gap-[6px] text-gray-900 typo-title-14-regular cursor-pointer',
         className
       )}
     >

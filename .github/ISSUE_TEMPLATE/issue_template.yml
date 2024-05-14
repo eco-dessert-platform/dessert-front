@@ -14,7 +14,7 @@ body:
         📝 문서 수정
         🧪 테스트 코드 관련
         🚨 Hotfix, 급한 수정
-        📖 storybook
+        📖 스토리북 생성
 
   - type: textarea
     id: title

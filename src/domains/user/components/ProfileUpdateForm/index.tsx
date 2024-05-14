@@ -2,7 +2,6 @@
 
 import { FormEventHandler } from 'react';
 import { useRecoilValue } from 'recoil';
-import Button from '@/shared/components/Button';
 import BirthdayInput from '@/domains/user/components/common/BirthdateInput';
 import MoreSection from '@/domains/user/components/ProfileUpdateForm/MoreSection';
 import NicknameInput from '@/domains/user/components/common/NickNameInput';
@@ -11,6 +10,7 @@ import ProfileImageInput from '@/domains/user/components/common/ProfileImageInpu
 import { UserProfileType } from '@/domains/user/types/profile';
 import useProfileUpdateMutation from '@/domains/user/queries/useProfileUpdateMutation';
 import { updateFormState } from '@/domains/user/atoms/profile';
+import ButtonSection from '@/domains/user/components/ProfileUpdateForm/ButtonSection';
 
 interface ProfileUpdateFormProps {
   defaultValues: UserProfileType;
@@ -29,7 +29,7 @@ const ProfileUpdateForm = ({
 
   return (
     <form className="px-[16px]" onSubmit={onSubmit}>
-      <div className="my-[16px] flex flex-col w-full justify-center items-center">
+      <div className="my-[16px] flex justify-center items-center">
         <ProfileImageInput defaultValue={profileImg ?? undefined} />
       </div>
       <div className="flex flex-col gap-[20px] mb-[36px]">
@@ -37,10 +37,8 @@ const ProfileUpdateForm = ({
         <PhoneNumberInput defaultValue={phoneNumber ?? undefined} />
         <BirthdayInput defaultValue={birthDate ?? undefined} />
       </div>
-      <div>
-        <MoreSection className="mb-[16px]" />
-        <Button type="submit">수정하기</Button>
-      </div>
+      <MoreSection className="mb-[16px]" />
+      <ButtonSection />
     </form>
   );
 };

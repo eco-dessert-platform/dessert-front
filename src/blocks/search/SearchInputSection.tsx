@@ -58,7 +58,7 @@ const SearchInputSection = () => {
 
   return (
     <div className="relative">
-      <PaddingWrapper className="flex items-center py-[10px]">
+      <PaddingWrapper className={`flex items-center ${isSearchDetailPage ? 'py-[10px]' : 'py-0'} `}>
         {isSearchDetailPage && <BackButton />}
         <SearchInput
           value={text}

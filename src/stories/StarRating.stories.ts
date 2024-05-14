@@ -17,6 +17,6 @@ export const Size: Story = {
   args: { initRating: 2, size: 'large' }
 };
 
-export const Drag: Story = {
-  args: { initRating: 0, size: 'large', dragged: true }
+export const Draggable: Story = {
+  args: { initRating: 0, size: 'large', draggable: true }
 };

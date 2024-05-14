@@ -5,10 +5,10 @@ import { RatingType, StarSizeType } from '@/domains/review/types/starRating';
 interface StarRatingProps {
   initRating?: RatingType;
   size?: StarSizeType;
-  dragged?: boolean;
+  draggable?: boolean;
 }
 
-const StarRating = ({ initRating = 0, size = 'small', dragged = false }: StarRatingProps) => {
+const StarRating = ({ initRating = 0, size = 'small', draggable = false }: StarRatingProps) => {
   const [rating, setRating] = useState<RatingType>(initRating);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +25,8 @@ const StarRating = ({ initRating = 0, size = 'small', dragged = false }: StarRat
         min="0"
         max="5"
         step="0.5"
-        disabled={!dragged}
-        className={`absolute left-0 top-0 w-full h-full opacity-0 ${dragged ? 'cursor-pointer' : ''}`}
+        disabled={!draggable}
+        className={`absolute left-0 top-0 w-full h-full opacity-0 ${draggable ? 'cursor-pointer' : ''}`}
       />
     </div>
   );

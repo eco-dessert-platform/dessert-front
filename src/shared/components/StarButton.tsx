@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const StarButton = ({ isActive, onClick, ...rest }: Props) => (
   <button type="button" onClick={onClick} {...rest}>
-    <StarIcon shape={isActive ? 'on' : 'off'} />
+    <StarIcon color={isActive ? 'yellow' : 'gray'} size="lg" />
   </button>
 );
 

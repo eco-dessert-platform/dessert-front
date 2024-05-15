@@ -1,4 +1,0 @@
-{
-  "stylelint.enable": true,
-  "stylelint.validate": ["css", "scss", "typescript", "typescriptreact"]
-}

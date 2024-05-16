@@ -22,7 +22,7 @@ const StarRating = ({
   };
 
   return (
-    <label htmlFor={id} className="block relative max-w-fit">
+    <label htmlFor={id} aria-label="별점" className="block relative max-w-fit">
       <Stars rating={rating} size={size} />
       <input
         type="range"

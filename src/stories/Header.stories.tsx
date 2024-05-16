@@ -26,3 +26,9 @@ export const WithBackButton: Story = {
     back: true
   }
 };
+
+export const WithContent: Story = {
+  args: {
+    content: <p className="typo-title-16-medium text-gray-500">1/2</p>
+  }
+};

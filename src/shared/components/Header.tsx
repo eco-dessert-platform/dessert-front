@@ -1,17 +1,16 @@
 'use client';
 
 import React from 'react';
-
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-
 import ArrowIcons from './icons/ArrowIcons';
 
 interface HeaderProps {
   title?: String;
+  content?: React.ReactNode;
   back?: boolean;
 }
 
-const Header = ({ title, back = false }: HeaderProps) => {
+const Header = ({ title, content, back = false }: HeaderProps) => {
   const goBackHandler = () => {
     window.history.back();
   };
@@ -28,7 +27,10 @@ const Header = ({ title, back = false }: HeaderProps) => {
           <ArrowIcons shape="back" />
         </button>
       )}
-      <h2 className="typo-title-16-medium">{title}</h2>
+      <div className="flex justify-between items-center w-full">
+        <h2 className="typo-title-16-medium">{title}</h2>
+        {content}
+      </div>
     </PaddingWrapper>
   );
 };

@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import Stars from '@/domains/review/components/StarRating/Stars';
 import { RatingType, StarSizeType } from '@/domains/review/types/starRating';
 
@@ -14,19 +15,20 @@ const StarRating = ({
   size = 'small',
   editable = false
 }: StarRatingProps) => {
+  const id = useId();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!onRatingChange) return;
     onRatingChange(Number(e.target.value) as RatingType);
   };
 
   return (
-    <label htmlFor="starRating" className="block relative max-w-fit">
+    <label htmlFor={id} className="block relative max-w-fit">
       <Stars rating={rating} size={size} />
       <input
         type="range"
         value={rating}
         onChange={handleChange}
-        id="starRating"
+        id={id}
         min="0"
         max="5"
         step="0.5"

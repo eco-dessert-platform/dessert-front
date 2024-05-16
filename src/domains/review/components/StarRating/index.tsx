@@ -1,34 +1,39 @@
-import { useState } from 'react';
 import Stars from '@/domains/review/components/StarRating/Stars';
 import { RatingType, StarSizeType } from '@/domains/review/types/starRating';
 
 interface StarRatingProps {
-  initRating?: RatingType;
+  rating: RatingType;
+  onRatingChange?: (rating: RatingType) => void;
   size?: StarSizeType;
-  draggable?: boolean;
+  editable?: boolean;
 }
 
-const StarRating = ({ initRating = 0, size = 'small', draggable = false }: StarRatingProps) => {
-  const [rating, setRating] = useState<RatingType>(initRating);
-
+const StarRating = ({
+  rating,
+  onRatingChange,
+  size = 'small',
+  editable = false
+}: StarRatingProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRating(Number(e.target.value) as RatingType);
+    if (!onRatingChange) return;
+    onRatingChange(Number(e.target.value) as RatingType);
   };
 
   return (
-    <div className="relative max-w-fit">
+    <label htmlFor="starRating" className="block relative max-w-fit">
       <Stars rating={rating} size={size} />
       <input
         type="range"
         value={rating}
         onChange={handleChange}
+        id="starRating"
         min="0"
         max="5"
         step="0.5"
-        disabled={!draggable}
-        className={`absolute left-0 top-0 w-full h-full opacity-0 ${draggable ? 'cursor-pointer' : ''}`}
+        disabled={!editable}
+        className={`absolute left-0 top-0 w-full h-full opacity-0 ${editable ? 'cursor-pointer' : ''}`}
       />
-    </div>
+    </label>
   );
 };
 

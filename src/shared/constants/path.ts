@@ -15,6 +15,7 @@ const PATH = {
   notification: '/mypage/notifications',
   serviceTerm: '/mypage/service-terms',
   privacyPolicy: '/mypage/privacy-policy',
+  marketing: '/mypage/marketing',
   login: '/mypage/login',
   mypage: '/mypage'
 };

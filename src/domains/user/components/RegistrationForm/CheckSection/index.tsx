@@ -5,7 +5,9 @@ import CheckBox from '@/shared/components/Checkbox';
 import { useRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
 import GrayDivider from '@/shared/components/GrayDivider';
-import { agreeState } from '../../atoms/profile';
+import ViewLinkWrapper from '@/domains/user/components/RegistrationForm/CheckSection/ViewLinkWrapper';
+import PATH from '@/shared/constants/path';
+import { agreeState } from '../../../atoms/profile';
 
 interface Props {
   className?: string;
@@ -63,7 +65,7 @@ const CheckSection = ({ className }: Props) => {
         isChecked={agree.isTermsOfServiceAccepted}
         onChange={onChangeService}
       >
-        [필수] 서비스 이용약관
+        <ViewLinkWrapper href={PATH.serviceTerm}>[필수] 서비스 이용약관</ViewLinkWrapper>
       </CheckBox>
       <CheckBox
         name="isPersonalInfoConsented"
@@ -71,14 +73,18 @@ const CheckSection = ({ className }: Props) => {
         isChecked={agree.isPersonalInfoConsented}
         onChange={onChangePersonalInfo}
       >
-        [필수] 개인 정보 처리방침 및 수집이용 동의
+        <ViewLinkWrapper href={PATH.privacyPolicy}>
+          [필수] 개인 정보 처리방침 및 수집이용 동의
+        </ViewLinkWrapper>
       </CheckBox>
       <CheckBox
         name="isAllowingMarketing"
         isChecked={agree.isAllowingMarketing}
         onChange={onChangeMarketing}
       >
-        [선택] 마케팅 수신 정보 및 이용 동의
+        <ViewLinkWrapper href={PATH.marketing}>
+          [선택] 마케팅 수신 정보 및 이용 동의
+        </ViewLinkWrapper>
       </CheckBox>
     </div>
   );

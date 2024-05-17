@@ -8,8 +8,11 @@ import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-quer
 export const useGetAllStoresQuery = () => {
   const queryKey = [QUERY_KEY.store, QUERY_KEY.main];
 
-  const queryFn = async ({ pageParam }: { pageParam: number }) => {
-    const res = await fetchExtend.get(`/stores?page=${pageParam}`);
+  const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
+    const firstPage = cursorId === -1;
+    const cursorIdQueryString = firstPage ? '' : `&cursorId=${cursorId}`;
+
+    const res = await fetchExtend.get(`/stores?${cursorIdQueryString}`);
 
     const { success, result, code, message }: ResultResponse<IAllStoresType> = await res.json();
     if (!res.ok || !success) {
@@ -19,14 +22,13 @@ export const useGetAllStoresQuery = () => {
   };
   const getNextPageParam: GetNextPageParamFunction<number, IAllStoresType> = (lastPage) => {
     if (!lastPage.hasNext) return undefined;
-    const nextCursorId = lastPage.content.at(-1)?.storeId;
-    return nextCursorId;
+    return lastPage.nextCursor;
   };
 
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: 0,
+    initialPageParam: -1,
     getNextPageParam,
     refetchOnMount: false,
     refetchOnReconnect: false,

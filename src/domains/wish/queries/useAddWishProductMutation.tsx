@@ -4,17 +4,21 @@ import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
-import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
+import RequiredLoginToast from '@/shared/components/RequiredLoginToast';
 import wishService from './service';
+import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 
 const useAddWishProductMutation = () => {
   const { openToast } = useToast();
   const { openModal } = useModal();
 
-  const mutationFn = ({ productId, folderId }: { productId: string; folderId: string }) =>
-    wishService.addWishProduct({ productId, folderId });
+  const mutationFn = async ({ productId, folderId }: { productId: string; folderId: string }) => {
+    await wishService.addWishProduct({ productId, folderId });
+    return { productId };
+  };
 
-  const onSuccess = async ({ productId }: { productId: string; folderId: string }) => {
+  const onSuccess = async ({ productId }: { productId: string }) => {
     await revalidateTag(REAVALIDATE_TAG.product);
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
 
@@ -28,12 +32,20 @@ const useAddWishProductMutation = () => {
     );
   };
 
-  const onError = (error: Error) => {
-    openToast(
-      <ToastPop>
-        <div>{error.message}</div>
-      </ToastPop>
-    );
+  const onError = ({ message }: Error) => {
+    switch (message) {
+      case ERROR_MESSAGE.requiredLogin:
+        openToast(<RequiredLoginToast />);
+        break;
+
+      default:
+        openToast(
+          <ToastPop>
+            <div>{message}</div>
+          </ToastPop>
+        );
+        break;
+    }
   };
 
   return useMutation({ mutationFn, onSuccess, onError });

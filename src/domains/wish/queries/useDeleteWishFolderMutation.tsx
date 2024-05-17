@@ -10,7 +10,7 @@ import { throwApiError } from '@/shared/utils/error';
 const useDeleteWishFolderMutation = () => {
   const { openToast } = useToast();
 
-  const mutationFn = async (folderId: number) => {
+  const mutationFn = async (folderId: string) => {
     const res = await fetchExtend.delete(`/wishLists/${folderId}`, {
       method: 'DELETE'
     });

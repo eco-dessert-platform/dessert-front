@@ -10,7 +10,7 @@ import { throwApiError } from '@/shared/utils/error';
 const useUpdateWishFolderMutation = () => {
   const { openToast } = useToast();
 
-  const mutationFn = async ({ folderId, title }: { folderId: number; title: string }) => {
+  const mutationFn = async ({ folderId, title }: { folderId: string; title: string }) => {
     const res = await fetchExtend.patch(`/wishLists/${folderId}`, {
       body: JSON.stringify({ title })
     });

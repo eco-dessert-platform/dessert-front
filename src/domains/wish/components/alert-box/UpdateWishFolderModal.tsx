@@ -9,7 +9,7 @@ import useInput from '@/shared/hooks/useInput';
 import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
 
 interface UpdateWishFolderModalProps {
-  folderId: number;
+  folderId: string;
 }
 
 const UpdateWishFolderModal = ({ folderId }: UpdateWishFolderModalProps) => {

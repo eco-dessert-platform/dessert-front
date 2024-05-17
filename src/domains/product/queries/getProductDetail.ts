@@ -3,8 +3,8 @@ import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
 import { throwApiError } from '@/shared/utils/error';
 
-const getProductDetail = async (params: { id: string }) => {
-  const res = await fetchExtend.get(`/boards/${params.id}`);
+const getProductDetail = async (productId: string) => {
+  const res = await fetchExtend.get(`/boards/${productId}`);
   const { result, success, message, code }: ResultResponse<IProductDetailType> = await res.json();
 
   if (!success) {

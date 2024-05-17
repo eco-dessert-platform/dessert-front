@@ -2,11 +2,15 @@ import Header from '@/shared/components/Header';
 import { ShareIcon } from '@/shared/components/icons';
 import getProductDetail from '@/domains/product/queries/getProductDetail';
 
-const ReviewListPage = async ({ params }: { params: { id: string } }) => {
+interface ReviewListPageProps {
+  params: { productId: string };
+}
+
+const ReviewListPage = async ({ params: { productId } }: ReviewListPageProps) => {
   const {
     board: { title: boardName },
     store: { storeName }
-  } = await getProductDetail(params);
+  } = await getProductDetail(productId);
 
   return (
     <>

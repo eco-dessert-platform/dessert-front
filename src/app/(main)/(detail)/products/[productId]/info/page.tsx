@@ -10,8 +10,12 @@ import Header from '@/shared/components/Header';
 import { ShareIcon } from '@/shared/components/icons';
 import getProductDetail from '@/domains/product/queries/getProductDetail';
 
-const ProductDetail = async ({ params }: { params: { id: string } }) => {
-  const data = await getProductDetail(params);
+interface ProductDetailProps {
+  params: { productId: string };
+}
+
+const ProductDetail = async ({ params: { productId } }: ProductDetailProps) => {
+  const data = await getProductDetail(productId);
 
   return (
     <>

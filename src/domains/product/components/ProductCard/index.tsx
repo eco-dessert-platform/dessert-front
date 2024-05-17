@@ -13,7 +13,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product, popular, ranking }: ProductCardProps) => (
-  <Link href={`/products/${product.boardId}`} className="relative">
+  <Link href={`/products/${product.boardId}/info`} className="relative">
     <ProductImage product={product} popular={popular} ranking={ranking} />
     <ProductSummary product={product} />
   </Link>

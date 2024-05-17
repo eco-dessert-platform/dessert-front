@@ -5,28 +5,25 @@ import DetailProductComposition from '@/blocks/product/DetailProductComposition'
 import ProductDetailImgs from '@/blocks/product/DetailProductImgs';
 import DetailProductSummary from '@/blocks/product/DetailProductSummary';
 import GrayDivider from '@/shared/components/GrayDivider';
-import { IProductDetailType } from '@/domains/product/types/productDetailType';
 import DetailStoreInfo from '@/domains/store/components/DetailStoreInfo';
-import fetchExtend from '@/shared/utils/api';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
-
-async function getDetail(params: { id: string }) {
-  const res = await fetchExtend.get(`/boards/${params.id}`);
-  const { result, success, message, code }: ResultResponse<IProductDetailType> = await res.json();
-
-  if (!success) {
-    throwApiError({ code, message });
-  }
-
-  return result;
-}
+import Header from '@/shared/components/Header';
+import { ShareIcon } from '@/shared/components/icons';
+import getProductDetail from '@/domains/product/queries/getProductDetail';
 
 const ProductDetail = async ({ params }: { params: { id: string } }) => {
-  const data = await getDetail(params);
+  const data = await getProductDetail(params);
 
   return (
     <>
+      <Header
+        title={`[${data.store.storeName}] ${data.board.title}`}
+        content={
+          <button type="button" aria-label="공유 버튼">
+            <ShareIcon />
+          </button>
+        }
+        back
+      />
       <ProductDetailImgs boardImages={data.board.images} isBundled={data.board.isBundled} />
       <DetailStoreInfo store={data.store} />
 

@@ -37,7 +37,7 @@ const Footer = () => {
       title: '전체',
       defaultIcon: <CategoryIcon />,
       activeIcon: <CategoryRedIcon />,
-      href: PATH.category
+      href: PATH.mainCategory
     },
     {
       title: '찜',
@@ -59,8 +59,9 @@ const Footer = () => {
         const isHomePage = pathname === '/';
         const isHomeLink = item.href === '/';
 
-        const isStorePage = pathname === '/stores';
-        const isProductLink = item.href === '/products';
+        const isMainPage = pathname.startsWith('/main');
+        const isMainCategoryLink = item.href === PATH.mainCategory;
+
         const isWishStorePage = pathname.startsWith('/wishlist');
         const isWishProductLink = item.href === '/wishlist/list/products';
 
@@ -68,7 +69,7 @@ const Footer = () => {
         if (!isHomePage && isHomeLink) {
           isActive = false;
         }
-        if (isStorePage && isProductLink) {
+        if (isMainPage && isMainCategoryLink) {
           isActive = true;
         }
         if (isWishStorePage && isWishProductLink) {

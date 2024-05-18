@@ -1,3 +1,4 @@
+import { useRecoilValue } from 'recoil';
 import { useMutation } from '@tanstack/react-query';
 import useModal from '@/shared/hooks/useModal';
 import useToast from '@/shared/hooks/useToast';
@@ -6,14 +7,17 @@ import { revalidateTag } from '@/shared/actions/revalidate';
 import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import RequiredLoginToast from '@/shared/components/RequiredLoginToast';
+import { isLoggedinState } from '@/shared/atoms/login';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 
 const useAddWishProductMutation = () => {
   const { openToast } = useToast();
   const { openModal } = useModal();
+  const isLoggedIn = useRecoilValue(isLoggedinState);
 
   const mutationFn = async ({ productId, folderId }: { productId: string; folderId: string }) => {
+    if (!isLoggedIn) throw new Error(ERROR_MESSAGE.requiredLogin);
     await wishService.addWishProduct({ productId, folderId });
     return { productId };
   };

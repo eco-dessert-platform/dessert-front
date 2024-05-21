@@ -46,7 +46,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
             className="p-[4px] rounded-full absolute top-[6px] right-[6px]"
             onClick={deleteFolder}
           >
-            <CloseIcon />
+            <CloseIcon shape="black" />
           </button>
         )}
 

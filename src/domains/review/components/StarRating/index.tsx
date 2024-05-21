@@ -1,19 +1,20 @@
-import { useId } from 'react';
+import { useId, InputHTMLAttributes } from 'react';
 import Stars from '@/domains/review/components/StarRating/Stars';
 import { RatingType, StarSizeType } from '@/domains/review/types/starRating';
 
-interface StarRatingProps {
+interface StarRatingProps extends InputHTMLAttributes<HTMLInputElement> {
   rating: RatingType;
   onRatingChange?: (rating: RatingType) => void;
-  size?: StarSizeType;
+  starSize?: StarSizeType;
   editable?: boolean;
 }
 
 const StarRating = ({
   rating,
   onRatingChange,
-  size = 'small',
-  editable = false
+  starSize = 'small',
+  editable = false,
+  ...props
 }: StarRatingProps) => {
   const id = useId();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ const StarRating = ({
 
   return (
     <label htmlFor={id} aria-label="별점" className="block relative max-w-fit">
-      <Stars rating={rating} size={size} />
+      <Stars rating={rating} size={starSize} />
       <input
         type="range"
         value={rating}
@@ -34,6 +35,7 @@ const StarRating = ({
         step="0.5"
         disabled={!editable}
         className={`absolute left-0 top-0 w-full h-full opacity-0 ${editable ? 'cursor-pointer' : ''}`}
+        {...props}
       />
     </label>
   );

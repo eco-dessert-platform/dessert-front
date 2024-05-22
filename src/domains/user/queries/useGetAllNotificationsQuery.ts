@@ -10,12 +10,11 @@ export const useGetAllNotificationsQuery = () => {
     return data;
   };
 
-  const getNextPageParam: GetNextPageParamFunction<number, Cursor<NotificationType>> = (
-    lastPage,
-    __,
-    lastPageParam
-  ) => {
-    const nextPageParam = lastPage.hasNext ? undefined : lastPageParam + 1;
+  const getNextPageParam: GetNextPageParamFunction<number, Cursor<NotificationType>> = ({
+    hasNext,
+    nextCursor
+  }) => {
+    const nextPageParam = hasNext ? undefined : nextCursor;
     return nextPageParam;
   };
 

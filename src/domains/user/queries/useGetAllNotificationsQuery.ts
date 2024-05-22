@@ -1,6 +1,7 @@
 import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
 import { NotificationType } from '@/domains/user/types/notification';
 import { Cursor } from '@/shared/types/response';
+import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import policyService from './service';
 import { notificationQueryKey } from './queryKey';
 
@@ -21,7 +22,7 @@ export const useGetAllNotificationsQuery = () => {
   return useInfiniteQuery({
     queryKey: notificationQueryKey.all,
     queryFn,
-    initialPageParam: -1,
+    initialPageParam: INITIAL_CORSOR,
     getNextPageParam,
     refetchOnMount: false,
     refetchOnReconnect: false,

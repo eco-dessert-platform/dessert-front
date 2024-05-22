@@ -27,7 +27,7 @@ export const useGetAllNotificationsQuery = () => {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
     select: ({ pages }) => {
-      const notifications = pages.map((page) => page.content).flat();
+      const notifications = pages.flatMap((page) => page.content);
       return notifications;
     }
   });

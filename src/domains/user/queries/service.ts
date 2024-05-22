@@ -10,6 +10,8 @@ class UserService extends Service {
     const res = await this.fetchExtend.get(`/notification${params}`);
     const { result, success, code, message }: ResultResponse<Cursor<NotificationType>> =
       await res.json();
+
+    console.log(params, result);
     if (!res.ok || !success) throwApiError({ code, message });
     return result;
   }

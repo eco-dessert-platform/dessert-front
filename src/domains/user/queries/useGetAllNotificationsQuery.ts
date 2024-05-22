@@ -15,7 +15,7 @@ export const useGetAllNotificationsQuery = () => {
     __,
     lastPageParam
   ) => {
-    const nextPageParam = lastPage.nextCursor === lastPageParam ? undefined : lastPageParam + 1;
+    const nextPageParam = lastPage.hasNext ? undefined : lastPageParam + 1;
     return nextPageParam;
   };
 

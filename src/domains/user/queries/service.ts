@@ -6,7 +6,8 @@ import { NotificationDetailType, NotificationType } from '../types/notification'
 
 class UserService extends Service {
   async getNotifications(cursorId: number) {
-    const res = await this.fetchExtend.get(`/notification?cursorId=${cursorId}`);
+    const params = cursorId === -1 ? '' : `?corsorId=${cursorId}`;
+    const res = await this.fetchExtend.get(`/notification${params}`);
     const { result, success, code, message }: ResultResponse<Cursor<NotificationType>> =
       await res.json();
     if (!res.ok || !success) throwApiError({ code, message });

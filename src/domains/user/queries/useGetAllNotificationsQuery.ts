@@ -22,7 +22,7 @@ export const useGetAllNotificationsQuery = () => {
   return useInfiniteQuery({
     queryKey: notificationQueryKey.all,
     queryFn,
-    initialPageParam: 1,
+    initialPageParam: -1,
     getNextPageParam,
     refetchOnMount: false,
     refetchOnReconnect: false,

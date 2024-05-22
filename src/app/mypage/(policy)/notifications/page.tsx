@@ -11,7 +11,7 @@ const Notifications = async () => {
       const notifications = await userService.getNotifications(pageParam);
       return notifications;
     },
-    initialPageParam: 1
+    initialPageParam: -1
   });
 
   return (

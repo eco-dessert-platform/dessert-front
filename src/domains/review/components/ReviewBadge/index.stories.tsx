@@ -6,7 +6,7 @@ import ReviewBadge from '@/domains/review/components/ReviewBadge';
 
 const meta: Meta<typeof ReviewBadge> = {
   component: ReviewBadge,
-  title: 'ReviewBadge'
+  title: 'review/ReviewBadge'
 };
 
 export default meta;
@@ -22,8 +22,8 @@ const Template = ({ isActive = false }: { isActive?: boolean }) => (
 
 const ClickStory = () => {
   const [activeBadge, setActiveBadge] = useState({
-    preference: undefined,
     taste: undefined,
+    brix: undefined,
     texture: undefined
   });
 

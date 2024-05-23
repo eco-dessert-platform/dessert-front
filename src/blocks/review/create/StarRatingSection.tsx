@@ -9,8 +9,8 @@ import StarRating from '@/domains/review/components/StarRating';
 import { useGetProductDetailQuery } from '@/domains/product/queries/useGetProductDetailQuery';
 
 const StarRatingSection = () => {
-  const { productId } = useParams();
-  const { data } = useGetProductDetailQuery(productId as string);
+  const { productId } = useParams<{ productId: string }>();
+  const { data } = useGetProductDetailQuery(productId);
   const [rating, setRating] = useRecoilState(starRatingState);
 
   const handleRatingChange = (newRating: RatingType) => {

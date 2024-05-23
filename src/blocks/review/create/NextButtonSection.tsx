@@ -6,7 +6,7 @@ import { isAllBadgeSelectedState } from '@/domains/review/atoms';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Button from '@/shared/components/Button';
 
-const ButtonSection = () => {
+const NextButtonSection = () => {
   const { push } = useRouter();
   const pathname = usePathname();
   const isAllBadgeSelected = useRecoilValue(isAllBadgeSelectedState);
@@ -17,7 +17,7 @@ const ButtonSection = () => {
   };
 
   return (
-    <div className="fixed z-[5000] left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] bg-white">
+    <div className="fixed z-bottomButton left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] bg-white">
       <PaddingWrapper>
         <Button
           variants="primary-black"
@@ -31,4 +31,4 @@ const ButtonSection = () => {
   );
 };
 
-export default ButtonSection;
+export default NextButtonSection;

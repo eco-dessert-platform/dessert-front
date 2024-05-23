@@ -8,7 +8,7 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
-import PreviewImage from '@/domains/review/components/PreviewImage';
+import PreviewImage from '@/blocks/review/create/ImageUploadSection/PreviewImage';
 
 const ImageUploadSection = () => {
   const [imageFiles, setImageFiles] = useRecoilState(uploadImageFilesState);

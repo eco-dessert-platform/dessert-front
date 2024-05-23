@@ -3,11 +3,11 @@ import { SelectedBadgeType } from '@/domains/review/types/badge';
 import { RatingType } from '@/domains/review/types/starRating';
 import { ReviewDataType } from '@/domains/review/types/review';
 
-export const selectedBadgeState = atom<SelectedBadgeType>({
+export const selectedBadgeState = atom<Partial<SelectedBadgeType>>({
   key: 'selectedBadge',
   default: {
-    preference: undefined,
     taste: undefined,
+    brix: undefined,
     texture: undefined
   }
 });

@@ -1,17 +1,16 @@
 'use client';
 
 import { FormEvent, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useSetRecoilState } from 'recoil';
 import { reviewDataState } from '@/domains/review/atoms';
 import { ReviewDataType } from '@/domains/review/types/review';
 import Header from '@/shared/components/Header';
-import BadgeSelectPage from '@/blocks/review/BadgeSelectPage';
-import StarRatingSelectPage from '@/blocks/review/StarRatingSelectPage';
 
 const REVIEW_DATA: ReviewDataType = {
   badges: {
-    preference: 'good',
-    taste: 'plain',
+    taste: 'good',
+    brix: 'plain',
     texture: 'soft'
   },
   rate: 3,
@@ -22,13 +21,15 @@ const REVIEW_DATA: ReviewDataType = {
   ]
 };
 
-interface ReviewUpdatePageProps {
-  searchParams: {
-    progress: '1' | '2';
-  };
+interface ReviewUpdateLayoutProps {
+  badgeSelect: React.ReactNode;
+  starRatingSelect: React.ReactNode;
 }
 
-const ReviewUpdatePage = ({ searchParams: { progress } }: ReviewUpdatePageProps) => {
+const ReviewUpdateLayout = ({ badgeSelect, starRatingSelect }: ReviewUpdateLayoutProps) => {
+  const searchParams = useSearchParams();
+  const progress = searchParams.get('progress');
+
   // TODO: REVIEW_DATA(mock data) -> useGetReviewQuery 호출해 actual data 받아오기 + recoil에 저장
   const setReviewData = useSetRecoilState(reviewDataState);
 
@@ -50,11 +51,9 @@ const ReviewUpdatePage = ({ searchParams: { progress } }: ReviewUpdatePageProps)
         content={<span className="typo-title-16-medium text-gray-500">{progress}/2</span>}
         back
       />
-      <form onSubmit={handleFormSubmit}>
-        {progress === '1' ? <BadgeSelectPage /> : <StarRatingSelectPage />}
-      </form>
+      <form onSubmit={handleFormSubmit}>{progress === '1' ? badgeSelect : starRatingSelect}</form>
     </>
   );
 };
 
-export default ReviewUpdatePage;
+export default ReviewUpdateLayout;

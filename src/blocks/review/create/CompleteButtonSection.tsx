@@ -5,12 +5,12 @@ import { starRatingState } from '@/domains/review/atoms';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Button from '@/shared/components/Button';
 
-const ButtonSection = () => {
+const CompleteButtonSection = () => {
   const starRating = useRecoilValue(starRatingState);
   const isStarRatingSelected = starRating > 0;
 
   return (
-    <div className="fixed z-[5000] left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] bg-white">
+    <div className="fixed z-bottomButton left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] bg-white">
       <PaddingWrapper>
         <Button
           variants="primary-black"
@@ -25,4 +25,4 @@ const ButtonSection = () => {
   );
 };
 
-export default ButtonSection;
+export default CompleteButtonSection;

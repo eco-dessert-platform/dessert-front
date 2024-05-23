@@ -32,7 +32,7 @@ const Comment = ({ id, comment }: Props) => {
         {isEllipsed && (
           <Link
             href={`${PATH.myReview}/${id}`}
-            className="float-right mt-[42px] [shape-outside:border-box]"
+            className="float-right mt-[42px] [shape-outside:border-box] text-gray-500"
           >
             더보기
           </Link>

@@ -17,7 +17,7 @@ const CLASS = {
 const Badge = ({ type = 'default', children }: Props) => (
   <div
     className={twMerge(
-      'inline-block typo-body-11-regular border text-center px-[6px] py-[2px] rounded-[4px]',
+      'inline-block typo-body-11-regular border flex-center w-fit px-[6px] py-[2px] rounded-[4px]',
       CLASS[type]
     )}
   >

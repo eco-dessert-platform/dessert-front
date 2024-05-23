@@ -48,7 +48,9 @@ const Review = ({
 
     <div className="flex gap-[4px]">
       {tags.map((tag) => (
-        <Badge type="tag">{tag}</Badge>
+        <Badge key={tag} type="tag">
+          {tag}
+        </Badge>
       ))}
     </div>
 

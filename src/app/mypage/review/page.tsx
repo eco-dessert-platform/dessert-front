@@ -2,6 +2,7 @@ import ReviewList from '@/blocks/user/review/ReviewList';
 import { reviewQueryKey } from '@/domains/review/queries/queryKey';
 import reviewService from '@/domains/review/queries/service';
 import Header from '@/shared/components/Header';
+import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 const MyReviewPage = async () => {
@@ -9,7 +10,7 @@ const MyReviewPage = async () => {
   await queryClinet.fetchInfiniteQuery({
     queryKey: reviewQueryKey.list('mypage'),
     queryFn: ({ pageParam }) => reviewService.getMyReview(pageParam),
-    initialPageParam: -1
+    initialPageParam: INITIAL_CORSOR
   });
 
   return (

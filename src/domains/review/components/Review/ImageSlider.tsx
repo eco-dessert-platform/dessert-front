@@ -17,7 +17,7 @@ const ImageSlider = ({ images }: Props) => {
             key={image}
             className="relative size-[64px] aspect-square rounded-[6px] overflow-hidden"
           >
-            <Image src={image} fill alt="review image" />
+            <Image src={image} fill alt="review image" className="object-cover" />
           </div>
         ))}
       </motion.div>

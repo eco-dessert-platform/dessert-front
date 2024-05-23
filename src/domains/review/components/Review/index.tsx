@@ -59,10 +59,8 @@ const Review = ({
       <button
         type="button"
         className={twMerge(
-          'typo-body-12-regular flex items-center gap-[4px] rounded-full border px-[8px] py-[4px]',
-          isLiked
-            ? 'text-primaryOrangeRed border-primaryOrangeRed'
-            : 'text-gray-500 border-gray-500'
+          'typo-body-12-regular flex items-center gap-[4px] rounded-full  px-[8px] py-[4px]',
+          isLiked ? 'text-primaryOrangeRed bg-secondaryPink' : 'text-gray-500 bg-redGray-30'
         )}
       >
         <ThumbsUpIcon color={isLiked ? 'red' : 'gray'} />

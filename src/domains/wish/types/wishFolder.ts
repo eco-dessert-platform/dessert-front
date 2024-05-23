@@ -1,7 +1,7 @@
 import { IProductType } from '@/domains/product/types/productType';
 
 export interface WishFolderType {
-  folderId: number;
+  folderId: string;
   title: string;
   count: number;
   productImages: string[];

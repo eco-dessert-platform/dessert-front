@@ -1,29 +1,31 @@
+import { useRecoilValue } from 'recoil';
 import { useMutation } from '@tanstack/react-query';
 import useModal from '@/shared/hooks/useModal';
 import useToast from '@/shared/hooks/useToast';
-import fetchExtend from '@/shared/utils/api';
 import ToastPop from '@/shared/components/ToastPop';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
+import RequiredLoginToast from '@/shared/components/RequiredLoginToast';
+import { isLoggedinState } from '@/shared/atoms/login';
+import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 
 const useAddWishProductMutation = () => {
   const { openToast } = useToast();
   const { openModal } = useModal();
+  const isLoggedIn = useRecoilValue(isLoggedinState);
 
   const mutationFn = async ({ productId, folderId }: { productId: string; folderId: string }) => {
-    const res = await fetchExtend.post(`/boards/${productId}/wish`, {
-      body: JSON.stringify({ folderId })
-    });
-    const { success, code, message }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
+    if (!isLoggedIn) throw new Error(ERROR_MESSAGE.requiredLogin);
+    await wishService.addWishProduct({ productId, folderId });
+    return { productId };
   };
 
-  const onSuccess = async () => {
-    const openFolderSelectModal = () => openModal(<WishFolderSelectModal />);
+  const onSuccess = async ({ productId }: { productId: string }) => {
     await revalidateTag(REAVALIDATE_TAG.product);
+    const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
+
     openToast(
       <ToastPop>
         <div>💖 찜한 상품에 추가했어요</div>
@@ -34,12 +36,20 @@ const useAddWishProductMutation = () => {
     );
   };
 
-  const onError = (error: Error) => {
-    openToast(
-      <ToastPop>
-        <div>{error.message}</div>
-      </ToastPop>
-    );
+  const onError = ({ message }: Error) => {
+    switch (message) {
+      case ERROR_MESSAGE.requiredLogin:
+        openToast(<RequiredLoginToast />);
+        break;
+
+      default:
+        openToast(
+          <ToastPop>
+            <div>{message}</div>
+          </ToastPop>
+        );
+        break;
+    }
   };
 
   return useMutation({ mutationFn, onSuccess, onError });

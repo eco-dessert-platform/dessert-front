@@ -13,7 +13,7 @@ import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
 import FolderThumbnail from '../common/FolderThumbnail';
 
 interface WishFolderProps {
-  id: number;
+  id: string;
   thumbnailList?: string[];
   name: string;
   count: number;

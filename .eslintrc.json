@@ -18,7 +18,13 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/stories/**", "**/*.test.**", "**/*.spec.**", "**/__tests__/**"],
+        "devDependencies": [
+          "**/stories/**",
+          "**/*.stories.**",
+          "**/*.test.**",
+          "**/*.spec.**",
+          "**/__tests__/**"
+        ],
         "optionalDependencies": false
       }
     ],

@@ -16,9 +16,9 @@ const Stars = ({ rating, size }: StarsProps) => (
         const order = idx + 1;
         const starSize = size === 'small' ? 'md' : 'xl';
 
-        if (order - 0.5 === rating) return <StarIcon size={starSize} color="half" />;
-        if (order <= rating) return <StarIcon size={starSize} color="yellow" />;
-        return <StarIcon size={starSize} color="gray" />;
+        if (order - 0.5 === rating) return <StarIcon key={order} size={starSize} color="half" />;
+        if (order <= rating) return <StarIcon key={order} size={starSize} color="yellow" />;
+        return <StarIcon key={order} size={starSize} color="gray" />;
       })}
   </div>
 );

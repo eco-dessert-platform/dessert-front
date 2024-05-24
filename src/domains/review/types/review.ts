@@ -1,4 +1,5 @@
-import { RatingType } from './starRating';
+import { SelectedBadgeType } from '@/domains/review/types/badge';
+import { RatingType } from '@/domains/review/types/starRating';
 
 export interface Review {
   id: string;
@@ -11,4 +12,11 @@ export interface Review {
   comment: string;
   date: string;
   rating: RatingType;
+}
+
+export interface ReviewDataType {
+  badges: Partial<SelectedBadgeType>;
+  rate: RatingType;
+  content: string;
+  photos: Array<string>;
 }

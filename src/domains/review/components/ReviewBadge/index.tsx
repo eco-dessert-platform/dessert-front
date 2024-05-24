@@ -1,6 +1,6 @@
 import { BadgeShapeType } from '@/domains/review/types/badge';
 import { ReviewBadgeIcon } from '@/shared/components/icons';
-import BADGE from '@/domains/review/constants/badge';
+import { BADGE } from '@/domains/review/constants/badge';
 import { twMerge } from 'tailwind-merge';
 
 interface ReviewBadgeProps extends React.HTMLAttributes<HTMLDivElement> {

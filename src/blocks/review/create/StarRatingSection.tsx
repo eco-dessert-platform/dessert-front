@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { starRatingState } from '@/domains/review/atoms';
 import { RatingType } from '@/domains/review/types/starRating';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import StarRating from '@/domains/review/components/StarRating';
+import StarRating from '@/domains/review/components/common/StarRating';
 import { useGetProductDetailQuery } from '@/domains/product/queries/useGetProductDetailQuery';
 
 const StarRatingSection = () => {

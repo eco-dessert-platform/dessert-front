@@ -2,7 +2,8 @@
 
 import { useRecoilState } from 'recoil';
 import { personalizedRecommendationState } from '@/domains/user/atoms/profile';
-
+import useToast from '@/shared/hooks/useToast';
+import ToastPop from '@/shared/components/ToastPop';
 import RecommendItem from './RecommendItem';
 
 const ITEMS = [
@@ -33,10 +34,21 @@ const ITEMS = [
 ] as const;
 
 const CheckSection = () => {
+  const { openToast } = useToast();
   const [recommendations, setRecommendations] = useRecoilState(personalizedRecommendationState);
+
+  const numChecks = Object.values(recommendations).reduce(
+    (totChecks, check) => totChecks + Number(check),
+    0
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = e.target;
+    const checkedThird = recommendations[name as keyof typeof recommendations] === false;
+    if (numChecks === 2 && checkedThird) {
+      openToast(<ToastPop>최대 2개까지 선택 가능하니, 1개를 제외하고 선택하세요!</ToastPop>);
+      return;
+    }
 
     setRecommendations((prev) => ({
       ...prev,

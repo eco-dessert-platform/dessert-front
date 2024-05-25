@@ -4,19 +4,16 @@ import DescriptionSection from '@/domains/user/components/RecommendForm/Descript
 import CheckSection from '@/domains/user/components/RecommendForm/CheckSection';
 import ButtonSection from '@/domains/user/components/RecommendForm/ButtonSection';
 
-const RecommendForm = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: mutate 연결
-  };
+interface RecommendFormProps {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <DescriptionSection />
-      <CheckSection />
-      <ButtonSection />
-    </form>
-  );
-};
+const RecommendForm = ({ onSubmit }: RecommendFormProps) => (
+  <form onSubmit={onSubmit}>
+    <DescriptionSection />
+    <CheckSection />
+    <ButtonSection />
+  </form>
+);
 
 export default RecommendForm;

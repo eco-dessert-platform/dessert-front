@@ -30,8 +30,8 @@ export const birthDateState = atom<string>({
   default: undefined
 });
 
-export const personalizedRecommendationState = atom({
-  key: 'recommend',
+export const preferenceState = atom({
+  key: 'preference',
   default: {
     isDiet: false,
     isMuscle: false,

@@ -1,10 +1,10 @@
 'use client';
 
 import { useRecoilState } from 'recoil';
-import { personalizedRecommendationState } from '@/domains/user/atoms/profile';
+import { preferenceState } from '@/domains/user/atoms/profile';
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
-import RecommendItem from './RecommendItem';
+import PreferenceItem from './PreferenceItem';
 
 const ITEMS = [
   {
@@ -35,22 +35,22 @@ const ITEMS = [
 
 const CheckSection = () => {
   const { openToast } = useToast();
-  const [recommendations, setRecommendations] = useRecoilState(personalizedRecommendationState);
+  const [preference, setPreference] = useRecoilState(preferenceState);
 
-  const numChecks = Object.values(recommendations).reduce(
+  const numChecks = Object.values(preference).reduce(
     (totChecks, check) => totChecks + Number(check),
     0
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = e.target;
-    const checkedThird = recommendations[name as keyof typeof recommendations] === false;
+    const checkedThird = preference[name as keyof typeof preference] === false;
     if (numChecks === 2 && checkedThird) {
       openToast(<ToastPop>최대 2개까지 선택 가능하니, 1개를 제외하고 선택하세요!</ToastPop>);
       return;
     }
 
-    setRecommendations((prev) => ({
+    setPreference((prev) => ({
       ...prev,
       [name]: checked
     }));
@@ -59,13 +59,13 @@ const CheckSection = () => {
   return (
     <div className="flex flex-col gap-[8px]">
       {ITEMS.map((item) => (
-        <RecommendItem
+        <PreferenceItem
           key={item.id}
           name={item.name}
           title={item.title}
           description={item.description}
           onChange={handleChange}
-          isChecked={recommendations[item.name]}
+          isChecked={preference[item.name]}
         />
       ))}
     </div>

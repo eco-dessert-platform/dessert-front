@@ -10,7 +10,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const RecommendItem = ({ name, title, description, isChecked, onChange }: Props) => (
+const PreferenceItem = ({ name, title, description, isChecked, onChange }: Props) => (
   <CheckBox
     name={name}
     isChecked={isChecked}
@@ -32,4 +32,4 @@ const RecommendItem = ({ name, title, description, isChecked, onChange }: Props)
   </CheckBox>
 );
 
-export default RecommendItem;
+export default PreferenceItem;

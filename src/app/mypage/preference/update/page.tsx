@@ -2,25 +2,25 @@
 
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { personalizedRecommendationState } from '@/domains/user/atoms/profile';
+import { preferenceState } from '@/domains/user/atoms/profile';
 import Header from '@/shared/components/Header';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import RecommendForm from '@/domains/user/components/RecommendForm';
+import PreferenceForm from '@/domains/user/components/PreferenceForm';
 
-const RECOMMEND_DATA = {
+const PREFERENCE_DATA = {
   isDiet: true,
   isMuscle: true,
   isHealth: false,
   isVegan: false
 };
 
-const RecommendUpdate = () => {
-  // TODO: RECOMMEND_DATA 대신 useGetRecommendQuery를 통해 actual data 가져오기
-  const setRecommend = useSetRecoilState(personalizedRecommendationState);
+const PreferenceUpdatePage = () => {
+  // TODO: PREFERENCE_DATA 대신 useGetPreferenceQuery를 통해 actual data 가져오기
+  const setPreference = useSetRecoilState(preferenceState);
 
   useEffect(() => {
-    setRecommend(RECOMMEND_DATA);
-  }, [setRecommend]);
+    setPreference(PREFERENCE_DATA);
+  }, [setPreference]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,10 +31,10 @@ const RecommendUpdate = () => {
     <>
       <Header title="맞춤 추천 수정하기" back />
       <PaddingWrapper>
-        <RecommendForm onSubmit={handleSubmit} />
+        <PreferenceForm onSubmit={handleSubmit} />
       </PaddingWrapper>
     </>
   );
 };
 
-export default RecommendUpdate;
+export default PreferenceUpdatePage;

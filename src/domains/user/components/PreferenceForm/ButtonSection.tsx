@@ -1,12 +1,12 @@
 'use client';
 
 import { useRecoilValue } from 'recoil';
-import { personalizedRecommendationState } from '@/domains/user/atoms/profile';
+import { preferenceState } from '@/domains/user/atoms/profile';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Button from '@/shared/components/Button';
 
 const ButtonSection = () => {
-  const checkedValue = useRecoilValue(personalizedRecommendationState);
+  const checkedValue = useRecoilValue(preferenceState);
 
   return (
     <div className="fixed z-[5000] w-full max-w-[600px] -translate-x-1/2 bottom-0 left-1/2 bg-white">

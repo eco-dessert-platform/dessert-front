@@ -13,7 +13,7 @@ const ButtonSection = () => {
       <PaddingWrapper>
         <Button
           type="submit"
-          disabled={Object.values(checkedValue).every((item) => item === false)}
+          disabled={checkedValue.length === 0}
           className="transition-all duration-300 ease-in-out disabled:bg-gray-300 disabled:text-white"
         >
           완료

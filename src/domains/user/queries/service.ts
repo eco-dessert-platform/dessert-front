@@ -1,8 +1,9 @@
-import { Cursor, ResultResponse } from '@/shared/types/response';
+import { Cursor, ResultResponse, DefaultResponse } from '@/shared/types/response';
 import QUERY_KEY from '@/shared/constants/queryKey';
-import { throwApiError } from '@/shared/utils/error';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import Service from '@/shared/queries/service';
+import { PreferenceType, PreferenceResultType } from '@/domains/user/types/profile';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 
 class UserService extends Service {
@@ -12,7 +13,7 @@ class UserService extends Service {
     const { result, success, code, message }: ResultResponse<Cursor<NotificationType>> =
       await res.json();
 
-    if (!res.ok || !success) throwApiError({ code, message });
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }
 
@@ -22,8 +23,32 @@ class UserService extends Service {
     });
     const { result, success, code, message }: ResultResponse<NotificationDetailType> =
       await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
+  }
+
+  async addPreference(preference: Array<PreferenceType>) {
+    const res = await this.fetchExtend.post('/preference', {
+      body: JSON.stringify({ preferenceType: preference.join('_').replace(' ', '_').toUpperCase() })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async getPreference() {
+    const res = await this.fetchExtend.get('/preference');
+    const { result, success, code, message }: ResultResponse<PreferenceResultType> =
+      await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result.preferenceType;
+  }
+
+  async updatePreference(preference: Array<PreferenceType>) {
+    const res = await this.fetchExtend.put('/preference', {
+      body: JSON.stringify({ preferenceType: preference.join('_').replace(' ', '_').toUpperCase() })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 }
 

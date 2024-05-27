@@ -8,7 +8,9 @@ export const getIngredientTag = (ingredients: Array<string>) => {
   return undefined;
 };
 
-export const getPriceTag = ({ minPrice, maxPrice }: { minPrice: number; maxPrice: number }) => {
+export const getPriceTag = (price: Array<number>) => {
+  const minPrice = Math.min(...price);
+  const maxPrice = Math.max(...price);
   if (minPrice === LIMIT_MIN_PRICE && maxPrice === LIMIT_MAX_PRICE) return undefined;
   return {
     type: TAG.price,

@@ -5,8 +5,7 @@ import { BadgeShapeType, BadgeKindType } from '@/domains/review/types/badge';
 import ReviewBadge from '@/domains/review/components/ReviewBadge';
 
 const meta: Meta<typeof ReviewBadge> = {
-  component: ReviewBadge,
-  title: 'review/ReviewBadge'
+  component: ReviewBadge
 };
 
 export default meta;

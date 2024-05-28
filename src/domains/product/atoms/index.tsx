@@ -20,10 +20,7 @@ export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({
 
 export const priceTempState = atomFamily<IPriceType, FilterFamilyIDType>({
   key: 'price',
-  default: {
-    minPrice: LIMIT_MIN_PRICE,
-    maxPrice: LIMIT_MAX_PRICE
-  }
+  default: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE]
 });
 
 export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({
@@ -31,7 +28,7 @@ export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({
   default: {
     category: undefined,
     tags: undefined,
-    price: { minPrice: LIMIT_MIN_PRICE, maxPrice: LIMIT_MAX_PRICE },
+    price: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE],
     sort: '추천순',
     showProductsAvailableOrder: false
   }

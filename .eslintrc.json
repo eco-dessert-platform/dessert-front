@@ -6,6 +6,8 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint/eslint-plugin"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+
     // airbnb custom
     "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "react/function-component-definition": [
@@ -18,7 +20,13 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/stories/**", "**/*.test.**", "**/*.spec.**", "**/__tests__/**"],
+        "devDependencies": [
+          "**/stories/**",
+          "**/*.stories.**",
+          "**/*.test.**",
+          "**/*.spec.**",
+          "**/__tests__/**"
+        ],
         "optionalDependencies": false
       }
     ],

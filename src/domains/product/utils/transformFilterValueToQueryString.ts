@@ -21,8 +21,8 @@ export const transformFilterValueToQueryString = (query: IFilterType) => {
   const queryObject = {
     category: categoryQuery || '',
     ...tagsQuery,
-    minPrice: String(query.price.minPrice),
-    maxPrice: String(query.price.maxPrice),
+    minPrice: String(Math.min(...query.price)),
+    maxPrice: String(Math.max(...query.price)),
     sort: sortQuery,
     orderAvailableToday: String(showProductsAvailableOrder)
   };

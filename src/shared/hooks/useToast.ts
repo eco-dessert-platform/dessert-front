@@ -1,6 +1,7 @@
 import { toastState } from '@/shared/atoms/alert';
-import { ReactNode, cloneElement, isValidElement } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { ReactElement, ReactNode, cloneElement, isValidElement } from 'react';
+import { ToastPopProps } from '../types/toastProps';
 
 const useToast = () => {
   const setToast = useSetRecoilState(toastState);
@@ -8,7 +9,7 @@ const useToast = () => {
   const closeToast = () => {
     setToast((toasts) => {
       const newToasts = [...toasts];
-      newToasts.shift();
+      newToasts.pop();
       return newToasts;
     });
   };
@@ -16,10 +17,14 @@ const useToast = () => {
   const openToast = (toast: ReactNode) => {
     setToast((toasts) => {
       const newToasts = [...toasts];
+
       if (isValidElement(toast)) {
-        const toastWithKey = cloneElement(toast, { key: Date.now() });
-        newToasts.push(toastWithKey);
+        const toastWithProps = cloneElement(toast as ReactElement<ToastPopProps>, {
+          key: Date.now()
+        });
+        newToasts.unshift(toastWithProps);
       }
+
       return newToasts;
     });
 

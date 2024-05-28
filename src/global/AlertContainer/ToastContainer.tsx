@@ -6,11 +6,11 @@ import { AnimatePresence } from 'framer-motion';
 import { useRecoilValue } from 'recoil';
 
 const ToastContainer = () => {
-  const toast = useRecoilValue(toastState);
+  const toasts = useRecoilValue(toastState);
 
   return (
-    <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0  h-[70px] z-toast">
-      <AnimatePresence>{toast}</AnimatePresence>
+    <PaddingWrapper className="bg-yellow-50 fixed max-w-[600px] w-full bottom-0  min-h-[70px] h-fit z-toast flex flex-col gap-[10px]">
+      <AnimatePresence>{toasts.map((toast) => toast)}</AnimatePresence>
     </PaddingWrapper>
   );
 };

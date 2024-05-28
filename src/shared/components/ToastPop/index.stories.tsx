@@ -1,8 +1,7 @@
-import useToast from '@/shared/hooks/useToast';
-
 import { Meta, StoryObj } from '@storybook/react';
 import ToastPop from '@/shared/components/ToastPop';
 import Button from '@/shared/components/Button';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 const meta: Meta<typeof ToastPop> = {
   component: ToastPop,
@@ -20,10 +19,10 @@ export default meta;
 type Story = StoryObj<typeof ToastPop>;
 
 const Template = () => {
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
 
   const handleButtonClick = () => {
-    openToast(<ToastPop>팝팝!</ToastPop>);
+    openToast({ message: '팝팝!' });
   };
 
   return (

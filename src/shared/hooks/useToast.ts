@@ -3,6 +3,10 @@ import { useSetRecoilState } from 'recoil';
 import { ReactElement, ReactNode, cloneElement, isValidElement } from 'react';
 import { ToastPopProps } from '../types/toastProps';
 
+/**
+ * @deprecated
+ * useToastNewVer을 사용해주세요
+ * */
 const useToast = () => {
   const setToast = useSetRecoilState(toastState);
 

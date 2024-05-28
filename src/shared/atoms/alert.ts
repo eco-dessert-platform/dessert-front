@@ -11,7 +11,16 @@ export const popupState = atom<ReactNode>({
   default: null
 });
 
+/**
+ * @deprecated
+ * toastStateNewVer을 사용해주세요.
+ */
 export const toastState = atom<ReactNode[]>({
   key: 'toastState',
+  default: []
+});
+
+export const toastStateNewVer = atom<{ message: string; id: number }[]>({
+  key: 'toastStateNewVer',
   default: []
 });

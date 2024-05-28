@@ -1,28 +1,25 @@
 'use client';
 
-import { toastState } from '@/shared/atoms/alert';
+import { toastStateNewVer } from '@/shared/atoms/alert';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import { ToastPopProps } from '@/shared/types/toastProps';
+import ToastPop from '@/shared/components/ToastPop';
 import { AnimatePresence } from 'framer-motion';
-import { ReactElement, cloneElement, isValidElement } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const ToastContainer = () => {
-  const toasts = useRecoilValue(toastState);
+  const toasts = useRecoilValue(toastStateNewVer);
 
   return (
-    <PaddingWrapper className="bg-yellow-50 fixed max-w-[600px] w-full bottom-0 left-1/2 -translate-x-1/2  min-h-[70px] h-fit z-toast flex flex-col gap-[10px]">
-      <AnimatePresence>
-        {toasts.map((toast, index) => {
-          if (!isValidElement(toast)) return null;
-
-          const toastWithIndex = cloneElement(toast as ReactElement<ToastPopProps>, {
-            index
-          });
-
-          return toastWithIndex;
-        })}
-      </AnimatePresence>
+    <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0 left-1/2 -translate-x-1/2  min-h-[70px] h-fit z-toast flex flex-col gap-[10px]">
+      <div className="relative w-full h-full">
+        <AnimatePresence>
+          {toasts.map(({ message, id }, index) => (
+            <ToastPop key={id} index={index}>
+              {message}
+            </ToastPop>
+          ))}
+        </AnimatePresence>
+      </div>
     </PaddingWrapper>
   );
 };

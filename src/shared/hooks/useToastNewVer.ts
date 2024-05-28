@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { toastStateNewVer } from '@/shared/atoms/alert';
 import { useSetRecoilState } from 'recoil';
 import { SECOND } from '../constants/time';
@@ -12,12 +13,12 @@ const useToastNewVer = () => {
     });
   };
 
-  const openToast = ({ message }: { message: string }) => {
+  const openToast = ({ message, action }: { message: string; action?: ReactNode }) => {
     const id = Date.now();
 
     setToast((toasts) => {
       const newToasts = [...toasts];
-      newToasts.unshift({ message, id });
+      newToasts.unshift({ message, action, id });
       return newToasts;
     });
 

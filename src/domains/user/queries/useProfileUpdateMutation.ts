@@ -1,19 +1,18 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
 import fetchExtend from '@/shared/utils/api';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import PATH from '@/shared/constants/path';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import { DefaultResponse } from '@/shared/types/response';
 import { throwApiError } from '@/shared/utils/error';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { MyProfileUpdateRequest } from '../types/profile';
 
 const useProfileUpdateMutation = () => {
   const { push } = useRouter();
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
 
   const mutationFn = async ({ profileImg, ...rest }: MyProfileUpdateRequest) => {
     const formData = new FormData();
@@ -35,23 +34,14 @@ const useProfileUpdateMutation = () => {
 
   const onSuccess = async () => {
     await revalidateTag(QUERY_KEY.profile);
-    openToast(
-      <ToastPop>
-        <div>프로필 수정이 완료되었어요.</div>
-      </ToastPop>
-    );
+    openToast({ message: '프로필 수정이 완료되었어요.' });
 
     push(PATH.mypage);
   };
 
   const onError = (e: Error) => {
     const message = e.message || '알 수 없는 이유로 수정에 실패했어요.';
-
-    openToast(
-      <ToastPop>
-        <div>{message}</div>
-      </ToastPop>
-    );
+    openToast({ message });
   };
 
   return useMutation({

@@ -13,8 +13,8 @@ const ToastContainer = () => {
     <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0 left-1/2 -translate-x-1/2  min-h-[70px] h-fit z-toast flex flex-col gap-[10px]">
       <div className="relative w-full h-full">
         <AnimatePresence>
-          {toasts.map(({ message, id }, index) => (
-            <ToastPop key={id} index={index}>
+          {toasts.map(({ message, id, action }, index) => (
+            <ToastPop key={id} index={index} action={action}>
               {message}
             </ToastPop>
           ))}

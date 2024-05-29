@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-const useToggle = () => {
-  const [isActive, setIsActive] = useState(false);
+const useToggle = (initialState: boolean = false) => {
+  const [isActive, setIsActive] = useState(initialState);
 
   const toggle = () => {
     setIsActive((prev) => !prev);
   };
 
-  return { toggle, isActive };
+  return { toggle, isActive, setIsActive };
 };
 
 export default useToggle;

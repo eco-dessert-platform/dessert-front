@@ -1,25 +1,22 @@
-'use client';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
+import userService from '@/domains/user/queries/service';
+import PreferenceFormSection from '@/blocks/user/preference/update/PreferenceFormSection';
 
-import useGetPreferenceQuery from '@/domains/user/queries/useGetPreferenceQuery';
-import useUpdatePreferenceMutation from '@/domains/user/queries/useUpdatePreferenceMutation';
-import Header from '@/shared/components/Header';
-import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import PreferenceForm from '@/domains/user/components/PreferenceForm';
-import Loading from '@/shared/components/Loading';
-
-const PreferenceUpdatePage = () => {
-  const { isLoading } = useGetPreferenceQuery();
-  const { mutate } = useUpdatePreferenceMutation();
-
-  if (isLoading) return <Loading />;
+const PreferenceUpdatePage = async () => {
+  const queryClient = new QueryClient();
+  await queryClient.fetchQuery({
+    queryKey: preferenceQueryKey.all,
+    queryFn: async () => {
+      const data = await userService.getPreference();
+      return data;
+    }
+  });
 
   return (
-    <>
-      <Header title="맞춤 추천 수정하기" back />
-      <PaddingWrapper>
-        <PreferenceForm mutate={mutate} />
-      </PaddingWrapper>
-    </>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PreferenceFormSection />
+    </HydrationBoundary>
   );
 };
 

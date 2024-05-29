@@ -14,7 +14,7 @@ const DropdownContent = ({ children, className }: Props) => {
   return (
     <div
       className={twMerge(
-        'flex flex-col items-center justify-center divide-y divide-gray-100 min-w-[72px] rounded-[12px] overflow-hidden shadow',
+        'flex flex-col items-center justify-center divide-y divide-gray-100 min-w-[72px] rounded-[10px] overflow-hidden shadow',
         className
       )}
     >

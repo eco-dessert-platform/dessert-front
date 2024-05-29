@@ -6,11 +6,11 @@ interface Props {
 }
 const getComponentFromChildren = ({ children, target }: Props) => {
   const childrenArray = Children.toArray(children);
-  const dropdownItem = childrenArray.filter(
+  const targetComponent = childrenArray.filter(
     (child) => isValidElement(child) && child.type === target.type
   );
 
-  return dropdownItem;
+  return targetComponent;
 };
 
 export default getComponentFromChildren;

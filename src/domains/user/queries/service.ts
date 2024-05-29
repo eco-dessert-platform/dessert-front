@@ -4,6 +4,7 @@ import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import Service from '@/shared/queries/service';
 import { PreferenceType, PreferenceResultType } from '@/domains/user/types/profile';
+import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 
 class UserService extends Service {
@@ -36,7 +37,9 @@ class UserService extends Service {
   }
 
   async getPreference() {
-    const res = await this.fetchExtend.get('/preference');
+    const res = await this.fetchExtend.get('/preference', {
+      next: { tags: preferenceQueryKey.all }
+    });
     const { result, success, code, message }: ResultResponse<PreferenceResultType> =
       await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));

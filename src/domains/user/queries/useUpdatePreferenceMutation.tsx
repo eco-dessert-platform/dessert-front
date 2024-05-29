@@ -1,14 +1,14 @@
 import { useRouter } from 'next/navigation';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { PreferenceType } from '@/domains/user/types/profile';
 import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
+import { revalidateTag } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';
 import userService from '@/domains/user/queries/service';
 import useToast from '@/shared/hooks/useToast';
 import ToastPop from '@/shared/components/ToastPop';
 
 const useUpdatePreferenceMutation = () => {
-  const queryClient = useQueryClient();
   const { openToast } = useToast();
   const { push } = useRouter();
 
@@ -21,7 +21,7 @@ const useUpdatePreferenceMutation = () => {
   };
 
   const onSuccess = () => {
-    queryClient.invalidateQueries({ queryKey: preferenceQueryKey.all });
+    revalidateTag(preferenceQueryKey.all[0]);
     openToast(<ToastPop>맞춤 추천이 수정됐으니, 추천 빵을 구경해봐요!</ToastPop>);
   };
 

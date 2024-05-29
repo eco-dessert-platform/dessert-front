@@ -3,18 +3,20 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { preferenceState } from '@/domains/user/atoms/profile';
-import useGetPreferenceQuery from '@/domains/user/queries/useGetPreferenceQuery';
+import { PreferenceType } from '@/domains/user/types/profile';
 import useUpdatePreferenceMutation from '@/domains/user/queries/useUpdatePreferenceMutation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import PreferenceForm from '@/domains/user/components/PreferenceForm';
 
-const PreferenceFormSection = () => {
-  const { data } = useGetPreferenceQuery();
-  const { mutate } = useUpdatePreferenceMutation();
+interface PreferenceFormSectionProps {
+  data: Array<PreferenceType>;
+}
+
+const PreferenceFormSection = ({ data }: PreferenceFormSectionProps) => {
   const setPreference = useSetRecoilState(preferenceState);
+  const { mutate } = useUpdatePreferenceMutation();
 
   useEffect(() => {
-    if (!data) return;
     setPreference(data);
   }, [setPreference, data]);
 

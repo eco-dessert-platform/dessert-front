@@ -27,3 +27,7 @@ export type SearchKeywordsType = Array<KeywordType>;
 export interface SearchResultType {
   content: SearchKeywordsType;
 }
+
+export interface PopularKeywordResultType {
+  content: Array<string>;
+}

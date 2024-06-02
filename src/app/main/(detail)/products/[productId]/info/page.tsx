@@ -1,22 +1,23 @@
-import BreifExplanation from '@/blocks/product/BriefExplanation';
 import DetailContentItems from '@/blocks/product/DetailContentItems';
 import ProductDetailImgs from '@/blocks/product/DetailProductImgs';
-import getProductDetail from '@/domains/product/queries/getProductDetail';
+import getBoardDetail from '@/domains/product/queries/getBoardDetail';
+import getStoreInfo from '@/domains/product/queries/getStoreInfo';
 import DetailStoreInfo from '@/domains/store/components/DetailStoreInfo';
 
-interface ProductDetailProps {
-  params: { productId: string };
-}
+// interface ProductDetailProps {
+//   params: { productId: string };
+// }
 
-const ProductDetail = async ({ params: { productId } }: ProductDetailProps) => {
-  const data = await getProductDetail(productId);
+const ProductDetail = async () => {
+  const boardData = await getBoardDetail();
+  const storeData = await getStoreInfo();
 
   return (
     <>
-      <ProductDetailImgs boardImages={data.board.images} isBundled={data.board.isBundled} />
-      <DetailStoreInfo store={data.store} />
-      <BreifExplanation boardData={data.board} />
-      <DetailContentItems data={data} />
+      <ProductDetailImgs boardImages={boardData.boardImages} isBundled />
+      <DetailStoreInfo store={storeData} />
+      {/* <BreifExplanation boardData={products} /> */}
+      <DetailContentItems boardData={boardData} />
     </>
   );
 };

@@ -1,10 +1,10 @@
-import { IProductDetailType } from '@/domains/product/types/productDetailType';
+import { IBoardType } from '@/domains/product/types/productDetailType';
 import { StarIcon } from '@/shared/components/icons';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface BreifExplanationProps {
-  boardData: IProductDetailType['board'];
+  boardData: IBoardType;
 }
 const BreifExplanation = ({ boardData }: BreifExplanationProps) => (
   <PaddingWrapper>

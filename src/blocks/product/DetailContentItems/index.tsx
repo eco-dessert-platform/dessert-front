@@ -1,14 +1,25 @@
+import getProductDetail from '@/domains/product/queries/getProductDetail';
+import { IBoardType } from '@/domains/product/types/productDetailType';
+
 import DeliveryFeeSection from './DeliveryFeeSection';
-import DetailInformationImgs from './DetailInformationImgs';
 import ProductOptionsSetion from './ProductOptionsSection';
 import ReviewBadgeSection from './ReviewBadgeSection';
 
-const DetailContentItems = ({ data }: { data: any }) => (
-  <>
-    <DeliveryFeeSection />
-    <ReviewBadgeSection />
-    <ProductOptionsSetion data={data} />
-    <DetailInformationImgs data={data} />
-  </>
-);
+interface Props {
+  // productId: string;
+  boardData: IBoardType;
+}
+
+const DetailContentItems = async ({ boardData }: Props) => {
+  const data = await getProductDetail();
+  const { products } = data;
+  return (
+    <>
+      <DeliveryFeeSection boardData={boardData} />
+      <ReviewBadgeSection />
+      <ProductOptionsSetion data={products} />
+      {/* <DetailInformationImgs data={products} /> */}
+    </>
+  );
+};
 export default DetailContentItems;

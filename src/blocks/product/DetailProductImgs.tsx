@@ -5,17 +5,12 @@ import 'swiper/css/bundle';
 import React, { useState } from 'react';
 
 import { BundleBadge } from '@/domains/product/components/ProductCard/ProductImage/BundleBadge';
-import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductImageSlide from '@/domains/product/components/ProductImageSlide';
 import ImageCounter from '@/domains/product/components/ProductImageSlide/ImgCounter';
-
-interface ImageProps {
-  id: number;
-  url: string;
-}
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface ProductImgProps {
-  boardImages: ImageProps[];
+  boardImages: string[];
   isBundled: boolean;
 }
 
@@ -31,7 +26,7 @@ const ProductDetailImgs = ({ boardImages, isBundled }: ProductImgProps) => {
             <BundleBadge />
           </div>
         )}
-        {boardImages[0].url && (
+        {boardImages && (
           <div className="absolute bottom-[10px] right-[10px] w-[37px] h-[21px] px-2.5 py-0.5 bg-black bg-opacity-60 rounded-[50px] justify-center items-center gap-2.5 inline-flex z-10">
             <ImageCounter index={swiperIndex} total={boardImages.length} />
           </div>

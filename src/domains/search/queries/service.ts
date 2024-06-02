@@ -1,7 +1,11 @@
 import Service from '@/shared/queries/service';
 import { ResultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { PopularKeywordsResultType, RecentSearchKeywordsResultType } from '@/domains/search/types';
+import {
+  PopularKeywordsResultType,
+  RecentSearchKeywordsResultType,
+  AutoCompleteResultType
+} from '@/domains/search/types';
 
 class SearchService extends Service {
   async getPopularKeywords() {
@@ -36,6 +40,15 @@ class SearchService extends Service {
     const { success, code, message } = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async getAutoCompleteSearchTexts(keyword: string) {
+    const res = await this.fetchExtend.get(`/search/auto-keyword?keyword=${keyword}`);
+    const { success, code, message, result }: ResultResponse<AutoCompleteResultType> =
+      await res.json();
+
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result.content;
   }
 }
 

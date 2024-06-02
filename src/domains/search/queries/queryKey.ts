@@ -5,3 +5,7 @@ export const searchQueryKey = {
 export const recentKeywordQueryKey = {
   all: ['recentKeyword']
 };
+
+export const autoCompleteQueryKey = {
+  all: ['autoComplete']
+};

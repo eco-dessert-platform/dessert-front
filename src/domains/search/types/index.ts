@@ -30,3 +30,7 @@ export interface RecentSearchKeywordsResultType {
 export interface PopularKeywordsResultType {
   content: Array<string>;
 }
+
+export interface AutoCompleteResultType {
+  content: Array<string>;
+}

@@ -20,3 +20,7 @@ export interface ReviewDataType {
   content: string;
   photos: Array<string>;
 }
+
+export interface PostReview extends ReviewDataType {
+  boardId: number;
+}

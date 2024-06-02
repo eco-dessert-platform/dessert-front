@@ -9,7 +9,8 @@ const QUERY_KEY = {
   product: 'product',
   keyword: 'keyword',
   autoComplete: 'autoComplete',
-  notification: 'notification'
+  notification: 'notification',
+  postReview: 'post review'
 };
 
 export default QUERY_KEY;

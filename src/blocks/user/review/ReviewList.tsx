@@ -8,26 +8,10 @@ const ReviewList = () => {
 
   return (
     <section className="flex flex-col divide-y divide-gray-200">
-      {reviews?.map(
-        ({ id, comment, date, nickname, isBest, images, rating, tags, like, isLiked }) => {
-          const formmatedDate = new Date(date).toLocaleDateString('ko-KR');
-          return (
-            <Review
-              key={id}
-              id={id}
-              nickname={nickname}
-              images={images}
-              rating={rating}
-              comment={comment}
-              tags={tags}
-              like={like}
-              isLiked={isLiked}
-              isBest={isBest}
-              date={formmatedDate}
-            />
-          );
-        }
-      )}
+      {reviews?.map((review) => {
+        const formmatedDate = new Date(review.date).toLocaleDateString('ko-KR');
+        return <Review key={review.id} {...review} date={formmatedDate} />;
+      })}
     </section>
   );
 };

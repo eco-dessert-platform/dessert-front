@@ -12,12 +12,19 @@ const ImageSlider = ({ images }: Props) => {
   return (
     <motion.div className="w-fit max-w-full" ref={constraintRef}>
       <motion.div drag="x" dragConstraints={constraintRef} className="flex w-max gap-[4px]">
-        {images?.map((image) => (
+        {images?.map((image, index) => (
           <div
-            key={image}
+            key={image + String(index)}
             className="relative size-[64px] aspect-square rounded-[6px] overflow-hidden"
           >
-            <Image src={image} fill alt="review image" className="object-cover" />
+            <Image
+              src={image}
+              fill
+              alt="review image"
+              className="object-cover"
+              sizes="64px"
+              priority
+            />
           </div>
         ))}
       </motion.div>

@@ -6,8 +6,8 @@ import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 const MyReviewPage = async () => {
-  const queryClinet = new QueryClient();
-  await queryClinet.fetchInfiniteQuery({
+  const queryClient = new QueryClient();
+  await queryClient.fetchInfiniteQuery({
     queryKey: reviewQueryKey.list('mypage'),
     queryFn: ({ pageParam }) => reviewService.getMyReview(pageParam),
     initialPageParam: INITIAL_CORSOR
@@ -16,7 +16,7 @@ const MyReviewPage = async () => {
   return (
     <>
       <Header back title="내가 작성한 리뷰" />
-      <HydrationBoundary state={dehydrate(queryClinet)}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
         <ReviewList />
       </HydrationBoundary>
     </>

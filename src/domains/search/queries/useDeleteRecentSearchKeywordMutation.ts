@@ -1,14 +1,8 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { SearchKeywordsType } from '@/domains/search/types';
-import fetchExtend from '@/shared/utils/api';
-import QUERY_KEY from '@/shared/constants/queryKey';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-
-interface DeleteRecentSearchKeyword {
-  content: boolean;
-}
+import searchService from '@/domains/search/queries/service';
+import { searchQueryKey, recentKeywordQueryKey } from '@/domains/search/queries/queryKey';
 
 type ContextType = {
   previousKeywords?: SearchKeywordsType;
@@ -18,20 +12,14 @@ type MutationError = (_error: Error, _variables: string, _context?: ContextType)
 
 export const useDeleteRecentSearchKeywordMutation = () => {
   const { openToast } = useToastNewVer();
-
   const queryClient = useQueryClient();
-  const queryKey = [QUERY_KEY.search, QUERY_KEY.keyword];
+  const queryKey = [...searchQueryKey.all, ...recentKeywordQueryKey.all];
 
   const mutationFn = async (keyword: string) => {
-    const res = await fetchExtend.delete(`/search/recency?keyword=${keyword}`);
-    const { success, code, message }: ResultResponse<DeleteRecentSearchKeyword> = await res.json();
-
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
+    await searchService.deleteRecentSearchKeyword(keyword);
   };
 
-  const onMutate = async (keywordToDelete: string): Promise<ContextType> => {
+  const onMutate = async (keywordToDelete: string) => {
     await queryClient.cancelQueries({ queryKey });
     const previousKeywords: SearchKeywordsType | undefined = queryClient.getQueryData(queryKey);
     queryClient.setQueryData(queryKey, (oldKeywords: SearchKeywordsType) =>

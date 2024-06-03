@@ -27,3 +27,5 @@ export { default as Search16Icon } from '@public/assets/icons/search.svg';
 export { default as RefreshIcon } from '@public/assets/icons/refresh.svg';
 export { default as ShareIcon } from '@public/assets/icons/share.svg';
 export { default as CameraIcon } from '@public/assets/icons/camera.svg';
+
+export { default as KebabIcon } from '@public/assets/icons/kebab.svg';

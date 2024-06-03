@@ -10,7 +10,17 @@ export const popupState = atom<ReactNode>({
   key: 'popupState',
   default: null
 });
-export const toastState = atom<ReactNode>({
+
+/**
+ * @deprecated
+ * toastStateNewVer을 사용해주세요.
+ */
+export const toastState = atom<ReactNode[]>({
   key: 'toastState',
-  default: null
+  default: []
+});
+
+export const toastStateNewVer = atom<{ message: string; id: number; action: ReactNode }[]>({
+  key: 'toastStateNewVer',
+  default: []
 });

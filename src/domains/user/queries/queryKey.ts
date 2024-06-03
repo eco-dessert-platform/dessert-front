@@ -6,3 +6,7 @@ export const notificationQueryKey = {
 export const userProfileQueryKey = {
   all: ['user-profile']
 };
+
+export const preferenceQueryKey = {
+  all: ['preference']
+};

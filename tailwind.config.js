@@ -28,7 +28,8 @@ module.exports = {
           900: '#212121'
         },
         redGray: {
-          30: '#F8F8F8'
+          30: '#F8F8F8',
+          50: '#F8F8F8'
         },
         blueGray: {
           30: '#F4F7F9',

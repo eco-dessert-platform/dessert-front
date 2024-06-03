@@ -1,10 +1,10 @@
-import { Cursor, ResultResponse } from '@/shared/types/response';
+import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import Service from '@/shared/queries/service';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { NotificationDetailType, NotificationType } from '../types/notification';
-import { UserProfileType } from '../types/profile';
-import { notificationQueryKey, userProfileQueryKey } from './queryKey';
+import { notificationQueryKey, userProfileQueryKey, preferenceQueryKey } from './queryKey';
+import { UserProfileType, PreferenceType, PreferenceResultType } from '../types/profile';
 
 class UserService extends Service {
   async getNotifications(cursorId: number) {
@@ -39,6 +39,32 @@ class UserService extends Service {
       throw new Error(ERROR_MESSAGE.api({ code, message }));
     }
     return result;
+  }
+
+  async addPreference(preference: Array<PreferenceType>) {
+    const res = await this.fetchExtend.post('/preference', {
+      body: JSON.stringify({ preferenceType: preference.join('_').replace(' ', '_').toUpperCase() })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async getPreference() {
+    const res = await this.fetchExtend.get('/preference', {
+      next: { tags: preferenceQueryKey.all }
+    });
+    const { result, success, code, message }: ResultResponse<PreferenceResultType> =
+      await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result.preferenceType;
+  }
+
+  async updatePreference(preference: Array<PreferenceType>) {
+    const res = await this.fetchExtend.put('/preference', {
+      body: JSON.stringify({ preferenceType: preference.join('_').replace(' ', '_').toUpperCase() })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 }
 

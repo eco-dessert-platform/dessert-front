@@ -1,8 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import usePopup from '@/shared/hooks/usePopup';
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import PATH from '@/shared/constants/path';
 import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
@@ -15,7 +14,7 @@ interface WithdrawResponse {
 const useWithdrawMutation = () => {
   const router = useRouter();
   const { closePopup } = usePopup();
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
 
   const mutationFn = async ({ formData }: { formData: FormData }) => {
     const rawFormData = {
@@ -35,20 +34,12 @@ const useWithdrawMutation = () => {
   };
 
   const onSuccess = ({ message }: { message: string }) => {
-    openToast(
-      <ToastPop>
-        <div>{message}</div>
-      </ToastPop>
-    );
+    openToast({ message });
     router.push(PATH.home);
   };
 
   const onError = ({ message }: Error) => {
-    openToast(
-      <ToastPop>
-        <div>{message}</div>
-      </ToastPop>
-    );
+    openToast({ message });
   };
 
   return useMutation({

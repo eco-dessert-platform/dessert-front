@@ -1,13 +1,12 @@
-import useToast from '@/shared/hooks/useToast';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import fetchExtend from '@/shared/utils/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import ToastPop from '@/shared/components/ToastPop';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import { DefaultResponse } from '@/shared/types/response';
 import { throwApiError } from '@/shared/utils/error';
 
 const useAddWishStoreMutation = () => {
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
   const mutationFn = async ({ storeId }: { storeId: string }) => {
@@ -18,19 +17,11 @@ const useAddWishStoreMutation = () => {
 
   const onSuccess = async () => {
     queryClient.invalidateQueries({ queryKey: [QUERY_KEY.store] });
-    openToast(
-      <ToastPop>
-        <div>💖 찜한 스토어에 추가했어요</div>
-      </ToastPop>
-    );
+    openToast({ message: '💖 찜한 스토어에 추가했어요' });
   };
 
-  const onError = (error: Error) => {
-    openToast(
-      <ToastPop>
-        <div>{error.message}</div>
-      </ToastPop>
-    );
+  const onError = ({ message }: Error) => {
+    openToast({ message });
   };
 
   return useMutation({ mutationFn, onSuccess, onError });

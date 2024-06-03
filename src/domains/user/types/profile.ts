@@ -25,3 +25,9 @@ export interface UserProfileType {
   phoneNumber: string | null;
   birthDate: string | null;
 }
+
+export type PreferenceType = 'diet' | 'muscle grow' | 'constitution' | 'vegan';
+
+export interface PreferenceResultType {
+  preferenceType: string;
+}

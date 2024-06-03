@@ -1,10 +1,10 @@
 import { Cursor, ResultResponse } from '@/shared/types/response';
-import QUERY_KEY from '@/shared/constants/queryKey';
 import { INITIAL_CORSOR } from '@/shared/constants/corsor';
 import Service from '@/shared/queries/service';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 import { UserProfileType } from '../types/profile';
+import { notificationQueryKey, userProfileQueryKey } from './queryKey';
 
 class UserService extends Service {
   async getNotifications(cursorId: number) {
@@ -19,7 +19,7 @@ class UserService extends Service {
 
   async getNotificationDetail(id: number) {
     const res = await this.fetchExtend.get(`/notification/${id}`, {
-      next: { tags: [QUERY_KEY.notification, String(id)] }
+      next: { tags: notificationQueryKey.detail(id) }
     });
     const { result, success, code, message }: ResultResponse<NotificationDetailType> =
       await res.json();
@@ -30,7 +30,7 @@ class UserService extends Service {
   async getUserProfile() {
     const res = await this.fetchExtend.get('/profile', {
       next: {
-        tags: [QUERY_KEY.profile]
+        tags: userProfileQueryKey.all
       }
     });
     if (res.status === 401) throw new Error(ERROR_MESSAGE.requiredLogin);

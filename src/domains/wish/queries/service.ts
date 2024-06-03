@@ -2,6 +2,7 @@ import Service from '@/shared/queries/service';
 import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { IStoreType } from '@/domains/store/types/store';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
+import { IProductType } from '@/domains/product/types/productType';
 
 class WishService extends Service {
   async getWishStoreList(cursorId: number) {
@@ -28,6 +29,14 @@ class WishService extends Service {
     const res = await this.fetchExtend.put(`/boards/${productId}/cancel`);
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async getWishProductList({ folderId, cursor }: { folderId: string; cursor: number }) {
+    const res = await this.fetchExtend.get(`/boards/folders/${folderId}?page=${cursor}`);
+    const { result, code, message, success }: ResultResponse<Cursor<IProductType>> =
+      await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
   }
 }
 

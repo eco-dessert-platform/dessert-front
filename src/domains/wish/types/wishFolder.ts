@@ -7,6 +7,9 @@ export interface WishFolderType {
   productImages: string[];
 }
 
+/**
+ * @deprecated
+ */
 export interface WishProductsDetail {
   content: IProductType[];
   pageable: {

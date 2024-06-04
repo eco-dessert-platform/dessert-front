@@ -5,7 +5,8 @@ import {
   PopularKeywordsResultType,
   RecentSearchKeywordsResultType,
   AutoCompleteResultType,
-  IAllProductsType
+  IAllProductsType,
+  IAllStoreType
 } from '@/domains/search/types';
 import { IFilterType } from '@/domains/product/types/filterType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
@@ -68,6 +69,14 @@ class SearchService extends Service {
       `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
     );
     const { result, code, message, success }: ResultResponse<IAllProductsType> = await res.json();
+
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
+  }
+
+  async getSearchStores({ keyword, pageParam }: { keyword: string; pageParam: number }) {
+    const res = await this.fetchExtend.get(`/search/stores?keyword=${keyword}&page=${pageParam}`);
+    const { result, code, message, success }: ResultResponse<IAllStoreType> = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;

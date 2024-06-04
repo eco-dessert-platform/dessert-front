@@ -4,8 +4,11 @@ import { ERROR_MESSAGE } from '@/shared/constants/error';
 import {
   PopularKeywordsResultType,
   RecentSearchKeywordsResultType,
-  AutoCompleteResultType
+  AutoCompleteResultType,
+  IAllProductsType
 } from '@/domains/search/types';
+import { IFilterType } from '@/domains/product/types/filterType';
+import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 
 class SearchService extends Service {
   async getPopularKeywords() {
@@ -49,6 +52,25 @@ class SearchService extends Service {
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result.content;
+  }
+
+  async getSearchProducts({
+    keyword,
+    filterValue,
+    pageParam
+  }: {
+    keyword: string;
+    filterValue: IFilterType;
+    pageParam: number;
+  }) {
+    const queryString = transformFilterValueToQueryString(filterValue);
+    const res = await this.fetchExtend.get(
+      `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
+    );
+    const { result, code, message, success }: ResultResponse<IAllProductsType> = await res.json();
+
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
   }
 }
 

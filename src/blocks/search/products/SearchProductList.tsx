@@ -12,12 +12,12 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 interface SearchProductListProps {
-  keyword?: string;
+  keyword: string;
 }
 
-const SearchProductList = ({ keyword = '' }: SearchProductListProps) => {
+const SearchProductList = ({ keyword }: SearchProductListProps) => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.search));
-  const { data, isLoading, isError, fetchNextPage, hasNextPage } = useGetSearchProductsQuery({
+  const { data, isError, fetchNextPage, hasNextPage } = useGetSearchProductsQuery({
     keyword,
     filterValue
   });
@@ -28,9 +28,6 @@ const SearchProductList = ({ keyword = '' }: SearchProductListProps) => {
     fetchNextPage();
   }, [inView, fetchNextPage]);
 
-  if (isLoading) {
-    return <SkeletonProductCardList />;
-  }
   if (isError) {
     return (
       <SadBbangleBox>

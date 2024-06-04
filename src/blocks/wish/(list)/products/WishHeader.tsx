@@ -1,10 +1,10 @@
 'use client';
 
+import { useParams, usePathname } from 'next/navigation';
 import useWishFolderListQuery from '@/domains/wish/queries/useWishFolderListQuery';
 import Header from '@/shared/components/Header';
 import ProductAndStoreTab from '@/shared/components/ProductAndStoreTab';
 import PATH from '@/shared/constants/path';
-import { useParams, usePathname } from 'next/navigation';
 
 const WishHeader = () => {
   const pathname = usePathname();

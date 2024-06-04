@@ -11,7 +11,11 @@ import { useEffect } from 'react';
 
 const WishProductList = () => {
   const { folderId } = useParams<{ folderId: string }>();
-  const { data: wishProducts, hasNextPage, fetchNextPage } = useWishProductListQuery(folderId);
+  const {
+    data: wishProducts,
+    hasNextPage,
+    fetchNextPage
+  } = useWishProductListQuery(Number(folderId));
   const { ref, inView } = useInView();
 
   useEffect(() => {

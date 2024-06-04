@@ -1,6 +1,6 @@
-import WishProductList from '@/blocks/wish/(list)/products/WishProductList';
-import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import WishProductList from '@/blocks/wish/(list)/products/[folderId]/WishProductList';
 import WishProductSortSelect from '@/domains/wish/components/WishProductSortSelect';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 const WishProductsDetail = () => (
   <>

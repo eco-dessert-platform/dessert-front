@@ -16,7 +16,7 @@ const useAddWishProductMutation = () => {
   const { openModal } = useModal();
   const isLoggedIn = useRecoilValue(isLoggedinState);
 
-  const mutationFn = async ({ productId, folderId }: { productId: string; folderId: string }) => {
+  const mutationFn = async ({ productId, folderId }: { productId: string; folderId: number }) => {
     if (!isLoggedIn) throw new Error(ERROR_MESSAGE.requiredLogin);
     await wishService.addWishProduct({ productId, folderId });
     return { productId };

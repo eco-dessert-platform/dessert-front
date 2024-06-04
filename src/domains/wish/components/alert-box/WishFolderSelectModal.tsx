@@ -20,7 +20,7 @@ const WishFolderSelectModal = ({ productId }: Props) => {
   const setSelectedWishFolder = useSetRecoilState(selectedWishFolderState);
   const { mutate } = useMoveWishProduct();
 
-  const moveTo = async ({ folderId, folderName }: { folderId: string; folderName: string }) => {
+  const moveTo = async ({ folderId, folderName }: { folderId: number; folderName: string }) => {
     setSelectedWishFolder(folderId);
     mutate({ productId, folderId, folderName });
   };

@@ -18,7 +18,7 @@ const useMoveWishProduct = () => {
     folderName
   }: {
     productId: string;
-    folderId: string;
+    folderId: number;
     folderName: string;
   }) => {
     await wishService.deleteWishProduct({ productId });

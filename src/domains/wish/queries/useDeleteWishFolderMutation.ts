@@ -9,7 +9,7 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 const useDeleteWishFolderMutation = () => {
   const { openToast } = useToastNewVer();
 
-  const mutationFn = async (folderId: string) => {
+  const mutationFn = async (folderId: number) => {
     const res = await fetchExtend.delete(`/wishLists/${folderId}`, {
       method: 'DELETE'
     });

@@ -14,7 +14,7 @@ class WishService extends Service {
     return result;
   }
 
-  async addWishProduct({ folderId, productId }: { folderId: string; productId: string }) {
+  async addWishProduct({ folderId, productId }: { folderId: number; productId: string }) {
     const res = await this.fetchExtend.post(`/boards/${productId}/wish`, {
       body: JSON.stringify({ folderId })
     });

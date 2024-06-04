@@ -9,7 +9,7 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 const useUpdateWishFolderMutation = () => {
   const { openToast } = useToastNewVer();
 
-  const mutationFn = async ({ folderId, title }: { folderId: string; title: string }) => {
+  const mutationFn = async ({ folderId, title }: { folderId: number; title: string }) => {
     const res = await fetchExtend.patch(`/wishLists/${folderId}`, {
       body: JSON.stringify({ title })
     });

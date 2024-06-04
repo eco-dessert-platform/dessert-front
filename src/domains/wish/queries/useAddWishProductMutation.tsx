@@ -4,10 +4,10 @@ import { useMutation } from '@tanstack/react-query';
 import useModal from '@/shared/hooks/useModal';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { revalidateTag } from '@/shared/actions/revalidate';
-import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { isLoggedinState } from '@/shared/atoms/login';
 import PATH from '@/shared/constants/path';
+import { productQueryKey } from '@/shared/queries/queryKey';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 
@@ -23,7 +23,7 @@ const useAddWishProductMutation = () => {
   };
 
   const onSuccess = async ({ productId }: { productId: string }) => {
-    await revalidateTag(REAVALIDATE_TAG.product);
+    await revalidateTag(productQueryKey.all[0]);
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
 
     openToast({

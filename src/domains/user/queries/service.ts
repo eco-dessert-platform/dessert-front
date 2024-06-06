@@ -1,7 +1,7 @@
 import { Cursor, ResultResponse, DefaultResponse } from '@/shared/types/response';
 import QUERY_KEY from '@/shared/constants/queryKey';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { INITIAL_CORSOR } from '@/shared/constants/corsor';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import Service from '@/shared/queries/service';
 import { PreferenceType, PreferenceResultType } from '@/domains/user/types/profile';
 import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
@@ -9,7 +9,7 @@ import { NotificationDetailType, NotificationType } from '../types/notification'
 
 class UserService extends Service {
   async getNotifications(cursorId: number) {
-    const params = cursorId === INITIAL_CORSOR ? '' : `?corsorId=${cursorId}`;
+    const params = cursorId === INITIAL_CURSOR ? '' : `?cursorId=${cursorId}`;
     const res = await this.fetchExtend.get(`/notification${params}`);
     const { result, success, code, message }: ResultResponse<Cursor<NotificationType>> =
       await res.json();

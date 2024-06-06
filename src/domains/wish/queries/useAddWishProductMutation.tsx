@@ -12,7 +12,7 @@ import { Cursor } from '@/shared/types/response';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
-import { updateInfiniteQueryCache } from './common/updater';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 
 const useAddWishProductMutation = () => {
   const { openToast } = useToastNewVer();

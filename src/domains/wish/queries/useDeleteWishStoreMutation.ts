@@ -3,7 +3,7 @@ import { Cursor } from '@/shared/types/response';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { storeQueryKey } from '@/domains/store/queries/queryKey';
 import { IStoreType } from '@/domains/store/types/store';
-import { updateInfiniteQueryCache } from './common/updater';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';
 
 const useDeleteWishStoreMutation = () => {

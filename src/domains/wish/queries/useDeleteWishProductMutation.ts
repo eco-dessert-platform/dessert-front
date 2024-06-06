@@ -5,7 +5,7 @@ import { Cursor } from '@/shared/types/response';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import wishService from './service';
 import { wishQueryKey } from './queryKey';
-import { updateInfiniteQueryCache } from './common/updater';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 
 const useDeleteWishProductMutation = () => {
   const { openToast } = useToastNewVer();

@@ -3,7 +3,7 @@ import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query
 import { Cursor } from '@/shared/types/response';
 import { IStoreType } from '@/domains/store/types/store';
 import { storeQueryKey } from '@/domains/store/queries/queryKey';
-import { updateInfiniteQueryCache } from './common/updater';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';
 
 const useAddWishStoreMutation = () => {

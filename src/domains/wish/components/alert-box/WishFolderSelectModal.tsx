@@ -12,7 +12,7 @@ import { selectedWishFolderState } from '../../atoms/wishFolder';
 import useMoveWishProduct from '../../queries/useMoveWishProduct';
 
 interface Props {
-  productId: string;
+  productId: number;
 }
 
 const WishFolderSelectModal = ({ productId }: Props) => {

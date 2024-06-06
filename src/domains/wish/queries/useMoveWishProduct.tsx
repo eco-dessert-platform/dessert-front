@@ -17,7 +17,7 @@ const useMoveWishProduct = () => {
     folderId,
     folderName
   }: {
-    productId: string;
+    productId: number;
     folderId: number;
     folderName: string;
   }) => {
@@ -26,7 +26,7 @@ const useMoveWishProduct = () => {
     return { productId, folderName };
   };
 
-  const onSuccess = ({ productId, folderName }: { productId: string; folderName: string }) => {
+  const onSuccess = ({ productId, folderName }: { productId: number; folderName: string }) => {
     revalidatePath(PATH.wishProductList);
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
     closeModal();

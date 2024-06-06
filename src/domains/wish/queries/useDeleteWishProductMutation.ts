@@ -1,24 +1,28 @@
-import fetchExtend from '@/shared/utils/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
-import { productQueryKey } from '@/shared/queries/queryKey';
-import { revalidateTag } from '@/shared/actions/revalidate';
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import { IProductType } from '@/domains/product/types/productType';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import { Cursor } from '@/shared/types/response';
+import { productQueryKey } from '@/shared/queries/queryKey';
+import wishService from './service';
+import { wishQueryKey } from './queryKey';
+import { updateInfiniteQueryCache } from './common/updater';
 
 const useDeleteWishProductMutation = () => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
-  const mutationFn = async ({ productId }: { productId: string }) => {
-    const res = await fetchExtend.put(`/boards/${productId}/cancel`);
-    const { success, code, message }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
+  const mutationFn = async ({ productId }: { productId: number }) => {
+    await wishService.deleteWishStore({ productId });
+    return { productId };
   };
 
-  const onSuccess = () => {
-    revalidateTag(productQueryKey.all[0]);
-    queryClient.invalidateQueries({ queryKey: productQueryKey.all });
+  const onSuccess = ({ productId }: { productId: number }) => {
+    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
+    queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
+      { queryKey: productQueryKey.all },
+      (oldData) =>
+        updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, { isWished: false })
+    );
     openToast({ message: '💖 찜 해제 되었어요' });
   };
 

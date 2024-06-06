@@ -23,7 +23,7 @@ class WishService extends Service {
     return list;
   }
 
-  async addWishProduct({ folderId, productId }: { folderId: number; productId: string }) {
+  async addWishProduct({ folderId, productId }: { folderId: number; productId: number }) {
     const res = await this.fetchExtend.post(`/boards/${productId}/wish`, {
       body: JSON.stringify({ folderId })
     });
@@ -34,8 +34,20 @@ class WishService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async deleteWishProduct({ productId }: { productId: string }) {
+  async addWishStore({ storeId }: { storeId: number }) {
+    const res = await this.fetchExtend.post(`/likes/store/${storeId}`);
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async deleteWishProduct({ productId }: { productId: number }) {
     const res = await this.fetchExtend.put(`/boards/${productId}/cancel`);
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async deleteWishStore({ productId }: { productId: number }) {
+    const res = await this.fetchExtend.delete(`/boards/${productId}/cancel`);
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }

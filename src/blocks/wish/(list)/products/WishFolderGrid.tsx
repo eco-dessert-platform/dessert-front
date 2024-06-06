@@ -1,12 +1,14 @@
-import WishFolder from '@/domains/wish/components/WishFolder';
-import wishService from '@/domains/wish/queries/service';
+'use client';
 
-const WishFolderGrid = async () => {
-  const wishList = await wishService.getWishFolderList();
+import WishFolder from '@/domains/wish/components/WishFolder';
+import useWishFolderListQuery from '@/domains/wish/queries/useWishFolderListQuery';
+
+const WishFolderGrid = () => {
+  const { data: wishList } = useWishFolderListQuery();
 
   return (
     <div className="grid gap-[16px] grid-cols-2">
-      {wishList.map(({ folderId, title, count, productImages }) => (
+      {wishList?.map(({ folderId, title, count, productImages }) => (
         <WishFolder
           key={folderId}
           id={folderId}

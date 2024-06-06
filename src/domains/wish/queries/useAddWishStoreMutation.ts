@@ -1,23 +1,17 @@
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import fetchExtend from '@/shared/utils/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import QUERY_KEY from '@/shared/constants/queryKey';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { useMutation } from '@tanstack/react-query';
+import { revalidatePath } from '@/shared/actions/revalidate';
+import PATH from '@/shared/constants/path';
+import wishService from './service';
 
 const useAddWishStoreMutation = () => {
   const { openToast } = useToastNewVer();
-  const queryClient = useQueryClient();
 
-  const mutationFn = async ({ storeId }: { storeId: string }) => {
-    const res = await fetchExtend.post(`/likes/store/${storeId}`);
-    const { success, code, message }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
-  };
+  const mutationFn = ({ storeId }: { storeId: number }) => wishService.addWishStore({ storeId });
 
   const onSuccess = async () => {
-    queryClient.invalidateQueries({ queryKey: [QUERY_KEY.store] });
     openToast({ message: '💖 찜한 스토어에 추가했어요' });
+    revalidatePath(PATH.wishStoreList);
   };
 
   const onError = ({ message }: Error) => {

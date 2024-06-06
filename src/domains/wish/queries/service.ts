@@ -46,9 +46,9 @@ class WishService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async deleteWishStore({ productId }: { productId: number }) {
-    const res = await this.fetchExtend.delete(`/boards/${productId}/cancel`);
-    const { success, code, message }: DefaultResponse = await res.json();
+  async deleteWishStore({ storeId }: { storeId: number }) {
+    const res = await this.fetchExtend.patch(`/likes/store/${storeId}`);
+    const { code, message, success }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
@@ -60,6 +60,28 @@ class WishService extends Service {
       await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
+  }
+
+  async updateWishFolder({ folderId, title }: { folderId: number; title: string }) {
+    const res = await this.fetchExtend.patch(`/wishLists/${folderId}`, {
+      body: JSON.stringify({ title })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async deleteWishFolder(folderId: number) {
+    const res = await this.fetchExtend.delete(`/wishLists/${folderId}`);
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async createWishFolder(title: string) {
+    const res = await this.fetchExtend.post('/wishLists', {
+      body: JSON.stringify({ title })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 }
 

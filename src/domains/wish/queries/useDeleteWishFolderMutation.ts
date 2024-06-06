@@ -1,24 +1,16 @@
-import { revalidatePath } from '@/shared/actions/revalidate';
-import PATH from '@/shared/constants/path';
-import fetchExtend from '@/shared/utils/api';
-import { useMutation } from '@tanstack/react-query';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import wishService from './service';
+import { wishQueryKey } from './queryKey';
 
 const useDeleteWishFolderMutation = () => {
   const { openToast } = useToastNewVer();
+  const queryClient = useQueryClient();
 
-  const mutationFn = async (folderId: number) => {
-    const res = await fetchExtend.delete(`/wishLists/${folderId}`, {
-      method: 'DELETE'
-    });
-    const { success, code, message }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
-  };
+  const mutationFn = async (folderId: number) => wishService.deleteWishFolder(folderId);
 
   const onSuccess = async () => {
-    await revalidatePath(PATH.wishProductList);
+    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
     openToast({ message: '찜 폴더가 삭제되었습니다.' });
   };
 

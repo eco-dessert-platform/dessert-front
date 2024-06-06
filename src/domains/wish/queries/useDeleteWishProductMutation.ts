@@ -12,7 +12,7 @@ const useDeleteWishProductMutation = () => {
   const queryClient = useQueryClient();
 
   const mutationFn = async ({ productId }: { productId: number }) => {
-    await wishService.deleteWishStore({ productId });
+    await wishService.deleteWishProduct({ productId });
     return { productId };
   };
 

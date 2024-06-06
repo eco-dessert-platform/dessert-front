@@ -1,16 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import { useInView } from 'react-intersection-observer';
-
 import SkeletonStoreList from '@/domains/store/components/SkeletonStoreCardList';
 import StoreCard from '@/domains/store/components/StoreCard';
 import { useGetAllStoresQuery } from '@/domains/store/queries/useGetAllStoresQuery';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const MainStoreList = () => {
-  const { data, isError, isLoading, fetchNextPage, hasNextPage } = useGetAllStoresQuery();
+  const { data, isError, fetchNextPage, hasNextPage } = useGetAllStoresQuery();
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -18,9 +16,6 @@ const MainStoreList = () => {
     fetchNextPage();
   }, [inView, fetchNextPage]);
 
-  if (isLoading) {
-    return <SkeletonStoreList row={10} />;
-  }
   if (isError) {
     return (
       <SadBbangleBox>

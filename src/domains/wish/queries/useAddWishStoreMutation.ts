@@ -12,15 +12,17 @@ const useAddWishStoreMutation = () => {
 
   const mutationFn = async ({ storeId }: { storeId: number }) => {
     await wishService.addWishStore({ storeId });
-    return storeId;
   };
 
-  const onSuccess = async (storeId: number) => {
+  const onMutate = ({ storeId }: { storeId: number }) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
       { queryKey: storeQueryKey.lists() },
       (oldData) =>
         updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: true })
     );
+  };
+
+  const onSuccess = () => {
     openToast({ message: '💖 찜한 상품에 추가했어요' });
   };
 
@@ -28,7 +30,12 @@ const useAddWishStoreMutation = () => {
     openToast({ message });
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({
+    mutationFn,
+    onSuccess,
+    onError,
+    onMutate
+  });
 };
 
 export default useAddWishStoreMutation;

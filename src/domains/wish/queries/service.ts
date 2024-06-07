@@ -41,7 +41,7 @@ class WishService extends Service {
   }
 
   async deleteWishProduct({ productId }: { productId: number }) {
-    const res = await this.fetchExtend.put(`/boards/${productId}/cancel`);
+    const res = await this.fetchExtend.delete(`/boards/${productId}/cancel`);
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }

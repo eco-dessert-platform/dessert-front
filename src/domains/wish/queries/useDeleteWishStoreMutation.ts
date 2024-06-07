@@ -12,15 +12,17 @@ const useDeleteWishStoreMutation = () => {
 
   const mutationFn = async ({ storeId }: { storeId: number }) => {
     await wishService.deleteWishStore({ storeId });
-    return storeId;
   };
 
-  const onSuccess = (storeId: number) => {
+  const onMutate = ({ storeId }: { storeId: number }) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
       { queryKey: storeQueryKey.lists() },
       (oldData) =>
         updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: false })
     );
+  };
+
+  const onSuccess = () => {
     openToast({ message: '💖 찜한 스토어에서 삭제했어요' });
   };
 
@@ -28,7 +30,7 @@ const useDeleteWishStoreMutation = () => {
     openToast({ message });
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({ mutationFn, onSuccess, onError, onMutate });
 };
 
 export default useDeleteWishStoreMutation;

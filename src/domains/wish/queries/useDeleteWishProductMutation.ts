@@ -16,13 +16,16 @@ const useDeleteWishProductMutation = () => {
     return { productId };
   };
 
-  const onSuccess = ({ productId }: { productId: number }) => {
-    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
+  const onMutate = ({ productId }: { productId: number }) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
       (oldData) =>
         updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, { isWished: false })
     );
+  };
+
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
     openToast({ message: '💖 찜 해제 되었어요' });
   };
 
@@ -30,7 +33,7 @@ const useDeleteWishProductMutation = () => {
     openToast({ message });
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({ mutationFn, onSuccess, onError, onMutate });
 };
 
 export default useDeleteWishProductMutation;

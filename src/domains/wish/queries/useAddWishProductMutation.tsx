@@ -26,13 +26,16 @@ const useAddWishProductMutation = () => {
     return { productId };
   };
 
-  const onSuccess = ({ productId }: { productId: number }) => {
-    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
+  const onMutate = ({ productId }: { productId: number }) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
       (oldData) =>
         updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
     );
+  };
+
+  const onSuccess = ({ productId }: { productId: number }) => {
+    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
 
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
     openToast({
@@ -64,7 +67,7 @@ const useAddWishProductMutation = () => {
     }
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({ mutationFn, onSuccess, onError, onMutate });
 };
 
 export default useAddWishProductMutation;

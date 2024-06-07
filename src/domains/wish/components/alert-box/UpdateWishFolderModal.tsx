@@ -1,37 +1,43 @@
 'use client';
 
-import useModal from '@/shared/hooks/useModal';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import Modal from '@/shared/components/Modal';
-import useInput from '@/shared/hooks/useInput';
-import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
+import { CreateWishFolderReqeust } from '../../types/form';
 
-interface UpdateWishFolderModalProps {
-  folderId: number;
+interface Props {
+  onValidSubmit: SubmitHandler<CreateWishFolderReqeust>;
 }
 
-const UpdateWishFolderModal = ({ folderId }: UpdateWishFolderModalProps) => {
-  const { closeModal } = useModal();
-  const { value, onChange } = useInput('');
-  const { mutate } = useUpdateWishFolderMutation();
-
-  const updateWishFolder = () => {
-    mutate({ folderId, title: value });
-    closeModal();
-  };
+const UpdateWishFolderModal = ({ onValidSubmit }: Props) => {
+  const MAX_LENGTH = 12;
+  const { register, handleSubmit, watch } = useForm<CreateWishFolderReqeust>({
+    defaultValues: { title: '' }
+  });
+  const titleRegister = register('title', { required: true });
+  const titleLength = watch('title').length;
 
   return (
     <Modal title="찜 폴더">
-      <PaddingWrapper className="flex flex-col gap-[16px]">
-        <div className="flex flex-col items-end gap-[4px]">
-          <Input onChange={onChange} autoComplete="off" placeholder="폴더 명을 입력해주세요." />
-          <div>
-            0<span className="text-gray-400">/12</span>
+      <PaddingWrapper>
+        <form onSubmit={handleSubmit(onValidSubmit)} className="flex flex-col gap-[16px]">
+          <div className="flex flex-col items-end gap-[4px]">
+            <Input
+              {...titleRegister}
+              type="text"
+              autoComplete="off"
+              maxLength={MAX_LENGTH}
+              placeholder="폴더 명을 입력해주세요."
+            />
+            <div>
+              {titleLength}
+              <span className="text-gray-400">/{MAX_LENGTH}</span>
+            </div>
           </div>
-        </div>
-        <Button onClick={updateWishFolder}>확인</Button>
+          <Button type="submit">확인</Button>
+        </form>
       </PaddingWrapper>
     </Modal>
   );

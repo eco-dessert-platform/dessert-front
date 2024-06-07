@@ -3,12 +3,14 @@
 import Button from '@/shared/components/Button';
 import { useRecoilState } from 'recoil';
 import useModal from '@/shared/hooks/useModal';
-import CreateWishFolderModal from '@/domains/wish/components/alert-box/CreateWishFolderModal';
 import { isWishFolderEditingState } from '@/domains/wish/atoms/wishFolder';
+import UpdateWishFolderModal from '@/domains/wish/components/alert-box/UpdateWishFolderModal';
+import useCreateWishFolderMutation from '@/domains/wish/queries/useCreateWishFolderMutation';
 
 const WishFolderEditButtonSection = () => {
+  const { mutate: createFolderMutate } = useCreateWishFolderMutation();
   const [isEditing, setIsEditing] = useRecoilState(isWishFolderEditingState);
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
   const editFolder = () => {
     setIsEditing(true);
@@ -19,7 +21,14 @@ const WishFolderEditButtonSection = () => {
   };
 
   const createFolder = () => {
-    openModal(<CreateWishFolderModal />);
+    openModal(
+      <UpdateWishFolderModal
+        onValidSubmit={({ title }) => {
+          createFolderMutate(title);
+          closeModal();
+        }}
+      />
+    );
   };
 
   return (

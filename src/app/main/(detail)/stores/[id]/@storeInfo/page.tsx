@@ -9,7 +9,7 @@ interface Props {
 
 const StoreInfoPage = async ({ params: { id } }: Props) => {
   const queryClient = new QueryClient();
-  await queryClient.fetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: storeQueryKey.detail(Number(id)),
     queryFn: async () => {
       const data = await storeService.getStoreInfo(Number(id));

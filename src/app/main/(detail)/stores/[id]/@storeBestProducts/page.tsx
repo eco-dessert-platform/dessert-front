@@ -9,7 +9,7 @@ interface Props {
 
 const StoreBestProductsPage = async ({ params: { id } }: Props) => {
   const queryClient = new QueryClient();
-  await queryClient.fetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: productQueryKey.list('store-detail/best'),
     queryFn: async () => {
       const data = await storeService.getStoreBestProducts(Number(id));

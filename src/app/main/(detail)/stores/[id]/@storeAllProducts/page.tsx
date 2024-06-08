@@ -10,7 +10,7 @@ interface Props {
 
 const StoreAllProductsPage = async ({ params: { id } }: Props) => {
   const queryClient = new QueryClient();
-  await queryClient.fetchInfiniteQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: productQueryKey.list('store-detail/all'),
     queryFn: async () => {
       const data = await storeService.getStoreAllProducts(Number(id));

@@ -3,9 +3,10 @@ import BottomArrowICon from '@public/assets/icons/arrow/bottom-arrow.svg';
 import DownArrowIcon from '@public/assets/icons/arrow/down-arrow.svg';
 import ForwardkArrowIcon from '@public/assets/icons/arrow/forward-arrow.svg';
 import MediumForwardArrowIcon from '@public/assets/icons/arrow/forward-medium-arrow.svg';
+import PrimaryMediumForwardArrowIcon from '@public/assets/icons/arrow/forward-medium-primary-arrow.svg';
 
 interface Props {
-  shape: 'bottom' | 'medium-forward' | 'forward' | 'back' | 'down';
+  shape: 'bottom' | 'medium-forward' | 'forward' | 'primary-medium-forward' | 'back' | 'down';
 }
 
 const ArrowIcons = ({ shape }: Props) => {
@@ -16,6 +17,8 @@ const ArrowIcons = ({ shape }: Props) => {
       return <MediumForwardArrowIcon />;
     case 'forward':
       return <ForwardkArrowIcon />;
+    case 'primary-medium-forward':
+      return <PrimaryMediumForwardArrowIcon />;
     case 'back':
       return <BackArrowIcon />;
     case 'down':

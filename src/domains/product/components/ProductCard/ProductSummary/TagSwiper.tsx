@@ -1,9 +1,8 @@
-import { IProductType } from '@/domains/product/types/productType';
 import { useEffect, useState } from 'react';
 import { transformTagToKr } from '@/domains/product/utils/transfromTag';
 
 interface TagSwiperProps {
-  tag: IProductType['tags'];
+  tag: string[];
 }
 
 const TagSwiper = ({ tag }: TagSwiperProps) => {

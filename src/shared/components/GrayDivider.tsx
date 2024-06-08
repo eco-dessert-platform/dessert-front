@@ -1,7 +1,9 @@
+import { twMerge } from 'tailwind-merge';
 import { GrayColorType } from '@/shared/types/color';
 
 interface GrayDividerProps {
   color?: GrayColorType;
+  className?: string;
 }
 
 const bgColor = {
@@ -17,8 +19,8 @@ const bgColor = {
   gray900: 'bg-gray-900'
 };
 
-const GrayDivider = ({ color = 'gray50' }: GrayDividerProps) => (
-  <hr className={`h-[1px] border-0 ${bgColor[color]}`} />
+const GrayDivider = ({ color = 'gray50', className }: GrayDividerProps) => (
+  <hr className={twMerge(`h-[1px] border-0 ${bgColor[color]}`, className)} />
 );
 
 export default GrayDivider;

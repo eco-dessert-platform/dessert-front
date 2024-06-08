@@ -11,6 +11,5 @@ export interface IProductType {
   price: number;
   isBundled: boolean;
   isWished: boolean;
-  tags: string[];
-  view: number;
+  tags?: string[];
 }

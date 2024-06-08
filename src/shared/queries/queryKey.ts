@@ -7,5 +7,7 @@ export const productQueryKey = {
 export const storeQueryKey = {
   all: ['store'],
   lists: () => [...storeQueryKey.all, 'list'],
-  list: (filter: string) => [...storeQueryKey.lists(), filter]
+  list: (filter: string) => [...storeQueryKey.lists(), filter],
+  details: () => [...storeQueryKey.all, 'detail'],
+  detail: (storeId: number) => [...storeQueryKey.details(), { storeId }]
 };

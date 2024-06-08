@@ -1,28 +1,50 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { useGetStoreAllProductsQuery } from '@/domains/store/queries/useGetStoreAllProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductCard from '@/domains/product/components/ProductCard';
+import SadBbangleBox from '@/shared/components/SadBbangleBox';
+import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 
 interface Props {
   storeId: number;
 }
 
-// infinite fetching 구현해야함
-
 const StoreAllProductsSection = ({ storeId }: Props) => {
-  const { data } = useGetStoreAllProductsQuery({ storeId });
+  const { data, isError, fetchNextPage, hasNextPage } = useGetStoreAllProductsQuery({ storeId });
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (!inView) return;
+    fetchNextPage();
+  }, [inView, fetchNextPage]);
+
+  if (isError) {
+    return (
+      <SadBbangleBox>
+        <p>오류가 발생했어요!</p>
+      </SadBbangleBox>
+    );
+  }
+  if (!data) return null;
 
   return (
     <PaddingWrapper>
-      <h5 className="text-gray-800 text-14 mb-[10px] font-semibold">전체상품</h5>
-      <div className="flex w-full flex-wrap m-auto gap-x-[4%] gap-y-4">
-        {data?.map((item) => (
-          <div key={item.boardId} className="w-[48%]">
+      <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">전체상품</h5>
+      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] pb-[36px]">
+        {data.map((item) => (
+          <div key={item.boardId}>
             <ProductCard product={item} />
           </div>
         ))}
       </div>
+      {hasNextPage && (
+        <div ref={ref} className="pb-[36px]">
+          <SkeletonProductCardList row={1} col={2} />
+        </div>
+      )}
     </PaddingWrapper>
   );
 };

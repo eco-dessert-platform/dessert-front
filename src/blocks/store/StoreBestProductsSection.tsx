@@ -11,12 +11,14 @@ interface Props {
 const StoreBestProductsSection = ({ storeId }: Props) => {
   const { data } = useGetStoreBestProductsQuery({ storeId });
 
+  if (!data) return null;
+
   return (
     <PaddingWrapper>
-      <h5 className="text-gray-800 text-14 mb-[10px] font-semibold">인기상품</h5>
-      <div className="flex w-full flex-wrap m-auto gap-x-[3%] gap-y-2">
+      <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">인기상품</h5>
+      <div className="grid grid-cols-3 gap-x-[10px]">
         {data?.map((item, i) => (
-          <div key={item.boardId} className="w-[31%]">
+          <div key={item.boardId}>
             <ProductCard product={item} popular ranking={Number(i + 1)} />
           </div>
         ))}

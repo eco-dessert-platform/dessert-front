@@ -7,7 +7,7 @@ import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query
 
 const MyReviewPage = async () => {
   const queryClient = new QueryClient();
-  await queryClient.fetchInfiniteQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: reviewQueryKey.list('mypage'),
     queryFn: ({ pageParam }) => reviewService.getMyReview(pageParam),
     initialPageParam: INITIAL_CURSOR

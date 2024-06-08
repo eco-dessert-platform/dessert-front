@@ -9,7 +9,7 @@ interface SearchStoresProps {
 
 const SearchStores = async ({ searchParams: { query: keyword = '' } }: SearchStoresProps) => {
   const queryClient = new QueryClient();
-  await queryClient.fetchInfiniteQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: [...storeQueryKey.list('search'), { keyword }],
     queryFn: async ({ pageParam }) => {
       const result = await searchService.getSearchStores({ keyword, pageParam });

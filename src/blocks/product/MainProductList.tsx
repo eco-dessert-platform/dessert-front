@@ -15,8 +15,7 @@ import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const MainProductList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.main));
-  const { data, isError, isLoading, fetchNextPage, hasNextPage } =
-    useGetAllProductsQuery(filterValue);
+  const { data, isError, fetchNextPage, hasNextPage } = useGetAllProductsQuery(filterValue);
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -24,9 +23,6 @@ const MainProductList = () => {
     fetchNextPage();
   }, [inView, fetchNextPage]);
 
-  if (isLoading) {
-    return <SkeletonProductCardList />;
-  }
   if (isError) {
     return (
       <SadBbangleBox>

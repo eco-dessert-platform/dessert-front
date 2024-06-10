@@ -1,49 +1,30 @@
-import { IAllProductsType } from '@/domains/product/types/allProductsType';
-import { IFilterType } from '@/domains/product/types/filterType';
-import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
-import { productQueryKey } from '@/shared/queries/queryKey';
-import { ResultResponse } from '@/shared/types/response';
-import fetchExtend from '@/shared/utils/api';
-import { throwApiError } from '@/shared/utils/error';
 import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
+import { productQueryKey } from '@/shared/queries/queryKey';
+import { Cursor } from '@/shared/types/response';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import { IProductType } from '@/domains/product/types/productType';
+import { IFilterType } from '@/domains/product/types/filterType';
+import productService from '@/domains/product/queries/service';
 
 export const useGetAllProductsQuery = (query: IFilterType) => {
-  const queryKey = productQueryKey.list('home');
+  const queryKey = [...productQueryKey.list('main'), { filter: query }];
 
-  const queryFn = async ({
-    pageParam
-  }: {
-    pageParam: { cursorId: number; cursorScore: number };
-  }) => {
-    const firstPage = pageParam.cursorId === -1;
-    const cursorIdQueryString = firstPage ? '' : `&targetId=${pageParam.cursorId}`;
-    const cursorScoreQueryString = `&targetScore=${pageParam.cursorScore}`;
-    const filterValueQueryString = transformFilterValueToQueryString(query);
-
-    const res = await fetchExtend.get(
-      `/boards?${filterValueQueryString}${cursorIdQueryString}${cursorScoreQueryString}`
-    );
-
-    const { success, result, code, message }: ResultResponse<IAllProductsType> = await res.json();
-
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
+  const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
+    const result = await productService.getAllProducts({ cursorId, filterValue: query });
     return result;
   };
 
-  const getNextPageParam: GetNextPageParamFunction<
-    { cursorId: number; cursorScore: number },
-    IAllProductsType
-  > = (lastPage) => {
+  const getNextPageParam: GetNextPageParamFunction<number, Cursor<Array<IProductType>>> = (
+    lastPage
+  ) => {
     if (!lastPage.hasNext) return undefined;
-    return { cursorId: lastPage.nextCursor, cursorScore: lastPage.cursorScore };
+    return lastPage.nextCursor;
   };
 
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: { cursorId: -1, cursorScore: 0 },
+    initialPageParam: INITIAL_CURSOR,
     getNextPageParam,
     refetchOnMount: false,
     refetchOnReconnect: false,
@@ -51,9 +32,7 @@ export const useGetAllProductsQuery = (query: IFilterType) => {
     staleTime: Infinity,
     select: ({ pages }) => {
       const products = pages.map((page) => page.content).flat();
-      const productCount = pages[0]?.boardCount || 0;
-      const storeCount = pages[0]?.storeCount || 0;
-      return { products, productCount, storeCount };
+      return { products };
     }
   });
 };

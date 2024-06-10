@@ -19,10 +19,10 @@ export const useGetStoreAllProductsQuery = ({ storeId }: Props) => {
 
   const initialPageParam = INITIAL_CURSOR;
 
-  const getNextPageParam: GetNextPageParamFunction<number, Cursor<Array<IProductType>>> = ({
-    hasNext,
-    nextCursor
-  }) => {
+  const getNextPageParam: GetNextPageParamFunction<
+    number,
+    Cursor<Array<Omit<IProductType, 'storeName'>>>
+  > = ({ hasNext, nextCursor }) => {
     const nextPageParam = hasNext ? nextCursor : undefined;
     return nextPageParam;
   };

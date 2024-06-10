@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
 import { useGetStoreAllProductsQuery } from '@/domains/store/queries/useGetStoreAllProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductCard from '@/domains/product/components/ProductCard';
@@ -13,7 +14,13 @@ interface Props {
 }
 
 const StoreAllProductsSection = ({ storeId }: Props) => {
-  const { data, isError, fetchNextPage, hasNextPage } = useGetStoreAllProductsQuery({ storeId });
+  const {
+    data: products,
+    isError,
+    fetchNextPage,
+    hasNextPage
+  } = useGetStoreAllProductsQuery({ storeId });
+  const { data: storeInfo } = useGetStoreInfoQuery({ storeId });
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -28,15 +35,15 @@ const StoreAllProductsSection = ({ storeId }: Props) => {
       </SadBbangleBox>
     );
   }
-  if (!data) return null;
+  if (!products || !storeInfo) return null;
 
   return (
     <PaddingWrapper>
       <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">전체상품</h5>
       <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] pb-[36px]">
-        {data.map((item) => (
-          <div key={item.boardId}>
-            <ProductCard product={item} />
+        {products.map((product) => (
+          <div key={product.boardId}>
+            <ProductCard product={{ ...product, storeName: storeInfo.storeName }} />
           </div>
         ))}
       </div>

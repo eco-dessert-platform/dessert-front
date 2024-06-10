@@ -47,7 +47,7 @@ class StoreService extends Service {
       storeId,
       boardId: ele.boardId,
       thumbnail: ele.boardProfile,
-      storeName: '스토어명',
+      // storeName: '스토어명',
       title: ele.boardTitle,
       price: ele.boardPrice,
       isWished: ele.isWished,
@@ -68,7 +68,7 @@ class StoreService extends Service {
       content: result.content.map((ele) => ({
         storeId,
         boardId: ele.boardId,
-        storeName: '스토어명',
+        // storeName: '스토어명',
         thumbnail: ele.boardThumbnail,
         title: ele.boardTitle,
         price: ele.boardPrice,

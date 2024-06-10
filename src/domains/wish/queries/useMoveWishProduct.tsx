@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
 import { revalidatePath } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';
@@ -10,7 +9,7 @@ import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 
 const useMoveWishProduct = () => {
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
   const { openModal, closeModal } = useModal();
 
   const mutationFn = async ({
@@ -31,23 +30,19 @@ const useMoveWishProduct = () => {
     revalidatePath(PATH.wishProductList);
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
     closeModal();
-    openToast(
-      <ToastPop>
-        <div>{folderName}에 추가했어요</div>
+    openToast({
+      message: `${folderName}에 추가했어요`,
+      action: (
         <button type="button" className="hover:underline" onClick={openFolderSelectModal}>
           편집
         </button>
-      </ToastPop>
-    );
+      )
+    });
   };
 
-  const onError = (error: Error) => {
+  const onError = ({ message }: Error) => {
     closeModal();
-    openToast(
-      <ToastPop>
-        <div>{error.message}</div>
-      </ToastPop>
-    );
+    openToast({ message });
   };
 
   return useMutation({

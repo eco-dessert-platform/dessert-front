@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { BbangleIcon } from '@/shared/components/icons';

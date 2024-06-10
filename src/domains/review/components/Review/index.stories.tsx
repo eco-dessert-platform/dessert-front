@@ -3,7 +3,6 @@ import Review from '.';
 
 const meta = {
   component: Review,
-  title: 'user/Review',
   args: {
     id: '1',
     nickname: '닉네임',

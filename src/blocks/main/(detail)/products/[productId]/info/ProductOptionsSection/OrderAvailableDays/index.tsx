@@ -5,16 +5,16 @@ import TypeOfDate from './TypeOfDate';
 import TypeOfWeek from './TypeOfWeek';
 
 interface DetailOrderAvailableDaysProps {
-  item: ProductType;
+  product: ProductType;
 }
 
-const OrderAvailableDays = ({ item }: DetailOrderAvailableDaysProps) => {
+const OrderAvailableDays = ({ product }: DetailOrderAvailableDaysProps) => {
   const renderContent = (type: string) => {
     switch (type) {
       case 'WEEK':
-        return <TypeOfWeek availableDays={item.orderAvailableWeek} />;
+        return <TypeOfWeek availableDays={product.orderAvailableWeek} />;
       case 'DATE':
-        return <TypeOfDate availableDays={item.orderAvailableDate} />;
+        return <TypeOfDate availableDays={product.orderAvailableDate} />;
       default:
         return null;
     }
@@ -24,7 +24,7 @@ const OrderAvailableDays = ({ item }: DetailOrderAvailableDaysProps) => {
     <div>
       <h2 className="text-gray-500 text-12 leading-150 font-semibold pb-0">주문 가능일</h2>
       <div className="flex justify-between items-center ">
-        <div className="flex gap-[4px]">{renderContent(item.orderType)}</div>
+        <div className="flex gap-[4px]">{renderContent(product.orderType)}</div>
         <button
           type="button"
           className="p-[6px] flex gap-[2px] border border-gray-200 rounded-[4px]"

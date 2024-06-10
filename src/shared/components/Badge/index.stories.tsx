@@ -3,7 +3,6 @@ import Badge from '.';
 
 const meta = {
   component: Badge,
-  title: 'common/Badge',
   args: { type: 'tag', children: 'badge' }
 } satisfies Meta<typeof Badge>;
 

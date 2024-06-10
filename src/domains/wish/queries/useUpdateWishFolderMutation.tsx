@@ -1,14 +1,13 @@
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
 import { revalidatePath } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';
 import fetchExtend from '@/shared/utils/api';
 import { useMutation } from '@tanstack/react-query';
 import { DefaultResponse } from '@/shared/types/response';
 import { throwApiError } from '@/shared/utils/error';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 const useUpdateWishFolderMutation = () => {
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
 
   const mutationFn = async ({ folderId, title }: { folderId: string; title: string }) => {
     const res = await fetchExtend.patch(`/wishLists/${folderId}`, {
@@ -20,11 +19,11 @@ const useUpdateWishFolderMutation = () => {
 
   const onSuccess = async () => {
     await revalidatePath(PATH.wishProductList);
-    openToast(<ToastPop>폴더 명이 수정되었어요.</ToastPop>);
+    openToast({ message: '폴더 명이 수정되었어요.' });
   };
 
   const onError = () => {
-    openToast(<ToastPop>폴더 명이 수정 중 에러가 발생했어요.</ToastPop>);
+    openToast({ message: '폴더 명이 수정 중 에러가 발생했어요.' });
   };
 
   return useMutation({

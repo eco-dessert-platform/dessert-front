@@ -6,20 +6,19 @@ import { uploadImageFilesState, uploadImageUrlsState } from '@/domains/review/at
 import { CameraIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
 import PreviewImage from '@/blocks/review/create/ImageUploadSection/PreviewImage';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 const ImageUploadSection = () => {
   const [imageFiles, setImageFiles] = useRecoilState(uploadImageFilesState);
   const [imageUrls, setImageUrls] = useRecoilState(uploadImageUrlsState);
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (!files) return;
     if (files.length > 5) {
-      openToast(<ToastPop>최대 5개까지 업로드할 수 있습니다</ToastPop>);
+      openToast({ message: '최대 5개까지 업로드할 수 있습니다' });
       return;
     }
 

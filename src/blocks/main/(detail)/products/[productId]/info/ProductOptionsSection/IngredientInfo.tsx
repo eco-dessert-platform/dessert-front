@@ -2,10 +2,10 @@ import { ProductType } from '@/domains/product/types/productDetailType';
 import Tag from '@/shared/components/Tag';
 
 interface Props {
-  item: ProductType;
+  product: ProductType;
 }
 
-const IngredientInfo = ({ item }: Props) => {
+const IngredientInfo = ({ product }: Props) => {
   const tagsArray = (detailData: ProductType) => {
     const tags = [];
     if (detailData.glutenFreeTag) tags.push('글루텐프리');
@@ -18,7 +18,7 @@ const IngredientInfo = ({ item }: Props) => {
 
   return (
     <div className="flex gap-[4px]">
-      {tagsArray(item).map((tag) => (
+      {tagsArray(product).map((tag) => (
         <Tag>{tag}</Tag>
       ))}
     </div>

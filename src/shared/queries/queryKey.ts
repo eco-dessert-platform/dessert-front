@@ -3,3 +3,9 @@ export const productQueryKey = {
   lists: () => [...productQueryKey.all, 'list'],
   list: (filter: string) => [...productQueryKey.lists(), filter]
 };
+
+export const storeQueryKey = {
+  all: ['store'],
+  lists: () => [...storeQueryKey.all, 'list'],
+  list: (filter: string) => [...storeQueryKey.lists(), filter]
+};

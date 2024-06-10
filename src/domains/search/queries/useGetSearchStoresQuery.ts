@@ -1,9 +1,9 @@
-import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
 import { IAllStoreType } from '@/domains/search/types';
 import QUERY_KEY from '@/shared/constants/queryKey';
-import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
+import fetchExtend from '@/shared/utils/api';
 import { throwApiError } from '@/shared/utils/error';
+import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 interface QueryHookProps {
   keyword: string;

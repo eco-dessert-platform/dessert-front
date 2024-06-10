@@ -5,17 +5,17 @@ import ImgNone from '@/domains/product/components/ProductImageSlide/ImgNone';
 
 interface ImgSliderProps {
   boardImages: string[];
-  setSwiperIndex: (_: number) => void;
+  onChange: (_: number) => void;
 }
 
-const ProductImageSlide = ({ boardImages, setSwiperIndex }: ImgSliderProps) => (
+const ProductImageSlide = ({ boardImages, onChange }: ImgSliderProps) => (
   <Swiper
     spaceBetween={10}
     slidesPerView={1}
     pagination={{ clickable: true }}
     scrollbar={{ el: '.swiper-scrollbar', draggable: true }}
     onActiveIndexChange={(swiperCore) => {
-      setSwiperIndex(swiperCore.activeIndex);
+      onChange(swiperCore.activeIndex);
     }}
   >
     {boardImages?.map((image) =>

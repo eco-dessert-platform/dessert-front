@@ -14,13 +14,13 @@ interface ProductImgProps {
   isBundled: boolean;
 }
 
-const ProductDetailImgs = ({ boardImages, isBundled }: ProductImgProps) => {
+const BoardImagesSection = ({ boardImages, isBundled }: ProductImgProps) => {
   const [swiperIndex, setSwiperIndex] = useState(0);
 
   return (
     <PaddingWrapper className="py-0">
       <div className="relative">
-        <ProductImageSlide boardImages={boardImages} setSwiperIndex={setSwiperIndex} />
+        <ProductImageSlide boardImages={boardImages} onChange={setSwiperIndex} />
         {isBundled && (
           <div className="absolute top-[10px] left-[10px] z-10 ">
             <BundleBadge />
@@ -36,4 +36,4 @@ const ProductDetailImgs = ({ boardImages, isBundled }: ProductImgProps) => {
   );
 };
 
-export default ProductDetailImgs;
+export default BoardImagesSection;

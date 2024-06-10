@@ -1,25 +1,35 @@
-import DetailContentItems from '@/blocks/product/DetailContentItems';
-import ProductDetailImgs from '@/blocks/product/DetailProductImgs';
-import getBoardDetail from '@/domains/product/queries/getBoardDetail';
-import getStoreInfo from '@/domains/product/queries/getStoreInfo';
-import DetailStoreInfo from '@/domains/store/components/DetailStoreInfo';
-
 // interface ProductDetailProps {
 //   params: { productId: string };
 // }
 
-const ProductDetail = async () => {
-  const boardData = await getBoardDetail();
-  const storeData = await getStoreInfo();
+import BoardDetailsSection from '@/blocks/main/(detail)/products/[productId]/info/BoardDetailSection';
+import BoardImagesSection from '@/blocks/main/(detail)/products/[productId]/info/BoardImagesSection';
+import ProductOptionsSetion from '@/blocks/main/(detail)/products/[productId]/info/ProductOptionsSection';
+import ReviewBadgeSection from '@/blocks/main/(detail)/products/[productId]/info/ReviewBadgeSection';
+import SimpleInfoWithStoreSection from '@/blocks/main/(detail)/products/[productId]/info/SimpleInfoWithStoreSection';
+import getBoardDetail from '@/domains/product/queries/getBoardDetail';
+import getProductDetail from '@/domains/product/queries/getProductDetail';
+
+const ProductDetailPage = async () => {
+  const [boardData, productData] = await Promise.all([getBoardDetail(), getProductDetail()]);
 
   return (
     <>
-      <ProductDetailImgs boardImages={boardData.boardImages} isBundled />
-      <DetailStoreInfo store={storeData} />
-      {/* <BreifExplanation boardData={products} /> */}
-      <DetailContentItems boardData={boardData} />
+      {/* 클라이언트 컴포넌트 */}
+      <BoardImagesSection
+        isBundled={productData.boardIsBundled}
+        boardImages={boardData.boardImages}
+      />
+      {/* 서버 컴포넌트 */}
+      <SimpleInfoWithStoreSection />
+      {/* 서버 컴포넌트 */}
+      <ReviewBadgeSection />
+      {/* 클라이언트 컴포넌트 */}
+      <ProductOptionsSetion productData={productData} />
+      {/* 서버 컴포넌트 */}
+      <BoardDetailsSection />
     </>
   );
 };
 
-export default ProductDetail;
+export default ProductDetailPage;

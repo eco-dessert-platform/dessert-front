@@ -1,12 +1,13 @@
 'use client';
 
-import { useRecoilState } from 'recoil';
 import { useParams } from 'next/navigation';
+import { useRecoilState } from 'recoil';
+
+import { useGetProductDetailQuery } from '@/domains/product/queries/useGetProductDetailQuery';
 import { starRatingState } from '@/domains/review/atoms';
+import StarRating from '@/domains/review/components/common/StarRating';
 import { RatingType } from '@/domains/review/types/starRating';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import StarRating from '@/domains/review/components/common/StarRating';
-import { useGetProductDetailQuery } from '@/domains/product/queries/useGetProductDetailQuery';
 
 const StarRatingSection = () => {
   const { productId } = useParams<{ productId: string }>();

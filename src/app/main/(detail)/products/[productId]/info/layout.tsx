@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
-import FixedPurchaseButtonSection from '@/blocks/product/FixedPurchaseButtonSection';
+import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
 import getBoardDetail from '@/domains/product/queries/getBoardDetail';
 import getStoreInfo from '@/domains/product/queries/getStoreInfo';
 import Header from '@/shared/components/Header';
@@ -12,9 +12,7 @@ interface DetailInfoLayoutProps {
 }
 
 const DetailInfoLayout = async ({ children }: DetailInfoLayoutProps) => {
-  // const data = await getProductDetail(productId);
-  const storeData = await getStoreInfo();
-  const boardData = await getBoardDetail();
+  const [storeData, boardData] = await Promise.all([getStoreInfo(), getBoardDetail()]);
 
   return (
     <>

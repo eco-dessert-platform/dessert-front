@@ -1,3 +1,8 @@
+/**
+ * @deprecated
+ * Api분할로 IProductDetailType이 아닌 IDetailProductType,INewStoreType,IBoardType 새로 추가되었으니 이거 사용해주세요
+ * */
+
 export interface IProductDetailType {
   store: {
     storeName: string;
@@ -96,7 +101,7 @@ export interface INewStoreType {
 export interface IBoardType {
   id: number;
   profile: string;
-  title: '비건 베이커리 로썸 비건빵';
+  title: string;
   price: number;
   purchaseUrl: string;
   deliveryFee: number;

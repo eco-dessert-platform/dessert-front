@@ -1,3 +1,8 @@
+/**
+ * @deprecated
+ * v1.0.0 에서 사용되던 컴포넌트인데 추후 사용가능성을 고려하여 삭제하지 않았습니다
+ * */
+
 'use client';
 
 import { useState } from 'react';

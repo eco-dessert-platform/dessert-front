@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import ImgNone from '@/domains/product/components/ProductImageSlide/ImgNone';
 
 interface ImgSliderProps {
-  boardImages: string[];
+  boardImages?: string[];
   onChange: (_: number) => void;
 }
 

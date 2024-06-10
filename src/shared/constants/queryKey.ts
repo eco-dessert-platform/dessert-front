@@ -10,7 +10,9 @@ const QUERY_KEY = {
   keyword: 'keyword',
   autoComplete: 'autoComplete',
   notification: 'notification',
-  productDetailStoreInfo: 'product detail store info'
+  productDetailStoreInfo: 'product detail store info',
+  boardDetail: 'board detail',
+  productDetail: 'product detail'
 };
 
 export default QUERY_KEY;

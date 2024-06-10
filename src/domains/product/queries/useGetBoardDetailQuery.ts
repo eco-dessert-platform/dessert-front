@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import productService from './service';
 
-const useGetStoreInfoQuery = () => {
-  const queryKey = [QUERY_KEY.productDetailStoreInfo];
-  const queryFn = productService.getStoreInfo;
+const useGetBoardDetailQuery = () => {
+  const queryKey = [QUERY_KEY.boardDetail];
+  const queryFn = () => productService.getBoardDetail();
 
   return useQuery({ queryKey, queryFn });
 };
 
-export default useGetStoreInfoQuery;
+export default useGetBoardDetailQuery;

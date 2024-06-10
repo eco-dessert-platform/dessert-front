@@ -23,7 +23,7 @@ const DetailStoreInfo = ({ storeData }: Props) => {
 
   return (
     <Link href={`/stores/${storeData.id}`} className="w-full">
-      <PaddingWrapper className="py-[12px] flex items-center justify-between">
+      <PaddingWrapper className="py-[10px] border-b border-gray-100 flex items-center justify-between">
         <div className="gap-[6px] items-center flex">
           <div className="overflow-hidden rounded-full">
             <Image src={storeData.profile} width={24} height={24} alt="설명" />

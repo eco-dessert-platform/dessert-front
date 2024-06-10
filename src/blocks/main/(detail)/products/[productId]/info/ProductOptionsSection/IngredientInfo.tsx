@@ -1,5 +1,5 @@
-import ProductTag from '@/domains/product/components/ProductTag';
 import { ProductType } from '@/domains/product/types/productDetailType';
+import Tag from '@/shared/components/Tag';
 
 interface Props {
   item: ProductType;
@@ -17,9 +17,9 @@ const IngredientInfo = ({ item }: Props) => {
   };
 
   return (
-    <div>
+    <div className="flex gap-[4px]">
       {tagsArray(item).map((tag) => (
-        <ProductTag tag={tag} />
+        <Tag>{tag}</Tag>
       ))}
     </div>
   );

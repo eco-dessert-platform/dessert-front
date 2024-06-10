@@ -1,7 +1,8 @@
 'use client';
 
 import DetailSectionWrapper from '@/domains/product/components/DetailSectionWrapper';
-import { IDetailProductType, ProductType } from '@/domains/product/types/productDetailType';
+import useGetProductDetailQuery from '@/domains/product/queries/useGetProductDetailQuery';
+import { ProductType } from '@/domains/product/types/productDetailType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import useToggle from '@/shared/hooks/useToggle';
 
@@ -10,7 +11,9 @@ import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
 import OrderAvailableDays from './OrderAvailableDays';
 
-const ProductOptionsSetion = ({ productData }: { productData: IDetailProductType }) => {
+const ProductOptionsSetion = () => {
+  const { data: productData } = useGetProductDetailQuery();
+
   const { isActive, toggle } = useToggle();
 
   const handleCategoryClick = () => {
@@ -19,7 +22,7 @@ const ProductOptionsSetion = ({ productData }: { productData: IDetailProductType
 
   return (
     <DetailSectionWrapper title="상품 옵션">
-      {productData.products.map((item: ProductType) => (
+      {productData?.products.map((item: ProductType) => (
         <>
           <CategoryOption onClick={handleCategoryClick} option={item} />
           {isActive && (

@@ -1,8 +1,8 @@
 import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { IStoreType } from '@/domains/store/types/store';
-import { storeQueryKey } from '@/domains/store/queries/queryKey';
 import { Cursor } from '@/shared/types/response';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import { storeQueryKey } from '@/shared/queries/queryKey';
 import wishService from './service';
 
 const useWishStoreListQuery = () => {

@@ -1,7 +1,7 @@
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Cursor } from '@/shared/types/response';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import { storeQueryKey } from '@/domains/store/queries/queryKey';
+import { storeQueryKey } from '@/shared/queries/queryKey';
 import { IStoreType } from '@/domains/store/types/store';
 import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';

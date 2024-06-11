@@ -13,9 +13,9 @@ interface FetchInstance {
 class Service {
   public fetchExtend: FetchInstance;
 
-  protected baseUrl: string;
+  private baseUrl: string;
 
-  protected headers: Record<string, string>;
+  private headers: Record<string, string>;
 
   constructor() {
     this.baseUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1`;
@@ -34,7 +34,7 @@ class Service {
     };
   }
 
-  protected async request(method: string, url: string, config?: RequestInit) {
+  private async request(method: string, url: string, config?: RequestInit) {
     const cookie = await getCookie('accessToken');
     const accessToken = cookie?.value;
     const bearerToken = `Bearer ${accessToken}`;
@@ -54,31 +54,31 @@ class Service {
     return res;
   }
 
-  protected get(url: string, init?: RequestInit) {
+  private get(url: string, init?: RequestInit) {
     return this.request('GET', url, init);
   }
 
-  protected post(url: string, init?: RequestInit) {
+  private post(url: string, init?: RequestInit) {
     return this.request('POST', url, init);
   }
 
-  protected put(url: string, init?: RequestInit) {
+  private put(url: string, init?: RequestInit) {
     return this.request('PUT', url, init);
   }
 
-  protected patch(url: string, init?: RequestInit) {
+  private patch(url: string, init?: RequestInit) {
     return this.request('PATCH', url, init);
   }
 
-  protected delete(url: string, init?: RequestInit) {
+  private delete(url: string, init?: RequestInit) {
     return this.request('DELETE', url, init);
   }
 
-  protected options(url: string, init?: RequestInit) {
+  private options(url: string, init?: RequestInit) {
     return this.request('OPTIONS', url, init);
   }
 
-  protected head(url: string, init?: RequestInit) {
+  private head(url: string, init?: RequestInit) {
     return this.request('HEAD', url, init);
   }
 }

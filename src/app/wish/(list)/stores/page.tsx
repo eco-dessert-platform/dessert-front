@@ -1,7 +1,7 @@
 import WishStroeList from '@/blocks/wish/(list)/stores/WishStoreList';
 import { storeQueryKey } from '@/domains/store/queries/queryKey';
 import wishService from '@/domains/wish/queries/service';
-import { INITIAL_CORSOR } from '@/shared/constants/corsor';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 const WishStoresPage = async () => {
@@ -9,7 +9,7 @@ const WishStoresPage = async () => {
   await queryClient.prefetchInfiniteQuery({
     queryKey: storeQueryKey.list('wish'),
     queryFn: ({ pageParam }) => wishService.getWishStoreList(pageParam),
-    initialPageParam: INITIAL_CORSOR
+    initialPageParam: INITIAL_CURSOR
   });
 
   return (

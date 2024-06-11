@@ -3,12 +3,12 @@ import { Cursor, DefaultResponse, ListResponse, ResultResponse } from '@/shared/
 import { IStoreType } from '@/domains/store/types/store';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { IProductType } from '@/domains/product/types/productType';
-import { INITIAL_CORSOR } from '@/shared/constants/corsor';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { WishFolderType } from '../types/wishFolder';
 
 class WishService extends Service {
   async getWishStoreList(cursorId: number) {
-    const isFirstPage = cursorId === INITIAL_CORSOR;
+    const isFirstPage = cursorId === INITIAL_CURSOR;
     const params = isFirstPage ? '' : `cursorId=${cursorId}`;
     const res = await this.fetchExtend.get(`/likes/stores?${params}`);
     const { result, success, code, message }: ResultResponse<Cursor<IStoreType>> = await res.json();
@@ -53,7 +53,7 @@ class WishService extends Service {
   }
 
   async getWishProductList({ folderId, cursorId }: { folderId: number; cursorId: number }) {
-    const isFirstPage = cursorId === INITIAL_CORSOR;
+    const isFirstPage = cursorId === INITIAL_CURSOR;
     const params = isFirstPage ? '' : `cursorId=${cursorId}`;
     const res = await this.fetchExtend.get(`/boards/folders/${folderId}?${params}`);
     const { result, code, message, success }: ResultResponse<Cursor<IProductType>> =

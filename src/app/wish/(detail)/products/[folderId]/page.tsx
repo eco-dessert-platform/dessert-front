@@ -2,7 +2,7 @@ import WishProductList from '@/blocks/wish/(detail)/products/[folderId]/WishProd
 import WishProductSortSelect from '@/domains/wish/components/WishProductSortSelect';
 import wishService from '@/domains/wish/queries/service';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import { INITIAL_CORSOR } from '@/shared/constants/corsor';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
@@ -19,7 +19,7 @@ const WishProductsDetail = async ({ params }: Props) => {
         folderId: Number(params.folderId),
         cursorId: pageParam
       }),
-    initialPageParam: INITIAL_CORSOR
+    initialPageParam: INITIAL_CURSOR
   });
 
   return (

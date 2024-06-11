@@ -2,7 +2,7 @@ import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-quer
 import { IStoreType } from '@/domains/store/types/store';
 import { storeQueryKey } from '@/domains/store/queries/queryKey';
 import { Cursor } from '@/shared/types/response';
-import { INITIAL_CORSOR } from '@/shared/constants/corsor';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import wishService from './service';
 
 const useWishStoreListQuery = () => {
@@ -16,7 +16,7 @@ const useWishStoreListQuery = () => {
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: INITIAL_CORSOR,
+    initialPageParam: INITIAL_CURSOR,
     getNextPageParam,
     select: ({ pages }) => pages.flatMap(({ content }) => content)
   });

@@ -5,11 +5,10 @@ import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';
 import userService from '@/domains/user/queries/service';
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 const useUpdatePreferenceMutation = () => {
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
   const { push } = useRouter();
 
   const mutationFn = async (preference: Array<PreferenceType>) => {
@@ -22,11 +21,11 @@ const useUpdatePreferenceMutation = () => {
 
   const onSuccess = () => {
     revalidateTag(preferenceQueryKey.all[0]);
-    openToast(<ToastPop>맞춤 추천이 수정됐으니, 추천 빵을 구경해봐요!</ToastPop>);
+    openToast({ message: '맞춤 추천이 수정됐으니, 추천 빵을 구경해봐요!' });
   };
 
-  const onError = (e: Error) => {
-    openToast(<ToastPop>{e.message}</ToastPop>);
+  const onError = ({ message }: Error) => {
+    openToast({ message });
   };
 
   return useMutation({ mutationFn, onSettled, onSuccess, onError });

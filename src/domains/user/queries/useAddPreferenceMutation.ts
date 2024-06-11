@@ -3,11 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 import { PreferenceType } from '@/domains/user/types/profile';
 import PATH from '@/shared/constants/path';
 import userService from '@/domains/user/queries/service';
-import useToast from '@/shared/hooks/useToast';
-import ToastPop from '@/shared/components/ToastPop';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 const useAddPreferenceMutation = () => {
-  const { openToast } = useToast();
+  const { openToast } = useToastNewVer();
   const { push } = useRouter();
 
   const mutationFn = async (preference: Array<PreferenceType>) => {
@@ -19,11 +18,11 @@ const useAddPreferenceMutation = () => {
   };
 
   const onSuccess = () => {
-    openToast(<ToastPop>맞춤 추천 받기가 완료됐으니, 추천 빵을 구경해봐요!</ToastPop>);
+    openToast({ message: '맞춤 추천 받기가 완료됐으니, 추천 빵을 구경해봐요!' });
   };
 
-  const onError = (e: Error) => {
-    openToast(<ToastPop>{e.message}</ToastPop>);
+  const onError = ({ message }: Error) => {
+    openToast({ message });
   };
 
   return useMutation({ mutationFn, onSettled, onSuccess, onError });

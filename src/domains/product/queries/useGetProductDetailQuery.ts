@@ -1,23 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
 import QUERY_KEY from '@/shared/constants/queryKey';
-import fetchExtend from '@/shared/utils/api';
-import { ResultResponse } from '@/shared/types/response';
-import { IProductDetailType } from '@/domains/product/types/productDetailType';
-import { throwApiError } from '@/shared/utils/error';
+import { useQuery } from '@tanstack/react-query';
 
-export const useGetProductDetailQuery = (productId: string) => {
-  const queryKey = [QUERY_KEY.product, QUERY_KEY.main, { productId }];
+import productService from './service';
 
-  const queryFn = async () => {
-    const res = await fetchExtend.get(`/boards/${productId}`);
-    const { result, success, message, code }: ResultResponse<IProductDetailType> = await res.json();
-
-    if (!success) {
-      throwApiError({ code, message });
-    }
-
-    return result;
-  };
+const useGetProductDetailQuery = () => {
+  const queryKey = [QUERY_KEY.productDetail];
+  const queryFn = () => productService.getProductDetail();
 
   return useQuery({ queryKey, queryFn });
 };
+
+export default useGetProductDetailQuery;

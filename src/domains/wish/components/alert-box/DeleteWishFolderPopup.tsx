@@ -7,7 +7,7 @@ import usePopup from '@/shared/hooks/usePopup';
 import useDeleteWishFolderMutation from '../../queries/useDeleteWishFolderMutation';
 
 interface DeleteWishFolderPopupProps {
-  folderId: string;
+  folderId: number;
   folderName: string;
 }
 

@@ -27,12 +27,12 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: String(product.boardId), folderId: selectedWishFolder });
+    addMutate({ productId: product.boardId, folderId: selectedWishFolder });
     e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
-    deleteMutate({ productId: String(product.boardId) });
+    deleteMutate({ productId: product.boardId });
     e.preventDefault();
   };
 

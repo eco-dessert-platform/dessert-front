@@ -1,5 +1,5 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import MainProductList from '@/blocks/product/MainProductList';
+import MainProductList from '@/blocks/main/(list)/MainProductList';
 import FilterSection from '@/domains/product/components/FilterSection';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import productService from '@/domains/product/queries/service';
@@ -7,7 +7,7 @@ import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
-const ProductList = async () => {
+const ProductListPage = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: [...productQueryKey.list('main'), { filter: INIT_FILTER_VALUE }],
@@ -31,4 +31,4 @@ const ProductList = async () => {
   );
 };
 
-export default ProductList;
+export default ProductListPage;

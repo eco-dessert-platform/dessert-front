@@ -12,11 +12,11 @@ const ProductSummary = ({ product }: ProductSummaryProps) => (
     <h3 className="mb-[2px] text-gray-800 overflow-hidden typo-body-12-regular text-ellipsis whitespace-nowrap ">
       {product.title}
     </h3>
-    <p className="typo-title-14-medium text-gray-900 leading-120 tracking-tight-4">
-      <span className="type-title-14-medium text-secondaryOrangeRed">10% </span>
+    <p className="typo-title-14-medium text-gray-900">
+      <span className="typo-title-14-medium text-secondaryOrangeRed">10% </span>
       {product.price}원
     </p>
-    <p className="mb-[4px] flex gap-[2px] items-center typo-title-14-medium text-gray-900 leading-120 tracking-tight-4">
+    <p className="mb-[4px] flex gap-[2px] items-center typo-title-14-medium text-gray-900 ">
       <StarIcon size="sm" color="yellow" />
       <span className="typo-body-11-semibold text-gray-800">4.5</span>
       <span className="typo-body-11-regular text-gray-500">(1000)</span>

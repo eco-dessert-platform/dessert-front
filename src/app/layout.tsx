@@ -29,7 +29,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
     <body className={pretendard.className}>
       <RootLayoutProvider>
         <SilentLogin />
-        <div className="shadow-lg sm:w-[600px] h-full m-auto overflow-x-hidden">
+        <div className="shadow-lg sm:w-[600px] h-full m-auto overflow-x-hidden scrollbar-hide">
           <main className="w-full min-h-[calc(100vh-70px)] relative">{children}</main>
           <Footer />
           <AlertContainer />

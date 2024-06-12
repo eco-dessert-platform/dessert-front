@@ -1,6 +1,6 @@
 const WEEK = ['월', '화', '수', '목', '금', '토', '일'];
 
-const TypeOfWeek = ({ availableDays }: { availableDays: any }) => {
+const TypeOfWeek = ({ availableDays }: { availableDays: Object }) => {
   const availableWeekList = Object.entries(availableDays)
     .filter(([, isAvailable]) => isAvailable)
     .map(([day]) => day);

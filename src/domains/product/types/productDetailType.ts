@@ -1,7 +1,7 @@
 /**
  * @deprecated
  * Api분할로 IProductDetailType이 아닌 IDetailProductType,INewStoreType,IBoardType 새로 추가되었으니 이거 사용해주세요
- * */
+ */
 
 export interface IProductDetailType {
   store: {

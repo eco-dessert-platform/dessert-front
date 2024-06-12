@@ -1,10 +1,10 @@
 import Header from '@/shared/components/Header';
-import ProductAndStoreTabWithCount from '@/domains/product/components/ProductAndStoreTabWithCount';
+import ProductAndStoreTab from '@/shared/components/ProductAndStoreTab';
 
 const MainListLayout = ({ children }: { children: React.ReactNode }) => (
   <>
     <Header title="전체보기" />
-    <ProductAndStoreTabWithCount />
+    <ProductAndStoreTab defaultPath="/main" />
     {children}
   </>
 );

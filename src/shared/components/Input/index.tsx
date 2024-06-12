@@ -1,5 +1,5 @@
 import { INPUT_STYLE } from '@/shared/constants/inputStyle';
-import { InputHTMLAttributes, ReactNode, useId } from 'react';
+import { ForwardedRef, InputHTMLAttributes, ReactNode, forwardRef, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,7 +7,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-const Input = ({ id, label, button, required, className, ...props }: Props) => {
+const Input = (
+  { id, label, button, required, className, ...props }: Props,
+  ref: ForwardedRef<HTMLInputElement>
+) => {
   const inputId = useId();
 
   return (
@@ -19,6 +22,7 @@ const Input = ({ id, label, button, required, className, ...props }: Props) => {
       )}
       <div className="relative w-full">
         <input
+          ref={ref}
           id={inputId}
           className={twMerge(INPUT_STYLE, button && 'pr-24', className)}
           required={required}
@@ -30,4 +34,4 @@ const Input = ({ id, label, button, required, className, ...props }: Props) => {
   );
 };
 
-export default Input;
+export default forwardRef(Input);

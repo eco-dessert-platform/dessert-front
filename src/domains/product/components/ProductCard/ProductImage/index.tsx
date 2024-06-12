@@ -3,15 +3,15 @@
 import { MouseEventHandler } from 'react';
 
 import Image from 'next/image';
+import { useRecoilValue } from 'recoil';
 
-import { IProductType } from '@/domains/product/types/productType';
 import { BundleBadge } from '@/domains/product/components/ProductCard/ProductImage/BundleBadge';
 import { RankingBadge } from '@/domains/product/components/ProductCard/ProductImage/RankingBadge';
+import { IProductType } from '@/domains/product/types/productType';
+import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
-import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
-import { useRecoilValue } from 'recoil';
 
 interface ProductImageProps {
   product: IProductType;
@@ -41,8 +41,8 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
       <Image
         src={product.thumbnail}
         alt="상품사진"
-        width={300}
-        height={300}
+        width={600}
+        height={600}
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}
         className="rounded-[6px] aspect-square"

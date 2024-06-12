@@ -32,7 +32,7 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
             <PaddingWrapper className="flex flex-col gap-4">
               <IngredientInfo product={product} />
               <OrderAvailableDays product={product} />
-              <NutrientInfo />
+              <NutrientInfo nutrient={product.nutrient} />
             </PaddingWrapper>
           )}
         </div>

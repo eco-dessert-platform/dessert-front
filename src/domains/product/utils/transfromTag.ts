@@ -98,3 +98,18 @@ export function transformDayTag(tag: string): string {
   }
   return tag;
 }
+
+export const nutirentEngToKr = (item: string) => {
+  switch (item) {
+    case 'sugars':
+      return '당류';
+    case 'protein':
+      return '단백질';
+    case 'carbohydrates':
+      return '탄수화물';
+    case 'fat':
+      return '지방';
+    default:
+      return '';
+  }
+};

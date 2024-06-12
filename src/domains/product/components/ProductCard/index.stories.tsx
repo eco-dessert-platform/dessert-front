@@ -26,7 +26,6 @@ const temple = {
   view: 123
 };
 
-// 스토리 템플릿을 만듭니다. `QueryClientProvider`로 감쌉니다.
 const Template: StoryFn<typeof ProductCard> = (args) => (
   <QueryClientProvider client={queryClient}>
     <div className="w-[40%]">
@@ -35,7 +34,6 @@ const Template: StoryFn<typeof ProductCard> = (args) => (
   </QueryClientProvider>
 );
 
-// 스토리를 정의하고, 기본 전달인자(args)를 설정합니다.
 export const ProductCardStory = Template.bind({});
 ProductCardStory.args = {
   product: temple

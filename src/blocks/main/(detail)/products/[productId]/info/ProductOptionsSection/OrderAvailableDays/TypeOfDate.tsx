@@ -1,13 +1,18 @@
 interface Props {
   availableDays: {
-    startDate: number;
-    endDate: number;
+    startDate: string;
+    endDate: string;
   };
 }
 
+const dateFormatter = (date: string) => {
+  const newDate = date.split('T')[0].replace(/-/g, '.');
+  return newDate;
+};
+
 const TypeOfDate = ({ availableDays: { startDate, endDate } }: Props) => (
   <div className="typo-title-14-regular text-gray-700">
-    {startDate} ~ {endDate}
+    {dateFormatter(startDate)} ~ {dateFormatter(endDate)}
   </div>
 );
 export default TypeOfDate;

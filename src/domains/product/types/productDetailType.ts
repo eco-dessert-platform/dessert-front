@@ -76,8 +76,8 @@ export interface ProductType {
   };
   orderType: string;
   orderAvailableDate: {
-    startDate: number;
-    endDate: number;
+    startDate: string;
+    endDate: string;
   };
   orderAvailableWeek: {
     mon: boolean;

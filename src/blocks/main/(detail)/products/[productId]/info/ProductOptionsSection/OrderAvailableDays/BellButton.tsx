@@ -15,7 +15,9 @@ const BellButton = ({ isNotified }: { isNotified: boolean }) => {
       <div className={isAnimating ? 'animate-bell' : ''}>
         <BellIcons shape={isAnimating ? 'on' : 'off'} />
       </div>
-      <span className="typo-body-12-medium text-gray-600">빵켓팅 알림 신청</span>
+      <span className="typo-body-12-medium text-gray-600">
+        빵켓팅 알림 {isAnimating ? '신청' : '해제'}
+      </span>
     </button>
   );
 };

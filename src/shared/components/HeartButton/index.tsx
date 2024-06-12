@@ -1,6 +1,7 @@
 'use client';
 
 import { ButtonHTMLAttributes } from 'react';
+
 import { HeartIcon } from '../icons';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

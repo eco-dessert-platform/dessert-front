@@ -80,15 +80,15 @@ export interface ProductType {
     endDate: string;
   };
   orderAvailableWeek: {
-    mon: boolean;
-    tue: boolean;
-    wed: boolean;
-    thu: boolean;
-    fri: boolean;
-    sat: boolean;
-    sun: boolean;
-    [key: string]: boolean;
+    monday: boolean;
+    tuesday: boolean;
+    wednesday: boolean;
+    thursday: boolean;
+    friday: boolean;
+    saturday: boolean;
+    sunday: boolean;
   };
+  isNotified: boolean;
 }
 
 export interface INewStoreType {

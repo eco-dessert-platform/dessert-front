@@ -12,8 +12,8 @@ import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
 import OrderAvailableDays from './OrderAvailableDays';
 
-const ProductOptionsSetion = () => {
-  const { data: productData } = useGetProductDetailQuery();
+const ProductOptionsSetion = ({ productId }: { productId: string }) => {
+  const { data: productData } = useGetProductDetailQuery(productId);
   const [activeOption, setActiveOption] = useState<{ [key: number]: boolean }>({});
 
   const handleCategoryClick = (id: number) => {

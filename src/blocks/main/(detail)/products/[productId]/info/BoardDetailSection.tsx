@@ -1,9 +1,13 @@
 import Image from 'next/image';
 
-import getBoardDetail from '@/domains/product/queries/getBoardDetail';
+import productService from '@/domains/product/queries/service';
 
-const BoardDetailsSection = async () => {
-  const { boardDetails } = await getBoardDetail();
+interface Props {
+  productId: string;
+}
+
+const BoardDetailsSection = async ({ productId }: Props) => {
+  const { boardDetails } = await productService.getBoardDetail(productId);
 
   return (
     <div className="w-full p-0 ">

@@ -11,10 +11,10 @@ import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQ
 import useGetProductDetailQuery from '@/domains/product/queries/useGetProductDetailQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
-const BoardImagesSection = () => {
+const BoardImagesSection = ({ productId }: { productId: string }) => {
   const [swiperIndex, setSwiperIndex] = useState(0);
-  const { data: boardDetail } = useGetBoardDetailQuery();
-  const { data: ProductDetail } = useGetProductDetailQuery();
+  const { data: boardDetail } = useGetBoardDetailQuery(productId);
+  const { data: ProductDetail } = useGetProductDetailQuery(productId);
 
   return (
     <PaddingWrapper className="py-0">

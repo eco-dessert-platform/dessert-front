@@ -1,5 +1,6 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 
 import useGetProductDetailQuery from '@/domains/product/queries/useGetProductDetailQuery';
@@ -9,8 +10,8 @@ import { RatingType } from '@/domains/review/types/starRating';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 const StarRatingSection = () => {
-  // const { productId } = useParams<{ productId: string }>();
-  const { data } = useGetProductDetailQuery();
+  const { productId } = useParams<{ productId: string }>();
+  const { data } = useGetProductDetailQuery(productId);
   const [rating, setRating] = useRecoilState(starRatingState);
 
   const handleRatingChange = (newRating: RatingType) => {

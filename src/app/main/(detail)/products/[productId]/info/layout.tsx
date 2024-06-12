@@ -1,18 +1,20 @@
 import React, { ReactNode } from 'react';
 
 import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
-import getBoardDetail from '@/domains/product/queries/getBoardDetail';
-import getStoreInfo from '@/domains/product/queries/getStoreInfo';
+import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
 import { ShareIcon } from '@/shared/components/icons';
 
 interface DetailInfoLayoutProps {
-  // params: { productId: string };
+  params: { productId: string };
   children: ReactNode;
 }
 
-const DetailInfoLayout = async ({ children }: DetailInfoLayoutProps) => {
-  const [storeData, boardData] = await Promise.all([getStoreInfo(), getBoardDetail()]);
+const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => {
+  const [storeData, boardData] = await Promise.all([
+    productService.getStoreInfo(params.productId),
+    productService.getBoardDetail(params.productId)
+  ]);
 
   return (
     <>

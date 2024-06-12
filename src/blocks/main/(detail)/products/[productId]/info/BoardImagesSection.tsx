@@ -25,7 +25,7 @@ const BoardImagesSection = ({ productId }: { productId: string }) => {
             <BundleBadge />
           </div>
         )}
-        {boardDetail?.boardImages && (
+        {boardDetail?.boardImages.length === 0 && (
           <div className="absolute bottom-[10px] right-[10px] w-[37px] h-[21px] px-2.5 py-0.5 bg-black bg-opacity-60 rounded-[50px] justify-center items-center gap-2.5 inline-flex z-10">
             <ImageCounter index={swiperIndex} total={boardDetail?.boardImages.length} />
           </div>

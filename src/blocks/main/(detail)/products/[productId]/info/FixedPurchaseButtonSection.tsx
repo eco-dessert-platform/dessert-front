@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { IBoardType } from '@/domains/product/types/productDetailType';
 import Button from '@/shared/components/Button';
 import HeartButton from '@/shared/components/HeartButton';
@@ -9,7 +11,10 @@ interface DetailFixedBtnSectionProps {
 }
 
 const FixedPurchaseButtonSection = ({ boardData }: DetailFixedBtnSectionProps) => {
-  const handleClickHeart = () => {};
+  const [isLiked, setIsLiked] = useState(boardData.isWished);
+  const handleClickHeart = () => {
+    setIsLiked((prev) => !prev);
+  };
 
   const gotoPurchaseUrl = () => {
     window.open(boardData.purchaseUrl, '_blank');
@@ -18,7 +23,7 @@ const FixedPurchaseButtonSection = ({ boardData }: DetailFixedBtnSectionProps) =
   return (
     <div className="bg-white z-[5000] max-w-[600px] w-full mx-auto p-[16px] fixed flex items-center gap-[10px] left-[0%] right-[0%] bottom-0 ">
       <div>
-        <HeartButton isActive={boardData.isWished} onClick={handleClickHeart} />
+        <HeartButton isActive={isLiked} onClick={handleClickHeart} />
       </div>
       <div className="flex-1">
         <Button onClick={gotoPurchaseUrl}>구매하러 가기</Button>

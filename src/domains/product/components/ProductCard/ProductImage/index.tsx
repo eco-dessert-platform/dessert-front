@@ -45,7 +45,7 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
         height={300}
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}
-        className="rounded-[6px] aspect-square"
+        className="rounded-[6px] aspect-square border-[1px] border-gray-100"
       />
       <div className="absolute bottom-[9px] right-[9px] h-[20px]">
         <HeartButton

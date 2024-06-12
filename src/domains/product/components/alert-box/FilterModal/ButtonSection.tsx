@@ -32,7 +32,7 @@ const ButtonSection = ({ filterFamilyId }: ButtonSectionProps) => {
     <PaddingWrapper className="flex gap-[10px] justify-center items-center">
       <Button
         variants="primary-white"
-        className="type-title-16-medium items-center justify-center flex gap-[2px]"
+        className="typo-title-16-medium items-center justify-center flex gap-[2px]"
         onClick={handleReset}
       >
         <ResetIcon />
@@ -40,7 +40,7 @@ const ButtonSection = ({ filterFamilyId }: ButtonSectionProps) => {
       </Button>
       <Button
         variants="primary-black"
-        className="type-title-16-medium text-white"
+        className="typo-title-16-medium text-white"
         onClick={handleConfirm}
       >
         적용

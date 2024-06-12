@@ -1,8 +1,8 @@
-import HomeLogoSection from '@/blocks/home/HomeLogoSection';
 import Banner from '@/blocks/home/Banner';
-import Search from '@/blocks/home/SearchSection';
-import CategorySection from '@/blocks/home/CategorySection';
 import BestProductsSection from '@/blocks/home/BestProductsSection';
+import CategorySection from '@/blocks/home/CategorySection';
+import HomeLogoSection from '@/blocks/home/HomeLogoSection';
+import Search from '@/blocks/home/SearchSection';
 
 const Home = () => (
   <>

@@ -14,7 +14,7 @@ const ProductDetailPage = ({ params }: Props) => (
 
     <SimpleInfoWithStoreSection productId={params.productId} />
 
-    <ReviewBadgeSection />
+    <ReviewBadgeSection productId={params.productId} />
 
     <ProductOptionsSetion productId={params.productId} />
 

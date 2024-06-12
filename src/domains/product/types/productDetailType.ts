@@ -110,3 +110,8 @@ export interface IBoardType {
   boardImages: string[];
   boardDetails: string[];
 }
+export interface IReviewBadgeType {
+  rating: string;
+  count: string;
+  badges: string[];
+}

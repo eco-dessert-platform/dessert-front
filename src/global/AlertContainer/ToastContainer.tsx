@@ -1,25 +1,16 @@
 'use client';
 
-import { toastStateNewVer } from '@/shared/atoms/alert';
+import { toastState } from '@/shared/atoms/alert';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import ToastPop from '@/shared/components/ToastPop';
 import { AnimatePresence } from 'framer-motion';
 import { useRecoilValue } from 'recoil';
 
 const ToastContainer = () => {
-  const toasts = useRecoilValue(toastStateNewVer);
+  const toast = useRecoilValue(toastState);
 
   return (
-    <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0 left-1/2 -translate-x-1/2  min-h-[70px] h-fit z-toast flex flex-col gap-[10px]">
-      <div className="relative w-full h-full">
-        <AnimatePresence>
-          {toasts.map(({ message, id, action }, index) => (
-            <ToastPop key={id} index={index} action={action}>
-              {message}
-            </ToastPop>
-          ))}
-        </AnimatePresence>
-      </div>
+    <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0  h-[70px] z-toast">
+      <AnimatePresence>{toast}</AnimatePresence>
     </PaddingWrapper>
   );
 };

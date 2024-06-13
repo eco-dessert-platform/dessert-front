@@ -34,16 +34,10 @@ const PhoneNumberInput = ({ defaultValue }: PhoneNumberInputProps) => {
     <div className="w-full">
       <Input
         type="tel"
-        label="휴대폰번호"
+        label="휴대폰 번호"
         placeholder="010-1234-5678"
         button={
-          <Button
-            disabled
-            type="button"
-            variants="input"
-            className="typo-body-12-medium"
-            onClick={() => {}}
-          >
+          <Button disabled type="button" variants="input" onClick={() => {}}>
             인증하기
           </Button>
         }

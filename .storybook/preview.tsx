@@ -1,8 +1,13 @@
 import '@/global/global.css';
+
 import React from 'react';
+
 import { RecoilRoot } from 'recoil';
+
 import type { Preview } from '@storybook/react';
-import AlertContainer from '../src/global/AlertContainer';
+
+import ModalContainer from '../src/global/ModalContainer';
+import ToastContainer from '../src/global/ToastContainer';
 
 const preview: Preview = {
   parameters: {
@@ -20,7 +25,8 @@ const preview: Preview = {
     (Story) => (
       <RecoilRoot>
         <Story />
-        <AlertContainer />
+        <ModalContainer />
+        <ToastContainer />
       </RecoilRoot>
     )
   ]

@@ -1,8 +1,11 @@
 import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
 import { IFilterType } from '@/domains/product/types/filterType';
 import { IAllProductsType } from '@/domains/search/types';
-import searchService from '@/domains/search/queries/service';
-import { productQueryKey } from '@/shared/queries/queryKey';
+import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
+import QUERY_KEY from '@/shared/constants/queryKey';
+import fetchExtend from '@/shared/utils/api';
+import { ResultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 
 interface QueryHookProps {
   keyword: string;
@@ -10,10 +13,29 @@ interface QueryHookProps {
 }
 
 export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookProps) => {
-  const queryKey = [...productQueryKey.list('search'), { filter: filterValue, keyword }];
+  const queryKey = [QUERY_KEY.product, QUERY_KEY.search, { filter: filterValue, keyword }];
 
   const queryFn = async ({ pageParam }: { pageParam: number }) => {
-    const result = await searchService.getSearchProducts({ keyword, filterValue, pageParam });
+    if (!keyword)
+      return {
+        content: [],
+        itemAllCount: 0,
+        limitItemCount: 0,
+        currentItemCount: 0,
+        pageNumber: 0,
+        existNextPage: false
+      };
+
+    const queryString = transformFilterValueToQueryString(filterValue);
+    const res = await fetchExtend.get(
+      `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
+    );
+    const { result, code, message, success }: ResultResponse<IAllProductsType> = await res.json();
+
+    if (!res.ok || !success) {
+      throwApiError({ code, message });
+    }
+
     return result;
   };
 

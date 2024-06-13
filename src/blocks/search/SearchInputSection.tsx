@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useAddRecentSearchKeywordMutation } from '@/domains/search/queries/useAddRecentSearchKeywordMutation';
-import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useDebounce } from '@/domains/search/hooks/useDebounce';
 import SearchInput from '@/domains/search/components/SearchInput';
 import AutoCompleteSearchContainer from '@/domains/search/components/AutoCompleteSearchContainer';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -58,7 +58,7 @@ const SearchInputSection = () => {
 
   return (
     <div className="relative">
-      <PaddingWrapper className={`flex items-center ${isSearchDetailPage ? 'py-[10px]' : 'py-0'} `}>
+      <PaddingWrapper className="flex items-center py-[10px]">
         {isSearchDetailPage && <BackButton />}
         <SearchInput
           value={text}

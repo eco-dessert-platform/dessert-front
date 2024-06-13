@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRecoilState } from 'recoil';
 import { filterValueState } from '@/domains/product/atoms';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
-import PATH from '@/shared/constants/path';
 
 interface CategoryButtonProps {
   name: string;
@@ -23,7 +22,7 @@ const CategoryButton = ({ name, icon, isCategoryTab }: CategoryButtonProps) => {
 
   return (
     <Link
-      href={PATH.mainProductList}
+      href="/products"
       className="flex flex-col justify-between items-center gap-1 py-[11px]"
       onClick={handleClickButton}
     >

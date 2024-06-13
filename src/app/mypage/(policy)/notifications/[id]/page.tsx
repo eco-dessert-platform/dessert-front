@@ -14,7 +14,7 @@ const NotificationDetail = async ({ params: { id } }: NotificationDetailProps) =
   return (
     <>
       <NotificationTitle title={notification.title} date={notification.createdAt} isBigTitle />
-      <PaddingWrapper className="text-gray-900 typo-title-14-regular">
+      <PaddingWrapper className="leading-150 text-14 text-gray-900 tracking-tight-2">
         {notification.content}
       </PaddingWrapper>
     </>

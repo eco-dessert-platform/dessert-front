@@ -1,37 +1,51 @@
 'use state';
 
-import { useEffect, useState, memo, useMemo } from 'react';
 import PriceInput from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceInputContainer/PriceInput';
-import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useTmpPrice } from '@/domains/product/hooks/useTmpPrice';
 
 interface PriceInputContainerProps {
   minPrice: number;
   maxPrice: number;
-  onPriceChange: (price: Array<number>) => void;
+  onMinPriceChange: (_newValue: number) => void;
+  onMaxPriceChange: (_newValue: number) => void;
 }
 
-const PriceInputContainer = ({ minPrice, maxPrice, onPriceChange }: PriceInputContainerProps) => {
-  const [tmpMinPrice, setTmpMinPrice] = useState(minPrice);
-  const [tmpMaxPrice, setTmpMaxPrice] = useState(maxPrice);
-  const tmpPrice = useMemo(() => [tmpMinPrice, tmpMaxPrice], [tmpMinPrice, tmpMaxPrice]);
-  const debouncedPrice = useDebounce({ value: tmpPrice, delay: 1000 });
+const PriceInputContainer = ({
+  minPrice,
+  maxPrice,
+  onMinPriceChange,
+  onMaxPriceChange
+}: PriceInputContainerProps) => {
+  const { tmpMinPrice, tmpMaxPrice, handleTmpMinPriceChange, handleTmpMaxPriceChange } =
+    useTmpPrice({ minPrice, maxPrice });
 
-  useEffect(() => {
-    setTmpMinPrice(minPrice);
-    setTmpMaxPrice(maxPrice);
-  }, [minPrice, maxPrice]);
+  const handleApplyButtonClick = () => {
+    if (tmpMinPrice > tmpMaxPrice) {
+      onMinPriceChange(tmpMaxPrice);
+      onMaxPriceChange(tmpMinPrice);
+      return;
+    }
 
-  useEffect(() => {
-    onPriceChange(debouncedPrice);
-  }, [onPriceChange, debouncedPrice]);
+    onMinPriceChange(tmpMinPrice);
+    onMaxPriceChange(tmpMaxPrice);
+  };
 
   return (
-    <div className="flex gap-[6px] items-center">
-      <PriceInput value={tmpMinPrice} onChange={setTmpMinPrice} />
-      ~
-      <PriceInput value={tmpMaxPrice} onChange={setTmpMaxPrice} />
+    <div className="flex gap-[10px] justify-between items-center">
+      <div className="flex flex-1 gap-[6px] items-center">
+        <PriceInput value={tmpMinPrice} onChange={handleTmpMinPriceChange} />
+        ~
+        <PriceInput value={tmpMaxPrice} onChange={handleTmpMaxPriceChange} />
+      </div>
+      <button
+        type="button"
+        className="font-semibold text-14 text-primaryOrangeRed leading-150 tracking-tight-2 cursor-pointer"
+        onClick={handleApplyButtonClick}
+      >
+        적용
+      </button>
     </div>
   );
 };
 
-export default memo(PriceInputContainer);
+export default PriceInputContainer;

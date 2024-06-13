@@ -1,47 +1,7 @@
 import type { StorybookConfig } from '@storybook/nextjs';
 
 const config: StorybookConfig = {
-  framework: '@storybook/nextjs',
-
-  stories: [
-    '../src/**/*.mdx',
-    {
-      directory: '../src/shared/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'COMMON'
-    },
-    {
-      directory: '../src/domains/user/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'USER'
-    },
-    {
-      directory: '../src/domains/product/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'product'
-    },
-    {
-      directory: '../src/domains/store/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'store'
-    },
-    {
-      directory: '../src/domains/review/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'review'
-    },
-    {
-      directory: '../src/domains/wish/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'wish'
-    },
-    {
-      directory: '../src/domains/search/components',
-      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-      titlePrefix: 'search'
-    }
-  ],
-
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
@@ -49,11 +9,14 @@ const config: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions'
   ],
-
-  docs: {},
-
+  framework: {
+    name: '@storybook/nextjs',
+    options: {}
+  },
+  docs: {
+    autodocs: 'tag'
+  },
   staticDirs: ['../public'],
-
   webpackFinal: async (config) => {
     config.module = config.module || {};
     config.module.rules = config.module.rules || [];
@@ -69,10 +32,6 @@ const config: StorybookConfig = {
     });
 
     return config;
-  },
-
-  typescript: {
-    reactDocgen: 'react-docgen-typescript'
   }
 };
 export default config;

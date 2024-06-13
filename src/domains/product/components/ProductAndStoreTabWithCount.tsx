@@ -13,11 +13,7 @@ const ProductAndStoreTabWithCount = () => {
 
   return (
     <Suspense>
-      <ProductAndStoreTab
-        defaultPath="/main"
-        productCount={data?.productCount}
-        storeCount={data?.storeCount}
-      />
+      <ProductAndStoreTab productCount={data?.productCount} storeCount={data?.storeCount} />
     </Suspense>
   );
 };

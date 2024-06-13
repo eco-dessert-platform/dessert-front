@@ -3,32 +3,44 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import ImgNone from '@/domains/product/components/ProductImageSlide/ImgNone';
 
-interface ImgSliderProps {
-  boardImages?: string[];
-  onChange: (_: number) => void;
+interface ImageTypes {
+  id: number;
+  url: string;
 }
 
-const ProductImageSlide = ({ boardImages, onChange }: ImgSliderProps) => (
+interface ImgSliderProps {
+  boardImages: ImageTypes[];
+  setSwiperIndex: (_: number) => void;
+}
+
+const ProductImageSlide = ({ boardImages, setSwiperIndex }: ImgSliderProps) => (
   <Swiper
     spaceBetween={10}
     slidesPerView={1}
     pagination={{ clickable: true }}
     scrollbar={{ el: '.swiper-scrollbar', draggable: true }}
     onActiveIndexChange={(swiperCore) => {
-      onChange(swiperCore.activeIndex);
+      setSwiperIndex(swiperCore.activeIndex);
     }}
   >
     {boardImages?.map((image) =>
-      image ? (
-        <SwiperSlide key={image}>
+      image.id ? (
+        <SwiperSlide key={image.id}>
           <div className="w-full pb-[100%]">
-            <Image src={image} alt="img" layout="fill" objectFit="cover" className="rounded-xl" />
+            <Image
+              src={image.url}
+              alt="img"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-xl"
+            />
           </div>
         </SwiperSlide>
       ) : (
-        <ImgNone key={image} />
+        <ImgNone key={image.id} />
       )
     )}
   </Swiper>
 );
+
 export default ProductImageSlide;

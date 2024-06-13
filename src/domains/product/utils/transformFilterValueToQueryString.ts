@@ -6,7 +6,7 @@ import {
 } from '@/domains/product/utils/transfromTag';
 
 export const transformFilterValueToQueryString = (query: IFilterType) => {
-  const { category, tags, price, sort, showProductsAvailableOrder } = query;
+  const { category, tags, sort, showProductsAvailableOrder } = query;
   const categoryQuery = category && transformCategoryToEng(category);
   const tagsEng = tags?.map((tag) => transformTagToEng(tag));
   const tagsQuery = tagsEng?.reduce(
@@ -16,18 +16,15 @@ export const transformFilterValueToQueryString = (query: IFilterType) => {
     }),
     {}
   );
-  const minPriceQuery = String(Math.min(...price));
-  const maxPriceQuery = String(Math.max(...price));
   const sortQuery = transformSortToEng(sort);
-  const orderAvailableTodayQuery = String(showProductsAvailableOrder);
 
   const queryObject = {
     category: categoryQuery || '',
     ...tagsQuery,
-    minPrice: minPriceQuery,
-    maxPrice: maxPriceQuery,
+    minPrice: String(query.price.minPrice),
+    maxPrice: String(query.price.maxPrice),
     sort: sortQuery,
-    orderAvailableToday: orderAvailableTodayQuery
+    orderAvailableToday: String(showProductsAvailableOrder)
   };
 
   return new URLSearchParams(queryObject).toString();

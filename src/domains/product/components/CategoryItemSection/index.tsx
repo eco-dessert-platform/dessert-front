@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 
 import useToggle from '@/shared/hooks/useToggle';
 
-import PATH from '@/shared/constants/path';
 import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
 
@@ -25,7 +24,7 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
   const handleCategoryClick = () => {
     toggle();
     if (subCategories.length === 0) {
-      router.push(PATH.mainProductList);
+      router.push('/products');
     }
   };
   return (

@@ -9,7 +9,6 @@ module.exports = {
         popup: 1000,
         modal: 1000,
         footer: 4999,
-        bottomButton: 5000,
         backdrop: 9999
       },
 
@@ -28,8 +27,7 @@ module.exports = {
           900: '#212121'
         },
         redGray: {
-          30: '#F8F8F8',
-          50: '#F8F8F8'
+          30: '#F8F8F8'
         },
         blueGray: {
           30: '#F4F7F9',
@@ -39,7 +37,10 @@ module.exports = {
         primaryOrangeRed: '#F04C28',
         subColorPink: '#FEEDEA',
         secondaryPink: '#FDF1EE',
-        secondaryOrangeRed: '#ED5F5F'
+        secondaryOrangeRed: '#ED5F5F',
+        redGray: {
+          30: '#F8F8F8'
+        }
       },
 
       // fontSize, lineHeight,letterSpacing 삭제 예정
@@ -84,12 +85,6 @@ module.exports = {
       const typoUtilities = {
         '.typo-heading-20-semibold': {
           'font-size': '20px',
-          'font-weight': 600,
-          'line-height': '150%',
-          'letter-spacing': '-0.02em'
-        },
-        '.typo-heading-18-semibold': {
-          'font-size': '18px',
           'font-weight': 600,
           'line-height': '150%',
           'letter-spacing': '-0.02em'

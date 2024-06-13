@@ -44,8 +44,7 @@ const PriceInput = ({ value, onChange }: PriceInputProps) => {
         value={`${value.toLocaleString()}`}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        onFocus={(e) => e.target.select()}
-        className={`p-0 border-none rounded-none text-right ${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}
+        className={`p-0 border-none text-right ${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}
       />
       <span className={`${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}>원</span>
     </div>

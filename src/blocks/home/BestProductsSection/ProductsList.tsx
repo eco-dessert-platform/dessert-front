@@ -1,14 +1,14 @@
 import { ResultResponse } from '@/shared/types/response';
 import { IProductListType, IProductType } from '@/domains/product/types/productType';
 import ProductCard from '@/domains/product/components/ProductCard';
+import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
 import fetchExtend from '@/shared/utils/api';
 import { throwApiError } from '@/shared/utils/error';
-import { productQueryKey } from '@/shared/queries/queryKey';
 
 const getBestProducts = async () => {
   const res = await fetchExtend.get('/boards', {
     next: {
-      tags: productQueryKey.list('home')
+      tags: [REAVALIDATE_TAG.product]
     }
   });
   const { result, success, message, code }: ResultResponse<IProductListType> = await res.json();

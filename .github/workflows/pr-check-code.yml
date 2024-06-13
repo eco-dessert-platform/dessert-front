@@ -16,8 +16,8 @@ jobs:
 
       - name: Set Yarn Version & install
         run: |
-          corepack enable && corepack prepare yarn@4.1.1
-          yarn install --immutable
+          yarn set version 4.1.1
+          yarn install
 
       - name: Check lint
         run: yarn run lint-staged

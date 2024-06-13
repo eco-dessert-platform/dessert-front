@@ -46,8 +46,7 @@ module.exports = {
       { hostname: 'firebasestorage.googleapis.com' },
       { hostname: 'k.kakaocdn.net' },
       { hostname: 't1.kakaocdn.net' },
-      { hostname: 'bbangree-oven.cdn.ntruss.com' },
-      { hostname: 'smartstore.naver.com' }
+      { hostname: 'bbangree-oven.cdn.ntruss.com' }
     ]
   },
 

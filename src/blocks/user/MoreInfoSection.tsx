@@ -34,7 +34,7 @@ const INFOS = [
 
 const LOGGEDIN_INFOS = [
   { href: PATH.notification, icon: <BellIcon />, content: '공지사항' },
-  { href: PATH.myReview, icon: <WriteIcon />, content: '내가 작성한 리뷰' },
+  { href: '#', icon: <WriteIcon />, content: '내가 작성한 리뷰' },
   { href: '#', icon: <ThumbsUpIcon />, content: '빵겟팅/재입고 알림 관리' },
   { href: '#', icon: <SettingIcon />, content: '상품 추천하기' },
   { href: '#', icon: <InquiryIcon />, content: '문의하기' }
@@ -43,7 +43,7 @@ const LOGGEDIN_INFOS = [
 const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (
   <PaddingWrapper className="flex items-center gap-[8px] border-solid border-b-[1px] border-gray-100">
     {icon}
-    <p className="typo-title-14-medium">{content}</p>
+    <p className="text-[14px] font-medium">{content}</p>
   </PaddingWrapper>
 );
 

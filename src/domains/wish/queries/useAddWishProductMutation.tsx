@@ -1,73 +1,48 @@
-import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
-import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import useModal from '@/shared/hooks/useModal';
-import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { isLoggedinState } from '@/shared/atoms/login';
-import PATH from '@/shared/constants/path';
-import { productQueryKey } from '@/shared/queries/queryKey';
-import { IProductType } from '@/domains/product/types/productType';
-import { Cursor } from '@/shared/types/response';
-import wishService from './service';
+import useToast from '@/shared/hooks/useToast';
+import fetchExtend from '@/shared/utils/api';
+import ToastPop from '@/shared/components/ToastPop';
+import { revalidateTag } from '@/shared/actions/revalidate';
+import { REAVALIDATE_TAG } from '@/shared/constants/revalidateTags';
+import { DefaultResponse } from '@/shared/types/response';
+import { throwApiError } from '@/shared/utils/error';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
-import { wishQueryKey } from './queryKey';
-import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 
 const useAddWishProductMutation = () => {
-  const { openToast } = useToastNewVer();
+  const { openToast } = useToast();
   const { openModal } = useModal();
-  const isLoggedIn = useRecoilValue(isLoggedinState);
-  const queryClient = useQueryClient();
 
-  const mutationFn = async ({ productId, folderId }: { productId: number; folderId: number }) => {
-    if (!isLoggedIn) throw new Error(ERROR_MESSAGE.requiredLogin);
-    await wishService.addWishProduct({ productId, folderId });
-    return { productId };
+  const mutationFn = async ({ productId, folderId }: { productId: string; folderId: string }) => {
+    const res = await fetchExtend.post(`/boards/${productId}/wish`, {
+      body: JSON.stringify({ folderId })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throwApiError({ code, message });
   };
 
-  const onMutate = ({ productId }: { productId: number }) => {
-    queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
-      { queryKey: productQueryKey.all },
-      (oldData) =>
-        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
-    );
-  };
-
-  const onSuccess = ({ productId }: { productId: number }) => {
-    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
-
-    const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
-    openToast({
-      message: '💖 찜한 상품에 추가했어요',
-      action: (
+  const onSuccess = async () => {
+    const openFolderSelectModal = () => openModal(<WishFolderSelectModal />);
+    await revalidateTag(REAVALIDATE_TAG.product);
+    openToast(
+      <ToastPop>
+        <div>💖 찜한 상품에 추가했어요</div>
         <button type="button" className="hover:underline" onClick={openFolderSelectModal}>
           편집
         </button>
-      )
-    });
+      </ToastPop>
+    );
   };
 
-  const onError = ({ message }: Error) => {
-    switch (message) {
-      case ERROR_MESSAGE.requiredLogin:
-        openToast({
-          message: ERROR_MESSAGE.requiredLogin,
-          action: (
-            <Link className="hover:underline" href={PATH.login}>
-              로그인
-            </Link>
-          )
-        });
-        break;
-
-      default:
-        openToast({ message });
-        break;
-    }
+  const onError = (error: Error) => {
+    openToast(
+      <ToastPop>
+        <div>{error.message}</div>
+      </ToastPop>
+    );
   };
 
-  return useMutation({ mutationFn, onSuccess, onError, onMutate });
+  return useMutation({ mutationFn, onSuccess, onError });
 };
 
 export default useAddWishProductMutation;

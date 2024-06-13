@@ -1,8 +1,8 @@
 import PopularKeyword from '@/domains/search/components/PopularKeyword';
-import searchService from '@/domains/search/queries/service';
+import { getPopularKeywords } from '@/domains/search/queries/getPopularKeywords';
 
 const PopularKeywordSection = async () => {
-  const popularKeywords = await searchService.getPopularKeywords();
+  const popularKeywords = await getPopularKeywords();
 
   return (
     <div className="flex flex-col gap-[16px]">

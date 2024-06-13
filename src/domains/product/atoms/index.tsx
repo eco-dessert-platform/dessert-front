@@ -7,7 +7,6 @@ import {
   FilterFamilyIDType
 } from '@/domains/product/types/filterType';
 import { LIMIT_MIN_PRICE, LIMIT_MAX_PRICE } from '@/domains/product/constants/priceLimit';
-import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 
 export const categoryTempState = atomFamily<ICategoryType, FilterFamilyIDType>({
   key: 'category',
@@ -21,12 +20,21 @@ export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({
 
 export const priceTempState = atomFamily<IPriceType, FilterFamilyIDType>({
   key: 'price',
-  default: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE]
+  default: {
+    minPrice: LIMIT_MIN_PRICE,
+    maxPrice: LIMIT_MAX_PRICE
+  }
 });
 
 export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({
   key: 'filterValueState',
-  default: INIT_FILTER_VALUE
+  default: {
+    category: undefined,
+    tags: undefined,
+    price: { minPrice: LIMIT_MIN_PRICE, maxPrice: LIMIT_MAX_PRICE },
+    sort: '추천순',
+    showProductsAvailableOrder: false
+  }
 });
 
 export const filterValueTempState = selectorFamily<IFilterType, FilterFamilyIDType>({

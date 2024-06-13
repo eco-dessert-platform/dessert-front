@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ProductAndStoreTab from '@/shared/components/ProductAndStoreTab';
+import ProductAndStoreTabWithCount from '@/domains/search/components/ProductAndStoreTabWithCount';
 
 interface SearchResultLayoutProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface SearchResultLayoutProps {
 const SearchResultLayout = ({ children }: SearchResultLayoutProps) => (
   <>
     <Suspense>
-      <ProductAndStoreTab defaultPath="/search" />
+      <ProductAndStoreTabWithCount />
     </Suspense>
     {children}
   </>

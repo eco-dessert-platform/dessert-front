@@ -37,7 +37,7 @@ const Footer = () => {
       title: '전체',
       defaultIcon: <CategoryIcon />,
       activeIcon: <CategoryRedIcon />,
-      href: PATH.mainCategory
+      href: PATH.category
     },
     {
       title: '찜',
@@ -54,14 +54,13 @@ const Footer = () => {
   ];
 
   return (
-    <div className="z-footer h-[70px] flex justify-between items-center sticky bottom-0 w-full bg-white border-t border-gray-100">
+    <div className="z-footer sm:w-[600px] sm:left-1/2 sm:translate-x-[-50%] py-[13px] flex justify-between fixed left-0 bottom-0 w-full bg-white border-t border-gray-100">
       {menu.map((item) => {
         const isHomePage = pathname === '/';
         const isHomeLink = item.href === '/';
 
-        const isMainPage = pathname.startsWith('/main');
-        const isMainCategoryLink = item.href === PATH.mainCategory;
-
+        const isStorePage = pathname === '/stores';
+        const isProductLink = item.href === '/products';
         const isWishStorePage = pathname.startsWith('/wishlist');
         const isWishProductLink = item.href === '/wishlist/list/products';
 
@@ -69,7 +68,7 @@ const Footer = () => {
         if (!isHomePage && isHomeLink) {
           isActive = false;
         }
-        if (isMainPage && isMainCategoryLink) {
+        if (isStorePage && isProductLink) {
           isActive = true;
         }
         if (isWishStorePage && isWishProductLink) {
@@ -84,7 +83,7 @@ const Footer = () => {
           >
             {isActive ? item.activeIcon : item.defaultIcon}
             <span
-              className={`${isActive ? 'text-primaryOrangeRed typo-body-12-semibold' : 'text-gray-500 typo-body-12-regular'}`}
+              className={`text-12 leading-150 tracking-tight-2 ${isActive ? 'text-primaryOrangeRed font-semibold' : 'text-gray-500 font-normal'}`}
             >
               {item.title}
             </span>

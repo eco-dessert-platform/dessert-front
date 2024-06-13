@@ -10,8 +10,6 @@ import { RankingBadge } from '@/domains/product/components/ProductCard/ProductIm
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
-import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
-import { useRecoilValue } from 'recoil';
 
 interface ProductImageProps {
   product: IProductType;
@@ -19,20 +17,20 @@ interface ProductImageProps {
   ranking?: number;
 }
 const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
+  const DEFAULT_FOLDER_ID = '0';
   const BLUR_DATA_URL =
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==';
-  const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: product.boardId, folderId: selectedWishFolder });
+    addMutate({ productId: String(product.boardId), folderId: DEFAULT_FOLDER_ID });
     e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
-    deleteMutate({ productId: product.boardId });
+    deleteMutate({ productId: String(product.boardId) });
     e.preventDefault();
   };
 

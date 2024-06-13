@@ -1,35 +1,17 @@
-import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
+import searchService from '@/domains/search/queries/service';
 import { IAllStoreType } from '@/domains/search/types';
-import QUERY_KEY from '@/shared/constants/queryKey';
-import fetchExtend from '@/shared/utils/api';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { storeQueryKey } from '@/shared/queries/queryKey';
+import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 interface QueryHookProps {
   keyword: string;
 }
 
 export const useGetSearchStoresQuery = ({ keyword }: QueryHookProps) => {
-  const queryKey = [QUERY_KEY.store, QUERY_KEY.search, { keyword }];
+  const queryKey = [...storeQueryKey.list('search'), { keyword }];
 
   const queryFn = async ({ pageParam }: { pageParam: number }) => {
-    if (!keyword)
-      return {
-        content: [],
-        itemAllCount: 0,
-        limitItemCount: 0,
-        currentItemCount: 0,
-        pageNumber: 0,
-        existNextPage: false
-      };
-
-    const res = await fetchExtend.get(`/search/stores?keyword=${keyword}&page=${pageParam}`);
-    const { result, code, message, success }: ResultResponse<IAllStoreType> = await res.json();
-
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
-
+    const result = await searchService.getSearchStores({ keyword, pageParam });
     return result;
   };
 

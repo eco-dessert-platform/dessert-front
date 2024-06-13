@@ -1,17 +1,14 @@
-import getWishList from '@/domains/wish/queries/getWishFolderList';
+'use client';
+
 import WishFolder from '@/domains/wish/components/WishFolder';
-import SadBbangleBox from '@/shared/components/SadBbangleBox';
+import useWishFolderListQuery from '@/domains/wish/queries/useWishFolderListQuery';
 
-const WishFolderGrid = async () => {
-  const wishList = await getWishList();
-
-  if (!wishList || wishList.length === 0) {
-    return <SadBbangleBox>찜한 상품이 없어요!</SadBbangleBox>;
-  }
+const WishFolderGrid = () => {
+  const { data: wishList } = useWishFolderListQuery();
 
   return (
     <div className="grid gap-[16px] grid-cols-2">
-      {wishList.map(({ folderId, title, count, productImages }) => (
+      {wishList?.map(({ folderId, title, count, productImages }) => (
         <WishFolder
           key={folderId}
           id={folderId}

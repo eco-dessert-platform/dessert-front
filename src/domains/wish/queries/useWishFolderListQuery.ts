@@ -1,11 +1,14 @@
-import QUERY_KEY from '@/shared/constants/queryKey';
 import { useQuery } from '@tanstack/react-query';
-import getWishFolderList from './getWishFolderList';
+import wishService from './service';
+import { wishQueryKey } from './queryKey';
 
-const useWishFolderListQueryQuery = () => {
-  const queryKey = [QUERY_KEY.wishFolder];
+const useWishFolderListQuery = () =>
+  useQuery({
+    queryKey: wishQueryKey.folders(),
+    queryFn: async () => {
+      const folderList = await wishService.getWishFolderList();
+      return folderList;
+    }
+  });
 
-  return useQuery({ queryKey, queryFn: getWishFolderList });
-};
-
-export default useWishFolderListQueryQuery;
+export default useWishFolderListQuery;

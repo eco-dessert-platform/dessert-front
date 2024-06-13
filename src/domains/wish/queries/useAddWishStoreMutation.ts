@@ -1,30 +1,41 @@
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import fetchExtend from '@/shared/utils/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import QUERY_KEY from '@/shared/constants/queryKey';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Cursor } from '@/shared/types/response';
+import { IStoreType } from '@/domains/store/types/store';
+import { storeQueryKey } from '@/shared/queries/queryKey';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
+import wishService from './service';
 
 const useAddWishStoreMutation = () => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
-  const mutationFn = async ({ storeId }: { storeId: string }) => {
-    const res = await fetchExtend.post(`/likes/store/${storeId}`);
-    const { success, code, message }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
+  const mutationFn = async ({ storeId }: { storeId: number }) => {
+    await wishService.addWishStore({ storeId });
   };
 
-  const onSuccess = async () => {
-    queryClient.invalidateQueries({ queryKey: [QUERY_KEY.store] });
-    openToast({ message: '💖 찜한 스토어에 추가했어요' });
+  const onMutate = ({ storeId }: { storeId: number }) => {
+    queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
+      { queryKey: storeQueryKey.lists() },
+      (oldData) =>
+        updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: true })
+    );
+  };
+
+  const onSuccess = () => {
+    openToast({ message: '💖 찜한 상품에 추가했어요' });
   };
 
   const onError = ({ message }: Error) => {
     openToast({ message });
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({
+    mutationFn,
+    onSuccess,
+    onError,
+    onMutate
+  });
 };
 
 export default useAddWishStoreMutation;

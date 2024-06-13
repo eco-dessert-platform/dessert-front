@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
+
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { categoryTempState, filterValueState } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { filterValueState, categoryTempState } from '@/domains/product/atoms';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
-import Radio from '@/shared/components/Radio';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import Radio from '@/shared/components/Radio';
 
 interface CategorySectionProps {
   filterFamilyId: FilterFamilyIDType;
@@ -24,7 +26,7 @@ const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
 
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
-      <div className="text-14 font-semibold leading-150 tracking-tight-2">카테고리</div>
+      <div className="typo-title-14-semibold text-gray-700">카테고리</div>
       <div className="flex gap-[10px] flex-wrap">
         {FILTER_VALUES.categories.map((item) => {
           const isSelected = selectedCategory === item;
@@ -36,7 +38,7 @@ const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
               onChange={() => handleClick(item)}
             >
               <div
-                className={`text-gray-900 text-14 leading-150 tracking-tight-2 ${isSelected ? 'font-semibold' : 'font-normal'}`}
+                className={`text-gray-800 typo-title-14-regular ${isSelected && 'typo-title-14-semibold text-primaryOrangeRed'}`}
               >
                 {item}
               </div>

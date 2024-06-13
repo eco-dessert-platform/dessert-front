@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -5,6 +7,7 @@ import useAddWishStoreMutation from '@/domains/wish/queries/useAddWishStoreMutat
 import useDeleteWishStoreMutation from '@/domains/wish/queries/useDeleteWishStoreMutation';
 import { BbangleIcon } from '@/shared/components/icons';
 import HeartButton from '@/shared/components/HeartButton';
+import { useState } from 'react';
 
 interface WishStroeProps {
   id: number;
@@ -15,15 +18,18 @@ interface WishStroeProps {
 }
 
 const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
+  const [isWishedLocal, setIsWishedLocal] = useState(isWished);
   const { mutate: addMutate } = useAddWishStoreMutation();
   const { mutate: deleteMutate } = useDeleteWishStoreMutation();
 
   const like = () => {
-    addMutate({ storeId: String(id) });
+    setIsWishedLocal(true);
+    addMutate({ storeId: id });
   };
 
   const hate = () => {
-    deleteMutate({ storeId: String(id) });
+    setIsWishedLocal(false);
+    deleteMutate({ storeId: id });
   };
 
   return (
@@ -41,7 +47,7 @@ const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
           <Link href={`/main/stores/${id}`} className="typo-title-14-semibold">
             {title}
           </Link>
-          <HeartButton isActive={isWished} onClick={isWished ? hate : like} />
+          <HeartButton isActive={isWishedLocal} onClick={isWishedLocal ? hate : like} />
         </div>
         <p className="text-gray-600 truncate typo-body-12-regular">{desc}</p>
       </div>

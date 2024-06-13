@@ -1,10 +1,13 @@
 'use client';
 
 import { ReactNode } from 'react';
-import useModal from '@/shared/hooks/useModal';
+
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
+
 import { CloseIcon } from '@/shared/components/icons';
+import useModal from '@/shared/hooks/useModal';
+
 import PaddingWrapper from '../PaddingWrapper';
 
 interface UpModalProps {
@@ -34,7 +37,7 @@ const Modal = ({ title, children, className }: UpModalProps) => {
       <PaddingWrapper className="flex items-center py-[10px]">
         <h4 className="flex-1 text-center typo-title-16-medium">{title}</h4>
         <button type="button" aria-label="close" onClick={closeModal} className="cursor-pointer">
-          <CloseIcon shape="black" />
+          <CloseIcon shape="no-bg" />
         </button>
       </PaddingWrapper>
       {children}

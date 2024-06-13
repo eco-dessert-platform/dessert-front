@@ -16,7 +16,7 @@
     "test:ui": "vitest --ui",
     "test:no-watch": "vitest run",
     "coverage": "vitest run --coverage",
-    "chromatic": "bash scripts/chromatic_publish.sh"
+    "chromatic": "bash ./scripts/chromatic_publish.sh"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

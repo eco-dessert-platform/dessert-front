@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import DetailSectionWrapper from '@/domains/product/components/DetailSectionWrapper';
 import useGetProductDetailQuery from '@/domains/product/queries/useGetProductDetailQuery';
-import { ProductType } from '@/domains/product/types/productDetailType';
+import { ProductsType } from '@/domains/product/types/productDetailType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 import CategoryOption from './CategoryOption';
@@ -25,7 +25,7 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
 
   return (
     <DetailSectionWrapper title="상품 옵션">
-      {productData?.products.map((product: ProductType) => (
+      {productData?.products.map((product: ProductsType) => (
         <div key={product.id}>
           <CategoryOption onClick={() => handleCategoryClick(product.id)} option={product} />
           {activeOption[product.id] && (

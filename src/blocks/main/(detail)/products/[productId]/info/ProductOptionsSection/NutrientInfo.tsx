@@ -1,8 +1,8 @@
-import { ProductType } from '@/domains/product/types/productDetailType';
+import { ProductsType } from '@/domains/product/types/productDetailType';
 import { nutirentEngToKr } from '@/domains/product/utils/transfromTag';
 
 interface Props {
-  nutrient: ProductType['nutrient'];
+  nutrient: ProductsType['nutrient'];
 }
 
 const NutrientInfo = ({ nutrient }: Props) => (

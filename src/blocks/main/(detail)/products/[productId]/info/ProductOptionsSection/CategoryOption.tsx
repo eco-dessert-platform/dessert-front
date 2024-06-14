@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ProductType } from '@/domains/product/types/productDetailType';
+import { ProductsType } from '@/domains/product/types/productDetailType';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface Props {
-  option: ProductType;
+  option: ProductsType;
   onClick: () => void;
 }
 

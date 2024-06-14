@@ -1,12 +1,12 @@
-import { ProductType } from '@/domains/product/types/productDetailType';
+import { ProductsType } from '@/domains/product/types/productDetailType';
 import Tag from '@/shared/components/Tag';
 
 interface Props {
-  product: ProductType;
+  product: ProductsType;
 }
 
 const IngredientInfo = ({ product }: Props) => {
-  const tagsArray = (detailData: ProductType) => {
+  const tagsArray = (detailData: ProductsType) => {
     const tags = [];
     if (detailData.glutenFreeTag) tags.push('글루텐프리');
     if (detailData.highProteinTag) tags.push('고단백');

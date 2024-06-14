@@ -1,10 +1,10 @@
-import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
+import productService from '@/domains/product/queries/service';
+import { IFilterType } from '@/domains/product/types/filterType';
+import { IProductType } from '@/domains/product/types/productType';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { Cursor } from '@/shared/types/response';
-import { INITIAL_CURSOR } from '@/shared/constants/cursor';
-import { IProductType } from '@/domains/product/types/productType';
-import { IFilterType } from '@/domains/product/types/filterType';
-import productService from '@/domains/product/queries/service';
+import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 export const useGetAllProductsQuery = (query: IFilterType) => {
   const queryKey = [...productQueryKey.list('main'), { filter: query }];

@@ -6,7 +6,7 @@ interface Props {
 }
 
 const dateFormatter = (date: string) => {
-  const newDate = date.split('T')[0].replace(/-/g, '.');
+  const newDate = new Date(date).toLocaleDateString('ko-KR');
   return newDate;
 };
 

@@ -21,7 +21,7 @@ const ShowMoreProductBtn = ({ data }: DetailBoardInfoProps) => {
           clickMore ? 'overflow-y-visible ' : 'overflow-y-hidden h-[271px]'
         }`}
       >
-        {data.board.products.length > 2 && (
+        {data.products.length > 2 && (
           <MoreButton
             isMore={clickMore}
             onClick={() => {

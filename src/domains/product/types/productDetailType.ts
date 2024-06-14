@@ -1,44 +1,3 @@
-/**
- * @deprecated
- * Api분할로 IProductDetailType이 아닌 IDetailProductType,INewStoreType,IBoardType 새로 추가되었으니 이거 사용해주세요
- */
-
-export interface IProductDetailType {
-  store: {
-    storeName: string;
-    storeId: number;
-    profile: string;
-    isWished: boolean;
-  };
-  board: {
-    boardId: number;
-    thumbnail: string;
-    images: [
-      {
-        id: number;
-        url: string;
-      }
-    ];
-    title: string;
-    price: number;
-    orderAvailableDays: {
-      mon: boolean;
-      tue: boolean;
-      wed: boolean;
-      thu: boolean;
-      fri: boolean;
-      sat: boolean;
-      sun: boolean;
-      [key: string]: boolean;
-    };
-    purchaseUrl: string;
-    isWished: boolean;
-    isBundled: boolean;
-    detail: IDetailImageType[];
-    products: IProductType[];
-  };
-}
-
 export interface IProductType {
   id: number;
   title: string;
@@ -46,19 +5,13 @@ export interface IProductType {
   tags: string[];
 }
 
-export interface IDetailImageType {
-  id: number;
-  imgIndex: number;
-  url: string;
-}
-
 // 새로운 버전
-export interface IDetailProductType {
-  boardIsBundled: true;
-  products: ProductType[];
+export interface IProductDetailType {
+  boardIsBundled: boolean;
+  products: ProductsType[];
 }
 
-export interface ProductType {
+export interface ProductsType {
   id: number;
   title: string;
   glutenFreeTag: boolean;
@@ -98,7 +51,7 @@ export interface INewStoreType {
   isWished: boolean;
 }
 
-export interface IBoardType {
+export interface IBoardDetailType {
   id: number;
   profile: string;
   title: string;

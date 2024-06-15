@@ -5,17 +5,18 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductsList from './ProductsList';
 
 const BestProductsSection = () => (
-  <PaddingWrapper className="pb-[36px]">
-    <div className="flex justify-between items-end py-[10px]">
-      <div className="text-gray-500 typo-heading-20-semibold">Best</div>
-      <Link href="/products" className="text-gray-400 typo-body-12-medium">
-        전체보기
+  <section className="pb-[36px]">
+    <PaddingWrapper className="flex justify-between">
+      <div className="text-gray-900 typo-heading-18-semibold">인기상품</div>
+      <Link href="/main/products" className="text-gray-600 typo-body-11-semibold">
+        더보기
       </Link>
-    </div>
+    </PaddingWrapper>
+
     <Suspense fallback={<SkeletonProductCardList />}>
       <ProductsList />
     </Suspense>
-  </PaddingWrapper>
+  </section>
 );
 
 export default BestProductsSection;

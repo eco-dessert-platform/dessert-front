@@ -1,6 +1,7 @@
 import { useRecoilState } from 'recoil';
-import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
+
 import { tagsTempState } from '@/domains/product/atoms';
+import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -38,7 +39,7 @@ const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
 
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
-      <div className="text-14 font-semibold leading-150 tracking-tight-2">성분</div>
+      <div className="typo-title-14-semibold text-gray-700">성분</div>
       <div className="flex gap-[10px] flex-wrap">
         {FILTER_VALUES.tags.map((tag) => {
           const isSelected = !!selectedTags?.includes(tag);
@@ -51,7 +52,7 @@ const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
               onChange={() => handleClick(tag)}
             >
               <span
-                className={`text-gray-800 text-14 leading-150 tracking-tight-2 ${isSelected ? 'font-semibold' : 'font-normal'}`}
+                className={`text-gray-800 typo-title-14-regular ${isSelected && 'typo-title-14-semibold text-primaryOrangeRed'}`}
               >
                 {tag}
               </span>

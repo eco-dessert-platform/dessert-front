@@ -1,17 +1,16 @@
+import { IFilterType } from '@/domains/product/types/filterType';
+import { IProductType } from '@/domains/product/types/productType';
+import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import Service from '@/shared/queries/service';
 import { Cursor, ResultResponse } from '@/shared/types/response';
-
-import { IFilterType } from '../types/filterType';
 import {
   IBoardDetailType,
   INewStoreType,
   IProductDetailType,
   IReviewBadgeType
 } from '../types/productDetailType';
-import { IProductType } from '../types/productType';
-import { transformFilterValueToQueryString } from '../utils/transformFilterValueToQueryString';
 
 class ProductService extends Service {
   async getAllProducts({ cursorId, filterValue }: { cursorId: number; filterValue: IFilterType }) {

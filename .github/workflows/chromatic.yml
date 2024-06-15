@@ -2,26 +2,44 @@
 name: 'Chromatic Deployment'
 
 on:
-  push:
-    branches: ['master']
+  pull_request:
+    branches: ['master', 'develop']
 
 jobs:
-  deploy:
+  chromatic-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+
       - name: 환경 변수를 설정합니다.
         run: echo "CHROMATIC_PROJECT_TOKEN=$CHROMATIC_PROJECT_TOKEN" >> .env
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
-      - name: 최신 버전을 다운로드 받습니다.
-        uses: actions/checkout@v4.1.1
+      - name: Set Yarn Version & install
+        run: |
+          corepack enable && corepack prepare yarn@4.1.1
+          yarn install --immutable
 
-      - name: package 설치
-        run: yarn
-
-      - name: 크로마틱에 배포합니다.
-        uses: chromaui/action@v1
+      - name: Publish Chromatic
+        id: chromatic
+        uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: '📖 storybook: ${{ steps.chromatic.outputs.storybookUrl }}'

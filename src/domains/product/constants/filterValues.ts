@@ -1,4 +1,4 @@
-import { LIMIT_MIN_PRICE, LIMIT_MAX_PRICE } from '@/domains/product/constants/priceLimit';
+import { LIMIT_MAX_PRICE, LIMIT_MIN_PRICE } from '@/domains/product/constants/priceLimit';
 
 export const FILTER_VALUES = {
   categories: ['전체', '빵', '쿠키', '케이크', '타르트', '잼/청', '요거트', '기타'],
@@ -11,5 +11,5 @@ export const INIT_FILTER_VALUE = {
   tags: undefined,
   price: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE],
   sort: '추천순',
-  showProductsAvailableOrder: false
+  orderAvailableToday: false
 };

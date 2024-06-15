@@ -5,6 +5,7 @@ import useWishFolderListQuery from '@/domains/wish/queries/useWishFolderListQuer
 import Header from '@/shared/components/Header';
 import ProductAndStoreTab from '@/shared/components/ProductAndStoreTab';
 import PATH from '@/shared/constants/path';
+import { Suspense } from 'react';
 
 const WishHeader = () => {
   const pathname = usePathname();
@@ -22,7 +23,9 @@ const WishHeader = () => {
   return (
     <>
       <Header title="찜" />
-      <ProductAndStoreTab defaultPath={PATH.wish} />
+      <Suspense>
+        <ProductAndStoreTab defaultPath={PATH.wish} />
+      </Suspense>
     </>
   );
 };

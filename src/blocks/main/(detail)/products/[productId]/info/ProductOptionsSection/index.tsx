@@ -3,8 +3,8 @@
 import { useState } from 'react';
 
 import DetailSectionWrapper from '@/domains/product/components/DetailSectionWrapper';
-import useGetProductOptionQuery from '@/domains/product/queries/useGetProductDetailQuery';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
+import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 import CategoryOption from './CategoryOption';

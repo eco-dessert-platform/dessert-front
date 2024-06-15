@@ -37,7 +37,8 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
           highProteinTag,
           sugarFreeTag,
           veganTag,
-          ketogenicTag
+          ketogenicTag,
+          isNotified
         }: ProductOptionType) => (
           <div key={id}>
             <CategoryOption title={title} onClick={() => handleCategoryClick(id)} />
@@ -54,7 +55,7 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
                   orderType={orderType}
                   orderAvailableWeek={orderAvailableWeek}
                   orderAvailableDate={orderAvailableDate}
-                  isNotified={false}
+                  isNotified={isNotified}
                 />
                 <NutrientInfo nutrient={nutrient} />
               </PaddingWrapper>

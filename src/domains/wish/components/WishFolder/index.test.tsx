@@ -8,7 +8,7 @@ describe('<WishFolder/> 테스트', () => {
   test('폴더 명과 찜 개수가 노출된다.', () => {
     render(
       <RootLayoutProvider>
-        <WishFolder id="0" name="폴더" count={10} />
+        <WishFolder id={0} name="폴더" count={10} />
       </RootLayoutProvider>
     );
 
@@ -22,7 +22,7 @@ describe('<WishFolder/> 테스트', () => {
   test('폴더 상세 페이지로 이동하는 href 속성을 가진다.', () => {
     render(
       <RootLayoutProvider>
-        <WishFolder id="0" name="폴더" count={10} />
+        <WishFolder id={0} name="폴더" count={10} />
       </RootLayoutProvider>
     );
 

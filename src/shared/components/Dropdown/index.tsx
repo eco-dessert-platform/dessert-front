@@ -37,7 +37,7 @@ const Dropdown = ({ children, className }: Props) => {
       <div aria-hidden="true" role="button" ref={triggerRef} className="w-full" onClick={toggle}>
         {dropdownTrigger}
       </div>
-      {isOpen && <div className="absolute left-1/2 -translate-x-1/2">{dropdownContent}</div>}
+      {isOpen && dropdownContent}
     </div>
   );
 };

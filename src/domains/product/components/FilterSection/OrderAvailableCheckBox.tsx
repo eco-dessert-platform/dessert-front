@@ -1,6 +1,7 @@
 'use client';
 
 import { useRecoilState } from 'recoil';
+
 import { filterValueState } from '@/domains/product/atoms';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
@@ -11,10 +12,10 @@ interface OrderAvailableCheckBoxProps {
 
 const OrderAvailableCheckBox = ({ filterFamilyId }: OrderAvailableCheckBoxProps) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
-  const isChecked = filterValue.showProductsAvailableOrder;
+  const isChecked = filterValue.orderAvailableToday;
 
   const handleCheckChange = () => {
-    setFilterValue({ ...filterValue, showProductsAvailableOrder: !isChecked });
+    setFilterValue({ ...filterValue, orderAvailableToday: !isChecked });
   };
 
   return (

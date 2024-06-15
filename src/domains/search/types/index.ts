@@ -19,11 +19,18 @@ export interface IAllStoreType {
   existNextPage: boolean; // 다음 페이지 유무
 }
 
-type KeywordType = {
+export type SearchKeywordsType = Array<{
   keyword: string;
-};
-export type SearchKeywordsType = Array<KeywordType>;
+}>;
 
-export interface SearchResultType {
+export interface RecentSearchKeywordsResultType {
   content: SearchKeywordsType;
+}
+
+export interface PopularKeywordsResultType {
+  content: Array<string>;
+}
+
+export interface AutoCompleteResultType {
+  content: Array<string>;
 }

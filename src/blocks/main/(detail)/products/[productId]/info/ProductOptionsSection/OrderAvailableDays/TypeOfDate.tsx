@@ -5,14 +5,14 @@ interface Props {
   };
 }
 
-const dateFormatter = (date: string) => {
-  const newDate = new Date(date).toLocaleDateString('ko-KR');
-  return newDate;
-};
+const TypeOfDate = ({ availableDays: { startDate, endDate } }: Props) => {
+  const formatedStartDate = new Date(startDate).toLocaleDateString('ko-KR');
+  const formatedEndDate = new Date(endDate).toLocaleDateString('ko-KR');
 
-const TypeOfDate = ({ availableDays: { startDate, endDate } }: Props) => (
-  <div className="typo-title-14-regular text-gray-700">
-    {dateFormatter(startDate)} ~ {dateFormatter(endDate)}
-  </div>
-);
+  return (
+    <div className="typo-title-14-regular text-gray-700">
+      {formatedStartDate} ~ {formatedEndDate}
+    </div>
+  );
+};
 export default TypeOfDate;

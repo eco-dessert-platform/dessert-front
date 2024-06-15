@@ -12,7 +12,7 @@ const ProductSummary = ({ product }: ProductSummaryProps) => (
       {product.title}
     </h3>
     <p className="mb-[4px] typo-title-14-medium text-gray-900 leading-120 tracking-tight-4">
-      {product.price}원
+      {product.price.toLocaleString()}원
     </p>
     {product.tags && <TagSwiper tag={product.tags} />}
   </div>

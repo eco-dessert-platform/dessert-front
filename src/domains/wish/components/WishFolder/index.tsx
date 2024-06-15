@@ -11,9 +11,10 @@ import DeleteWishFolderPopup from '../alert-box/DeleteWishFolderPopup';
 import { isWishFolderEditingState } from '../../atoms/wishFolder';
 import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
 import FolderThumbnail from '../common/FolderThumbnail';
+import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
 
 interface WishFolderProps {
-  id: string;
+  id: number;
   thumbnailList?: string[];
   name: string;
   count: number;
@@ -23,6 +24,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   const isEditing = useRecoilValue(isWishFolderEditingState);
   const { openPopup } = usePopup();
   const { openModal } = useModal();
+  const { mutate: updateWishFolderTitle } = useUpdateWishFolderMutation();
 
   const deleteFolder: MouseEventHandler<HTMLButtonElement> = (e) => {
     openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
@@ -30,7 +32,13 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   };
 
   const updateFolderName: MouseEventHandler<HTMLButtonElement> = () => {
-    openModal(<UpdateWishFolderModal folderId={id} />);
+    openModal(
+      <UpdateWishFolderModal
+        onValidSubmit={({ title }) => {
+          updateWishFolderTitle({ title, folderId: id });
+        }}
+      />
+    );
   };
 
   return (

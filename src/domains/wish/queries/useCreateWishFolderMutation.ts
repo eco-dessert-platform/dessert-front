@@ -1,24 +1,16 @@
-import { revalidatePath } from '@/shared/actions/revalidate';
-import PATH from '@/shared/constants/path';
-import fetchExtend from '@/shared/utils/api';
-import { useMutation } from '@tanstack/react-query';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import wishService from './service';
+import { wishQueryKey } from './queryKey';
 
 const useCreateWishFolderMutation = () => {
   const { openToast } = useToastNewVer();
+  const queryClient = useQueryClient();
 
-  const mutationFn = async (title: string) => {
-    const res = await fetchExtend.post('/wishLists', {
-      body: JSON.stringify({ title })
-    });
-    const { success, code, message }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
-  };
+  const mutationFn = (title: string) => wishService.createWishFolder(title);
 
-  const onSuccess = async () => {
-    await revalidatePath(PATH.wishProductList);
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
     openToast({ message: '찜 폴더가 추가되었습니다.' });
   };
 

@@ -17,9 +17,13 @@ const PATH = {
   serviceTerm: '/mypage/service-terms',
   privacyPolicy: '/mypage/privacy-policy',
   marketing: '/mypage/marketing',
+
   login: '/mypage/login',
   mypage: '/mypage',
-  myReview: '/mypage/review'
+  myReview: '/mypage/review',
+
+  preferenceCreate: '/mypage/preference/create',
+  preferenceUpdate: '/mypage/preference/upate'
 };
 
 export default PATH;

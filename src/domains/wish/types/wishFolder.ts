@@ -1,12 +1,15 @@
 import { IProductType } from '@/domains/product/types/productType';
 
 export interface WishFolderType {
-  folderId: string;
+  folderId: number;
   title: string;
   count: number;
   productImages: string[];
 }
 
+/**
+ * @deprecated
+ */
 export interface WishProductsDetail {
   content: IProductType[];
   pageable: {

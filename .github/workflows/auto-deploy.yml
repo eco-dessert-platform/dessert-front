@@ -27,6 +27,7 @@ jobs:
           echo "NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI" >> .env
           
           echo "NEXT_PUBLIC_FLARELANE_PROJECT_ID=$NEXT_PUBLIC_FLARELANE_PROJECT_ID" >> .env
+          echo "NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID" >> .env
 
         
         env:
@@ -38,6 +39,7 @@ jobs:
           NEXT_PUBLIC_KAKAO_AUTH_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_KAKAO_AUTH_CLIENT_ID }}
           NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_KAKAO_AUTH_REDIRECT_URI }}
           NEXT_PUBLIC_FLARELANE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FLARELANE_PROJECT_ID }}
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
           
       - name: 도커 이미지를 생성하고 도커 허브에 업로드합니다.
         run: |

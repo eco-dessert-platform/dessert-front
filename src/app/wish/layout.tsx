@@ -1,9 +1,7 @@
 import { getCookie } from '@/shared/actions/cookie';
-import Header from '@/shared/components/Header';
-import ProductAndStoreTab from '@/shared/components/ProductAndStoreTab';
-import PATH from '@/shared/constants/path';
 import { ReactNode } from 'react';
 import { TOKEN } from '@/shared/constants/token';
+import WishHeader from '@/blocks/wish/(list)/products/WishHeader';
 
 interface Props {
   children: ReactNode;
@@ -16,8 +14,7 @@ const Layout = async ({ children, login }: Props) => {
 
   return (
     <>
-      <Header title="찜" />
-      <ProductAndStoreTab defaultPath={PATH.wish} />
+      <WishHeader />
       {isLoggedIn ? children : login}
     </>
   );

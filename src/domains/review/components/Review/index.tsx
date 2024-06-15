@@ -1,7 +1,8 @@
 import { twMerge } from 'tailwind-merge';
 import Badge from '@/shared/components/Badge';
-import { ThumbsUpIcon } from '@/shared/components/icons';
+import { KebabIcon, ThumbsUpIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import Dropdown from '@/shared/components/Dropdown';
 import { RatingType } from '../../types/starRating';
 import StarRating from '../common/StarRating';
 import Comment from './Comment';
@@ -33,9 +34,21 @@ const Review = ({
   isLiked
 }: Props) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
-    <div className="flex gap-[4px]">
-      {isBest && <Badge type="best">BEST</Badge>}
-      <span className="typo-title-14-medium">{nickname}</span>
+    <div className="flex items-center justify-between">
+      <div className="flex gap-[4px]">
+        {isBest && <Badge type="best">BEST</Badge>}
+        <span className="typo-title-14-medium">{nickname}</span>
+      </div>
+
+      <Dropdown>
+        <Dropdown.Trigger>
+          <KebabIcon />
+        </Dropdown.Trigger>
+        <Dropdown.Content position="left">
+          <Dropdown.Item>수정</Dropdown.Item>
+          <Dropdown.Item>삭제</Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown>
     </div>
 
     <div className="flex flex-col gap-[8px]">

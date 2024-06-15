@@ -68,8 +68,23 @@ export function transformSortToEng(sort: string): string {
   if (sort === '추천순') {
     return 'RECOMMEND';
   }
-  if (sort === '인기순') {
-    return 'POPULAR';
+  if (sort === '찜 많은순') {
+    return 'MOST_WISHED';
+  }
+  if (sort === '리뷰 개수순') {
+    return 'MOST_REVIEWED';
+  }
+  if (sort === '만족도순') {
+    return 'HIGHEST_RATED';
+  }
+  if (sort === '최신순') {
+    return 'RECENT';
+  }
+  if (sort === '낮은 가격순') {
+    return 'LOW_PRICE';
+  }
+  if (sort === '높은 가격순') {
+    return 'HIGH_PRICE';
   }
   return sort;
 }

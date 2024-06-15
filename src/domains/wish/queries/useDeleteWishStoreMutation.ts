@@ -1,23 +1,28 @@
-import fetchExtend from '@/shared/utils/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import QUERY_KEY from '@/shared/constants/queryKey';
-import { DefaultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Cursor } from '@/shared/types/response';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import { storeQueryKey } from '@/shared/queries/queryKey';
+import { IStoreType } from '@/domains/store/types/store';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
+import wishService from './service';
 
 const useDeleteWishStoreMutation = () => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
-  const mutationFn = async ({ storeId }: { storeId: string }) => {
-    const res = await fetchExtend.patch(`/likes/store/${storeId}`);
-    const { code, message, success }: DefaultResponse = await res.json();
-    if (!res.ok || !success) throwApiError({ code, message });
+  const mutationFn = async ({ storeId }: { storeId: number }) => {
+    await wishService.deleteWishStore({ storeId });
+  };
+
+  const onMutate = ({ storeId }: { storeId: number }) => {
+    queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
+      { queryKey: storeQueryKey.lists() },
+      (oldData) =>
+        updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: false })
+    );
   };
 
   const onSuccess = () => {
-    queryClient.invalidateQueries({ queryKey: [QUERY_KEY.store] });
-
     openToast({ message: '💖 찜한 스토어에서 삭제했어요' });
   };
 
@@ -25,7 +30,7 @@ const useDeleteWishStoreMutation = () => {
     openToast({ message });
   };
 
-  return useMutation({ mutationFn, onSuccess, onError });
+  return useMutation({ mutationFn, onSuccess, onError, onMutate });
 };
 
 export default useDeleteWishStoreMutation;

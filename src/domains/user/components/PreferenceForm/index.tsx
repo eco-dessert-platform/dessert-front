@@ -11,17 +11,12 @@ interface PreferenceFormProps {
   mutate: UseMutateFunction<void, Error, PreferenceType[], unknown>;
 }
 
-const isPreferenceTypeArray = (values: FormDataEntryValue[]): values is PreferenceType[] =>
-  values.every((value) => (typeof value) in Array<PreferenceType>);
-
 const PreferenceForm = ({ mutate }: PreferenceFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const preference = formData.getAll('preference');
-    if (isPreferenceTypeArray(preference)) {
-      mutate(preference);
-    }
+    const preference = formData.getAll('preference') as Array<PreferenceType>;
+    mutate(preference);
   };
 
   return (

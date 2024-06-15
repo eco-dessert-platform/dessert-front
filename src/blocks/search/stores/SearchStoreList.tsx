@@ -8,11 +8,11 @@ import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import SkeletonStoreList from '@/domains/store/components/SkeletonStoreCardList';
 
 interface SearchStoreListProps {
-  keyword?: string;
+  keyword: string;
 }
 
-const SearchStoreList = ({ keyword = '' }: SearchStoreListProps) => {
-  const { data, isLoading, isError, fetchNextPage, hasNextPage } = useGetSearchStoresQuery({
+const SearchStoreList = ({ keyword }: SearchStoreListProps) => {
+  const { data, isError, fetchNextPage, hasNextPage } = useGetSearchStoresQuery({
     keyword
   });
   const { ref, inView } = useInView();
@@ -22,9 +22,6 @@ const SearchStoreList = ({ keyword = '' }: SearchStoreListProps) => {
     fetchNextPage();
   }, [inView, fetchNextPage]);
 
-  if (isLoading) {
-    return <SkeletonStoreList row={10} />;
-  }
   if (isError) {
     return (
       <SadBbangleBox>

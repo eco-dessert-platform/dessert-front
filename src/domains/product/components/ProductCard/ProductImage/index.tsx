@@ -27,12 +27,12 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: String(product.boardId), folderId: selectedWishFolder });
+    addMutate({ productId: product.boardId, folderId: selectedWishFolder });
     e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
-    deleteMutate({ productId: String(product.boardId) });
+    deleteMutate({ productId: product.boardId });
     e.preventDefault();
   };
 
@@ -45,7 +45,7 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
         height={300}
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}
-        className="rounded-[6px] aspect-square"
+        className="rounded-[6px] aspect-square border-[1px] border-gray-100"
       />
       <div className="absolute bottom-[9px] right-[9px] h-[20px]">
         <HeartButton

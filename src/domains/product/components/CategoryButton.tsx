@@ -24,11 +24,11 @@ const CategoryButton = ({ name, icon, isCategoryTab }: CategoryButtonProps) => {
   return (
     <Link
       href={PATH.mainProductList}
-      className="flex flex-col justify-between items-center gap-1 py-[11px]"
+      className="flex flex-col justify-between items-center gap-1 py-[11px] hover:opacity-70 transition-opacity"
       onClick={handleClickButton}
     >
-      <div>{icon}</div>
-      <div className="font-normal text-gray-800 text-14 leading-140 tracking-tight-4">{name}</div>
+      <div className="w-[46px] h-[46px] bg-gray-50 rounded-[16px] p-[11px]">{icon}</div>
+      <div className="text-gray-800 typo-body-12-regular">{name}</div>
     </Link>
   );
 };

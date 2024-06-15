@@ -28,7 +28,7 @@ const ProductsList = async () => {
 
   return (
     <>
-      <FilterSection filterFamilyId={FILTER_FAMILY_ID.main} />
+      {/* <FilterSection filterFamilyId={FILTER_FAMILY_ID.main} /> */}
       <PaddingWrapper>
         <div className="grid grid-cols-3 gap-x-[10px]">
           {bestProducts?.content

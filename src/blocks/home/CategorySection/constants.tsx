@@ -10,44 +10,32 @@ import {
 export const categoryMenu = [
   {
     id: 1,
-    category: '상품별',
     name: '전체',
-    icon: <AllIcon />,
-    url: 'all'
+    icon: <AllIcon />
   },
   {
     id: 2,
-    category: '상품별',
     name: '고단백',
-    icon: <ProteinIcon />,
-    url: 'all'
+    icon: <ProteinIcon />
   },
   {
     id: 3,
-    category: '상품별',
     name: '저당',
-    icon: <LowSugarIcon />,
-    url: 'all'
+    icon: <LowSugarIcon />
   },
   {
     id: 4,
-    category: '상품별',
     name: '저지방',
-    icon: <LowFatIcon />,
-    url: 'all'
+    icon: <LowFatIcon />
   },
   {
     id: 5,
-    category: '상품별',
     name: '글루텐프리',
-    icon: <GlutenFreeIcon />,
-    url: 'all'
+    icon: <GlutenFreeIcon />
   },
   {
     id: 6,
-    category: '상품별',
     name: '비건',
-    icon: <VeganIcon />,
-    url: 'all'
+    icon: <VeganIcon />
   }
 ];

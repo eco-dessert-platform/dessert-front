@@ -16,8 +16,6 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
     productService.getBoardDetail(params.productId)
   ]);
 
-  console.log(boardData);
-
   return (
     <>
       <Header

@@ -5,9 +5,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { INewStoreType } from '@/domains/product/types/productDetailType';
 import HeartButton from '@/shared/components/HeartButton';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { INewStoreType } from '@/domains/store/types/store';
 
 interface Props {
   storeData: INewStoreType;

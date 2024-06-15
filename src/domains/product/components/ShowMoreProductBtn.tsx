@@ -5,10 +5,10 @@ import { useState } from 'react';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 import MoreButton from '../../../shared/components/MoreButton';
-import { IProductDetailType } from '../types/productDetailType';
+import { ProductOptionResponse } from '../types/productDetailType';
 
 interface DetailBoardInfoProps {
-  data: IProductDetailType;
+  data: ProductOptionResponse;
 }
 
 const ShowMoreProductBtn = ({ data }: DetailBoardInfoProps) => {

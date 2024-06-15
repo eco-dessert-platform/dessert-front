@@ -1,17 +1,9 @@
-export interface IProductType {
-  id: number;
-  title: string;
-  category: string;
-  tags: string[];
-}
-
-// 새로운 버전
-export interface IProductDetailType {
+export interface ProductOptionResponse {
   boardIsBundled: boolean;
-  products: ProductsType[];
+  products: ProductOptionType[];
 }
 
-export interface ProductsType {
+export interface ProductOptionType {
   id: number;
   title: string;
   glutenFreeTag: boolean;
@@ -42,13 +34,6 @@ export interface ProductsType {
     sunday: boolean;
   };
   isNotified: boolean;
-}
-
-export interface INewStoreType {
-  id: number;
-  title: string;
-  profile: string;
-  isWished: boolean;
 }
 
 export interface IBoardDetailType {

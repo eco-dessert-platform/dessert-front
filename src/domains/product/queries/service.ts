@@ -5,11 +5,11 @@ import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import Service from '@/shared/queries/service';
 import { Cursor, ResultResponse } from '@/shared/types/response';
+import { INewStoreType } from '@/domains/store/types/store';
 import {
   IBoardDetailType,
-  INewStoreType,
-  IProductDetailType,
-  IReviewBadgeType
+  IReviewBadgeType,
+  ProductOptionResponse
 } from '../types/productDetailType';
 
 class ProductService extends Service {
@@ -34,10 +34,12 @@ class ProductService extends Service {
     return result;
   }
 
-  async getProductDetail(productId: string) {
+  async getProductOption(productId: string) {
     const res = await this.fetchExtend.get(`/boards/${productId}/product`);
-    const { result, success, message, code }: ResultResponse<IProductDetailType> = await res.json();
+    const { result, success, message, code }: ResultResponse<ProductOptionResponse> =
+      await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+
     return result;
   }
 

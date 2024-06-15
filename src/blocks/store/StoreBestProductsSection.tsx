@@ -27,12 +27,12 @@ const StoreBestProductsSection = ({ storeId }: Props) => {
       <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">인기상품</h5>
       <div className="grid grid-cols-3 gap-x-[10px]">
         {products.map((product, i) => (
-            <ProductCard
+          <ProductCard
             key={product.boardId}
-              product={{ ...product, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
-              popular
-              ranking={Number(i + 1)}
-            />
+            product={{ ...product, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
+            popular
+            ranking={Number(i + 1)}
+          />
         ))}
       </div>
     </PaddingWrapper>

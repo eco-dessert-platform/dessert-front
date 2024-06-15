@@ -23,7 +23,9 @@ const PATH = {
   myReview: '/mypage/review',
 
   preferenceCreate: '/mypage/preference/create',
-  preferenceUpdate: '/mypage/preference/upate'
+  preferenceUpdate: '/mypage/preference/upate',
+  bbangketing: '/mypage/alarm/bbangketing',
+  restock: '/mypage/alarm/restock'
 };
 
 export default PATH;

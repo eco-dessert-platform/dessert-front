@@ -33,6 +33,9 @@ const VARIANT_CLASS = {
     'w-full h-[46px] py-[14px] px-[10px] text-center rounded-full text-gray-900 bg-white border border-solid border-gray-200'
 };
 
+/**
+ * @deprecated ButtonNewver 사용해주세요.
+ */
 const Button = ({ variants = 'primary-black', className = '', ...props }: ButtonProps) => (
   <button type="button" className={twMerge(VARIANT_CLASS[variants], className)} {...props} />
 );

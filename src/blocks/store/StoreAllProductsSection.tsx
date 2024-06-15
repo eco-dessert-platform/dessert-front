@@ -35,20 +35,27 @@ const StoreAllProductsSection = ({ storeId }: Props) => {
       </SadBbangleBox>
     );
   }
-  if (!products || !storeInfo) return null;
+  if (!storeInfo || !products || products.length === 0) {
+    return (
+      <SadBbangleBox>
+        <p>상품이 없어요!</p>
+      </SadBbangleBox>
+    );
+  }
 
   return (
-    <PaddingWrapper>
-      <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">전체상품</h5>
-      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] pb-[36px]">
+    <PaddingWrapper className="px-0 pb-[36px]">
+      <h5 className="mb-[10px] px-[16px] typo-title-14-semibold text-gray-800">전체상품</h5>
+      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] px-[16px]">
         {products.map((product) => (
-          <div key={product.boardId}>
-            <ProductCard product={{ ...product, storeName: storeInfo.storeName }} />
-          </div>
+          <ProductCard
+            key={product.boardId}
+            product={{ ...product, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
+          />
         ))}
       </div>
       {hasNextPage && (
-        <div ref={ref} className="pb-[36px]">
+        <div ref={ref}>
           <SkeletonProductCardList row={1} col={2} />
         </div>
       )}

@@ -17,7 +17,7 @@ const BoardImagesSection = ({ productId }: { productId: string }) => {
   const { data: productOption } = useGetProductOptionQuery(productId);
 
   return (
-    <PaddingWrapper className="py-0">
+    <PaddingWrapper className="pb-0">
       <div className="relative">
         <ProductImageSlide boardImages={boardDetail?.boardImages} onChange={setSwiperIndex} />
         {productOption?.boardIsBundled && (

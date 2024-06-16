@@ -5,8 +5,6 @@ import fetchExtend from '@/shared/utils/api';
 import { throwApiError } from '@/shared/utils/error';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import FilterSection from '@/domains/product/components/FilterSection';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 
 const getBestProducts = async () => {
   const res = await fetchExtend.get('/boards', {
@@ -28,7 +26,7 @@ const ProductsList = async () => {
 
   return (
     <>
-      <FilterSection filterFamilyId={FILTER_FAMILY_ID.main} />
+      {/* <FilterSection filterFamilyId={FILTER_FAMILY_ID.main} /> */}
       <PaddingWrapper>
         <div className="grid grid-cols-3 gap-x-[10px]">
           {bestProducts?.content

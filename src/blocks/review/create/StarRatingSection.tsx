@@ -1,16 +1,17 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 
-import useGetProductDetailQuery from '@/domains/product/queries/useGetProductDetailQuery';
 import { starRatingState } from '@/domains/review/atoms';
 import StarRating from '@/domains/review/components/common/StarRating';
 import { RatingType } from '@/domains/review/types/starRating';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
 
 const StarRatingSection = () => {
-  // const { productId } = useParams<{ productId: string }>();
-  const { data } = useGetProductDetailQuery();
+  const { productId } = useParams<{ productId: string }>();
+  const { data } = useGetProductOptionQuery(productId);
   const [rating, setRating] = useRecoilState(starRatingState);
 
   const handleRatingChange = (newRating: RatingType) => {

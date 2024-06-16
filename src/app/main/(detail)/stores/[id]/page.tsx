@@ -1,22 +1,53 @@
-import AllProducts from '@/blocks/store/AllProducts';
-import BestProducts from '@/blocks/store/BestProducts';
-import DetailStoreProfile from '@/blocks/store/DetailStoreProfile';
-import StoreDetailSection from '@/domains/store/components/StoreDetailSection';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { storeQueryKey, productQueryKey } from '@/shared/queries/queryKey';
+import storeService from '@/domains/store/queries/service';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import GrayDivider from '@/shared/components/GrayDivider';
+import StoreInfoSection from '@/blocks/store/StoreInfoSection';
+import StoreBestProductsSection from '@/blocks/store/StoreBestProductsSection';
+import StoreAllProductsSection from '@/blocks/store/StoreAllProductsSection';
 
-const StoreDetail = ({ params: { id } }: { params: { id: string } }) => (
-  <div className="w-full">
-    <div className="border-b-4 w-full mx-auto pb-[16px] border-solid border-gray-100">
-      <DetailStoreProfile storeId={Number(id)} />
-    </div>
-    <div className="w-full border-b border-solid border-gray-100 py-[16px]">
-      <StoreDetailSection title="인기상품">
-        <BestProducts storeId={Number(id)} />
-      </StoreDetailSection>
-    </div>
-    <StoreDetailSection title="전체상품" className="py-[16px]">
-      <AllProducts storeId={Number(id)} />
-    </StoreDetailSection>
-  </div>
-);
+interface Props {
+  params: { id: string };
+}
 
-export default StoreDetail;
+const MainStoreDetailPage = async ({ params: { id } }: Props) => {
+  const storeId = Number(id);
+  const queryClient = new QueryClient();
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: storeQueryKey.detail(storeId),
+      queryFn: async () => {
+        const data = await storeService.getStoreInfo(storeId);
+        return data;
+      }
+    }),
+    queryClient.prefetchQuery({
+      queryKey: productQueryKey.list('store-detail/best'),
+      queryFn: async () => {
+        const data = await storeService.getStoreBestProducts(storeId);
+        return data;
+      }
+    }),
+    queryClient.prefetchInfiniteQuery({
+      queryKey: productQueryKey.list('store-detail/all'),
+      queryFn: async () => {
+        const data = await storeService.getStoreAllProducts(storeId);
+        return data;
+      },
+      initialPageParam: INITIAL_CURSOR
+    })
+  ]);
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <StoreInfoSection storeId={storeId} />
+      <GrayDivider color="gray100" className="h-[4px]" />
+      <StoreBestProductsSection storeId={storeId} />
+      <GrayDivider color="gray100" />
+      <StoreAllProductsSection storeId={storeId} />
+    </HydrationBoundary>
+  );
+};
+
+export default MainStoreDetailPage;

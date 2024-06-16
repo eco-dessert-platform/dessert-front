@@ -3,9 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import productService from './service';
 
-const useGetStoreInfoQuery = () => {
+interface Props {
+  productId: string;
+}
+
+const useGetStoreInfoQuery = ({ productId }: Props) => {
   const queryKey = [QUERY_KEY.productDetailStoreInfo];
-  const queryFn = () => productService.getStoreInfo();
+  const queryFn = () => productService.getStoreInfo(productId);
 
   return useQuery({ queryKey, queryFn });
 };

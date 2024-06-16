@@ -36,6 +36,7 @@ const useAddWishProductMutation = () => {
 
   const onSuccess = ({ productId }: { productId: number }) => {
     queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
+    queryClient.invalidateQueries({ queryKey: productQueryKey.detail(productId) });
 
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
     openToast({

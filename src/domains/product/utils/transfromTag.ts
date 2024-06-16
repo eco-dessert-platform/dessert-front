@@ -90,26 +90,41 @@ export function transformSortToEng(sort: string): string {
 }
 
 export function transformDayTag(tag: string): string {
-  if (tag === 'fri') {
+  if (tag === 'friday') {
     return '금';
   }
-  if (tag === 'mon') {
+  if (tag === 'monday') {
     return '월';
   }
-  if (tag === 'sat') {
+  if (tag === 'saturday') {
     return '토';
   }
-  if (tag === 'sun') {
+  if (tag === 'sunday') {
     return '일';
   }
-  if (tag === 'thu') {
+  if (tag === 'thursday') {
     return '목';
   }
-  if (tag === 'tue') {
+  if (tag === 'tuesday') {
     return '화';
   }
-  if (tag === 'wed') {
+  if (tag === 'wednesday') {
     return '수';
   }
   return tag;
 }
+
+export const nutirentEngToKr = (item: string) => {
+  switch (item) {
+    case 'sugars':
+      return '당류';
+    case 'protein':
+      return '단백질';
+    case 'carbohydrates':
+      return '탄수화물';
+    case 'fat':
+      return '지방';
+    default:
+      return '';
+  }
+};

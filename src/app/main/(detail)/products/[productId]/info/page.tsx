@@ -1,24 +1,24 @@
-// interface ProductDetailProps {
-//   params: { productId: string };
-// }
-
 import BoardDetailsSection from '@/blocks/main/(detail)/products/[productId]/info/BoardDetailSection';
 import BoardImagesSection from '@/blocks/main/(detail)/products/[productId]/info/BoardImagesSection';
 import ProductOptionsSetion from '@/blocks/main/(detail)/products/[productId]/info/ProductOptionsSection';
 import ReviewBadgeSection from '@/blocks/main/(detail)/products/[productId]/info/ReviewBadgeSection';
 import SimpleInfoWithStoreSection from '@/blocks/main/(detail)/products/[productId]/info/SimpleInfoWithStoreSection';
 
-const ProductDetailPage = () => (
+interface Props {
+  params: { productId: string };
+}
+
+const ProductDetailPage = ({ params }: Props) => (
   <>
-    <BoardImagesSection />
+    <BoardImagesSection productId={params.productId} />
 
-    <SimpleInfoWithStoreSection />
+    <SimpleInfoWithStoreSection productId={params.productId} />
 
-    <ReviewBadgeSection />
+    <ReviewBadgeSection productId={params.productId} />
 
-    <ProductOptionsSetion />
+    <ProductOptionsSetion productId={params.productId} />
 
-    <BoardDetailsSection />
+    <BoardDetailsSection productId={params.productId} />
   </>
 );
 

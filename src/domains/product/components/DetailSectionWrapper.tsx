@@ -9,7 +9,7 @@ interface DetailSectionWrapperProps {
 
 const DetailSectionWrapper = ({ title, children }: DetailSectionWrapperProps) => (
   <>
-    <PaddingWrapper className="typo-title-14-semibold px-[16px] border-gray-100 text-gray-800">
+    <PaddingWrapper className="typo-title-14-semibold border-gray-100 text-gray-800">
       {title}
     </PaddingWrapper>
     {children}

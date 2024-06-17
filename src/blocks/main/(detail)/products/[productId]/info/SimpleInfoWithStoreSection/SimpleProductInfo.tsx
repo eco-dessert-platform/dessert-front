@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { IBoardType } from '@/domains/product/types/productDetailType';
+import { IBoardDetailType } from '@/domains/product/types/productDetailType';
 import { StarIcon } from '@/shared/components/icons';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
-const SimpleProductInfo = ({ boardData }: { boardData: IBoardType }) => (
+const SimpleProductInfo = ({ boardData }: { boardData: IBoardDetailType }) => (
   <PaddingWrapper>
     <div className="typo-title-16-regular leading-130 font-normal text-gray-800 mb-[2px]">
       {boardData.title}

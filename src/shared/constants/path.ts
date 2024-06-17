@@ -20,7 +20,10 @@ const PATH = {
 
   login: '/mypage/login',
   mypage: '/mypage',
-  myReview: '/mypage/review'
+  myReview: '/mypage/review',
+
+  preferenceCreate: '/mypage/preference/create',
+  preferenceUpdate: '/mypage/preference/upate'
 };
 
 export default PATH;

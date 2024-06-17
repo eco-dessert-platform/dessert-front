@@ -17,7 +17,7 @@ interface SearchProductListProps {
 
 const SearchProductList = ({ keyword }: SearchProductListProps) => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.search));
-  const { data, isError, fetchNextPage, hasNextPage } = useGetSearchProductsQuery({
+  const { data, isFetching, isError, fetchNextPage, hasNextPage } = useGetSearchProductsQuery({
     keyword,
     filterValue
   });
@@ -28,6 +28,9 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
     fetchNextPage();
   }, [inView, fetchNextPage]);
 
+  if (isFetching) {
+    return <SkeletonProductCardList />;
+  }
   if (isError) {
     return (
       <SadBbangleBox>

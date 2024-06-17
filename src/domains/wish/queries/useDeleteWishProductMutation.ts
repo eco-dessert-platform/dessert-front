@@ -22,10 +22,12 @@ const useDeleteWishProductMutation = () => {
       (oldData) =>
         updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, { isWished: false })
     );
+    return { productId };
   };
 
-  const onSuccess = () => {
+  const onSuccess = ({ productId }: { productId: number }) => {
     queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
+    queryClient.invalidateQueries({ queryKey: productQueryKey.detail(productId) });
     openToast({ message: '💖 찜 해제 되었어요' });
   };
 

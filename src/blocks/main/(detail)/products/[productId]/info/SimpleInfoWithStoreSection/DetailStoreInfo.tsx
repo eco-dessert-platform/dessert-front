@@ -5,9 +5,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { INewStoreType } from '@/domains/product/types/productDetailType';
+import HeartButton from '@/shared/components/HeartButton';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import StarButton from '@/shared/components/StarButton';
+import { INewStoreType } from '@/domains/store/types/store';
 
 interface Props {
   storeData: INewStoreType;
@@ -30,7 +30,7 @@ const DetailStoreInfo = ({ storeData }: Props) => {
           </div>
           <div className="text-gray-600 text-14">{storeData.title}</div>
         </div>
-        <StarButton isActive={isLiked} onClick={addStoreToWishList} />
+        <HeartButton shape="default" isActive={isLiked} onClick={addStoreToWishList} />
       </PaddingWrapper>
     </Link>
   );

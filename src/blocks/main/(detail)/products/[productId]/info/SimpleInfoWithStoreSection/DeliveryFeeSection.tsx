@@ -1,8 +1,8 @@
-import { IBoardType } from '@/domains/product/types/productDetailType';
+import { IBoardDetailType } from '@/domains/product/types/productDetailType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface Props {
-  boardData: IBoardType;
+  boardData: IBoardDetailType;
 }
 
 const DeliveryFeeSection = ({ boardData }: Props) => (

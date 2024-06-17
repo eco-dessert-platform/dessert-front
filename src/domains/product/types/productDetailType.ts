@@ -1,64 +1,9 @@
-/**
- * @deprecated
- * Api분할로 IProductDetailType이 아닌 IDetailProductType,INewStoreType,IBoardType 새로 추가되었으니 이거 사용해주세요
- */
-
-export interface IProductDetailType {
-  store: {
-    storeName: string;
-    storeId: number;
-    profile: string;
-    isWished: boolean;
-  };
-  board: {
-    boardId: number;
-    thumbnail: string;
-    images: [
-      {
-        id: number;
-        url: string;
-      }
-    ];
-    title: string;
-    price: number;
-    orderAvailableDays: {
-      mon: boolean;
-      tue: boolean;
-      wed: boolean;
-      thu: boolean;
-      fri: boolean;
-      sat: boolean;
-      sun: boolean;
-      [key: string]: boolean;
-    };
-    purchaseUrl: string;
-    isWished: boolean;
-    isBundled: boolean;
-    detail: IDetailImageType[];
-    products: IProductType[];
-  };
+export interface ProductOptionResponse {
+  boardIsBundled: boolean;
+  products: ProductOptionType[];
 }
 
-export interface IProductType {
-  id: number;
-  title: string;
-  category: string;
-  tags: string[];
-}
-
-export interface IDetailImageType {
-  id: number;
-  imgIndex: number;
-  url: string;
-}
-
-// 새로운 버전
-export interface IDetailProductType {
-  boardIsBundled: true;
-  products: ProductType[];
-}
-
-export interface ProductType {
+export interface ProductOptionType {
   id: number;
   title: string;
   glutenFreeTag: boolean;
@@ -76,29 +21,22 @@ export interface ProductType {
   };
   orderType: string;
   orderAvailableDate: {
-    startDate: number;
-    endDate: number;
+    startDate: string;
+    endDate: string;
   };
   orderAvailableWeek: {
-    mon: boolean;
-    tue: boolean;
-    wed: boolean;
-    thu: boolean;
-    fri: boolean;
-    sat: boolean;
-    sun: boolean;
-    [key: string]: boolean;
+    monday: boolean;
+    tuesday: boolean;
+    wednesday: boolean;
+    thursday: boolean;
+    friday: boolean;
+    saturday: boolean;
+    sunday: boolean;
   };
+  isNotified: boolean;
 }
 
-export interface INewStoreType {
-  id: number;
-  title: string;
-  profile: string;
-  isWished: boolean;
-}
-
-export interface IBoardType {
+export interface IBoardDetailType {
   id: number;
   profile: string;
   title: string;
@@ -109,4 +47,9 @@ export interface IBoardType {
   isWished: boolean;
   boardImages: string[];
   boardDetails: string[];
+}
+export interface IReviewBadgeType {
+  rating: string;
+  count: string;
+  badges: string[];
 }

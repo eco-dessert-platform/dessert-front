@@ -10,4 +10,7 @@ export { default as CakeIcon } from './cake-icon.svg';
 export { default as CookieIcon } from './cookie-icon.svg';
 export { default as EtcIcon } from './etc-icon.svg';
 export { default as JamIcon } from './jam-icon.svg';
-export { default as TartIcon } from './tart-icon.svg';
+export { default as GlutenFreeIcon } from './gluten-free-icon.svg';
+export { default as LowFatIcon } from './low-fat-icon.svg';
+export { default as LowSugarIcon } from './low-sugar-icon.svg';
+export { default as VeganIcon } from './vegan-icon.svg';

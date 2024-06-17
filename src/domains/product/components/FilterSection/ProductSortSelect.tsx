@@ -3,13 +3,12 @@
 import { useRecoilState } from 'recoil';
 import { filterValueState } from '@/domains/product/atoms';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
+import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
 import Select from '@/shared/components/Select';
 
 interface ProductSortSelectProps {
   filterFamilyId: FilterFamilyIDType;
 }
-
-const OPTIONS = ['추천순', '인기순'];
 
 const ProductSortSelect = ({ filterFamilyId }: ProductSortSelectProps) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
@@ -19,7 +18,13 @@ const ProductSortSelect = ({ filterFamilyId }: ProductSortSelectProps) => {
     setFilterValue({ ...filterValue, sort: newSelectedOption });
   };
 
-  return <Select options={OPTIONS} selectedOption={selectedOption} onChange={handleSelectChange} />;
+  return (
+    <Select
+      options={FILTER_VALUES.sorts}
+      selectedOption={selectedOption}
+      onChange={handleSelectChange}
+    />
+  );
 };
 
 export default ProductSortSelect;

@@ -5,6 +5,7 @@ import Header from '@/shared/components/Header';
 import { ShareIcon } from '@/shared/components/icons';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
 
 interface DetailInfoLayoutProps {
@@ -38,6 +39,7 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
       />
       <ProductDetailTabs />
       {children}
+      <FixedPurchaseButtonSection boardData={boardData} />
     </HydrationBoundary>
   );
 };

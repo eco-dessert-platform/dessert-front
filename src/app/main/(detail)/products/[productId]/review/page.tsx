@@ -1,24 +1,26 @@
-// interface ReviewListPageProps {
-//   params: { productId: string };
-// }
+import { HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { reivewQueryOption } from '@/domains/review/queries/useReviewQuery';
+import ReviewList from './_blocks/ReviewList';
 
-const ReviewListPage = async () => (
-  // const {
-  //   board: { title: boardName },
-  //   store: { storeName }
-  // } = await getProductDetail(productId);
+interface Props {
+  params: { productId: string };
+}
 
-  <>
-    {/* <Header
-        title={`[${storeName}] ${boardName}`}
-        content={
-          <button type="button" aria-label="공유 버튼">
-            <ShareIcon />
-          </button>
-        }
-        back
-      /> */}
-    리뷰 목록 페이지
-  </>
-);
+const ReviewListPage = async ({ params }: Props) => {
+  const productId = Number(params.productId);
+  const queryClient = new QueryClient();
+  const { queryKey, queryFn, initialPageParam } = reivewQueryOption(productId);
+  await queryClient.prefetchInfiniteQuery({
+    queryKey,
+    queryFn,
+    initialPageParam
+  });
+
+  return (
+    <HydrationBoundary>
+      <ReviewList />
+    </HydrationBoundary>
+  );
+};
+
 export default ReviewListPage;

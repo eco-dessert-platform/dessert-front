@@ -28,7 +28,7 @@ const temple = {
 
 const Template: StoryFn<typeof ProductCard> = (args) => (
   <QueryClientProvider client={queryClient}>
-    <div className="w-[40%]">
+    <div className="max-w-[300px]">
       <ProductCard {...args} />
     </div>
   </QueryClientProvider>

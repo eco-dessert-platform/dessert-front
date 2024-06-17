@@ -41,8 +41,8 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
       <Image
         src={product.thumbnail}
         alt="상품사진"
-        width={600}
-        height={600}
+        width={300}
+        height={300}
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}
         className="rounded-[6px] aspect-square"

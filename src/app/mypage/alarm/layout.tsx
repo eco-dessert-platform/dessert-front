@@ -1,6 +1,6 @@
 import { QuestionMarkIcon } from '@/shared/components/icons';
 import Header from '@/shared/components/Header';
-import BbangketingAndRestockTab from '@/domains/user/components/BbangketingAndRestockTab';
+import BbangketingAndRestockTab from '@/domains/alarm/components/BbangketingAndRestockTab';
 
 interface Props {
   children: React.ReactNode;

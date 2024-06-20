@@ -1,6 +1,6 @@
-import DescriptionSection from '@/blocks/review/create/DescriptionSection';
-import BadgeSection from '@/blocks/review/create/BadgeSection';
-import NextButtonSection from '@/blocks/review/create/NextButtonSection';
+import BadgeSection from './_blocks/BadgeSection';
+import DescriptionSection from './_blocks/DescriptionSection';
+import NextButtonSection from './_blocks/NextButtonSection';
 
 const BadgeSelectPage = () => (
   <>

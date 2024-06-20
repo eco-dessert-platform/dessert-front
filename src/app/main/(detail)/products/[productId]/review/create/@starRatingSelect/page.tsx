@@ -1,7 +1,7 @@
-import StarRatingSection from '@/blocks/review/create/StarRatingSection';
-import ContentSection from '@/blocks/review/create/ContentSection';
-import ImageUploadSection from '@/blocks/review/create/ImageUploadSection';
-import CompleteButtonSection from '@/blocks/review/create/CompleteButtonSection';
+import CompleteButtonSection from './_blocks/CompleteButtonSection';
+import ContentSection from './_blocks/ContentSection';
+import ImageUploadSection from './_blocks/ImageUploadSection';
+import StarRatingSection from './_blocks/StarRatingSection';
 
 const StarRatingSelectPage = () => (
   <>

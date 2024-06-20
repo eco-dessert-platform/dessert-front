@@ -20,3 +20,11 @@ export interface ReviewDataType {
   content: string;
   photos: Array<string>;
 }
+
+export interface ReviewCreateForm {
+  badges: Partial<SelectedBadgeType>;
+  rate: RatingType;
+  content: string;
+  boardId: number;
+  urls: string[];
+}

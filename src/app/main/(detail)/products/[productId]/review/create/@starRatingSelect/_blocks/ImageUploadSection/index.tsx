@@ -2,16 +2,18 @@
 
 import { ChangeEvent } from 'react';
 import { useRecoilState } from 'recoil';
-import { uploadImageFilesState, uploadImageUrlsState } from '@/domains/review/atoms';
+import { uploadImageUrlsState } from '@/domains/review/atoms';
 import { CameraIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
-import PreviewImage from '@/blocks/review/create/ImageUploadSection/PreviewImage';
+import PreviewImage from '@/app/main/(detail)/products/[productId]/review/create/@starRatingSelect/_blocks/ImageUploadSection/PreviewImage';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import { useFormContext } from 'react-hook-form';
+import { ReviewCreateForm } from '@/domains/review/types/review';
 
 const ImageUploadSection = () => {
-  const [imageFiles, setImageFiles] = useRecoilState(uploadImageFilesState);
-  const [imageUrls, setImageUrls] = useRecoilState(uploadImageUrlsState);
+  const [imagePreviewUrls, setImagePreviewUrls] = useRecoilState(uploadImageUrlsState);
+  const { register } = useFormContext<ReviewCreateForm>();
   const { openToast } = useToastNewVer();
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,19 +25,19 @@ const ImageUploadSection = () => {
     }
 
     const fileArray = Array.from(files);
-    setImageFiles(fileArray);
-    setImageUrls(fileArray.map((file) => URL.createObjectURL(file)));
+    setImagePreviewUrls(fileArray.map((file) => URL.createObjectURL(file)));
   };
 
   const handleImageRemove = (idxToRemove: number) => {
-    setImageFiles(imageFiles.filter((_, idx) => idx !== idxToRemove));
-    setImageUrls(imageUrls.filter((_, idx) => idx !== idxToRemove));
+    setImagePreviewUrls(imagePreviewUrls.filter((_, idx) => idx !== idxToRemove));
   };
+
+  const fileInputRegister = register('urls', { onChange: handleImageUpload });
 
   return (
     <PaddingWrapper className="flex gap-x-[5px] overflow-x-scroll scrollbar-hide">
       <ImageInput
-        onChange={handleImageUpload}
+        {...fileInputRegister}
         multiple
         className="flex flex-col justify-center items-center min-w-[64px] h-[64px] border-[1.5px] border-gray-300 rounded-[6px]"
       >
@@ -43,15 +45,17 @@ const ImageUploadSection = () => {
         <div className="flex gap-x-[2px] typo-body-11-regular text-gray-500">
           사진
           <p>
-            <span className={imageUrls.length > 0 ? 'text-primaryOrangeRed' : 'text-gray-500'}>
-              {imageUrls.length}
+            <span
+              className={imagePreviewUrls.length > 0 ? 'text-primaryOrangeRed' : 'text-gray-500'}
+            >
+              {imagePreviewUrls.length}
             </span>
             /5
           </p>
         </div>
       </ImageInput>
-      {imageUrls.length > 0 &&
-        imageUrls.map((url, idx) => (
+      {imagePreviewUrls.length > 0 &&
+        imagePreviewUrls.map((url, idx) => (
           <PreviewImage key={url} imageSrc={url} onRemove={() => handleImageRemove(idx)} />
         ))}
     </PaddingWrapper>

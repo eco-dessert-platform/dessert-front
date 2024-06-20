@@ -3,9 +3,9 @@ import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { InfiniteQueryOptions } from '@/shared/types/query';
 import { reviewQueryKey } from './queryKey';
 import reviewService from './service';
-import { Review } from '../types/review';
+import { ReviewType } from '../types/review';
 
-export const reivewQueryOption = (boardId: number): InfiniteQueryOptions<Review[]> => ({
+export const reivewQueryOption = (boardId: number): InfiniteQueryOptions<ReviewType[]> => ({
   queryKey: reviewQueryKey.list('board', boardId),
   queryFn: async ({ pageParam }: { pageParam: number }) => {
     const data = await reviewService.getReview({ cursorId: pageParam, boardId });

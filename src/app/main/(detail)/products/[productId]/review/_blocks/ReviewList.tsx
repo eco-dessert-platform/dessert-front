@@ -18,22 +18,26 @@ const ReviewList = () => {
 
   return (
     <section className="flex flex-col divide-y divide-gray-200">
-      {reviews?.map(({ isBest, id, nickname, rating, comment, tags, like, isLiked, date }) => {
-        const formattedDate = new Date(date).toLocaleDateString('ko-KR');
-        return (
-          <Review
-            id={id}
-            nickname={nickname}
-            rating={rating}
-            comment={comment}
-            tags={tags}
-            like={like}
-            isLiked={isLiked}
-            isBest={isBest}
-            date={formattedDate}
-          />
-        );
-      })}
+      {reviews?.map(
+        ({ isBest, id, nickname, rating, comment, tags, like, isLiked, date, images }) => {
+          const formattedDate = new Date(date).toLocaleDateString('ko-KR');
+          return (
+            <Review
+              key={id}
+              id={id}
+              nickname={nickname}
+              rating={rating}
+              comment={comment}
+              tags={tags}
+              like={like}
+              isLiked={isLiked}
+              isBest={isBest}
+              date={formattedDate}
+              images={images}
+            />
+          );
+        }
+      )}
 
       {hasNextPage && (
         <div ref={ref}>

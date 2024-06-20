@@ -3,23 +3,10 @@ import Badge from '@/shared/components/Badge';
 import { KebabIcon, ThumbsUpIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Dropdown from '@/shared/components/Dropdown';
-import { RatingType } from '../../types/starRating';
 import StarRating from '../common/StarRating';
 import Comment from './Comment';
 import ImageSlider from './ImageSlider';
-
-interface Props {
-  id: string;
-  nickname: string;
-  images?: string[];
-  rating: RatingType;
-  comment: string;
-  tags: string[];
-  like: number;
-  isLiked: boolean;
-  isBest: boolean;
-  date: string;
-}
+import { ReviewType } from '../../types/review';
 
 const Review = ({
   id,
@@ -32,7 +19,7 @@ const Review = ({
   tags,
   like,
   isLiked
-}: Props) => (
+}: ReviewType) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
       <div className="flex gap-[4px]">

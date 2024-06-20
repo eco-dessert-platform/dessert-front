@@ -7,8 +7,14 @@ const meta = {
     id: '1',
     nickname: '닉네임',
     images: [
-      'https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg',
-      'https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg'
+      {
+        id: 1,
+        url: 'https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg'
+      },
+      {
+        id: 2,
+        url: 'https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-three-puppies-with-their-mouths-open-are-posing-for-a-photo-image_2902292.jpg'
+      }
     ],
     rating: 3,
     comment: '댓글 내용이 들어가요.',

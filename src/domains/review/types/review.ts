@@ -24,7 +24,7 @@ export interface ReviewDataType {
 export interface ReviewCreateForm {
   badges: Partial<SelectedBadgeType>;
   rate: RatingType;
-  content: string;
+  content?: string;
   boardId: number;
   urls: string[];
 }

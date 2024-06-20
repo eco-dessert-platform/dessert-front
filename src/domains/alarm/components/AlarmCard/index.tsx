@@ -1,6 +1,7 @@
 'use client';
 
 import { memo } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { ProductType, AlarmType } from '@/domains/alarm/types';
 import AlarmButton from '@/domains/alarm/components/AlarmCard/AlarmButton';
@@ -27,7 +28,9 @@ const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
           className="w-[40px] h-[40px] object-cover rounded-[6px]"
         />
         <div className="w-full overflow-hidden">
-          <h6 className="typo-title-14-semibold text-gray-900">{title}</h6>
+          <Link href={`/main/products/${id}/info`}>
+            <h6 className="typo-title-14-semibold text-gray-900">{title}</h6>
+          </Link>
           <p className="typo-body-12-regular text-gray-600 line-clamp-2 text-ellipsis overflow-hidden break-words">
             {description}
           </p>

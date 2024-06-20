@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import Image from 'next/image';
 import { ProductType, AlarmType } from '@/domains/alarm/types';
 import AlarmButton from '@/domains/alarm/components/AlarmCard/AlarmButton';
@@ -40,4 +41,4 @@ const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
   );
 };
 
-export default AlarmCard;
+export default memo(AlarmCard);

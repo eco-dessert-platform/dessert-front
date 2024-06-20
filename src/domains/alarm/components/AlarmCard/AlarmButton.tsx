@@ -17,15 +17,15 @@ const AlarmButton = ({ type, isAlarming, onClick }: Props) => {
   return (
     <button
       type="button"
-      className="flex justify-center items-center gap-x-[2px] p-[6px] w-full border-[1px] border-gray-200 rounded-[4px]"
+      className={`flex justify-center items-center gap-x-[2px] p-[6px] w-full border-[1px] border-gray-200 rounded-[4px]
+        typo-body-12-medium ${isAlarming ? 'text-gray-800' : 'bg-gray-900 text-white'}
+        `}
       onClick={onClick}
     >
-      <span className={cn(isMounted && isAlarming && ALARM[type].animation)}>
-        {ALARM[type].icon(isAlarming)}
-      </span>
-      <span className={`typo-body-12-medium ${isAlarming ? 'text-gray-700' : 'text-gray-800'}`}>
-        {ALARM[type].name} 알림 {isAlarming ? '해제' : '재신청'}
-      </span>
+      {isAlarming && (
+        <span className={cn(isMounted && ALARM[type].animation)}>{ALARM[type].icon}</span>
+      )}
+      {ALARM[type].name} 알림 {isAlarming ? '중' : '신청'}
     </button>
   );
 };

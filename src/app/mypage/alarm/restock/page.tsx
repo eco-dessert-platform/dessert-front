@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { ProductType } from '@/domains/alarm/types';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import AlarmCard from '@/domains/alarm/components/AlarmCard';
@@ -29,18 +29,18 @@ const PRODUCTS: Array<ProductType> = [
 const RestockPage = () => {
   const [products, setProducts] = useState(PRODUCTS);
 
-  const handleAlarm = (id: number) => {
-    const newProducts = products.map((product) => {
-      if (product.id === id) return { ...product, isAlarming: !product.isAlarming };
-      return product;
-    });
-    setProducts(newProducts);
-  };
+  const handleAlarm = useCallback((id: number) => {
+    setProducts((prev) =>
+      prev.map((product) => {
+        if (product.id === id) return { ...product, isAlarming: !product.isAlarming };
+        return product;
+      })
+    );
+  }, []);
 
-  const handleDelete = (id: number) => {
-    const newProducts = products.filter((product) => product.id !== id);
-    setProducts(newProducts);
-  };
+  const handleDelete = useCallback((id: number) => {
+    setProducts((prev) => prev.filter((product) => product.id !== id));
+  }, []);
 
   if (products.length === 0) return <NoAlarm type="restock" />;
 

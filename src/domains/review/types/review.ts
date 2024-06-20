@@ -14,17 +14,18 @@ export interface Review {
   rating: RatingType;
 }
 
-export interface ReviewDataType {
-  badges: Partial<SelectedBadgeType>;
+export interface ReviewCreateForm {
+  badges: SelectedBadgeType;
   rate: RatingType;
   content: string;
-  photos: Array<string>;
-}
-
-export interface ReviewCreateForm {
-  badges: Partial<SelectedBadgeType>;
-  rate: RatingType;
-  content?: string;
   boardId: number;
   urls: string[];
+}
+
+export interface CreatReviewRequest {
+  badges: string[];
+  rate: number;
+  content: string;
+  urls: string[];
+  boardId: number;
 }

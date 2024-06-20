@@ -7,8 +7,8 @@ const useImageUploadMutation = () => {
 
   return useMutation({
     mutationFn: (images: FileList) => reviewService.uploadImage(images),
-    onError: () => {
-      openToast({ message: '업로드를 실패했어요.' });
+    onError: (error) => {
+      openToast({ message: error.message });
     }
   });
 };

@@ -1,5 +1,5 @@
 import Service from '@/shared/queries/service';
-import { Cursor, ResultResponse } from '@/shared/types/response';
+import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { Review } from '../types/review';
 
@@ -10,6 +10,21 @@ class ReviewService extends Service {
     if (!res.ok) throw new Error('mock error');
     const { result }: ResultResponse<Cursor<Review[]>> = await res.json();
     return result;
+  }
+
+  async createReview(review: {
+    badges: string[];
+    rate: number;
+    content: string;
+    urls: string[];
+    boardId: number;
+  }) {
+    const res = await this.fetchExtend.post('/review', {
+      body: JSON.stringify(review)
+    });
+
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
   async uploadImage(photos: FileList) {
@@ -28,9 +43,9 @@ class ReviewService extends Service {
       body: JSON.stringify(formData)
     });
 
-    const { code, message, result }: ResultResponse<{ urls: string[] }> = await res.json();
+    const { code, message, result, success }: ResultResponse<{ urls: string[] }> = await res.json();
 
-    if (!res.ok) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    if (!res.ok || success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result.urls;
   }
 }

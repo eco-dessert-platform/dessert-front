@@ -4,6 +4,8 @@ import { useParams, useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header';
 import { FormProvider, SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { ReviewCreateForm } from '@/domains/review/types/review';
+import useCreateReviewMutation from '@/domains/review/queries/useCreateReviewMutation';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 interface ReviewCreateLayoutProps {
   badgeSelect: React.ReactNode;
@@ -16,7 +18,7 @@ const ReviewCreateLayout = ({ badgeSelect, starRatingSelect }: ReviewCreateLayou
   const progress = searchParams.get('progress');
   const methods = useForm<ReviewCreateForm>({
     defaultValues: {
-      rate: 1,
+      rate: 0,
       badges: {
         texture: undefined,
         brix: undefined,
@@ -28,12 +30,22 @@ const ReviewCreateLayout = ({ badgeSelect, starRatingSelect }: ReviewCreateLayou
     }
   });
   const { handleSubmit } = methods;
+  const { mutate: createReviewMutation } = useCreateReviewMutation();
+  const { openToast } = useToastNewVer();
 
-  const onValidSubmit: SubmitHandler<ReviewCreateForm> = () => {
-    // TODO: mutate 함수 호출
+  const onValidSubmit: SubmitHandler<ReviewCreateForm> = ({ badges, ...rest }) => {
+    const { brix, taste, texture } = badges;
+    const formmatedBadges = [brix, taste, texture].map((value) => value?.toUpperCase());
+
+    createReviewMutation({
+      badges: formmatedBadges,
+      ...rest
+    });
   };
 
-  const onInvalidSubmit: SubmitErrorHandler<ReviewCreateForm> = () => {};
+  const onInvalidSubmit: SubmitErrorHandler<ReviewCreateForm> = () => {
+    openToast({ message: '값을 모두 입력해주세요.' });
+  };
 
   if (progress !== '1' && progress !== '2') throw new Error('비정상적인 접근입니다.');
 

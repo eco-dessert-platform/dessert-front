@@ -31,16 +31,17 @@ class ReviewService extends Service {
     const category = 'REVIEW';
     const formData = new FormData();
 
-    formData.append('category', category);
+    const categoryBlob = new Blob([JSON.stringify(category)], { type: 'application/json' });
+    formData.append('category', categoryBlob);
     for (let i = 0; i < photos.length; i += 1) {
-      formData.append('multipart', photos[i]);
+      formData.append('photos', photos[i]);
     }
 
     const res = await this.fetchExtend.post('/review/image', {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      body: JSON.stringify(formData)
+      body: formData
     });
 
     const { code, message, result, success }: ResultResponse<{ urls: string[] }> = await res.json();

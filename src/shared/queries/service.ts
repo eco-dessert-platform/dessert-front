@@ -43,13 +43,13 @@ class Service {
 
     const res = await fetch(fullUrl, {
       method,
+      ...config,
       headers: {
         ...this.headers,
         'Content-Type': 'application/json',
         Authorization: bearerToken,
         ...config?.headers
-      },
-      ...config
+      }
     });
     return res;
   }

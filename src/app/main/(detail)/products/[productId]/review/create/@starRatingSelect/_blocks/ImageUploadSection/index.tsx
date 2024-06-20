@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { uploadImageUrlsState } from '@/domains/review/atoms';
 import { CameraIcon } from '@/shared/components/icons';
@@ -10,11 +10,17 @@ import PreviewImage from '@/app/main/(detail)/products/[productId]/review/create
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { useFormContext } from 'react-hook-form';
 import { ReviewCreateForm } from '@/domains/review/types/review';
+import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutation';
 
 const ImageUploadSection = () => {
+  const { mutate: imageUploadMuate, data: images, isSuccess } = useImageUploadMutation(['review']);
   const [imagePreviewUrls, setImagePreviewUrls] = useRecoilState(uploadImageUrlsState);
-  const { register } = useFormContext<ReviewCreateForm>();
+  const { register, setValue } = useFormContext<ReviewCreateForm>();
   const { openToast } = useToastNewVer();
+
+  useEffect(() => {
+    if (isSuccess && images) setValue('urls', images);
+  }, [isSuccess, images, setValue]);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -26,6 +32,7 @@ const ImageUploadSection = () => {
 
     const fileArray = Array.from(files);
     setImagePreviewUrls(fileArray.map((file) => URL.createObjectURL(file)));
+    imageUploadMuate(files);
   };
 
   const handleImageRemove = (idxToRemove: number) => {

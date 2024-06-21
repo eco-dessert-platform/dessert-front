@@ -21,7 +21,7 @@ const Header = ({ title, content, back = false }: HeaderProps) => {
         <button
           type="button"
           aria-label="button"
-          className="cursor-pointer mr-[17px]"
+          className="cursor-pointer"
           onClick={goBackHandler}
         >
           <ArrowIcons shape="back" />

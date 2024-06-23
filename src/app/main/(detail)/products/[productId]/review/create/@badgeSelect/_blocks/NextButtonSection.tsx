@@ -4,12 +4,12 @@ import { useRouter, usePathname } from 'next/navigation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import { useFormContext } from 'react-hook-form';
-import { ReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewCreateForm } from '@/domains/review/types/review';
 
 const NextButtonSection = () => {
   const { push } = useRouter();
   const pathname = usePathname();
-  const { getValues } = useFormContext<ReviewCreateForm>();
+  const { getValues } = useFormContext<IReviewCreateForm>();
 
   const { badges } = getValues();
   const isAllBadgeSelected = Object.values(badges).every((badge) => badge);

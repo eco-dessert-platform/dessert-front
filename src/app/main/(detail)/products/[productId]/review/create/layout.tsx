@@ -1,11 +1,9 @@
 'use client';
 
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/shared/components/Header';
-import { FormProvider, SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import { ReviewCreateForm } from '@/domains/review/types/review';
-import useCreateReviewMutation from '@/domains/review/queries/useCreateReviewMutation';
-import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import ReviewFormProvider from './_blocks/ReviewFormProvider';
+import ReviewCreateForm from './_blocks/ReviewCreateForm';
 
 interface ReviewCreateLayoutProps {
   badgeSelect: React.ReactNode;
@@ -13,43 +11,8 @@ interface ReviewCreateLayoutProps {
 }
 
 const ReviewCreateLayout = ({ badgeSelect, starRatingSelect }: ReviewCreateLayoutProps) => {
-  const { productId } = useParams<{ productId: string }>();
   const searchParams = useSearchParams();
   const progress = searchParams.get('progress');
-  const methods = useForm<ReviewCreateForm>({
-    defaultValues: {
-      rate: 0,
-      badges: {
-        texture: undefined,
-        brix: undefined,
-        taste: undefined
-      },
-      content: '',
-      boardId: Number(productId),
-      images: {
-        files: undefined,
-        urls: []
-      }
-    }
-  });
-  const { handleSubmit } = methods;
-  const { mutate: createReviewMutation } = useCreateReviewMutation();
-  const { openToast } = useToastNewVer();
-
-  const onValidSubmit: SubmitHandler<ReviewCreateForm> = ({ badges, images, ...rest }) => {
-    const { brix, taste, texture } = badges;
-    const formmatedBadges = [brix, taste, texture].map((value) => value?.toUpperCase());
-
-    createReviewMutation({
-      badges: formmatedBadges,
-      urls: images.urls,
-      ...rest
-    });
-  };
-
-  const onInvalidSubmit: SubmitErrorHandler<ReviewCreateForm> = () => {
-    openToast({ message: '값을 모두 입력해주세요.' });
-  };
 
   if (progress !== '1' && progress !== '2') throw new Error('비정상적인 접근입니다.');
 
@@ -60,12 +23,12 @@ const ReviewCreateLayout = ({ badgeSelect, starRatingSelect }: ReviewCreateLayou
         content={<span className="typo-title-16-medium text-gray-500">{progress}/2</span>}
         back
       />
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onValidSubmit, onInvalidSubmit)}>
+      <ReviewFormProvider>
+        <ReviewCreateForm>
           {progress === '1' && badgeSelect}
           {progress === '2' && starRatingSelect}
-        </form>
-      </FormProvider>
+        </ReviewCreateForm>
+      </ReviewFormProvider>
     </>
   );
 };

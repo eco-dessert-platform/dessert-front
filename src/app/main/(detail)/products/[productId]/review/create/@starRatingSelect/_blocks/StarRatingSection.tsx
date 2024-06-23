@@ -6,12 +6,12 @@ import { useFormContext } from 'react-hook-form';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
 import StarRating from '@/domains/review/components/common/StarRating';
-import { ReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewCreateForm } from '@/domains/review/types/review';
 
 const StarRatingSection = () => {
   const { productId } = useParams<{ productId: string }>();
   const { data } = useGetProductOptionQuery(productId);
-  const { register, watch } = useFormContext<ReviewCreateForm>();
+  const { register, watch } = useFormContext<IReviewCreateForm>();
 
   return (
     <div className="flex flex-col items-center mb-[28px]">

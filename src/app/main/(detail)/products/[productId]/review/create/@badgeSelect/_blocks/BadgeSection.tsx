@@ -4,10 +4,10 @@ import { BADGE } from '@/domains/review/constants/badge';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ReviewBadge from '@/domains/review/components/ReviewBadge';
 import { useFormContext } from 'react-hook-form';
-import { ReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewCreateForm } from '@/domains/review/types/review';
 
 const BadgeSection = () => {
-  const { watch, register } = useFormContext<ReviewCreateForm>();
+  const { watch, register } = useFormContext<IReviewCreateForm>();
 
   const badges = Object.values(BADGE);
 

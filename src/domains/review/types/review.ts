@@ -14,7 +14,7 @@ export interface Review {
   rating: RatingType;
 }
 
-export interface ReviewCreateForm {
+export interface IReviewCreateForm {
   badges: SelectedBadgeType;
   rate: RatingType;
   content: string;

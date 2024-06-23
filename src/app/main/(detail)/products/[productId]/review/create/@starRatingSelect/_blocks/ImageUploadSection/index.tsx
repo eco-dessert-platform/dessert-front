@@ -7,12 +7,12 @@ import ImageInput from '@/shared/components/ImageInput';
 import PreviewImage from '@/app/main/(detail)/products/[productId]/review/create/@starRatingSelect/_blocks/ImageUploadSection/PreviewImage';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { useFormContext } from 'react-hook-form';
-import { ReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewCreateForm } from '@/domains/review/types/review';
 import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutation';
 
 const ImageUploadSection = () => {
   const { mutate: imageUploadMuate, data: images, isSuccess } = useImageUploadMutation(['review']);
-  const { register, setValue, watch, getValues } = useFormContext<ReviewCreateForm>();
+  const { register, setValue, watch, getValues } = useFormContext<IReviewCreateForm>();
   const { openToast } = useToastNewVer();
 
   useEffect(() => {

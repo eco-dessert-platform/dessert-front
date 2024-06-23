@@ -47,7 +47,8 @@ module.exports = {
       { hostname: 'k.kakaocdn.net' },
       { hostname: 't1.kakaocdn.net' },
       { hostname: 'bbangree-oven.cdn.ntruss.com' },
-      { hostname: 'smartstore.naver.com' }
+      { hostname: 'smartstore.naver.com' },
+      { hostname: 't1.gstatic.com' } // AlarmCard 이미지 테스트를 위함 (추후 삭제 예정)
     ]
   },
 

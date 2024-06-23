@@ -8,6 +8,8 @@ export { default as StarIcon } from './StarIcon';
 export { default as ReviewBadgeIcon } from './ReviewBadgeIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as ThumbsUpIcon } from './ThumbsUpIcon';
+export { default as BellIcon } from './BellIcon';
+export { default as TimerIcon } from './TimerIcon';
 
 export { default as PlusIcon } from '@public/assets/icons/plus.svg';
 
@@ -29,3 +31,4 @@ export { default as ShareIcon } from '@public/assets/icons/share.svg';
 export { default as CameraIcon } from '@public/assets/icons/camera.svg';
 
 export { default as KebabIcon } from '@public/assets/icons/kebab.svg';
+export { default as QuestionMarkIcon } from '@public/assets/icons/question-mark.svg';

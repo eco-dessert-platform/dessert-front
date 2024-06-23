@@ -26,6 +26,7 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
           </button>
         }
         back
+        className="sticky top-0 bg-white z-50"
       />
       {children}
       <FixedPurchaseButtonSection boardData={boardData} />

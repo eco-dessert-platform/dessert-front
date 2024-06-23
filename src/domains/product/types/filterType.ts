@@ -14,4 +14,7 @@ export interface IFilterType {
   orderAvailableToday: IOrderAvailableToday;
 }
 
-export type FilterFamilyIDType = typeof FILTER_FAMILY_ID.main | typeof FILTER_FAMILY_ID.search;
+export type FilterFamilyIDType =
+  | typeof FILTER_FAMILY_ID.main
+  | typeof FILTER_FAMILY_ID.search
+  | typeof FILTER_FAMILY_ID.home;

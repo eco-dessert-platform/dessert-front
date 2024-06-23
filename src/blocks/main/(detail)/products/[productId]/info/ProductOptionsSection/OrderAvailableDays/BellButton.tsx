@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BellIcons from '@/shared/components/icons/BellIcons';
+import BellIcons from '@/shared/components/icons/BellIcon';
 import useToggle from '@/shared/hooks/useToggle';
 
 const BellButton = ({ isNotified }: { isNotified: boolean }) => {

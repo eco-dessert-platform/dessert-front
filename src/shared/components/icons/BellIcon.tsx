@@ -1,13 +1,13 @@
 'use client';
 
-import BellOff from '@public/assets/icons/bell/bell-off.svg';
-import BellOn from '@public/assets/icons/bell/bell-on.svg';
+import BellOff from '@public/assets/icons/alarm/bell-off.svg';
+import BellOn from '@public/assets/icons/alarm/bell-on.svg';
 
 interface Props {
   shape: 'off' | 'on';
 }
 
-const BellIcons = ({ shape }: Props) => {
+const BellIcon = ({ shape }: Props) => {
   switch (shape) {
     case 'off':
       return <BellOff />;
@@ -18,4 +18,4 @@ const BellIcons = ({ shape }: Props) => {
   }
 };
 
-export default BellIcons;
+export default BellIcon;

@@ -26,19 +26,23 @@ const ReviewCreateLayout = ({ badgeSelect, starRatingSelect }: ReviewCreateLayou
       },
       content: '',
       boardId: Number(productId),
-      urls: []
+      images: {
+        files: undefined,
+        urls: []
+      }
     }
   });
   const { handleSubmit } = methods;
   const { mutate: createReviewMutation } = useCreateReviewMutation();
   const { openToast } = useToastNewVer();
 
-  const onValidSubmit: SubmitHandler<ReviewCreateForm> = ({ badges, ...rest }) => {
+  const onValidSubmit: SubmitHandler<ReviewCreateForm> = ({ badges, images, ...rest }) => {
     const { brix, taste, texture } = badges;
     const formmatedBadges = [brix, taste, texture].map((value) => value?.toUpperCase());
 
     createReviewMutation({
       badges: formmatedBadges,
+      urls: images.urls,
       ...rest
     });
   };

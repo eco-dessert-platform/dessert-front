@@ -1,8 +1,6 @@
 'use client';
 
 import { ChangeEvent, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { uploadImageUrlsState } from '@/domains/review/atoms';
 import { CameraIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
@@ -14,12 +12,11 @@ import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutat
 
 const ImageUploadSection = () => {
   const { mutate: imageUploadMuate, data: images, isSuccess } = useImageUploadMutation(['review']);
-  const [imagePreviewUrls, setImagePreviewUrls] = useRecoilState(uploadImageUrlsState);
-  const { register, setValue } = useFormContext<ReviewCreateForm>();
+  const { register, setValue, watch, getValues } = useFormContext<ReviewCreateForm>();
   const { openToast } = useToastNewVer();
 
   useEffect(() => {
-    if (isSuccess && images) setValue('urls', images);
+    if (isSuccess && images) setValue('images.urls', images);
   }, [isSuccess, images, setValue]);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,17 +26,22 @@ const ImageUploadSection = () => {
       openToast({ message: '최대 5개까지 업로드할 수 있습니다' });
       return;
     }
-
-    const fileArray = Array.from(files);
-    setImagePreviewUrls(fileArray.map((file) => URL.createObjectURL(file)));
     imageUploadMuate(files);
   };
 
   const handleImageRemove = (idxToRemove: number) => {
-    setImagePreviewUrls(imagePreviewUrls.filter((_, idx) => idx !== idxToRemove));
+    const dataTransfer = new DataTransfer();
+    const files = getValues('images.files');
+    const filteredFiles = Array.from(files).filter((_, idx) => idx !== idxToRemove);
+    filteredFiles.forEach((file) => {
+      dataTransfer.items.add(file);
+    });
+    setValue('images.files', dataTransfer.files);
   };
 
-  const fileInputRegister = register('urls', { onChange: handleImageUpload });
+  const fileInputRegister = register('images.files', { onChange: handleImageUpload });
+
+  const uploadedImagesUrl = watch('images.urls');
 
   return (
     <PaddingWrapper className="flex gap-x-[5px] overflow-x-scroll scrollbar-hide">
@@ -53,18 +55,17 @@ const ImageUploadSection = () => {
           사진
           <p>
             <span
-              className={imagePreviewUrls.length > 0 ? 'text-primaryOrangeRed' : 'text-gray-500'}
+              className={uploadedImagesUrl.length > 0 ? 'text-primaryOrangeRed' : 'text-gray-500'}
             >
-              {imagePreviewUrls.length}
+              {uploadedImagesUrl.length}
             </span>
             /5
           </p>
         </div>
       </ImageInput>
-      {imagePreviewUrls.length > 0 &&
-        imagePreviewUrls.map((url, idx) => (
-          <PreviewImage key={url} imageSrc={url} onRemove={() => handleImageRemove(idx)} />
-        ))}
+      {uploadedImagesUrl.map((url, idx) => (
+        <PreviewImage key={url} imageSrc={url} onRemove={() => handleImageRemove(idx)} />
+      ))}
     </PaddingWrapper>
   );
 };

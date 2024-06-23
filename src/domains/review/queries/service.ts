@@ -27,26 +27,21 @@ class ReviewService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async uploadImage(photos: FileList) {
-    const category = 'REVIEW';
+  async uploadImage(images: FileList) {
     const formData = new FormData();
 
-    const categoryBlob = new Blob([JSON.stringify(category)], { type: 'application/json' });
-    formData.append('category', categoryBlob);
-    for (let i = 0; i < photos.length; i += 1) {
-      formData.append('photos', photos[i]);
-    }
+    Array.from(images).forEach((image) => {
+      formData.append('images', image);
+    });
+    formData.append('category', 'REVIEW');
 
-    const res = await this.fetchExtend.post('/review/image', {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      },
+    const res = await this.fetchExtend.postForm('/review/image', {
       body: formData
     });
 
     const { code, message, result, success }: ResultResponse<{ urls: string[] }> = await res.json();
 
-    if (!res.ok || success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result.urls;
   }
 }

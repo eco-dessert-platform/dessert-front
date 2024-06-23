@@ -35,9 +35,9 @@ const StarRating = (
         value={value}
         onChange={onChange}
         id={id}
-        min="0"
-        max="5"
-        step="0.5"
+        min={0}
+        max={5}
+        step={0.5}
         disabled={!editable}
         className={`absolute left-0 top-0 w-full h-full opacity-0 ${editable ? 'cursor-pointer' : ''}`}
         {...props}

@@ -19,7 +19,10 @@ export interface ReviewCreateForm {
   rate: RatingType;
   content: string;
   boardId: number;
-  urls: string[];
+  images: {
+    files: FileList;
+    urls: string[];
+  };
 }
 
 export interface CreatReviewRequest {

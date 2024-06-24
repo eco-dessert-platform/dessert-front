@@ -16,8 +16,6 @@ const ReviewList = () => {
     if (inView) fetchNextPage();
   }, [inView, fetchNextPage]);
 
-  console.log(reviews);
-
   return (
     <section className="flex flex-col divide-y divide-gray-200">
       {reviews?.map(

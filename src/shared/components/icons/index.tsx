@@ -32,3 +32,4 @@ export { default as CameraIcon } from '@public/assets/icons/camera.svg';
 
 export { default as KebabIcon } from '@public/assets/icons/kebab.svg';
 export { default as QuestionMarkIcon } from '@public/assets/icons/question-mark.svg';
+export { default as PolygonIcon } from '@public/assets/icons/polygon.svg';

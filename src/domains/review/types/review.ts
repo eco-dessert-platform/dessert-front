@@ -3,7 +3,7 @@ import { RatingType } from '@/domains/review/types/starRating';
 
 export interface ReviewType {
   id: string;
-  images: { id: number; url: string }[];
+  images: { id: number; url: string }[] | null;
   nickname: string;
   isBest: boolean;
   tags: string[];
@@ -14,17 +14,21 @@ export interface ReviewType {
   rating: RatingType;
 }
 
-export interface ReviewDetailType {
-  id: string;
-  images: { id: number; url: string }[];
-  nickname: string;
-  isBest: boolean;
-  tags: string[];
-  like: number;
-  isLiked: boolean;
-  comment: string;
-  date: string;
-  rating: RatingType;
+export interface BoardReviewRateResponse {
+  rating: number;
+  count: number;
+  taste: {
+    good: number;
+    bad: number;
+  };
+  brix: {
+    sweet: number;
+    plain: number;
+  };
+  texture: {
+    soft: number;
+    dry: number;
+  };
 }
 
 export interface IReviewCreateForm {

@@ -23,7 +23,22 @@ const PATH = {
   myReview: '/mypage/review',
 
   preferenceCreate: '/mypage/preference/create',
-  preferenceUpdate: '/mypage/preference/upate'
+  preferenceUpdate: '/mypage/preference/upate',
+  bbangketing: '/mypage/alarm/bbangketing',
+  restock: '/mypage/alarm/restock',
+
+  reviewList: (productId: number) => `${PATH.mainProductList}/${productId}/review`,
+  reviewCreate: ({ productId, progress }: { productId: number; progress: number }) =>
+    `/main/products/${productId}/review/create/${progress}`,
+  reviewUpdate: ({
+    productId,
+    progress,
+    reviewId
+  }: {
+    productId: number;
+    progress: number;
+    reviewId: number;
+  }) => `/main/products/${productId}/review/${reviewId}/update/${progress}`
 };
 
 export default PATH;

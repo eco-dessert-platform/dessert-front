@@ -40,7 +40,7 @@ const Review = ({
 
     <div className="flex flex-col gap-[8px]">
       <div>
-        <StarRating rating={rating} />
+        <StarRating value={rating} />
       </div>
       {images && <ImageSlider images={images} />}
       <Comment id={id} comment={comment} />

@@ -16,7 +16,7 @@ const EditableStory = () => {
 
   return (
     <StarRating
-      rating={rating}
+      value={rating}
       onRatingChange={(newRating) => setRating(newRating)}
       starSize="large"
       editable
@@ -25,11 +25,11 @@ const EditableStory = () => {
 };
 
 export const Default: Story = {
-  args: { rating: 3.5 }
+  args: { value: 3.5 }
 };
 
 export const Size: Story = {
-  args: { rating: 2, starSize: 'large' }
+  args: { value: 2, starSize: 'large' }
 };
 
 export const Editable: Story = {

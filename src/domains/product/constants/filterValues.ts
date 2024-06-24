@@ -7,7 +7,7 @@ export const FILTER_VALUES = {
 };
 
 export const INIT_FILTER_VALUE = {
-  category: undefined,
+  category: '전체',
   tags: undefined,
   price: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE],
   sort: '추천순',

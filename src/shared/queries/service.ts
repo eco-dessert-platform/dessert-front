@@ -3,6 +3,7 @@ import { getCookie } from '../actions/cookie';
 interface FetchInstance {
   get: (url: string, init?: RequestInit) => Promise<Response>;
   post: (url: string, init?: RequestInit) => Promise<Response>;
+  postForm: (url: string, init?: RequestInit) => Promise<Response>;
   put: (url: string, init?: RequestInit) => Promise<Response>;
   patch: (url: string, init?: RequestInit) => Promise<Response>;
   delete: (url: string, init?: RequestInit) => Promise<Response>;
@@ -29,12 +30,13 @@ class Service {
       head: this.head.bind(this),
       options: this.options.bind(this),
       post: this.post.bind(this),
+      postForm: this.postForm.bind(this),
       put: this.put.bind(this),
       patch: this.patch.bind(this)
     };
   }
 
-  private async request(method: string, url: string, config?: RequestInit) {
+  private async request(method: string, url: string, config?: RequestInit, form: boolean = false) {
     const cookie = await getCookie('accessToken');
     const accessToken = cookie?.value;
     const bearerToken = `Bearer ${accessToken}`;
@@ -43,13 +45,13 @@ class Service {
 
     const res = await fetch(fullUrl, {
       method,
+      ...config,
       headers: {
         ...this.headers,
-        'Content-Type': 'application/json',
+        ...(form ? {} : { 'Content-Type': 'application/json' }),
         Authorization: bearerToken,
         ...config?.headers
-      },
-      ...config
+      }
     });
     return res;
   }
@@ -60,6 +62,10 @@ class Service {
 
   private post(url: string, init?: RequestInit) {
     return this.request('POST', url, init);
+  }
+
+  private postForm(url: string, init?: RequestInit) {
+    return this.request('POST', url, init, true);
   }
 
   private put(url: string, init?: RequestInit) {

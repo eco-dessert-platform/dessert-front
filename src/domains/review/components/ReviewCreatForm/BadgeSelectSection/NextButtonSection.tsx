@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import { useFormContext } from 'react-hook-form';
@@ -8,7 +8,6 @@ import { IReviewCreateForm } from '@/domains/review/types/review';
 
 const NextButtonSection = () => {
   const { push } = useRouter();
-  const pathname = usePathname();
   const { getValues } = useFormContext<IReviewCreateForm>();
 
   const { badges } = getValues();
@@ -16,7 +15,8 @@ const NextButtonSection = () => {
 
   const handleButtonClick = () => {
     if (!isAllBadgeSelected) return;
-    push(`${pathname}?progress=2`);
+    const commentPage = './2';
+    push(commentPage);
   };
 
   return (

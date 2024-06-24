@@ -20,5 +20,7 @@ export const reviewQueryKey = {
   list: ({ boardId, type }: { boardId?: number; type: string }) => [
     ...reviewQueryKey.lists(),
     { type, boardId }
-  ]
+  ],
+  details: () => [...reviewQueryKey.all, 'detail'],
+  detail: (id: number) => [...reviewQueryKey.details(), id]
 };

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { reviewQueryKey } from '@/shared/queries/queryKey';
 import reviewService from './service';
-import { reviewQueryKey } from './queryKey';
 
 const useReviewDetailQuery = (id: number) =>
   useQuery({

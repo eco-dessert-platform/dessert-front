@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   radius?: 'round' | 'square';
 }
 
-export const ButtonVariants = cva(
+export const buttonVariants = cva(
   'inline-flex min-w-[120px] p-[16px] justify-center items-center shrink-0 typo-title-16-medium',
   {
     variants: {
@@ -42,7 +42,7 @@ const ButtonNewver = ({
   <button
     type="button"
     className={cn(
-      ButtonVariants({ size, color, radius }),
+      buttonVariants({ size, color, radius }),
       'disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed',
       className
     )}

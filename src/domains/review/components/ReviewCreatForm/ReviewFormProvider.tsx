@@ -1,13 +1,20 @@
+'use client';
+
 import { IReviewCreateForm } from '@/domains/review/types/review';
 import { useParams } from 'next/navigation';
-import { PropsWithChildren } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { ReactNode } from 'react';
+import { DefaultValues, FormProvider, useForm } from 'react-hook-form';
 
-const ReviewFormProvider = ({ children }: PropsWithChildren) => {
+interface Props {
+  children: ReactNode;
+  defaultValues?: DefaultValues<IReviewCreateForm>;
+}
+
+const ReviewFormProvider = ({ children, defaultValues }: Props) => {
   const { productId } = useParams<{ productId: string }>();
 
   const methods = useForm<IReviewCreateForm>({
-    defaultValues: {
+    defaultValues: defaultValues || {
       rate: 0,
       badges: {
         texture: undefined,

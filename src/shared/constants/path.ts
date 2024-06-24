@@ -25,7 +25,19 @@ const PATH = {
   preferenceCreate: '/mypage/preference/create',
   preferenceUpdate: '/mypage/preference/upate',
   bbangketing: '/mypage/alarm/bbangketing',
-  restock: '/mypage/alarm/restock'
+  restock: '/mypage/alarm/restock',
+
+  reviewCreate: ({ productId, progress }: { productId: number; progress: number }) =>
+    `/main/products/${productId}/review/create/${progress}`,
+  reviewUpdate: ({
+    productId,
+    progress,
+    reviewId
+  }: {
+    productId: number;
+    progress: number;
+    reviewId: number;
+  }) => `/main/products/${productId}/review/${reviewId}/update/${progress}`
 };
 
 export default PATH;

@@ -4,11 +4,11 @@ import { ChangeEvent, useEffect } from 'react';
 import { CameraIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
-import PreviewImage from '@/app/main/(detail)/products/[productId]/review/create/@starRatingSelect/_blocks/ImageUploadSection/PreviewImage';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { useFormContext } from 'react-hook-form';
 import { IReviewCreateForm } from '@/domains/review/types/review';
 import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutation';
+import PreviewImage from './PreviewImage';
 
 const ImageUploadSection = () => {
   const { mutate: imageUploadMuate, data: images, isSuccess } = useImageUploadMutation(['review']);
@@ -32,8 +32,8 @@ const ImageUploadSection = () => {
   const handleImageRemove = (idxToRemove: number) => {
     const dataTransfer = new DataTransfer();
     const files = getValues('images.files');
-    const filteredFiles = Array.from(files).filter((_, idx) => idx !== idxToRemove);
-    filteredFiles.forEach((file) => {
+    const filteredFiles = files && Array.from(files).filter((_, idx) => idx !== idxToRemove);
+    filteredFiles?.forEach((file) => {
       dataTransfer.items.add(file);
     });
     setValue('images.files', dataTransfer.files);

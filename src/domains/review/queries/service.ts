@@ -1,14 +1,21 @@
 import Service from '@/shared/queries/service';
 import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { Review } from '../types/review';
+import { ReviewType } from '../types/review';
 
 class ReviewService extends Service {
   async getMyReview(cursorId: number) {
     const mockReviewUrl = `http://localhost:3000/mock/review.json?cursorId=${cursorId}`;
     const res = await this.fetchExtend.get(mockReviewUrl);
     if (!res.ok) throw new Error('mock error');
-    const { result }: ResultResponse<Cursor<Review[]>> = await res.json();
+    const { result }: ResultResponse<Cursor<ReviewType[]>> = await res.json();
+    return result;
+  }
+
+  async getReviewDetail(id: number) {
+    const res = await this.fetchExtend.get(`/review/${id}`);
+    const { result, success, message, code }: ResultResponse<ReviewType> = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }
 

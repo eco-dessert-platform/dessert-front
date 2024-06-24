@@ -1,7 +1,7 @@
 import { SelectedBadgeType } from '@/domains/review/types/badge';
 import { RatingType } from '@/domains/review/types/starRating';
 
-export interface Review {
+export interface ReviewType {
   id: string;
   images: string[];
   nickname: string;
@@ -20,7 +20,7 @@ export interface IReviewCreateForm {
   content: string;
   boardId: number;
   images: {
-    files: FileList;
+    files?: FileList;
     urls: string[];
   };
 }

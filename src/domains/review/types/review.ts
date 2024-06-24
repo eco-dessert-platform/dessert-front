@@ -14,6 +14,19 @@ export interface ReviewType {
   rating: RatingType;
 }
 
+export interface ReviewDetailType {
+  id: string;
+  images: { id: number; url: string }[];
+  nickname: string;
+  isBest: boolean;
+  tags: string[];
+  like: number;
+  isLiked: boolean;
+  comment: string;
+  date: string;
+  rating: RatingType;
+}
+
 export interface IReviewCreateForm {
   badges: SelectedBadgeType;
   rate: RatingType;

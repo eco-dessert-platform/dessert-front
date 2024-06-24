@@ -1,16 +1,18 @@
 import { BADGE } from '../constants/badge';
-import { ReviewType } from '../types/review';
+import { ReviewDetailType } from '../types/review';
 
-export const getFormValuesFromReviewType = ({
+export const getFormValuesFromReviewDetailType = ({
   review,
   boardId
 }: {
-  review: ReviewType;
+  review: ReviewDetailType;
   boardId: number;
 }) => {
   const textureKr = review.tags.find((tag) => tag === BADGE.dry.text || tag === BADGE.soft.text);
   const brixKr = review.tags.find((tag) => tag === BADGE.sweet.text || tag === BADGE.plain.text);
   const tasteKr = review.tags.find((tag) => tag === BADGE.good.text || tag === BADGE.bad.text);
+
+  const imagesUrl = review.images.map(({ url }) => url);
 
   const formValues = {
     rate: review.rating,
@@ -32,7 +34,7 @@ export const getFormValuesFromReviewType = ({
     boardId,
     images: {
       files: undefined,
-      urls: []
+      urls: imagesUrl
     }
   };
 

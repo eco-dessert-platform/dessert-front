@@ -1,7 +1,7 @@
 import Service from '@/shared/queries/service';
 import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { CreatReviewRequest, ReviewType } from '../types/review';
+import { CreatReviewRequest, ReviewDetailType, ReviewType } from '../types/review';
 
 class ReviewService extends Service {
   async getMyReview(cursorId: number) {
@@ -14,7 +14,7 @@ class ReviewService extends Service {
 
   async getReviewDetail(id: number) {
     const res = await this.fetchExtend.get(`/review/${id}`);
-    const { result, success, message, code }: ResultResponse<ReviewType> = await res.json();
+    const { result, success, message, code }: ResultResponse<ReviewDetailType> = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }

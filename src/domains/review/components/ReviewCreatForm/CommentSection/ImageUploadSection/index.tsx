@@ -16,7 +16,9 @@ const ImageUploadSection = () => {
   const { openToast } = useToastNewVer();
 
   useEffect(() => {
-    if (isSuccess && images) setValue('images.urls', images);
+    if (isSuccess && images) {
+      setValue('images.urls', images);
+    }
   }, [isSuccess, images, setValue]);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +34,15 @@ const ImageUploadSection = () => {
   const handleImageRemove = (idxToRemove: number) => {
     const dataTransfer = new DataTransfer();
     const files = getValues('images.files');
+    const urls = getValues('images.urls');
     const filteredFiles = files && Array.from(files).filter((_, idx) => idx !== idxToRemove);
+    const filteredUrls = urls.filter((_, idx) => idx !== idxToRemove);
+
     filteredFiles?.forEach((file) => {
       dataTransfer.items.add(file);
     });
     setValue('images.files', dataTransfer.files);
+    setValue('images.urls', filteredUrls);
   };
 
   const fileInputRegister = register('images.files', { onChange: handleImageUpload });

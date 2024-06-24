@@ -1,21 +1,17 @@
-import { DefaultValues } from 'react-hook-form';
+import { FormEventHandler } from 'react';
 import BadgeSelectSection from './BadgeSelectSection';
 import CommentSection from './CommentSection';
-import ReviewFormProvider from './ReviewFormProvider';
-import { IReviewCreateForm } from '../../types/review';
 
 interface Props {
   progress: 1 | 2;
-  defaultValues?: DefaultValues<IReviewCreateForm>;
+  onSumbmit: FormEventHandler<HTMLFormElement>;
 }
 
-const ReviewCreateForm = ({ progress, defaultValues }: Props) => (
-  <ReviewFormProvider defaultValues={defaultValues}>
-    <form>
-      {progress === 1 && <BadgeSelectSection />}
-      {progress === 2 && <CommentSection />}
-    </form>
-  </ReviewFormProvider>
+const ReviewCreateForm = ({ progress, onSumbmit }: Props) => (
+  <form onSubmit={onSumbmit}>
+    {progress === 1 && <BadgeSelectSection />}
+    {progress === 2 && <CommentSection />}
+  </form>
 );
 
 export default ReviewCreateForm;

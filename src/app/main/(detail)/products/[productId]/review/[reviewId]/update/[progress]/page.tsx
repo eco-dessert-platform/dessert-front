@@ -1,23 +1,34 @@
+import { notFound } from 'next/navigation';
+import { SubmitErrorHandler, SubmitHandler, useFormContext } from 'react-hook-form';
 import Header from '@/shared/components/Header';
 import ReviewCreateForm from '@/domains/review/components/ReviewCreatForm';
-import { notFound } from 'next/navigation';
-import reviewService from '@/domains/review/queries/service';
-import { getFormValuesFromReviewType } from '@/domains/review/utils/transformer';
+import { IReviewCreateForm } from '@/domains/review/types/review';
+import useUpdateReviewMutation from '@/domains/review/queries/useUpdateReviewMutation';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 interface ReviewUpdatePageProps {
   params: { reviewId: string; productId: string; progress: string };
 }
 
-const ReviewUpdatePage = async ({ params }: ReviewUpdatePageProps) => {
+const ReviewUpdatePage = ({ params }: ReviewUpdatePageProps) => {
   const progress = Number(params.progress);
+  const { mutate } = useUpdateReviewMutation();
+  const { handleSubmit } = useFormContext<IReviewCreateForm>();
+  const { openToast } = useToastNewVer();
 
   if (!(progress === 1 || progress === 2)) notFound();
 
-  const reviewDetail = await reviewService.getReviewDetail(Number(params.reviewId));
-  const defaultValues = getFormValuesFromReviewType({
-    review: reviewDetail,
-    boardId: Number(params.productId)
-  });
+  const onValidSubmit: SubmitHandler<IReviewCreateForm> = ({ badges, images, ...rest }) => {
+    mutate({
+      urls: images.urls,
+      badges: [badges.taste, badges.brix, badges.texture],
+      ...rest
+    });
+  };
+
+  const onInvalidSubmit: SubmitErrorHandler<IReviewCreateForm> = () => {
+    openToast({ message: '값을 올바르게 입력해주세요.' });
+  };
 
   return (
     <>
@@ -26,7 +37,10 @@ const ReviewUpdatePage = async ({ params }: ReviewUpdatePageProps) => {
         content={<span className="typo-title-16-medium text-gray-500">{progress}/2</span>}
         back
       />
-      <ReviewCreateForm progress={progress} defaultValues={defaultValues} />
+      <ReviewCreateForm
+        progress={progress}
+        onSumbmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
+      />
     </>
   );
 };

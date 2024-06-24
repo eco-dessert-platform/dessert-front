@@ -1,7 +1,7 @@
 import Service from '@/shared/queries/service';
 import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { ReviewType } from '../types/review';
+import { CreatReviewRequest, ReviewType } from '../types/review';
 
 class ReviewService extends Service {
   async getMyReview(cursorId: number) {
@@ -19,17 +19,18 @@ class ReviewService extends Service {
     return result;
   }
 
-  async createReview(review: {
-    badges: string[];
-    rate: number;
-    content: string;
-    urls: string[];
-    boardId: number;
-  }) {
+  async createReview(review: CreatReviewRequest) {
     const res = await this.fetchExtend.post('/review', {
       body: JSON.stringify(review)
     });
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
 
+  async updateReview(review: CreatReviewRequest) {
+    const res = await this.fetchExtend.put('/review', {
+      body: JSON.stringify(review)
+    });
     const { code, message, success }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }

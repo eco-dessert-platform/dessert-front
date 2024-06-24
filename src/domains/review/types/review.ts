@@ -27,7 +27,7 @@ export interface IReviewCreateForm {
 
 export interface CreatReviewRequest {
   badges: string[];
-  rate: number;
+  rate: RatingType;
   content: string;
   urls: string[];
   boardId: number;

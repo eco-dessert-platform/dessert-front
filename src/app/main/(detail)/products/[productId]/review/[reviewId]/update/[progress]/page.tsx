@@ -15,7 +15,7 @@ interface ReviewUpdatePageProps {
 const ReviewUpdatePage = ({ params }: ReviewUpdatePageProps) => {
   const progress = Number(params.progress);
   const { mutate } = useUpdateReviewMutation();
-  const { handleSubmit, watch } = useFormContext<IReviewCreateForm>();
+  const { handleSubmit } = useFormContext<IReviewCreateForm>();
   const { openToast } = useToastNewVer();
 
   if (!(progress === 1 || progress === 2)) notFound();
@@ -31,8 +31,6 @@ const ReviewUpdatePage = ({ params }: ReviewUpdatePageProps) => {
   const onInvalidSubmit: SubmitErrorHandler<IReviewCreateForm> = () => {
     openToast({ message: '값을 올바르게 입력해주세요.' });
   };
-
-  console.log(watch('images'));
 
   return (
     <>

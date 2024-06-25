@@ -6,6 +6,7 @@ const useReviewDetailQuery = (id: number) =>
   useQuery({
     queryKey: reviewQueryKey.detail(id),
     queryFn: () => reviewService.getReviewDetail(id)
+    // enabled: !!id
   });
 
 export default useReviewDetailQuery;

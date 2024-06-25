@@ -2,10 +2,10 @@
 
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { useFormContext } from 'react-hook-form';
-import { IReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewWriteForm } from '@/domains/review/types/review';
 
 const ContentSection = () => {
-  const { register } = useFormContext<IReviewCreateForm>();
+  const { register } = useFormContext<IReviewWriteForm>();
 
   return (
     <div className="flex flex-col items-center">

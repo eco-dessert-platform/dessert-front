@@ -31,7 +31,7 @@ export interface BoardReviewRateResponse {
   };
 }
 
-export interface IReviewCreateForm {
+export interface IReviewWriteForm {
   badges: SelectedBadgeType;
   rate: RatingType;
   content: string;

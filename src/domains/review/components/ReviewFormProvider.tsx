@@ -1,19 +1,19 @@
 'use client';
 
-import { IReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewWriteForm } from '@/domains/review/types/review';
 import { useParams } from 'next/navigation';
 import { ReactNode } from 'react';
 import { DefaultValues, FormProvider, useForm } from 'react-hook-form';
 
 interface Props {
   children: ReactNode;
-  defaultValues?: DefaultValues<IReviewCreateForm>;
+  defaultValues?: DefaultValues<IReviewWriteForm>;
 }
 
 const ReviewFormProvider = ({ children, defaultValues }: Props) => {
   const { productId } = useParams<{ productId: string }>();
 
-  const methods = useForm<IReviewCreateForm>({
+  const methods = useForm<IReviewWriteForm>({
     defaultValues: defaultValues || {
       rate: 0,
       badges: {

@@ -1,22 +1,24 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import { useFormContext } from 'react-hook-form';
-import { IReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewWriteForm } from '@/domains/review/types/review';
+import PATH from '@/shared/constants/path';
 
 const NextButtonSection = () => {
   const { push } = useRouter();
-  const { getValues } = useFormContext<IReviewCreateForm>();
+  const { getValues } = useFormContext<IReviewWriteForm>();
+  const searchParams = useSearchParams();
+  const productId = searchParams.get('productId');
 
   const { badges } = getValues();
   const isAllBadgeSelected = Object.values(badges).every((badge) => badge);
 
   const handleButtonClick = () => {
     if (!isAllBadgeSelected) return;
-    const commentPage = './2';
-    push(commentPage);
+    push(PATH.reviewCreate({ productId: Number(productId), progress: 2 }));
   };
 
   return (

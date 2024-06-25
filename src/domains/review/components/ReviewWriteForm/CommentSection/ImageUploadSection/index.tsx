@@ -6,13 +6,13 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { useFormContext } from 'react-hook-form';
-import { IReviewCreateForm } from '@/domains/review/types/review';
+import { IReviewWriteForm } from '@/domains/review/types/review';
 import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutation';
 import PreviewImage from './PreviewImage';
 
 const ImageUploadSection = () => {
   const { mutate: imageUploadMuate, data: images, isSuccess } = useImageUploadMutation(['review']);
-  const { register, setValue, watch, getValues } = useFormContext<IReviewCreateForm>();
+  const { register, setValue, watch, getValues } = useFormContext<IReviewWriteForm>();
   const { openToast } = useToastNewVer();
 
   useEffect(() => {

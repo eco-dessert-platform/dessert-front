@@ -7,11 +7,11 @@ interface Props {
   onSumbmit: FormEventHandler<HTMLFormElement>;
 }
 
-const ReviewCreateForm = ({ progress, onSumbmit }: Props) => (
+const ReviewWriteForm = ({ progress, onSumbmit }: Props) => (
   <form onSubmit={onSumbmit}>
     {progress === 1 && <BadgeSelectSection />}
     {progress === 2 && <CommentSection />}
   </form>
 );
 
-export default ReviewCreateForm;
+export default ReviewWriteForm;

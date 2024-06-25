@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Badge from '@/shared/components/Badge';
 import { KebabIcon, ThumbsUpIcon } from '@/shared/components/icons';
@@ -7,6 +8,11 @@ import StarRating from '../common/StarRating';
 import Comment from './Comment';
 import ImageSlider from './ImageSlider';
 import { ReviewType } from '../../types/review';
+
+interface Props extends ReviewType {
+  onModifyClick?: MouseEventHandler<HTMLButtonElement>;
+  onDeleteClick?: MouseEventHandler<HTMLButtonElement>;
+}
 
 const Review = ({
   id,
@@ -18,8 +24,10 @@ const Review = ({
   comment,
   tags,
   like,
-  isLiked
-}: ReviewType) => (
+  isLiked,
+  onDeleteClick,
+  onModifyClick
+}: Props) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
       <div className="flex gap-[4px]">
@@ -32,8 +40,8 @@ const Review = ({
           <KebabIcon />
         </Dropdown.Trigger>
         <Dropdown.Content position="left">
-          <Dropdown.Item>수정</Dropdown.Item>
-          <Dropdown.Item>삭제</Dropdown.Item>
+          <Dropdown.Item onClick={onModifyClick}>수정</Dropdown.Item>
+          <Dropdown.Item onClick={onDeleteClick}>삭제</Dropdown.Item>
         </Dropdown.Content>
       </Dropdown>
     </div>

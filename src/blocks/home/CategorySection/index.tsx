@@ -5,7 +5,7 @@ import CategoryButton from '@/domains/product/components/CategoryButton';
 import { CATEGORY } from '@/domains/home/constants/category';
 
 const CategorySection = () => (
-  <PaddingWrapper className="grid pb-[0px] grid-cols-3">
+  <PaddingWrapper className="grid grid-cols-3">
     {CATEGORY.map((category) => (
       <CategoryButton key={category.id} name={category.name} icon={category.icon} />
     ))}

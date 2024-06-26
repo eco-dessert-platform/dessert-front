@@ -11,7 +11,7 @@ const RecommendationSection = async () => {
 
   return (
     !isLoggedIn && (
-      <PaddingWrapper>
+      <PaddingWrapper className="py-[6px]">
         <Link
           href={PATH.login}
           className="border-primaryOrangeRed rounded-[8px] border px-[16px] py-[14px] w-full flex hover:opacity-70 transition-opacity"

@@ -2,7 +2,7 @@
 
 import { FormEvent } from 'react';
 import { UseMutateFunction } from '@tanstack/react-query';
-import { PreferenceType } from '@/domains/user/types/profile';
+import { PreferenceType } from '@/domains/user/types/preference';
 import DescriptionSection from '@/domains/user/components/PreferenceForm/DescriptionSection';
 import CheckSection from '@/domains/user/components/PreferenceForm/CheckSection';
 import ButtonSection from '@/domains/user/components/PreferenceForm/ButtonSection';

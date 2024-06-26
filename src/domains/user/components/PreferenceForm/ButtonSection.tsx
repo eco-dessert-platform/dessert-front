@@ -1,7 +1,7 @@
 'use client';
 
 import { useRecoilValue } from 'recoil';
-import { preferenceState } from '@/domains/user/atoms/profile';
+import { preferenceState } from '@/domains/user/atoms/preference';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Button from '@/shared/components/Button';
 

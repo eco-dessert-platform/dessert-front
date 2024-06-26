@@ -25,10 +25,10 @@ const ProductsList = () => {
 
   if (isFetching && !isFetchingNextPage) {
     return (
-      <>
+      <PaddingWrapper className="flex flex-col gap-y-[16px]">
         <SkeletonProductCardList row={1} col={3} />
         <SkeletonProductCardList row={1} col={2} />
-      </>
+      </PaddingWrapper>
     );
   }
   if (isError) {
@@ -47,8 +47,8 @@ const ProductsList = () => {
   }
 
   return (
-    <PaddingWrapper className="px-0 pb-[36px]">
-      <div className="grid grid-cols-3 gap-x-[10px] px-[16px] pb-[16px]">
+    <PaddingWrapper className="pb-[36px]">
+      <div className="grid grid-cols-3 gap-x-[10px] pb-[16px]">
         {data.products.slice(0, 3).map((product: IProductType, index: number) => (
           <ProductCard
             key={String(product.boardId)}
@@ -58,14 +58,14 @@ const ProductsList = () => {
           />
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] px-[16px]">
+      <div className="grid grid-cols-2 gap-[16px]">
         {data.products.slice(3).map((product: IProductType) => (
           <ProductCard key={String(product.boardId)} product={product} />
         ))}
         {hasNextPage && <SkeletonProductCardList row={1} col={1} />}
       </div>
       {hasNextPage && (
-        <div ref={ref}>
+        <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList row={1} col={2} />
         </div>
       )}

@@ -25,7 +25,11 @@ const MainProductList = () => {
   }, [inView, fetchNextPage]);
 
   if (isFetching && !isFetchingNextPage) {
-    return <SkeletonProductCardList />;
+    return (
+      <PaddingWrapper>
+        <SkeletonProductCardList />
+      </PaddingWrapper>
+    );
   }
   if (isError) {
     return (
@@ -43,14 +47,14 @@ const MainProductList = () => {
   }
 
   return (
-    <PaddingWrapper className="px-0">
-      <div className="grid grid-cols-2 gap-x-[16px] px-[16px] gap-y-[16px] pb-[36px]">
+    <PaddingWrapper className="pb-[36px]">
+      <div className="grid grid-cols-2 gap-[16px]">
         {data.products.map((product) => (
           <ProductCard key={`${product.boardId}`} product={product} />
         ))}
       </div>
       {hasNextPage && (
-        <div ref={ref} className="pb-[36px]">
+        <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList row={1} col={2} />
         </div>
       )}

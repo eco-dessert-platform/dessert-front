@@ -1,16 +1,21 @@
-'use client';
-
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
 import Link from 'next/link';
 import PATH from '@/shared/constants/path';
-import useGetPreferenceQuery from '@/domains/user/queries/useGetPreferenceQuery';
+import { getCookie } from '@/shared/actions/cookie';
+import { TOKEN } from '@/shared/constants/token';
+import userService from '@/domains/user/queries/service';
+import { transformDataToAtomFormat } from '@/domains/user/utils/transformPreference';
 import { genGuidanceMessage } from '@/domains/home/utils/genGuidanceMessage';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
-const TitleSection = () => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
-  const { data: preference } = useGetPreferenceQuery();
+const TitleSection = async () => {
+  const accessToken = await getCookie(TOKEN.accessToken);
+  const isLoggedIn = !!accessToken;
+
+  let preference;
+  if (isLoggedIn) {
+    const data = await userService.getPreference();
+    preference = transformDataToAtomFormat(data);
+  }
 
   return (
     <PaddingWrapper>

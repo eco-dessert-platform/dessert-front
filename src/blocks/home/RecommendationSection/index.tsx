@@ -1,14 +1,13 @@
-'use client';
-
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { getCookie } from '@/shared/actions/cookie';
+import { TOKEN } from '@/shared/constants/token';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Link from 'next/link';
 import PATH from '@/shared/constants/path';
 
-const RecommendationSection = () => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+const RecommendationSection = async () => {
+  const accessToken = await getCookie(TOKEN.accessToken);
+  const isLoggedIn = !!accessToken;
 
   return (
     !isLoggedIn && (

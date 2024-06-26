@@ -3,8 +3,6 @@ import { productQueryKey } from '@/shared/queries/queryKey';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { getCookie } from '@/shared/actions/cookie';
 import { TOKEN } from '@/shared/constants/token';
-import userService from '@/domains/user/queries/service';
-import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
 import productService from '@/domains/product/queries/service';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import TitleSection from '@/blocks/home/BestProductsSection/TitleSection';
@@ -16,26 +14,20 @@ const BestProductsSection = async () => {
   const isLoggedIn = !!accessToken;
 
   const queryClient = new QueryClient();
-  Promise.all([
-    await queryClient.prefetchQuery({
-      queryKey: preferenceQueryKey.all,
-      queryFn: userService.getPreference
-    }),
-    await queryClient.prefetchInfiniteQuery({
-      queryKey: [
-        ...productQueryKey.list('home'),
-        { filter: INIT_FILTER_VALUE, recommended: isLoggedIn }
-      ],
-      queryFn: async ({ pageParam: cursorId }: { pageParam: number }) => {
-        const result = await productService.getAllProducts({
-          cursorId,
-          filterValue: INIT_FILTER_VALUE
-        });
-        return result;
-      },
-      initialPageParam: INITIAL_CURSOR
-    })
-  ]);
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: [
+      ...productQueryKey.list('home'),
+      { filter: INIT_FILTER_VALUE, recommended: isLoggedIn }
+    ],
+    queryFn: async ({ pageParam: cursorId }: { pageParam: number }) => {
+      const result = await productService.getAllProducts({
+        cursorId,
+        filterValue: INIT_FILTER_VALUE
+      });
+      return result;
+    },
+    initialPageParam: INITIAL_CURSOR
+  });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

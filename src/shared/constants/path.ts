@@ -23,7 +23,7 @@ const PATH = {
   myReview: '/mypage/review',
 
   preferenceCreate: '/mypage/preference/create',
-  preferenceUpdate: '/mypage/preference/upate',
+  preferenceUpdate: '/mypage/preference/update',
   bbangketing: '/mypage/alarm/bbangketing',
   restock: '/mypage/alarm/restock'
 };

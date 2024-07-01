@@ -36,7 +36,7 @@ const ImageUploadSection = () => {
     const files = getValues('images.files');
     const urls = getValues('images.urls');
     const filteredFiles = files && Array.from(files).filter((_, idx) => idx !== idxToRemove);
-    const filteredUrls = urls.filter((_, idx) => idx !== idxToRemove);
+    const filteredUrls = urls?.filter((_, idx) => idx !== idxToRemove);
 
     filteredFiles?.forEach((file) => {
       dataTransfer.items.add(file);
@@ -61,15 +61,20 @@ const ImageUploadSection = () => {
           사진
           <p>
             <span
-              className={uploadedImagesUrl.length > 0 ? 'text-primaryOrangeRed' : 'text-gray-500'}
+              className={
+                uploadedImagesUrl && uploadedImagesUrl.length > 0
+                  ? 'text-primaryOrangeRed'
+                  : 'text-gray-500'
+              }
             >
-              {uploadedImagesUrl.length}
+              {uploadedImagesUrl?.length || 0}
             </span>
             /5
           </p>
         </div>
       </ImageInput>
-      {uploadedImagesUrl.map((url, idx) => (
+
+      {uploadedImagesUrl?.map((url, idx) => (
         <PreviewImage key={url} imageSrc={url} onRemove={() => handleImageRemove(idx)} />
       ))}
     </PaddingWrapper>

@@ -17,7 +17,7 @@ const EditableStory = () => {
   return (
     <StarRating
       value={rating}
-      onRatingChange={(newRating) => setRating(newRating)}
+      onChange={(e) => setRating(Number(e.currentTarget.value) as RatingType)}
       starSize="large"
       editable
     />

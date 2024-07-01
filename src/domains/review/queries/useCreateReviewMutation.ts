@@ -2,8 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import reviewService from './service';
 import { CreatReviewRequest } from '../types/review';
+import reviewService from './service';
 
 const useCreateReviewMutation = () => {
   const { push } = useRouter();

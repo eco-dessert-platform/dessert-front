@@ -39,7 +39,7 @@ export interface IReviewWriteForm {
   boardId: number;
   images: {
     files?: FileList;
-    urls: string[];
+    urls?: string[];
   };
 }
 
@@ -47,6 +47,6 @@ export interface CreatReviewRequest {
   badges: string[];
   rate: RatingType;
   content: string;
-  urls: string[];
+  urls: string[] | null;
   boardId: number;
 }

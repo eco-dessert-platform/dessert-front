@@ -5,6 +5,7 @@ import { reivewQueryOption } from '@/domains/review/queries/useReviewQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { buttonVariants } from '@/shared/components/ButtonNewver';
 import PATH from '@/shared/constants/path';
+import { cn } from '@/shared/utils/cn';
 import ReviewList from './_blocks/ReviewList';
 import RatingSection from './_blocks/RatingSection';
 import BadgeSection from './_blocks/BadgeSection';
@@ -42,9 +43,15 @@ const ReviewListPage = async ({ params }: Props) => {
           리뷰 작성
         </Link>
         {bestReview.images && bestReview.images.length > 0 && (
-          <div className="flex gap-[4px] w-full h-[200px]">
-            {bestReview.images.map(({ id, url }) => (
-              <div className="relative w-full h-full">
+          <div className="flex gap-[4px] w-full aspect-[4/1]">
+            {bestReview.images.slice(0, 4).map(({ id, url }, idx) => (
+              <div
+                className={cn(
+                  'relative aspect-square h-full rounded-[6px] overflow-hidden',
+                  idx === 3 &&
+                    "after:content-['+더보기'] after:flex-center after:absolute after:bg-black/50 after:size-full after:text-white"
+                )}
+              >
                 <Image key={id} src={url} alt="best review image" fill />
               </div>
             ))}

@@ -35,7 +35,7 @@ const ReviewUpdatePage = ({ params }: ReviewUpdatePageProps) => {
   return (
     <>
       <Header
-        title="리뷰 작성"
+        title="리뷰 수정"
         content={<span className="typo-title-16-medium text-gray-500">{progress}/2</span>}
         back
       />

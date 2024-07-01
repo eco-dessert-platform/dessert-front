@@ -1,30 +1,17 @@
-import { useId, InputHTMLAttributes, ForwardedRef, forwardRef, useEffect } from 'react';
+import { useId, InputHTMLAttributes, ForwardedRef, forwardRef } from 'react';
 import { RatingType, StarSizeType } from '@/domains/review/types/starRating';
 import Stars from './Stars';
 
 interface StarRatingProps extends InputHTMLAttributes<HTMLInputElement> {
-  onRatingChange?: (rating: RatingType) => void;
   starSize?: StarSizeType;
   editable?: boolean;
 }
 
 const StarRating = (
-  {
-    value,
-    onChange,
-    onRatingChange,
-    starSize = 'small',
-    editable = false,
-    ...props
-  }: StarRatingProps,
+  { value, onChange, starSize = 'small', editable = false, ...props }: StarRatingProps,
   ref: ForwardedRef<HTMLInputElement>
 ) => {
   const id = useId();
-
-  useEffect(() => {
-    if (!onRatingChange) return;
-    onRatingChange(Number(value) as RatingType);
-  }, [value, onRatingChange]);
 
   return (
     <label htmlFor={id} aria-label="별점" className="block relative max-w-fit">

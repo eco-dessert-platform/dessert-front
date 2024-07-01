@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import reviewService from './service';
@@ -8,14 +8,15 @@ import { CreatReviewRequest } from '../types/review';
 const useUpdateReviewMutation = () => {
   const { push } = useRouter();
   const { openToast } = useToastNewVer();
-  const { productId } = useParams<{ productId: string }>();
+  const searchParams = useSearchParams();
 
   return useMutation({
     mutationFn: ({ review, id }: { review: CreatReviewRequest; id: number }) =>
       reviewService.updateReview({ review, id }),
 
     onSuccess: () => {
-      push(PATH.reviewList(Number(productId)));
+      const productId = Number(searchParams.get('productId'));
+      push(PATH.reviewList(productId));
       openToast({ message: '리뷰가 작성 되었어요.' });
     },
 

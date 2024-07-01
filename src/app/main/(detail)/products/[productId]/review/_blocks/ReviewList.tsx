@@ -19,10 +19,11 @@ const ReviewList = () => {
   return (
     <section className="flex flex-col divide-y divide-gray-200">
       {reviews?.map(
-        ({ isBest, id, nickname, rating, comment, tags, like, isLiked, date, images }) => {
+        ({ isBest, id, boardId, nickname, rating, comment, tags, like, isLiked, date, images }) => {
           const formattedDate = new Date(date).toLocaleDateString('ko-KR');
           return (
             <Review
+              boardId={boardId}
               key={id}
               id={id}
               nickname={nickname}

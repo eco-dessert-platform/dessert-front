@@ -11,11 +11,14 @@ const useUpdateReviewMutation = () => {
   const { productId } = useParams<{ productId: string }>();
 
   return useMutation({
-    mutationFn: (review: CreatReviewRequest) => reviewService.updateReview(review),
+    mutationFn: ({ review, id }: { review: CreatReviewRequest; id: number }) =>
+      reviewService.updateReview({ review, id }),
+
     onSuccess: () => {
       push(PATH.reviewList(Number(productId)));
       openToast({ message: '리뷰가 작성 되었어요.' });
     },
+
     onError: () => {
       openToast({ message: '리뷰 작성 실패했어요.' });
     }

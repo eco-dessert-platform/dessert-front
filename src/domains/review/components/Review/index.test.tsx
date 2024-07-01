@@ -6,7 +6,8 @@ describe('<Review /> 테스트', () => {
   test('필요한 정보가 노출된다.', () => {
     render(
       <Review
-        id="1"
+        id={1}
+        boardId={1}
         nickname="닉네임"
         rating={0}
         comment="댓글"

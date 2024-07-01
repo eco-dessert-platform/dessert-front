@@ -1,21 +1,17 @@
-import { MouseEventHandler } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { Suspense } from 'react';
 import Badge from '@/shared/components/Badge';
-import { KebabIcon, ThumbsUpIcon } from '@/shared/components/icons';
+import { cn } from '@/shared/utils/cn';
+import { ThumbsUpIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import Dropdown from '@/shared/components/Dropdown';
+import { ReviewType } from '../../types/review';
 import StarRating from '../common/StarRating';
 import Comment from './Comment';
 import ImageSlider from './ImageSlider';
-import { ReviewType } from '../../types/review';
-
-interface Props extends ReviewType {
-  onModifyClick?: MouseEventHandler<HTMLButtonElement>;
-  onDeleteClick?: MouseEventHandler<HTMLButtonElement>;
-}
+import KebabMenu from './KebabMenu';
 
 const Review = ({
   id,
+  boardId,
   isBest,
   nickname,
   date,
@@ -24,10 +20,8 @@ const Review = ({
   comment,
   tags,
   like,
-  isLiked,
-  onDeleteClick,
-  onModifyClick
-}: Props) => (
+  isLiked
+}: ReviewType) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
       <div className="flex gap-[4px]">
@@ -35,15 +29,9 @@ const Review = ({
         <span className="typo-title-14-medium">{nickname}</span>
       </div>
 
-      <Dropdown>
-        <Dropdown.Trigger>
-          <KebabIcon />
-        </Dropdown.Trigger>
-        <Dropdown.Content position="left">
-          <Dropdown.Item onClick={onModifyClick}>수정</Dropdown.Item>
-          <Dropdown.Item onClick={onDeleteClick}>삭제</Dropdown.Item>
-        </Dropdown.Content>
-      </Dropdown>
+      <Suspense>
+        <KebabMenu reviewId={id} boardId={boardId} />
+      </Suspense>
     </div>
 
     <div className="flex flex-col gap-[8px]">
@@ -66,7 +54,7 @@ const Review = ({
       <span className="typo-body-12-regular text-gray-500">{date}</span>
       <button
         type="button"
-        className={twMerge(
+        className={cn(
           'typo-body-12-regular flex items-center gap-[4px] rounded-full  px-[8px] py-[4px]',
           isLiked ? 'text-primaryOrangeRed bg-secondaryPink' : 'text-gray-500 bg-redGray-30'
         )}

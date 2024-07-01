@@ -48,8 +48,8 @@ class ReviewService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async updateReview(review: CreatReviewRequest) {
-    const res = await this.fetchExtend.put('/review', {
+  async updateReview({ review, id }: { review: CreatReviewRequest; id: number }) {
+    const res = await this.fetchExtend.put(`/review/${id}`, {
       body: JSON.stringify(review)
     });
     const { code, message, success }: DefaultResponse = await res.json();

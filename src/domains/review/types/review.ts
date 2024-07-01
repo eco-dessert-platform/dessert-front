@@ -2,7 +2,8 @@ import { SelectedBadgeType } from '@/domains/review/types/badge';
 import { RatingType } from '@/domains/review/types/starRating';
 
 export interface ReviewType {
-  id: string;
+  id: number;
+  boardId: number;
   images: { id: number; url: string }[] | null;
   nickname: string;
   isBest: boolean;

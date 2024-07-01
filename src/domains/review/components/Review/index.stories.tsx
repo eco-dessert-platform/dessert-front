@@ -4,7 +4,8 @@ import Review from '.';
 const meta = {
   component: Review,
   args: {
-    id: '1',
+    id: 1,
+    boardId: 1,
     nickname: '닉네임',
     images: [
       {

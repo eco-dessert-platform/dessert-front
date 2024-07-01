@@ -1,12 +1,17 @@
+import { MouseEventHandler } from 'react';
 import BadgeSection from './BadgeSection';
 import DescriptionSection from './DescriptionSection';
 import NextButtonSection from './NextButtonSection';
 
-const BadgeSelectSection = () => (
+interface Props {
+  onNextClick: MouseEventHandler<HTMLButtonElement>;
+}
+
+const BadgeSelectSection = ({ onNextClick }: Props) => (
   <>
     <DescriptionSection />
     <BadgeSection />
-    <NextButtonSection />
+    <NextButtonSection onNextClick={onNextClick} />
   </>
 );
 

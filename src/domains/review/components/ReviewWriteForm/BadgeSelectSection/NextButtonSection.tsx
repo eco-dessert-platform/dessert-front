@@ -1,25 +1,18 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import { useFormContext } from 'react-hook-form';
 import { IReviewWriteForm } from '@/domains/review/types/review';
-import PATH from '@/shared/constants/path';
+import { MouseEventHandler } from 'react';
 
-const NextButtonSection = () => {
-  const { push } = useRouter();
+interface Props {
+  onNextClick: MouseEventHandler<HTMLButtonElement>;
+}
+const NextButtonSection = ({ onNextClick }: Props) => {
   const { getValues } = useFormContext<IReviewWriteForm>();
-  const searchParams = useSearchParams();
-  const productId = searchParams.get('productId');
-
   const { badges } = getValues();
   const isAllBadgeSelected = Object.values(badges).every((badge) => badge);
-
-  const handleButtonClick = () => {
-    if (!isAllBadgeSelected) return;
-    push(PATH.reviewCreate({ productId: Number(productId), progress: 2 }));
-  };
 
   return (
     <div className="fixed z-bottomButton left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] bg-white">
@@ -27,7 +20,7 @@ const NextButtonSection = () => {
         <ButtonNewver
           color="black"
           className="w-full"
-          onClick={handleButtonClick}
+          onClick={onNextClick}
           disabled={!isAllBadgeSelected}
         >
           다음

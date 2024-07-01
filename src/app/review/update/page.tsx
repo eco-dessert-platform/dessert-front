@@ -10,8 +10,12 @@ interface ReviewUpdatePageProps {
   searchParams: { reviewId: string | null; productId: string | null; progress: string | null };
 }
 
-const ReviewUpdatePage = ({ searchParams: { progress } }: ReviewUpdatePageProps) => {
+const ReviewUpdatePage = ({
+  searchParams: { progress, reviewId, productId }
+}: ReviewUpdatePageProps) => {
   const progressNum = Number(progress);
+
+  if (!productId || !reviewId) throw new Error('비정상적인 접근');
   if (!(progressNum === 1 || progressNum === 2)) notFound();
 
   return (

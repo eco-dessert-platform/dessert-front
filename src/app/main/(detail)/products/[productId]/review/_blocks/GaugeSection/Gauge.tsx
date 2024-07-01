@@ -34,11 +34,21 @@ const Gauge = ({ left, right }: Props) => {
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div className={cn('flex gap-[2px]', isLeftGreater ? 'text-gray-800' : 'text-gray-400')}>
+        <div
+          className={cn(
+            'flex gap-[2px] items-center',
+            isLeftGreater ? 'text-gray-800' : 'text-gray-400'
+          )}
+        >
           <span className="typo-body-12-semibold">{left.text}</span>
           <span className="typo-body-11-semibold">{left.value}</span>
         </div>
-        <div className={cn('flex gap-[2px]', isLeftGreater ? 'text-gray-400' : 'text-gray-800')}>
+        <div
+          className={cn(
+            'flex gap-[2px] items-center',
+            isLeftGreater ? 'text-gray-400' : 'text-gray-800'
+          )}
+        >
           <span className="typo-body-11-semibold">{right.value}</span>
           <span className="typo-body-12-semibold">{right.text}</span>
         </div>

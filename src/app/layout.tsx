@@ -13,6 +13,7 @@ import AlertContainer from '@/global/AlertContainer';
 // import RegisterServiceWorker from '@/global/RegisterServiceWorker';
 import SilentLogin from '@/global/SilentLogin';
 import GAScript from '@/global/GAScript';
+import ForeGroundMessage from '@/global/ForeGroundMessage';
 
 const pretendard = localFont({
   src: '../../public/assets/fonts/PretendardVariable.woff2'
@@ -35,6 +36,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
           <AlertContainer />
         </div>
       </RootLayoutProvider>
+      <ForeGroundMessage />
       <KaKaoChatScript />
       {/* <RegisterServiceWorker /> */}
       {/* <FlareLaneScript /> */}

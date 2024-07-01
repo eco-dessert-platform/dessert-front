@@ -37,5 +37,11 @@
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off"
   },
-  "ignorePatterns": ["*.config.*", "node_modules", "*.d.ts", "public/sw.js"]
+  "ignorePatterns": [
+    "*.config.*",
+    "node_modules",
+    "*.d.ts",
+    "public/sw.js",
+    "public/firebase-messaging-sw.js"
+  ]
 }

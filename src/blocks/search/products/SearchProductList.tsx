@@ -17,10 +17,11 @@ interface SearchProductListProps {
 
 const SearchProductList = ({ keyword }: SearchProductListProps) => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.search));
-  const { data, isFetching, isError, fetchNextPage, hasNextPage } = useGetSearchProductsQuery({
-    keyword,
-    filterValue
-  });
+  const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetSearchProductsQuery({
+      keyword,
+      filterValue
+    });
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -28,8 +29,12 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
     fetchNextPage();
   }, [inView, fetchNextPage]);
 
-  if (isFetching) {
-    return <SkeletonProductCardList />;
+  if (isFetching && !isFetchingNextPage) {
+    return (
+      <PaddingWrapper>
+        <SkeletonProductCardList />
+      </PaddingWrapper>
+    );
   }
   if (isError) {
     return (
@@ -49,13 +54,13 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
 
   return (
     <PaddingWrapper className="pb-[36px]">
-      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px]">
+      <div className="grid grid-cols-2 gap-[16px]">
         {data.products.map((product) => (
           <ProductCard key={product.boardId} product={product} />
         ))}
       </div>
       {hasNextPage && (
-        <div ref={ref}>
+        <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList row={1} col={2} />
         </div>
       )}

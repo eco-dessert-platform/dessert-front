@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { PreferenceType } from '@/domains/user/types/profile';
+import { PreferenceType } from '@/domains/user/types/preference';
 import { preferenceQueryKey } from '@/domains/user/queries/queryKey';
 import { revalidateTag } from '@/shared/actions/revalidate';
 import PATH from '@/shared/constants/path';

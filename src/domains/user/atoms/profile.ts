@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { MyProfileUpdateRequest, RegistrationRequest, PreferenceType } from '../types/profile';
+import { MyProfileUpdateRequest, RegistrationRequest } from '../types/profile';
 
 export const agreeState = atom({
   key: 'agree',
@@ -28,11 +28,6 @@ export const nicknameState = atom<string>({
 export const birthDateState = atom<string>({
   key: 'birthDate',
   default: undefined
-});
-
-export const preferenceState = atom<Array<PreferenceType>>({
-  key: 'preference',
-  default: []
 });
 
 export const registrationFormState = selector<RegistrationRequest>({

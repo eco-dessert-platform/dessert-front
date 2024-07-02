@@ -2,7 +2,7 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Image from 'next/image';
 
 const Banner = () => (
-  <PaddingWrapper className="pb-[0px]">
+  <PaddingWrapper>
     <Image
       src="/assets/images/banner.png"
       alt="배너"

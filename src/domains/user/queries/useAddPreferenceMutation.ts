@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { PreferenceType } from '@/domains/user/types/profile';
+import { PreferenceType } from '@/domains/user/types/preference';
 import PATH from '@/shared/constants/path';
 import userService from '@/domains/user/queries/service';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';

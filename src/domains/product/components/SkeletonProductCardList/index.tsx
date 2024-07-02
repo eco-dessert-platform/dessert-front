@@ -1,4 +1,3 @@
-import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SkeletonProductCard from './SkeletonProductCard';
 
 interface SkeletonProductCardListProps {
@@ -22,10 +21,10 @@ const GRID_COLS: GridType = {
 };
 
 const SkeletonProductCardList = ({ row = 3, col = 2 }: SkeletonProductCardListProps) => (
-  <PaddingWrapper className={`grid ${GRID_ROWS[row]} ${GRID_COLS[col]} gap-x-[16px] gap-y-[16px]`}>
+  <div className={`grid ${GRID_ROWS[row]} ${GRID_COLS[col]} gap-x-[16px] gap-y-[16px]`}>
     {Array.from(Array(row * col).keys()).map((item) => (
       <SkeletonProductCard key={item} />
     ))}
-  </PaddingWrapper>
+  </div>
 );
 export default SkeletonProductCardList;

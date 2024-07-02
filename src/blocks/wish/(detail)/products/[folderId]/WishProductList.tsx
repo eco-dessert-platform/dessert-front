@@ -32,20 +32,18 @@ const WishProductList = () => {
   }
 
   return (
-    <>
-      <PaddingWrapper>
-        <div className="grid grid-cols-2 gap-[16px]">
-          {wishProducts.map((product) => (
-            <ProductCard key={product.boardId} product={product} />
-          ))}
-        </div>
-      </PaddingWrapper>
+    <PaddingWrapper>
+      <div className="grid grid-cols-2 gap-[16px]">
+        {wishProducts.map((product) => (
+          <ProductCard key={product.boardId} product={product} />
+        ))}
+      </div>
       {hasNextPage && (
-        <div ref={ref}>
+        <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList />
         </div>
       )}
-    </>
+    </PaddingWrapper>
   );
 };
 

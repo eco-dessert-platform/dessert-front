@@ -28,11 +28,9 @@ const WishProductsDetail = async ({ params }: Props) => {
         <WishProductSortSelect />
       </PaddingWrapper>
 
-      <PaddingWrapper>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <WishProductList />
-        </HydrationBoundary>
-      </PaddingWrapper>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <WishProductList />
+      </HydrationBoundary>
     </>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler } from 'react';
 
 import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
@@ -23,19 +23,15 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==';
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
-  const [isLiked, setIsLiked] = useState(product.isWished);
-
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setIsLiked((prev) => !prev);
     addMutate({ productId: product.boardId, folderId: selectedWishFolder });
     e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setIsLiked((prev) => !prev);
     deleteMutate({ productId: product.boardId });
     e.preventDefault();
   };
@@ -49,10 +45,14 @@ const ProductImage = ({ product, popular, ranking }: ProductImageProps) => {
         height={300}
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}
-        className="rounded-[6px] aspect-square border-[1px] border-gray-100"
+        className="rounded-[6px] aspect-square"
       />
       <div className="absolute bottom-[9px] right-[9px] h-[20px]">
-        <HeartButton isActive={isLiked} shape="shadow" onClick={isLiked ? hate : like} />
+        <HeartButton
+          isActive={product.isWished}
+          shape="shadow"
+          onClick={product.isWished ? hate : like}
+        />
       </div>
       <div className="absolute z-10 top-[6px] left-[6px] w-full flex gap-[6px]">
         {popular && <RankingBadge ranking={ranking} />}

@@ -15,6 +15,7 @@ module.exports = {
 
       colors: {
         // ex) text-gray-50
+
         gray: {
           50: '#FAFAFA',
           100: '#F5F5F5',

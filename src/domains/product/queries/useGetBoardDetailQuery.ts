@@ -7,7 +7,11 @@ const useGetBoardDetailQuery = (productId: string) => {
   const queryKey = [QUERY_KEY.boardDetail];
   const queryFn = () => productService.getBoardDetail(productId);
 
-  return useQuery({ queryKey, queryFn });
+  return useQuery({
+    queryKey,
+    queryFn,
+    staleTime: 0
+  });
 };
 
 export default useGetBoardDetailQuery;

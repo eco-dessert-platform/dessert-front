@@ -1,6 +1,6 @@
 import { QuestionMarkIcon } from '@/shared/components/icons';
 import Header from '@/shared/components/Header';
-import BbangketingAndRestockTab from '@/domains/alarm/components/BbangketingAndRestockTab';
+import BbangcketingAndRestockTab from '@/domains/alarm/components/BbangcketingAndRestockTab';
 
 interface Props {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ const AlarmLayout = ({ children }: Props) => (
       }
       back
     />
-    <BbangketingAndRestockTab />
+    <BbangcketingAndRestockTab />
     {children}
   </>
 );

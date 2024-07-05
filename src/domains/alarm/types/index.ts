@@ -1,4 +1,4 @@
-export type AlarmType = 'bbangketing' | 'restock';
+export type AlarmType = 'bbangcketing' | 'restock';
 
 export interface ProductType {
   id: number;

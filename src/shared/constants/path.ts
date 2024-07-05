@@ -24,7 +24,7 @@ const PATH = {
 
   preferenceCreate: '/mypage/preference/create',
   preferenceUpdate: '/mypage/preference/upate',
-  bbangketing: '/mypage/alarm/bbangketing',
+  bbangcketing: '/mypage/alarm/bbangcketing',
   restock: '/mypage/alarm/restock'
 };
 

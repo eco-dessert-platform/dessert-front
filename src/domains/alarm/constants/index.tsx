@@ -1,7 +1,7 @@
 import { BellIcon, TimerIcon } from '@/shared/components/icons';
 
 export const ALARM = {
-  bbangketing: {
+  bbangcketing: {
     name: '빵켓팅',
     icon: <BellIcon shape="on" />,
     animation: 'animate-bell-shake origin-[50%_20%]'

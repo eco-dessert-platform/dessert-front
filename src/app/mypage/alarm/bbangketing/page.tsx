@@ -26,7 +26,7 @@ const PRODUCTS: Array<ProductType> = [
   }
 ];
 
-const BbanketingPage = () => {
+const BbancketingPage = () => {
   const [products, setProducts] = useState(PRODUCTS);
 
   const handleAlarm = useCallback((id: number) => {
@@ -42,14 +42,14 @@ const BbanketingPage = () => {
     setProducts((prev) => prev.filter((product) => product.id !== id));
   }, []);
 
-  if (products.length === 0) return <NoAlarm type="bbangketing" />;
+  if (products.length === 0) return <NoAlarm type="bbangcketing" />;
 
   return (
     <PaddingWrapper className="flex flex-col gap-y-[16px]">
       {products.map((product) => (
         <AlarmCard
           key={product.id}
-          type="bbangketing"
+          type="bbangcketing"
           data={product}
           onAlarm={handleAlarm}
           onDelete={handleDelete}
@@ -59,4 +59,4 @@ const BbanketingPage = () => {
   );
 };
 
-export default BbanketingPage;
+export default BbancketingPage;

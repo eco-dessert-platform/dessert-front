@@ -52,6 +52,8 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
                   ketogenicTag={ketogenicTag}
                 />
                 <OrderAvailableDays
+                  productOptionId={id}
+                  productOptionName={title}
                   orderType={orderType}
                   orderAvailableWeek={orderAvailableWeek}
                   orderAvailableDate={orderAvailableDate}

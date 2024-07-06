@@ -19,7 +19,7 @@ export interface ProductOptionType {
     weight: number;
     calories: number;
   };
-  orderType: string;
+  orderType: 'WEEK' | 'DATE';
   orderAvailableDate: {
     startDate: string;
     endDate: string;
@@ -34,6 +34,7 @@ export interface ProductOptionType {
     sunday: boolean;
   };
   isNotified: boolean;
+  soldout: boolean;
 }
 
 export interface IBoardDetailType {

@@ -3,7 +3,7 @@ import firebaseApp from '@/domains/alarm/utils/firebase';
 
 export const getFcmToken = async () => {
   if (!(typeof window !== 'undefined' && 'PushManager' in window && 'serviceWorker' in navigator))
-    return null;
+    throw new Error('푸시 알림이 불가합니다.');
 
   const messaging = getMessaging(firebaseApp);
   const permission = await Notification.requestPermission();
@@ -14,5 +14,5 @@ export const getFcmToken = async () => {
     });
     return currentToken;
   }
-  return null;
+  throw new Error('설정에서 알림 권한을 허용해주세요.');
 };

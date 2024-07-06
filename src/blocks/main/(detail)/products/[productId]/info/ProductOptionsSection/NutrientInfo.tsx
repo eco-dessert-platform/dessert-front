@@ -17,7 +17,10 @@ const NutrientInfo = ({ nutrient }: Props) => (
         if (key === 'weight') return null;
 
         return (
-          <div className="bg-gray-50 rounded-[6px] py-[4px] px-[10px] w-fit flex-1 flex flex-col items-center justify-center">
+          <div
+            key={key}
+            className="bg-gray-50 rounded-[6px] py-[4px] px-[10px] w-fit flex-1 flex flex-col items-center justify-center"
+          >
             <div className="typo-body-12-medium text-gray-700">{nutirentEngToKr(key)}</div>
             <div className="typo-title-16-semibold text-gray-900">{value}</div>
           </div>

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProductType, AlarmType } from '@/domains/alarm/types';
-import AlarmButton from '@/domains/alarm/components/AlarmCard/AlarmButton';
+import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
 import DeleteButton from '@/domains/alarm/components/AlarmCard/DeleteButton';
 
 interface Props {

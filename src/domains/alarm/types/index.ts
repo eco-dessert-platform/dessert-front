@@ -7,3 +7,14 @@ export interface ProductType {
   thumbnail: string;
   isAlarming: boolean;
 }
+
+export interface AddAlarmProps {
+  fcmToken: string;
+  pushCategory: AlarmType;
+  productOptionId: number;
+}
+
+export interface CancelAlarmProps {
+  pushCategory: AlarmType;
+  productOptionId: number;
+}

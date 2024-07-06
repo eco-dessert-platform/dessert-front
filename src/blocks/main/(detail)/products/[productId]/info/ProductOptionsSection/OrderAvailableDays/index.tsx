@@ -6,11 +6,14 @@ import { isLoggedinState } from '@/shared/atoms/login';
 import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
+import usePopup from '@/shared/hooks/usePopup';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { ORDER_TYPE } from '@/domains/product/constants/orderType';
-import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
 import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
 import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
+import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
+import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
+import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import TypeOfDate from './TypeOfDate';
 import TypeOfWeek from './TypeOfWeek';
 
@@ -21,6 +24,7 @@ interface Props {
   orderAvailableWeek: ProductOptionType['orderAvailableWeek'];
   orderAvailableDate: ProductOptionType['orderAvailableDate'];
   isNotified: ProductOptionType['isNotified'];
+  soldout: ProductOptionType['soldout'];
 }
 
 const OrderAvailableDays = ({
@@ -29,16 +33,32 @@ const OrderAvailableDays = ({
   orderType,
   orderAvailableWeek,
   orderAvailableDate,
-  isNotified
+  isNotified,
+  soldout
 }: Props) => {
   const { push } = useRouter();
   const { openToast } = useToastNewVer();
   const { openModal } = useModal();
+  const { openPopup } = usePopup();
   const isLoggedIn = useRecoilValue(isLoggedinState);
 
-  const handleClick = () => {
+  const handleRestockBtnClick = () => {
     if (!isLoggedIn) {
-      openToast({ message: '알림 신청 하려면 먼저 로그인해주세요.' });
+      openToast({ message: '알림 신청을 하려면 먼저 로그인해주세요.' });
+      push(PATH.login);
+      return;
+    }
+
+    if (isNotified) {
+      openPopup(<CancelAlarmPopup type="restock" productOptionId={productOptionId} />);
+    } else {
+      openPopup(<AddAlarmPopup type="restock" productOptionId={productOptionId} />);
+    }
+  };
+
+  const handleBbangcketingBtnClick = () => {
+    if (!isLoggedIn) {
+      openToast({ message: '알림 신청을 하려면 먼저 로그인해주세요.' });
       push(PATH.login);
       return;
     }
@@ -71,9 +91,9 @@ const OrderAvailableDays = ({
           {orderType === 'DATE' && <TypeOfDate availableDays={orderAvailableDate} />}
         </div>
         <AlarmButton
-          type="bbangcketing"
+          type={soldout ? 'restock' : 'bbangcketing'}
           isAlarming={isNotified}
-          onClick={handleClick}
+          onClick={soldout ? handleRestockBtnClick : handleBbangcketingBtnClick}
           className="max-w-max"
         />
       </div>

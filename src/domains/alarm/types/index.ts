@@ -1,11 +1,11 @@
 export type AlarmType = 'bbangcketing' | 'restock';
 
-export interface ProductType {
-  id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  isAlarming: boolean;
+export interface PushProductType {
+  productId: number;
+  storeName: string;
+  productTitle: string;
+  boardThumbnail: string;
+  subscribed: boolean;
 }
 
 export interface AddAlarmProps {
@@ -17,4 +17,8 @@ export interface AddAlarmProps {
 export interface CancelAlarmProps {
   pushCategory: AlarmType;
   productOptionId: number;
+}
+
+export interface GetAlarmProps {
+  pushCategory: AlarmType;
 }

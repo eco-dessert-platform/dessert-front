@@ -1,20 +1,20 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { alarmQueryKey } from '@/domains/alarm/queries/queryKey';
 import alarmService from '@/domains/alarm/queries/service';
-import RestockProductList from '@/app/mypage/alarm/restock/_blocks/RestockProductList';
+import BbancketingProductList from '@/app/mypage/alarm/bbangcketing/_blocks/BbangcketingProductList';
 
-const RestockPage = async () => {
+const BbancketingPage = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: alarmQueryKey.list('restock'),
-    queryFn: () => alarmService.getAlarm({ pushCategory: 'restock' })
+    queryKey: alarmQueryKey.list('bbangcketing'),
+    queryFn: () => alarmService.getAlarm({ pushCategory: 'bbangcketing' })
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <RestockProductList />
+      <BbancketingProductList />
     </HydrationBoundary>
   );
 };
 
-export default RestockPage;
+export default BbancketingPage;

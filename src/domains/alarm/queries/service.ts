@@ -1,7 +1,12 @@
 import Service from '@/shared/queries/service';
-import { DefaultResponse } from '@/shared/types/response';
+import { DefaultResponse, ListResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { AddAlarmProps, CancelAlarmProps } from '@/domains/alarm/types';
+import {
+  AddAlarmProps,
+  CancelAlarmProps,
+  GetAlarmProps,
+  PushProductType
+} from '@/domains/alarm/types';
 
 class AlarmService extends Service {
   async addAlarm({ fcmToken, pushCategory, productOptionId }: AddAlarmProps) {
@@ -27,6 +32,14 @@ class AlarmService extends Service {
     const { success, code, message }: DefaultResponse = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async getAlarm({ pushCategory }: GetAlarmProps) {
+    const res = await this.fetchExtend.get(`/push?pushCategory=${pushCategory.toUpperCase()}`);
+    const { list, success, code, message }: ListResponse<Array<PushProductType>> = await res.json();
+
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return list;
   }
 }
 

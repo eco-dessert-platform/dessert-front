@@ -3,42 +3,46 @@
 import { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ProductType, AlarmType } from '@/domains/alarm/types';
+import { PushProductType, AlarmType } from '@/domains/alarm/types';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
 import DeleteButton from '@/domains/alarm/components/AlarmCard/DeleteButton';
 
 interface Props {
   type: AlarmType;
-  data: ProductType;
+  data: PushProductType;
   onAlarm: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
 const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
-  const { id, title, description, thumbnail, isAlarming } = data;
+  const { productId, storeName, productTitle, boardThumbnail, subscribed } = data;
+  const BLUR_DATA_URL =
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAQAAAAm93DmAAAAKElEQVR42u3MQQEAAAQEMNe/pCaE4LkFWHrqVYRCoVAoFAqFQqHwZgEv8ksBbxtCcwAAAABJRU5ErkJggg==';
 
   return (
     <div className="flex flex-col gap-y-[10px] p-[16px] w-full border-[1px] border-gray-100 rounded-[10px]">
       <div className="flex justify-between items-start gap-x-[10px]">
         <Image
-          src={thumbnail}
+          src={boardThumbnail}
           alt="상품 이미지"
           width={40}
           height={40}
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
           className="w-[40px] h-[40px] object-cover rounded-[6px]"
         />
         <div className="w-full overflow-hidden">
-          <Link href={`/main/products/${id}/info`}>
-            <h6 className="typo-title-14-semibold text-gray-900">{title}</h6>
+          <Link href={`/main/products/${productId}/info`}>
+            <h6 className="typo-title-14-semibold text-gray-900">{storeName}</h6>
           </Link>
           <p className="typo-body-12-regular text-gray-600 line-clamp-2 text-ellipsis overflow-hidden break-words">
-            {description}
+            {productTitle}
           </p>
         </div>
       </div>
       <div className="flex gap-x-[10px]">
-        <AlarmButton type={type} isAlarming={isAlarming} onClick={() => onAlarm(id)} />
-        {!isAlarming && <DeleteButton onClick={() => onDelete(id)} />}
+        <AlarmButton type={type} isAlarming={subscribed} onClick={() => onAlarm(productId)} />
+        {!subscribed && <DeleteButton onClick={() => onDelete(productId)} />}
       </div>
     </div>
   );

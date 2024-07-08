@@ -19,8 +19,10 @@ const CategoryOption = ({ title, soldout, onClick }: Props) => (
     )}
   >
     <button type="button" onClick={onClick} className="flex items-center justify-between w-full">
-      {soldout && '(품절)'}
-      {title}
+      <div className="flex gap-x-[5px]">
+        <span>{soldout && '(품절)'}</span>
+        <span>{title}</span>
+      </div>
       <ArrowIcons shape="large-down" />
     </button>
   </PaddingWrapper>

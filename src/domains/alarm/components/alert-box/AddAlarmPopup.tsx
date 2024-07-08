@@ -1,8 +1,5 @@
-import { useParams } from 'next/navigation';
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
-import { useAddAlarmMutation } from '@/domains/alarm/queries/useAddAlarmMutation';
 import { getFcmToken } from '@/domains/alarm/utils/fcmToken';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import usePopup from '@/shared/hooks/usePopup';
@@ -12,24 +9,17 @@ import ButtonNewver from '@/shared/components/ButtonNewver';
 
 interface Props {
   type: AlarmType;
-  productOptionId: ProductOptionType['id'];
+  addAlarm: (fcmToken: string) => void;
 }
 
-const AddAlarmPopup = ({ type, productOptionId }: Props) => {
+const AddAlarmPopup = ({ type, addAlarm }: Props) => {
   const { openToast } = useToastNewVer();
   const { closePopup } = usePopup();
-  const { productId } = useParams<{ productId: string }>();
-  const { mutate: addAlarm } = useAddAlarmMutation({
-    pushCategory: type,
-    productId: Number(productId),
-    productOptionId
-  });
 
   const handleApply = async () => {
     try {
       const fcmToken = await getFcmToken();
-
-      addAlarm({ fcmToken });
+      addAlarm(fcmToken);
     } catch (error) {
       if (!(error instanceof Error)) return;
       openToast({ message: `[알림 신청 실패] ${error.message}` });

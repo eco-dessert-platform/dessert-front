@@ -20,7 +20,7 @@ const AlarmButton = ({ type, isAlarming, onClick, className }: Props) => {
       type="button"
       className={cn(
         `flex justify-center items-center gap-x-[2px] p-[6px] w-full border-[1px] border-gray-200 rounded-[4px]
-        typo-body-12-medium ${isAlarming ? 'text-gray-800' : 'bg-gray-900 text-white'}
+        typo-body-12-medium ${isAlarming ? 'bg-gray-50 text-gray-800' : 'bg-gray-900 text-white'}
         `,
         className
       )}

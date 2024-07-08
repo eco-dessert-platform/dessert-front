@@ -1,12 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { isLoggedinState } from '@/shared/atoms/login';
 import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
 import usePopup from '@/shared/hooks/usePopup';
+import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { ORDER_TYPE } from '@/domains/product/constants/orderType';
 import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
@@ -37,10 +38,16 @@ const OrderAvailableDays = ({
   soldout
 }: Props) => {
   const { push } = useRouter();
+  const { productId } = useParams<{ productId: string }>();
+  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const { mutate: addAlarm } = useAddAlarmMutation({
+    pushCategory: soldout ? 'restock' : 'bbangcketing',
+    productId: Number(productId),
+    productOptionId
+  });
   const { openToast } = useToastNewVer();
   const { openModal } = useModal();
   const { openPopup } = usePopup();
-  const isLoggedIn = useRecoilValue(isLoggedinState);
 
   const handleRestockBtnClick = () => {
     if (!isLoggedIn) {
@@ -52,7 +59,9 @@ const OrderAvailableDays = ({
     if (isNotified) {
       openPopup(<CancelAlarmPopup type="restock" productOptionId={productOptionId} />);
     } else {
-      openPopup(<AddAlarmPopup type="restock" productOptionId={productOptionId} />);
+      openPopup(
+        <AddAlarmPopup type="restock" addAlarm={(fcmToken: string) => addAlarm({ fcmToken })} />
+      );
     }
   };
 

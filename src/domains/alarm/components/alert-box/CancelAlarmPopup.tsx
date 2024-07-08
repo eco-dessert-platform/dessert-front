@@ -1,8 +1,5 @@
-import { useParams } from 'next/navigation';
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
-import { useCancelAlarmMutation } from '@/domains/alarm/queries/useCancelAlarmMutation';
 import usePopup from '@/shared/hooks/usePopup';
 import Popup from '@/shared/components/Popup';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -10,17 +7,11 @@ import ButtonNewver from '@/shared/components/ButtonNewver';
 
 interface Props {
   type: AlarmType;
-  productOptionId: ProductOptionType['id'];
+  cancelAlarm: () => void;
 }
 
-const CancelAlarmPopup = ({ type, productOptionId }: Props) => {
+const CancelAlarmPopup = ({ type, cancelAlarm }: Props) => {
   const { closePopup } = usePopup();
-  const { productId } = useParams<{ productId: string }>();
-  const { mutate: cancelAlarm } = useCancelAlarmMutation({
-    pushCategory: type,
-    productId: Number(productId),
-    productOptionId
-  });
 
   const handleCancel = () => {
     cancelAlarm();

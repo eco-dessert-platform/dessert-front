@@ -8,8 +8,10 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
 import usePopup from '@/shared/hooks/usePopup';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
+import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { ORDER_TYPE } from '@/domains/product/constants/orderType';
+import { AlarmType } from '@/domains/alarm/types';
 import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
 import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
@@ -37,17 +39,19 @@ const OrderAvailableDays = ({
   isNotified,
   soldout
 }: Props) => {
-  const { push } = useRouter();
-  const { productId } = useParams<{ productId: string }>();
-  const isLoggedIn = useRecoilValue(isLoggedinState);
-  const { mutate: addAlarm } = useAddAlarmMutation({
-    pushCategory: soldout ? 'restock' : 'bbangcketing',
-    productId: Number(productId),
-    productOptionId
-  });
   const { openToast } = useToastNewVer();
   const { openModal } = useModal();
   const { openPopup } = usePopup();
+  const { push } = useRouter();
+  const { productId } = useParams<{ productId: string }>();
+  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const mutationProps = {
+    pushCategory: (soldout ? 'restock' : 'bbangcketing') as AlarmType,
+    productId: Number(productId),
+    productOptionId
+  };
+  const { mutate: addAlarm } = useAddAlarmMutation(mutationProps);
+  const { mutate: cancelAlarm } = useCancelAlarmMutation(mutationProps);
 
   const handleRestockBtnClick = () => {
     if (!isLoggedIn) {
@@ -57,7 +61,7 @@ const OrderAvailableDays = ({
     }
 
     if (isNotified) {
-      openPopup(<CancelAlarmPopup type="restock" productOptionId={productOptionId} />);
+      openPopup(<CancelAlarmPopup type="restock" cancelAlarm={cancelAlarm} />);
     } else {
       openPopup(
         <AddAlarmPopup type="restock" addAlarm={(fcmToken: string) => addAlarm({ fcmToken })} />

@@ -3,21 +3,27 @@
 import usePopup from '@/shared/hooks/usePopup';
 import { useGetAlarmQuery } from '@/domains/alarm/queries/useGetAlarmQuery';
 import { useAddAlarmMutation } from '@/domains/alarm/queries/useAddAlarmMutation';
+import { useCancelAlarmMutation } from '@/domains/alarm/queries/useCancelAlarmMutation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Loading from '@/shared/components/Loading';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import AlarmCard from '@/domains/alarm/components/AlarmCard';
 import NoAlarm from '@/domains/alarm/components/NoAlarm';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
+import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import DeleteAlarmPopup from '@/domains/alarm/components/alert-box/DeleteAlarmPopup';
 
 const RestockProductList = () => {
   const { openPopup } = usePopup();
   const { data: products, isFetching, isError } = useGetAlarmQuery({ pushCategory: 'restock' });
   const { mutate: addAlarm } = useAddAlarmMutation({ pushCategory: 'restock' });
+  const { mutate: cancelAlarm } = useCancelAlarmMutation({ pushCategory: 'restock' });
 
   const handleAlarm = (isAlarming: boolean, productOptionId: number) => {
-    if (isAlarming) console.log('알림 해제 팝업 나타남');
+    if (isAlarming)
+      openPopup(
+        <CancelAlarmPopup type="restock" cancelAlarm={() => cancelAlarm({ productOptionId })} />
+      );
     else
       openPopup(
         <AddAlarmPopup

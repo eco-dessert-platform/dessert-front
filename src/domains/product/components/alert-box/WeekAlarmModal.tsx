@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
-import { useCancelAlarmMutation } from '@/domains/alarm/queries/useCancelAlarmMutation';
+import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { transformDayTag } from '@/domains/product/utils/transfromTag';
 import { getFcmToken } from '@/domains/alarm/utils/fcmToken';

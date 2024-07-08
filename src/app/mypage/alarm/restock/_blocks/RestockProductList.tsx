@@ -1,13 +1,16 @@
 'use client';
 
+import usePopup from '@/shared/hooks/usePopup';
 import { useGetAlarmQuery } from '@/domains/alarm/queries/useGetAlarmQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Loading from '@/shared/components/Loading';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import AlarmCard from '@/domains/alarm/components/AlarmCard';
 import NoAlarm from '@/domains/alarm/components/NoAlarm';
+import DeleteAlarmPopup from '@/domains/alarm/components/alert-box/DeleteAlarmPopup';
 
 const RestockProductList = () => {
+  const { openPopup } = usePopup();
   const { data: products, isFetching, isError } = useGetAlarmQuery({ pushCategory: 'restock' });
 
   if (isFetching) {
@@ -30,7 +33,9 @@ const RestockProductList = () => {
           type="restock"
           data={product}
           onAlarm={() => undefined}
-          onDelete={() => undefined}
+          onDelete={() =>
+            openPopup(<DeleteAlarmPopup type="restock" productOptionId={product.productId} />)
+          }
         />
       ))}
     </PaddingWrapper>

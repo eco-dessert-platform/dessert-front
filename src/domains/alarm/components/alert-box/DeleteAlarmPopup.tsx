@@ -1,8 +1,7 @@
-import { useParams } from 'next/navigation';
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
-import { useCancelAlarmMutation } from '@/domains/alarm/queries/useCancelAlarmMutation';
+import { useDeleteAlarmMutation } from '@/domains/alarm/queries/useDeleteAlarmMutation';
 import usePopup from '@/shared/hooks/usePopup';
 import Popup from '@/shared/components/Popup';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -13,17 +12,12 @@ interface Props {
   productOptionId: ProductOptionType['id'];
 }
 
-const CancelAlarmPopup = ({ type, productOptionId }: Props) => {
+const DeleteAlarmPopup = ({ type, productOptionId }: Props) => {
   const { closePopup } = usePopup();
-  const { productId } = useParams<{ productId: string }>();
-  const { mutate: cancelAlarm } = useCancelAlarmMutation({
-    pushCategory: type,
-    productId: Number(productId),
-    productOptionId
-  });
+  const { mutate: deleteAlarm } = useDeleteAlarmMutation({ pushCategory: type, productOptionId });
 
-  const handleCancel = () => {
-    cancelAlarm();
+  const handleDelete = () => {
+    deleteAlarm();
     closePopup();
   };
 
@@ -33,7 +27,7 @@ const CancelAlarmPopup = ({ type, productOptionId }: Props) => {
         {ALARM[type].name} 알림
       </PaddingWrapper>
       <PaddingWrapper className="text-center typo-title-14-regular">
-        {ALARM[type].name} 알림을 해제할까요?
+        {ALARM[type].name} 알림을 삭제할까요?
       </PaddingWrapper>
       <PaddingWrapper className="flex justify-around gap-x-[10px] py-[10px]">
         <ButtonNewver
@@ -50,13 +44,13 @@ const CancelAlarmPopup = ({ type, productOptionId }: Props) => {
           size="md"
           radius="round"
           className="flex-1"
-          onClick={handleCancel}
+          onClick={handleDelete}
         >
-          해제
+          삭제
         </ButtonNewver>
       </PaddingWrapper>
     </Popup>
   );
 };
 
-export default CancelAlarmPopup;
+export default DeleteAlarmPopup;

@@ -8,17 +8,20 @@ export interface PushProductType {
   subscribed: boolean;
 }
 
-export interface AddAlarmProps {
+export interface PushCategoryType {
+  pushCategory: AlarmType;
+}
+
+export interface ProductOptionIdType {
+  productOptionId: number;
+}
+
+export interface GetAlarmProps extends PushCategoryType {}
+
+export interface AddAlarmProps extends PushCategoryType, ProductOptionIdType {
   fcmToken: string;
-  pushCategory: AlarmType;
-  productOptionId: number;
 }
 
-export interface CancelAlarmProps {
-  pushCategory: AlarmType;
-  productOptionId: number;
-}
+export interface CancelAlarmProps extends PushCategoryType, ProductOptionIdType {}
 
-export interface GetAlarmProps {
-  pushCategory: AlarmType;
-}
+export interface DeleteAlarmProps extends PushCategoryType, ProductOptionIdType {}

@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/shared/utils/cn';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'border-white' | 'black' | 'border-primary' | 'primary' | 'disabled';
+  color?: 'border-white' | 'black' | 'border-primary' | 'primary';
   size?: 'md' | 'lg';
   radius?: 'round' | 'square';
 }
@@ -18,8 +18,7 @@ export const ButtonVariants = cva(
         black: 'bg-black text-white',
         'border-primary':
           'bg-white border border-primaryOrangeRed text-primaryOrangeRed hover:bg-black/[0.02] active:bg-black/[0.04]',
-        primary: 'text-white bg-primaryOrangeRed  hover:brightness-[.96] active:brightness-90',
-        disabled: 'bg-gray-300 text-white cursor-not-allowed'
+        primary: 'text-white bg-primaryOrangeRed  hover:brightness-[.96] active:brightness-90'
       },
       size: {
         md: 'h-[46px]',
@@ -42,7 +41,11 @@ const ButtonNewver = ({
 }: Props) => (
   <button
     type="button"
-    className={cn(ButtonVariants({ size, color, radius }), className)}
+    className={cn(
+      ButtonVariants({ size, color, radius }),
+      'disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed',
+      className
+    )}
     {...props}
   />
 );

@@ -7,7 +7,7 @@ import {
   VeganIcon
 } from '@/domains/product/assets/category/icons';
 
-export const categoryMenu = [
+export const CATEGORY = [
   {
     id: 1,
     name: '전체',

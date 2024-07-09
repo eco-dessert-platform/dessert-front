@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { preferenceState } from '@/domains/user/atoms/profile';
-import { PreferenceType } from '@/domains/user/types/profile';
+import { preferenceState } from '@/domains/user/atoms/preference';
+import { PreferenceType } from '@/domains/user/types/preference';
 import useUpdatePreferenceMutation from '@/domains/user/queries/useUpdatePreferenceMutation';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import PreferenceForm from '@/domains/user/components/PreferenceForm';

@@ -44,9 +44,9 @@ const StoreAllProductsSection = ({ storeId }: Props) => {
   }
 
   return (
-    <PaddingWrapper className="px-0 pb-[36px]">
-      <h5 className="mb-[10px] px-[16px] typo-title-14-semibold text-gray-800">전체상품</h5>
-      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px] px-[16px]">
+    <PaddingWrapper className="pb-[36px]">
+      <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">전체상품</h5>
+      <div className="grid grid-cols-2 gap-[16px]">
         {products.map((product) => (
           <ProductCard
             key={product.boardId}
@@ -55,7 +55,7 @@ const StoreAllProductsSection = ({ storeId }: Props) => {
         ))}
       </div>
       {hasNextPage && (
-        <div ref={ref}>
+        <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList row={1} col={2} />
         </div>
       )}

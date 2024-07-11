@@ -18,12 +18,14 @@ class AlarmService extends Service {
     return list;
   }
 
-  async addAlarm({ fcmToken, pushCategory, productOptionId }: AddAlarmProps) {
+  async addAlarm({ fcmToken, pushCategory, productOptionId, pushType, days }: AddAlarmProps) {
     const res = await this.fetchExtend.post('/push', {
       body: JSON.stringify({
         fcmToken,
         pushCategory: pushCategory.toUpperCase(),
-        productId: productOptionId
+        productId: productOptionId,
+        pushType,
+        days: days?.map((day) => day.toUpperCase()).join(', ')
       })
     });
     const { success, code, message }: DefaultResponse = await res.json();

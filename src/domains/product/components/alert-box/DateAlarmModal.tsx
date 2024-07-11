@@ -33,7 +33,8 @@ const DateAlarmModal = ({
   const { mutate: addAlarm } = useAddAlarmMutation({
     pushCategory: 'bbangcketing',
     productId: Number(productId),
-    productOptionId
+    productOptionId,
+    pushType: 'DATE'
   });
   const { mutate: cancelAlarm } = useCancelAlarmMutation({
     pushCategory: 'bbangcketing',

@@ -7,6 +7,7 @@ import useModal from '@/shared/hooks/useModal';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
+import { DayEnType } from '@/domains/product/types/dayType';
 import { transformDayTag } from '@/domains/product/utils/transfromTag';
 import { getFcmToken } from '@/domains/alarm/utils/fcmToken';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -23,11 +24,13 @@ const WeekAlarmModal = ({ productOptionId, orderAvailableWeek }: Props) => {
   const { openToast } = useToastNewVer();
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();
-  const [selectedDays, setSelectedDays] = useState<Array<string>>([]);
+  const [selectedDays, setSelectedDays] = useState<Array<DayEnType>>([]);
   const { mutate: addAlarm } = useAddAlarmMutation({
     pushCategory: 'bbangcketing',
     productId: Number(productId),
-    productOptionId
+    productOptionId,
+    pushType: 'WEEK',
+    days: selectedDays
   });
   const { mutate: cancelAlarm } = useCancelAlarmMutation({
     pushCategory: 'bbangcketing',
@@ -35,7 +38,7 @@ const WeekAlarmModal = ({ productOptionId, orderAvailableWeek }: Props) => {
     productOptionId
   });
 
-  const handleChange = (dayToChange: string) => {
+  const handleChange = (dayToChange: DayEnType) => {
     const newValue = selectedDays.includes(dayToChange)
       ? selectedDays.filter((day) => day !== dayToChange)
       : [...selectedDays, dayToChange];
@@ -60,14 +63,15 @@ const WeekAlarmModal = ({ productOptionId, orderAvailableWeek }: Props) => {
   return (
     <Modal title="요일별 알림 신청">
       <PaddingWrapper className="py-[10px] flex flex-col gap-y-[10px]">
-        {Object.entries(orderAvailableWeek).map(([dayEn, isOrderAvailable]) => {
+        {Object.entries(orderAvailableWeek).map(([day, isOrderAvailable]) => {
+          const dayEn = day as DayEnType;
           const dayKr = transformDayTag(dayEn);
           return (
             isOrderAvailable && (
               <Checkbox
-                key={dayKr}
-                isChecked={selectedDays.includes(dayKr)}
-                onChange={() => handleChange(dayKr)}
+                key={dayEn}
+                isChecked={selectedDays.includes(dayEn)}
+                onChange={() => handleChange(dayEn)}
                 className="typo-title-14-regular"
               >
                 매주 {dayKr}요일 알림

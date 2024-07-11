@@ -1,3 +1,5 @@
+export type OrderType = 'WEEK' | 'DATE';
+
 export interface ProductOptionResponse {
   boardIsBundled: boolean;
   products: ProductOptionType[];
@@ -19,7 +21,7 @@ export interface ProductOptionType {
     weight: number;
     calories: number;
   };
-  orderType: 'WEEK' | 'DATE';
+  orderType: OrderType;
   orderAvailableDate: {
     startDate: string;
     endDate: string;

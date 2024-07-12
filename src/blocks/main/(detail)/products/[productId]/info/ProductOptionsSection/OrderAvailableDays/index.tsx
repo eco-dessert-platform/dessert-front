@@ -80,8 +80,7 @@ const OrderAvailableDays = ({
       openModal(
         <WeekAlarmModal productOptionId={productOptionId} orderAvailableWeek={orderAvailableWeek} />
       );
-    }
-    if (orderType === 'DATE') {
+    } else if (orderType === 'DATE') {
       openModal(
         <DateAlarmModal
           productOptionId={productOptionId}

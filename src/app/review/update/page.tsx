@@ -1,7 +1,7 @@
-'use client';
-
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { reviewDetailQueryOptions } from '@/domains/review/queries/useReviewDetailQuery';
 import Header from '@/shared/components/Header';
 import ReviewUpdateForm from './_blocks/ReviewUpdateForm';
 import ReviewUpdateFormProvider from './_blocks/ReviewUpdateFormProvider';
@@ -10,13 +10,20 @@ interface ReviewUpdatePageProps {
   searchParams: { reviewId: string | null; productId: string | null; progress: string | null };
 }
 
-const ReviewUpdatePage = ({
+const ReviewUpdatePage = async ({
   searchParams: { progress, reviewId, productId }
 }: ReviewUpdatePageProps) => {
   const progressNum = Number(progress);
 
   if (!productId || !reviewId) throw new Error('비정상적인 접근');
   if (!(progressNum === 1 || progressNum === 2)) notFound();
+
+  const { queryFn, queryKey } = reviewDetailQueryOptions(Number(reviewId));
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey,
+    queryFn
+  });
 
   return (
     <>
@@ -26,9 +33,11 @@ const ReviewUpdatePage = ({
         back
       />
       <Suspense>
-        <ReviewUpdateFormProvider>
-          <ReviewUpdateForm progress={progressNum} />
-        </ReviewUpdateFormProvider>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ReviewUpdateFormProvider>
+            <ReviewUpdateForm progress={progressNum} />
+          </ReviewUpdateFormProvider>
+        </HydrationBoundary>
       </Suspense>
     </>
   );

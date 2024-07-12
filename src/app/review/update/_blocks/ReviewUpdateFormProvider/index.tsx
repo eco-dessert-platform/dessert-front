@@ -17,9 +17,10 @@ const ReviewFormProvider = ({ children }: Props) => {
   if (!productId) throw new Error('productId is invalid');
   if (!reviewId) throw new Error('reviewId is invalid');
 
-  const { data: reviewDetail } = useReviewDetailQuery(Number(reviewId));
+  const { data: reviewDetail, isLoading } = useReviewDetailQuery(Number(reviewId));
 
-  if (!reviewDetail) return 'loading';
+  if (isLoading) return 'loading';
+  if (!reviewDetail) return 'not found data';
 
   const defaultValues = getFormValuesFromReviewType({
     review: reviewDetail,

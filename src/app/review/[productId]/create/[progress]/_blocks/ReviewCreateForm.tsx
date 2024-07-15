@@ -18,7 +18,6 @@ const ReviewCreateForm = ({ progress }: Props) => {
   const { mutate } = useCreateReviewMutation();
   const { push } = useRouter();
   const { productId } = useParams();
-
   const onSubmitValid: SubmitHandler<IReviewWriteForm> = ({ images, badges, ...rest }) => {
     mutate({
       badges: [badges.brix, badges.taste, badges.texture].map((badge) => badge.toUpperCase()),

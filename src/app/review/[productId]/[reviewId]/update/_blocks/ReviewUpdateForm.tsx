@@ -5,7 +5,7 @@ import useUpdateReviewMutation from '@/domains/review/queries/useUpdateReviewMut
 import { IReviewWriteForm } from '@/domains/review/types/review';
 import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from 'react-hook-form';
 
 interface Props {
@@ -17,10 +17,9 @@ const ReviewUpdateForm = ({ progress }: Props) => {
   const { handleSubmit } = useFormContext<IReviewWriteForm>();
   const { openToast } = useToastNewVer();
   const { push } = useRouter();
-  const searchParams = useSearchParams();
+  const { reviewId, productId } = useParams<{ productId: string; reviewId: string }>();
 
   const onValidSubmit: SubmitHandler<IReviewWriteForm> = ({ badges, images, ...rest }) => {
-    const reviewId = Number(searchParams.get('reviewId'));
     const review = {
       urls: images.urls || null,
       badges: [badges.taste, badges.brix, badges.texture].map((badge) => badge.toUpperCase()),
@@ -28,7 +27,7 @@ const ReviewUpdateForm = ({ progress }: Props) => {
     };
     mutate({
       review,
-      id: reviewId
+      id: Number(reviewId)
     });
   };
 
@@ -37,8 +36,6 @@ const ReviewUpdateForm = ({ progress }: Props) => {
   };
 
   const onNextClick = () => {
-    const productId = searchParams.get('productId');
-    const reviewId = searchParams.get('reviewId');
     push(
       PATH.reviewUpdate({ productId: Number(productId), progress: 2, reviewId: Number(reviewId) })
     );

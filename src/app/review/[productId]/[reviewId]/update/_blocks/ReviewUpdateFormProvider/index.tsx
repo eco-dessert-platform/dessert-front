@@ -2,7 +2,7 @@
 
 import { getFormValuesFromReviewType } from '@/domains/review/utils/transformer';
 import useReviewDetailQuery from '@/domains/review/queries/useReviewDetailQuery';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import FormProviderWithDefaultValues from './FormProviderWithDefaultValues';
 
 interface Props {
@@ -10,9 +10,7 @@ interface Props {
 }
 
 const ReviewFormProvider = ({ children }: Props) => {
-  const searchParams = useSearchParams();
-  const reviewId = searchParams.get('reviewId');
-  const productId = searchParams.get('productId');
+  const { reviewId, productId } = useParams();
 
   if (!productId) throw new Error('productId is invalid');
   if (!reviewId) throw new Error('reviewId is invalid');

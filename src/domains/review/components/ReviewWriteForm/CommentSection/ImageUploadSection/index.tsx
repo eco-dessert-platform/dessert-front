@@ -16,14 +16,14 @@ const ImageUploadSection = () => {
   const { openToast } = useToastNewVer();
 
   useEffect(() => {
-    if (isSuccess && images) {
+    if (isSuccess && images.length > 0) {
       setValue('images.urls', images);
     }
   }, [isSuccess, images, setValue]);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
-    if (!files) return;
+    if (!files || files.length === 0) return;
     if (files.length > 5) {
       openToast({ message: '최대 5개까지 업로드할 수 있습니다' });
       return;

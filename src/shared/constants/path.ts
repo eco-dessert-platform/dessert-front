@@ -31,7 +31,7 @@ const PATH = {
 
   reviewList: (productId: number) => `${PATH.mainProductList}/${productId}/review`,
   reviewCreate: ({ productId, progress }: { productId: number; progress: number }) =>
-    `/review/create/${productId}/${progress}`,
+    `/review/${productId}/create/${progress}`,
   reviewUpdate: ({
     productId,
     progress,
@@ -40,7 +40,7 @@ const PATH = {
     productId: number;
     progress: number;
     reviewId: number;
-  }) => `/review/update?productId=${productId}&reviewId=${reviewId}&progress=${progress}`
+  }) => `/review/${productId}/${reviewId}/update/${progress}`
 };
 
 export default PATH;

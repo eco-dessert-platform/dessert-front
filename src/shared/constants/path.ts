@@ -31,7 +31,7 @@ const PATH = {
 
   reviewList: (productId: number) => `${PATH.mainProductList}/${productId}/review`,
   reviewCreate: ({ productId, progress }: { productId: number; progress: number }) =>
-    `/review/create?productId=${productId}&progress=${progress}`,
+    `/review/create/${productId}/${progress}`,
   reviewUpdate: ({
     productId,
     progress,

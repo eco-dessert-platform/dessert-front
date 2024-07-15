@@ -5,7 +5,7 @@ import useCreateReviewMutation from '@/domains/review/queries/useCreateReviewMut
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from 'react-hook-form';
 import { IReviewWriteForm } from '@/domains/review/types/review';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import PATH from '@/shared/constants/path';
 
 interface Props {
@@ -17,7 +17,7 @@ const ReviewCreateForm = ({ progress }: Props) => {
   const { openToast } = useToastNewVer();
   const { mutate } = useCreateReviewMutation();
   const { push } = useRouter();
-  const searchParams = useSearchParams();
+  const { productId } = useParams();
 
   const onSubmitValid: SubmitHandler<IReviewWriteForm> = ({ images, badges, ...rest }) => {
     mutate({
@@ -32,7 +32,6 @@ const ReviewCreateForm = ({ progress }: Props) => {
   };
 
   const onNextClick = () => {
-    const productId = searchParams.get('productId');
     push(PATH.reviewCreate({ productId: Number(productId), progress: 2 }));
   };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { RatingType } from '@/domains/review/types/starRating';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IReviewWriteForm } from '@/domains/review/types/review';
@@ -10,8 +10,7 @@ interface Props {
 }
 
 const ReviewFormProvider = ({ children }: Props) => {
-  const searchParams = useSearchParams();
-  const productId = searchParams.get('productId');
+  const { productId } = useParams();
 
   if (!productId) throw new Error('productId is invalid');
 

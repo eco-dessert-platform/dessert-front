@@ -5,6 +5,8 @@ const PATH = {
 
   mainCategory: '/main/product-category',
   mainProductList: '/main/products',
+  mainProductListInfo: (productId: number) => `/main/products/${productId}/info`,
+  mainProductListReview: (productId: number) => `/main/products/${productId}/review`,
 
   wish: '/wish',
   wishLogin: '/wish/login',

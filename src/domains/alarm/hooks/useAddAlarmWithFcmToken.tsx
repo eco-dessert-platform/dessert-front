@@ -14,12 +14,12 @@ const useAddAlarmWithFcmToken = ({ addAlarm }: Props) => {
   const fcmToken = useRecoilValue(fcmTokenState);
 
   useEffect(() => {
-    if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
-    else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
-  }, [fcmToken, addAlarm, openToast]);
+    if (!fcmToken.data && !fcmToken.error) sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
+  }, [fcmToken.data, fcmToken.error]);
 
   const addAlarmWithFcmToken = () => {
-    if (!fcmToken.data && !fcmToken.error) sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
+    if (!fcmToken.data && !fcmToken.error)
+      openToast({ message: '[알림 신청 실패] fcmToken을 가져오는 데 실패했습니다.' });
     else if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
     else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
   };

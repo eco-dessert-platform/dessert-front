@@ -1,15 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useState } from 'react';
 import { useParams } from 'next/navigation';
-import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
-import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
-import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
-import { fcmTokenState } from '@/domains/alarm/atoms';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
+import useAddAlarmWithFcmToken from '@/domains/alarm/hooks/useAddAlarmWithFcmToken';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Modal from '@/shared/components/Modal';
@@ -29,10 +25,8 @@ const DateAlarmModal = ({
   orderAvailableDate: { startDate },
   isNotified
 }: Props) => {
-  const { openToast } = useToastNewVer();
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();
-  const fcmToken = useRecoilValue(fcmTokenState);
   const [isSelected, setIsSelected] = useState(isNotified);
   const { mutate: addAlarm } = useAddAlarmMutation({
     pushCategory: 'bbangcketing',
@@ -45,11 +39,7 @@ const DateAlarmModal = ({
     productId: Number(productId),
     productOptionId
   });
-
-  useEffect(() => {
-    if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
-    else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
-  }, [fcmToken, addAlarm, openToast]);
+  const { addAlarmWithFcmToken } = useAddAlarmWithFcmToken({ addAlarm });
 
   const handleChange = () => {
     setIsSelected(!isSelected);
@@ -57,11 +47,8 @@ const DateAlarmModal = ({
 
   const handleApply = async () => {
     if (isNotified !== isSelected) {
-      if (isSelected) {
-        if (!fcmToken.data && !fcmToken.error) sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
-        else if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
-        else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
-      } else cancelAlarm();
+      if (isSelected) addAlarmWithFcmToken();
+      else cancelAlarm();
     }
     closeModal();
   };

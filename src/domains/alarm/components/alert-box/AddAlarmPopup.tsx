@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
-import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
+'use client';
+
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
-import { fcmTokenState } from '@/domains/alarm/atoms';
-import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import usePopup from '@/shared/hooks/usePopup';
+import useAddAlarmWithFcmToken from '@/domains/alarm/hooks/useAddAlarmWithFcmToken';
 import Popup from '@/shared/components/Popup';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ButtonNewver from '@/shared/components/ButtonNewver';
@@ -17,19 +14,11 @@ interface Props {
 }
 
 const AddAlarmPopup = ({ type, addAlarm }: Props) => {
-  const { openToast } = useToastNewVer();
   const { closePopup } = usePopup();
-  const fcmToken = useRecoilValue(fcmTokenState);
-
-  useEffect(() => {
-    if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
-    else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
-  }, [fcmToken, addAlarm, openToast]);
+  const { addAlarmWithFcmToken } = useAddAlarmWithFcmToken({ addAlarm });
 
   const handleApply = async () => {
-    if (!fcmToken.data && !fcmToken.error) sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
-    else if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
-    else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
+    addAlarmWithFcmToken();
     closePopup();
   };
 

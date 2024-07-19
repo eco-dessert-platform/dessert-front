@@ -1,5 +1,7 @@
 'use client';
 
+import { useRecoilValue } from 'recoil';
+import { appState } from '@/shared/atoms/app';
 import usePopup from '@/shared/hooks/usePopup';
 import { useGetAlarmQuery } from '@/domains/alarm/queries/useGetAlarmQuery';
 import { useAddAlarmMutation } from '@/domains/alarm/queries/useAddAlarmMutation';
@@ -9,12 +11,14 @@ import Loading from '@/shared/components/Loading';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import AlarmCard from '@/domains/alarm/components/AlarmCard';
 import NoAlarm from '@/domains/alarm/components/NoAlarm';
+import MobileAppPopup from '@/domains/alarm/components/alert-box/MobileAppPopup';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
 import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import DeleteAlarmPopup from '@/domains/alarm/components/alert-box/DeleteAlarmPopup';
 
 const BbancketingProductList = () => {
   const { openPopup } = usePopup();
+  const app = useRecoilValue(appState);
   const {
     data: products,
     isFetching,
@@ -24,6 +28,11 @@ const BbancketingProductList = () => {
   const { mutate: cancelAlarm } = useCancelAlarmMutation({ pushCategory: 'bbangcketing' });
 
   const handleAlarm = (isAlarming: boolean, productOptionId: number) => {
+    if (!app.isWebviewApp) {
+      openPopup(<MobileAppPopup type="bbangcketing" />);
+      return;
+    }
+
     if (isAlarming)
       openPopup(
         <CancelAlarmPopup
@@ -35,7 +44,7 @@ const BbancketingProductList = () => {
       openPopup(
         <AddAlarmPopup
           type="bbangcketing"
-          addAlarm={(fcmToken) => addAlarm({ fcmToken, productOptionId })}
+          addAlarm={({ fcmToken }) => addAlarm({ fcmToken, productOptionId })}
         />
       );
   };

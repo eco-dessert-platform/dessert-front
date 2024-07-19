@@ -1,5 +1,7 @@
 'use client';
 
+import { useRecoilValue } from 'recoil';
+import { appState } from '@/shared/atoms/app';
 import usePopup from '@/shared/hooks/usePopup';
 import { useGetAlarmQuery } from '@/domains/alarm/queries/useGetAlarmQuery';
 import { useAddAlarmMutation } from '@/domains/alarm/queries/useAddAlarmMutation';
@@ -9,17 +11,24 @@ import Loading from '@/shared/components/Loading';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import AlarmCard from '@/domains/alarm/components/AlarmCard';
 import NoAlarm from '@/domains/alarm/components/NoAlarm';
+import MobileAppPopup from '@/domains/alarm/components/alert-box/MobileAppPopup';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
 import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import DeleteAlarmPopup from '@/domains/alarm/components/alert-box/DeleteAlarmPopup';
 
 const RestockProductList = () => {
   const { openPopup } = usePopup();
+  const app = useRecoilValue(appState);
   const { data: products, isFetching, isError } = useGetAlarmQuery({ pushCategory: 'restock' });
   const { mutate: addAlarm } = useAddAlarmMutation({ pushCategory: 'restock' });
   const { mutate: cancelAlarm } = useCancelAlarmMutation({ pushCategory: 'restock' });
 
   const handleAlarm = (isAlarming: boolean, productOptionId: number) => {
+    if (!app.isWebviewApp) {
+      openPopup(<MobileAppPopup type="restock" />);
+      return;
+    }
+
     if (isAlarming)
       openPopup(
         <CancelAlarmPopup type="restock" cancelAlarm={() => cancelAlarm({ productOptionId })} />
@@ -28,7 +37,7 @@ const RestockProductList = () => {
       openPopup(
         <AddAlarmPopup
           type="restock"
-          addAlarm={(fcmToken) => addAlarm({ fcmToken, productOptionId })}
+          addAlarm={({ fcmToken }) => addAlarm({ fcmToken, productOptionId })}
         />
       );
   };

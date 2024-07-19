@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 import { useParams } from 'next/navigation';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
+import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
+import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
+import { fcmTokenState } from '@/domains/alarm/atoms';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { DayEnType } from '@/domains/product/types/dayType';
 import { transformDayTag } from '@/domains/product/utils/transfromTag';
-import { getFcmToken } from '@/domains/alarm/utils/fcmToken';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Modal from '@/shared/components/Modal';
 import Checkbox from '@/shared/components/Checkbox';
@@ -24,6 +27,7 @@ const WeekAlarmModal = ({ productOptionId, orderAvailableWeek }: Props) => {
   const { openToast } = useToastNewVer();
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();
+  const fcmToken = useRecoilValue(fcmTokenState);
   const [selectedDays, setSelectedDays] = useState<Array<DayEnType>>([]);
   const { mutate: addAlarm } = useAddAlarmMutation({
     pushCategory: 'bbangcketing',
@@ -38,6 +42,11 @@ const WeekAlarmModal = ({ productOptionId, orderAvailableWeek }: Props) => {
     productOptionId
   });
 
+  useEffect(() => {
+    if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
+    else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
+  }, [fcmToken, addAlarm, openToast]);
+
   const handleChange = (dayToChange: DayEnType) => {
     const newValue = selectedDays.includes(dayToChange)
       ? selectedDays.filter((day) => day !== dayToChange)
@@ -47,15 +56,12 @@ const WeekAlarmModal = ({ productOptionId, orderAvailableWeek }: Props) => {
   };
 
   const handleApply = async () => {
-    try {
-      const fcmToken = await getFcmToken();
-
-      const numSelectedDays = selectedDays.length;
-      if (numSelectedDays === 0) cancelAlarm();
-      if (numSelectedDays > 0) addAlarm({ fcmToken });
-    } catch (error) {
-      if (!(error instanceof Error)) return;
-      openToast({ message: `[알림 신청 실패] ${error.message}` });
+    const numSelectedDays = selectedDays.length;
+    if (numSelectedDays === 0) cancelAlarm();
+    if (numSelectedDays > 0) {
+      if (!fcmToken.data && !fcmToken.error) sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
+      else if (fcmToken.data) addAlarm({ fcmToken: fcmToken.data });
+      else openToast({ message: `[알림 신청 실패] ${fcmToken.error}` });
     }
     closeModal();
   };

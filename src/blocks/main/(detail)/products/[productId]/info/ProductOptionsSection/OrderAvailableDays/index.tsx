@@ -7,6 +7,7 @@ import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
 import usePopup from '@/shared/hooks/usePopup';
+import { appState } from '@/shared/atoms/app';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
@@ -15,6 +16,7 @@ import { AlarmType } from '@/domains/alarm/types';
 import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
 import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
+import MobileAppPopup from '@/domains/alarm/components/alert-box/MobileAppPopup';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
 import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import TypeOfDate from './TypeOfDate';
@@ -44,6 +46,7 @@ const OrderAvailableDays = ({
   const { openPopup } = usePopup();
   const { push } = useRouter();
   const { productId } = useParams<{ productId: string }>();
+  const app = useRecoilValue(appState);
   const isLoggedIn = useRecoilValue(isLoggedinState);
   const mutationProps = {
     pushCategory: (soldout ? 'restock' : 'bbangcketing') as AlarmType,
@@ -54,6 +57,11 @@ const OrderAvailableDays = ({
   const { mutate: cancelAlarm } = useCancelAlarmMutation(mutationProps);
 
   const handleRestockBtnClick = () => {
+    if (!app.isWebviewApp) {
+      openPopup(<MobileAppPopup type="restock" />);
+      return;
+    }
+
     if (!isLoggedIn) {
       openToast({ message: '알림 신청을 하려면 먼저 로그인해주세요.' });
       push(PATH.login);
@@ -64,12 +72,17 @@ const OrderAvailableDays = ({
       openPopup(<CancelAlarmPopup type="restock" cancelAlarm={cancelAlarm} />);
     } else {
       openPopup(
-        <AddAlarmPopup type="restock" addAlarm={(fcmToken: string) => addAlarm({ fcmToken })} />
+        <AddAlarmPopup type="restock" addAlarm={({ fcmToken }) => addAlarm({ fcmToken })} />
       );
     }
   };
 
   const handleBbangcketingBtnClick = () => {
+    if (!app.isWebviewApp) {
+      openPopup(<MobileAppPopup type="bbangcketing" />);
+      return;
+    }
+
     if (!isLoggedIn) {
       openToast({ message: '알림 신청을 하려면 먼저 로그인해주세요.' });
       push(PATH.login);

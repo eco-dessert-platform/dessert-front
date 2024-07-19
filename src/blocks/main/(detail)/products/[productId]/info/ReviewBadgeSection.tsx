@@ -18,6 +18,7 @@ const ReviewBadgeSection = async ({ productId }: Props) => {
       <PaddingWrapper className="flex gap-3 pt-0">
         {badges.map((badge) => (
           <ReviewBadge
+            key={badge}
             shape={badge.toLowerCase() as keyof typeof BADGE}
             className="flex-1 max-h-[100px]"
           />

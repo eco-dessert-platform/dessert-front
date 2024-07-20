@@ -45,7 +45,7 @@ const ReviewUpdateForm = ({ progress }: Props) => {
     <ReviewWriteForm
       progress={progress}
       onNextClick={onNextClick}
-      onSumbmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
+      onSubmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
     />
   );
 };

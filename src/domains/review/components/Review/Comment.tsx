@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
-  id: Number;
+  id: number;
   comment: string;
 }
 

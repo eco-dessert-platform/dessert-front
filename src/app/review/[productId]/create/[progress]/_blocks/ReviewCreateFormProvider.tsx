@@ -9,7 +9,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const ReviewFormProvider = ({ children }: Props) => {
+const ReviewCreateFormProvider = ({ children }: Props) => {
   const { productId } = useParams();
 
   if (!productId) throw new Error('productId is invalid');
@@ -34,4 +34,4 @@ const ReviewFormProvider = ({ children }: Props) => {
   return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
-export default ReviewFormProvider;
+export default ReviewCreateFormProvider;

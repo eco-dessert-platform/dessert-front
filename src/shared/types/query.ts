@@ -5,6 +5,6 @@ export type InfiniteQueryOptions<T> = UndefinedInitialDataInfiniteOptions<
   Cursor<T>,
   Error,
   T,
-  (string | number | {})[],
+  (string | number | Record<string, unknown>)[],
   number
 >;

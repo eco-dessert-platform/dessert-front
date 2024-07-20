@@ -46,6 +46,7 @@ const ReviewListPage = async ({ params }: Props) => {
           <div className="flex gap-[4px] w-full aspect-[4/1]">
             {bestReview.images.slice(0, 4).map(({ id, url }, idx) => (
               <div
+                key={id}
                 className={cn(
                   'relative aspect-square h-full rounded-[6px] overflow-hidden',
                   idx === 3 &&

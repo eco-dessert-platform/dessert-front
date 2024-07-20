@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
-import ReviewCreatFormProvider from './[progress]/_blocks/ReviewCreatFormProvider';
+import ReviewCreateFormProvider from './[progress]/_blocks/ReviewCreateFormProvider';
 
 const Layout = ({ children }: PropsWithChildren) => (
-  <ReviewCreatFormProvider>{children}</ReviewCreatFormProvider>
+  <ReviewCreateFormProvider>{children}</ReviewCreateFormProvider>
 );
 
 export default Layout;

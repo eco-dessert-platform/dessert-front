@@ -56,6 +56,12 @@ class ReviewService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
+  async deleteReview(id: number) {
+    const res = await this.fetchExtend.delete(`/review/${id}`);
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
   async uploadImage(images: FileList) {
     const formData = new FormData();
 

@@ -5,6 +5,7 @@ import { KebabIcon } from '@/shared/components/icons';
 import PATH from '@/shared/constants/path';
 import { useRouter } from 'next/navigation';
 import { ReviewType } from '../../types/review';
+import useDeleteReviewMutation from '../../queries/useDeleteReviewMutation';
 
 interface Props {
   reviewId: ReviewType['id'];
@@ -13,12 +14,15 @@ interface Props {
 
 const KebabMenu = ({ reviewId, boardId }: Props) => {
   const { push } = useRouter();
+  const { mutate: deleteMutate } = useDeleteReviewMutation();
 
   const onModifyClick = () => {
     push(PATH.reviewUpdate({ productId: boardId, reviewId, progress: 1 }));
   };
 
-  const onDeleteClick = () => {};
+  const onDeleteClick = () => {
+    deleteMutate(reviewId);
+  };
 
   return (
     <Dropdown>

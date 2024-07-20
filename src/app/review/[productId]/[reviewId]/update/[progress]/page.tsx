@@ -14,7 +14,7 @@ const ReviewUpdatePage = async ({ params }: Props) => {
   return (
     <>
       <Header
-        title="리뷰 작성"
+        title="리뷰 수성"
         content={<span className="typo-title-16-medium text-gray-500">{progress}/2</span>}
         back
       />

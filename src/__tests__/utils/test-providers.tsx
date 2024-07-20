@@ -3,11 +3,11 @@ import {
   AppRouterInstance
 } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { vi } from 'vitest';
-import React, { useMemo } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export type AppRouterContextProviderMockProps = {
   router: Partial<AppRouterInstance>;
-
   children: React.ReactNode;
 };
 
@@ -28,4 +28,10 @@ export const AppRouterContextProviderMock = ({
     [router]
   );
   return <AppRouterContext.Provider value={mockedRouter}>{children}</AppRouterContext.Provider>;
+};
+
+export const CleanQueryProvider = ({ children }: PropsWithChildren) => {
+  const queryClient = new QueryClient();
+
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };

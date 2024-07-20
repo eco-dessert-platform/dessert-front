@@ -14,7 +14,7 @@ interface Props {
 
 const KebabMenu = ({ reviewId, boardId }: Props) => {
   const { push } = useRouter();
-  const { mutate: deleteMutate } = useDeleteReviewMutation();
+  const { mutate: deleteMutate } = useDeleteReviewMutation(boardId);
 
   const onModifyClick = () => {
     push(PATH.reviewUpdate({ productId: boardId, reviewId, progress: 1 }));

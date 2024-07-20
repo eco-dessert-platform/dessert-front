@@ -23,6 +23,10 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
     queryClient.fetchQuery({
       queryKey: productQueryKey.detail(Number(params.productId), 'store'),
       queryFn: () => productService.getStoreInfo(params.productId)
+    }),
+    queryClient.prefetchQuery({
+      queryKey: productQueryKey.detail(Number(params.productId), 'product-option'),
+      queryFn: () => productService.getProductOption(params.productId)
     })
   ]);
 

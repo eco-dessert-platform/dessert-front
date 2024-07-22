@@ -16,7 +16,6 @@ const useDislikeReviewMutation = ({ id, oldLikeCount }: { id: number; oldLikeCou
       queryClient.setQueriesData<InfiniteData<Cursor<ReviewType[]>>>(
         { queryKey: reviewQueryKey.lists() },
         (oldData) =>
-          // Todo. like: -1 변경 예정, 백엔드 변경 요청 중
           updateInfiniteQueryCache(
             oldData,
             { value: id, key: 'id' },

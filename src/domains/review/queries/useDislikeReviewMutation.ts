@@ -1,0 +1,31 @@
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import { Cursor } from '@/shared/types/response';
+import { reviewQueryKey } from '@/shared/queries/queryKey';
+import { updateInfiniteQueryCache } from '@/shared/utils/queryCache';
+import reviewService from './service';
+import { ReviewType } from '../types/review';
+
+const useDislikeReviewMutation = () => {
+  const { openToast } = useToastNewVer();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: number) => {
+      await reviewService.dislikeReview(id);
+      return id;
+    },
+    onMutate: (id: number) => {
+      queryClient.setQueriesData<InfiniteData<Cursor<ReviewType[]>>>(
+        { queryKey: reviewQueryKey.lists() },
+        (oldData) =>
+          // Todo. like: -1 변경 예정, 백엔드 변경 요청 중
+          updateInfiniteQueryCache(oldData, { value: id, key: 'id' }, { like: -1, isLiked: false })
+      );
+    },
+    onError: () => {
+      openToast({ message: '도움돼요 해제 실패했어요.' });
+    }
+  });
+};
+export default useDislikeReviewMutation;

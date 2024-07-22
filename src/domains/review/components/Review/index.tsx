@@ -51,7 +51,7 @@ const Review = ({
 
     <div className="flex justify-between items-center">
       <span className="typo-body-12-regular text-gray-500">{date}</span>
-      <LikeButton isLiked={isLiked} like={like} />
+      <LikeButton id={id} isLiked={isLiked} like={like} />
     </div>
   </PaddingWrapper>
 );

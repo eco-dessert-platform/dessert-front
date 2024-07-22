@@ -1,15 +1,27 @@
 import { ThumbsUpIcon } from '@/shared/components/icons';
 import { cn } from '@/shared/utils/cn';
-import { MouseEventHandler } from 'react';
+import useLikeReviewMutation from '../../queries/useLikeReviewMutation';
+import useDislikeReviewMutation from '../../queries/useDislikeReviewMutation';
 
 interface Props {
+  id: number;
   isLiked?: boolean;
   like: number;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-// eslint-disable-next-line arrow-body-style
-const LikeButton = ({ isLiked, like, onClick }: Props) => {
+const LikeButton = ({ id, isLiked, like }: Props) => {
+  console.log(id, like, isLiked);
+  const { mutate: likeMutate } = useLikeReviewMutation();
+  const { mutate: dislikeMutate } = useDislikeReviewMutation();
+
+  const onClick = isLiked
+    ? () => {
+        dislikeMutate(id);
+      }
+    : () => {
+        likeMutate(id);
+      };
+
   return (
     <button
       type="button"

@@ -10,17 +10,10 @@ interface Props {
 }
 
 const LikeButton = ({ id, isLiked, like }: Props) => {
-  console.log(id, like, isLiked);
-  const { mutate: likeMutate } = useLikeReviewMutation();
-  const { mutate: dislikeMutate } = useDislikeReviewMutation();
+  const { mutate: likeMutate } = useLikeReviewMutation({ id, oldLikeCount: like });
+  const { mutate: dislikeMutate } = useDislikeReviewMutation({ id, oldLikeCount: like });
 
-  const onClick = isLiked
-    ? () => {
-        dislikeMutate(id);
-      }
-    : () => {
-        likeMutate(id);
-      };
+  const mutate = isLiked ? dislikeMutate : likeMutate;
 
   return (
     <button
@@ -29,7 +22,7 @@ const LikeButton = ({ id, isLiked, like }: Props) => {
         'typo-body-12-regular flex items-center gap-[4px] rounded-full  px-[8px] py-[4px]',
         isLiked ? 'text-primaryOrangeRed bg-secondaryPink' : 'text-gray-500 bg-redGray-30'
       )}
-      onClick={onClick}
+      onClick={() => mutate()}
     >
       <ThumbsUpIcon color={isLiked ? 'red' : 'gray'} />
       <span>도움돼요 {like}</span>

@@ -6,21 +6,22 @@ import { updateInfiniteQueryCache } from '@/shared/utils/queryCache';
 import reviewService from './service';
 import { ReviewType } from '../types/review';
 
-const useDislikeReviewMutation = () => {
+const useDislikeReviewMutation = ({ id, oldLikeCount }: { id: number; oldLikeCount: number }) => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id: number) => {
-      await reviewService.dislikeReview(id);
-      return id;
-    },
-    onMutate: (id: number) => {
+    mutationFn: () => reviewService.dislikeReview(id),
+    onMutate: () => {
       queryClient.setQueriesData<InfiniteData<Cursor<ReviewType[]>>>(
         { queryKey: reviewQueryKey.lists() },
         (oldData) =>
           // Todo. like: -1 변경 예정, 백엔드 변경 요청 중
-          updateInfiniteQueryCache(oldData, { value: id, key: 'id' }, { like: -1, isLiked: false })
+          updateInfiniteQueryCache(
+            oldData,
+            { value: id, key: 'id' },
+            { like: oldLikeCount - 1, isLiked: false }
+          )
       );
     },
     onError: () => {

@@ -34,7 +34,7 @@ const Footer = () => {
       href: PATH.search
     },
     {
-      title: '전체',
+      title: '카테고리',
       defaultIcon: <CategoryIcon />,
       activeIcon: <CategoryRedIcon />,
       href: PATH.mainCategory

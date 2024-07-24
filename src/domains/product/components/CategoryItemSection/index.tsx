@@ -4,10 +4,12 @@ import React from 'react';
 
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-
-import useToggle from '@/shared/hooks/useToggle';
+import { useSetRecoilState } from 'recoil';
 
 import PATH from '@/shared/constants/path';
+import useToggle from '@/shared/hooks/useToggle';
+
+import { categoryValueState } from '../../atoms';
 import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
 
@@ -19,11 +21,13 @@ interface CategoryItemProps {
 
 const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps) => {
   const router = useRouter();
+  const setSelectedCategory = useSetRecoilState(categoryValueState);
 
   const { isActive, toggle } = useToggle();
 
   const handleCategoryClick = () => {
     toggle();
+    setSelectedCategory(title);
     if (subCategories.length === 0) {
       router.push(PATH.mainProductList);
     }

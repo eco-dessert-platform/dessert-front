@@ -1,5 +1,6 @@
 import MainProductList from '@/blocks/main/(list)/MainProductList';
-import FilterSection from '@/domains/product/components/FilterSection';
+import SortingFilterSection from '@/blocks/main/(list)/SortingFilterSection';
+import CategoryTab from '@/domains/product/components/CategoryTab';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import productService from '@/domains/product/queries/service';
@@ -23,7 +24,8 @@ const ProductListPage = async () => {
 
   return (
     <>
-      <FilterSection filterFamilyId={FILTER_FAMILY_ID.main} />
+      <CategoryTab filterFamilyId={FILTER_FAMILY_ID.main} />
+      <SortingFilterSection defaultPath="/search" />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MainProductList />
       </HydrationBoundary>

@@ -1,10 +1,9 @@
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import { productQueryKey } from '@/shared/queries/queryKey';
-import searchService from '@/domains/search/queries/service';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
-import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
-import FilterSection from '@/domains/product/components/FilterSection';
+import SortingFilterSection from '@/blocks/main/(list)/SortingFilterSection';
 import SearchProductList from '@/blocks/search/products/SearchProductList';
+import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
+import searchService from '@/domains/search/queries/service';
+import { productQueryKey } from '@/shared/queries/queryKey';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 interface SearchProductsProps {
   searchParams: { query?: string };
@@ -27,7 +26,7 @@ const SearchProducts = async ({ searchParams: { query: keyword = '' } }: SearchP
 
   return (
     <>
-      <FilterSection filterFamilyId={FILTER_FAMILY_ID.search} />
+      <SortingFilterSection defaultPath="search" />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SearchProductList keyword={keyword} />
       </HydrationBoundary>

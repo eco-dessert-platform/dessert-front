@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useState, useEffect, useRef } from 'react';
 import { PolygonIcon } from '@/shared/components/icons';
 import { cn } from '@/shared/utils/cn';
 
@@ -40,6 +40,22 @@ const Tooltip = ({
   polygonPosition = 'center',
   arrow = true
 }: Props) => {
+  const anchor = useRef<HTMLButtonElement>(null);
+  const [showContentBox, setShowContentBox] = useState(false);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const clickedTarget = e.target;
+      const anchorRef = anchor.current;
+      if (clickedTarget instanceof Element && anchorRef?.contains(clickedTarget)) return;
+
+      setShowContentBox(false);
+    };
+
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
   const polygonClassName = cn(
     'absolute',
     {
@@ -82,8 +98,10 @@ const Tooltip = ({
 
   return (
     <div className="relative max-w-max group">
-      <button type="button">{children}</button>
-      <div className="invisible group-hover:visible">
+      <button type="button" ref={anchor} onClick={() => setShowContentBox(true)}>
+        {children}
+      </button>
+      <div className={cn(`invisible group-hover:visible`, showContentBox && 'visible')}>
         {arrow && <PolygonIcon className={polygonClassName} />}
         <div className={cn(contentBoxClassName, className)}>{content}</div>
       </div>

@@ -14,10 +14,13 @@ const RatingSection = async ({ params: { productId } }: Props) => {
     <div className="flex justify-between">
       <div className="flex items-center gap-[2px]">
         <span className="typo-title-14-semibold text-gray-700">평점</span>
-        <div className="group relative">
+        <Tooltip
+          content="작성된 리뷰 중에서 더 많이 받은 배지가 대표 배지로 나타나요!"
+          placement="bottom-start"
+          className="w-[150px]"
+        >
           <QuestionMarkIcon />
-          <Tooltip className="absolute top-[calc(100%+8px)] group-hover:visible">tooltip</Tooltip>
-        </div>
+        </Tooltip>
       </div>
       <div className="flex gap-[4px] items-center">
         <StarRating value={rating} starSize="small" />

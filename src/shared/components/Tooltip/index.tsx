@@ -20,15 +20,21 @@ const Tooltip = ({ content, children, className, placement = 'bottom', arrowPosi
   const { openTooltip, closeTooltip } = useTooltip();
 
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
+    const handlePointerDown = (e: MouseEvent) => {
       const clickedTarget = e.target;
       const anchorRef = anchor.current;
       if (clickedTarget instanceof Element && anchorRef?.contains(clickedTarget)) return;
       closeTooltip();
     };
 
-    window.addEventListener('click', handleClick);
-    return () => window.removeEventListener('click', handleClick);
+    window.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('resize', closeTooltip);
+    window.addEventListener('wheel', closeTooltip);
+    return () => {
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('resize', closeTooltip);
+      window.removeEventListener('wheel', closeTooltip);
+    };
   }, [closeTooltip]);
 
   const showTooltip = () => {
@@ -60,7 +66,7 @@ const Tooltip = ({ content, children, className, placement = 'bottom', arrowPosi
       ref={anchor}
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
-      onClick={showTooltip}
+      onPointerDown={showTooltip}
     >
       {children}
     </button>

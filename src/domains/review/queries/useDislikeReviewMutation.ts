@@ -25,6 +25,15 @@ const useDislikeReviewMutation = ({ id, oldLikeCount }: { id: number; oldLikeCou
     },
     onError: () => {
       openToast({ message: '도움돼요 해제 실패했어요.' });
+      queryClient.setQueriesData<InfiniteData<Cursor<ReviewType[]>>>(
+        { queryKey: reviewQueryKey.lists() },
+        (oldData) =>
+          updateInfiniteQueryCache(
+            oldData,
+            { value: id, key: 'id' },
+            { like: oldLikeCount + 1, isLiked: true }
+          )
+      );
     }
   });
 };

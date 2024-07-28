@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Tooltip from '@/shared/components/Tooltip';
 import { PLACEMENT } from '@/shared/constants/tooltip';
-import { PlacementType, PolygonPositionType } from '@/shared/types/tooltip';
+import { PlacementType, ArrowPositionType } from '@/shared/types/tooltip';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 
 const meta: Meta<typeof Tooltip> = {
@@ -21,16 +21,16 @@ type Story = StoryObj<typeof Tooltip>;
 const Template = ({
   anchorText,
   placement,
-  polygonPosition
+  arrowPosition
 }: {
   anchorText: string;
   placement?: PlacementType;
-  polygonPosition?: PolygonPositionType;
+  arrowPosition?: ArrowPositionType;
 }) => (
   <Tooltip
     content="Tooltip"
     placement={placement}
-    polygonPosition={polygonPosition}
+    arrowPosition={arrowPosition}
     className="min-w-max text-center"
   >
     <ButtonNewver>{anchorText}</ButtonNewver>
@@ -49,7 +49,7 @@ export const Placement: Story = {
   )
 };
 
-export const PolygonPosition: Story = {
+export const ArrowPosition: Story = {
   render: () => (
     <div className="flex flex-col gap-y-10">
       <div>
@@ -58,11 +58,11 @@ export const PolygonPosition: Story = {
           {Template({ anchorText: 'Default(center)' })}
           {Template({
             anchorText: 'Custom(left: 10px)',
-            polygonPosition: { left: 10 }
+            arrowPosition: { left: 10 }
           })}
           {Template({
             anchorText: 'Custom(right: 10px)',
-            polygonPosition: { right: 10 }
+            arrowPosition: { right: 10 }
           })}
         </div>
       </div>
@@ -73,13 +73,13 @@ export const PolygonPosition: Story = {
           {Template({
             anchorText: 'Custom(top: 10px)',
             placement: 'right',
-            polygonPosition: { top: 10 }
+            arrowPosition: { top: 10 }
           })}
           {Template({
             anchorText: 'Custom(bottom: 10px)',
             placement: 'right',
 
-            polygonPosition: { bottom: 10 }
+            arrowPosition: { bottom: 10 }
           })}
         </div>
       </div>

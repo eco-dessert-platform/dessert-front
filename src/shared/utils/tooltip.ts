@@ -1,4 +1,4 @@
-import { PlacementType, PolygonPositionType } from '@/shared/types/tooltip';
+import { PlacementType, ArrowPositionType } from '@/shared/types/tooltip';
 
 export const getPlacementStyle = (anchorEl: Element, placement: PlacementType) => {
   const anchorRect = anchorEl.getBoundingClientRect();
@@ -87,65 +87,65 @@ export const getPlacementStyle = (anchorEl: Element, placement: PlacementType) =
   }
 };
 
-export const getPolygonPositionStyle = (
+export const getArrowPositionStyle = (
   placement: PlacementType,
-  polygonPosition: PolygonPositionType | undefined
+  arrowPosition: ArrowPositionType | undefined
 ) => {
   switch (placement) {
     case 'top':
     case 'top-start':
     case 'top-end':
-      if (polygonPosition && polygonPosition.right)
+      if (arrowPosition && arrowPosition.right)
         return {
           top: 'calc(100% - 2px)',
-          right: polygonPosition.right,
+          right: arrowPosition.right,
           transform: 'translateX(50%) rotate(180deg)'
         };
       return {
         top: 'calc(100% - 2px)',
-        left: polygonPosition?.left || '50%',
+        left: arrowPosition?.left || '50%',
         transform: 'translateX(-50%) rotate(180deg)'
       };
     case 'bottom':
     case 'bottom-start':
     case 'bottom-end':
-      if (polygonPosition && polygonPosition.right)
+      if (arrowPosition && arrowPosition.right)
         return {
           bottom: 'calc(100% - 2px)',
-          right: polygonPosition.right,
+          right: arrowPosition.right,
           transform: 'translateX(50%)'
         };
       return {
         bottom: 'calc(100% - 2px)',
-        left: polygonPosition?.left || '50%',
+        left: arrowPosition?.left || '50%',
         transform: 'translateX(-50%)'
       };
     case 'left':
     case 'left-start':
     case 'left-end':
-      if (polygonPosition && polygonPosition.bottom)
+      if (arrowPosition && arrowPosition.bottom)
         return {
           left: 'calc(100% - 2px)',
-          bottom: polygonPosition.bottom,
+          bottom: arrowPosition.bottom,
           transform: 'translateY(50%) rotate(90deg)'
         };
       return {
         left: 'calc(100% - 2px)',
-        top: polygonPosition?.top || '50%',
+        top: arrowPosition?.top || '50%',
         transform: 'translateY(-50%) rotate(90deg)'
       };
     case 'right':
     case 'right-start':
     case 'right-end':
-      if (polygonPosition && polygonPosition.bottom)
+      if (arrowPosition && arrowPosition.bottom)
         return {
           right: 'calc(100% - 2px)',
-          bottom: polygonPosition.bottom,
+          bottom: arrowPosition.bottom,
           transform: 'translateY(50%) rotate(-90deg)'
         };
       return {
         right: 'calc(100% - 2px)',
-        top: polygonPosition?.top || '50%',
+        top: arrowPosition?.top || '50%',
         transform: 'translateY(-50%) rotate(-90deg)'
       };
     default:

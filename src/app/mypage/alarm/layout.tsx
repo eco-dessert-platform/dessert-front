@@ -16,7 +16,7 @@ const AlarmLayout = ({ children }: Props) => (
           content={`• 빵켓팅은 항상 구매할 수 없는 빵을 시간에 맞춰 구매하는 것이에요!
             • '빵켓팅' 알림을 설정하면, 출고되는 즉시 푸시 알림이 전달되어 편하고 빠르게 구매할 수 있어요!`}
           placement="bottom-end"
-          polygonPosition={{ right: 12 }}
+          arrowPosition={{ right: 12 }}
           className="w-[170px]"
         >
           <QuestionMarkIcon />

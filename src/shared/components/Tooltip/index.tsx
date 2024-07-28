@@ -3,25 +3,19 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { PolygonIcon } from '@/shared/components/icons';
 import { cn } from '@/shared/utils/cn';
-import { getPlacementStyle, getPolygonPositionStyle } from '@/shared/utils/tooltip';
+import { getPlacementStyle, getArrowPositionStyle } from '@/shared/utils/tooltip';
 import useTooltip from '@/shared/hooks/useTooltip';
-import { PlacementType, PolygonPositionType } from '@/shared/types/tooltip';
+import { PlacementType, ArrowPositionType } from '@/shared/types/tooltip';
 
 interface Props {
   content: string;
   children: ReactNode;
   className?: string;
   placement?: PlacementType;
-  polygonPosition?: PolygonPositionType;
+  arrowPosition?: ArrowPositionType;
 }
 
-const Tooltip = ({
-  content,
-  children,
-  className,
-  placement = 'bottom',
-  polygonPosition
-}: Props) => {
+const Tooltip = ({ content, children, className, placement = 'bottom', arrowPosition }: Props) => {
   const anchor = useRef<HTMLButtonElement>(null);
   const { openTooltip, closeTooltip } = useTooltip();
 
@@ -43,10 +37,7 @@ const Tooltip = ({
 
     openTooltip(
       <div className="fixed max-w-max z-tooltip" style={getPlacementStyle(anchorRef, placement)}>
-        <PolygonIcon
-          className="absolute"
-          style={getPolygonPositionStyle(placement, polygonPosition)}
-        />
+        <PolygonIcon className="absolute" style={getArrowPositionStyle(placement, arrowPosition)} />
         <div
           className={cn(
             'max-w-[300px] min-w-min px-[8px] py-[6px] rounded-[4px] bg-gray-800 whitespace-pre-line text-wrap break-all typo-body-11-regular text-white',

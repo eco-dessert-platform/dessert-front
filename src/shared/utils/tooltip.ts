@@ -100,7 +100,7 @@ export const getArrowPositionStyle = (
     case 'top':
     case 'top-start':
     case 'top-end':
-      if (arrowPosition && arrowPosition.right)
+      if (arrowPosition?.right)
         return {
           top: 'calc(100% - 2px)',
           right: arrowPosition.right,
@@ -114,7 +114,7 @@ export const getArrowPositionStyle = (
     case 'bottom':
     case 'bottom-start':
     case 'bottom-end':
-      if (arrowPosition && arrowPosition.right)
+      if (arrowPosition?.right)
         return {
           bottom: 'calc(100% - 2px)',
           right: arrowPosition.right,
@@ -128,7 +128,7 @@ export const getArrowPositionStyle = (
     case 'left':
     case 'left-start':
     case 'left-end':
-      if (arrowPosition && arrowPosition.bottom)
+      if (arrowPosition?.bottom)
         return {
           left: 'calc(100% - 2px)',
           bottom: arrowPosition.bottom,
@@ -142,7 +142,7 @@ export const getArrowPositionStyle = (
     case 'right':
     case 'right-start':
     case 'right-end':
-      if (arrowPosition && arrowPosition.bottom)
+      if (arrowPosition?.bottom)
         return {
           right: 'calc(100% - 2px)',
           bottom: arrowPosition.bottom,

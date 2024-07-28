@@ -78,6 +78,7 @@ const Tooltip = ({
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
       onPointerDown={showTooltip}
+      aria-describedby="tooltip"
     >
       {children}
     </button>

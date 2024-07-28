@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Tooltip, {
-  PLACEMENT,
-  POLYGON_POSITION,
-  PlacementType,
-  PolygonPositionType
-} from '@/shared/components/Tooltip';
+import Tooltip from '@/shared/components/Tooltip';
+import { PLACEMENT } from '@/shared/constants/tooltip';
+import { PlacementType, PolygonPositionType } from '@/shared/types/tooltip';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 
 const meta: Meta<typeof Tooltip> = {
@@ -24,20 +21,17 @@ type Story = StoryObj<typeof Tooltip>;
 const Template = ({
   anchorText,
   placement,
-  polygonPosition,
-  arrow
+  polygonPosition
 }: {
   anchorText: string;
   placement?: PlacementType;
   polygonPosition?: PolygonPositionType;
-  arrow?: boolean;
 }) => (
   <Tooltip
     content="Tooltip"
     placement={placement}
     polygonPosition={polygonPosition}
-    arrow={arrow}
-    className="w-3/4 text-center"
+    className="min-w-max text-center"
   >
     <ButtonNewver>{anchorText}</ButtonNewver>
   </Tooltip>
@@ -57,27 +51,38 @@ export const Placement: Story = {
 
 export const PolygonPosition: Story = {
   render: () => (
-    <div>
-      <h5 className="mb-2">placement: bottom</h5>
-      <div className="grid grid-rows-1 grid-cols-3 gap-x-10 min-w-[300px] justify-items-center mb-10">
-        {POLYGON_POSITION.map((position) =>
-          Template({ anchorText: position, polygonPosition: position })
-        )}
+    <div className="flex flex-col gap-y-10">
+      <div>
+        <h5 className="mb-2">placement: bottom</h5>
+        <div className="flex gap-x-10">
+          {Template({ anchorText: 'Default(center)' })}
+          {Template({
+            anchorText: 'Custom(left: 10px)',
+            polygonPosition: { left: 10 }
+          })}
+          {Template({
+            anchorText: 'Custom(right: 10px)',
+            polygonPosition: { right: 10 }
+          })}
+        </div>
       </div>
-      <h5 className="mb-2">placement: left</h5>
-      <div className="grid grid-rows-1 grid-cols-3 gap-x-10 min-w-[300px] justify-items-center">
-        {POLYGON_POSITION.map((position) =>
-          Template({ anchorText: position, placement: 'left', polygonPosition: position })
-        )}
-      </div>
-    </div>
-  )
-};
+      <div>
+        <h5 className="mb-2">placement: right</h5>
+        <div className="flex gap-x-10">
+          {Template({ anchorText: 'Default(center)', placement: 'right' })}
+          {Template({
+            anchorText: 'Custom(top: 10px)',
+            placement: 'right',
+            polygonPosition: { top: 10 }
+          })}
+          {Template({
+            anchorText: 'Custom(bottom: 10px)',
+            placement: 'right',
 
-export const Arrow: Story = {
-  render: () => (
-    <div className="grid grid-rows-4 grid-cols-3 gap-x-10 gap-y-10 min-w-[300px] justify-items-center">
-      {PLACEMENT.map((placement) => Template({ anchorText: placement, placement, arrow: false }))}
+            polygonPosition: { bottom: 10 }
+          })}
+        </div>
+      </div>
     </div>
   )
 };

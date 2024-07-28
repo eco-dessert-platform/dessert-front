@@ -24,3 +24,8 @@ export const toastStateNewVer = atom<{ message: string; id: number; action: Reac
   key: 'toastStateNewVer',
   default: []
 });
+
+export const tooltipState = atom<ReactNode>({
+  key: 'tooltipState',
+  default: null
+});

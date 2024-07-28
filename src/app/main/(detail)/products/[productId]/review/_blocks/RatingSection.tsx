@@ -17,6 +17,7 @@ const RatingSection = async ({ params: { productId } }: Props) => {
         <Tooltip
           content="작성된 리뷰 중에서 더 많이 받은 배지가 대표 배지로 나타나요!"
           placement="bottom-start"
+          polygonPosition={{ left: 12 }}
           className="w-[150px]"
         >
           <QuestionMarkIcon />

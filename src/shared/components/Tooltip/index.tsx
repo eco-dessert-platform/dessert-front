@@ -13,9 +13,17 @@ interface Props {
   className?: string;
   placement?: PlacementType;
   arrowPosition?: ArrowPositionType;
+  distance?: number;
 }
 
-const Tooltip = ({ content, children, className, placement = 'bottom', arrowPosition }: Props) => {
+const Tooltip = ({
+  content,
+  children,
+  className,
+  placement = 'bottom',
+  arrowPosition,
+  distance = 0
+}: Props) => {
   const anchor = useRef<HTMLButtonElement>(null);
   const { openTooltip, closeTooltip } = useTooltip();
 
@@ -42,7 +50,10 @@ const Tooltip = ({ content, children, className, placement = 'bottom', arrowPosi
     if (!anchorRef) return;
 
     openTooltip(
-      <div className="fixed max-w-max z-tooltip" style={getPlacementStyle(anchorRef, placement)}>
+      <div
+        className="fixed max-w-max z-tooltip"
+        style={getPlacementStyle(anchorRef, placement, distance)}
+      >
         <PolygonIcon className="absolute" style={getArrowPositionStyle(placement, arrowPosition)} />
         <div
           className={cn(

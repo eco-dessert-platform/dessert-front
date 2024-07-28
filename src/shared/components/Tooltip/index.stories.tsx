@@ -21,16 +21,19 @@ type Story = StoryObj<typeof Tooltip>;
 const Template = ({
   anchorText,
   placement,
-  arrowPosition
+  arrowPosition,
+  distance
 }: {
   anchorText: string;
   placement?: PlacementType;
   arrowPosition?: ArrowPositionType;
+  distance?: number;
 }) => (
   <Tooltip
     content="Tooltip"
     placement={placement}
     arrowPosition={arrowPosition}
+    distance={distance}
     className="min-w-max text-center"
   >
     <ButtonNewver>{anchorText}</ButtonNewver>
@@ -83,6 +86,14 @@ export const ArrowPosition: Story = {
           })}
         </div>
       </div>
+    </div>
+  )
+};
+
+export const Distance: Story = {
+  render: () => (
+    <div className="flex gap-x-10">
+      {[2, 5, 10].map((distance) => Template({ anchorText: `${distance}px`, distance }))}
     </div>
   )
 };

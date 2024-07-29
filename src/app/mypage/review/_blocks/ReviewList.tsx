@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 
 const ReviewList = () => {
   const { inView, ref } = useInView();
-  const { data: reviews, fetchNextPage } = useMyReviewQuery();
+  const { data: reviews, fetchNextPage, hasNextPage } = useMyReviewQuery();
 
   useEffect(() => {
     if (inView) fetchNextPage();
@@ -36,9 +36,11 @@ const ReviewList = () => {
           );
         }
       )}
-      <div className="bg-gray" ref={ref}>
-        skeleton
-      </div>
+      {hasNextPage && (
+        <div ref={ref}>
+          <Review.Skeleton />
+        </div>
+      )}
     </section>
   );
 };

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useRef } from 'react';
+import ImageWithFallback from '@/shared/components/ImageWithFallback';
+import Skeleton from '@/shared/components/Skeleton';
 import { ReviewType } from '../../types/review';
 
 interface Props {
@@ -18,7 +19,13 @@ const ImageSlider = ({ images }: Props) => {
             key={id}
             className="relative size-[64px] aspect-square rounded-[6px] overflow-hidden"
           >
-            <Image src={url} fill alt="review image" className="object-cover" />
+            <ImageWithFallback
+              fallback={<Skeleton className="size-full rounded-none" />}
+              src={url}
+              fill
+              alt="review image"
+              className="object-cover"
+            />
           </div>
         ))}
       </motion.div>

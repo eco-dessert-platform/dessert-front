@@ -6,8 +6,9 @@ import { BoardReviewRateResponse, CreatReviewRequest, ReviewType } from '../type
 
 class ReviewService extends Service {
   async getMyReview(cursorId: number) {
-    const mockReviewUrl = `http://localhost:3000/mock/review.json?cursorId=${cursorId}`;
-    const res = await this.fetchExtend.get(mockReviewUrl);
+    const url =
+      cursorId === INITIAL_CURSOR ? `/review/myreview` : `/review/myreview?cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(url);
     if (!res.ok) throw new Error('mock error');
     const { result }: ResultResponse<Cursor<ReviewType[]>> = await res.json();
     return result;

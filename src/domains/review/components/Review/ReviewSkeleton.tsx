@@ -2,7 +2,7 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Skeleton from '@/shared/components/Skeleton';
 import StarRating from '../common/StarRating';
 
-const ReveiwSkeleton = () => (
+const ReviewSkeleton = () => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <Skeleton className="w-20" />
 
@@ -29,4 +29,4 @@ const ReveiwSkeleton = () => (
   </PaddingWrapper>
 );
 
-export default ReveiwSkeleton;
+export default ReviewSkeleton;

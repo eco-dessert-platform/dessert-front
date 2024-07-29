@@ -8,7 +8,7 @@ import StarRating from '../common/StarRating';
 import Comment from './Comment';
 import ImageSlider from './ImageSlider';
 import KebabMenu from './KebabMenu';
-import ReveiwSkeleton from './ReveiwSkeleton';
+import ReviewSkeleton from './ReviewSkeleton';
 
 const Review = ({
   id,
@@ -67,6 +67,6 @@ const Review = ({
   </PaddingWrapper>
 );
 
-Review.Skeleton = ReveiwSkeleton;
+Review.Skeleton = ReviewSkeleton;
 
 export default Review;

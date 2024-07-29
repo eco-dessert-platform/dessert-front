@@ -80,6 +80,18 @@ class ReviewService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result.urls;
   }
+
+  async likeReview(id: number) {
+    const res = await this.fetchExtend.get(`/review/like/${id}`);
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async dislikeReview(id: number) {
+    const res = await this.fetchExtend.delete(`/review/like/${id}`);
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
 }
 
 const reviewService = new ReviewService();

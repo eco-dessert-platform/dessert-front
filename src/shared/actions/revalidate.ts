@@ -6,6 +6,6 @@ export const revalidateTag = async (tag: string) => {
   _revalidateTag(tag);
 };
 
-export const revalidatePath = async (tag: string) => {
-  _revalidatePath(tag);
+export const revalidatePath = async (path: string) => {
+  _revalidatePath(path);
 };

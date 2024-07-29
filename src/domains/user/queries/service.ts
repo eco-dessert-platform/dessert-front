@@ -5,7 +5,7 @@ import Service from '@/shared/queries/service';
 import { transformPreferenceToEng } from '@/domains/user/utils/transformPreference';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 import { notificationQueryKey, userProfileQueryKey } from './queryKey';
-import { UserProfileType } from '../types/profile';
+import { UserProfileType, WithdrawResponse } from '../types/profile';
 import { PreferenceType, PreferenceResultType } from '../types/preference';
 
 class UserService extends Service {
@@ -40,6 +40,17 @@ class UserService extends Service {
     if (!success) {
       throw new Error(ERROR_MESSAGE.api({ code, message }));
     }
+    return result;
+  }
+
+  async withdraw(deleteReasons: Array<string>) {
+    const res = await this.fetchExtend.patch('/members', {
+      body: JSON.stringify({
+        reasons: deleteReasons.join(',')
+      })
+    });
+    const { result, success, message, code }: ResultResponse<WithdrawResponse> = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }
 

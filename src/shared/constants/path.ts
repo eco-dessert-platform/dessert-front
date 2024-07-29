@@ -15,6 +15,7 @@ const PATH = {
   wishStoreList: '/wish/stores',
 
   profileUpdate: '/mypage/update',
+  withdraw: '/mypage/withdraw',
   notification: '/mypage/notifications',
   serviceTerm: '/mypage/service-terms',
   privacyPolicy: '/mypage/privacy-policy',

@@ -30,7 +30,5 @@ export const transformFilterValueToQueryString = (query: IFilterType) => {
     orderAvailableToday: orderAvailableTodayQuery
   };
 
-  console.log(queryObject);
-
   return new URLSearchParams(queryObject).toString();
 };

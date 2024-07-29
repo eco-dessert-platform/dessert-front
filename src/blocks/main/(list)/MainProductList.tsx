@@ -17,8 +17,6 @@ const MainProductList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.main));
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAllCategoryProductsQuery(filterValue);
-  console.log('filterValue', filterValue);
-  console.log('data', data);
   const { ref, inView } = useInView();
 
   useEffect(() => {

@@ -1,23 +1,24 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+
 import { useInView } from 'react-intersection-observer';
+import { useRecoilValue } from 'recoil';
+
 import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
-import { IProductType } from '@/domains/product/types/productType';
-import { useGetAllProductsQuery } from '@/domains/home/queries/useGetAllProductsQuery';
 import ProductCard from '@/domains/product/components/ProductCard';
+import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
+import { IProductType } from '@/domains/product/types/productType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
-import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 
 const ProductsList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.home));
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetAllProductsQuery(filterValue);
+    useGetAllCategoryProductsQuery(filterValue);
   const { ref, inView } = useInView();
-
   useEffect(() => {
     if (!inView) return;
     fetchNextPage();

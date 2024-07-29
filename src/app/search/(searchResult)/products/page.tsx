@@ -1,5 +1,6 @@
 import SortingFilterSection from '@/blocks/main/(list)/SortingFilterSection';
 import SearchProductList from '@/blocks/search/products/SearchProductList';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import searchService from '@/domains/search/queries/service';
 import { productQueryKey } from '@/shared/queries/queryKey';
@@ -26,7 +27,7 @@ const SearchProducts = async ({ searchParams: { query: keyword = '' } }: SearchP
 
   return (
     <>
-      <SortingFilterSection defaultPath="search" />
+      <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.search} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SearchProductList keyword={keyword} />
       </HydrationBoundary>

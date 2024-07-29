@@ -14,20 +14,6 @@ import {
 } from '../types/productDetailType';
 
 class ProductService extends Service {
-  async getAllProducts({ cursorId, filterValue }: { cursorId: number; filterValue: IFilterType }) {
-    const cursorIdQueryString = cursorId === INITIAL_CURSOR ? '' : `&cursorId=${cursorId}`;
-    const filterValueQueryString = transformFilterValueToQueryString(filterValue);
-
-    const res = await this.fetchExtend.get(
-      `/boards?${filterValueQueryString}${cursorIdQueryString}`
-    );
-    const { success, result, code, message }: ResultResponse<Cursor<Array<IProductType>>> =
-      await res.json();
-
-    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result;
-  }
-
   async getAllCategoryProducts({
     cursorId,
     filterValue

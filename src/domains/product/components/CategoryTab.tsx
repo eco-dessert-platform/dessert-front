@@ -17,7 +17,6 @@ interface Props {
 const CategoryTab = ({ filterFamilyId }: Props) => {
   const id = useId();
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
-  console.log('궁금해?????????????????????', filterValue.category);
   const tabContainerRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 

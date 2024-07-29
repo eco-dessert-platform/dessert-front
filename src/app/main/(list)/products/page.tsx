@@ -13,7 +13,7 @@ const ProductListPage = async () => {
   await queryClient.prefetchInfiniteQuery({
     queryKey: [...productQueryKey.list('main'), { filter: INIT_FILTER_VALUE }],
     queryFn: async ({ pageParam: cursorId }: { pageParam: number }) => {
-      const result = await productService.getAllProducts({
+      const result = await productService.getAllCategoryProducts({
         cursorId,
         filterValue: INIT_FILTER_VALUE
       });
@@ -25,7 +25,7 @@ const ProductListPage = async () => {
   return (
     <>
       <CategoryTab filterFamilyId={FILTER_FAMILY_ID.main} />
-      <SortingFilterSection defaultPath="/search" />
+      <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.main} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MainProductList />
       </HydrationBoundary>

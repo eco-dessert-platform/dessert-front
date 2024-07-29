@@ -17,11 +17,11 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
   const queryClient = new QueryClient();
   const [boardData, storeData] = await Promise.all([
     queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(Number(params.productId), 'board'),
+      queryKey: productQueryKey.detail(Number(params.productId), 'board-detail'),
       queryFn: () => productService.getBoardDetail(params.productId)
     }),
     queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(Number(params.productId), 'store'),
+      queryKey: productQueryKey.detail(Number(params.productId), 'store-info'),
       queryFn: () => productService.getStoreInfo(params.productId)
     }),
     queryClient.prefetchQuery({

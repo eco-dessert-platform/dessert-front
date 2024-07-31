@@ -10,6 +10,8 @@ import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductM
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
 import ButtonNewver from '@/shared/components/ButtonNewver';
+import FixedBottom from '@/shared/components/FixedBottom';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface DetailFixedBtnSectionProps {
   boardData: IBoardDetailType;
@@ -36,20 +38,22 @@ const FixedPurchaseButtonSection = ({ boardData }: DetailFixedBtnSectionProps) =
   };
 
   return (
-    <div className="bg-white z-[5000] max-w-[600px] w-full mx-auto p-[16px] fixed flex items-center gap-[10px] left-[0%] right-[0%] bottom-0 ">
-      <div>
-        <HeartButton
-          shape="default"
-          isActive={boardData.isWished}
-          onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
-        />
-      </div>
-      <div className="flex-1">
-        <ButtonNewver color="black" className="w-full" size="lg" onClick={gotoPurchaseUrl}>
-          구매하러 가기
-        </ButtonNewver>
-      </div>
-    </div>
+    <FixedBottom>
+      <PaddingWrapper className="bg-white flex items-center gap-[10px]">
+        <div>
+          <HeartButton
+            shape="default"
+            isActive={boardData.isWished}
+            onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
+          />
+        </div>
+        <div className="flex-1">
+          <ButtonNewver color="black" className="w-full" size="lg" onClick={gotoPurchaseUrl}>
+            구매하러 가기
+          </ButtonNewver>
+        </div>
+      </PaddingWrapper>
+    </FixedBottom>
   );
 };
 

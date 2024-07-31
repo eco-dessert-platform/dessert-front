@@ -1,11 +1,15 @@
-import Button from '@/shared/components/Button';
+import ButtonNewver from '@/shared/components/ButtonNewver';
+import FixedBottom from '@/shared/components/FixedBottom';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 const ButtonSection = () => (
-  <div className="fixed z-[5000] left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] p-[16px] bg-white">
-    <Button type="submit" variants="primary-black">
-      수정하기
-    </Button>
-  </div>
+  <FixedBottom>
+    <PaddingWrapper className="bg-white">
+      <ButtonNewver type="submit" color="black" className="w-full">
+        수정하기
+      </ButtonNewver>
+    </PaddingWrapper>
+  </FixedBottom>
 );
 
 export default ButtonSection;

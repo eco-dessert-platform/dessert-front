@@ -1,13 +1,18 @@
 import { cn } from '@/shared/utils/cn';
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef, ForwardedRef } from 'react';
 
-interface PaddingWrapperProps {
+interface PaddingWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: ReactNode;
 }
 
-const PaddingWrapper = ({ className, children }: PaddingWrapperProps) => (
-  <div className={cn('p-[16px]', className)}>{children}</div>
+const PaddingWrapper = (
+  { className, children, ...rest }: PaddingWrapperProps,
+  ref: ForwardedRef<HTMLDivElement>
+) => (
+  <div ref={ref} className={cn('p-[16px]', className)} {...rest}>
+    {children}
+  </div>
 );
 
-export default PaddingWrapper;
+export default forwardRef(PaddingWrapper);

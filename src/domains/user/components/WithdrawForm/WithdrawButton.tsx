@@ -1,8 +1,10 @@
 'use client';
 
-import Button from '@/shared/components/Button';
+import ButtonNewver from '@/shared/components/ButtonNewver';
 import WithdrawPopup from '@/domains/user/components/alert-box/WithdrawPopup';
 import usePopup from '@/shared/hooks/usePopup';
+import FixedBottom from '@/shared/components/FixedBottom';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface WithdrawButtonProps {
   disabled: boolean;
@@ -17,11 +19,18 @@ const WithdrawButton = ({ disabled = true }: WithdrawButtonProps) => {
   };
 
   return (
-    <div className="fixed z-[5000] left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] p-[16px] bg-white">
-      <Button onClick={handleClickButton} disabled={disabled}>
-        탈퇴하기
-      </Button>
-    </div>
+    <FixedBottom>
+      <PaddingWrapper className=" bg-white">
+        <ButtonNewver
+          onClick={handleClickButton}
+          disabled={disabled}
+          color="black"
+          className="w-full"
+        >
+          탈퇴하기
+        </ButtonNewver>
+      </PaddingWrapper>
+    </FixedBottom>
   );
 };
 

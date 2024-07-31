@@ -16,13 +16,13 @@ const ToastPop = ({ children, index = 0, action }: Props) => (
     initial={{ opacity: 0, bottom: 0 }}
     animate={{
       opacity: 1,
-      bottom: '100%',
+      bottom: 'calc(100% + 10px)',
       translateY: -index * 10,
       scale: 1 - 0.04 * index,
       zIndex: 9999 - index
     }}
     exit={{
-      bottom: '100%',
+      bottom: 'calc(100% + 10px)',
       translateY: -index * 10 + 5,
       opacity: 0
     }}

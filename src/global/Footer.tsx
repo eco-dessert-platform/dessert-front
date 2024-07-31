@@ -54,7 +54,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="z-footer h-[70px] flex justify-between items-center sticky bottom-0 w-full bg-white border-t border-gray-100">
+    <div className="h-[70px] flex justify-between items-center w-full bg-white border-t border-gray-100">
       {menu.map((item) => {
         const isHomePage = pathname === '/';
         const isHomeLink = item.href === '/';

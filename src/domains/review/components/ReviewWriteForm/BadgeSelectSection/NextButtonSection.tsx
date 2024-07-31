@@ -5,6 +5,7 @@ import ButtonNewver from '@/shared/components/ButtonNewver';
 import { useFormContext } from 'react-hook-form';
 import { IReviewWriteForm } from '@/domains/review/types/review';
 import { MouseEventHandler } from 'react';
+import FixedBottom from '@/shared/components/FixedBottom';
 
 interface Props {
   onNextClick: MouseEventHandler<HTMLButtonElement>;
@@ -15,8 +16,8 @@ const NextButtonSection = ({ onNextClick }: Props) => {
   const isAllBadgeSelected = Object.values(badges).every((badge) => badge);
 
   return (
-    <div className="fixed z-bottomButton left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[600px] bg-white">
-      <PaddingWrapper>
+    <FixedBottom>
+      <PaddingWrapper className="bg-white">
         <ButtonNewver
           color="black"
           className="w-full"
@@ -26,7 +27,7 @@ const NextButtonSection = ({ onNextClick }: Props) => {
           다음
         </ButtonNewver>
       </PaddingWrapper>
-    </div>
+    </FixedBottom>
   );
 };
 

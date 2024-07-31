@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import KaKaoChatScript from '@/global/KaKaoChatScript';
 import RootLayoutProvider from '@/global/RootLayoutProvider';
-import Footer from '@/global/Footer';
+import FixedBottomContainer from '@/global/FixedBottomContainer';
 import AlertContainer from '@/global/AlertContainer';
 import SilentLogin from '@/global/SilentLogin';
 import GAScript from '@/global/GAScript';
@@ -27,7 +27,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
         <SilentLogin />
         <div className="shadow-lg sm:w-[600px] h-full m-auto overflow-x-hidden scrollbar-hide">
           <main className="w-full min-h-[calc(100vh-70px)] relative">{children}</main>
-          <Footer />
+          <FixedBottomContainer />
           <AlertContainer />
         </div>
       </RootLayoutProvider>

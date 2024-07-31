@@ -44,7 +44,7 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
       />
       <ProductDetailTabs />
       {children}
-      <FixedPurchaseButtonSection boardData={boardData} />
+      <FixedPurchaseButtonSection />
     </HydrationBoundary>
   );
 };

@@ -10,7 +10,7 @@ const ToastContainer = () => {
   const toasts = useRecoilValue(toastStateNewVer);
 
   return (
-    <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0 left-1/2 -translate-x-1/2  min-h-[70px] h-fit z-toast flex flex-col gap-[10px]">
+    <PaddingWrapper className="fixed max-w-[600px] w-full bottom-0 left-1/2 -translate-x-1/2 h-[90px] z-toast py-0">
       <div className="relative w-full h-full">
         <AnimatePresence>
           {toasts.map(({ message, id, action }, index) => (

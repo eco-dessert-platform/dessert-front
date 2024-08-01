@@ -17,7 +17,11 @@ const FixedBottom = ({ children }: Props) => {
     return resetFixedBottom;
   }, [setFixedBottom, resetFixedBottom, children]);
 
-  return null;
+  return (
+    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 z-[5001] max-w-[600px] w-full">
+      {children}
+    </div>
+  );
 };
 
 export default FixedBottom;

@@ -22,6 +22,7 @@ const StoreBestProductsSection = ({ storeId }: Props) => {
     );
   }
 
+  console.log(products, storeInfo);
   return (
     <PaddingWrapper>
       <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">인기상품</h5>

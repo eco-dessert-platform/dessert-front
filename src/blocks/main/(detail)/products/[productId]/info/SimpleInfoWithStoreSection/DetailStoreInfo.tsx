@@ -23,7 +23,7 @@ const DetailStoreInfo = ({ storeData }: Props) => {
   };
 
   return (
-    <Link href={PATH.mainStroeDetail(storeData.id)} className="w-full">
+    <Link href={PATH.mainStoreDetail(storeData.id)} className="w-full">
       <PaddingWrapper className="py-[10px] border-b border-gray-100 flex items-center justify-between">
         <div className="gap-[6px] items-center flex">
           <div className="overflow-hidden rounded-full">

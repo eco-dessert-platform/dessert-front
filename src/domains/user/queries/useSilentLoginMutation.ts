@@ -13,7 +13,10 @@ interface ResultType {
 const useSilentLoginMutation = () => {
   const setLogin = useSetRecoilState(isLoggedinState);
 
-  const mutationFn = (refreshToken: string) => userService.extendLogin(refreshToken);
+  const mutationFn = async (refreshToken: string) => {
+    const accessToken = await userService.extendLogin(refreshToken);
+    return accessToken;
+  };
 
   const onSuccess = async ({ accessToken }: ResultType) => {
     const accessTokenExp = getExpFromToken(accessToken);

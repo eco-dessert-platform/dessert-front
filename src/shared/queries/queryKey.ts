@@ -11,7 +11,7 @@ export const storeQueryKey = {
   lists: () => [...storeQueryKey.all, 'list'],
   list: (filter: string) => [...storeQueryKey.lists(), filter],
   details: () => [...storeQueryKey.all, 'detail'],
-  detail: (storeId: number) => [...storeQueryKey.details(), { storeId }]
+  detail: (storeId: number) => [...storeQueryKey.details(), storeId]
 };
 
 export const reviewQueryKey = {

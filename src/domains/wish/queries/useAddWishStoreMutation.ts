@@ -1,24 +1,28 @@
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Cursor } from '@/shared/types/response';
+import { Cursor, ResultResponse } from '@/shared/types/response';
 import { IStoreType } from '@/domains/store/types/store';
 import { storeQueryKey } from '@/shared/queries/queryKey';
-import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
+import { updateInfiniteQueryCache, updateResultQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';
 
-const useAddWishStoreMutation = () => {
+const useAddWishStoreMutation = (storeId: number) => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
-  const mutationFn = async ({ storeId }: { storeId: number }) => {
+  const mutationFn = async () => {
     await wishService.addWishStore({ storeId });
   };
 
-  const onMutate = ({ storeId }: { storeId: number }) => {
+  const onMutate = () => {
     queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
       { queryKey: storeQueryKey.lists() },
       (oldData) =>
         updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: true })
+    );
+    queryClient.setQueriesData<ResultResponse<IStoreType>>(
+      { queryKey: storeQueryKey.detail(storeId) },
+      (oldData) => updateResultQueryCache(oldData, { isWished: true })
     );
   };
 
@@ -28,6 +32,8 @@ const useAddWishStoreMutation = () => {
 
   const onError = ({ message }: Error) => {
     openToast({ message });
+    queryClient.resetQueries({ queryKey: storeQueryKey.lists() });
+    queryClient.resetQueries({ queryKey: storeQueryKey.detail(storeId) });
   };
 
   return useMutation({

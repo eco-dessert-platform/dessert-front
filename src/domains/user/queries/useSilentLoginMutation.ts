@@ -1,9 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useSetRecoilState } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
-import { TOKEN } from '@/shared/constants/token';
-import { deleteCookie, setCookie } from '@/shared/actions/cookie';
-import { getExpFromToken } from '@/domains/user/utils/jwt';
+import useAuth from '@/shared/hooks/useAuth';
 import userService from './service';
 
 interface ResultType {
@@ -11,7 +7,7 @@ interface ResultType {
 }
 
 const useSilentLoginMutation = () => {
-  const setLogin = useSetRecoilState(isLoggedinState);
+  const { logout, login } = useAuth();
 
   const mutationFn = async (refreshToken: string) => {
     const accessToken = await userService.extendLogin(refreshToken);
@@ -19,20 +15,11 @@ const useSilentLoginMutation = () => {
   };
 
   const onSuccess = async ({ accessToken }: ResultType) => {
-    const accessTokenExp = getExpFromToken(accessToken);
-
-    await setCookie({
-      name: TOKEN.accessToken,
-      value: accessToken,
-      expires: accessTokenExp
-    });
-
-    setLogin(true);
+    await login({ accessToken });
   };
 
   const onError = async (error: Error) => {
-    await Promise.all([deleteCookie(TOKEN.accessToken), deleteCookie(TOKEN.refreshToken)]);
-    setLogin(false);
+    await logout();
     console.error(error);
   };
 

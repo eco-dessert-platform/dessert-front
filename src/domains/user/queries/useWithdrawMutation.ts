@@ -4,11 +4,11 @@ import usePopup from '@/shared/hooks/usePopup';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import PATH from '@/shared/constants/path';
 import userService from '@/domains/user/queries/service';
-import useLogout from '@/shared/hooks/useLogout';
+import useAuth from '@/shared/hooks/useAuth';
 
 const useWithdrawMutation = () => {
   const { push } = useRouter();
-  const { logout } = useLogout();
+  const { logout } = useAuth();
   const { closePopup } = usePopup();
   const { openToast } = useToastNewVer();
 
@@ -19,8 +19,8 @@ const useWithdrawMutation = () => {
   };
 
   const onSuccess = async ({ message }: { message: string }) => {
-    openToast({ message });
     await logout();
+    openToast({ message });
     push(PATH.home);
   };
 

@@ -89,6 +89,18 @@ class UserService extends Service {
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
+
+  async extendLogin(refreshToken: string) {
+    const res = await this.fetchExtend.post('/token', {
+      body: JSON.stringify({ refreshToken })
+    });
+    const { result, success, code, message }: ResultResponse<{ accessToken: string }> =
+      await res.json();
+    if (!res.ok || !success) {
+      throw new Error(ERROR_MESSAGE.api({ code, message }));
+    }
+    return result;
+  }
 }
 
 const userService = new UserService();

@@ -2,11 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState } from 'recoil';
 import { isLoggedinState } from '@/shared/atoms/login';
 import { TOKEN } from '@/shared/constants/token';
-import fetchExtend from '@/shared/utils/api';
-import { setCookie } from '@/shared/actions/cookie';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
+import { deleteCookie, setCookie } from '@/shared/actions/cookie';
 import { getExpFromToken } from '@/domains/user/utils/jwt';
+import userService from './service';
 
 interface ResultType {
   accessToken: string;
@@ -15,16 +13,7 @@ interface ResultType {
 const useSilentLoginMutation = () => {
   const setLogin = useSetRecoilState(isLoggedinState);
 
-  const mutationFn = async (refreshToken: string) => {
-    const res = await fetchExtend.post('/token', {
-      body: JSON.stringify({ refreshToken })
-    });
-    const { result, success, code, message }: ResultResponse<ResultType> = await res.json();
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
-    return result;
-  };
+  const mutationFn = (refreshToken: string) => userService.extendLogin(refreshToken);
 
   const onSuccess = async ({ accessToken }: ResultType) => {
     const accessTokenExp = getExpFromToken(accessToken);
@@ -38,7 +27,8 @@ const useSilentLoginMutation = () => {
     setLogin(true);
   };
 
-  const onError = (error: Error) => {
+  const onError = async (error: Error) => {
+    await Promise.all([deleteCookie(TOKEN.accessToken), deleteCookie(TOKEN.refreshToken)]);
     setLogin(false);
     console.error(error);
   };

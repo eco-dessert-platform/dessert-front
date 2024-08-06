@@ -1,33 +1,33 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import fetchExtend from '@/shared/utils/api';
 import PATH from '@/shared/constants/path';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useAuth from '@/shared/hooks/useAuth';
+import userService from './service';
+import { LoginResponse, SocialType } from '../types/login';
 
-export interface LoginResponse {
-  accessToken: string;
-  refreshToken: string;
-}
-
-const useLoginMutation = () => {
+const useSocialLoginMutation = () => {
   const { openToast } = useToastNewVer();
   const { replace } = useRouter();
   const { login } = useAuth();
 
-  const mutationFn = async (accessToken: string) => {
-    const res = await fetchExtend.get(`/oauth/login/kakao?token=${accessToken}`);
-    const { success, result, code, message }: ResultResponse<LoginResponse> = await res.json();
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
-    return result;
-  };
+  const mutationFn = ({
+    socialToken,
+    socialType
+  }: {
+    socialToken: string;
+    socialType: SocialType;
+  }) => userService.login({ socialToken, socialType });
 
   const onSuccess = async ({ accessToken, refreshToken }: LoginResponse) => {
     await login({ accessToken, refreshToken });
+    const { isFullyAssigned, isPreferenceAssigned } = await userService.getMyPreferenceStatus();
+
+    console.log({ isFullyAssigned, isPreferenceAssigned });
+    if (isFullyAssigned) {
+      replace(PATH.preferenceCreate);
+      return;
+    }
     openToast({ message: '로그인 되었어요.' });
     replace(PATH.home);
   };
@@ -40,4 +40,4 @@ const useLoginMutation = () => {
   return useMutation({ mutationKey: ['login'], mutationFn, onSuccess, onError });
 };
 
-export default useLoginMutation;
+export default useSocialLoginMutation;

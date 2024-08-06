@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { useAddRecentSearchKeywordMutation } from '@/domains/search/queries/useAddRecentSearchKeywordMutation';
-import { useDebounce } from '@/shared/hooks/useDebounce';
-import SearchInput from '@/domains/search/components/SearchInput';
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import AutoCompleteSearchContainer from '@/domains/search/components/AutoCompleteSearchContainer';
+import SearchInput from '@/domains/search/components/SearchInput';
+import { useAddRecentSearchKeywordMutation } from '@/domains/search/queries/useAddRecentSearchKeywordMutation';
+import Header from '@/shared/components/Header';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import BackButton from '@/shared/components/BackButton';
+import { useDebounce } from '@/shared/hooks/useDebounce';
 
 const SEARCH_DETAIL_PAGE_PATHNAMES = ['/search/products', '/search/stores'];
 
@@ -52,14 +54,16 @@ const SearchInputSection = () => {
     params.set('query', text);
     router.push(`/search/products?${params.toString()}`);
 
-    mutate(text);
-    setShowAutoComplete(false);
+    if (text.trim() !== '') {
+      mutate(text);
+      setShowAutoComplete(false);
+    }
   };
 
   return (
     <div className="relative">
+      {!isSearchDetailPage && <Header title="검색" />}
       <PaddingWrapper className={`flex items-center ${isSearchDetailPage ? 'py-[10px]' : 'py-0'} `}>
-        {isSearchDetailPage && <BackButton />}
         <SearchInput
           value={text}
           onChange={handleInputChange}

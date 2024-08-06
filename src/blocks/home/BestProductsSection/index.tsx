@@ -1,13 +1,13 @@
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import { productQueryKey } from '@/shared/queries/queryKey';
-import { INITIAL_CURSOR } from '@/shared/constants/cursor';
-import { getCookie } from '@/shared/actions/cookie';
-import { TOKEN } from '@/shared/constants/token';
-import productService from '@/domains/product/queries/service';
-import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
+import ProductsList from '@/blocks/home/BestProductsSection/ProductsList';
 import TitleSection from '@/blocks/home/BestProductsSection/TitleSection';
 import CategoryTab from '@/domains/product/components/CategoryTab';
-import ProductsList from '@/blocks/home/BestProductsSection/ProductsList';
+import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
+import productService from '@/domains/product/queries/service';
+import { getCookie } from '@/shared/actions/cookie';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import { TOKEN } from '@/shared/constants/token';
+import { productQueryKey } from '@/shared/queries/queryKey';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 const BestProductsSection = async () => {
   const accessToken = await getCookie(TOKEN.accessToken);
@@ -20,7 +20,7 @@ const BestProductsSection = async () => {
       { filter: INIT_FILTER_VALUE, recommended: isLoggedIn }
     ],
     queryFn: async ({ pageParam: cursorId }: { pageParam: number }) => {
-      const result = await productService.getAllProducts({
+      const result = await productService.getAllCategoryProducts({
         cursorId,
         filterValue: INIT_FILTER_VALUE
       });

@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import Header from '@/shared/components/Header';
+
 import SearchInputSection from '@/blocks/search/SearchInputSection';
 
 interface SearchLayoutProps {
@@ -8,7 +8,6 @@ interface SearchLayoutProps {
 
 const SearchLayout = ({ children }: SearchLayoutProps) => (
   <>
-    <Header title="검색" />
     <Suspense>
       <SearchInputSection />
     </Suspense>

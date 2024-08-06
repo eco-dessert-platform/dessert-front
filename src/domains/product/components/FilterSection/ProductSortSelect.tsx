@@ -1,9 +1,10 @@
 'use client';
 
 import { useRecoilState } from 'recoil';
+
 import { filterValueState } from '@/domains/product/atoms';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import Select from '@/shared/components/Select';
 
 interface ProductSortSelectProps {
@@ -20,6 +21,7 @@ const ProductSortSelect = ({ filterFamilyId }: ProductSortSelectProps) => {
 
   return (
     <Select
+      className="border-0 typo-body-12-medium"
       options={FILTER_VALUES.sorts}
       selectedOption={selectedOption}
       onChange={handleSelectChange}

@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { productQueryKey } from '@/shared/queries/queryKey';
-
 import productService from './service';
 
 const useGetProductOptionQuery = (productId: string) => {

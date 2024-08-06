@@ -1,13 +1,16 @@
-import QUERY_KEY from '@/shared/constants/queryKey';
 import { useQuery } from '@tanstack/react-query';
+import { productQueryKey } from '@/shared/queries/queryKey';
 
 import productService from './service';
 
 const useGetBoardDetailQuery = (productId: string) => {
-  const queryKey = [QUERY_KEY.boardDetail];
+  const queryKey = productQueryKey.detail(Number(productId), 'board-detail');
   const queryFn = () => productService.getBoardDetail(productId);
 
-  return useQuery({ queryKey, queryFn });
+  return useQuery({
+    queryKey,
+    queryFn
+  });
 };
 
 export default useGetBoardDetailQuery;

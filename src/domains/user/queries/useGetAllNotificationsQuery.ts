@@ -15,7 +15,7 @@ export const useGetAllNotificationsQuery = () => {
     hasNext,
     nextCursor
   }) => {
-    const nextPageParam = hasNext ? undefined : nextCursor;
+    const nextPageParam = hasNext ? nextCursor : undefined;
     return nextPageParam;
   };
 

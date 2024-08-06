@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { productQueryKey } from '@/shared/queries/queryKey';
+import { storeQueryKey } from '@/shared/queries/queryKey';
 import storeService from '@/domains/store/queries/service';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const useGetStoreBestProductsQuery = ({ storeId }: Props) => {
-  const queryKey = productQueryKey.list('store-detail/best');
+  const queryKey = storeQueryKey.detail(storeId, 'best-products');
 
   const queryFn = async () => {
     const data = await storeService.getStoreBestProducts(storeId);

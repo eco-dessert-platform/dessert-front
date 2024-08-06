@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const useGetStoreInfoQuery = ({ storeId }: Props) => {
-  const queryKey = storeQueryKey.detail(storeId);
+  const queryKey = storeQueryKey.detail(storeId, 'info');
 
   const queryFn = async () => {
     const data = await storeService.getStoreInfo(storeId);

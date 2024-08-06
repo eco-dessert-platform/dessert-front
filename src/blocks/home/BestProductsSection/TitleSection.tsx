@@ -13,8 +13,12 @@ const TitleSection = async () => {
 
   let preference;
   if (isLoggedIn) {
-    const data = await userService.getPreference();
-    preference = transformDataToAtomFormat(data);
+    try {
+      const data = await userService.getPreference();
+      preference = transformDataToAtomFormat(data);
+    } catch (error) {
+      if (error instanceof Error) console.error(error.message);
+    }
   }
 
   return (

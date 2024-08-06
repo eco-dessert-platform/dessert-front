@@ -1,16 +1,11 @@
 import '@/global/global.css';
-
 import { ReactNode } from 'react';
-
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-
 import KaKaoChatScript from '@/global/KaKaoChatScript';
 import RootLayoutProvider from '@/global/RootLayoutProvider';
 import Footer from '@/global/Footer';
 import AlertContainer from '@/global/AlertContainer';
-// import FlareLaneScript from '@/global/FlareLaneScript';
-// import RegisterServiceWorker from '@/global/RegisterServiceWorker';
 import SilentLogin from '@/global/SilentLogin';
 import GAScript from '@/global/GAScript';
 import ForeGroundMessage from '@/global/ForeGroundMessage';
@@ -38,8 +33,6 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       </RootLayoutProvider>
       <ForeGroundMessage />
       <KaKaoChatScript />
-      {/* <RegisterServiceWorker /> */}
-      {/* <FlareLaneScript /> */}
     </body>
     <GAScript />
   </html>

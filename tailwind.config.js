@@ -8,6 +8,7 @@ module.exports = {
         toast: 1000,
         popup: 1000,
         modal: 1000,
+        tooltip: 1000,
         footer: 4999,
         bottomButton: 5000,
         backdrop: 9999
@@ -15,6 +16,7 @@ module.exports = {
 
       colors: {
         // ex) text-gray-50
+
         gray: {
           50: '#FAFAFA',
           100: '#F5F5F5',

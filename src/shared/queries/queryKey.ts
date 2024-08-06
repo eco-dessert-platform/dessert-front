@@ -11,5 +11,16 @@ export const storeQueryKey = {
   lists: () => [...storeQueryKey.all, 'list'],
   list: (filter: string) => [...storeQueryKey.lists(), filter],
   details: () => [...storeQueryKey.all, 'detail'],
-  detail: (storeId: number) => [...storeQueryKey.details(), { storeId }]
+  detail: (storeId: number, type: string) => [...storeQueryKey.details(), storeId, type]
+};
+
+export const reviewQueryKey = {
+  all: ['review'],
+  lists: () => [...reviewQueryKey.all, 'list'],
+  list: ({ boardId, type }: { boardId?: number; type: string }) => [
+    ...reviewQueryKey.lists(),
+    { type, boardId }
+  ],
+  details: () => [...reviewQueryKey.all, 'detail'],
+  detail: (id: number) => [...reviewQueryKey.details(), id]
 };

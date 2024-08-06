@@ -1,6 +1,5 @@
-import QUERY_KEY from '@/shared/constants/queryKey';
 import { useQuery } from '@tanstack/react-query';
-
+import { productQueryKey } from '@/shared/queries/queryKey';
 import productService from './service';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 }
 
 const useGetStoreInfoQuery = ({ productId }: Props) => {
-  const queryKey = [QUERY_KEY.productDetailStoreInfo];
+  const queryKey = productQueryKey.detail(Number(productId), 'store-info');
   const queryFn = () => productService.getStoreInfo(productId);
 
   return useQuery({ queryKey, queryFn });

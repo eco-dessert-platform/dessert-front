@@ -3,7 +3,9 @@ import React from 'react';
 import { RecoilRoot } from 'recoil';
 import type { Preview } from '@storybook/react';
 import AlertContainer from '../src/global/AlertContainer';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 const preview: Preview = {
   parameters: {
     controls: {
@@ -19,8 +21,10 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <RecoilRoot>
-        <Story />
-        <AlertContainer />
+        <QueryClientProvider client={queryClient}>
+          <Story />
+          <AlertContainer />
+        </QueryClientProvider>
       </RecoilRoot>
     )
   ]

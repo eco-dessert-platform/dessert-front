@@ -3,39 +3,25 @@ import { useMutation } from '@tanstack/react-query';
 import usePopup from '@/shared/hooks/usePopup';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import PATH from '@/shared/constants/path';
-import fetchExtend from '@/shared/utils/api';
-import { ResultResponse } from '@/shared/types/response';
-import { throwApiError } from '@/shared/utils/error';
-
-interface WithdrawResponse {
-  message: string;
-}
+import userService from '@/domains/user/queries/service';
+import useAuth from '@/shared/hooks/useAuth';
 
 const useWithdrawMutation = () => {
-  const router = useRouter();
+  const { push } = useRouter();
+  const { logout } = useAuth();
   const { closePopup } = usePopup();
   const { openToast } = useToastNewVer();
 
   const mutationFn = async ({ formData }: { formData: FormData }) => {
-    const rawFormData = {
-      reasons: formData.getAll('delete-reason').join(',')
-    };
-
-    const res = await fetchExtend.patch('/members', {
-      body: JSON.stringify(rawFormData)
-    });
-    const { result, success, message, code }: ResultResponse<WithdrawResponse> = await res.json();
-
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
-
+    const deleteReasons = formData.getAll('delete-reason') as Array<string>;
+    const result = await userService.withdraw(deleteReasons);
     return result;
   };
 
-  const onSuccess = ({ message }: { message: string }) => {
+  const onSuccess = async ({ message }: { message: string }) => {
+    await logout();
     openToast({ message });
-    router.push(PATH.home);
+    push(PATH.home);
   };
 
   const onError = ({ message }: Error) => {

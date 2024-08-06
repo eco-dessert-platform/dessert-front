@@ -1,16 +1,15 @@
-import ReviewList from '@/blocks/user/review/ReviewList';
-import { reviewQueryKey } from '@/domains/review/queries/queryKey';
-import reviewService from '@/domains/review/queries/service';
-import Header from '@/shared/components/Header';
-import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { myReviewQueryOption } from '@/domains/review/queries/useMyReviewQuery';
+import Header from '@/shared/components/Header';
+import ReviewList from './_blocks/ReviewList';
 
 const MyReviewPage = async () => {
   const queryClient = new QueryClient();
+  const { queryKey, queryFn, initialPageParam } = myReviewQueryOption;
   await queryClient.prefetchInfiniteQuery({
-    queryKey: reviewQueryKey.list('mypage'),
-    queryFn: ({ pageParam }) => reviewService.getMyReview(pageParam),
-    initialPageParam: INITIAL_CURSOR
+    queryKey,
+    queryFn,
+    initialPageParam
   });
 
   return (

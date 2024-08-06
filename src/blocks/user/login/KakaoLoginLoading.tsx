@@ -2,7 +2,7 @@
 
 import Loading from '@/shared/components/Loading';
 import useKakaoAuthMutation from '@/domains/user/queries/useKakaoAuthMutation';
-import useLoginMutation from '@/domains/user/queries/useLoginMutation';
+import useLoginMutation from '@/domains/user/queries/useSocialLoginMutation';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -19,7 +19,7 @@ const KakaoLoginLoading = () => {
 
   useEffect(() => {
     if (!kakoAuthData?.access_token) return;
-    mutateLogin(kakoAuthData.access_token);
+    mutateLogin({ socialToken: kakoAuthData.access_token, socialType: 'KAKAO' });
   }, [mutateLogin, kakoAuthData]);
 
   return <Loading />;

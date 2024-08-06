@@ -18,6 +18,7 @@ const PATH = {
   wishStoreList: '/wish/stores',
 
   profileUpdate: '/mypage/update',
+  profileRegistration: '/mypage/registration',
   withdraw: '/mypage/withdraw',
   notification: '/mypage/notifications',
   serviceTerm: '/mypage/service-terms',

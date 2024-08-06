@@ -18,3 +18,5 @@ export interface ParsedJWT {
   id: number;
   iss: number;
 }
+
+export type SocialType = 'KAKAO' | 'GOOGLE';

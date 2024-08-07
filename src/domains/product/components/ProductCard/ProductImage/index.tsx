@@ -13,6 +13,7 @@ import HeartButton from '@/shared/components/HeartButton';
 import Badge from '@/shared/components/Badge';
 import { BellIcon } from '@/shared/components/icons';
 import { cn } from '@/shared/utils/cn';
+import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
 
 interface ProductImageProps {
   product: IProductType;
@@ -24,8 +25,6 @@ const ProductImage = ({
   popular,
   ranking
 }: ProductImageProps) => {
-  const BLUR_DATA_URL =
-    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==';
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
   const { mutate: addMutate } = useAddWishProductMutation();

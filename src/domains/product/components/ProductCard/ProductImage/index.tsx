@@ -57,7 +57,7 @@ const ProductImage = ({
         blurDataURL={BLUR_DATA_URL}
         className="rounded-[6px] aspect-square"
       />
-      <div className="absolute bottom-[9px] right-[9px] h-[20px]">
+      <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px]">
         <HeartButton isActive={isWished} shape="shadow" onClick={isWished ? hate : like} />
       </div>
       <div className="absolute z-10 top-[6px] left-[6px] w-full flex flex-wrap gap-[6px]">

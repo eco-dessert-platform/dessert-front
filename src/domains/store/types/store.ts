@@ -30,6 +30,6 @@ export interface IStoreBestProductType {
 
 export interface IStoreProductType extends IStoreBestProductType {
   tags: string[];
-  reviewRate?: number;
-  reviewCount?: number;
+  reviewRate: number;
+  reviewCount: number;
 }

@@ -23,8 +23,13 @@ export interface IStoreBestProductType {
   price: number;
   isWished: boolean;
   isBundled: boolean;
+  isBbangcketing: boolean;
+  isSoldOut: boolean;
+  discountRate: number;
 }
 
 export interface IStoreProductType extends IStoreBestProductType {
   tags: string[];
+  reviewRate?: number;
+  reviewCount?: number;
 }

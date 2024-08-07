@@ -49,14 +49,12 @@ const ProductsList = () => {
   return (
     <PaddingWrapper className="pb-[36px]">
       <div className="grid grid-cols-3 gap-x-[10px] pb-[16px]">
-        {data.products.slice(0, 3).map((product: IProductType, index: number) => (
-          <ProductCard
-            key={String(product.boardId)}
-            product={product}
-            popular
-            ranking={index + 1}
-          />
-        ))}
+        {data.products.slice(0, 3).map((product: IProductType, index: number) => {
+          const { tags, reviewRate, reviewCount, ...rest } = product;
+          return (
+            <ProductCard key={String(product.boardId)} product={rest} popular ranking={index + 1} />
+          );
+        })}
       </div>
       <div className="grid grid-cols-2 gap-[16px]">
         {data.products.slice(3).map((product: IProductType) => (

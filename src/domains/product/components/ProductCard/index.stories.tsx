@@ -23,7 +23,11 @@ const temple = {
   isBundled: true,
   isWished: true,
   tags: ['glutenFree', 'vegan'],
-  view: 123
+  reviewRate: 4,
+  reviewCount: 1500,
+  isBbangcketing: true,
+  isSoldOut: true,
+  discountRate: 10
 };
 
 const Template: StoryFn<typeof ProductCard> = (args) => (

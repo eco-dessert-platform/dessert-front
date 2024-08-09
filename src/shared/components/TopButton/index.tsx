@@ -1,8 +1,26 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 
 const TopButton = () => {
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const mainEl = document.getElementById('main');
+    if (!mainEl) return undefined;
+
+    const handleScroll = () => {
+      if (mainEl.scrollTop >= window.innerHeight) setShowButton(true);
+      else setShowButton(false);
+    };
+
+    mainEl.addEventListener('scroll', handleScroll);
+    return () => {
+      mainEl.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleClick = () => {
     const mainEl = document.getElementById('main');
     if (!mainEl) return;
@@ -11,6 +29,8 @@ const TopButton = () => {
       behavior: 'smooth'
     });
   };
+
+  if (!showButton) return null;
 
   return (
     <button

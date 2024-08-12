@@ -21,7 +21,6 @@ const ProductSortSelect = ({ filterFamilyId }: ProductSortSelectProps) => {
 
   return (
     <Select
-      className="border-0 typo-body-12-medium"
       options={FILTER_VALUES.sorts}
       selectedOption={selectedOption}
       onChange={handleSelectChange}

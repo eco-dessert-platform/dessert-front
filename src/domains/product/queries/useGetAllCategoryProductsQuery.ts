@@ -33,6 +33,7 @@ export const useGetAllCategoryProductsQuery = (query: IFilterType) => {
     select: ({ pages }) => {
       const products = pages.map((page) => page.content).flat();
       const totalCount = pages.reduce((acc, page) => acc + page.content.length, 0);
+
       return { products, totalCount };
     }
   });

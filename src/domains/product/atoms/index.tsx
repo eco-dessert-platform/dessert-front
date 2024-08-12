@@ -12,7 +12,7 @@ import {
 
 export const categoryTempState = atomFamily<ICategoryType, FilterFamilyIDType>({
   key: 'category',
-  default: undefined
+  default: 'undefined'
 });
 
 export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({

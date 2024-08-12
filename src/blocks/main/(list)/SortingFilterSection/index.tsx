@@ -32,9 +32,9 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
         <ProductSortSelect filterFamilyId={FILTER_FAMILY_ID.main} />
       </div>
       <div className="flex gap-[4px]">
-        <FilterButton filterType="category" />
-        <FilterButton filterType="tags" />
-        <FilterButton filterType="price" />
+        <FilterButton filterType="category" defaultTitle="카테고리" />
+        <FilterButton filterType="tags" defaultTitle="성분" />
+        <FilterButton filterType="price" defaultTitle="가격" />
       </div>
     </PaddingWrapper>
   );

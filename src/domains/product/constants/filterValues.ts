@@ -20,8 +20,8 @@ export const FILTER_VALUES = {
 };
 
 export const INIT_FILTER_VALUE = {
-  category: '전체',
-  tags: [],
+  category: '',
+  tags: null,
   price: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE],
   sort: '추천순',
   orderAvailableToday: false

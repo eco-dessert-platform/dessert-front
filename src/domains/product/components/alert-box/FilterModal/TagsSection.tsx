@@ -1,8 +1,10 @@
-import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
 
-import { tagsTempState } from '@/domains/product/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { filterValueState, tagsTempState } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
+import { FilterFamilyIDType, ITagsType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
@@ -11,31 +13,30 @@ interface TagsSectionProps {
 }
 
 const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
-  const [selectedTags, setSelectedTags] = useRecoilState(tagsTempState(filterFamilyId));
-  const uniqueValue = '전체';
+  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
+  const [selectedTags, setSelectedTags] = useRecoilState<ITagsType>(tagsTempState(filterFamilyId));
 
-  const handleClick = (clickedItem: string) => {
-    if (!selectedTags) {
-      setSelectedTags([clickedItem]);
-      return;
-    }
+  useEffect(() => {
+    setSelectedTags(filterValue.tags || '전체');
+  }, [filterValue, setSelectedTags]);
 
-    if (clickedItem === uniqueValue) {
-      setSelectedTags([clickedItem]);
-      return;
-    }
-
-    if (selectedTags.includes(clickedItem)) {
-      const updatedItems = selectedTags
-        .filter((item) => item !== clickedItem)
-        .filter((item) => item !== uniqueValue);
-      setSelectedTags(updatedItems);
-      return;
-    }
-
-    const updatedItems = [...selectedTags, clickedItem].filter((item) => item !== uniqueValue);
-    setSelectedTags(updatedItems);
+  const handleClick = (clickItem: string) => {
+    setSelectedTags(clickItem);
   };
+
+  // if (selectedTags.includes(clickedItem)) {
+  //   const updatedItems = selectedTags
+  //     .filter((item: string) => item !== clickedItem)
+  //     .filter((item: string) => item !== uniqueValue);
+  //   setSelectedTags(updatedItems.length === 0 ? [uniqueValue] : updatedItems);
+  //   return;
+  // }
+
+  //   const updatedItems = [...selectedTags, clickedItem].filter(
+  //     (item: string) => item !== uniqueValue
+  //   );
+  //   setSelectedTags(updatedItems);
+  // };
 
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">

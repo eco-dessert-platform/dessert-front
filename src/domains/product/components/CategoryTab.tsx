@@ -39,7 +39,6 @@ const CategoryTab = ({ filterFamilyId }: Props) => {
         const tabRect = tab.getBoundingClientRect();
         const containerRect = tabContainer.getBoundingClientRect();
 
-        // Adjust the scroll position to align the active tab with the left edge of the container
         const offsetLeft = tabRect.left - containerRect.left + tabContainer.scrollLeft;
         tabContainer.scrollTo({ left: offsetLeft, behavior: 'smooth' });
       }
@@ -49,16 +48,20 @@ const CategoryTab = ({ filterFamilyId }: Props) => {
   return (
     <LayoutGroup id={id}>
       <div ref={tabContainerRef} className="flex overflow-x-scroll scrollbar-hide">
-        {FILTER_VALUES.categories.map((category) => (
-          <TabButton
-            key={category}
-            active={filterValue.category === category}
-            onClick={() => handleClick(category)}
-            className="min-w-max p-[10px]"
-          >
-            {category}
-          </TabButton>
-        ))}
+        {FILTER_VALUES.categories.map((category, index) => {
+          const isActive =
+            filterValue.category === category || (!filterValue.category && index === 0);
+          return (
+            <TabButton
+              key={category}
+              active={isActive}
+              onClick={() => handleClick(category)}
+              className="min-w-max p-[10px]"
+            >
+              {category}
+            </TabButton>
+          );
+        })}
       </div>
     </LayoutGroup>
   );

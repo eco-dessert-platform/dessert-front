@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { useRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
 
@@ -28,12 +26,11 @@ interface SelectProps {
 const FilterButton = ({ filterType, defaultTitle, className }: SelectProps) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(FILTER_FAMILY_ID.main));
 
-  const [isClick, setIsClick] = useState(false);
-
   const { openModal } = useModal();
 
+  const isSelectedSomething = filterValue[filterType] && filterValue[filterType] !== '전체';
+
   const openFilterModal = () => {
-    setIsClick(true);
     openModal(<FilterModal filterFamilyId={FILTER_FAMILY_ID.main} />);
   };
 
@@ -69,13 +66,13 @@ const FilterButton = ({ filterType, defaultTitle, className }: SelectProps) => {
       <div
         className={twMerge(
           'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] border-gray-200 rounded-[50px] cursor-pointer',
-          filterValue[filterType] ? 'border-primaryOrangeRed text-primaryOrangeRed' : '',
+          isSelectedSomething ? 'border-primaryOrangeRed text-primaryOrangeRed' : '',
           className
         )}
       >
         {filterValue[filterType] || defaultTitle}
         <div>
-          {isClick ? (
+          {isSelectedSomething ? (
             <div
               role="button"
               tabIndex={0}

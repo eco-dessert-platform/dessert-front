@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { appState } from '@/shared/atoms/app';
+import useWebview from '@/shared/hooks/useWebView';
 import { fcmTokenState } from '@/domains/alarm/atoms';
 import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
 import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
@@ -13,7 +13,7 @@ import ButtonNewver from '@/shared/components/ButtonNewver';
 
 const DisplayFcmToken = () => {
   const { openPopup, closePopup } = usePopup();
-  const app = useRecoilValue(appState);
+  const { isWebView } = useWebview();
   const fcmToken = useRecoilValue(fcmTokenState);
   const countClicked = useRef(0);
 
@@ -38,7 +38,7 @@ const DisplayFcmToken = () => {
   const handleClick = () => {
     countClicked.current += 1;
     const isMultipleOf10 = countClicked.current % 10 === 0;
-    if (isMultipleOf10 && app.isWebviewApp) {
+    if (isMultipleOf10 && isWebView) {
       sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
     }
   };

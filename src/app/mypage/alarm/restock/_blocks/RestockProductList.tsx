@@ -1,7 +1,6 @@
 'use client';
 
-import { useRecoilValue } from 'recoil';
-import { appState } from '@/shared/atoms/app';
+import useWebView from '@/shared/hooks/useWebView';
 import usePopup from '@/shared/hooks/usePopup';
 import { useGetAlarmQuery } from '@/domains/alarm/queries/useGetAlarmQuery';
 import { useAddAlarmMutation } from '@/domains/alarm/queries/useAddAlarmMutation';
@@ -18,13 +17,12 @@ import DeleteAlarmPopup from '@/domains/alarm/components/alert-box/DeleteAlarmPo
 
 const RestockProductList = () => {
   const { openPopup } = usePopup();
-  const app = useRecoilValue(appState);
   const { data: products, isFetching, isError } = useGetAlarmQuery({ pushCategory: 'restock' });
   const { mutate: addAlarm } = useAddAlarmMutation({ pushCategory: 'restock' });
   const { mutate: cancelAlarm } = useCancelAlarmMutation({ pushCategory: 'restock' });
 
   const handleAlarm = (isAlarming: boolean, productOptionId: number) => {
-    if (!app.isWebviewApp) {
+    if (!useWebView) {
       openPopup(<MobileAppPopup type="restock" />);
       return;
     }

@@ -5,12 +5,9 @@ import { useSetRecoilState } from 'recoil';
 import { MessageType } from '@/shared/types/message';
 import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
 import { fcmTokenState } from '@/domains/alarm/atoms';
-import { APP } from '@/shared/constants/appMessageType';
-import { appState } from '@/shared/atoms/app';
 
 const ReceiveMessageFromApp = () => {
   const setFcmToken = useSetRecoilState(fcmTokenState);
-  const setApp = useSetRecoilState(appState);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -22,9 +19,6 @@ const ReceiveMessageFromApp = () => {
       if (type === FCM_TOKEN.getSucceed || type === FCM_TOKEN.getFailed) {
         setFcmToken({ data, error });
       }
-      if (type === APP.isWebviewApp) {
-        setApp({ isWebviewApp: true });
-      }
     };
 
     window.addEventListener('message', handleMessage);
@@ -34,7 +28,7 @@ const ReceiveMessageFromApp = () => {
       window.removeEventListener('message', handleMessage);
       document.addEventListener('message', handleMessage as EventListener);
     };
-  }, [setFcmToken, setApp]);
+  }, [setFcmToken]);
 
   return null;
 };

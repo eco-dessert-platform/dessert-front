@@ -7,7 +7,7 @@ import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useModal from '@/shared/hooks/useModal';
 import usePopup from '@/shared/hooks/usePopup';
-import { appState } from '@/shared/atoms/app';
+import useWebView from '@/shared/hooks/useWebView';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
@@ -46,7 +46,7 @@ const OrderAvailableDays = ({
   const { openPopup } = usePopup();
   const { push } = useRouter();
   const { productId } = useParams<{ productId: string }>();
-  const app = useRecoilValue(appState);
+  const { isWebView } = useWebView();
   const isLoggedIn = useRecoilValue(isLoggedinState);
   const mutationProps = {
     pushCategory: (soldout ? 'restock' : 'bbangcketing') as AlarmType,
@@ -57,7 +57,7 @@ const OrderAvailableDays = ({
   const { mutate: cancelAlarm } = useCancelAlarmMutation(mutationProps);
 
   const handleRestockBtnClick = () => {
-    if (!app.isWebviewApp) {
+    if (!isWebView) {
       openPopup(<MobileAppPopup type="restock" />);
       return;
     }
@@ -78,7 +78,7 @@ const OrderAvailableDays = ({
   };
 
   const handleBbangcketingBtnClick = () => {
-    if (!app.isWebviewApp) {
+    if (!isWebView) {
       openPopup(<MobileAppPopup type="bbangcketing" />);
       return;
     }

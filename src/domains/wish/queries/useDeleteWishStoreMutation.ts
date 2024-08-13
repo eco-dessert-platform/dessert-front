@@ -1,9 +1,9 @@
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Cursor, ResultResponse } from '@/shared/types/response';
+import { Cursor } from '@/shared/types/response';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { storeQueryKey } from '@/shared/queries/queryKey';
 import { IStoreType } from '@/domains/store/types/store';
-import { updateInfiniteQueryCache, updateResultQueryCache } from '../../../shared/utils/queryCache';
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';
 
 const useDeleteWishStoreMutation = (storeId: number) => {
@@ -20,9 +20,12 @@ const useDeleteWishStoreMutation = (storeId: number) => {
       (oldData) =>
         updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: false })
     );
-    queryClient.setQueriesData<ResultResponse<IStoreType>>(
+    queryClient.setQueriesData<IStoreType>(
       { queryKey: storeQueryKey.detail(storeId) },
-      (oldData) => updateResultQueryCache(oldData, { isWished: false })
+      (oldData) => {
+        if (!oldData) return oldData;
+        return { ...oldData, isWished: false };
+      }
     );
   };
 

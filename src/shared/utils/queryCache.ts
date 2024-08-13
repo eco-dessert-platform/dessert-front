@@ -1,5 +1,5 @@
 import { InfiniteData } from '@tanstack/react-query';
-import { Cursor, ResultResponse } from '@/shared/types/response';
+import { Cursor } from '@/shared/types/response';
 
 /**
  *
@@ -32,17 +32,5 @@ export const updateInfiniteQueryCache = <T>(
     return page;
   });
 
-  return newData;
-};
-
-export const updateResultQueryCache = <T>(
-  oldData: ResultResponse<T> | undefined,
-  newItem: Partial<ResultResponse<T>['result']>
-) => {
-  if (!oldData) return oldData;
-  const newData: ResultResponse<T> = {
-    ...oldData,
-    result: { ...oldData.result, ...newItem }
-  };
   return newData;
 };

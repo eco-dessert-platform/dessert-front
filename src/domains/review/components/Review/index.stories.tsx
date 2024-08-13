@@ -23,7 +23,8 @@ const meta = {
     like: 10,
     isLiked: false,
     isBest: true,
-    date: '2030. 1. 1.'
+    date: '2030. 1. 1.',
+    isMine: true
   }
 } satisfies Meta<typeof Review>;
 

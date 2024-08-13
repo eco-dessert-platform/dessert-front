@@ -23,8 +23,8 @@ export const updateInfiniteQueryCache = <T>(
     const updatedPage = { ...page };
     updatedPage.content = [...page.content];
     const oldItem = updatedPage.content[itemIndex];
-    const updatedContent = updateFn(oldItem);
-    updatedPage.content[itemIndex] = updatedContent;
+    const updatedItem = updateFn(oldItem);
+    updatedPage.content[itemIndex] = updatedItem;
     return updatedPage;
   });
 

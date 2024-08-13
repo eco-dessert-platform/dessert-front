@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import Badge from '@/shared/components/Badge';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { ReviewType } from '../../types/review';
@@ -20,7 +19,8 @@ const Review = ({
   comment,
   tags,
   like,
-  isLiked
+  isLiked,
+  isMine
 }: ReviewType) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
@@ -29,9 +29,7 @@ const Review = ({
         <span className="typo-title-14-medium">{nickname}</span>
       </div>
 
-      <Suspense>
-        <KebabMenu reviewId={id} boardId={boardId} />
-      </Suspense>
+      {isMine && <KebabMenu reviewId={id} boardId={boardId} />}
     </div>
 
     <div className="flex flex-col gap-[8px]">

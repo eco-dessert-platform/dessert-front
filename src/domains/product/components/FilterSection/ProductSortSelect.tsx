@@ -3,7 +3,7 @@
 import { useRecoilState } from 'recoil';
 
 import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
+import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import Select from '@/shared/components/Select';
 
@@ -13,7 +13,7 @@ interface ProductSortSelectProps {
 
 const ProductSortSelect = ({ filterFamilyId }: ProductSortSelectProps) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
-  const selectedOption = filterValue.sort;
+  const selectedOption = filterValue.sort || INIT_FILTER_VALUE.sort;
 
   const handleSelectChange = (newSelectedOption: string) => {
     setFilterValue({ ...filterValue, sort: newSelectedOption });

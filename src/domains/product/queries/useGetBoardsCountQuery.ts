@@ -3,8 +3,8 @@ import { IFilterType } from '@/domains/product/types/filterType';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetBoardsCountQuery = (query: IFilterType) => {
-  const queryKey = [productQueryKey.count, query];
+export const useGetBoardsCountQuery = (query: Omit<IFilterType, 'sort'>) => {
+  const queryKey = [...productQueryKey.list('main'), 'boards-count', { filter: query }];
 
   const queryFn = async () => {
     const result = await productService.getBoardsCount({ filterValue: query });

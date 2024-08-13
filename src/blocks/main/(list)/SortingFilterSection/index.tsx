@@ -19,16 +19,13 @@ interface Props {
 
 const SortingFilterSection = ({ filterFamilyId }: Props) => {
   const filterValue = useRecoilValue(filterValueState(filterFamilyId));
-
-  const { data: countData, isLoading, isError } = useGetBoardsCountQuery(filterValue);
+  const { sort, ...filterValueWithoutSort } = filterValue;
+  const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 
   return (
-    <PaddingWrapper className="py-[12px] border-b border-gray-100 ">
+    <PaddingWrapper className="py-[12px] border-b border-gray-100">
       <div className="flex justify-between items-center">
-        <span className="text-gray-800 typo-body-12-medium">
-          {isLoading ? '로딩 중...' : `총 ${countData}개`}
-          {isError && '[error]'}
-        </span>
+        <span className="text-gray-800 typo-body-12-medium">{`총 ${boardsCount ?? ''}개`}</span>
         <ProductSortSelect filterFamilyId={FILTER_FAMILY_ID.main} />
       </div>
       <div className="flex gap-[4px]">

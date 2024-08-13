@@ -18,7 +18,7 @@ export const transformFilterValueToQueryString = (query: IFilterType) => {
   );
   const minPriceQuery = String(Math.min(...price));
   const maxPriceQuery = String(Math.max(...price));
-  const sortQuery = transformSortToEng(sort);
+  const sortQuery = sort && transformSortToEng(sort);
   const orderAvailableTodayQuery = String(orderAvailableToday);
 
   const queryObject = {
@@ -26,7 +26,7 @@ export const transformFilterValueToQueryString = (query: IFilterType) => {
     ...tagsQuery,
     minPrice: minPriceQuery,
     maxPrice: maxPriceQuery,
-    sort: sortQuery,
+    sort: sortQuery || '',
     orderAvailableToday: orderAvailableTodayQuery
   };
 

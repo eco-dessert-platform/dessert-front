@@ -10,7 +10,7 @@ export interface IFilterType {
   category?: ICategoryType;
   tags?: ITagsType;
   price: IPriceType;
-  sort: ISortType;
+  sort?: ISortType;
   orderAvailableToday: IOrderAvailableToday;
 }
 

@@ -31,7 +31,10 @@ const useAddWishProductMutation = () => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
     );
     queryClient.setQueriesData<Array<IStoreBestProductType>>(
       {
@@ -47,7 +50,10 @@ const useAddWishProductMutation = () => {
         predicate: (query) => query.queryKey[3] === 'all-products'
       },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
     );
   };
 

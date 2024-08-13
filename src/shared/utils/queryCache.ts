@@ -11,25 +11,21 @@ import { InfiniteData } from '@tanstack/react-query';
 export const updateInfiniteQueryCache = <T>(
   oldData: InfiniteData<Cursor<T[]>> | undefined,
   target: { value: number; key: keyof T },
-  newItem: Partial<T>
+  updateFn: (oldItem: T) => T
 ) => {
   if (!oldData) return oldData;
 
   const newData = { ...oldData };
   newData.pages = newData.pages?.map((page) => {
     const itemIndex = page.content.findIndex((item) => item[target.key] === target.value);
+    if (itemIndex === -1) return page;
 
-    if (itemIndex !== -1) {
-      const updatedPage = { ...page };
-      updatedPage.content = [...page.content];
-      updatedPage.content[itemIndex] = {
-        ...updatedPage.content[itemIndex],
-        ...newItem
-      };
-      return updatedPage;
-    }
-
-    return page;
+    const updatedPage = { ...page };
+    updatedPage.content = [...page.content];
+    const oldItem = updatedPage.content[itemIndex];
+    const updatedContent = updateFn(oldItem);
+    updatedPage.content[itemIndex] = updatedContent;
+    return updatedPage;
   });
 
   return newData;

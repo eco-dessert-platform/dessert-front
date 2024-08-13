@@ -3,6 +3,7 @@ import { IFilterType } from '@/domains/product/types/filterType';
 import { IAllProductsType } from '@/domains/search/types';
 import searchService from '@/domains/search/queries/service';
 import { productQueryKey } from '@/shared/queries/queryKey';
+import { Cursor } from '@/shared/types/response';
 
 interface QueryHookProps {
   keyword: string;
@@ -17,12 +18,10 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
     return result;
   };
 
-  const getNextPageParam: GetNextPageParamFunction<number, IAllProductsType> = (
-    lastPage,
-    __,
-    lastPageParam
+  const getNextPageParam: GetNextPageParamFunction<number, Cursor<IAllProductsType>> = (
+    lastPage
   ) => {
-    const nextPageParam = lastPage.existNextPage ? lastPageParam + 1 : undefined;
+    const nextPageParam = lastPage.hasNext ? lastPage.nextCursor : undefined;
     return nextPageParam;
   };
 
@@ -36,8 +35,8 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
     refetchOnWindowFocus: false,
     staleTime: Infinity,
     select: ({ pages }) => {
-      const products = pages.map((page) => page.content).flat();
-      const itemCount = pages[0]?.itemAllCount || 0;
+      const products = pages.map((page) => page.content.boards).flat();
+      const itemCount = pages[0]?.content.itemAllCount || 0;
       return { products, itemCount };
     }
   });

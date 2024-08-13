@@ -1,5 +1,5 @@
 import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
-import { productQueryKey } from '@/shared/queries/queryKey';
+import { storeQueryKey } from '@/shared/queries/queryKey';
 import storeService from '@/domains/store/queries/service';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { Cursor } from '@/shared/types/response';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const useGetStoreAllProductsQuery = ({ storeId }: Props) => {
-  const queryKey = productQueryKey.list('store-detail/all');
+  const queryKey = storeQueryKey.detail(storeId, 'all-products');
 
   const queryFn = async () => {
     const data = await storeService.getStoreAllProducts(storeId);

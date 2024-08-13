@@ -4,7 +4,7 @@ import 'swiper/css/bundle';
 
 import React, { useState } from 'react';
 
-import { BundleBadge } from '@/domains/product/components/ProductCard/ProductImage/BundleBadge';
+import Badge from '@/shared/components/Badge';
 import ProductImageSlide from '@/domains/product/components/ProductImageSlide';
 import ImageCounter from '@/domains/product/components/ProductImageSlide/ImgCounter';
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
@@ -26,7 +26,7 @@ const BoardImagesSection = ({ productId }: { productId: string }) => {
         <ProductImageSlide boardImages={imageArray as string[]} onChange={setSwiperIndex} />
         {productOption?.boardIsBundled && (
           <div className="absolute top-[10px] left-[10px] z-10 ">
-            <BundleBadge />
+            <Badge type="bundle">묶음상품</Badge>
           </div>
         )}
         {imageArray.length > 0 && (

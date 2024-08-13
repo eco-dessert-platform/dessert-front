@@ -6,9 +6,10 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { isLoggedinState } from '@/shared/atoms/login';
 import PATH from '@/shared/constants/path';
-import { productQueryKey } from '@/shared/queries/queryKey';
+import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { IProductType } from '@/domains/product/types/productType';
 import { Cursor } from '@/shared/types/response';
+import { IStoreBestProductType } from '@/domains/store/types/store';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
@@ -29,6 +30,22 @@ const useAddWishProductMutation = () => {
   const onMutate = ({ productId }: { productId: number }) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
+      (oldData) =>
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
+    );
+    queryClient.setQueriesData<Array<IStoreBestProductType>>(
+      {
+        queryKey: storeQueryKey.details(),
+        predicate: (query) => query.queryKey[3] === 'best-products'
+      },
+      (oldData) =>
+        oldData?.map((data) => (data.boardId === productId ? { ...data, isWished: true } : data))
+    );
+    queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
+      {
+        queryKey: storeQueryKey.details(),
+        predicate: (query) => query.queryKey[3] === 'all-products'
+      },
       (oldData) =>
         updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
     );

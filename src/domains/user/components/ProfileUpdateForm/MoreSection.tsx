@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-import useLogout from '@/shared/hooks/useLogout';
 import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import useAuth from '@/shared/hooks/useAuth';
 
 interface Props {
   className?: string;
@@ -13,7 +13,7 @@ interface Props {
 
 const MoreSection = ({ className }: Props) => {
   const { push } = useRouter();
-  const { logout } = useLogout();
+  const { logout } = useAuth();
   const { openToast } = useToastNewVer();
   const handleLogout = async () => {
     await logout();

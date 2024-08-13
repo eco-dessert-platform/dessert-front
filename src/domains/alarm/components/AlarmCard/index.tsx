@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PushProductType, AlarmType } from '@/domains/alarm/types';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
 import DeleteButton from '@/domains/alarm/components/AlarmCard/DeleteButton';
+import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
 
 interface Props {
   type: AlarmType;
@@ -16,8 +17,6 @@ interface Props {
 
 const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
   const { productId, storeName, productTitle, boardThumbnail, subscribed } = data;
-  const BLUR_DATA_URL =
-    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAQAAAAm93DmAAAAKElEQVR42u3MQQEAAAQEMNe/pCaE4LkFWHrqVYRCoVAoFAqFQqHwZgEv8ksBbxtCcwAAAABJRU5ErkJggg==';
 
   return (
     <div className="flex flex-col gap-y-[10px] p-[16px] w-full border-[1px] border-gray-100 rounded-[10px]">

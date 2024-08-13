@@ -12,4 +12,9 @@ export interface IProductType {
   isBundled: boolean;
   isWished: boolean;
   tags?: string[];
+  reviewRate?: number;
+  reviewCount?: number;
+  isBbangcketing: boolean;
+  isSoldOut: boolean;
+  discountRate: number;
 }

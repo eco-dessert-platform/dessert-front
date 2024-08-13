@@ -6,24 +6,28 @@ interface ProductSummaryProps {
   product: IProductType;
 }
 
-const ProductSummary = ({ product }: ProductSummaryProps) => (
+const ProductSummary = ({
+  product: { storeName, title, discountRate, price, reviewRate, reviewCount, tags }
+}: ProductSummaryProps) => (
   <div className="mt-[6px]">
-    <p className="text-gray-400 typo-body-11-regular">{product?.storeName}</p>
+    <p className="text-gray-400 typo-body-11-regular">{storeName}</p>
     <h3 className="text-gray-800 typo-body-12-regular overflow-hidden text-ellipsis whitespace-nowrap">
-      {product.title}
+      {title}
     </h3>
     <div className="flex items-center gap-x-[2px] typo-title-14-medium">
-      <span className="text-secondaryOrangeRed">10%</span>
-      <span className="text-gray-900">{product.price.toLocaleString()}원</span>
+      {discountRate > 0 && <span className="text-secondaryOrangeRed">{discountRate}%</span>}
+      <span className="text-gray-900">{price.toLocaleString()}원</span>
     </div>
-    <div className="mb-[4px] flex gap-[2px] items-center">
-      <div className="flex items-center">
-        <StarIcon size="sm" color="yellow" />
-        <span className="typo-body-11-semibold text-gray-800">4.5</span>
+    {reviewRate !== undefined && reviewCount !== undefined && (
+      <div className="mb-[4px] flex gap-[2px] items-center">
+        <div className="flex items-center">
+          <StarIcon size="sm" color="yellow" />
+          <p className="typo-body-11-semibold text-gray-800">{reviewRate.toFixed(1)}</p>
+        </div>
+        <span className="typo-body-11-regular text-gray-500">({reviewCount.toLocaleString()})</span>
       </div>
-      <span className="typo-body-11-regular text-gray-500">(1000)</span>
-    </div>
-    {product.tags && <TagSwiper tag={product.tags} />}
+    )}
+    {tags && <TagSwiper tag={tags} />}
   </div>
 );
 

@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useMutationState } from '@tanstack/react-query';
-import type { LoginResponse } from '@/domains/user/queries/useLoginMutation';
+import { LoginResponse } from '@/domains/user/types/login';
 import useSilentLoginMutation from '@/domains/user/queries/useSilentLoginMutation';
 import { getExpFromToken, expToMaxAge } from '@/domains/user/utils/jwt';
 import { MINUTE } from '@/shared/constants/time';

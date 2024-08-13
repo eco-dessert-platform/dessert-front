@@ -8,6 +8,9 @@ const getApiUrl = (endpoint: string) => {
   return `${API_V1_URL}${endpoint}`;
 };
 
+/**
+ * @deprecated Service의 fetchExtend를 사용해주세요.
+ */
 const fetchExtend = {
   get: async (endpoint: string, init?: RequestInit | undefined) => {
     const accessToken = await getAccessToken();

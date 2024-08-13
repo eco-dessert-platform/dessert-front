@@ -7,6 +7,7 @@ import { NotificationDetailType, NotificationType } from '../types/notification'
 import { notificationQueryKey, userProfileQueryKey } from './queryKey';
 import { UserProfileType, WithdrawResponse } from '../types/profile';
 import { PreferenceType, PreferenceResultType } from '../types/preference';
+import { LoginResponse, SocialType } from '../types/login';
 
 class UserService extends Service {
   async getNotifications(cursorId: number) {
@@ -88,6 +89,43 @@ class UserService extends Service {
     });
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async login({ socialType, socialToken }: { socialType: SocialType; socialToken: string }) {
+    const url = `/oauth/login/${socialType.toLocaleLowerCase()}?token=${socialToken}`;
+    const res = await this.fetchExtend.get(url);
+    const { result, success, code, message }: ResultResponse<LoginResponse> = await res.json();
+    if (!res.ok || !success) {
+      throw new Error(ERROR_MESSAGE.api({ code, message }));
+    }
+    return result;
+  }
+
+  async extendLogin(refreshToken: string) {
+    const res = await this.fetchExtend.post('/token', {
+      body: JSON.stringify({ refreshToken })
+    });
+    const { result, success, code, message }: ResultResponse<{ accessToken: string }> =
+      await res.json();
+    if (!res.ok || !success) {
+      throw new Error(ERROR_MESSAGE.api({ code, message }));
+    }
+    return result;
+  }
+
+  async getMyPreferenceStatus() {
+    const res = await this.fetchExtend.get('/members/status');
+    const {
+      result,
+      success,
+      code,
+      message
+    }: ResultResponse<{ isFullyAssigned: boolean; isPreferenceAssigned: boolean }> =
+      await res.json();
+    if (!res.ok || !success) {
+      throw new Error(ERROR_MESSAGE.api({ code, message }));
+    }
+    return result;
   }
 }
 

@@ -1,10 +1,8 @@
 import Service from '@/shared/queries/service';
-import { ResultResponse } from '@/shared/types/response';
+import { ResultResponse, ListResponse, Cursor } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import {
-  PopularKeywordsResultType,
   RecentSearchKeywordsResultType,
-  AutoCompleteResultType,
   IAllProductsType,
   IAllStoreType
 } from '@/domains/search/types';
@@ -16,11 +14,10 @@ class SearchService extends Service {
     const res = await this.fetchExtend.get('/search/best-keyword', {
       next: { revalidate: 60 * 60 }
     });
-    const { success, code, message, result }: ResultResponse<PopularKeywordsResultType> =
-      await res.json();
+    const { success, code, message, list }: ListResponse<Array<string>> = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result.content;
+    return list;
   }
 
   async getRecentSearchKeywords() {
@@ -48,11 +45,10 @@ class SearchService extends Service {
 
   async getAutoCompleteSearchTexts(keyword: string) {
     const res = await this.fetchExtend.get(`/search/auto-keyword?keyword=${keyword}`);
-    const { success, code, message, result }: ResultResponse<AutoCompleteResultType> =
-      await res.json();
+    const { success, code, message, list }: ListResponse<Array<string>> = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result.content;
+    return list;
   }
 
   async getSearchProducts({
@@ -68,7 +64,8 @@ class SearchService extends Service {
     const res = await this.fetchExtend.get(
       `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
     );
-    const { result, code, message, success }: ResultResponse<IAllProductsType> = await res.json();
+    const { result, code, message, success }: ResultResponse<Cursor<IAllProductsType>> =
+      await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;

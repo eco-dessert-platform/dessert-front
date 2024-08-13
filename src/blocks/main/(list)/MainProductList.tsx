@@ -50,7 +50,7 @@ const MainProductList = () => {
     <PaddingWrapper className="pb-[36px]">
       <div className="grid grid-cols-2 gap-[16px]">
         {data.products.map((product) => (
-          <ProductCard key={`${product.boardId}`} product={product} />
+          <ProductCard key={product.boardId} product={product} />
         ))}
       </div>
       {hasNextPage && (

@@ -5,9 +5,6 @@ export function transformCategoryToEng(tag: string): string {
   if (tag === '식빵·모닝빵') {
     return 'BREAD';
   }
-  if (tag === '쿠키·비스킷·크래커') {
-    return 'COOKIE';
-  }
   if (tag === '베이글·도넛') {
     return 'BAGEL';
   }
@@ -17,10 +14,13 @@ export function transformCategoryToEng(tag: string): string {
   if (tag === '타르트·파이') {
     return 'TART';
   }
+  if (tag === '쿠키·비스킷·크래커') {
+    return 'COOKIE';
+  }
   if (tag === '과자') {
     return 'SNACK';
   }
-  if (tag === '쨈ㆍ청') {
+  if (tag === '잼·청') {
     return 'JAM';
   }
   if (tag === '아이스크림') {

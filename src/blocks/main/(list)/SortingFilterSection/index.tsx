@@ -23,7 +23,7 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
   const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 
   return (
-    <PaddingWrapper className="py-[12px] border-b border-gray-100">
+    <PaddingWrapper className="flex flex-col gap-y-[10px] pb-[12px] border-b border-gray-100">
       <div className="flex justify-between items-center">
         <span className="text-gray-800 typo-body-12-medium">{`총 ${boardsCount ?? ''}개`}</span>
         <ProductSortSelect filterFamilyId={FILTER_FAMILY_ID.main} />

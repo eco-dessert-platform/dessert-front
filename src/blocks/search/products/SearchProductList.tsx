@@ -38,14 +38,14 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
   }
   if (isError) {
     return (
-      <SadBbangleBox>
+      <SadBbangleBox className="py-[50px]">
         <p>오류가 발생했어요!</p>
       </SadBbangleBox>
     );
   }
   if (!data || data.itemCount === 0) {
     return (
-      <SadBbangleBox>
+      <SadBbangleBox className="py-[50px]">
         <p>검색 결과가 없어요 😥</p>
         <p>다른 키워드로 검색해보세요!</p>
       </SadBbangleBox>

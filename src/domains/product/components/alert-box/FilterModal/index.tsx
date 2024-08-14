@@ -15,7 +15,7 @@ interface FilterModalProps {
 }
 
 const FilterModal = ({ filterFamilyId }: FilterModalProps) => (
-  <Modal title="필터" className="py-[18px]">
+  <Modal title="필터">
     <TagsSection filterFamilyId={filterFamilyId} />
     <GrayDivider color="gray100" />
     <CategorySection filterFamilyId={filterFamilyId} />

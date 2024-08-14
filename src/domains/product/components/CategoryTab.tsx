@@ -28,7 +28,7 @@ const CategoryTab = ({ filterFamilyId }: Props) => {
   };
 
   useEffect(() => {
-    const activeIndex = FILTER_VALUES.categories.findIndex(
+    const activeIndex = FILTER_VALUES.category.kind.findIndex(
       (category) => category === filterValue.category
     );
     if (activeIndex !== -1 && tabRefs.current[activeIndex]) {
@@ -48,7 +48,7 @@ const CategoryTab = ({ filterFamilyId }: Props) => {
   return (
     <LayoutGroup id={id}>
       <div ref={tabContainerRef} className="flex overflow-x-scroll scrollbar-hide">
-        {FILTER_VALUES.categories.map((category, index) => {
+        {FILTER_VALUES.category.kind.map((category, index) => {
           const isActive =
             filterValue.category === category || (!filterValue.category && index === 0);
           return (

@@ -21,7 +21,7 @@ const ProductSortSelect = ({ filterFamilyId }: ProductSortSelectProps) => {
 
   return (
     <Select
-      options={FILTER_VALUES.sorts}
+      options={FILTER_VALUES.sorts.kind}
       selectedOption={selectedOption}
       onChange={handleSelectChange}
     />

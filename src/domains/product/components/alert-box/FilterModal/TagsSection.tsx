@@ -42,7 +42,7 @@ const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
       <div className="typo-title-14-semibold text-gray-700">성분</div>
       <div className="flex gap-[10px] flex-wrap">
-        {FILTER_VALUES.tags.map((tag) => {
+        {FILTER_VALUES.tags.kind.map((tag) => {
           const isSelected = !!selectedTags?.includes(tag);
           return (
             <CheckBox

@@ -22,7 +22,7 @@ const FilterSection = ({ filterFamilyId }: FilterSectionProps) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
   const { openModal } = useModal();
 
-  const categoryTags = FILTER_VALUES.categories.map((item) => ({
+  const categoryTags = FILTER_VALUES.category.kind.map((item) => ({
     type: TAG.category,
     content: item
   }));

@@ -1,6 +1,5 @@
 import Link from 'next/link';
-
-import XX from '@/domains/search/assets/xx.svg';
+import { CloseIcon } from '@/shared/components/icons';
 
 interface RecentKeywordProps {
   title: string;
@@ -13,7 +12,7 @@ const RecentKeyword = ({ title, onClick }: RecentKeywordProps) => (
       {title}
     </Link>
     <button type="button" onClick={onClick} aria-label="delete button">
-      <XX />
+      <CloseIcon shape="no-bg-16" />
     </button>
   </div>
 );

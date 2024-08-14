@@ -37,7 +37,7 @@ const Modal = ({ title, children, className }: UpModalProps) => {
       <PaddingWrapper className="flex items-center py-[10px]">
         <h4 className="flex-1 text-center typo-title-16-medium">{title}</h4>
         <button type="button" aria-label="close" onClick={closeModal} className="cursor-pointer">
-          <CloseIcon shape="no-bg" />
+          <CloseIcon shape="no-bg-24" />
         </button>
       </PaddingWrapper>
       {children}

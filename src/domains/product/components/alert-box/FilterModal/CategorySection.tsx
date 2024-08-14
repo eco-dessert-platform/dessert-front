@@ -28,7 +28,7 @@ const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
       <div className="typo-title-14-semibold text-gray-700">카테고리</div>
       <div className="flex gap-[10px] flex-wrap">
-        {FILTER_VALUES.categories.map((item) => {
+        {FILTER_VALUES.category.kind.map((item) => {
           const isSelected = selectedCategory === item;
           return (
             <Radio

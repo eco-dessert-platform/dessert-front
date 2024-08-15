@@ -19,13 +19,14 @@ const DetailStoreInfo = ({ storeId }: Props) => {
   const { mutate: addMutate } = useAddWishStoreMutation(storeId);
   const { mutate: deleteMutate } = useDeleteWishStoreMutation(storeId);
 
+  console.log(storeData);
   if (!storeData) return <PaddingWrapper>스토어 정보를 찾을 수 없어요.</PaddingWrapper>;
 
   const wishMutate = storeData.isWished ? deleteMutate : addMutate;
 
-  const addStoreToWishList = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleWish = (e: React.MouseEvent<HTMLButtonElement>) => {
     wishMutate();
+    e.preventDefault();
   };
 
   return (
@@ -37,7 +38,7 @@ const DetailStoreInfo = ({ storeId }: Props) => {
           </div>
           <div className="text-gray-600 text-14">{storeData.storeName}</div>
         </div>
-        <HeartButton shape="default" isActive={storeData.isWished} onClick={addStoreToWishList} />
+        <HeartButton shape="default" isActive={storeData.isWished} onClick={(e) => handleWish(e)} />
       </PaddingWrapper>
     </Link>
   );

@@ -24,12 +24,10 @@ const useSocialLoginMutation = () => {
     const { isFullyAssigned, isPreferenceAssigned } = await userService.getMyPreferenceStatus();
 
     if (!isPreferenceAssigned) {
-      openToast({ message: '약관 동의를 완료해주세요.' });
       replace(PATH.profileRegistration);
       return;
     }
     if (!isFullyAssigned) {
-      openToast({ message: '맞춤 추천 설문을 완료해주세요.' });
       replace(PATH.preferenceCreate);
       return;
     }

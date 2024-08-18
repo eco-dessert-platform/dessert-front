@@ -28,7 +28,7 @@ const IsOrderAvailableCheckbox = ({ filterFamilyId }: OrderAvailableCheckBoxProp
   return (
     <PaddingWrapper>
       <CheckBox
-        className="text-gray-800"
+        className="text-gray-800 typo-title-14-regular"
         isChecked={orderAvailableToday}
         onChange={handleCheckChange}
       >

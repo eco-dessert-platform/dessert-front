@@ -12,12 +12,12 @@ import {
 
 export const categoryTempState = atomFamily<ICategoryType, FilterFamilyIDType>({
   key: 'category',
-  default: 'undefined'
+  default: INIT_FILTER_VALUE.category
 });
 
 export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({
   key: 'ingredient',
-  default: undefined
+  default: INIT_FILTER_VALUE.tags
 });
 
 export const priceTempState = atomFamily<IPriceType, FilterFamilyIDType>({
@@ -27,7 +27,7 @@ export const priceTempState = atomFamily<IPriceType, FilterFamilyIDType>({
 
 export const orderAvailableTodayTempState = atomFamily<boolean, FilterFamilyIDType>({
   key: 'orderAvailableToday',
-  default: undefined
+  default: INIT_FILTER_VALUE.orderAvailableToday
 });
 
 export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({

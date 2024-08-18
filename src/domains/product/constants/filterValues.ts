@@ -30,13 +30,13 @@ export const FILTER_VALUES = {
     name: '가격'
   },
   orderAvailableToday: {
-    name: '오늘 주문 가능'
+    name: '주문가능상품만 보기'
   }
 };
 
 export const INIT_FILTER_VALUE = {
-  category: '',
-  tags: null,
+  category: '전체',
+  tags: ['전체'],
   price: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE],
   sort: '추천순',
   orderAvailableToday: false

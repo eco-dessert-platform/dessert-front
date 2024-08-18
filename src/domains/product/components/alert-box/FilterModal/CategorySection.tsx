@@ -7,6 +7,7 @@ import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Radio from '@/shared/components/Radio';
+import { cn } from '@/shared/utils/cn';
 
 interface CategorySectionProps {
   filterFamilyId: FilterFamilyIDType;
@@ -17,7 +18,7 @@ const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(categoryTempState(filterFamilyId));
 
   useEffect(() => {
-    setSelectedCategory(filterValue.category || '전체');
+    setSelectedCategory(filterValue.category);
   }, [filterValue, setSelectedCategory]);
 
   const handleClick = (clickItem: string) => {
@@ -33,12 +34,19 @@ const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
           return (
             <Radio
               key={item}
-              className={`h-[37px] p-[8px] rounded-[8px] ${isSelected ? 'bg-[#FDF1EE]' : 'bg-blueGray-30'}`}
+              className={cn(
+                'h-[37px] p-[8px] rounded-[8px]',
+                isSelected ? 'bg-secondaryPink' : 'bg-blueGray-30'
+              )}
               isChecked={isSelected}
               onChange={() => handleClick(item)}
             >
               <div
-                className={`text-gray-800 typo-title-14-regular ${isSelected && 'typo-title-14-semibold text-primaryOrangeRed'}`}
+                className={
+                  isSelected
+                    ? 'typo-title-14-semibold text-primaryOrangeRed'
+                    : 'typo-title-14-regular text-gray-800'
+                }
               >
                 {item}
               </div>

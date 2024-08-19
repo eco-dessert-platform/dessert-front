@@ -26,7 +26,7 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
   return (
     <PaddingWrapper className="flex flex-col gap-y-[10px] pb-[12px] border-b border-gray-100">
       <div className="flex justify-between items-center">
-        <span className="text-gray-800 typo-body-12-medium">{`총 ${boardsCount ?? ''}개`}</span>
+        <span className="text-gray-800 typo-body-12-medium">총 {boardsCount ?? ''}개</span>
         <ProductSortSelect filterFamilyId={filterFamilyId} />
       </div>
       <div className="flex gap-[4px]">
@@ -45,11 +45,11 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
         <FilterButton
           filterFamilyId={filterFamilyId}
           text={
-            filterValue.tags === INIT_FILTER_VALUE.tags
+            isEqual(filterValue.tags, INIT_FILTER_VALUE.tags)
               ? FILTER_VALUES.tags.name
               : getIngredientTag(filterValue.tags)
           }
-          isFiltered={filterValue.tags !== INIT_FILTER_VALUE.tags}
+          isFiltered={!isEqual(filterValue.tags, INIT_FILTER_VALUE.tags)}
           onReset={() => {
             setFilterValue((prev) => ({ ...prev, tags: INIT_FILTER_VALUE.tags }));
           }}

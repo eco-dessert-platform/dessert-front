@@ -2,14 +2,15 @@
 
 import { useRecoilValue } from 'recoil';
 
-import { categoryValueState } from '@/domains/product/atoms';
+import { mainCategoryState } from '@/domains/product/atoms';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import Header from '@/shared/components/Header';
 
 const MainListLayout = ({ children }: { children: React.ReactNode }) => {
-  const categoryValue = useRecoilValue(categoryValueState);
+  const mainCategory = useRecoilValue(mainCategoryState(FILTER_FAMILY_ID.main));
   return (
     <>
-      <Header title={categoryValue} back />
+      <Header title={mainCategory} back />
       {children}
     </>
   );

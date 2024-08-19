@@ -1,22 +1,17 @@
+import { MAIN_CATEGORIES_TYPE } from '@/domains/product/constants/mainCategories';
 import { LIMIT_MAX_PRICE, LIMIT_MIN_PRICE } from './priceLimit';
 
 export const FILTER_VALUES = {
   category: {
     name: '카테고리',
-    kind: [
-      '전체',
-      '식빵·모닝빵',
-      '베이글·도넛',
-      '케이크',
-      '타르트·파이',
-      '쿠키·비스킷·크래커',
-      '과자',
-      '잼·청',
-      '아이스크림',
-      '요거트',
-      '그래놀라',
-      '기타'
-    ]
+    kind: {
+      [MAIN_CATEGORIES_TYPE[0].title]: [
+        ...MAIN_CATEGORIES_TYPE[1].subCategories,
+        ...MAIN_CATEGORIES_TYPE[2].subCategories.slice(1)
+      ],
+      [MAIN_CATEGORIES_TYPE[1].title]: MAIN_CATEGORIES_TYPE[1].subCategories,
+      [MAIN_CATEGORIES_TYPE[2].title]: MAIN_CATEGORIES_TYPE[2].subCategories
+    }
   },
   tags: {
     name: '성분',

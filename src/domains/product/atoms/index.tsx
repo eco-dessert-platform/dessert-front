@@ -1,9 +1,9 @@
-import { atom, atomFamily, DefaultValue, selectorFamily } from 'recoil';
+import { atomFamily, DefaultValue, selectorFamily } from 'recoil';
 
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
-import { LIMIT_MAX_PRICE, LIMIT_MIN_PRICE } from '@/domains/product/constants/priceLimit';
 import {
   FilterFamilyIDType,
+  MainCategoryType,
   ICategoryType,
   IFilterType,
   IPriceType,
@@ -22,7 +22,7 @@ export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({
 
 export const priceTempState = atomFamily<IPriceType, FilterFamilyIDType>({
   key: 'price',
-  default: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE]
+  default: INIT_FILTER_VALUE.price
 });
 
 export const orderAvailableTodayTempState = atomFamily<boolean, FilterFamilyIDType>({
@@ -33,10 +33,6 @@ export const orderAvailableTodayTempState = atomFamily<boolean, FilterFamilyIDTy
 export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({
   key: 'filterValueState',
   default: INIT_FILTER_VALUE
-});
-export const categoryValueState = atom<string>({
-  key: 'categoryValueState',
-  default: '전체'
 });
 
 export const filterValueTempState = selectorFamily<IFilterType, FilterFamilyIDType>({
@@ -68,4 +64,9 @@ export const filterValueTempState = selectorFamily<IFilterType, FilterFamilyIDTy
       set(priceTempState(filterFamilyId), newValue.price);
       set(orderAvailableTodayTempState(filterFamilyId), newValue.orderAvailableToday);
     }
+});
+
+export const mainCategoryState = atomFamily<MainCategoryType, FilterFamilyIDType>({
+  key: 'mainCategoryState',
+  default: '전체'
 });

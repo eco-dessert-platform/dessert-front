@@ -11,8 +11,7 @@ import {
   HomeRedIcon,
   ProfileIcon,
   ProfileRedIcon,
-  Search24Icon,
-  Search24RedIcon
+  SearchIcon
 } from '@/shared/components/icons';
 import PATH from '@/shared/constants/path';
 
@@ -29,8 +28,8 @@ const Footer = () => {
     },
     {
       title: '검색',
-      defaultIcon: <Search24Icon />,
-      activeIcon: <Search24RedIcon />,
+      defaultIcon: <SearchIcon shape="gray-24" />,
+      activeIcon: <SearchIcon shape="red-24" />,
       href: PATH.search
     },
     {

@@ -1,11 +1,7 @@
 import Service from '@/shared/queries/service';
 import { ResultResponse, ListResponse, Cursor } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import {
-  RecentSearchKeywordsResultType,
-  IAllProductsType,
-  IAllStoreType
-} from '@/domains/search/types';
+import { RecentSearchKeywordsResultType, IAllProductsType } from '@/domains/search/types';
 import { IFilterType } from '@/domains/product/types/filterType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 
@@ -66,14 +62,6 @@ class SearchService extends Service {
     );
     const { result, code, message, success }: ResultResponse<Cursor<IAllProductsType>> =
       await res.json();
-
-    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result;
-  }
-
-  async getSearchStores({ keyword, pageParam }: { keyword: string; pageParam: number }) {
-    const res = await this.fetchExtend.get(`/search/stores?keyword=${keyword}&page=${pageParam}`);
-    const { result, code, message, success }: ResultResponse<IAllStoreType> = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;

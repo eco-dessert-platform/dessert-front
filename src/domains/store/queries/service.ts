@@ -1,7 +1,6 @@
 import Service from '@/shared/queries/service';
 import { ResultResponse, ListResponse, Cursor } from '@/shared/types/response';
-import { IStoreType, IStoreBestProductType, IStoreProductType } from '@/domains/store/types/store';
-import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import { IStoreType, IStoreProductType } from '@/domains/store/types/store';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 
 class StoreService extends Service {

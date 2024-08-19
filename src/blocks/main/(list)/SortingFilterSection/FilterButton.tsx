@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import FilterModal from '@/domains/product/components/alert-box/FilterModal';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { CloseIcon } from '@/shared/components/icons';
@@ -15,14 +16,16 @@ interface SelectProps {
 }
 
 const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: SelectProps) => {
+  const closeRef = useRef<HTMLSpanElement>(null);
   const { openModal } = useModal();
 
-  const handleClick = () => {
-    if (isFiltered) {
-      onReset();
-    } else {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!isFiltered) {
       openModal(<FilterModal filterFamilyId={filterFamilyId} />);
+      return;
     }
+    if (closeRef.current && e.target instanceof Element && closeRef.current.contains(e.target))
+      onReset();
   };
 
   return (
@@ -31,12 +34,16 @@ const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: Sel
       aria-label="filter button"
       onClick={handleClick}
       className={cn(
-        'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] border-gray-200 rounded-[50px] cursor-pointer typo-body-12-regular',
-        isFiltered && 'border-primaryOrangeRed text-primaryOrangeRed'
+        'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] rounded-[50px] cursor-pointer',
+        isFiltered
+          ? 'border-primaryOrangeRed text-primaryOrangeRed typo-body-12-bold'
+          : 'border-gray-200 text-gray-900 typo-body-12-regular'
       )}
     >
       <span>{text}</span>
-      {isFiltered ? <CloseIcon shape="no-bg-16-orange" /> : <ArrowIcons shape="down" />}
+      <span ref={closeRef}>
+        {isFiltered ? <CloseIcon shape="no-bg-16-orange" /> : <ArrowIcons shape="down" />}
+      </span>
     </button>
   );
 };

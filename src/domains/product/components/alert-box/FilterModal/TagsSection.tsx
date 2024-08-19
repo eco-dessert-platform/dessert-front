@@ -1,5 +1,8 @@
-import { useRecoilState } from 'recoil';
-import { tagsTempState } from '@/domains/product/atoms';
+'use client';
+
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { filterValueState, tagsTempState } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
@@ -11,8 +14,13 @@ interface TagsSectionProps {
 }
 
 const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
+  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
   const [selectedTags, setSelectedTags] = useRecoilState(tagsTempState(filterFamilyId));
   const uniqueValue = '전체';
+
+  useEffect(() => {
+    setSelectedTags(filterValue.tags);
+  }, [filterValue, setSelectedTags]);
 
   const handleClick = (clickedItem: string) => {
     if (clickedItem === uniqueValue) {

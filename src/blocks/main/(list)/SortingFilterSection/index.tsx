@@ -2,14 +2,16 @@
 
 import React from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { filterValueState } from '@/domains/product/atoms';
-import ProductSortSelect from '@/domains/product/components/FilterSection/ProductSortSelect';
 import { useGetBoardsCountQuery } from '@/domains/product/queries/useGetBoardsCountQuery';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
+import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
+import { getIngredientTag, getPriceTag } from '@/domains/product/utils/getTag';
+import { isEqual } from '@/domains/product/utils/isEqual';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-
+import ProductSortSelect from './ProductSortSelect';
 import FilterButton from './FilterButton';
 
 interface Props {
@@ -17,7 +19,7 @@ interface Props {
 }
 
 const SortingFilterSection = ({ filterFamilyId }: Props) => {
-  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
+  const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
   const { sort, ...filterValueWithoutSort } = filterValue;
   const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 
@@ -28,9 +30,42 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
         <ProductSortSelect filterFamilyId={filterFamilyId} />
       </div>
       <div className="flex gap-[4px]">
-        <FilterButton text="카테고리" filterFamilyId={filterFamilyId} onReset={() => {}} />
-        <FilterButton text="성분" filterFamilyId={filterFamilyId} onReset={() => {}} />
-        <FilterButton text="가격" filterFamilyId={filterFamilyId} onReset={() => {}} />
+        <FilterButton
+          filterFamilyId={filterFamilyId}
+          text={
+            filterValue.category === INIT_FILTER_VALUE.category
+              ? FILTER_VALUES.category.name
+              : filterValue.category
+          }
+          isFiltered={filterValue.category !== INIT_FILTER_VALUE.category}
+          onReset={() => {
+            setFilterValue((prev) => ({ ...prev, category: INIT_FILTER_VALUE.category }));
+          }}
+        />
+        <FilterButton
+          filterFamilyId={filterFamilyId}
+          text={
+            filterValue.tags === INIT_FILTER_VALUE.tags
+              ? FILTER_VALUES.tags.name
+              : getIngredientTag(filterValue.tags)
+          }
+          isFiltered={filterValue.tags !== INIT_FILTER_VALUE.tags}
+          onReset={() => {
+            setFilterValue((prev) => ({ ...prev, tags: INIT_FILTER_VALUE.tags }));
+          }}
+        />
+        <FilterButton
+          filterFamilyId={filterFamilyId}
+          text={
+            isEqual(filterValue.price, INIT_FILTER_VALUE.price)
+              ? FILTER_VALUES.price.name
+              : getPriceTag(filterValue.price)
+          }
+          isFiltered={!isEqual(filterValue.price, INIT_FILTER_VALUE.price)}
+          onReset={() => {
+            setFilterValue((prev) => ({ ...prev, price: INIT_FILTER_VALUE.price }));
+          }}
+        />
       </div>
     </PaddingWrapper>
   );

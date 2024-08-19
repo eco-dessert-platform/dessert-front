@@ -33,14 +33,14 @@ const MainProductList = () => {
   }
   if (isError) {
     return (
-      <SadBbangleBox className="py-[50px]">
+      <SadBbangleBox className="h-[calc(100vh-270px)]">
         <p>오류가 발생했어요!</p>
       </SadBbangleBox>
     );
   }
   if (!data || data.products.length === 0) {
     return (
-      <SadBbangleBox className="py-[50px]">
+      <SadBbangleBox className="h-[calc(100vh-270px)]">
         <p>상품이 없어요!</p>
       </SadBbangleBox>
     );

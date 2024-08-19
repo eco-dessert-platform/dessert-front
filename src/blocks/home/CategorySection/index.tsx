@@ -1,7 +1,7 @@
 'use client';
 
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import CategoryButton from '@/domains/product/components/CategoryButton';
+import CategoryButton from '@/blocks/home/CategorySection/CategoryButton';
 import { CATEGORY } from '@/domains/home/constants/category';
 
 const CategorySection = () => (

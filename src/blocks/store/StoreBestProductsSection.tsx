@@ -26,14 +26,17 @@ const StoreBestProductsSection = ({ storeId }: Props) => {
     <PaddingWrapper>
       <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">인기상품</h5>
       <div className="grid grid-cols-3 gap-x-[10px]">
-        {products.map((product, i) => (
-          <ProductCard
-            key={product.boardId}
-            product={{ ...product, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
-            popular
-            ranking={Number(i + 1)}
-          />
-        ))}
+        {products.map((product, i) => {
+          const { reviewRate, reviewCount, tags, ...rest } = product;
+          return (
+            <ProductCard
+              key={product.boardId}
+              product={{ ...rest, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
+              popular
+              ranking={Number(i + 1)}
+            />
+          );
+        })}
       </div>
     </PaddingWrapper>
   );

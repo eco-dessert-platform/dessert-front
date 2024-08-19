@@ -9,7 +9,7 @@ import PATH from '@/shared/constants/path';
 import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { IProductType } from '@/domains/product/types/productType';
 import { Cursor } from '@/shared/types/response';
-import { IStoreBestProductType } from '@/domains/store/types/store';
+import { IStoreProductType } from '@/domains/store/types/store';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
@@ -33,7 +33,7 @@ const useAddWishProductMutation = () => {
       (oldData) =>
         updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
     );
-    queryClient.setQueriesData<Array<IStoreBestProductType>>(
+    queryClient.setQueriesData<Array<IStoreProductType>>(
       {
         queryKey: storeQueryKey.details(),
         predicate: (query) => query.queryKey[3] === 'best-products'

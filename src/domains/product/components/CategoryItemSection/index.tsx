@@ -9,8 +9,9 @@ import { useSetRecoilState } from 'recoil';
 import PATH from '@/shared/constants/path';
 import useToggle from '@/shared/hooks/useToggle';
 
-import { mainCategoryState } from '@/domains/product/atoms';
+import { mainCategoryState, filterValueState } from '@/domains/product/atoms';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
 
@@ -23,6 +24,7 @@ interface CategoryItemProps {
 const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps) => {
   const router = useRouter();
   const setMainCategory = useSetRecoilState(mainCategoryState(FILTER_FAMILY_ID.main));
+  const setFilterValue = useSetRecoilState(filterValueState(FILTER_FAMILY_ID.main));
 
   const { isActive, toggle } = useToggle();
 
@@ -30,6 +32,7 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
     toggle();
     setMainCategory(title);
     if (subCategories.length === 0) {
+      setFilterValue((prev) => ({ ...prev, category: INIT_FILTER_VALUE.category }));
       router.push(PATH.mainProductList);
     }
   };

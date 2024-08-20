@@ -5,7 +5,6 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { filterValueState } from '@/domains/product/atoms';
-import { useGetBoardsCountQuery } from '@/domains/product/queries/useGetBoardsCountQuery';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { getIngredientTag, getPriceTag } from '@/domains/product/utils/getTag';
@@ -13,6 +12,8 @@ import { isEqual } from '@/domains/product/utils/isEqual';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductSortSelect from './ProductSortSelect';
 import FilterButton from './FilterButton';
+import MainBoardCount from './MainBoardCount';
+import SearchBoardCount from './SearchBoardCount';
 
 interface Props {
   filterFamilyId: FilterFamilyIDType;
@@ -20,13 +21,12 @@ interface Props {
 
 const SortingFilterSection = ({ filterFamilyId }: Props) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
-  const { sort, ...filterValueWithoutSort } = filterValue;
-  const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 
   return (
     <PaddingWrapper className="flex flex-col gap-y-[10px] pb-[12px] border-b border-gray-100">
       <div className="flex justify-between items-center">
-        <span className="text-gray-800 typo-body-12-medium">총 {boardsCount ?? ''}개</span>
+        {filterFamilyId === 'main' && <MainBoardCount />}
+        {filterFamilyId === 'search' && <SearchBoardCount />}
         <ProductSortSelect filterFamilyId={filterFamilyId} />
       </div>
       <div className="flex gap-[4px]">

@@ -36,8 +36,8 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
     staleTime: Infinity,
     select: ({ pages }) => {
       const products = pages.map((page) => page.content.boards).flat();
-      const itemCount = pages[0]?.content.itemAllCount || 0;
-      return { products, itemCount };
+      const boardsCount = pages[0]?.content.itemAllCount || 0;
+      return { products, boardsCount };
     }
   });
 };

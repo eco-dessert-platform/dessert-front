@@ -42,7 +42,7 @@ const TitleSection = async () => {
         </Link>
       </div>
       {isLoggedIn && preference && (
-        <p className="mt-[6px] typo-body-12-semibold text-gray-600 whitespace-pre-line">
+        <p className="mt-[6px] typo-body-12-regular text-gray-600 whitespace-pre-line">
           {genGuidanceMessage(preference)}
         </p>
       )}

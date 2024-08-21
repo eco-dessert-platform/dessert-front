@@ -17,7 +17,7 @@ const RecommendationSection = async () => {
           className="border-primaryOrangeRed rounded-[8px] border px-[16px] py-[14px] w-full flex hover:opacity-70 transition-opacity"
         >
           <div className="flex justify-between w-full gap-2">
-            <div className="w-10 h-10 rounded-[10px] bg-primaryOrangeRed bg-opacity-15 flex justify-center items-center">
+            <div className="min-w-[40px] h-[40px] rounded-[10px] bg-primaryOrangeRed bg-opacity-15 flex justify-center items-center">
               <span>🥐</span>
             </div>
             <div className="w-full">

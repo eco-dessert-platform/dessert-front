@@ -5,7 +5,7 @@ import Header from '@/shared/components/Header';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
-import ShareButton from '@/shared/components/ShareButton';
+import ShareButton from '@/app/main/(detail)/products/[productId]/_blocks/ShareButton';
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
 
 interface DetailInfoLayoutProps {

@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import { filterValueState } from '@/domains/product/atoms';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import useCategory from '@/domains/product/hooks/useCategory';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PATH from '@/shared/constants/path';
 
@@ -11,10 +12,11 @@ interface SubCategoryItemProps {
 }
 
 const SubCategoryItem = ({ categoryItem }: SubCategoryItemProps) => {
-  const [, setFilterValue] = useRecoilState(filterValueState(FILTER_FAMILY_ID.main));
+  const setFilterValue = useSetRecoilState(filterValueState(FILTER_FAMILY_ID.main));
+  const { elaborateCategory } = useCategory(FILTER_FAMILY_ID.main);
 
   const clickCategory = (selectedItem: string) => {
-    setFilterValue((prev) => ({ ...prev, category: selectedItem }));
+    setFilterValue((prev) => ({ ...prev, category: elaborateCategory(selectedItem) }));
   };
 
   return (

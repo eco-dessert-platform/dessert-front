@@ -9,6 +9,7 @@ import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { getIngredientTag, getPriceTag } from '@/domains/product/utils/getTag';
 import { isEqual } from '@/domains/product/utils/isEqual';
+import useCategory from '@/domains/product/hooks/useCategory';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductSortSelect from './ProductSortSelect';
 import FilterButton from './FilterButton';
@@ -21,6 +22,7 @@ interface Props {
 
 const SortingFilterSection = ({ filterFamilyId }: Props) => {
   const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
+  const { elaborateCategory, simplifyCategory } = useCategory(filterFamilyId);
 
   return (
     <PaddingWrapper className="flex flex-col gap-y-[10px] pb-[12px] border-b border-gray-100">
@@ -33,13 +35,16 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
         <FilterButton
           filterFamilyId={filterFamilyId}
           text={
-            filterValue.category === INIT_FILTER_VALUE.category
+            simplifyCategory(filterValue.category) === INIT_FILTER_VALUE.category
               ? FILTER_VALUES.category.name
               : filterValue.category
           }
-          isFiltered={filterValue.category !== INIT_FILTER_VALUE.category}
+          isFiltered={simplifyCategory(filterValue.category) !== INIT_FILTER_VALUE.category}
           onReset={() => {
-            setFilterValue((prev) => ({ ...prev, category: INIT_FILTER_VALUE.category }));
+            setFilterValue((prev) => ({
+              ...prev,
+              category: elaborateCategory(INIT_FILTER_VALUE.category)
+            }));
           }}
         />
         <FilterButton

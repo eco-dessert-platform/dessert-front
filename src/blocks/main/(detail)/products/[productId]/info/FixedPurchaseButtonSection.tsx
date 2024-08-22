@@ -20,7 +20,6 @@ const FixedPurchaseButtonSection = () => {
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
   const { data: boardData } = useGetBoardDetailQuery(productId);
 
-  console.log(boardData?.isWished);
   if (!boardData) return 'data not found';
 
   const addToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {

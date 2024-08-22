@@ -1,5 +1,5 @@
-import { InfiniteData } from '@tanstack/react-query';
 import { Cursor } from '@/shared/types/response';
+import { InfiniteData } from '@tanstack/react-query';
 
 /**
  *

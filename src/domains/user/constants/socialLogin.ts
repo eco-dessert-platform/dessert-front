@@ -1,8 +1,10 @@
 export const GOOGLE = {
   authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
   clientId: process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID,
+  clientSecret: process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_SECRET,
   redirectUri: process.env.NEXT_PUBLIC_GOOGLE_AUTH_REDIRECT_URI,
-  scope: 'https://www.googleapis.com/auth/drive.metadata.readonly',
+  scope:
+    'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
   responseType: 'token'
 };
 

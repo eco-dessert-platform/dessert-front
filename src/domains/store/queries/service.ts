@@ -1,6 +1,6 @@
 import Service from '@/shared/queries/service';
 import { ResultResponse, ListResponse, Cursor } from '@/shared/types/response';
-import { IStoreType, IStoreBestProductType, IStoreProductType } from '@/domains/store/types/store';
+import { IStoreType, IStoreProductType } from '@/domains/store/types/store';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 
@@ -25,7 +25,7 @@ class StoreService extends Service {
 
   async getStoreBestProducts(storeId: number) {
     const res = await this.fetchExtend.get(`/stores/${storeId}/boards/best`);
-    const { list, success, code, message }: ListResponse<Array<IStoreBestProductType>> =
+    const { list, success, code, message }: ListResponse<Array<IStoreProductType>> =
       await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));

@@ -3,7 +3,7 @@ import { IProductType } from '@/domains/product/types/productType';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { Cursor } from '@/shared/types/response';
 import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
-import { IStoreBestProductType } from '@/domains/store/types/store';
+import { IStoreProductType } from '@/domains/store/types/store';
 import wishService from './service';
 import { wishQueryKey } from './queryKey';
 import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
@@ -21,9 +21,12 @@ const useDeleteWishProductMutation = () => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, { isWished: false })
+        updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, (oldItem) => ({
+          ...oldItem,
+          isWished: false
+        }))
     );
-    queryClient.setQueriesData<Array<IStoreBestProductType>>(
+    queryClient.setQueriesData<Array<IStoreProductType>>(
       {
         queryKey: storeQueryKey.details(),
         predicate: (query) => query.queryKey[3] === 'best-products'
@@ -37,7 +40,10 @@ const useDeleteWishProductMutation = () => {
         predicate: (query) => query.queryKey[3] === 'all-products'
       },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, { isWished: false })
+        updateInfiniteQueryCache(oldData, { key: 'boardId', value: productId }, (oldItem) => ({
+          ...oldItem,
+          isWished: false
+        }))
     );
     return { productId };
   };

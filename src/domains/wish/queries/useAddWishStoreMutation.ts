@@ -18,7 +18,10 @@ const useAddWishStoreMutation = (storeId: number) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
       { queryKey: storeQueryKey.lists() },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: true })
+        updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
     );
     queryClient.setQueriesData<IStoreType>(
       { queryKey: storeQueryKey.detail(storeId) },

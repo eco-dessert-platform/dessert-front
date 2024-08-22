@@ -35,7 +35,7 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
       className="selectEl relative inline-block text-gray-900 typo-body-12-medium"
       onClick={handleSelectClick}
     >
-      <div className="flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] border-gray-200 rounded-[50px] cursor-pointer">
+      <div className="flex items-center gap-[4px] p-[8px] pl-[12px] rounded-[50px] cursor-pointer">
         {selectedOption}
         <span className={`${isExpended ? 'rotate-180 transition-all' : ''}`}>
           <ArrowIcons shape="down" />

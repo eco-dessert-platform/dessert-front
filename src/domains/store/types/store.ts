@@ -1,3 +1,5 @@
+import { IProductType } from '@/domains/product/types/productType';
+
 export interface IStoreType {
   storeId: number;
   storeName: string;
@@ -16,20 +18,4 @@ export interface INewStoreType {
   isWished: boolean;
 }
 
-export interface IStoreBestProductType {
-  boardId: number;
-  thumbnail: string;
-  title: string;
-  price: number;
-  isWished: boolean;
-  isBundled: boolean;
-  isBbangcketing: boolean;
-  isSoldOut: boolean;
-  discountRate: number;
-}
-
-export interface IStoreProductType extends IStoreBestProductType {
-  tags: string[];
-  reviewRate: number;
-  reviewCount: number;
-}
+export type IStoreProductType = Omit<IProductType, 'storeId' | 'storeName'>;

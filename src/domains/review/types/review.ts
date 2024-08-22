@@ -13,6 +13,7 @@ export interface ReviewType {
   comment: string;
   date: string;
   rating: RatingType;
+  isMine: boolean;
 }
 
 export interface BoardReviewRateResponse {

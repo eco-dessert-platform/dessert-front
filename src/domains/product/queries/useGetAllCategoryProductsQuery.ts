@@ -6,11 +6,11 @@ import { productQueryKey } from '@/shared/queries/queryKey';
 import { Cursor } from '@/shared/types/response';
 import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 
-export const useGetAllProductsQuery = (query: IFilterType) => {
+export const useGetAllCategoryProductsQuery = (query: IFilterType) => {
   const queryKey = [...productQueryKey.list('main'), { filter: query }];
 
   const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
-    const result = await productService.getAllProducts({ cursorId, filterValue: query });
+    const result = await productService.getAllCategoryProducts({ cursorId, filterValue: query });
     return result;
   };
 
@@ -32,7 +32,9 @@ export const useGetAllProductsQuery = (query: IFilterType) => {
     staleTime: Infinity,
     select: ({ pages }) => {
       const products = pages.map((page) => page.content).flat();
-      return { products };
+      const totalCount = pages.reduce((acc, page) => acc + page.content.length, 0);
+
+      return { products, totalCount };
     }
   });
 };

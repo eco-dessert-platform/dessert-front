@@ -10,8 +10,8 @@ interface Props {
 }
 
 const LikeButton = ({ id, isLiked, like }: Props) => {
-  const { mutate: likeMutate } = useLikeReviewMutation({ id, oldLikeCount: like });
-  const { mutate: dislikeMutate } = useDislikeReviewMutation({ id, oldLikeCount: like });
+  const { mutate: likeMutate } = useLikeReviewMutation(id);
+  const { mutate: dislikeMutate } = useDislikeReviewMutation(id);
 
   const mutate = isLiked ? dislikeMutate : likeMutate;
 

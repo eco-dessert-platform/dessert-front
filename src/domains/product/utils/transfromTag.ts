@@ -2,23 +2,35 @@ export function transformCategoryToEng(tag: string): string {
   if (tag === '전체') {
     return '';
   }
-  if (tag === '빵') {
+  if (tag === '식빵·모닝빵') {
     return 'BREAD';
   }
-  if (tag === '쿠키') {
+  if (tag === '쿠키·비스킷·크래커') {
     return 'COOKIE';
+  }
+  if (tag === '베이글·도넛') {
+    return 'BAGEL';
   }
   if (tag === '케이크') {
     return 'CAKE';
   }
-  if (tag === '타르트') {
+  if (tag === '타르트·파이') {
     return 'TART';
   }
-  if (tag === '잼/청') {
+  if (tag === '과자') {
+    return 'SNACK';
+  }
+  if (tag === '쨈ㆍ청') {
     return 'JAM';
+  }
+  if (tag === '아이스크림') {
+    return 'ICE_CREAM';
   }
   if (tag === '요거트') {
     return 'YOGURT';
+  }
+  if (tag === '그래놀라') {
+    return 'GRANOLA';
   }
   if (tag === '기타') {
     return 'ETC';
@@ -37,10 +49,10 @@ export function transformTagToKr(tag: string): string {
     return '비건';
   }
   if (tag === 'sugarFree') {
-    return '무설탕';
+    return '저당';
   }
   if (tag === 'ketogenic') {
-    return '키토제닉';
+    return '저지방';
   }
   return tag;
 }

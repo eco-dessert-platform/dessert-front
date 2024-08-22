@@ -26,9 +26,10 @@ const FilterSection = ({ filterFamilyId }: FilterSectionProps) => {
     type: TAG.category,
     content: item
   }));
-  const ingredientTag = filterValue.tags && getIngredientTag(filterValue.tags);
-  const priceTag = getPriceTag(filterValue.price);
-  const filterTagList = [ingredientTag, priceTag, ...categoryTags];
+
+  const ingredientTag = Array.isArray(filterValue.tags) ? getIngredientTag(filterValue.tags) : null;
+  const priceTag = filterValue.price ? getPriceTag(filterValue.price) : null;
+  const filterTagList = [ingredientTag, priceTag, ...categoryTags].filter(Boolean); // null 값을 제거하기 위해 filter(Boolean) 사용
 
   const handleFilterClick = (newCategory: string) => {
     setFilterValue((prev) => ({

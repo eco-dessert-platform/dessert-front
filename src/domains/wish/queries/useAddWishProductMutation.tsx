@@ -9,7 +9,7 @@ import PATH from '@/shared/constants/path';
 import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { IProductType } from '@/domains/product/types/productType';
 import { Cursor } from '@/shared/types/response';
-import { IStoreBestProductType } from '@/domains/store/types/store';
+import { IStoreProductType } from '@/domains/store/types/store';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
@@ -31,9 +31,12 @@ const useAddWishProductMutation = () => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
     );
-    queryClient.setQueriesData<Array<IStoreBestProductType>>(
+    queryClient.setQueriesData<Array<IStoreProductType>>(
       {
         queryKey: storeQueryKey.details(),
         predicate: (query) => query.queryKey[3] === 'best-products'
@@ -47,7 +50,10 @@ const useAddWishProductMutation = () => {
         predicate: (query) => query.queryKey[3] === 'all-products'
       },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
     );
   };
 

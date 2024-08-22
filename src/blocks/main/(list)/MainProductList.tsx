@@ -9,14 +9,14 @@ import { filterValueState } from '@/domains/product/atoms';
 import ProductCard from '@/domains/product/components/ProductCard';
 import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
-import { useGetAllProductsQuery } from '@/domains/product/queries/useGetAllProductsQuery';
+import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const MainProductList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.main));
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetAllProductsQuery(filterValue);
+    useGetAllCategoryProductsQuery(filterValue);
   const { ref, inView } = useInView();
 
   useEffect(() => {

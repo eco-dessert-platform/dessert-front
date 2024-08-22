@@ -1,7 +1,7 @@
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 
 export type ICategoryType = string | undefined;
-export type ITagsType = string[] | undefined;
+export type ITagsType = string[] | string | undefined | null;
 export type IPriceType = number[];
 export type ISortType = string;
 export type IOrderAvailableToday = boolean;

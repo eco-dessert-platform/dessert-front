@@ -1,4 +1,4 @@
-import { atomFamily, DefaultValue, selectorFamily } from 'recoil';
+import { atom, atomFamily, DefaultValue, selectorFamily } from 'recoil';
 
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { LIMIT_MAX_PRICE, LIMIT_MIN_PRICE } from '@/domains/product/constants/priceLimit';
@@ -12,7 +12,7 @@ import {
 
 export const categoryTempState = atomFamily<ICategoryType, FilterFamilyIDType>({
   key: 'category',
-  default: undefined
+  default: 'undefined'
 });
 
 export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({
@@ -33,6 +33,10 @@ export const orderAvailableTodayTempState = atomFamily<boolean, FilterFamilyIDTy
 export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({
   key: 'filterValueState',
   default: INIT_FILTER_VALUE
+});
+export const categoryValueState = atom<string>({
+  key: 'categoryValueState',
+  default: '전체'
 });
 
 export const filterValueTempState = selectorFamily<IFilterType, FilterFamilyIDType>({

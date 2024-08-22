@@ -8,7 +8,7 @@ import {
 export const transformFilterValueToQueryString = (query: IFilterType) => {
   const { category, tags, price, sort, orderAvailableToday } = query;
   const categoryQuery = category && transformCategoryToEng(category);
-  const tagsEng = tags?.map((tag) => transformTagToEng(tag));
+  const tagsEng = Array.isArray(tags) ? tags.map((tag) => transformTagToEng(tag)) : [];
   const tagsQuery = tagsEng?.reduce(
     (acc, tag) => ({
       ...acc,

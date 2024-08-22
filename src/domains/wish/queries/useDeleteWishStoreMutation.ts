@@ -18,7 +18,10 @@ const useDeleteWishStoreMutation = (storeId: number) => {
     queryClient.setQueriesData<InfiniteData<Cursor<IStoreType[]>>>(
       { queryKey: storeQueryKey.lists() },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, { isWished: false })
+        updateInfiniteQueryCache(oldData, { key: 'storeId', value: storeId }, (oldItem) => ({
+          ...oldItem,
+          isWished: false
+        }))
     );
 
     queryClient.setQueriesData<IStoreType>(

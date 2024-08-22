@@ -17,7 +17,7 @@ const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(categoryTempState(filterFamilyId));
 
   useEffect(() => {
-    setSelectedCategory(filterValue.category);
+    setSelectedCategory(filterValue.category || '전체');
   }, [filterValue, setSelectedCategory]);
 
   const handleClick = (clickItem: string) => {

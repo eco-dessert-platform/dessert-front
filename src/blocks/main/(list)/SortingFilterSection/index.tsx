@@ -8,7 +8,7 @@ import { filterValueState } from '@/domains/product/atoms';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { getIngredientTag, getPriceTag } from '@/domains/product/utils/getTag';
-import { isEqual } from '@/domains/product/utils/isEqual';
+import { isEqualArray } from '@/domains/product/utils/isEqualArray';
 import useCategory from '@/domains/product/hooks/useCategory';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductSortSelect from './ProductSortSelect';
@@ -50,11 +50,11 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
         <FilterButton
           filterFamilyId={filterFamilyId}
           text={
-            isEqual(filterValue.tags, INIT_FILTER_VALUE.tags)
+            isEqualArray(filterValue.tags, INIT_FILTER_VALUE.tags)
               ? FILTER_VALUES.tags.name
               : getIngredientTag(filterValue.tags)
           }
-          isFiltered={!isEqual(filterValue.tags, INIT_FILTER_VALUE.tags)}
+          isFiltered={!isEqualArray(filterValue.tags, INIT_FILTER_VALUE.tags)}
           onReset={() => {
             setFilterValue((prev) => ({ ...prev, tags: INIT_FILTER_VALUE.tags }));
           }}
@@ -62,11 +62,11 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
         <FilterButton
           filterFamilyId={filterFamilyId}
           text={
-            isEqual(filterValue.price, INIT_FILTER_VALUE.price)
+            isEqualArray(filterValue.price, INIT_FILTER_VALUE.price)
               ? FILTER_VALUES.price.name
               : getPriceTag(filterValue.price)
           }
-          isFiltered={!isEqual(filterValue.price, INIT_FILTER_VALUE.price)}
+          isFiltered={!isEqualArray(filterValue.price, INIT_FILTER_VALUE.price)}
           onReset={() => {
             setFilterValue((prev) => ({ ...prev, price: INIT_FILTER_VALUE.price }));
           }}

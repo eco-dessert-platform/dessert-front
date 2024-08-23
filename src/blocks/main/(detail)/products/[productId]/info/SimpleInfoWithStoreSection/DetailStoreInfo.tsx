@@ -19,7 +19,6 @@ const DetailStoreInfo = ({ storeId }: Props) => {
   const { mutate: addMutate } = useAddWishStoreMutation(storeId);
   const { mutate: deleteMutate } = useDeleteWishStoreMutation(storeId);
 
-  console.log(storeData);
   if (!storeData) return <PaddingWrapper>스토어 정보를 찾을 수 없어요.</PaddingWrapper>;
 
   const wishMutate = storeData.isWished ? deleteMutate : addMutate;

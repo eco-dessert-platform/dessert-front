@@ -6,6 +6,7 @@ import { ProductOptionResponse } from '@/domains/product/types/productDetailType
 import alarmService from '@/domains/alarm/queries/service';
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
+import { transformWeekArrayToObject } from '@/domains/product/utils/transformWeek';
 
 interface Props {
   pushCategory: AlarmType;
@@ -24,14 +25,17 @@ export const useCancelAlarmMutation = ({ pushCategory, productId, productOptionI
   };
 
   const onMutate = async () => {
-    // TODO: useGetProductOptionQuery 훅의 queryKey로 접근해 이 product의 isNotified, (요일인 경우) 선택한 요일 변경
     await queryClient.cancelQueries({ queryKey: productOptionQueryKey });
     const previousQueryData: ProductOptionResponse | undefined =
       queryClient.getQueryData(productOptionQueryKey);
     queryClient.setQueryData(productOptionQueryKey, (prev: ProductOptionResponse) => {
       const newProducts = prev.products.map((productOption) =>
         productOption.id === productOptionId
-          ? { ...productOption, isNotified: false }
+          ? {
+              ...productOption,
+              isNotified: false,
+              appliedOrderWeek: transformWeekArrayToObject([])
+            }
           : productOption
       );
       return { ...prev, products: newProducts };

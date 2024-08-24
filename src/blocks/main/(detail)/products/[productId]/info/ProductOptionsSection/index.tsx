@@ -25,52 +25,18 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
 
   return (
     <DetailSectionWrapper title="상품 옵션">
-      {productOption?.products.map(
-        ({
-          id,
-          title,
-          orderType,
-          orderAvailableDate,
-          orderAvailableWeek,
-          nutrient,
-          glutenFreeTag,
-          highProteinTag,
-          sugarFreeTag,
-          veganTag,
-          ketogenicTag,
-          isNotified,
-          soldout
-        }: ProductOptionType) => (
-          <div key={id}>
-            <CategoryOption
-              title={title}
-              soldout={soldout}
-              onClick={() => handleCategoryClick(id)}
-            />
-            {activeOption[id] && (
-              <PaddingWrapper className="flex flex-col gap-4">
-                <IngredientInfo
-                  glutenFreeTag={glutenFreeTag}
-                  highProteinTag={highProteinTag}
-                  sugarFreeTag={sugarFreeTag}
-                  veganTag={veganTag}
-                  ketogenicTag={ketogenicTag}
-                />
-                <OrderAvailableDays
-                  productOptionId={id}
-                  productOptionName={title}
-                  orderType={orderType}
-                  orderAvailableWeek={orderAvailableWeek}
-                  orderAvailableDate={orderAvailableDate}
-                  isNotified={isNotified}
-                  soldout={soldout}
-                />
-                <NutrientInfo nutrient={nutrient} />
-              </PaddingWrapper>
-            )}
-          </div>
-        )
-      )}
+      {productOption?.products.map((product: ProductOptionType) => (
+        <div key={product.id}>
+          <CategoryOption product={product} onClick={() => handleCategoryClick(product.id)} />
+          {activeOption[product.id] && (
+            <PaddingWrapper className="flex flex-col gap-4">
+              <IngredientInfo product={product} />
+              <OrderAvailableDays product={product} />
+              <NutrientInfo product={product} />
+            </PaddingWrapper>
+          )}
+        </div>
+      ))}
     </DetailSectionWrapper>
   );
 };

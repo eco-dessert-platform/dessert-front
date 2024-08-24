@@ -7,6 +7,7 @@ import { DayEnType } from '@/domains/product/types/dayType';
 import alarmService from '@/domains/alarm/queries/service';
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
+import { transformWeekArrayToObject } from '@/domains/product/utils/transformWeek';
 
 interface Props {
   pushCategory: AlarmType;
@@ -33,16 +34,22 @@ export const useAddAlarmMutation = ({
   };
 
   const onMutate = async () => {
-    // TODO: useGetProductOptionQuery 훅의 queryKey로 접근해 이 product의 isNotified, (요일인 경우) 선택한 요일 변경
     await queryClient.cancelQueries({ queryKey: productOptionQueryKey });
     const previousQueryData: ProductOptionResponse | undefined =
       queryClient.getQueryData(productOptionQueryKey);
     queryClient.setQueryData(productOptionQueryKey, (prev: ProductOptionResponse) => {
-      const newProducts = prev.products.map((productOption) =>
-        productOption.id === productOptionId
-          ? { ...productOption, isNotified: true }
-          : productOption
-      );
+      const newProducts = prev.products.map((productOption) => {
+        if (productOption.id === productOptionId) {
+          if (pushType === 'WEEK' && days)
+            return {
+              ...productOption,
+              isNotified: true,
+              appliedOrderWeek: transformWeekArrayToObject(days)
+            };
+          if (pushType === 'DATE') return { ...productOption, isNotified: true };
+        }
+        return productOption;
+      });
       return { ...prev, products: newProducts };
     });
     return previousQueryData;

@@ -1,24 +1,30 @@
-import { transformDayTag } from '@/domains/product/utils/transfromTag';
+import { WeekProductOptionType } from '@/domains/product/types/productDetailType';
+import { DayKrType } from '@/domains/product/types/dayType';
+import { transformDayToEng } from '@/domains/product/utils/transformDay';
+import { transformWeekObjectToArray } from '@/domains/product/utils/transformWeek';
+import { WEEK } from '@/domains/product/constants/week';
 import { cn } from '@/shared/utils/cn';
 
-const TypeOfWeek = ({ availableDays }: { availableDays: Object }) => {
-  const availableWeekList = Object.entries(availableDays)
-    .filter(([, isAvailable]) => isAvailable)
-    .map(([day]) => transformDayTag(day));
+interface Props {
+  availableDays: WeekProductOptionType['orderAvailableWeek'];
+}
+
+const TypeOfWeek = ({ availableDays }: Props) => {
+  const availableWeekList = transformWeekObjectToArray(availableDays);
 
   return (
     <>
-      {['월', '화', '수', '목', '금', '토', '일'].map((item) => (
+      {WEEK.map((dayKr: DayKrType) => (
         <div
-          key={item}
+          key={dayKr}
           className={cn(
             'rounded-full typo-body-12-regular w-[24px] h-[24px] flex items-center justify-center',
-            availableWeekList.includes(transformDayTag(item))
+            availableWeekList.includes(transformDayToEng(dayKr))
               ? 'text-primaryOrangeRed bg-subColorPink typo-body-12-medium'
               : 'text-gray-600 bg-gray-50 '
           )}
         >
-          {item}
+          {dayKr}
         </div>
       ))}
     </>

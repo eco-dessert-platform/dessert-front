@@ -13,6 +13,7 @@ import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarm
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { ORDER_TYPE } from '@/domains/product/constants/orderType';
 import { AlarmType } from '@/domains/alarm/types';
+import { isWeekProductOption, isDateProductOption } from '@/domains/product/utils/typeGuard';
 import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
 import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
@@ -23,24 +24,14 @@ import TypeOfDate from './TypeOfDate';
 import TypeOfWeek from './TypeOfWeek';
 
 interface Props {
-  productOptionId: ProductOptionType['id'];
-  productOptionName: ProductOptionType['title'];
-  orderType: ProductOptionType['orderType'];
-  orderAvailableWeek: ProductOptionType['orderAvailableWeek'];
-  orderAvailableDate: ProductOptionType['orderAvailableDate'];
-  isNotified: ProductOptionType['isNotified'];
-  soldout: ProductOptionType['soldout'];
+  product: ProductOptionType;
 }
 
-const OrderAvailableDays = ({
-  productOptionId,
-  productOptionName,
-  orderType,
-  orderAvailableWeek,
-  orderAvailableDate,
-  isNotified,
-  soldout
-}: Props) => {
+const OrderAvailableDays = ({ product }: Props) => {
+  const { id: productOptionId, orderType, isSoldout, isNotified } = product;
+  const isWeek = orderType === 'WEEK' && isWeekProductOption(product);
+  const isDate = orderType === 'DATE' && isDateProductOption(product);
+
   const { openToast } = useToastNewVer();
   const { openModal } = useModal();
   const { openPopup } = usePopup();
@@ -49,7 +40,7 @@ const OrderAvailableDays = ({
   const { isWebView } = useWebView();
   const isLoggedIn = useRecoilValue(isLoggedinState);
   const mutationProps = {
-    pushCategory: (soldout ? 'restock' : 'bbangcketing') as AlarmType,
+    pushCategory: (isSoldout ? 'restock' : 'bbangcketing') as AlarmType,
     productId: Number(productId),
     productOptionId
   };
@@ -89,19 +80,10 @@ const OrderAvailableDays = ({
       return;
     }
 
-    if (orderType === 'WEEK') {
-      openModal(
-        <WeekAlarmModal productOptionId={productOptionId} orderAvailableWeek={orderAvailableWeek} />
-      );
-    } else if (orderType === 'DATE') {
-      openModal(
-        <DateAlarmModal
-          productOptionId={productOptionId}
-          productOptionName={productOptionName}
-          orderAvailableDate={orderAvailableDate}
-          isNotified={isNotified}
-        />
-      );
+    if (isWeek) {
+      openModal(<WeekAlarmModal product={product} />);
+    } else if (isDate) {
+      openModal(<DateAlarmModal product={product} />);
     }
   };
 
@@ -112,13 +94,13 @@ const OrderAvailableDays = ({
       </h2>
       <div className="flex justify-between items-center">
         <div className="flex gap-[4px]">
-          {orderType === 'WEEK' && <TypeOfWeek availableDays={orderAvailableWeek} />}
-          {orderType === 'DATE' && <TypeOfDate availableDays={orderAvailableDate} />}
+          {isWeek && <TypeOfWeek availableDays={product.orderAvailableWeek} />}
+          {isDate && <TypeOfDate availableDays={product.orderAvailableDate} />}
         </div>
         <AlarmButton
-          type={soldout ? 'restock' : 'bbangcketing'}
+          type={isSoldout ? 'restock' : 'bbangcketing'}
           isAlarming={isNotified}
-          onClick={soldout ? handleRestockBtnClick : handleBbangcketingBtnClick}
+          onClick={isSoldout ? handleRestockBtnClick : handleBbangcketingBtnClick}
           className="max-w-max"
         />
       </div>

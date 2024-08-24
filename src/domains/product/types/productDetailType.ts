@@ -1,11 +1,12 @@
+import { DayEnType } from '@/domains/product/types/dayType';
+
 export type OrderType = 'WEEK' | 'DATE';
+export type WeekObjectType = {
+  [key in DayEnType]: boolean;
+};
+export type WeekArrayType = Array<DayEnType>;
 
-export interface ProductOptionResponse {
-  boardIsBundled: boolean;
-  products: ProductOptionType[];
-}
-
-export interface ProductOptionType {
+interface BaseProductOptionType {
   id: number;
   title: string;
   glutenFreeTag: boolean;
@@ -13,6 +14,7 @@ export interface ProductOptionType {
   sugarFreeTag: boolean;
   veganTag: boolean;
   ketogenicTag: boolean;
+  price: number;
   nutrient: {
     sugars: number;
     protein: number;
@@ -22,21 +24,27 @@ export interface ProductOptionType {
     calories: number;
   };
   orderType: OrderType;
+  isSoldout: boolean;
+  isNotified: boolean;
+}
+
+export interface WeekProductOptionType extends BaseProductOptionType {
+  orderAvailableWeek: WeekObjectType;
+  appliedOrderWeek: WeekObjectType;
+}
+
+export interface DateProductOptionType extends BaseProductOptionType {
   orderAvailableDate: {
     startDate: string;
     endDate: string;
   };
-  orderAvailableWeek: {
-    monday: boolean;
-    tuesday: boolean;
-    wednesday: boolean;
-    thursday: boolean;
-    friday: boolean;
-    saturday: boolean;
-    sunday: boolean;
-  };
-  isNotified: boolean;
-  soldout: boolean;
+}
+
+export type ProductOptionType = WeekProductOptionType | DateProductOptionType;
+
+export interface ProductOptionResponse {
+  boardIsBundled: boolean;
+  products: Array<ProductOptionType>;
 }
 
 export interface IBoardDetailType {

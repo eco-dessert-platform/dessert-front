@@ -89,31 +89,6 @@ export function transformSortToEng(sort: string): string {
   return sort;
 }
 
-export function transformDayTag(tag: string): string {
-  if (tag === 'friday') {
-    return '금';
-  }
-  if (tag === 'monday') {
-    return '월';
-  }
-  if (tag === 'saturday') {
-    return '토';
-  }
-  if (tag === 'sunday') {
-    return '일';
-  }
-  if (tag === 'thursday') {
-    return '목';
-  }
-  if (tag === 'tuesday') {
-    return '화';
-  }
-  if (tag === 'wednesday') {
-    return '수';
-  }
-  return tag;
-}
-
 export const nutirentEngToKr = (item: string) => {
   switch (item) {
     case 'sugars':

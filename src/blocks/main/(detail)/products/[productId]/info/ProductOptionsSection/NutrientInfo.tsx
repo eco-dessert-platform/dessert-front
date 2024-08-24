@@ -2,10 +2,10 @@ import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { nutirentEngToKr } from '@/domains/product/utils/transfromTag';
 
 interface Props {
-  nutrient: ProductOptionType['nutrient'];
+  product: ProductOptionType;
 }
 
-const NutrientInfo = ({ nutrient }: Props) => (
+const NutrientInfo = ({ product: { nutrient } }: Props) => (
   <div>
     <div className="flex justify-between items-center">
       <h2 className="text-gray-500 text-12 leading-150 font-semibold ">영양정보</h2>

@@ -8,7 +8,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => (
   <>
-    <Header back title="앱 런칭 기념 EVENT!" />
+    <Header back title="앱 런칭 기념 EVENT!" className="sticky top-0 bg-white z-50" />
     {children}
   </>
 );

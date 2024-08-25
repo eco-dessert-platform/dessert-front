@@ -73,12 +73,18 @@ module.exports = {
           '0%, 20%, 100%': { transform: 'rotate(0)' },
           '2%, 6%, 10%': { transform: 'rotate(-10deg)' },
           '4%, 8%, 12%': { transform: 'rotate(10deg)' }
+        },
+        ['heart-pop']: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.3)' },
+          '100%': { transform: 'scale(1)' }
         }
       },
 
       animation: {
         ['bell-shake']: 'bell-shake 5s 0.1s ease-in-out',
-        ['timer-shake']: 'timer-shake 5s 0.1s ease-in-out'
+        ['timer-shake']: 'timer-shake 5s 0.1s ease-in-out',
+        ['heart-pop']: 'heart-pop 0.3s ease-in-out'
       },
 
       // fontSize, lineHeight,letterSpacing 삭제 예정

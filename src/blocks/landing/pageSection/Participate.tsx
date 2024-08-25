@@ -42,15 +42,16 @@ const Participate = () => {
         blurDataURL={BLUR_DATA_URL}
         className="object-contain"
       />
-      <PaddingWrapper>
-        <PaddingWrapper className="bg-[#FCFCFC] py-[20px] text-[20px] w-[85%] flex justify-between m-auto">
+      <div className="py-[40px]">
+        <PaddingWrapper className="bg-[#FCFCFC] py-[24px] text-[4vw] w-[85%] rounded-md flex justify-between m-auto">
           <span className="text-[#391A09] font-semibold">이벤트 종료까지 </span>
-          <span className="text-[#438BBF] font-semibold">
-            {timeLeft.days}일 &nbsp;{timeLeft.hours}시간 &nbsp;{timeLeft.minutes}분 &nbsp;
+          <span className="text-primaryOrangeRed font-semibold">
+            {timeLeft.days}일 <span className="mx-1">{timeLeft.hours}시간</span>
+            <span className="mx-1">{timeLeft.minutes}분</span>
             {timeLeft.seconds}초
           </span>
         </PaddingWrapper>
-      </PaddingWrapper>
+      </div>
     </>
   );
 };

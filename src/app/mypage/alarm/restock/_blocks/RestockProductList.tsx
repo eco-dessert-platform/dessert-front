@@ -11,18 +11,21 @@ import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import AlarmCard from '@/domains/alarm/components/AlarmCard';
 import NoAlarm from '@/domains/alarm/components/NoAlarm';
 import MobileAppPopup from '@/domains/alarm/components/alert-box/MobileAppPopup';
+import ReadyForServicePopup from '@/domains/alarm/components/alert-box/ReadyForServicePopup';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
 import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import DeleteAlarmPopup from '@/domains/alarm/components/alert-box/DeleteAlarmPopup';
 
 const RestockProductList = () => {
   const { openPopup } = usePopup();
+  const { isWebView } = useWebView();
   const { data: products, isFetching, isError } = useGetAlarmQuery({ pushCategory: 'restock' });
   const { mutate: addAlarm } = useAddAlarmMutation({ pushCategory: 'restock' });
   const { mutate: cancelAlarm } = useCancelAlarmMutation({ pushCategory: 'restock' });
 
+  /* eslint-disable */
   const handleAlarm = (isAlarming: boolean, productOptionId: number) => {
-    if (!useWebView) {
+    if (!isWebView) {
       openPopup(<MobileAppPopup type="restock" />);
       return;
     }
@@ -39,6 +42,7 @@ const RestockProductList = () => {
         />
       );
   };
+  /* eslint-enable */
 
   const handleDelete = (productOptionId: number) => {
     openPopup(<DeleteAlarmPopup type="restock" productOptionId={productOptionId} />);
@@ -63,7 +67,8 @@ const RestockProductList = () => {
           key={product.productId}
           type="restock"
           data={product}
-          onAlarm={() => handleAlarm(product.subscribed, product.productId)}
+          // onAlarm={() => handleAlarm(product.subscribed, product.productId)}
+          onAlarm={() => openPopup(<ReadyForServicePopup type="restock" />)}
           onDelete={() => handleDelete(product.productId)}
         />
       ))}

@@ -6,31 +6,19 @@ import Image from 'next/image';
 
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
+import { HOUR, MINUTE, SECOND } from '@/shared/constants/time';
 
-interface CountdownProps {
-  targetDate: Date;
-}
-
-const Participate = ({ targetDate }: CountdownProps) => {
+const Participate = () => {
+  const targetDate = new Date('2024-08-31T00:00:00');
   const calculateTimeLeft = () => {
-    const difference = +targetDate - +new Date();
-    let timeLeft = {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0
+    const difference = Math.max(Number(targetDate) - Number(new Date()), 0);
+
+    return {
+      days: Math.floor(difference / (24 * HOUR)),
+      hours: Math.floor((difference / HOUR) % 24),
+      minutes: Math.floor((difference / MINUTE) % 60),
+      seconds: Math.floor((difference / SECOND) % 60)
     };
-
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      };
-    }
-
-    return timeLeft;
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
@@ -38,7 +26,7 @@ const Participate = ({ targetDate }: CountdownProps) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    }, 1 * SECOND);
 
     return () => clearInterval(timer);
   }, [targetDate]);

@@ -1,4 +1,4 @@
-import Image from 'next/image'; // next/image가 필요하므로 import 추가
+import Image from 'next/image';
 import Link from 'next/link';
 
 import PaddingWrapper from '@/shared/components/PaddingWrapper';

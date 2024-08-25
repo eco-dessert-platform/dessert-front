@@ -30,7 +30,7 @@ interface BaseProductOptionType {
 
 export interface WeekProductOptionType extends BaseProductOptionType {
   orderAvailableWeek: WeekObjectType;
-  appliedOrderWeek: WeekObjectType;
+  appliedOrderWeek?: WeekObjectType;
 }
 
 export interface DateProductOptionType extends BaseProductOptionType {

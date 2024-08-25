@@ -27,11 +27,12 @@ const WeekAlarmModal = ({
   }
 }: Props) => {
   const orderAvailableWeekArr = transformWeekObjectToArray(orderAvailableWeekObject);
-  const appliedOrderWeekArr = transformWeekObjectToArray(appliedOrderWeekObject);
+  const appliedOrderWeekArr =
+    appliedOrderWeekObject && transformWeekObjectToArray(appliedOrderWeekObject);
 
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();
-  const [selectedDays, setSelectedDays] = useState<Array<DayEnType>>(appliedOrderWeekArr);
+  const [selectedDays, setSelectedDays] = useState<Array<DayEnType>>(appliedOrderWeekArr || []);
   const { mutate: addAlarm } = useAddAlarmMutation({
     pushCategory: 'bbangcketing',
     productId: Number(productId),

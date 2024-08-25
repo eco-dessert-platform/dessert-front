@@ -40,7 +40,12 @@ class ProductService extends Service {
       await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
 
-    return result;
+    const newProducts = result.products.map((product) => ({
+      ...product,
+      isNotified: false
+    }));
+    const newResult = { ...result, products: newProducts };
+    return newResult;
   }
 
   async getBoardDetail(productId: string) {

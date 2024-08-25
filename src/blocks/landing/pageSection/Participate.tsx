@@ -32,7 +32,7 @@ const Participate = () => {
   }, [targetDate]);
 
   return (
-    <>
+    <div className="relative">
       <Image
         src="/assets/images/landing3.png"
         alt="배너"
@@ -42,17 +42,16 @@ const Participate = () => {
         blurDataURL={BLUR_DATA_URL}
         className="object-contain"
       />
-      <div className="py-[40px]">
-        <PaddingWrapper className="bg-[#FCFCFC] py-[24px] text-[4vw] w-[85%] rounded-md flex justify-between m-auto">
-          <span className="text-[#391A09] font-semibold">이벤트 종료까지 </span>
-          <span className="text-primaryOrangeRed font-semibold">
-            {timeLeft.days}일 <span className="mx-1">{timeLeft.hours}시간</span>
-            <span className="mx-1">{timeLeft.minutes}분</span>
-            {timeLeft.seconds}초
-          </span>
-        </PaddingWrapper>
-      </div>
-    </>
+
+      <PaddingWrapper className="bg-white py-[50px] text-[4.3vw] md:text-[3vw] lg:text-[3vw] w-[85%] rounded-md flex justify-between m-auto">
+        <span className="text-[#2A51FF] font-medium">이벤트 종료까지 </span>
+        <span className="text-[#2A51FF] font-medium">
+          {timeLeft.days}일 <span className="mx-1">{timeLeft.hours}시간</span>
+          <span className="mx-1">{timeLeft.minutes}분</span>
+          {timeLeft.seconds}초
+        </span>
+      </PaddingWrapper>
+    </div>
   );
 };
 

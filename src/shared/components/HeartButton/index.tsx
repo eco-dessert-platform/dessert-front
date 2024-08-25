@@ -2,6 +2,10 @@
 
 import { ButtonHTMLAttributes, useState } from 'react';
 
+import { useRecoilValue } from 'recoil';
+
+import { isLoggedinState } from '@/shared/atoms/login';
+
 import { HeartIcon } from '../icons';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,10 +17,16 @@ const HeartButton = ({ isActive, shape = 'default', onClick, ...rest }: Props) =
   const activeClass = isActive ? 'on' : 'off';
 
   const [isPopping, setIsPopping] = useState(false);
+  const isLoggedIn = useRecoilValue(isLoggedinState);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!isLoggedIn) {
+      e.preventDefault();
+      if (onClick) onClick(e);
+      return;
+    }
     setIsPopping(true);
-    if (onClick) onClick(e);
+
     setTimeout(() => {
       setIsPopping(false);
     }, 300);

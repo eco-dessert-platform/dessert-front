@@ -8,6 +8,7 @@ import Footer from '@/global/Footer';
 import AlertContainer from '@/global/AlertContainer';
 import SilentLogin from '@/global/SilentLogin';
 import GAScript from '@/global/GAScript';
+import ForeGroundMessage from '@/global/ForeGroundMessage';
 import ReceiveMessageFromApp from '@/global/ReceiveMessageFromApp';
 
 const pretendard = localFont({
@@ -35,6 +36,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
           <AlertContainer />
         </div>
       </RootLayoutProvider>
+      <ForeGroundMessage />
       <KaKaoChatScript />
     </body>
     <GAScript />

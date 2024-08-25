@@ -26,7 +26,7 @@ const ReceiveMessageFromApp = () => {
 
     return () => {
       window.removeEventListener('message', handleMessage);
-      document.addEventListener('message', handleMessage as EventListener);
+      document.removeEventListener('message', handleMessage as EventListener);
     };
   }, [setFcmToken]);
 

@@ -38,15 +38,15 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
   }
   if (isError) {
     return (
-      <SadBbangleBox>
+      <SadBbangleBox className="h-[calc(100vh-220px)]">
         <p>오류가 발생했어요!</p>
       </SadBbangleBox>
     );
   }
-  if (!data || data.itemCount === 0) {
+  if (!data || data.boardsCount === 0) {
     return (
-      <SadBbangleBox>
-        <p>검색 결과가 없어요 😥</p>
+      <SadBbangleBox className="h-[calc(100vh-220px)]">
+        <p>{keyword}에 대한 검색 결과가 없어요 😥</p>
         <p>다른 키워드로 검색해보세요!</p>
       </SadBbangleBox>
     );

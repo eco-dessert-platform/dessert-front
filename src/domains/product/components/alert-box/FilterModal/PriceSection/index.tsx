@@ -1,19 +1,24 @@
 'use client';
 
-import { useRecoilState } from 'recoil';
-
-import { priceTempState } from '@/domains/product/atoms';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { filterValueState, priceTempState } from '@/domains/product/atoms';
 import PriceInputContainer from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceInputContainer';
-import PriceSlide from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceSlide';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import PriceSlide from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceSlide';
 
 interface PriceSectionProps {
   filterFamilyId: FilterFamilyIDType;
 }
 
 const PriceSection = ({ filterFamilyId }: PriceSectionProps) => {
+  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
   const [price, setPrice] = useRecoilState(priceTempState(filterFamilyId));
+
+  useEffect(() => {
+    setPrice(filterValue.price);
+  }, [filterValue, setPrice]);
 
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">

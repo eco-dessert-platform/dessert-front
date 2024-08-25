@@ -1,9 +1,9 @@
 import { atomFamily, DefaultValue, selectorFamily } from 'recoil';
 
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
-import { LIMIT_MAX_PRICE, LIMIT_MIN_PRICE } from '@/domains/product/constants/priceLimit';
 import {
   FilterFamilyIDType,
+  MainCategoryType,
   ICategoryType,
   IFilterType,
   IPriceType,
@@ -12,22 +12,22 @@ import {
 
 export const categoryTempState = atomFamily<ICategoryType, FilterFamilyIDType>({
   key: 'category',
-  default: undefined
+  default: INIT_FILTER_VALUE.category
 });
 
 export const tagsTempState = atomFamily<ITagsType, FilterFamilyIDType>({
   key: 'ingredient',
-  default: undefined
+  default: INIT_FILTER_VALUE.tags
 });
 
 export const priceTempState = atomFamily<IPriceType, FilterFamilyIDType>({
   key: 'price',
-  default: [LIMIT_MIN_PRICE, LIMIT_MAX_PRICE]
+  default: INIT_FILTER_VALUE.price
 });
 
 export const orderAvailableTodayTempState = atomFamily<boolean, FilterFamilyIDType>({
   key: 'orderAvailableToday',
-  default: undefined
+  default: INIT_FILTER_VALUE.orderAvailableToday
 });
 
 export const filterValueState = atomFamily<IFilterType, FilterFamilyIDType>({
@@ -64,4 +64,9 @@ export const filterValueTempState = selectorFamily<IFilterType, FilterFamilyIDTy
       set(priceTempState(filterFamilyId), newValue.price);
       set(orderAvailableTodayTempState(filterFamilyId), newValue.orderAvailableToday);
     }
+});
+
+export const mainCategoryState = atomFamily<MainCategoryType, FilterFamilyIDType>({
+  key: 'mainCategoryState',
+  default: '전체'
 });

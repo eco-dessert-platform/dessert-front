@@ -1,6 +1,8 @@
-import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
 
-import { orderAvailableTodayTempState } from '@/domains/product/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { filterValueState, orderAvailableTodayTempState } from '@/domains/product/atoms';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -10,16 +12,26 @@ interface OrderAvailableCheckBoxProps {
 }
 
 const IsOrderAvailableCheckbox = ({ filterFamilyId }: OrderAvailableCheckBoxProps) => {
-  const [isAvailableOrder, setIsAvailableOrder] = useRecoilState(
+  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
+  const [orderAvailableToday, setOrderAvailableToday] = useRecoilState(
     orderAvailableTodayTempState(filterFamilyId)
   );
 
+  useEffect(() => {
+    setOrderAvailableToday(filterValue.orderAvailableToday);
+  }, [filterValue, setOrderAvailableToday]);
+
   const handleCheckChange = () => {
-    setIsAvailableOrder((prev) => !prev);
+    setOrderAvailableToday((prev) => !prev);
   };
+
   return (
     <PaddingWrapper>
-      <CheckBox className="text-gray-800" isChecked={isAvailableOrder} onChange={handleCheckChange}>
+      <CheckBox
+        className="text-gray-800 typo-title-14-regular"
+        isChecked={orderAvailableToday}
+        onChange={handleCheckChange}
+      >
         주문가능상품만 보기
       </CheckBox>
     </PaddingWrapper>

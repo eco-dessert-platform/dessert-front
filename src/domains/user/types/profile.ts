@@ -25,3 +25,7 @@ export interface UserProfileType {
   phoneNumber: string | null;
   birthDate: string | null;
 }
+
+export interface WithdrawResponse {
+  message: string;
+}

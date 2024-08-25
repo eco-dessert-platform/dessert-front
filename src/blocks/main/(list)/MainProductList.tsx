@@ -9,14 +9,14 @@ import { filterValueState } from '@/domains/product/atoms';
 import ProductCard from '@/domains/product/components/ProductCard';
 import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
-import { useGetAllProductsQuery } from '@/domains/product/queries/useGetAllProductsQuery';
+import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const MainProductList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.main));
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetAllProductsQuery(filterValue);
+    useGetAllCategoryProductsQuery(filterValue);
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -33,14 +33,14 @@ const MainProductList = () => {
   }
   if (isError) {
     return (
-      <SadBbangleBox>
+      <SadBbangleBox className="h-[calc(100vh-270px)]">
         <p>오류가 발생했어요!</p>
       </SadBbangleBox>
     );
   }
   if (!data || data.products.length === 0) {
     return (
-      <SadBbangleBox>
+      <SadBbangleBox className="h-[calc(100vh-270px)]">
         <p>상품이 없어요!</p>
       </SadBbangleBox>
     );
@@ -50,7 +50,7 @@ const MainProductList = () => {
     <PaddingWrapper className="pb-[36px]">
       <div className="grid grid-cols-2 gap-[16px]">
         {data.products.map((product) => (
-          <ProductCard key={`${product.boardId}`} product={product} />
+          <ProductCard key={product.boardId} product={product} />
         ))}
       </div>
       {hasNextPage && (

@@ -2,9 +2,13 @@ const PATH = {
   home: '/',
 
   search: '/search',
+  searchProductList: '/search/products',
 
   mainCategory: '/main/product-category',
   mainProductList: '/main/products',
+  mainProductListInfo: (productId: number) => `/main/products/${productId}/info`,
+  mainProductListReview: (productId: number) => `/main/products/${productId}/review`,
+  mainStoreDetail: (storeId: number) => `/main/stores/${storeId}`,
 
   wish: '/wish',
   wishLogin: '/wish/login',
@@ -13,6 +17,8 @@ const PATH = {
   wishStoreList: '/wish/stores',
 
   profileUpdate: '/mypage/update',
+  profileRegistration: '/mypage/registration',
+  withdraw: '/mypage/withdraw',
   notification: '/mypage/notifications',
   serviceTerm: '/mypage/service-terms',
   privacyPolicy: '/mypage/privacy-policy',
@@ -29,7 +35,7 @@ const PATH = {
 
   reviewList: (productId: number) => `${PATH.mainProductList}/${productId}/review`,
   reviewCreate: ({ productId, progress }: { productId: number; progress: number }) =>
-    `/main/products/${productId}/review/create/${progress}`,
+    `/review/${productId}/create/${progress}`,
   reviewUpdate: ({
     productId,
     progress,
@@ -38,7 +44,7 @@ const PATH = {
     productId: number;
     progress: number;
     reviewId: number;
-  }) => `/main/products/${productId}/review/${reviewId}/update/${progress}`
+  }) => `/review/${productId}/${reviewId}/update/${progress}`
 };
 
 export default PATH;

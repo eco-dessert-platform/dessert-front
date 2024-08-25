@@ -1,20 +1,42 @@
 import Service from '@/shared/queries/service';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { Cursor, DefaultResponse, ResultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { CreatReviewRequest, ReviewDetailType, ReviewType } from '../types/review';
+import { BoardReviewRateResponse, CreatReviewRequest, ReviewType } from '../types/review';
 
 class ReviewService extends Service {
   async getMyReview(cursorId: number) {
-    const mockReviewUrl = `http://localhost:3000/mock/review.json?cursorId=${cursorId}`;
-    const res = await this.fetchExtend.get(mockReviewUrl);
+    const url =
+      cursorId === INITIAL_CURSOR ? `/review/myreview` : `/review/myreview?cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(url);
     if (!res.ok) throw new Error('mock error');
     const { result }: ResultResponse<Cursor<ReviewType[]>> = await res.json();
     return result;
   }
 
+  async getReview({ boardId, cursorId }: { boardId: number; cursorId: number }) {
+    const params =
+      cursorId === INITIAL_CURSOR
+        ? `boardId=${boardId}`
+        : `boardId=${boardId}&cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(`/review/list/${boardId}?${params}`);
+    const { result, success, code, message }: ResultResponse<Cursor<ReviewType[]>> =
+      await res.json();
+    if (!success || !res.ok) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
+  }
+
   async getReviewDetail(id: number) {
     const res = await this.fetchExtend.get(`/review/${id}`);
-    const { result, success, message, code }: ResultResponse<ReviewDetailType> = await res.json();
+    const { result, success, message, code }: ResultResponse<ReviewType> = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
+  }
+
+  async getReviewRating(boadrId: number) {
+    const res = await this.fetchExtend.get(`/review/rate/${boadrId}`);
+    const { result, success, message, code }: ResultResponse<BoardReviewRateResponse> =
+      await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }
@@ -27,10 +49,16 @@ class ReviewService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async updateReview(review: CreatReviewRequest) {
-    const res = await this.fetchExtend.put('/review', {
+  async updateReview({ review, id }: { review: CreatReviewRequest; id: number }) {
+    const res = await this.fetchExtend.put(`/review/${id}`, {
       body: JSON.stringify(review)
     });
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async deleteReview(id: number) {
+    const res = await this.fetchExtend.delete(`/review/${id}`);
     const { code, message, success }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
@@ -51,6 +79,18 @@ class ReviewService extends Service {
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result.urls;
+  }
+
+  async likeReview(id: number) {
+    const res = await this.fetchExtend.get(`/review/like/${id}`);
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async dislikeReview(id: number) {
+    const res = await this.fetchExtend.delete(`/review/like/${id}`);
+    const { code, message, success }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 }
 

@@ -30,14 +30,14 @@ const Modal = ({ title, children, className }: UpModalProps) => {
         duration: 0.2
       }}
       className={twMerge(
-        'absolute w-full max-w-[600px] bg-white z-[5001] rounded-t-[12px]',
+        'absolute w-full max-w-[600px] max-h-[90vh] bg-white z-[5001] rounded-t-[12px] overflow-y-scroll scrollbar-hide',
         className
       )}
     >
-      <PaddingWrapper className="flex items-center py-[10px]">
+      <PaddingWrapper className="sticky top-0 flex items-center py-[10px] bg-white">
         <h4 className="flex-1 text-center typo-title-16-medium">{title}</h4>
         <button type="button" aria-label="close" onClick={closeModal} className="cursor-pointer">
-          <CloseIcon shape="no-bg" />
+          <CloseIcon shape="no-bg-24" />
         </button>
       </PaddingWrapper>
       {children}

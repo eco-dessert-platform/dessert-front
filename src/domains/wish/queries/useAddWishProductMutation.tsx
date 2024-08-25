@@ -6,9 +6,10 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { isLoggedinState } from '@/shared/atoms/login';
 import PATH from '@/shared/constants/path';
-import { productQueryKey } from '@/shared/queries/queryKey';
+import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { IProductType } from '@/domains/product/types/productType';
 import { Cursor } from '@/shared/types/response';
+import { IStoreProductType } from '@/domains/store/types/store';
 import wishService from './service';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
@@ -30,13 +31,35 @@ const useAddWishProductMutation = () => {
     queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
       { queryKey: productQueryKey.all },
       (oldData) =>
-        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, { isWished: true })
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
+    );
+    queryClient.setQueriesData<Array<IStoreProductType>>(
+      {
+        queryKey: storeQueryKey.details(),
+        predicate: (query) => query.queryKey[3] === 'best-products'
+      },
+      (oldData) =>
+        oldData?.map((data) => (data.boardId === productId ? { ...data, isWished: true } : data))
+    );
+    queryClient.setQueriesData<InfiniteData<Cursor<IProductType[]>>>(
+      {
+        queryKey: storeQueryKey.details(),
+        predicate: (query) => query.queryKey[3] === 'all-products'
+      },
+      (oldData) =>
+        updateInfiniteQueryCache(oldData, { value: productId, key: 'boardId' }, (oldItem) => ({
+          ...oldItem,
+          isWished: true
+        }))
     );
   };
 
   const onSuccess = ({ productId }: { productId: number }) => {
     queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
-    queryClient.invalidateQueries({ queryKey: productQueryKey.detail(productId) });
+    queryClient.invalidateQueries({ queryKey: productQueryKey.detail(productId, 'board-detail') });
 
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
     openToast({

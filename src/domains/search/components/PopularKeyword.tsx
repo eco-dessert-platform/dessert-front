@@ -6,12 +6,10 @@ interface PopularKeywordProps {
 }
 
 const PopularKeyword = ({ order, name }: PopularKeywordProps) => (
-  <div className="flex items-center gap-[6px]">
+  <Link href={`/search/products?query=${name}`} className="flex items-center gap-[6px] py-[8px]">
     <p className="text-primaryOrangeRed typo-title-14-bold">{order}</p>
-    <Link href={`/search/products?query=${name}`} className="text-gray-900 typo-title-14-regular">
-      {name}
-    </Link>
-  </div>
+    <p className="text-gray-900 typo-title-14-regular">{name}</p>
+  </Link>
 );
 
 export default PopularKeyword;

@@ -1,29 +1,47 @@
-export function transformCategoryToEng(tag: string): string {
-  if (tag === '전체') {
-    return '';
+export function transformCategoryToEng(category: string): string {
+  if (category === '전체') {
+    return 'ALL';
   }
-  if (tag === '빵') {
+  if (category === '전체_빵') {
+    return 'ALL_BREAD';
+  }
+  if (category === '전체_과자') {
+    return 'ALL_SNACK';
+  }
+  if (category === '식빵·모닝빵') {
     return 'BREAD';
   }
-  if (tag === '쿠키') {
-    return 'COOKIE';
+  if (category === '베이글·도넛') {
+    return 'BAGEL';
   }
-  if (tag === '케이크') {
+  if (category === '케이크') {
     return 'CAKE';
   }
-  if (tag === '타르트') {
+  if (category === '타르트·파이') {
     return 'TART';
   }
-  if (tag === '잼/청') {
+  if (category === '쿠키·비스킷·크래커') {
+    return 'COOKIE';
+  }
+  if (category === '과자') {
+    return 'SNACK';
+  }
+  if (category === '잼·청') {
     return 'JAM';
   }
-  if (tag === '요거트') {
+  if (category === '아이스크림') {
+    return 'ICE_CREAM';
+  }
+  if (category === '요거트') {
     return 'YOGURT';
   }
-  if (tag === '기타') {
+  if (category === '그래놀라') {
+    return 'GRANOLA';
+  }
+  if (category === '기타') {
     return 'ETC';
   }
-  return tag;
+  return category;
 }
 
 export function transformTagToKr(tag: string): string {
@@ -37,10 +55,10 @@ export function transformTagToKr(tag: string): string {
     return '비건';
   }
   if (tag === 'sugarFree') {
-    return '무설탕';
+    return '저당';
   }
   if (tag === 'ketogenic') {
-    return '키토제닉';
+    return '저지방';
   }
   return tag;
 }

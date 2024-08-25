@@ -1,23 +1,24 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+
 import { useInView } from 'react-intersection-observer';
+import { useRecoilValue } from 'recoil';
+
 import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
-import { IProductType } from '@/domains/product/types/productType';
-import { useGetAllProductsQuery } from '@/domains/home/queries/useGetAllProductsQuery';
 import ProductCard from '@/domains/product/components/ProductCard';
+import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
+import { IProductType } from '@/domains/product/types/productType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
-import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 
 const ProductsList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.home));
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetAllProductsQuery(filterValue);
+    useGetAllCategoryProductsQuery(filterValue);
   const { ref, inView } = useInView();
-
   useEffect(() => {
     if (!inView) return;
     fetchNextPage();
@@ -49,14 +50,12 @@ const ProductsList = () => {
   return (
     <PaddingWrapper className="pb-[36px]">
       <div className="grid grid-cols-3 gap-x-[10px] pb-[16px]">
-        {data.products.slice(0, 3).map((product: IProductType, index: number) => (
-          <ProductCard
-            key={String(product.boardId)}
-            product={product}
-            popular
-            ranking={index + 1}
-          />
-        ))}
+        {data.products.slice(0, 3).map((product: IProductType, index: number) => {
+          const { tags, reviewRate, reviewCount, ...rest } = product;
+          return (
+            <ProductCard key={String(product.boardId)} product={rest} popular ranking={index + 1} />
+          );
+        })}
       </div>
       <div className="grid grid-cols-2 gap-[16px]">
         {data.products.slice(3).map((product: IProductType) => (

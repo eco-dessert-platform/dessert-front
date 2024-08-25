@@ -1,24 +1,36 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, test } from 'vitest';
+import { ReactNode } from 'react';
+import { cleanup, render, screen } from '@testing-library/react';
+import { describe, expect, test, vi } from 'vitest';
+import { AppRouterContextProviderMock, CleanQueryProvider } from '@/__tests__/utils/test-providers';
 import Review from '.';
+import { ReviewType } from '../../types/review';
 
 describe('<Review /> 테스트', () => {
-  test('필요한 정보가 노출된다.', () => {
-    render(
-      <Review
-        id="1"
-        nickname="닉네임"
-        rating={0}
-        comment="댓글"
-        tags={['태그1', '태그2']}
-        like={100}
-        images={['https://test.jpg']}
-        isLiked={false}
-        isBest={false}
-        date="2024. 01. 01"
-      />
+  const mockReviewData: ReviewType = {
+    id: 1,
+    boardId: 1,
+    nickname: '닉네임',
+    rating: 0,
+    comment: '댓글',
+    tags: ['태그1', '태그2'],
+    like: 100,
+    images: [{ id: 1, url: 'https://test.jpg' }],
+    isLiked: false,
+    isBest: false,
+    date: '2024. 01. 01',
+    isMine: true
+  };
+  const renderWithProviders = (children: ReactNode) => {
+    const push = vi.fn();
+    return render(
+      <AppRouterContextProviderMock router={{ push }}>
+        <CleanQueryProvider>{children}</CleanQueryProvider>
+      </AppRouterContextProviderMock>
     );
+  };
 
+  test('필요한 정보가 노출된다.', () => {
+    renderWithProviders(<Review {...mockReviewData} />);
     expect(screen.getByText('닉네임')).toBeDefined();
     expect(screen.getAllByText('댓글')).toBeDefined();
     expect(screen.getByText('태그1')).toBeDefined();
@@ -26,5 +38,15 @@ describe('<Review /> 테스트', () => {
     expect(screen.getByText('도움돼요 100')).toBeDefined();
     expect(screen.getByText('2024. 01. 01')).toBeDefined();
     expect(screen.getByAltText('review image')).toBeDefined();
+  });
+
+  test('isMine 값에 따라 kebab 버튼 노출이 달라진다.', () => {
+    renderWithProviders(<Review {...mockReviewData} isMine />);
+    expect(screen.queryByLabelText('dropdown')).not.toBeNull();
+
+    cleanup();
+
+    renderWithProviders(<Review {...mockReviewData} isMine={false} />);
+    expect(screen.queryByLabelText('dropdown')).toBeNull();
   });
 });

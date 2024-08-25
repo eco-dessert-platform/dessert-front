@@ -1,5 +1,5 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import { storeQueryKey, productQueryKey } from '@/shared/queries/queryKey';
+import { storeQueryKey } from '@/shared/queries/queryKey';
 import storeService from '@/domains/store/queries/service';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import GrayDivider from '@/shared/components/GrayDivider';
@@ -16,21 +16,21 @@ const MainStoreDetailPage = async ({ params: { id } }: Props) => {
   const queryClient = new QueryClient();
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: storeQueryKey.detail(storeId),
+      queryKey: storeQueryKey.detail(storeId, 'info'),
       queryFn: async () => {
         const data = await storeService.getStoreInfo(storeId);
         return data;
       }
     }),
     queryClient.prefetchQuery({
-      queryKey: productQueryKey.list('store-detail/best'),
+      queryKey: storeQueryKey.detail(storeId, 'best-products'),
       queryFn: async () => {
         const data = await storeService.getStoreBestProducts(storeId);
         return data;
       }
     }),
     queryClient.prefetchInfiniteQuery({
-      queryKey: productQueryKey.list('store-detail/all'),
+      queryKey: storeQueryKey.detail(storeId, 'all-products'),
       queryFn: async () => {
         const data = await storeService.getStoreAllProducts(storeId);
         return data;

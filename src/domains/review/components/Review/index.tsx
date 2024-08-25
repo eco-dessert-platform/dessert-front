@@ -1,28 +1,16 @@
-import { twMerge } from 'tailwind-merge';
 import Badge from '@/shared/components/Badge';
-import { KebabIcon, ThumbsUpIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import Dropdown from '@/shared/components/Dropdown';
-import { RatingType } from '../../types/starRating';
+import { ReviewType } from '../../types/review';
 import StarRating from '../common/StarRating';
 import Comment from './Comment';
 import ImageSlider from './ImageSlider';
-
-interface Props {
-  id: string;
-  nickname: string;
-  images?: string[];
-  rating: RatingType;
-  comment: string;
-  tags: string[];
-  like: number;
-  isLiked: boolean;
-  isBest: boolean;
-  date: string;
-}
+import KebabMenu from './KebabMenu';
+import ReviewSkeleton from './ReviewSkeleton';
+import LikeButton from './LikeButton';
 
 const Review = ({
   id,
+  boardId,
   isBest,
   nickname,
   date,
@@ -31,8 +19,9 @@ const Review = ({
   comment,
   tags,
   like,
-  isLiked
-}: Props) => (
+  isLiked,
+  isMine
+}: ReviewType) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
       <div className="flex gap-[4px]">
@@ -40,15 +29,7 @@ const Review = ({
         <span className="typo-title-14-medium">{nickname}</span>
       </div>
 
-      <Dropdown>
-        <Dropdown.Trigger>
-          <KebabIcon />
-        </Dropdown.Trigger>
-        <Dropdown.Content position="left">
-          <Dropdown.Item>수정</Dropdown.Item>
-          <Dropdown.Item>삭제</Dropdown.Item>
-        </Dropdown.Content>
-      </Dropdown>
+      {isMine && <KebabMenu reviewId={id} boardId={boardId} />}
     </div>
 
     <div className="flex flex-col gap-[8px]">
@@ -69,18 +50,11 @@ const Review = ({
 
     <div className="flex justify-between items-center">
       <span className="typo-body-12-regular text-gray-500">{date}</span>
-      <button
-        type="button"
-        className={twMerge(
-          'typo-body-12-regular flex items-center gap-[4px] rounded-full  px-[8px] py-[4px]',
-          isLiked ? 'text-primaryOrangeRed bg-secondaryPink' : 'text-gray-500 bg-redGray-30'
-        )}
-      >
-        <ThumbsUpIcon color={isLiked ? 'red' : 'gray'} />
-        <span>도움돼요 {like}</span>
-      </button>
+      <LikeButton id={id} isLiked={isLiked} like={like} />
     </div>
   </PaddingWrapper>
 );
+
+Review.Skeleton = ReviewSkeleton;
 
 export default Review;

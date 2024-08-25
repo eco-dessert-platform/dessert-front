@@ -3,6 +3,7 @@ import BoardImagesSection from '@/blocks/main/(detail)/products/[productId]/info
 import ProductOptionsSetion from '@/blocks/main/(detail)/products/[productId]/info/ProductOptionsSection';
 import ReviewBadgeSection from '@/blocks/main/(detail)/products/[productId]/info/ReviewBadgeSection';
 import SimpleInfoWithStoreSection from '@/blocks/main/(detail)/products/[productId]/info/SimpleInfoWithStoreSection';
+import TopButton from '../_blocks/TopButton';
 
 interface Props {
   params: { productId: string };
@@ -19,6 +20,7 @@ const ProductDetailPage = ({ params }: Props) => (
     <ProductOptionsSetion productId={params.productId} />
 
     <BoardDetailsSection productId={params.productId} />
+    <TopButton />
   </>
 );
 

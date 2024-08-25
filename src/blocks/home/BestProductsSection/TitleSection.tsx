@@ -13,8 +13,12 @@ const TitleSection = async () => {
 
   let preference;
   if (isLoggedIn) {
-    const data = await userService.getPreference();
-    preference = transformDataToAtomFormat(data);
+    try {
+      const data = await userService.getPreference();
+      preference = transformDataToAtomFormat(data);
+    } catch (error) {
+      if (error instanceof Error) console.error(error.message);
+    }
   }
 
   return (
@@ -38,7 +42,7 @@ const TitleSection = async () => {
         </Link>
       </div>
       {isLoggedIn && preference && (
-        <p className="mt-[6px] typo-body-12-semibold text-gray-600 whitespace-pre-line">
+        <p className="mt-[6px] typo-body-12-regular text-gray-600 whitespace-pre-line">
           {genGuidanceMessage(preference)}
         </p>
       )}

@@ -1,5 +1,6 @@
-import productService from '@/domains/product/queries/service';
+'use client';
 
+import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
 import DeliveryFeeSection from './DeliveryFeeSection';
 import DetailStoreInfo from './DetailStoreInfo';
 import SimpleProductInfo from './SimpleProductInfo';
@@ -8,14 +9,14 @@ interface Props {
   productId: string;
 }
 
-const SimpleInfoWithStoreSection = async ({ productId }: Props) => {
-  const [storeData, boardData] = await Promise.all([
-    productService.getStoreInfo(productId),
-    productService.getBoardDetail(productId)
-  ]);
+const SimpleInfoWithStoreSection = ({ productId }: Props) => {
+  const { data: boardData } = useGetBoardDetailQuery(productId);
+
+  if (!boardData) return 'not found data';
+
   return (
     <>
-      <DetailStoreInfo storeData={storeData} />
+      <DetailStoreInfo storeId={boardData.storeId} />
       <SimpleProductInfo boardData={boardData} />
       <DeliveryFeeSection boardData={boardData} />
     </>

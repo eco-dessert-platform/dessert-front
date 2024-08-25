@@ -1,16 +1,17 @@
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 
-export type ICategoryType = string | undefined;
-export type ITagsType = string[] | undefined;
+export type MainCategoryType = string;
+export type ICategoryType = string;
+export type ITagsType = string[];
 export type IPriceType = number[];
 export type ISortType = string;
 export type IOrderAvailableToday = boolean;
 
 export interface IFilterType {
-  category?: ICategoryType;
-  tags?: ITagsType;
+  category: ICategoryType;
+  tags: ITagsType;
   price: IPriceType;
-  sort: ISortType;
+  sort?: ISortType;
   orderAvailableToday: IOrderAvailableToday;
 }
 

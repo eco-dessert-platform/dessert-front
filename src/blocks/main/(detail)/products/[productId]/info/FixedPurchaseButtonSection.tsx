@@ -4,30 +4,31 @@ import { MouseEventHandler } from 'react';
 
 import { useRecoilValue } from 'recoil';
 
-import { IBoardDetailType } from '@/domains/product/types/productDetailType';
 import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
 import ButtonNewver from '@/shared/components/ButtonNewver';
+import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
+import { useParams } from 'next/navigation';
 
-interface DetailFixedBtnSectionProps {
-  boardData: IBoardDetailType;
-}
-
-const FixedPurchaseButtonSection = ({ boardData }: DetailFixedBtnSectionProps) => {
+const FixedPurchaseButtonSection = () => {
+  const { productId } = useParams<{ productId: string }>();
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
+  const { data: boardData } = useGetBoardDetailQuery(productId);
+
+  if (!boardData) return 'data not found';
 
   const addToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: boardData.id, folderId: selectedWishFolder });
+    addMutate({ productId: boardData.boardId, folderId: selectedWishFolder });
     e.preventDefault();
   };
 
   const deleteToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {
-    deleteMutate({ productId: boardData.id });
+    deleteMutate({ productId: boardData.boardId });
     e.preventDefault();
   };
 

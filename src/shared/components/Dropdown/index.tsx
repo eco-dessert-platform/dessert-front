@@ -33,7 +33,7 @@ const Dropdown = ({ children, className }: Props) => {
   }, [setIsActive]);
 
   return (
-    <div className={twMerge('relative inline-block', className)}>
+    <div aria-label="dropdown" className={twMerge('relative inline-block', className)}>
       <div aria-hidden="true" role="button" ref={triggerRef} className="w-full" onClick={toggle}>
         {dropdownTrigger}
       </div>

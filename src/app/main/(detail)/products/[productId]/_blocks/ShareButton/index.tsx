@@ -13,7 +13,7 @@ const ShareButton = () => {
           title: document.title,
           url: window.location.href
         })
-        .catch((error: Error) => openToast({ message: error.message }));
+        .catch((error: Error) => console.error({ message: error.message }));
     } else {
       openToast({ message: '공유가 불가합니다' });
     }

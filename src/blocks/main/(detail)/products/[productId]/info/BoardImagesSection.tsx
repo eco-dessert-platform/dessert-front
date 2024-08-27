@@ -19,11 +19,16 @@ const BoardImagesSection = ({ productId }: { productId: string }) => {
   const imageArray = [boardDetail?.profile, ...(boardDetail?.boardImages ?? [])].filter(
     (item) => item !== undefined && item !== null
   );
+  const isAllProductSoldOut = productOption?.products.every((product) => product.isSoldout);
 
   return (
     <PaddingWrapper className="pb-0">
       <div className="relative">
-        <ProductImageSlide boardImages={imageArray as string[]} onChange={setSwiperIndex} />
+        <ProductImageSlide
+          boardImages={imageArray as string[]}
+          isSoldOut={isAllProductSoldOut}
+          onChange={setSwiperIndex}
+        />
         {productOption?.boardIsBundled && (
           <div className="absolute top-[10px] left-[10px] z-10 ">
             <Badge type="bundle">묶음상품</Badge>

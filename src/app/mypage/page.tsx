@@ -9,7 +9,11 @@ import { TOKEN } from '@/shared/constants/token';
 
 export const metadata: Metadata = {
   title: '마이페이지',
-  description: '빵그리의 오븐에 로그인 하고 다양한 서비스를 이용해 보세요.'
+  description: '빵그리의 오븐에 로그인 하고 다양한 서비스를 이용해 보세요.',
+  openGraph: {
+    title: '마이페이지 | 빵그리의 오븐',
+    description: '빵그리의 오븐에 로그인 하고 다양한 서비스를 이용해 보세요.'
+  }
 };
 
 const MyPage = async () => {

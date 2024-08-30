@@ -6,7 +6,11 @@ import WishHeader from '@/blocks/wish/(list)/products/WishHeader';
 
 export const metadata: Metadata = {
   title: '위시리스트',
-  description: '관심있는 상품이나 스토어를 위시리스트에 담아보세요.'
+  description: '관심있는 상품이나 스토어를 위시리스트에 담아보세요.',
+  openGraph: {
+    title: '위시리스트 | 빵그리의 오븐',
+    description: '관심있는 상품이나 스토어를 위시리스트에 담아보세요.'
+  }
 };
 
 interface Props {

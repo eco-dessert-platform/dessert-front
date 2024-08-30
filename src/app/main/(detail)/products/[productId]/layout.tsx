@@ -18,7 +18,17 @@ export async function generateMetadata({
   const productOptions = await productService.getProductOption(productId);
   return {
     title: `[${store.title}] ${product.title}`,
-    description: productOptions.products.map((item) => item.title).join(', ')
+    description: productOptions.products.map((item) => item.title).join(', '),
+    openGraph: {
+      title: '빵그리의 오븐',
+      description: `[${store.title}] ${product.title}`,
+      images: [
+        {
+          url: product.profile,
+          alt: 'product image'
+        }
+      ]
+    }
   };
 }
 

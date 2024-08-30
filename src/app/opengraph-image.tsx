@@ -7,7 +7,10 @@ export const contentType = 'image/png';
 const OpenGraphImage = () =>
   new ImageResponse(
     (
-      <div className="w-full h-full flex justify-center items-center bg-primaryOrangeRed">
+      <div
+        className="w-full h-full flex justify-center items-center bg-primaryOrangeRed"
+        style={{ display: 'flex' }}
+      >
         <BbangleLogoIcon />
       </div>
     )

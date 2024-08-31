@@ -4,12 +4,11 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import KaKaoChatScript from '@/global/KaKaoChatScript';
 import RootLayoutProvider from '@/global/RootLayoutProvider';
-import Footer from '@/global/Footer';
-import AlertContainer from '@/global/AlertContainer';
 import SilentLogin from '@/global/SilentLogin';
 import GAScript from '@/global/GAScript';
 import ForeGroundMessage from '@/global/ForeGroundMessage';
 import ReceiveMessageFromApp from '@/global/ReceiveMessageFromApp';
+import AlertContainer from '@/global/AlertContainer';
 
 const pretendard = localFont({
   src: '../../public/assets/fonts/PretendardVariable.woff2'
@@ -27,12 +26,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       <RootLayoutProvider>
         <SilentLogin />
         <ReceiveMessageFromApp />
-        <div
-          id="main"
-          className="shadow-lg sm:w-[600px] h-full m-auto overflow-x-hidden scrollbar-hide"
-        >
-          <main className="w-full min-h-[calc(100vh-70px)] relative">{children}</main>
-          <Footer />
+        <div id="main" className="shadow-lg max-w-[600px] mx-auto">
+          {children}
           <AlertContainer />
         </div>
       </RootLayoutProvider>

@@ -1,5 +1,5 @@
+import type { Metadata } from 'next';
 import React, { ReactNode } from 'react';
-
 import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
 import DefaultLayout from '@/shared/components/DefaultLayout';
@@ -9,25 +9,49 @@ import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[product
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
 import ShareButton from './_blocks/ShareButton';
 
+export async function generateMetadata({
+  params: { productId }
+}: {
+  params: { productId: string };
+}): Promise<Metadata> {
+  const product = await productService.getBoardDetail(productId);
+  const store = await productService.getStoreInfo(productId);
+  const productOptions = await productService.getProductOption(productId);
+  return {
+    title: `[${store.title}] ${product.title}`,
+    description: productOptions.products.map((item) => item.title).join(', '),
+    openGraph: {
+      title: '빵그리의 오븐',
+      description: `[${store.title}] ${product.title}`,
+      images: [
+        {
+          url: product.profile,
+          alt: 'product image'
+        }
+      ]
+    }
+  };
+}
+
 interface DetailInfoLayoutProps {
   params: { productId: string };
   children: ReactNode;
 }
 
-const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => {
+const DetailInfoLayout = async ({ params: { productId }, children }: DetailInfoLayoutProps) => {
   const queryClient = new QueryClient();
   const [boardData, storeData] = await Promise.all([
     queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(Number(params.productId), 'board-detail'),
-      queryFn: () => productService.getBoardDetail(params.productId)
+      queryKey: productQueryKey.detail(Number(productId), 'board-detail'),
+      queryFn: () => productService.getBoardDetail(productId)
     }),
     queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(Number(params.productId), 'store-info'),
-      queryFn: () => productService.getStoreInfo(params.productId)
+      queryKey: productQueryKey.detail(Number(productId), 'store-info'),
+      queryFn: () => productService.getStoreInfo(productId)
     }),
     queryClient.prefetchQuery({
-      queryKey: productQueryKey.detail(Number(params.productId), 'product-option'),
-      queryFn: () => productService.getProductOption(params.productId)
+      queryKey: productQueryKey.detail(Number(productId), 'product-option'),
+      queryFn: () => productService.getProductOption(productId)
     })
   ]);
 

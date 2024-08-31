@@ -7,10 +7,11 @@ import { cn } from '@/shared/utils/cn';
 
 interface Props {
   product: ProductOptionType;
+  isExpended: boolean;
   onClick: () => void;
 }
 
-const CategoryOption = ({ product: { title, isSoldout }, onClick }: Props) => (
+const CategoryOption = ({ product: { title, isSoldout }, isExpended, onClick }: Props) => (
   <PaddingWrapper
     className={cn(
       'border-b border-gray-100 typo-title-14-regular text-gray-800 ',
@@ -22,7 +23,9 @@ const CategoryOption = ({ product: { title, isSoldout }, onClick }: Props) => (
         <span>{isSoldout && '(품절)'}</span>
         <span>{title}</span>
       </div>
-      <ArrowIcons shape="large-down" />
+      <span className={cn(isExpended && 'rotate-180 transition-all')}>
+        <ArrowIcons shape="large-down" />
+      </span>
     </button>
   </PaddingWrapper>
 );

@@ -37,7 +37,7 @@ const FixedPurchaseButtonSection = () => {
   };
 
   return (
-    <div className="bg-white z-[5000] max-w-[600px] w-full mx-auto p-[16px] fixed flex items-center gap-[10px] left-[0%] right-[0%] bottom-0 ">
+    <div className="bg-white max-w-[600px] w-full mx-auto p-[16px] flex items-center gap-[10px]">
       <div>
         <HeartButton
           shape="default"

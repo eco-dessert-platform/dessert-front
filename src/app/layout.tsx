@@ -26,7 +26,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       <RootLayoutProvider>
         <SilentLogin />
         <ReceiveMessageFromApp />
-        <div id="main" className="shadow-lg max-w-[600px] mx-auto">
+        <div id="main" className="shadow-lg max-w-[600px] mx-auto min-h-screen">
           {children}
           <AlertContainer />
         </div>

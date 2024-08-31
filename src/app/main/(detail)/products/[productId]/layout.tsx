@@ -2,11 +2,12 @@ import React, { ReactNode } from 'react';
 
 import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
+import DefaultLayout from '@/shared/components/DefaultLayout';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
-import ShareButton from '@/app/main/(detail)/products/[productId]/_blocks/ShareButton';
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
+import ShareButton from './_blocks/ShareButton';
 
 interface DetailInfoLayoutProps {
   params: { productId: string };
@@ -32,15 +33,21 @@ const DetailInfoLayout = async ({ params, children }: DetailInfoLayoutProps) => 
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Header
-        title={`[${storeData.title}] ${boardData.title}`}
-        content={<ShareButton />}
-        back
-        className="sticky top-0 bg-white z-50"
+      <DefaultLayout
+        main={
+          <>
+            <Header
+              title={`[${storeData.title}] ${boardData.title}`}
+              content={<ShareButton />}
+              back
+              className="sticky top-0 bg-white z-50"
+            />
+            <ProductDetailTabs />
+            {children}
+          </>
+        }
+        footer={<FixedPurchaseButtonSection />}
       />
-      <ProductDetailTabs />
-      {children}
-      <FixedPurchaseButtonSection />
     </HydrationBoundary>
   );
 };

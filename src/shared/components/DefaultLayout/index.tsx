@@ -8,7 +8,7 @@ interface Props {
 
 const DefaultLayout = ({ main, footer }: Props) => (
   <div className="flex flex-col justify-between h-screen">
-    <main className="w-full relative overflow-scroll">
+    <main className="w-full flex-1 relative overflow-scroll">
       {main}
       <ToastContainer />
     </main>

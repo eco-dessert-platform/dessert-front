@@ -2,24 +2,33 @@
 
 import { toastStateNewVer } from '@/shared/atoms/alert';
 import ToastPop from '@/shared/components/ToastPop';
-import { AnimatePresence } from 'framer-motion';
-import { useRef } from 'react';
+import { ELEMENT_ID } from '@/shared/constants/elementId';
+import { AnimatePresence, motion, useSpring } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const ToastContainer = () => {
   const toasts = useRecoilValue(toastStateNewVer);
+  const top = useSpring(0);
+  const pathname = usePathname();
+  const mainRef = useRef<HTMLElement | null>(null);
 
-  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const mainElement = document.getElementById(ELEMENT_ID.main);
+    if (!mainElement) return;
+    if (mainRef.current?.clientHeight === mainElement.clientHeight) return;
 
-  const parentHeight = ref.current?.parentElement?.clientHeight;
+    top.set(mainElement.clientHeight);
+    mainRef.current = mainElement;
+  }, [pathname, top]);
 
   return (
-    <div
-      ref={ref}
+    <motion.div
       style={{
-        top: parentHeight
+        translateY: top
       }}
-      className="fixed w-[calc(100%-32px)] max-w-[calc(600px-32px)] z-toast mx-auto px-4 "
+      className="fixed top-0 w-[calc(100%-32px)] max-w-[calc(600px-32px)] z-toast mx-auto px-4 "
     >
       <AnimatePresence>
         {toasts.map(({ message, id, action }, index) => (
@@ -28,7 +37,7 @@ const ToastContainer = () => {
           </ToastPop>
         ))}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

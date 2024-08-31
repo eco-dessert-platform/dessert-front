@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
+import DefaultLayout from '@/shared/components/DefaultLayout';
 import { reviewDetailQueryOptions } from '@/domains/review/queries/useReviewDetailQuery';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import ReviewUpdateFormProvider from './_blocks/ReviewUpdateFormProvider';
+import ButtonSection from './_blocks/ButtonSection';
 
 interface Props {
   params: { productId: string; reviewId: string };
@@ -20,7 +22,9 @@ const Layout = async ({ params, children }: Props) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ReviewUpdateFormProvider>{children}</ReviewUpdateFormProvider>
+      <ReviewUpdateFormProvider>
+        <DefaultLayout main={children} footer={<ButtonSection />} />
+      </ReviewUpdateFormProvider>
     </HydrationBoundary>
   );
 };

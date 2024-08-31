@@ -18,7 +18,12 @@ const StarRatingSection = () => {
       <PaddingWrapper className="typo-title-16-semibold text-center text-gray-900">
         {data?.products[0].title || 'OOO'}은 만족했나요?
       </PaddingWrapper>
-      <StarRating {...register('rate')} value={watch('rate')} starSize="large" editable />
+      <StarRating
+        {...register('rate', { required: true })}
+        value={watch('rate')}
+        starSize="large"
+        editable
+      />
     </div>
   );
 };

@@ -2,7 +2,6 @@
 
 import { MouseEventHandler } from 'react';
 
-import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
 
 import { IProductType } from '@/domains/product/types/productType';
@@ -14,6 +13,8 @@ import Badge from '@/shared/components/Badge';
 import { BellIcon } from '@/shared/components/icons';
 import { cn } from '@/shared/utils/cn';
 import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
+import ImageWithFallback from '@/shared/components/ImageWithFallback';
+import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 interface ProductImageProps {
   product: IProductType;
@@ -48,15 +49,22 @@ const ProductImage = ({
           "after:content-['Sold_Out'] after:size-full after:flex-center after:absolute after:inset-0 after:bg-black/[0.3] after:text-gray-300 after:typo-heading-20-semibold after:rounded-[6px]"
       )}
     >
-      <Image
-        src={thumbnail}
-        alt="상품사진"
-        width={300}
-        height={300}
-        placeholder="blur"
-        blurDataURL={BLUR_DATA_URL}
-        className="rounded-[6px] aspect-square object-cover"
-      />
+      <div className="relative aspect-square ">
+        <ImageWithFallback
+          src={thumbnail}
+          alt="상품사진"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+          className="object-cover rounded-[6px]"
+          fill
+          fallback={
+            <SadBbangleBox className="border rounded-[6px] size-full">
+              이미지를 불러오지 못 했어요.
+            </SadBbangleBox>
+          }
+        />
+      </div>
+
       <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px]">
         <HeartButton isActive={isWished} shape="shadow" onClick={isWished ? hate : like} />
       </div>

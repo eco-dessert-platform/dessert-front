@@ -23,7 +23,6 @@ const ToastContainer = () => {
     footerRef.current = footer;
   }, [pathname, top]);
 
-  console.log(top.get());
   return (
     <motion.div
       style={{

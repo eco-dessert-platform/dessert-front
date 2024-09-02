@@ -10,7 +10,7 @@ import ProfileImageInput from '@/domains/user/components/common/ProfileImageInpu
 import { UserProfileType } from '@/domains/user/types/profile';
 import useProfileUpdateMutation from '@/domains/user/queries/useProfileUpdateMutation';
 import { updateFormState } from '@/domains/user/atoms/profile';
-import ButtonSection from '@/domains/user/components/ProfileUpdateForm/ButtonSection';
+import { FORM_ID } from '../../constants/form';
 
 interface ProfileUpdateFormProps {
   defaultValues: UserProfileType;
@@ -28,7 +28,7 @@ const ProfileUpdateForm = ({
   };
 
   return (
-    <form className="px-[16px]" onSubmit={onSubmit}>
+    <form id={FORM_ID.profileUpdate} className="px-[16px]" onSubmit={onSubmit}>
       <div className="my-[16px] flex justify-center items-center">
         <ProfileImageInput defaultValue={profileImg ?? undefined} />
       </div>
@@ -38,7 +38,6 @@ const ProfileUpdateForm = ({
         <BirthdayInput defaultValue={birthDate ?? undefined} />
       </div>
       <MoreSection className="mb-[16px]" />
-      <ButtonSection />
     </form>
   );
 };

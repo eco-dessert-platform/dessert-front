@@ -42,7 +42,7 @@ const ButtonSection = () => {
     <div className="w-full max-w-[600px] bg-white">
       <PaddingWrapper>
         <ButtonNewver
-          form="review-create-form"
+          form="review-update-form"
           color="black"
           disabled={!isValid}
           className="w-full"

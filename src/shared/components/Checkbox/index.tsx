@@ -14,6 +14,7 @@ interface CheckBoxProps {
   className?: string;
 }
 
+/** @deprecated CheckBoxNewver 사용해주세요 */
 const CheckBox = ({
   isChecked = false,
   onChange,

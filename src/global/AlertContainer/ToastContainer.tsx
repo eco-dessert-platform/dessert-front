@@ -12,17 +12,18 @@ const ToastContainer = () => {
   const toasts = useRecoilValue(toastStateNewVer);
   const top = useSpring(0);
   const pathname = usePathname();
-  const mainRef = useRef<HTMLElement | null>(null);
+  const footerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const mainElement = document.getElementById(ELEMENT_ID.main);
-    if (!mainElement) return;
-    if (mainRef.current?.clientHeight === mainElement.clientHeight) return;
+    const footer = document.getElementById(ELEMENT_ID.footer);
+    if (!footer) return;
+    if (footerRef.current?.offsetTop === footer.offsetTop) return;
 
-    top.set(mainElement.clientHeight);
-    mainRef.current = mainElement;
+    top.set(footer.offsetTop);
+    footerRef.current = footer;
   }, [pathname, top]);
 
+  console.log(top.get());
   return (
     <motion.div
       style={{

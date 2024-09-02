@@ -70,7 +70,7 @@ class UserService extends Service {
   }
 
   async getPreference() {
-    const res = await this.fetchExtend.get('/preference');
+    const res = await this.fetchExtend.get('/preference', { cache: 'no-store' });
     const { result, success, code, message }: ResultResponse<PreferenceResultType> =
       await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));

@@ -10,10 +10,12 @@ interface Props {
 const DefaultLayout = ({ main, header, footer }: Props) => (
   <div className="flex flex-col justify-between h-screen">
     {header && <header>{header}</header>}
-    <main id={ELEMENT_ID.main} className="w-full flex-1 relative overflow-scroll">
-      {main}
-    </main>
-    {footer && <footer className="shrink-0 sticky bottom-0">{footer}</footer>}
+    <main className="w-full flex-1 relative overflow-scroll">{main}</main>
+    {footer && (
+      <footer id={ELEMENT_ID.footer} className="shrink-0 sticky bottom-0">
+        {footer}
+      </footer>
+    )}
   </div>
 );
 

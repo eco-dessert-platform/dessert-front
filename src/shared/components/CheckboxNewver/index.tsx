@@ -5,16 +5,30 @@ import { cn } from '@/shared/utils/cn';
 import { CheckIcon } from '../icons';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  title?: string;
-  label?: string;
+  label?:
+    | {
+        title?: string;
+        description: string;
+      }
+    | string;
 }
 
 const CheckBoxNewver = (
-  { label, title, className, onBeforeInput, ...props }: Props,
+  { label, className, onBeforeInput, ...props }: Props,
   ref: ForwardedRef<HTMLInputElement>
 ) => {
   const inputId = useId();
-  const hasLabel = !!(title || label);
+
+  const hasLabel = !!label;
+
+  let title: string | undefined;
+  let description: string | undefined;
+  if (typeof label === 'string') {
+    description = label;
+  } else if (hasLabel) {
+    description = label.description;
+    title = label.title;
+  }
 
   return (
     <label
@@ -43,14 +57,14 @@ const CheckBoxNewver = (
               {title}
             </div>
           )}
-          {label && (
+          {description && (
             <div
               className={cn(
                 'typo-title-14-regular text-gray-700',
                 props.checked && 'typo-title-14-semibold text-primaryOrangeRed'
               )}
             >
-              {label}
+              {description}
             </div>
           )}
         </div>

@@ -42,8 +42,10 @@ const CheckSection = () => {
           <CheckBoxNewver
             key={item.id}
             value={item.title}
-            title={item.title}
-            label={item.description}
+            label={{
+              title: item.title,
+              description: item.description
+            }}
             checked={checked}
             {...register('preferenceType')}
             disabled={disabled}

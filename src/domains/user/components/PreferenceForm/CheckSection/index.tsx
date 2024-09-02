@@ -1,10 +1,8 @@
 'use client';
 
-import { useRecoilState } from 'recoil';
-import { preferenceState } from '@/domains/user/atoms/preference';
-import { PreferenceType } from '@/domains/user/types/preference';
-import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import PreferenceItem from './PreferenceItem';
+import { PreferenceFormType } from '@/domains/user/types/preference';
+import { useFormContext } from 'react-hook-form';
+import CheckBoxNewver from '@/shared/components/CheckboxNewver';
 
 const ITEMS = [
   {
@@ -30,39 +28,28 @@ const ITEMS = [
 ] as const;
 
 const CheckSection = () => {
-  const { openToast } = useToastNewVer();
-  const [preference, setPreference] = useRecoilState(preferenceState);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked, value } = e.target;
-    const checkedValue = value as PreferenceType;
-
-    const numChecks = preference.length;
-    const checkedThird = !preference.includes(checkedValue);
-    if (numChecks === 2 && checkedThird) {
-      openToast({ message: '최대 2개까지 선택 가능하니, 1개를 제외하고 선택하세요!' });
-      return;
-    }
-
-    if (checked) {
-      setPreference([...preference, checkedValue]);
-      return;
-    }
-    setPreference(preference.filter((val) => val !== checkedValue));
-  };
+  const { watch, register } = useFormContext<PreferenceFormType>();
+  const preferences = watch('preferenceType');
 
   return (
     <div className="flex flex-col gap-[8px]">
-      {ITEMS.map((item) => (
-        <PreferenceItem
-          key={item.id}
-          value={item.title}
-          isChecked={preference.includes(item.title)}
-          onChange={handleChange}
-          title={item.title}
-          description={item.description}
-        />
-      ))}
+      {ITEMS.map((item) => {
+        const checked = preferences.includes(item.title);
+        const checkedCount = preferences.filter((value) => !!value).length;
+        const disabled = !checked && checkedCount >= 2;
+
+        return (
+          <CheckBoxNewver
+            key={item.id}
+            value={item.title}
+            title={item.title}
+            label={item.description}
+            checked={checked}
+            {...register('preferenceType')}
+            disabled={disabled}
+          />
+        );
+      })}
     </div>
   );
 };

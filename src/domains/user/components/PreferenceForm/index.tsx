@@ -1,31 +1,19 @@
 'use client';
 
-import { FormEvent } from 'react';
-import { UseMutateFunction } from '@tanstack/react-query';
-import { PreferenceType } from '@/domains/user/types/preference';
 import DescriptionSection from '@/domains/user/components/PreferenceForm/DescriptionSection';
 import CheckSection from '@/domains/user/components/PreferenceForm/CheckSection';
-import ButtonSection from '@/domains/user/components/PreferenceForm/ButtonSection';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 
-interface PreferenceFormProps {
-  mutate: UseMutateFunction<void, Error, PreferenceType[], unknown>;
-}
-
-const PreferenceForm = ({ mutate }: PreferenceFormProps) => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const preference = formData.getAll('preference') as Array<PreferenceType>;
-    mutate(preference);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
+const PreferenceForm = (
+  props: DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
+) => (
+  <PaddingWrapper>
+    <form {...props}>
       <DescriptionSection />
       <CheckSection />
-      <ButtonSection />
     </form>
-  );
-};
+  </PaddingWrapper>
+);
 
 export default PreferenceForm;

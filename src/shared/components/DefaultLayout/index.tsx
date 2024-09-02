@@ -4,14 +4,16 @@ import { ReactNode } from 'react';
 interface Props {
   main: ReactNode;
   footer?: ReactNode;
+  header?: ReactNode;
 }
 
-const DefaultLayout = ({ main, footer }: Props) => (
+const DefaultLayout = ({ main, header, footer }: Props) => (
   <div className="flex flex-col justify-between h-screen">
+    {header && <header>{header}</header>}
     <main id={ELEMENT_ID.main} className="w-full flex-1 relative overflow-scroll">
       {main}
     </main>
-    <footer className="shrink-0 sticky bottom-0">{footer}</footer>
+    {footer && <footer className="shrink-0 sticky bottom-0">{footer}</footer>}
   </div>
 );
 

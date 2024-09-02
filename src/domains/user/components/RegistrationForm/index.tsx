@@ -5,11 +5,11 @@ import { useRecoilValue } from 'recoil';
 import BirthdayInput from '@/domains/user/components/common/BirthdateInput';
 import NicknameInput from '@/domains/user/components/common/NickNameInput';
 import PhoneNumberInput from '@/domains/user/components/common/PhoneNumberInput';
-import ButtonSection from '@/domains/user/components/RegistrationForm/ButtonSection';
 import { registrationFormState } from '../../atoms/profile';
 import useRegistrationMutation from '../../queries/useRegistrationMutation';
 import ProfileImageInput from '../common/ProfileImageInput';
 import CheckSection from './CheckSection';
+import { FORM_ID } from '../../constants/form';
 
 const RegistrationForm = () => {
   const registrationForm = useRecoilValue(registrationFormState);
@@ -22,7 +22,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form ref={formRef} className="px-[16px]" onSubmit={onSubmit}>
+    <form id={FORM_ID.profileRegist} ref={formRef} className="px-[16px]" onSubmit={onSubmit}>
       <div className="my-[16px] flex justify-center items-center">
         <ProfileImageInput />
       </div>
@@ -32,7 +32,6 @@ const RegistrationForm = () => {
         <BirthdayInput />
       </div>
       <CheckSection className="mb-[32px]" />
-      <ButtonSection />
     </form>
   );
 };

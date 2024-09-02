@@ -29,6 +29,7 @@ const CheckBoxNewver = (
     description = label.description;
     title = label.title;
   }
+  const isOnlyTitle = !!(title && !description);
 
   return (
     <label
@@ -50,7 +51,8 @@ const CheckBoxNewver = (
           {title && (
             <div
               className={cn(
-                'typo-title-14-semibold text-gray',
+                'text-gray-900',
+                isOnlyTitle ? 'typo-title-14-regular' : 'typo-title-14-semibold',
                 props.checked && 'text-primaryOrangeRed'
               )}
             >

@@ -25,7 +25,7 @@ const CheckBoxNewver = (
   let description: string | undefined;
   if (typeof label === 'string') {
     description = label;
-  } else if (hasLabel) {
+  } else if (typeof label === 'object') {
     description = label.description;
     title = label.title;
   }

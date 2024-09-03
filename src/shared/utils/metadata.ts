@@ -12,6 +12,7 @@ interface StaticMetadataType {
 
 const staticMetadata: StaticMetadataType = {
   root: {
+    metadataBase: new URL('https://www.bbangle.store'),
     title: {
       template: '%s | 빵그리의 오븐',
       default: '빵그리의 오븐'

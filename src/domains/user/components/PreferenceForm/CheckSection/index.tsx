@@ -3,25 +3,23 @@
 import { PreferenceFormType } from '@/domains/user/types/preference';
 import { useFormContext } from 'react-hook-form';
 import CheckBoxNewver from '@/shared/components/CheckboxNewver';
+import { selectInputVariants } from '@/shared/style/variants';
+import { cn } from '@/shared/utils/cn';
 
 const ITEMS = [
   {
-    id: 1,
     title: '다이어트',
     description: '건강 디저트를 먹으며, 체중조절이 필요해요.'
   },
   {
-    id: 2,
     title: '근성장',
     description: '고단백의 디저트를 건강하게 먹고 싶어요.'
   },
   {
-    id: 3,
     title: '체질•알러지',
     description: '소화불량, 당뇨, 알레르기 등이 있어요.'
   },
   {
-    id: 4,
     title: '비건•채식',
     description: '환경, 동물, 노동권 문제를 중요시해요.'
   }
@@ -39,17 +37,29 @@ const CheckSection = () => {
         const disabled = !checked && checkedCount >= 2;
 
         return (
-          <CheckBoxNewver
-            key={item.id}
-            value={item.title}
-            label={{
-              title: item.title,
-              description: item.description
-            }}
-            checked={checked}
-            {...register('preferenceType')}
-            disabled={disabled}
-          />
+          <label
+            key={item.title}
+            className={cn(
+              selectInputVariants({ outline: true, checked }),
+              'flex p-[10px] gap-[12px] items-center',
+              disabled && 'opacity-70'
+            )}
+            htmlFor={item.title}
+          >
+            <CheckBoxNewver
+              id={item.title}
+              value={item.title}
+              checked={checked}
+              disabled={disabled}
+              {...register('preferenceType')}
+            />
+            <div className="flex flex-col">
+              <div className="typo-title-14-semibold">{item.title}</div>
+              <div className={checked ? 'typo-title-14-semibold' : 'typo-title-14-regular'}>
+                {item.description}
+              </div>
+            </div>
+          </label>
         );
       })}
     </div>

@@ -9,19 +9,18 @@ interface Props {
   params: { productId: string };
 }
 
-const ProductDetailPage = ({ params }: Props) => (
-  <>
-    <BoardImagesSection productId={params.productId} />
-
-    <SimpleInfoWithStoreSection productId={params.productId} />
-
-    <ReviewBadgeSection productId={params.productId} />
-
-    <ProductOptionsSetion productId={params.productId} />
-
-    <BoardDetailsSection productId={params.productId} />
-    <TopButton />
-  </>
-);
+const ProductDetailPage = ({ params: { productId } }: Props) => {
+  const id = Number(productId);
+  return (
+    <>
+      <BoardImagesSection productId={id} />
+      <SimpleInfoWithStoreSection productId={id} />
+      <ReviewBadgeSection productId={id} />
+      <ProductOptionsSetion productId={id} />
+      <BoardDetailsSection productId={id} />
+      <TopButton />
+    </>
+  );
+};
 
 export default ProductDetailPage;

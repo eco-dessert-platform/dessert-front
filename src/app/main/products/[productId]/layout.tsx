@@ -1,57 +1,38 @@
-import type { Metadata } from 'next';
 import React, { ReactNode } from 'react';
 import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
 import DefaultLayout from '@/shared/components/DefaultLayout';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { GenerateMetadataProps } from '@/shared/types/generateMetadata';
+import { getDynamicMetadata } from '@/shared/utils/metadata';
 import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
 import ShareButton from './_blocks/ShareButton';
 
-export async function generateMetadata({
-  params: { productId }
-}: {
-  params: { productId: string };
-}): Promise<Metadata> {
-  const product = await productService.getBoardDetail(productId);
-  const store = await productService.getStoreInfo(productId);
-  const productOptions = await productService.getProductOption(productId);
-  return {
-    title: `[${store.title}] ${product.title}`,
-    description: productOptions.products.map((item) => item.title).join(', '),
-    openGraph: {
-      title: '빵그리의 오븐',
-      description: `[${store.title}] ${product.title}`,
-      images: [
-        {
-          url: product.profile,
-          alt: 'product image'
-        }
-      ]
-    }
-  };
-}
+export const generateMetadata = async (props: GenerateMetadataProps) =>
+  getDynamicMetadata('product-detail', props);
 
 interface DetailInfoLayoutProps {
   params: { productId: string };
   children: ReactNode;
 }
 
-const DetailInfoLayout = async ({ params: { productId }, children }: DetailInfoLayoutProps) => {
+const ProductDetailLayout = async ({ params: { productId }, children }: DetailInfoLayoutProps) => {
+  const id = Number(productId);
   const queryClient = new QueryClient();
   const [boardData, storeData] = await Promise.all([
     queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(Number(productId), 'board-detail'),
-      queryFn: () => productService.getBoardDetail(productId)
+      queryKey: productQueryKey.detail(id, 'board-detail'),
+      queryFn: () => productService.getBoardDetail(id)
     }),
     queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(Number(productId), 'store-info'),
-      queryFn: () => productService.getStoreInfo(productId)
+      queryKey: productQueryKey.detail(id, 'store-info'),
+      queryFn: () => productService.getStoreInfo(id)
     }),
     queryClient.prefetchQuery({
-      queryKey: productQueryKey.detail(Number(productId), 'product-option'),
-      queryFn: () => productService.getProductOption(productId)
+      queryKey: productQueryKey.detail(id, 'product-option'),
+      queryFn: () => productService.getProductOption(id)
     })
   ]);
 
@@ -76,4 +57,4 @@ const DetailInfoLayout = async ({ params: { productId }, children }: DetailInfoL
   );
 };
 
-export default DetailInfoLayout;
+export default ProductDetailLayout;

@@ -112,13 +112,6 @@ class UserService extends Service {
     return data;
   }
 
-  async getGoogleToken(code: string) {
-    const res = await this.fetchExtend.get(`/oauth2/login/callback/google?code=${code}`);
-    const data: LoginResponse = await res.json();
-    if (!res.ok) throw Error('로그인 실패');
-    return data;
-  }
-
   async login({ socialType, socialToken }: { socialType: SocialType; socialToken: string }) {
     const url = `/oauth/login/${socialType.toLocaleLowerCase()}?token=${socialToken}`;
     const res = await this.fetchExtend.get(url);

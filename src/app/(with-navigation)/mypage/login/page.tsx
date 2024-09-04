@@ -18,7 +18,6 @@ const LoginPage = () => {
   const { mutate: kakaoMutate } = useKakaoLoginMutation();
   const { mutate: googleMutate } = useGoogleLoginMutation();
 
-  // usePopupEffect : 팝업 열렸을때 대기 (메시지 수신 대기)
   useEffect(() => {
     if (!popup) return undefined;
 

@@ -5,14 +5,14 @@ import { useRecoilState } from 'recoil';
 import LoginLogoSection from '@/blocks/user/login/LoginLogoSection';
 import GoogleLoginButton from '@/blocks/user/login/GoogleLoginButton';
 import { socialLoginPopupState } from '@/domains/user/atoms/login';
-import useKakaoAuthMutation from '@/domains/user/queries/useKakaoAuthMutation';
 import { SocialType } from '@/domains/user/types/login';
+import { useKakaoLoginMutation } from '@/domains/user/queries/useLoginMutation';
 import KakaoLoginButton from './_blocks/KakaoLoginButton';
 
 const LoginPage = () => {
   const [popup, setPopup] = useRecoilState(socialLoginPopupState);
   const [message, setMessage] = useState<{ code: string; socialType: SocialType }>();
-  const { mutate: kakaoMutate } = useKakaoAuthMutation();
+  const { mutate: kakaoMutate } = useKakaoLoginMutation();
 
   // usePopupEffect : 팝업 열렸을때 대기 (메시지 수신 대기)
   useEffect(() => {

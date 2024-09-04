@@ -107,9 +107,15 @@ class UserService extends Service {
       },
       body
     });
-    console.log(res);
     if (!res.ok) throw new Error('카카오 로그인 실패');
     const data: KakaoAuthResponse = await res.json();
+    return data;
+  }
+
+  async getGoogleToken(code: string) {
+    const res = await this.fetchExtend.get(`/oauth2/login/callback/google?code=${code}`);
+    const data: LoginResponse = await res.json();
+    if (!res.ok) throw Error('로그인 실패');
     return data;
   }
 

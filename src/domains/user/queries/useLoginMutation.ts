@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useAuth from '@/shared/hooks/useAuth';
 import PATH from '@/shared/constants/path';
-import { LoginResponse, KakaoAuthResponse, SocialType } from '../types/login';
+import { LoginResponse, SocialType } from '../types/login';
 import userService from './service';
 
 export function useSocialLoginMutation() {
@@ -47,19 +47,20 @@ export function useSocialLoginMutation() {
 export function useKakaoLoginMutation() {
   const { mutate: loginMutate } = useSocialLoginMutation();
 
-  const mutationFn = async (code: string) => {
-    const data = await userService.getKakaoToken(code);
-    return data;
-  };
-
-  const onSuccess = (data: KakaoAuthResponse) => {
-    loginMutate({ socialToken: data.access_token, socialType: 'KAKAO' });
-  };
-
   return useMutation({
-    mutationFn,
-    onSuccess
+    mutationFn: async (code: string) => {
+      const data = await userService.getKakaoToken(code);
+      loginMutate({ socialToken: data.access_token, socialType: 'KAKAO' });
+    }
   });
 }
 
-export function useGoogleLoginMutation() {}
+export function useGoogleLoginMutation() {
+  const { mutate: loginMutate } = useSocialLoginMutation();
+
+  return useMutation({
+    mutationFn: async (token: string) => {
+      loginMutate({ socialToken: token, socialType: 'GOOGLE' });
+    }
+  });
+}

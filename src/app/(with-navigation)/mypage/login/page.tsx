@@ -3,16 +3,20 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import LoginLogoSection from '@/blocks/user/login/LoginLogoSection';
-import GoogleLoginButton from '@/blocks/user/login/GoogleLoginButton';
 import { socialLoginPopupState } from '@/domains/user/atoms/login';
 import { SocialType } from '@/domains/user/types/login';
-import { useKakaoLoginMutation } from '@/domains/user/queries/useLoginMutation';
+import {
+  useGoogleLoginMutation,
+  useKakaoLoginMutation
+} from '@/domains/user/queries/useLoginMutation';
 import KakaoLoginButton from './_blocks/KakaoLoginButton';
+import GoogleLoginButton from './_blocks/GoogleLoginButton';
 
 const LoginPage = () => {
   const [popup, setPopup] = useRecoilState(socialLoginPopupState);
   const [message, setMessage] = useState<{ code: string; socialType: SocialType }>();
   const { mutate: kakaoMutate } = useKakaoLoginMutation();
+  const { mutate: googleMutate } = useGoogleLoginMutation();
 
   // usePopupEffect : 팝업 열렸을때 대기 (메시지 수신 대기)
   useEffect(() => {
@@ -36,8 +40,9 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!message) return;
-    if (message.socialType) kakaoMutate(message.code);
-  }, [message, kakaoMutate]);
+    if (message.socialType === 'KAKAO') kakaoMutate(message.code);
+    if (message.socialType === 'GOOGLE') googleMutate(message.code);
+  }, [message, kakaoMutate, googleMutate]);
 
   return (
     <div className="flex flex-col gap-[81px] px-[16px] m-[16px] pt-[70px]">

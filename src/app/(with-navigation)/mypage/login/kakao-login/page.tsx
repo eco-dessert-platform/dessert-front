@@ -1,5 +1,5 @@
-import KakaoLoginLoading from '@/blocks/user/login/KakaoLoginLoading';
 import { Suspense } from 'react';
+import KakaoLoginLoading from './_blocks/KakaoLoginLoading';
 
 const KakaoLoginLoadingPage = () => (
   <Suspense>

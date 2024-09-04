@@ -12,8 +12,8 @@ interface Props {
 export const useGetStoreAllProductsQuery = ({ storeId }: Props) => {
   const queryKey = storeQueryKey.detail(storeId, 'all-products');
 
-  const queryFn = async () => {
-    const data = await storeService.getStoreAllProducts(storeId);
+  const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
+    const data = await storeService.getStoreAllProducts(storeId, cursorId);
     return data;
   };
 

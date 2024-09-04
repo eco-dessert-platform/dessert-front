@@ -125,10 +125,10 @@ const generateStoreDetailMetadata = async ({
 }: GenerateMetadataProps): Promise<Metadata> => {
   const storeId = Number(id);
   const storeInfo = await storeService.getStoreInfo(storeId);
-  const storeAllProducts = await storeService.getStoreAllProducts(storeId);
+  const storeBestProducts = await storeService.getStoreBestProducts(storeId);
   return {
     title: storeInfo.storeName,
-    description: `${storeInfo.introduce}. ${storeAllProducts.content.map((product) => product.title).join(', ')}`,
+    description: `${storeInfo.introduce}. ${storeBestProducts.map((product) => product.title).join(', ')}`,
     openGraph: {
       title: '빵그리의 오븐',
       description: `[${storeInfo.storeName}] ${storeInfo.introduce}`,

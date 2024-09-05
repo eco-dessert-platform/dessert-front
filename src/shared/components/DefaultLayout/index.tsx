@@ -12,7 +12,9 @@ const DefaultLayout = ({ main, header, footer }: Props) => (
     {header && (
       <header className="sticky top-0 max-w-[600px] w-full mx-auto z-header">{header}</header>
     )}
-    <main className="max-w-[600px] w-full mx-auto relative flex-1">{main}</main>
+    <main id={ELEMENT_ID.main} className="max-w-[600px] w-full mx-auto relative flex-1">
+      {main}
+    </main>
     {footer && (
       <footer
         id={ELEMENT_ID.footer}

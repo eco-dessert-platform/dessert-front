@@ -2,16 +2,15 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
+import { IStoreType } from '@/domains/store/types/store';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import StarButton from '@/shared/components/StarButton';
 
 interface Props {
-  storeId: number;
+  storeInfo: IStoreType;
 }
 
-const StoreInfoSection = ({ storeId }: Props) => {
-  const { data: storeInfo } = useGetStoreInfoQuery({ storeId });
+const StoreInfoSection = ({ storeInfo }: Props) => {
   const [isLiked, setIsLiked] = useState(storeInfo?.isWished || false);
 
   if (!storeInfo) return null;

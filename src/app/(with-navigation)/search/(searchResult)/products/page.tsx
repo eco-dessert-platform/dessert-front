@@ -5,6 +5,7 @@ import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import searchService from '@/domains/search/queries/service';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
 interface SearchProductsProps {
   searchParams: { query?: string };
@@ -14,15 +15,15 @@ const SearchProducts = async ({ searchParams: { query: keyword = '' } }: SearchP
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: [...productQueryKey.list('search'), { filter: INIT_FILTER_VALUE, keyword }],
-    queryFn: async ({ pageParam }) => {
+    queryFn: async ({ pageParam: cursorId }: { pageParam: number }) => {
       const result = await searchService.getSearchProducts({
         keyword,
         filterValue: INIT_FILTER_VALUE,
-        pageParam
+        cursorId
       });
       return result;
     },
-    initialPageParam: 0
+    initialPageParam: INITIAL_CURSOR
   });
 
   return (

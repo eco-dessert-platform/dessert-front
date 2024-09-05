@@ -1,20 +1,19 @@
 'use client';
 
-import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
+import { IStoreType } from '@/domains/store/types/store';
 import { useGetStoreBestProductsQuery } from '@/domains/store/queries/useGetStoreBestProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductCard from '@/domains/product/components/ProductCard';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 interface Props {
-  storeId: number;
+  storeInfo: IStoreType;
 }
 
-const StoreBestProductsSection = ({ storeId }: Props) => {
+const StoreBestProductsSection = ({ storeInfo: { storeId, storeName } }: Props) => {
   const { data: products } = useGetStoreBestProductsQuery({ storeId });
-  const { data: storeInfo } = useGetStoreInfoQuery({ storeId });
 
-  if (!storeInfo || !products || products.length === 0) {
+  if (!products || products.length === 0) {
     return (
       <SadBbangleBox>
         <p>인기 상품이 없어요!</p>
@@ -31,7 +30,7 @@ const StoreBestProductsSection = ({ storeId }: Props) => {
           return (
             <ProductCard
               key={product.boardId}
-              product={{ ...rest, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
+              product={{ ...rest, storeId, storeName }}
               popular
               ranking={Number(i + 1)}
             />

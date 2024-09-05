@@ -10,7 +10,7 @@ import { IReviewWriteForm } from '@/domains/review/types/review';
 
 const StarRatingSection = () => {
   const { productId } = useParams<{ productId: string }>();
-  const { data } = useGetProductOptionQuery(productId);
+  const { data } = useGetProductOptionQuery(Number(productId));
   const { register, watch } = useFormContext<IReviewWriteForm>();
 
   return (

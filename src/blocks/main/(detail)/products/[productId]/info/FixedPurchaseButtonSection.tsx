@@ -18,7 +18,7 @@ const FixedPurchaseButtonSection = () => {
 
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
-  const { data: boardData } = useGetBoardDetailQuery(productId);
+  const { data: boardData } = useGetBoardDetailQuery(Number(productId));
 
   if (!boardData) return 'data not found';
 

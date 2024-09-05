@@ -4,7 +4,7 @@ import { BbangleLogoIcon } from '@/shared/components/icons';
 export const alt = '빵그리의 오븐 로고';
 export const contentType = 'image/png';
 
-const OpenGraphImage = () =>
+const TwitterImage = () =>
   new ImageResponse(
     (
       <div
@@ -16,4 +16,4 @@ const OpenGraphImage = () =>
     )
   );
 
-export default OpenGraphImage;
+export default TwitterImage;

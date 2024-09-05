@@ -73,10 +73,10 @@ export function transformTagToEng(tag: string): string {
   if (tag === '비건') {
     return 'veganTag';
   }
-  if (tag === '무설탕') {
+  if (tag === '저당') {
     return 'sugarFreeTag';
   }
-  if (tag === '키토제닉') {
+  if (tag === '저지방') {
     return 'ketogenicTag';
   }
   return tag;

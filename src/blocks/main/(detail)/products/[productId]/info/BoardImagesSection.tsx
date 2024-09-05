@@ -11,7 +11,7 @@ import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQ
 import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
-const BoardImagesSection = ({ productId }: { productId: string }) => {
+const BoardImagesSection = ({ productId }: { productId: number }) => {
   const [swiperIndex, setSwiperIndex] = useState(0);
   const { data: boardDetail } = useGetBoardDetailQuery(productId);
   const { data: productOption } = useGetProductOptionQuery(productId);

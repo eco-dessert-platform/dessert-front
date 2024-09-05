@@ -8,15 +8,18 @@ interface Props {
 }
 
 const DefaultLayout = ({ main, header, footer }: Props) => (
-  <div className="flex flex-col justify-between h-screen">
-    {header && <header>{header}</header>}
-    <main className="w-full flex-1 relative overflow-scroll">{main}</main>
+  <>
+    {header && <header className="sticky top-0 max-w-[600px] mx-auto">{header}</header>}
+    <main className="max-w-[600px] mx-auto relative">{main}</main>
     {footer && (
-      <footer id={ELEMENT_ID.footer} className="shrink-0 sticky bottom-0">
+      <footer
+        id={ELEMENT_ID.footer}
+        className="max-w-[600px] w-full mx-auto shrink-0 sticky bottom-0"
+      >
         {footer}
       </footer>
     )}
-  </div>
+  </>
 );
 
 export default DefaultLayout;

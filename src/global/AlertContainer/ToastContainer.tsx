@@ -17,9 +17,9 @@ const ToastContainer = () => {
   useEffect(() => {
     const footer = document.getElementById(ELEMENT_ID.footer);
     if (!footer) return;
-    if (footerRef.current?.offsetTop === footer.offsetTop) return;
+    if (footerRef.current?.clientHeight === footer.clientHeight) return;
 
-    top.set(footer.offsetTop);
+    top.set(-footer.clientHeight);
     footerRef.current = footer;
   }, [pathname, top]);
 
@@ -28,8 +28,9 @@ const ToastContainer = () => {
       style={{
         translateY: top
       }}
-      className="fixed top-0 w-[calc(100%-32px)] max-w-[calc(600px-32px)] z-toast mx-auto px-4 "
+      className="fixed bottom-0 w-full z-toast "
     >
+      {/* <ToastPop index={0}>test</ToastPop> */}
       <AnimatePresence>
         {toasts.map(({ message, id, action }, index) => (
           <ToastPop key={id} index={index} action={action}>

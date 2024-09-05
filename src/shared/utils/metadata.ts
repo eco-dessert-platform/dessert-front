@@ -87,9 +87,10 @@ const staticMetadata: StaticMetadataType = {
 };
 
 const generateProductDetailMetadata = async ({
-  params: { productId }
+  params
 }: GenerateMetadataProps): Promise<Metadata> => {
-  const id = Number(productId);
+  if (!params?.productId) return {};
+  const id = Number(params.productId);
   const product = await productService.getBoardDetail(id);
   const store = await productService.getStoreInfo(id);
   const productOptions = await productService.getProductOption(id);
@@ -121,9 +122,10 @@ const generateProductDetailMetadata = async ({
 };
 
 const generateStoreDetailMetadata = async ({
-  params: { id }
+  params
 }: GenerateMetadataProps): Promise<Metadata> => {
-  const storeId = Number(id);
+  if (!params?.id) return {};
+  const storeId = Number(params.id);
   const storeInfo = await storeService.getStoreInfo(storeId);
   const storeBestProducts = await storeService.getStoreBestProducts(storeId);
   return {

@@ -1,15 +1,22 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { infiniteQueryOptions, keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import wishService from './service';
 
-const useWishProductListQuery = (folderId: number) =>
-  useInfiniteQuery({
-    queryKey: productQueryKey.list('wish'),
-    queryFn: ({ pageParam }) => wishService.getWishProductList({ cursorId: pageParam, folderId }),
+type Params = Omit<Parameters<typeof wishService.getWishProductList>[0], 'cursorId'>;
+
+export const wishProductListoptions = ({ folderId, sort }: Params) =>
+  infiniteQueryOptions({
+    queryKey: productQueryKey.list({ type: 'wish', sort }),
+    queryFn: ({ pageParam }) =>
+      wishService.getWishProductList({ cursorId: pageParam, folderId, sort }),
     initialPageParam: INITIAL_CURSOR,
     getNextPageParam: ({ hasNext, nextCursor }) => (hasNext ? nextCursor : undefined),
-    select: ({ pages }) => pages.map(({ content }) => content).flat()
+    select: ({ pages }) => pages.map(({ content }) => content).flat(),
+    placeholderData: keepPreviousData
   });
+
+const useWishProductListQuery = (params: Params) =>
+  useInfiniteQuery(wishProductListoptions(params));
 
 export default useWishProductListQuery;

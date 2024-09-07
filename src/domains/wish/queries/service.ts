@@ -52,13 +52,25 @@ class WishService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async getWishProductList({ folderId, cursorId }: { folderId: number; cursorId: number }) {
-    const isFirstPage = cursorId === INITIAL_CURSOR;
-    const params = isFirstPage ? '' : `cursorId=${cursorId}`;
+  async getWishProductList({
+    folderId,
+    cursorId,
+    sort
+  }: {
+    folderId: number;
+    cursorId: number;
+    sort: string;
+  }) {
+    const params = new URLSearchParams({
+      cursorId: cursorId === INITIAL_CURSOR ? '' : String(cursorId),
+      sort
+    }).toString();
+
     const res = await this.fetchExtend.get(`/boards/folders/${folderId}?${params}`);
     const { result, code, message, success }: ResultResponse<Cursor<IProductType>> =
       await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+
     return result;
   }
 

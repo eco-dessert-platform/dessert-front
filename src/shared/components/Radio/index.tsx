@@ -1,12 +1,14 @@
 'use client';
 
 import React, { ChangeEvent, ReactNode, useId } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { CheckIcon } from '../icons';
 
 interface RadioProps {
   isChecked: boolean;
-  onChange: (_e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (_e: ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string;
   required?: boolean;

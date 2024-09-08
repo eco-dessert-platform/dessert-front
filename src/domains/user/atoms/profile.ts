@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+
 import { MyProfileUpdateRequest, RegistrationRequest } from '../types/profile';
 
 export const agreeState = atom({
@@ -17,6 +18,10 @@ export const profileImgState = atom<File>({
 
 export const phoneNumberState = atom<string>({
   key: 'phoneNumber',
+  default: undefined
+});
+export const genderState = atom<string>({
+  key: 'gender',
   default: undefined
 });
 

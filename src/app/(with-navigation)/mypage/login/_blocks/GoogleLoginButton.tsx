@@ -19,7 +19,7 @@ const GoogleLoginButton = () => {
     const query = new URLSearchParams(queryObject);
     const popup = window.open(`${GOOGLE.authUrl}?${query}`, '_blank', 'width=400, height=650');
     if (!popup) return;
-    setPopup({ type: 'KAKAO', window: popup });
+    setPopup({ type: 'GOOGLE', window: popup });
   };
 
   return (

@@ -1,3 +1,4 @@
+import QueryString from 'qs';
 import { Cursor, ResultResponse, DefaultResponse } from '@/shared/types/response';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
@@ -7,7 +8,8 @@ import { NotificationDetailType, NotificationType } from '../types/notification'
 import { notificationQueryKey, userProfileQueryKey } from './queryKey';
 import { UserProfileType, WithdrawResponse } from '../types/profile';
 import { PreferenceType, PreferenceResultType } from '../types/preference';
-import { LoginResponse, SocialType } from '../types/login';
+import { KakaoAuthResponse, LoginResponse, SocialType } from '../types/login';
+import { KAKAO } from '../constants/socialLogin';
 
 class UserService extends Service {
   async getNotifications(cursorId: number) {
@@ -91,6 +93,25 @@ class UserService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
+  async getKakaoToken(code: string) {
+    const body = QueryString.stringify({
+      grant_type: 'authorization_code',
+      client_id: KAKAO.client_id,
+      redirect_uri: KAKAO.redirect_uri,
+      code
+    });
+
+    const res = await this.fetchExtend.post('https://kauth.kakao.com/oauth/token', {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      },
+      body
+    });
+    if (!res.ok) throw new Error('카카오 로그인 실패');
+    const data: KakaoAuthResponse = await res.json();
+    return data;
+  }
+
   async login({ socialType, socialToken }: { socialType: SocialType; socialToken: string }) {
     const url = `/oauth/login/${socialType.toLocaleLowerCase()}?token=${socialToken}`;
     const res = await this.fetchExtend.get(url);
@@ -98,6 +119,7 @@ class UserService extends Service {
     if (!res.ok || !success) {
       throw new Error(ERROR_MESSAGE.api({ code, message }));
     }
+
     return result;
   }
 

@@ -10,25 +10,26 @@ import { useRecoilValue } from 'recoil';
 
 const ToastContainer = () => {
   const toasts = useRecoilValue(toastStateNewVer);
-  const top = useSpring(0);
+  const translateY = useSpring(0);
   const pathname = usePathname();
   const footerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const footer = document.getElementById(ELEMENT_ID.footer);
     if (!footer) return;
-    if (footerRef.current?.offsetTop === footer.offsetTop) return;
+    if (footerRef.current?.clientHeight === footer.clientHeight) return;
 
-    top.set(footer.offsetTop);
+    translateY.set(-footer.clientHeight);
     footerRef.current = footer;
-  }, [pathname, top]);
+  }, [pathname, translateY]);
 
   return (
     <motion.div
       style={{
-        translateY: top
+        translateY,
+        translateX: '-50%'
       }}
-      className="fixed top-0 w-[calc(100%-32px)] max-w-[calc(600px-32px)] z-toast mx-auto px-4 "
+      className="fixed bottom-0 w-full  max-w-[calc(600px-32px)] z-toast left-1/2"
     >
       <AnimatePresence>
         {toasts.map(({ message, id, action }, index) => (

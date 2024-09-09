@@ -28,7 +28,7 @@ const ToastPop = ({ children, index = 0, action }: Props) => {
         translateY: `${-100 - TRANS_Y_RATIO * index}%`,
         opacity: 0
       }}
-      className="absolute w-full  shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] flex items-center justify-between  px-[16px] py-[10px]  bg-gray-800 rounded-[8px] text-white typo-title-14-medium"
+      className="absolute w-full shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] flex items-center justify-between  px-[16px] py-[10px]  bg-gray-800 rounded-[8px] text-white typo-title-14-medium"
     >
       <span>{children}</span>
       {action && <span>{action}</span>}

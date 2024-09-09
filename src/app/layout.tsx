@@ -21,10 +21,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       <RootLayoutProvider>
         <SilentLogin />
         <ReceiveMessageFromApp />
-        <div className="shadow-lg max-w-[600px] mx-auto min-h-screen">
-          {children}
-          <AlertContainer />
-        </div>
+        {children}
+        <AlertContainer />
       </RootLayoutProvider>
       <KaKaoChatScript />
     </body>

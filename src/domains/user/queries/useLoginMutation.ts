@@ -1,12 +1,12 @@
-import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import PATH from '@/shared/constants/path';
+import { useRouter } from 'next/navigation';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useAuth from '@/shared/hooks/useAuth';
-import userService from './service';
+import PATH from '@/shared/constants/path';
 import { LoginResponse, SocialType } from '../types/login';
+import userService from './service';
 
-const useSocialLoginMutation = () => {
+export function useSocialLoginMutation() {
   const { openToast } = useToastNewVer();
   const { replace } = useRouter();
   const { login } = useAuth();
@@ -42,6 +42,25 @@ const useSocialLoginMutation = () => {
   };
 
   return useMutation({ mutationKey: ['login'], mutationFn, onSuccess, onError });
-};
+}
 
-export default useSocialLoginMutation;
+export function useKakaoLoginMutation() {
+  const { mutate: loginMutate } = useSocialLoginMutation();
+
+  return useMutation({
+    mutationFn: async (code: string) => {
+      const data = await userService.getKakaoToken(code);
+      loginMutate({ socialToken: data.access_token, socialType: 'KAKAO' });
+    }
+  });
+}
+
+export function useGoogleLoginMutation() {
+  const { mutate: loginMutate } = useSocialLoginMutation();
+
+  return useMutation({
+    mutationFn: async (token: string) => {
+      loginMutate({ socialToken: token, socialType: 'GOOGLE' });
+    }
+  });
+}

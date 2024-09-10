@@ -26,7 +26,7 @@ const BadgeSection = () => {
               type="radio"
               value={id}
               className="appearance-none"
-              {...register(`badges.${kind}`)}
+              {...register(`badges.${kind}`, { required: true })}
             />
           </label>
         ))}

@@ -4,6 +4,7 @@ import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { RecentSearchKeywordsResultType, IAllProductsType } from '@/domains/search/types';
 import { IFilterType } from '@/domains/product/types/filterType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
 class SearchService extends Service {
   async getPopularKeywords() {
@@ -50,15 +51,17 @@ class SearchService extends Service {
   async getSearchProducts({
     keyword,
     filterValue,
-    pageParam
+    cursorId
   }: {
     keyword: string;
     filterValue: IFilterType;
-    pageParam: number;
+    cursorId: number;
   }) {
-    const queryString = transformFilterValueToQueryString(filterValue);
+    const cursorIdQueryString = cursorId === INITIAL_CURSOR ? '' : `&cursorId=${cursorId}`;
+    const filterValueQueryString = transformFilterValueToQueryString(filterValue);
+
     const res = await this.fetchExtend.get(
-      `/search/boards?keyword=${keyword}&${queryString}&page=${pageParam}`
+      `/search/boards?keyword=${keyword}&${filterValueQueryString}${cursorIdQueryString}`
     );
     const { result, code, message, success }: ResultResponse<Cursor<IAllProductsType>> =
       await res.json();

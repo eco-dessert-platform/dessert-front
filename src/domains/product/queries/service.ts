@@ -44,14 +44,14 @@ class ProductService extends Service {
     return result;
   }
 
-  async getStoreInfo(productId: string) {
+  async getStoreInfo(productId: number) {
     const res = await this.fetchExtend.get(`/boards/${productId}/store`);
     const { result, success, message, code }: ResultResponse<INewStoreType> = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }
 
-  async getProductOption(productId: string) {
+  async getProductOption(productId: number) {
     const res = await this.fetchExtend.get(`/boards/${productId}/product`);
     const { result, success, message, code }: ResultResponse<ProductOptionResponse> =
       await res.json();
@@ -65,14 +65,14 @@ class ProductService extends Service {
     return newResult;
   }
 
-  async getBoardDetail(productId: string) {
+  async getBoardDetail(productId: number) {
     const res = await this.fetchExtend.get(`/boards/${productId}`);
     const { result, success, message, code }: ResultResponse<IBoardDetailType> = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }
 
-  async getReviewBadge(productId: string) {
+  async getReviewBadge(productId: number) {
     const res = await this.fetchExtend.get(`/boards/${productId}/review`);
     const { result, success, message, code }: ResultResponse<IReviewBadgeType> = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));

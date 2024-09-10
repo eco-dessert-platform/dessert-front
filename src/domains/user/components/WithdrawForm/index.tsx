@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import DeleteReasonList from '@/domains/user/components/WithdrawForm/DeleteReasonList';
 import Agree from '@/domains/user/components/WithdrawForm/Agree';
-import WithdrawButton from '@/domains/user/components/WithdrawForm/WithdrawButton';
 import useWithdrawMutation from '../../queries/useWithdrawMutation';
+import { FORM_ID } from '../../constants/form';
 
 const WithdrawForm = () => {
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
@@ -22,7 +22,7 @@ const WithdrawForm = () => {
   };
 
   return (
-    <form id="withdraw-form" onSubmit={handleFormSubmit}>
+    <form id={FORM_ID.withdraw} onSubmit={handleFormSubmit}>
       <div>
         <p className="mb-[8px] typo-title-14-semibold">
           계정을 삭제하는 이유를 알려주세요😢
@@ -33,7 +33,6 @@ const WithdrawForm = () => {
           <Agree isChecked={isAgreeChecked} onChange={handleAgreeChange} />
         </div>
       </div>
-      <WithdrawButton disabled={!isAgreeChecked} />
     </form>
   );
 };

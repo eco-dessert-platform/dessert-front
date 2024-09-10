@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
+import { IStoreType } from '@/domains/store/types/store';
 import { useGetStoreAllProductsQuery } from '@/domains/store/queries/useGetStoreAllProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ProductCard from '@/domains/product/components/ProductCard';
@@ -10,17 +10,16 @@ import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 
 interface Props {
-  storeId: number;
+  storeInfo: IStoreType;
 }
 
-const StoreAllProductsSection = ({ storeId }: Props) => {
+const StoreAllProductsSection = ({ storeInfo: { storeId, storeName } }: Props) => {
   const {
     data: products,
     isError,
     fetchNextPage,
     hasNextPage
   } = useGetStoreAllProductsQuery({ storeId });
-  const { data: storeInfo } = useGetStoreInfoQuery({ storeId });
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const StoreAllProductsSection = ({ storeId }: Props) => {
       </SadBbangleBox>
     );
   }
-  if (!storeInfo || !products || products.length === 0) {
+  if (!products || products.length === 0) {
     return (
       <SadBbangleBox>
         <p>상품이 없어요!</p>
@@ -48,10 +47,7 @@ const StoreAllProductsSection = ({ storeId }: Props) => {
       <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">전체상품</h5>
       <div className="grid grid-cols-2 gap-[16px]">
         {products.map((product) => (
-          <ProductCard
-            key={product.boardId}
-            product={{ ...product, storeId: storeInfo.storeId, storeName: storeInfo.storeName }}
-          />
+          <ProductCard key={product.boardId} product={{ ...product, storeId, storeName }} />
         ))}
       </div>
       {hasNextPage && (

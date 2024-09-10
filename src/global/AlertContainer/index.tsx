@@ -7,8 +7,8 @@ const AlertContainer = () => (
   <>
     <ModalContainer />
     <PopupContainer />
-    <ToastContainer />
     <TooltipContainer />
+    <ToastContainer />
   </>
 );
 

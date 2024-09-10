@@ -12,7 +12,7 @@ import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
 import OrderAvailableDays from './OrderAvailableDays';
 
-const ProductOptionsSetion = ({ productId }: { productId: string }) => {
+const ProductOptionsSetion = ({ productId }: { productId: number }) => {
   const { data: productOption } = useGetProductOptionQuery(productId);
   const [activeOption, setActiveOption] = useState<{ [key: number]: boolean }>({});
 
@@ -27,7 +27,11 @@ const ProductOptionsSetion = ({ productId }: { productId: string }) => {
     <DetailSectionWrapper title="상품 옵션">
       {productOption?.products.map((product: ProductOptionType) => (
         <div key={product.id}>
-          <CategoryOption product={product} onClick={() => handleCategoryClick(product.id)} />
+          <CategoryOption
+            product={product}
+            isExpended={activeOption[product.id]}
+            onClick={() => handleCategoryClick(product.id)}
+          />
           {activeOption[product.id] && (
             <PaddingWrapper className="flex flex-col gap-4">
               <IngredientInfo product={product} />

@@ -1,8 +1,6 @@
-'use client';
-
 import { notFound } from 'next/navigation';
 import Header from '@/shared/components/Header';
-import ReviewCreateForm from './_blocks/ReviewCreateForm';
+import ReviewCreateForm from '../_blocks/ReviewCreateForm';
 
 interface ReviewCreatePageProps {
   params: { productId: string | null; progress: string | null };
@@ -21,7 +19,7 @@ const ReviewCreatePage = ({ params: { productId, progress } }: ReviewCreatePageP
         content={<span className="typo-title-16-medium text-gray-500">{progressNum}/2</span>}
         back
       />
-      <ReviewCreateForm progress={progressNum} />
+      <ReviewCreateForm progress={progressNum} />;
     </>
   );
 };

@@ -32,7 +32,7 @@ export const nicknameState = atom<string>({
 
 export const birthDateState = atom<string>({
   key: 'birthDate',
-  default: ''
+  default: undefined
 });
 
 export const registrationFormState = selector<RegistrationRequest>({

@@ -1,7 +1,9 @@
 'use client';
 
 import React, { ChangeEvent, ReactNode, useId } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { CheckIcon } from '../icons';
 
 interface CheckBoxProps {

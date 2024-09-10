@@ -1,12 +1,15 @@
 'use client';
 
 import { ChangeEvent } from 'react';
-import CheckBox from '@/shared/components/Checkbox';
+
 import { useRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
-import GrayDivider from '@/shared/components/GrayDivider';
+
 import ViewLinkWrapper from '@/domains/user/components/RegistrationForm/CheckSection/ViewLinkWrapper';
+import CheckBox from '@/shared/components/Checkbox';
+import GrayDivider from '@/shared/components/GrayDivider';
 import PATH from '@/shared/constants/path';
+
 import { agreeState } from '../../../atoms/profile';
 
 interface Props {
@@ -61,7 +64,6 @@ const CheckSection = ({ className }: Props) => {
       <p className="typo-body-12-regular text-primaryOrangeRed">유효성체크문구영역</p>
       <CheckBox
         name="isTermsOfServiceAccepted"
-        required
         isChecked={agree.isTermsOfServiceAccepted}
         onChange={onChangeService}
       >
@@ -69,7 +71,6 @@ const CheckSection = ({ className }: Props) => {
       </CheckBox>
       <CheckBox
         name="isPersonalInfoConsented"
-        required
         isChecked={agree.isPersonalInfoConsented}
         onChange={onChangePersonalInfo}
       >

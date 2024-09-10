@@ -1,11 +1,14 @@
 'use client';
 
-import { useRecoilState } from 'recoil';
-import { ChangeEvent, useId } from 'react';
+import { ChangeEvent, useId, useState } from 'react';
+
+import { useSetRecoilState } from 'recoil';
+
 import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
-import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
+
 import { nicknameState } from '../../atoms/profile';
+import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
 
 interface NicknameInputProps {
   defaultValue?: string;
@@ -14,7 +17,8 @@ interface NicknameInputProps {
 const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
   const inputId = useId();
   const { mutate, data } = useNicknameDoubleCheckMutation();
-  const [nickname, setNickname] = useRecoilState(nicknameState);
+  const [nickname, setNickname] = useState(defaultValue);
+  const setNick = useSetRecoilState(nicknameState);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -22,7 +26,19 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
   };
 
   const checkDouble = () => {
-    mutate(nickname);
+    mutate(nickname || '', {
+      onSuccess: (res) => {
+        if (res.isValid) {
+          setNick(nickname || '');
+        } else {
+          setNick('');
+          setNickname('');
+        }
+      },
+      onError: (error) => {
+        console.error('닉네임 중복 체크 실패:', error);
+      }
+    });
   };
 
   return (
@@ -35,7 +51,7 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
         autoComplete="off"
         required
         maxLength={20}
-        defaultValue={defaultValue}
+        value={nickname}
         className="typo-title-14-medium"
         button={
           <Button

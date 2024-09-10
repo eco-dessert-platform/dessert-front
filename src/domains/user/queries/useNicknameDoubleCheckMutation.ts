@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
-import fetchExtend from '@/shared/utils/api';
 import { ResultResponse } from '@/shared/types/response';
+import fetchExtend from '@/shared/utils/api';
 import { throwApiError } from '@/shared/utils/error';
+import { useMutation } from '@tanstack/react-query';
+
 import { NicknameDoubleCheckResponse } from '../types/profile';
 
 const useNicknameDoubleCheckMutation = () => {

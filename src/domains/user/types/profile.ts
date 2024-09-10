@@ -1,11 +1,12 @@
 export interface NicknameDoubleCheckResponse {
   message: string;
+  isValid: boolean;
 }
 
 export interface MyProfileUpdateRequest {
   profileImg: File | null;
   nickname: string | null;
-  sex: string | null;
+  sex: string;
   birthDate: string | null;
 }
 
@@ -16,7 +17,7 @@ export interface RegistrationRequest {
   isPersonalInfoConsented: boolean;
   isTermsOfServiceAccepted: boolean;
   nickname: string;
-  birthDate?: string;
+  birthDate: string;
 }
 
 export interface UserProfileType {

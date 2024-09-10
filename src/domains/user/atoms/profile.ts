@@ -20,9 +20,9 @@ export const phoneNumberState = atom<string>({
   key: 'phoneNumber',
   default: undefined
 });
-export const genderState = atom<string>({
-  key: 'gender',
-  default: undefined
+export const sexState = atom<string>({
+  key: 'sex',
+  default: 'MAN'
 });
 
 export const nicknameState = atom<string>({
@@ -32,7 +32,7 @@ export const nicknameState = atom<string>({
 
 export const birthDateState = atom<string>({
   key: 'birthDate',
-  default: undefined
+  default: ''
 });
 
 export const registrationFormState = selector<RegistrationRequest>({
@@ -42,6 +42,7 @@ export const registrationFormState = selector<RegistrationRequest>({
     const profileImg = get(profileImgState);
     const nickname = get(nicknameState);
     const phoneNumber = get(phoneNumberState);
+    const sex = get(sexState);
     const birthDate = get(birthDateState);
     const agree = get(agreeState);
 
@@ -49,6 +50,7 @@ export const registrationFormState = selector<RegistrationRequest>({
       profileImg,
       nickname,
       birthDate,
+      sex,
       phoneNumber,
       ...agree
     };
@@ -61,6 +63,7 @@ export const updateFormState = selector<MyProfileUpdateRequest>({
   get: ({ get }) => {
     const profileImg = get(profileImgState);
     const nickname = get(nicknameState);
+    const sex = get(sexState);
     const phoneNumber = get(phoneNumberState);
     const birthDate = get(birthDateState);
 
@@ -68,6 +71,7 @@ export const updateFormState = selector<MyProfileUpdateRequest>({
       profileImg,
       nickname,
       birthDate,
+      sex,
       phoneNumber
     };
   }

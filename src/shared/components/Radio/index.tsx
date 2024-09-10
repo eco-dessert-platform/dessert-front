@@ -7,7 +7,7 @@ import { twMerge } from 'tailwind-merge';
 import { CheckIcon } from '../icons';
 
 interface RadioProps {
-  isChecked: boolean;
+  isChecked?: boolean;
   onChange?: (_e: ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string;

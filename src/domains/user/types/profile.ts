@@ -5,24 +5,24 @@ export interface NicknameDoubleCheckResponse {
 export interface MyProfileUpdateRequest {
   profileImg: File | null;
   nickname: string | null;
-  phoneNumber: string | null;
+  sex: string | null;
   birthDate: string | null;
 }
 
 export interface RegistrationRequest {
   profileImg?: File;
-  phoneNumber: string;
+  sex: string;
   isAllowingMarketing: boolean;
   isPersonalInfoConsented: boolean;
   isTermsOfServiceAccepted: boolean;
   nickname: string;
-  birthdate?: string;
+  birthDate?: string;
 }
 
 export interface UserProfileType {
   profileImg: string | null;
   nickname: string | null;
-  phoneNumber: string | null;
+  sex: string;
   birthDate: string | null;
 }
 

@@ -5,7 +5,7 @@ import { BADGE } from '@/domains/review/constants/badge';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface Props {
-  productId: string;
+  productId: number;
 }
 
 const ReviewBadgeSection = async ({ productId }: Props) => {

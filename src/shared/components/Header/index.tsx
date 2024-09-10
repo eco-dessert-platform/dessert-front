@@ -21,7 +21,12 @@ const Header = ({ title, content, back = false, className }: HeaderProps) => {
   };
 
   return (
-    <PaddingWrapper className={twMerge('flex items-center h-[60px] py-[10px]', className)}>
+    <PaddingWrapper
+      className={twMerge(
+        'sticky top-0 z-header flex bg-white items-center h-[60px] py-[10px]',
+        className
+      )}
+    >
       {back && (
         <button
           type="button"

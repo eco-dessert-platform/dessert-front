@@ -4,6 +4,7 @@ import { IAllProductsType } from '@/domains/search/types';
 import searchService from '@/domains/search/queries/service';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { Cursor } from '@/shared/types/response';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
 interface QueryHookProps {
   keyword: string;
@@ -13,8 +14,8 @@ interface QueryHookProps {
 export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookProps) => {
   const queryKey = [...productQueryKey.list('search'), { filter: filterValue, keyword }];
 
-  const queryFn = async ({ pageParam }: { pageParam: number }) => {
-    const result = await searchService.getSearchProducts({ keyword, filterValue, pageParam });
+  const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
+    const result = await searchService.getSearchProducts({ keyword, filterValue, cursorId });
     return result;
   };
 
@@ -28,7 +29,7 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
   return useInfiniteQuery({
     queryKey,
     queryFn,
-    initialPageParam: 0,
+    initialPageParam: INITIAL_CURSOR,
     getNextPageParam,
     refetchOnMount: false,
     refetchOnReconnect: false,

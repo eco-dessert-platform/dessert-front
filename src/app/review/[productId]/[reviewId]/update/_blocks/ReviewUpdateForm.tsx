@@ -3,9 +3,8 @@
 import ReviewWriteForm from '@/domains/review/components/ReviewWriteForm';
 import useUpdateReviewMutation from '@/domains/review/queries/useUpdateReviewMutation';
 import { IReviewWriteForm } from '@/domains/review/types/review';
-import PATH from '@/shared/constants/path';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { SubmitErrorHandler, SubmitHandler, useFormContext } from 'react-hook-form';
 
 interface Props {
@@ -16,8 +15,7 @@ const ReviewUpdateForm = ({ progress }: Props) => {
   const { mutate } = useUpdateReviewMutation();
   const { handleSubmit } = useFormContext<IReviewWriteForm>();
   const { openToast } = useToastNewVer();
-  const { push } = useRouter();
-  const { reviewId, productId } = useParams<{ productId: string; reviewId: string }>();
+  const { reviewId } = useParams<{ productId: string; reviewId: string }>();
 
   const onValidSubmit: SubmitHandler<IReviewWriteForm> = ({ badges, images, ...rest }) => {
     const review = {
@@ -35,16 +33,10 @@ const ReviewUpdateForm = ({ progress }: Props) => {
     openToast({ message: '값을 올바르게 입력해주세요.' });
   };
 
-  const onNextClick = () => {
-    push(
-      PATH.reviewUpdate({ productId: Number(productId), progress: 2, reviewId: Number(reviewId) })
-    );
-  };
-
   return (
     <ReviewWriteForm
+      id="review-update-form"
       progress={progress}
-      onNextClick={onNextClick}
       onSubmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
     />
   );

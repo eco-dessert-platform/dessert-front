@@ -6,7 +6,7 @@ import DetailStoreInfo from './DetailStoreInfo';
 import SimpleProductInfo from './SimpleProductInfo';
 
 interface Props {
-  productId: string;
+  productId: number;
 }
 
 const SimpleInfoWithStoreSection = ({ productId }: Props) => {

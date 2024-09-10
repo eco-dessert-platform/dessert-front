@@ -2,6 +2,7 @@ import Service from '@/shared/queries/service';
 import { ResultResponse, ListResponse, Cursor } from '@/shared/types/response';
 import { IStoreType, IStoreProductType } from '@/domains/store/types/store';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
+import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
 class StoreService extends Service {
   async getStoreInfo(storeId: number) {
@@ -21,8 +22,9 @@ class StoreService extends Service {
     return list;
   }
 
-  async getStoreAllProducts(storeId: number) {
-    const res = await this.fetchExtend.get(`/stores/${storeId}/boards`);
+  async getStoreAllProducts(storeId: number, cursorId: number) {
+    const params = cursorId === INITIAL_CURSOR ? '' : `?cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(`/stores/${storeId}/boards${params}`);
     const { result, success, code, message }: ResultResponse<Cursor<Array<IStoreProductType>>> =
       await res.json();
 

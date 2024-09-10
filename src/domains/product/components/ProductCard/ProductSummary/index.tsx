@@ -16,7 +16,7 @@ const ProductSummary = ({
     </h3>
     <div className="flex items-center gap-x-[2px] typo-title-14-medium">
       {discountRate > 0 && <span className="text-secondaryOrangeRed">{discountRate}%</span>}
-      <span className="text-gray-900">{price}원</span>
+      <span className="text-gray-900">{price.toLocaleString()}원</span>
     </div>
     {reviewRate !== undefined && reviewCount !== undefined && (
       <div className="mb-[4px] flex gap-[2px] items-center">

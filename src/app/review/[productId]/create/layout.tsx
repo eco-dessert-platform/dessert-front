@@ -1,8 +1,12 @@
 import { PropsWithChildren } from 'react';
-import ReviewCreateFormProvider from './[progress]/_blocks/ReviewCreateFormProvider';
+import DefaultLayout from '@/shared/components/DefaultLayout';
+import ReviewCreateFormProvider from './_blocks/ReviewCreateFormProvider';
+import ButtonSection from './_blocks/ButtonSection';
 
 const Layout = ({ children }: PropsWithChildren) => (
-  <ReviewCreateFormProvider>{children}</ReviewCreateFormProvider>
+  <ReviewCreateFormProvider>
+    <DefaultLayout main={children} footer={<ButtonSection />} />
+  </ReviewCreateFormProvider>
 );
 
 export default Layout;

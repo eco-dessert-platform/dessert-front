@@ -1,16 +1,16 @@
-import { FormEventHandler, MouseEventHandler } from 'react';
+import { FormEventHandler } from 'react';
 import BadgeSelectSection from './BadgeSelectSection';
 import CommentSection from './CommentSection';
 
 interface Props {
+  id?: string;
   progress: 1 | 2;
-  onNextClick: MouseEventHandler<HTMLButtonElement>;
   onSubmit: FormEventHandler<HTMLFormElement>;
 }
 
-const ReviewWriteForm = ({ progress, onSubmit, onNextClick }: Props) => (
-  <form onSubmit={onSubmit}>
-    {progress === 1 && <BadgeSelectSection onNextClick={onNextClick} />}
+const ReviewWriteForm = ({ id, progress, onSubmit }: Props) => (
+  <form id={id} onSubmit={onSubmit}>
+    {progress === 1 && <BadgeSelectSection />}
     {progress === 2 && <CommentSection />}
   </form>
 );

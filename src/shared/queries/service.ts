@@ -21,7 +21,6 @@ class Service {
   constructor() {
     this.baseUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1`;
     this.headers = {
-      csrf: 'token',
       Referer: this.baseUrl
     };
     this.fetchExtend = {
@@ -39,7 +38,7 @@ class Service {
   private async request(method: string, url: string, config?: RequestInit, form: boolean = false) {
     const cookie = await getCookie('accessToken');
     const accessToken = cookie?.value;
-    const bearerToken = `Bearer ${accessToken}`;
+    const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
     const fullUrl =
       url.startsWith('http://') || url.startsWith('https://') ? url : `${this.baseUrl}${url}`;
 
@@ -49,7 +48,7 @@ class Service {
       headers: {
         ...this.headers,
         ...(form ? {} : { 'Content-Type': 'application/json' }),
-        Authorization: bearerToken,
+        ...(bearerToken ? { Authorization: bearerToken } : null),
         ...config?.headers
       }
     });

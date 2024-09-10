@@ -8,12 +8,16 @@ import { updateFormState } from '@/domains/user/atoms/profile';
 import BirthdayInput from '@/domains/user/components/common/BirthdateInput';
 import NicknameInput from '@/domains/user/components/common/NickNameInput';
 import ProfileImageInput from '@/domains/user/components/common/ProfileImageInput';
+
 import ButtonSection from '@/domains/user/components/ProfileUpdateForm/ButtonSection';
 import MoreSection from '@/domains/user/components/ProfileUpdateForm/MoreSection';
 import useProfileUpdateMutation from '@/domains/user/queries/useProfileUpdateMutation';
 import { UserProfileType } from '@/domains/user/types/profile';
 
 import SexInput from '../common/SexInput';
+
+import { FORM_ID } from '../../constants/form';
+
 
 interface ProfileUpdateFormProps {
   defaultValues: UserProfileType;
@@ -31,7 +35,7 @@ const ProfileUpdateForm = ({
   };
 
   return (
-    <form className="px-[16px]" onSubmit={onSubmit}>
+    <form id={FORM_ID.profileUpdate} className="px-[16px]" onSubmit={onSubmit}>
       <div className="my-[16px] flex justify-center items-center">
         <ProfileImageInput defaultValue={profileImg ?? undefined} />
       </div>
@@ -41,7 +45,6 @@ const ProfileUpdateForm = ({
         <BirthdayInput defaultValue={birthDate ?? undefined} />
       </div>
       <MoreSection className="mb-[16px]" />
-      <ButtonSection />
     </form>
   );
 };

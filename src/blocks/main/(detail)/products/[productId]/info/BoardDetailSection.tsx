@@ -3,7 +3,7 @@ import Image from 'next/image';
 import productService from '@/domains/product/queries/service';
 
 interface Props {
-  productId: string;
+  productId: number;
 }
 
 const BoardDetailsSection = async ({ productId }: Props) => {

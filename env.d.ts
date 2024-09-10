@@ -13,6 +13,7 @@ declare global {
       NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_SECRET: string;
       NEXT_PUBLIC_GOOGLE_AUTH_REDIRECT_URI: string;
       NEXT_PUBLIC_GA_ID: string;
+      NEXT_PUBLIC_GTM_ID: string;
     }
   }
 }

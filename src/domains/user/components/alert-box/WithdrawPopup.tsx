@@ -3,6 +3,7 @@
 import Popup from '@/shared/components/Popup';
 import usePopup from '@/shared/hooks/usePopup';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { FORM_ID } from '../../constants/form';
 
 const WithdrawPopup = () => {
   const { closePopup } = usePopup();
@@ -32,7 +33,7 @@ const WithdrawPopup = () => {
           </button>
           <input
             type="submit"
-            form="withdraw-form"
+            form={FORM_ID.withdraw}
             value="탈퇴하기"
             className="text-primaryOrangeRed typo-title-14-medium cursor-pointer"
           />

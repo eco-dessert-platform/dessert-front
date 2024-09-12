@@ -10,6 +10,7 @@ import ImageCounter from '@/domains/product/components/ProductImageSlide/ImgCoun
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
 import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import ImgNone from '@/domains/product/components/ProductImageSlide/ImgNone';
 
 const BoardImagesSection = ({ productId }: { productId: number }) => {
   const [swiperIndex, setSwiperIndex] = useState(0);
@@ -19,22 +20,27 @@ const BoardImagesSection = ({ productId }: { productId: number }) => {
   const imageArray = [boardDetail?.profile, ...(boardDetail?.boardImages ?? [])].filter(
     (item) => item !== undefined && item !== null
   );
+  const haveBoardImages = imageArray.length > 0;
   const isAllProductSoldOut = productOption?.products.every((product) => product.isSoldout);
 
   return (
     <PaddingWrapper className="pb-0">
       <div className="relative">
-        <ProductImageSlide
-          boardImages={imageArray as string[]}
-          isSoldOut={isAllProductSoldOut}
-          onChange={setSwiperIndex}
-        />
+        {haveBoardImages ? (
+          <ProductImageSlide
+            boardImages={imageArray as string[]}
+            isSoldOut={isAllProductSoldOut}
+            onChange={setSwiperIndex}
+          />
+        ) : (
+          <ImgNone />
+        )}
         {productOption?.boardIsBundled && (
           <div className="absolute top-[10px] left-[10px] z-10 ">
             <Badge type="bundle">묶음상품</Badge>
           </div>
         )}
-        {imageArray.length > 0 && (
+        {haveBoardImages && (
           <div className="absolute bottom-[10px] right-[10px] w-[37px] h-[21px] px-2.5 py-0.5 bg-black bg-opacity-60 rounded-[50px] justify-center items-center gap-2.5 inline-flex z-10">
             <ImageCounter index={swiperIndex} total={imageArray.length} />
           </div>

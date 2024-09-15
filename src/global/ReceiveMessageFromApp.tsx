@@ -3,8 +3,8 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { MessageType } from '@/shared/types/message';
-import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
 import { fcmTokenState } from '@/domains/alarm/atoms';
+import { FCM_TYPE } from '@/shared/constants/message';
 
 const ReceiveMessageFromApp = () => {
   const setFcmToken = useSetRecoilState(fcmTokenState);
@@ -17,7 +17,7 @@ const ReceiveMessageFromApp = () => {
       if (!message.type) throw new Error('메시지 타입이 올바르지 않습니다.');
       const { type, data, error }: MessageType = message;
 
-      if (type === FCM_TOKEN.getSucceed || type === FCM_TOKEN.getFailed) {
+      if (type === FCM_TYPE.getSucceed || type === FCM_TYPE.getFailed) {
         setFcmToken({ data, error });
       }
     };

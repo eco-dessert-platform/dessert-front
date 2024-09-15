@@ -5,7 +5,8 @@ import { useRecoilValue } from 'recoil';
 import useWebview from '@/shared/hooks/useWebView';
 import { fcmTokenState } from '@/domains/alarm/atoms';
 import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
-import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
+import { FCM_TYPE } from '@/shared/constants/message';
+
 import usePopup from '@/shared/hooks/usePopup';
 import Popup from '@/shared/components/Popup';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -39,7 +40,7 @@ const DisplayFcmToken = () => {
     countClicked.current += 1;
     const isMultipleOf10 = countClicked.current % 10 === 0;
     if (isMultipleOf10 && isWebView) {
-      sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
+      sendMessageToApp({ type: FCM_TYPE.getFcmToken });
     }
   };
 

@@ -9,6 +9,7 @@ import {
   useGoogleLoginMutation,
   useKakaoLoginMutation
 } from '@/domains/user/queries/useLoginMutation';
+import { LOGIN_TYPE } from '@/shared/constants/message';
 import KakaoLoginButton from './_blocks/KakaoLoginButton';
 import GoogleLoginButton from './_blocks/GoogleLoginButton';
 
@@ -19,21 +20,27 @@ const LoginPage = () => {
   const { mutate: googleMutate } = useGoogleLoginMutation();
 
   useEffect(() => {
-    if (!popup) return undefined;
-
     const handlePopup = (e: MessageEvent) => {
-      if (e.origin !== window.location.origin) return;
-      const { code, socialType } = e.data;
-      if (!code || !socialType) return;
+      if (typeof e.data !== 'string') return;
+      const { type, data } = JSON.parse(e.data);
 
+      if (type !== LOGIN_TYPE || !data) return;
+      const { socialType, code } = data;
+
+      if (!code || !socialType) return;
+      setMessage({ code, socialType });
+
+      if (!popup) return;
       popup.window.close();
       setPopup(null);
-      setMessage({ code, socialType });
     };
 
     window.addEventListener('message', handlePopup);
+    document.addEventListener('message', handlePopup as EventListener);
+
     return () => {
       window.removeEventListener('message', handlePopup);
+      document.removeEventListener('message', handlePopup as EventListener);
     };
   }, [popup, setPopup, kakaoMutate]);
 

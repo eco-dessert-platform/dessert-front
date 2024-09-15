@@ -1,6 +1,7 @@
 'use client';
 
 import Loading from '@/shared/components/Loading';
+import { LOGIN_TYPE } from '@/shared/constants/message';
 import { useEffect } from 'react';
 
 const GoogleLoginLoadingPage = () => {
@@ -9,7 +10,18 @@ const GoogleLoginLoadingPage = () => {
     const params = new URLSearchParams(hash.substring(1));
     const token = params.get('access_token');
     if (!token) return;
-    window.opener.postMessage({ code: token, socialType: 'GOOGLE' }, window.location.origin);
+
+    const message = JSON.stringify({
+      type: LOGIN_TYPE,
+      data: { socialType: 'GOOGLE', code: token }
+    });
+
+    if (!window.opener) {
+      window.location.replace(`bbangleoven://?message=${message}`);
+      return;
+    }
+
+    window.opener.postMessage(message, window.location.origin);
   });
 
   return <Loading />;

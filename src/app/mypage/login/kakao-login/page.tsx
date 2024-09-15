@@ -1,6 +1,7 @@
 'use client';
 
 import Loading from '@/shared/components/Loading';
+import { MessageType } from '@/shared/types/message';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -10,7 +11,10 @@ const KakaoLoginLoadingPage = () => {
 
   useEffect(() => {
     if (!code) return;
-    window.opener.postMessage({ code, socialType: 'KAKAO' }, window.location.origin);
+
+    const data = JSON.stringify({ code, socialType: 'KAKAO' });
+    const message: MessageType = { type: 'login', data };
+    window.opener.postMessage(message, window.location.origin);
   }, [code]);
 
   return <Loading />;

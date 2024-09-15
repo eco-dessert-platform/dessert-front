@@ -12,10 +12,8 @@ const ReceiveMessageFromApp = () => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (typeof event.data !== 'string') return;
-      alert(event.data);
 
       const message = JSON.parse(event.data);
-      alert(message);
       if (!message.type) throw new Error('메시지 타입이 올바르지 않습니다.');
       const { type, data, error }: MessageType = message;
 

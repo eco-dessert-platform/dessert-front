@@ -2,6 +2,7 @@
 
 import Loading from '@/shared/components/Loading';
 import { LOGIN_TYPE } from '@/shared/constants/message';
+import { APP_URL } from '@/shared/constants/url';
 import { useEffect } from 'react';
 
 const GoogleLoginLoadingPage = () => {
@@ -17,7 +18,7 @@ const GoogleLoginLoadingPage = () => {
     });
 
     if (!window.opener) {
-      window.location.replace(`bbangleoven://?message=${message}`);
+      window.location.replace(`${APP_URL}?message=${message}`);
       return;
     }
 

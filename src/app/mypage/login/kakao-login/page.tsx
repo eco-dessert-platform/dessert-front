@@ -1,7 +1,8 @@
 'use client';
 
 import Loading from '@/shared/components/Loading';
-import { MessageType } from '@/shared/types/message';
+import { LOGIN_TYPE } from '@/shared/constants/message';
+import { APP_URL } from '@/shared/constants/url';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -12,8 +13,12 @@ const KakaoLoginLoadingPage = () => {
   useEffect(() => {
     if (!code) return;
 
-    const data = JSON.stringify({ code, socialType: 'KAKAO' });
-    const message: MessageType = { type: 'login', data };
+    const message = JSON.stringify({ type: LOGIN_TYPE, data: { code, socialType: 'KAKAO' } });
+
+    if (!window.opener) {
+      window.location.replace(`${APP_URL}?message=${message}`);
+      return;
+    }
     window.opener.postMessage(message, window.location.origin);
   }, [code]);
 

@@ -8,6 +8,7 @@ import { IProductType } from '@/domains/product/types/productType';
 import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
+import { isLoggedinState } from '@/shared/atoms/login';
 import Badge from '@/shared/components/Badge';
 import HeartButton from '@/shared/components/HeartButton';
 import { BellIcon } from '@/shared/components/icons';
@@ -31,8 +32,12 @@ const ProductImage = ({
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
+  const isLoggedIn = useRecoilValue(isLoggedinState);
+
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: boardId, folderId: selectedWishFolder });
+    if (isLoggedIn) {
+      addMutate({ productId: boardId, folderId: selectedWishFolder });
+    }
     e.preventDefault();
   };
 

@@ -7,15 +7,15 @@ import Radio from '@/shared/components/Radio';
 import { sexState } from '../../atoms/profile';
 
 const SexInput = () => {
-  const [gender, setGender] = useRecoilState(sexState);
+  const [sex, setSex] = useRecoilState(sexState);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setGender(value);
+    setSex(value);
   };
 
-  const isManSelected = gender === 'MAN';
-  const isWomanSelected = gender === 'WOMAN';
+  const isManSelected = sex === 'MAN';
+  const isWomanSelected = sex === 'WOMAN';
 
   return (
     <div>

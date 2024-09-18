@@ -2,6 +2,7 @@
 
 import Review from '@/domains/review/components/Review';
 import useReviewQuery from '@/domains/review/queries/useReviewQuery';
+import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import Skeleton from '@/shared/components/Skeleton';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -15,6 +16,9 @@ const ReviewList = () => {
   useEffect(() => {
     if (inView) fetchNextPage();
   }, [inView, fetchNextPage]);
+
+  if (!reviews || reviews.length === 0)
+    return <SadBbangleBox className="size-[300px] mx-auto">작성된 리뷰가 없어요.</SadBbangleBox>;
 
   return (
     <section className="flex flex-col divide-y divide-gray-200">

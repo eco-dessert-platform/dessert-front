@@ -42,9 +42,9 @@ const ReviewListPage = async ({ params }: Props) => {
         >
           리뷰 작성
         </Link>
-        {bestReview.images && bestReview.images.length > 0 && (
+        {bestReview?.images && bestReview.images.length > 0 && (
           <div className="flex gap-[4px] w-full aspect-[4/1]">
-            {bestReview.images.slice(0, 4).map(({ id, url }, idx) => (
+            {bestReview?.images.slice(0, 4).map(({ id, url }, idx) => (
               <div
                 key={id}
                 className={cn(

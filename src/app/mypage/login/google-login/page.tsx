@@ -23,6 +23,7 @@ const GoogleLoginLoadingPage = () => {
     }
 
     window.opener.postMessage(message, window.location.origin);
+    window.close();
   });
 
   return <Loading />;

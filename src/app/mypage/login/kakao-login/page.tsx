@@ -20,6 +20,7 @@ const KakaoLoginLoadingPage = () => {
       return;
     }
     window.opener.postMessage(message, window.location.origin);
+    window.close();
   }, [code]);
 
   return <Loading />;

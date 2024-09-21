@@ -31,7 +31,6 @@ const LoginPage = () => {
       setMessage({ code, socialType });
 
       if (!popup) return;
-      popup.window.close();
       setPopup(null);
     };
 

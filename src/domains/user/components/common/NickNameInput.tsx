@@ -1,7 +1,8 @@
 'use client';
 
-import { ChangeEvent, useId, useState } from 'react';
+import { useId } from 'react';
 
+import { useFormContext } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
 
 import Button from '@/shared/components/Button';
@@ -10,29 +11,28 @@ import Input from '@/shared/components/Input';
 import { nicknameState } from '../../atoms/profile';
 import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
 
-interface NicknameInputProps {
-  defaultValue?: string;
-}
-
-const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
+const NicknameInput = () => {
   const inputId = useId();
   const { mutate, data } = useNicknameDoubleCheckMutation();
-  const [nickname, setNickname] = useState(defaultValue);
+
   const setNick = useSetRecoilState(nicknameState);
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { defaultValues }
+  } = useFormContext();
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setNickname(value);
-  };
+  const nickname = watch('nickname', defaultValues?.nickname);
 
-  const checkDouble = () => {
+  const nickDoubleCheck = () => {
     mutate(nickname || '', {
       onSuccess: (res) => {
         if (res.isValid) {
           setNick(nickname || '');
         } else {
           setNick('');
-          setNickname('');
+          setValue('nickname', '');
         }
       },
       onError: (error) => {
@@ -45,9 +45,14 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
     <div className="w-full">
       <Input
         id={inputId}
+        {...register('nickname', {
+          onChange: (e) => {
+            const { value } = e.target;
+            setNick(value);
+          }
+        })}
         placeholder="닉네임을 입력해 주세요."
         label="닉네임"
-        onChange={onChange}
         autoComplete="off"
         required
         maxLength={20}
@@ -58,7 +63,7 @@ const NicknameInput = ({ defaultValue }: NicknameInputProps) => {
             type="button"
             variants="input"
             className="typo-body-12-medium"
-            onClick={checkDouble}
+            onClick={nickDoubleCheck}
           >
             중복확인
           </Button>

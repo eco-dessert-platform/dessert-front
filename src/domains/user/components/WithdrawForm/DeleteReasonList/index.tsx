@@ -1,4 +1,8 @@
-import DeleteReasonItem from './DeleteReasonItem';
+'use client';
+
+import { useFormContext } from 'react-hook-form';
+import { WithdrawFormType } from '@/domains/user/types/profile';
+import CheckBoxNewver from '@/shared/components/CheckboxNewver';
 
 const REASONS = [
   { content: '원하는 정보가 부족해요.' },
@@ -8,12 +12,29 @@ const REASONS = [
   { content: '기타' }
 ];
 
-const DeleteReasonList = () => (
-  <div className="flex flex-col gap-[16px] py-[10px]">
-    {REASONS.map(({ content }) => (
-      <DeleteReasonItem key={content} content={content} />
-    ))}
-  </div>
-);
+const DeleteReasonList = () => {
+  const { watch, register } = useFormContext<WithdrawFormType>();
+  const deleteReasons = watch('deleteReasons');
+
+  return (
+    <div className="flex flex-col gap-[16px] py-[10px]">
+      {REASONS.map(({ content }) => (
+        <label
+          key={content}
+          htmlFor={content}
+          className="flex gap-[6px] items-center cursor-pointer"
+        >
+          <CheckBoxNewver
+            id={content}
+            value={content}
+            checked={deleteReasons.includes(content)}
+            {...register('deleteReasons', { required: true })}
+          />
+          <p className="typo-title-14-regular">{content}</p>
+        </label>
+      ))}
+    </div>
+  );
+};
 
 export default DeleteReasonList;

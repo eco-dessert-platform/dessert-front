@@ -12,8 +12,7 @@ const useWithdrawMutation = () => {
   const { closePopup } = usePopup();
   const { openToast } = useToastNewVer();
 
-  const mutationFn = async ({ formData }: { formData: FormData }) => {
-    const deleteReasons = formData.getAll('delete-reason') as Array<string>;
+  const mutationFn = async ({ deleteReasons }: { deleteReasons: Array<string> }) => {
     const result = await userService.withdraw(deleteReasons);
     return result;
   };

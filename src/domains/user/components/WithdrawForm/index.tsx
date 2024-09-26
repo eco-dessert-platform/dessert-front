@@ -1,28 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useFormContext, SubmitHandler } from 'react-hook-form';
+import { WithdrawFormType } from '@/domains/user/types/profile';
 import DeleteReasonList from '@/domains/user/components/WithdrawForm/DeleteReasonList';
 import Agree from '@/domains/user/components/WithdrawForm/Agree';
 import useWithdrawMutation from '../../queries/useWithdrawMutation';
 import { FORM_ID } from '../../constants/form';
 
 const WithdrawForm = () => {
-  const [isAgreeChecked, setIsAgreeChecked] = useState(false);
   const { mutate } = useWithdrawMutation();
+  const { handleSubmit } = useFormContext<WithdrawFormType>();
 
-  const handleAgreeChange = () => {
-    setIsAgreeChecked(!isAgreeChecked);
-  };
-
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    mutate({ formData });
+  const onValid: SubmitHandler<WithdrawFormType> = ({ deleteReasons }) => {
+    mutate({ deleteReasons });
   };
 
   return (
-    <form id={FORM_ID.withdraw} onSubmit={handleFormSubmit}>
+    <form id={FORM_ID.withdraw} onSubmit={handleSubmit(onValid)}>
       <div>
         <p className="mb-[8px] typo-title-14-semibold">
           계정을 삭제하는 이유를 알려주세요😢
@@ -31,7 +25,7 @@ const WithdrawForm = () => {
         </p>
         <DeleteReasonList />
         <div className="flex justify-center mt-[20px] mb-[32px]">
-          <Agree isChecked={isAgreeChecked} onChange={handleAgreeChange} />
+          <Agree />
         </div>
       </div>
     </form>

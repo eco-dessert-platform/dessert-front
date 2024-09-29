@@ -1,14 +1,18 @@
-import PATH from '@/shared/constants/path';
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import PATH from '@/shared/constants/path';
+import { cn } from '@/shared/utils/cn';
 
 interface Props {
-  id: number;
   comment: string;
+  boardId: number;
+  reviewId: number;
 }
 
-const Comment = ({ id, comment }: Props) => {
-  const [isEllipsed, setIsEllipsed] = useState(false);
+const Comment = ({ comment, boardId, reviewId }: Props) => {
+  const [status, setStatus] = useState<'init' | 'ellipsis' | 'entire'>('init');
 
   const commentRef = useRef<HTMLParagraphElement>(null);
   const originalCommentRef = useRef<HTMLParagraphElement>(null);
@@ -18,7 +22,8 @@ const Comment = ({ id, comment }: Props) => {
       if (!originalCommentRef.current || !commentRef.current) return;
       const { clientHeight: originalHeight } = originalCommentRef.current;
       const { clientHeight: commentHeight } = commentRef.current;
-      setIsEllipsed(originalHeight !== commentHeight);
+      const newStatus = originalHeight === commentHeight ? 'entire' : 'ellipsis';
+      setStatus(newStatus);
     };
 
     handleMoreButton();
@@ -26,19 +31,31 @@ const Comment = ({ id, comment }: Props) => {
     return () => window.addEventListener('resize', handleMoreButton);
   }, []);
 
+  const showEntire = () => {
+    setStatus('entire');
+  };
+
   return (
     <>
-      <div className="typo-title-14-regular line-clamp-3">
-        {isEllipsed && (
-          <Link
-            href={`${PATH.myReview}/${id}`}
+      <div
+        className={cn(
+          'typo-title-14-regular',
+          (status === 'init' || status === 'ellipsis') && 'line-clamp-3'
+        )}
+      >
+        {status === 'ellipsis' && (
+          <button
+            type="button"
+            onClick={showEntire}
             className="float-right mt-[42px] [shape-outside:border-box] text-gray-500"
           >
             더보기
-          </Link>
+          </button>
         )}
 
-        <p ref={commentRef}>{comment}</p>
+        <Link href={PATH.reviewDetail({ productId: boardId, reviewId })}>
+          <p ref={commentRef}>{comment}</p>
+        </Link>
       </div>
 
       <div className="overflow-hidden h-0 typo-title-14-regular">

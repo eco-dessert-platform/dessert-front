@@ -18,6 +18,12 @@ const useCreateReviewMutation = () => {
       queryClient.invalidateQueries({
         queryKey: reviewQueryKey.list({ boardId: Number(productId), type: 'board' })
       });
+      queryClient.invalidateQueries({
+        queryKey: reviewQueryKey.list({ type: 'mypage' })
+      });
+      queryClient.invalidateQueries({
+        queryKey: [...reviewQueryKey.all, 'photos', { boardId: Number(productId) }]
+      });
       push(PATH.mainProductListReview(Number(productId)));
       openToast({ message: '리뷰가 작성 되었어요.' });
     },

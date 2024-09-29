@@ -10,7 +10,9 @@ import AlertContainer from '@/global/AlertContainer';
 import { getStaticMetadata } from '@/shared/utils/metadata';
 
 const pretendard = localFont({
-  src: '../../public/assets/fonts/PretendardVariable.woff2'
+  src: '../../public/assets/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920'
 });
 
 export const metadata = getStaticMetadata('root');

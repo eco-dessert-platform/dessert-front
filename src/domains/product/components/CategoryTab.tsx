@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useId, useRef } from 'react';
+import { useId, useRef } from 'react';
 
-import { LayoutGroup } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { filterValueState, mainCategoryState } from '@/domains/product/atoms';
@@ -21,7 +21,6 @@ const CategoryTab = ({ filterFamilyId }: Props) => {
   const mainCategory = useRecoilValue(mainCategoryState(filterFamilyId));
   const { elaborateCategory, simplifyCategory } = useCategory(filterFamilyId);
   const tabContainerRef = useRef<HTMLDivElement>(null);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const handleClick = (newCategory: string) => {
     setFilterValue((prev) => ({
@@ -30,42 +29,33 @@ const CategoryTab = ({ filterFamilyId }: Props) => {
     }));
   };
 
-  useEffect(() => {
-    const activeIndex = FILTER_VALUES.category.kind[mainCategory].findIndex(
-      (category) => category === filterValue.category
-    );
-    if (activeIndex !== -1 && tabRefs.current[activeIndex]) {
-      const tab = tabRefs.current[activeIndex];
-      const tabContainer = tabContainerRef.current;
-
-      if (tab && tabContainer) {
-        const tabRect = tab.getBoundingClientRect();
-        const containerRect = tabContainer.getBoundingClientRect();
-
-        const offsetLeft = tabRect.left - containerRect.left + tabContainer.scrollLeft;
-        tabContainer.scrollTo({ left: offsetLeft, behavior: 'smooth' });
-      }
-    }
-  }, [filterValue, mainCategory]);
-
   return (
     <LayoutGroup id={id}>
-      <div ref={tabContainerRef} className="flex overflow-x-scroll scrollbar-hide">
-        {FILTER_VALUES.category.kind[mainCategory].map((category, index) => {
-          const isActive =
-            simplifyCategory(filterValue.category) === category ||
-            (!filterValue.category && index === 0);
-          return (
-            <TabButton
-              key={category}
-              active={isActive}
-              onClick={() => handleClick(category)}
-              className="min-w-max p-[10px]"
-            >
-              {category}
-            </TabButton>
-          );
-        })}
+      <div className="overflow-hidden" ref={tabContainerRef}>
+        <motion.div
+          drag="x"
+          dragConstraints={tabContainerRef}
+          dragElastic={0}
+          className="min-w-max overflow-x-scroll scrollbar-hide"
+        >
+          <div className="flex w-full">
+            {FILTER_VALUES.category.kind[mainCategory].map((category, index) => {
+              const isActive =
+                simplifyCategory(filterValue.category) === category ||
+                (!filterValue.category && index === 0);
+              return (
+                <TabButton
+                  key={category}
+                  active={isActive}
+                  onClick={() => handleClick(category)}
+                  className="min-w-max p-[10px]"
+                >
+                  {category}
+                </TabButton>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
     </LayoutGroup>
   );

@@ -4,7 +4,7 @@ import { useId } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
-import Button from '@/shared/components/Button';
+import ButtonNewver from '@/shared/components/ButtonNewver';
 import Input from '@/shared/components/Input';
 
 import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
@@ -44,14 +44,15 @@ const NicknameInput = () => {
         value={nickname}
         className="typo-title-14-medium"
         button={
-          <Button
+          <ButtonNewver
             type="button"
-            variants="input"
-            className="typo-body-12-medium"
+            color="gray"
+            radius="square"
+            className="typo-body-12-medium my-[14px] h-[30px] min-w-[64px] px-0"
             onClick={nickDoubleCheck}
           >
             중복확인
-          </Button>
+          </ButtonNewver>
         }
       />
       {data?.message && (

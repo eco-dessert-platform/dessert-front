@@ -1,37 +1,45 @@
 'use client';
 
+import { memo, useEffect, useState } from 'react';
+
 import Image from 'next/image';
-import { ChangeEventHandler, memo, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useFormContext } from 'react-hook-form';
+
 import { BbangleIcon } from '@/shared/components/icons';
 import ImageInput from '@/shared/components/ImageInput';
-import { profileImgState } from '../../atoms/profile';
 
-interface ProfileImageInputProps {
-  defaultValue?: string;
-}
+const ProfileImageInput = () => {
+  const { register, watch, setValue } = useFormContext();
+  const [previewImg, setPreviewImg] = useState<string>('');
 
-const ProfileImageInput = ({ defaultValue }: ProfileImageInputProps) => {
-  const [profileImg, setProfileImg] = useRecoilState(profileImgState);
-  const [imgSrc, setImgSrc] = useState(defaultValue);
-
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) throw Error('파일이 없습니다.');
-    setProfileImg(file);
-  };
+  const profileImg = watch('profileImg');
 
   useEffect(() => {
-    if (profileImg) setImgSrc(URL.createObjectURL(profileImg));
+    if (profileImg && typeof profileImg === 'string') {
+      setPreviewImg(profileImg);
+    } else if (profileImg instanceof File) {
+      setPreviewImg(URL.createObjectURL(profileImg));
+    }
   }, [profileImg]);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue('profileImg', file);
+      setPreviewImg(URL.createObjectURL(file));
+    } else {
+      console.error('파일이 없습니다.');
+    }
+  };
 
   return (
     <ImageInput
+      {...register('profileImg')}
       onChange={onChange}
       className="relative flex justify-center items-center rounded-full overflow-hidden w-[100px] h-[100px] bg-gray-100"
     >
-      {imgSrc ? (
-        <Image src={imgSrc} alt="profile preview" width={100} height={100} />
+      {previewImg ? (
+        <Image src={previewImg} alt="profile preview" width={100} height={100} />
       ) : (
         <BbangleIcon
           shape="smile"

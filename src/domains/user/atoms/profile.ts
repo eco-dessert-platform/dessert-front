@@ -11,7 +11,7 @@ export const agreeState = atom({
   }
 });
 
-export const profileImgState = atom<File>({
+export const profileImgState = atom<string>({
   key: 'profileImg',
   default: undefined
 });

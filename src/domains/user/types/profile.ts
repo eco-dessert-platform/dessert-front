@@ -4,14 +4,14 @@ export interface NicknameDoubleCheckResponse {
 }
 
 export interface MyProfileUpdateRequest {
-  profileImg: File | null;
+  profileImg: string | null;
   nickname: string | null;
   sex: string;
   birthDate: string | null;
 }
 
 export interface RegistrationRequest {
-  profileImg?: File;
+  profileImg?: string;
   sex: string;
   isAllowingMarketing: boolean;
   isPersonalInfoConsented: boolean;

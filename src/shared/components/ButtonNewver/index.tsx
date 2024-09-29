@@ -1,9 +1,11 @@
 import { ButtonHTMLAttributes } from 'react';
+
 import { cva } from 'class-variance-authority';
+
 import { cn } from '@/shared/utils/cn';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'border-white' | 'black' | 'border-primary' | 'primary';
+  color?: 'border-white' | 'black' | 'border-primary' | 'primary' | 'gray';
   size?: 'md' | 'lg';
   radius?: 'round' | 'square';
 }
@@ -13,6 +15,7 @@ export const buttonVariants = cva(
   {
     variants: {
       color: {
+        gray: 'text-gray-50 bg-gray-700',
         'border-white':
           'bg-white border border-gray-200 text-black hover:bg-black/[0.02] active:bg-black/[0.04] ',
         black: 'bg-black text-white',

@@ -1,11 +1,7 @@
 'use client';
 
-import { FormEventHandler } from 'react';
-
 import { FormProvider, useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
 
-import { updateFormState } from '@/domains/user/atoms/profile';
 import BirthdayInput from '@/domains/user/components/common/BirthdateInput';
 import NicknameInput from '@/domains/user/components/common/NickNameInput';
 import ProfileImageInput from '@/domains/user/components/common/ProfileImageInput';
@@ -21,34 +17,37 @@ interface ProfileUpdateFormProps {
 }
 
 const ProfileUpdateForm = ({
-  defaultValues: { profileImg, nickname, birthDate }
+  defaultValues: { profileImg, nickname, sex, birthDate }
 }: ProfileUpdateFormProps) => {
+  const { mutate } = useProfileUpdateMutation();
+
   const methods = useForm({
     defaultValues: {
       profileImg,
       nickname,
+      sex,
       birthDate
     }
   });
 
-  const { mutate } = useProfileUpdateMutation();
-  const updateForm = useRecoilValue(updateFormState);
-
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    mutate(updateForm);
-    e.preventDefault();
+  const onSubmit = (data: UserProfileType) => {
+    mutate(data);
   };
 
   return (
     <FormProvider {...methods}>
-      <form id={FORM_ID.profileUpdate} className="px-[16px]" onSubmit={onSubmit}>
+      <form
+        id={FORM_ID.profileUpdate}
+        className="px-[16px]"
+        onSubmit={methods.handleSubmit(onSubmit)}
+      >
         <div className="my-[16px] flex justify-center items-center">
-          <ProfileImageInput defaultValue={profileImg ?? undefined} />
+          <ProfileImageInput />
         </div>
         <div className="flex flex-col gap-[20px] mb-[36px]">
           <NicknameInput />
           <SexInput />
-          <BirthdayInput defaultValue={birthDate ?? undefined} />
+          <BirthdayInput />
         </div>
         <MoreSection className="mb-[16px]" />
       </form>

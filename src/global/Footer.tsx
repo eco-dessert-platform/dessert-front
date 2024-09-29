@@ -61,8 +61,8 @@ const Footer = () => {
         const isMainPage = pathname.startsWith('/main');
         const isMainCategoryLink = item.href === PATH.mainCategory;
 
-        const isWishStorePage = pathname.startsWith('/wishlist');
-        const isWishProductLink = item.href === '/wishlist/list/products';
+        const isWishStorePage = pathname === PATH.wishStoreList;
+        const isWishProductLink = item.href === PATH.wishProductList;
 
         let isActive = pathname.startsWith(item.href);
         if (!isHomePage && isHomeLink) {

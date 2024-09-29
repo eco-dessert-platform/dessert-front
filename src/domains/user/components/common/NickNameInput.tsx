@@ -3,35 +3,25 @@
 import { useId } from 'react';
 
 import { useFormContext } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
 
 import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 
-import { nicknameState } from '../../atoms/profile';
 import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
 
 const NicknameInput = () => {
   const inputId = useId();
+
   const { mutate, data } = useNicknameDoubleCheckMutation();
 
-  const setNick = useSetRecoilState(nicknameState);
-  const {
-    register,
-    watch,
-    setValue,
-    formState: { defaultValues }
-  } = useFormContext();
+  const { register, watch, setValue } = useFormContext();
 
-  const nickname = watch('nickname', defaultValues?.nickname);
+  const nickname = watch('nickname');
 
   const nickDoubleCheck = () => {
     mutate(nickname || '', {
       onSuccess: (res) => {
-        if (res.isValid) {
-          setNick(nickname || '');
-        } else {
-          setNick('');
+        if (!res.isValid) {
           setValue('nickname', '');
         }
       },
@@ -45,12 +35,7 @@ const NicknameInput = () => {
     <div className="w-full">
       <Input
         id={inputId}
-        {...register('nickname', {
-          onChange: (e) => {
-            const { value } = e.target;
-            setNick(value);
-          }
-        })}
+        {...register('nickname')}
         placeholder="닉네임을 입력해 주세요."
         label="닉네임"
         autoComplete="off"

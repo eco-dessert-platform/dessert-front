@@ -1,18 +1,13 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 
-import { useRecoilState } from 'recoil';
+import { useFormContext } from 'react-hook-form';
 
 import Radio from '@/shared/components/Radio';
 
-import { sexState } from '../../atoms/profile';
-
 const SexInput = () => {
-  const [sex, setSex] = useRecoilState(sexState);
+  const { register, watch } = useFormContext();
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setSex(value);
-  };
+  const sex = watch('sex');
 
   const isManSelected = sex === 'MAN';
   const isWomanSelected = sex === 'WOMAN';
@@ -23,10 +18,10 @@ const SexInput = () => {
         성별 <span className="text-primaryOrangeRed"> *</span>
       </span>
       <span className="w-full inline-flex gap-4">
-        <Radio isChecked={isManSelected} value="MAN" onChange={onChange}>
+        <Radio isChecked={isManSelected} value="MAN" {...register('sex')}>
           <p className={isManSelected ? 'typo-title-14-medium' : 'typo-title-14-regular'}>남성</p>
         </Radio>
-        <Radio isChecked={isWomanSelected} value="WOMAN" onChange={onChange}>
+        <Radio isChecked={isWomanSelected} value="WOMAN" {...register('sex')}>
           <p className={isWomanSelected ? 'typo-title-14-medium' : 'typo-title-14-regular'}>여성</p>
         </Radio>
       </span>

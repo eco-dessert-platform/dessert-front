@@ -4,8 +4,9 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import { useFormContext } from 'react-hook-form';
 import { IReviewWriteForm } from '@/domains/review/types/review';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import PATH from '@/shared/constants/path';
+import { attachRedirectUrl } from '@/shared/utils/attachRedirectUrl';
 
 const ButtonSection = () => {
   const { progress, productId, reviewId } = useParams<{
@@ -17,6 +18,8 @@ const ButtonSection = () => {
   const {
     formState: { isValid }
   } = useFormContext<IReviewWriteForm>();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get('redirect');
 
   const config = {
     '1': {
@@ -24,10 +27,13 @@ const ButtonSection = () => {
       type: 'button',
       onClick: () =>
         push(
-          PATH.reviewUpdate({
-            productId: Number(productId),
-            progress: 2,
-            reviewId: Number(reviewId)
+          attachRedirectUrl({
+            url: PATH.reviewUpdate({
+              productId: Number(productId),
+              progress: 2,
+              reviewId: Number(reviewId)
+            }),
+            redirectUrl
           })
         )
     },

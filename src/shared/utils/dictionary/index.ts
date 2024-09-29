@@ -1,4 +1,4 @@
-type TDictionary = Record<string | number, string | number>;
+type TDictionary = Record<string, string>;
 
 class Dictionary {
   private dictionary: TDictionary;

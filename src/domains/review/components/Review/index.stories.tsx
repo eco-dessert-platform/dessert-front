@@ -24,7 +24,8 @@ const meta = {
     isLiked: false,
     isBest: true,
     date: '2030. 1. 1.',
-    isMine: true
+    isMine: true,
+    usedIn: 'review-list'
   }
 } satisfies Meta<typeof Review>;
 

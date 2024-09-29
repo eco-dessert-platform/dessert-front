@@ -6,6 +6,11 @@ export const modalState = atom<ReactNode>({
   default: null
 });
 
+export const fullScreenModalState = atom<ReactNode>({
+  key: 'fullScreenModalState',
+  default: null
+});
+
 export const popupState = atom<ReactNode>({
   key: 'popupState',
   default: null

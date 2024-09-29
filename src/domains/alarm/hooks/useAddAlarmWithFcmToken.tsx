@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useWebView from '@/shared/hooks/useWebView';
+import { FCM_TYPE } from '@/shared/constants/message';
 import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
-import { FCM_TOKEN } from '@/domains/alarm/constants/fcmTokenMessageType';
 import { fcmTokenState } from '@/domains/alarm/atoms';
 
 interface Props {
@@ -17,7 +17,7 @@ const useAddAlarmWithFcmToken = ({ addAlarm }: Props) => {
 
   useEffect(() => {
     if (isWebView && !fcmToken.data && !fcmToken.error)
-      sendMessageToApp({ type: FCM_TOKEN.getFcmToken });
+      sendMessageToApp({ type: FCM_TYPE.getFcmToken });
   }, [isWebView, fcmToken.data, fcmToken.error]);
 
   const addAlarmWithFcmToken = () => {

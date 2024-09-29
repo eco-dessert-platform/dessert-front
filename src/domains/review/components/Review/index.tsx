@@ -8,6 +8,10 @@ import KebabMenu from './KebabMenu';
 import ReviewSkeleton from './ReviewSkeleton';
 import LikeButton from './LikeButton';
 
+export interface ReviewProps extends ReviewType {
+  usedIn: 'review-list' | 'review-detail';
+}
+
 const Review = ({
   id,
   boardId,
@@ -20,8 +24,9 @@ const Review = ({
   tags,
   like,
   isLiked,
-  isMine
-}: ReviewType) => (
+  isMine,
+  usedIn
+}: ReviewProps) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
       <div className="flex gap-[4px]">
@@ -29,7 +34,7 @@ const Review = ({
         <span className="typo-title-14-medium">{nickname}</span>
       </div>
 
-      {isMine && <KebabMenu reviewId={id} boardId={boardId} />}
+      {isMine && <KebabMenu reviewId={id} boardId={boardId} usedIn={usedIn} />}
     </div>
 
     <div className="flex flex-col gap-[8px]">
@@ -37,7 +42,8 @@ const Review = ({
         <StarRating value={rating} />
       </div>
       {images && <ImageSlider images={images} />}
-      <Comment id={id} comment={comment} />
+      {usedIn === 'review-list' && <Comment comment={comment} boardId={boardId} reviewId={id} />}
+      {usedIn === 'review-detail' && <p className="typo-title-14-regular">{comment}</p>}
     </div>
 
     <div className="flex gap-[4px]">

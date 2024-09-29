@@ -1,3 +1,5 @@
+'use client';
+
 import { useId, InputHTMLAttributes, ForwardedRef, forwardRef } from 'react';
 import { RatingType, StarSizeType } from '@/domains/review/types/starRating';
 import Stars from './Stars';

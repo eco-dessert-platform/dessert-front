@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
+import { RecoilRoot } from 'recoil';
 import { cleanup, render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import { AppRouterContextProviderMock, CleanQueryProvider } from '@/__tests__/utils/test-providers';
-import Review from '.';
-import { ReviewType } from '../../types/review';
+import Review, { ReviewProps } from '.';
 
 describe('<Review /> 테스트', () => {
-  const mockReviewData: ReviewType = {
+  const mockReviewData: ReviewProps = {
     id: 1,
     boardId: 1,
     nickname: '닉네임',
@@ -18,14 +18,17 @@ describe('<Review /> 테스트', () => {
     isLiked: false,
     isBest: false,
     date: '2024. 01. 01',
-    isMine: true
+    isMine: true,
+    usedIn: 'review-list'
   };
   const renderWithProviders = (children: ReactNode) => {
     const push = vi.fn();
     return render(
-      <AppRouterContextProviderMock router={{ push }}>
-        <CleanQueryProvider>{children}</CleanQueryProvider>
-      </AppRouterContextProviderMock>
+      <RecoilRoot>
+        <AppRouterContextProviderMock router={{ push }}>
+          <CleanQueryProvider>{children}</CleanQueryProvider>
+        </AppRouterContextProviderMock>
+      </RecoilRoot>
     );
   };
 

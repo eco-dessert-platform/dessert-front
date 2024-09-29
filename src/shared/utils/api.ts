@@ -1,5 +1,5 @@
 import { getAccessToken } from '@/shared/utils/token';
-import { API_URL } from '../constants/api';
+import { API_URL } from '../constants/url';
 
 const API_V1_URL = `${API_URL}/api/v1`;
 

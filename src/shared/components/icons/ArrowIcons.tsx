@@ -7,6 +7,8 @@ import MediumForwardArrowIcon from '@public/assets/icons/arrow/forward-medium-ar
 import PrimaryMediumForwardArrowIcon from '@public/assets/icons/arrow/forward-medium-primary-arrow.svg';
 import LargeDownArrowIcon from '@public/assets/icons/arrow/large-down-arrow.svg';
 import TopArrowIcon from '@public/assets/icons/arrow/top-arrow.svg';
+import LeftArrowIcon from '@public/assets/icons/arrow/left-arrow.svg';
+import RightArrowIcon from '@public/assets/icons/arrow/right-arrow.svg';
 
 interface Props {
   shape:
@@ -18,7 +20,9 @@ interface Props {
     | 'large-down'
     | 'forward-12'
     | 'primary-medium-forward'
-    | 'top';
+    | 'top'
+    | 'left'
+    | 'right';
 }
 
 const ArrowIcons = ({ shape }: Props) => {
@@ -41,6 +45,10 @@ const ArrowIcons = ({ shape }: Props) => {
       return <Forward12 />;
     case 'top':
       return <TopArrowIcon />;
+    case 'left':
+      return <LeftArrowIcon />;
+    case 'right':
+      return <RightArrowIcon />;
     default:
       return <BottomArrowICon />;
   }

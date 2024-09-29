@@ -14,11 +14,11 @@ const ReviewSkeleton = () => (
         <Skeleton className="size-[64px] aspect-square rounded-[6px]" />
         <Skeleton className="size-[64px] aspect-square rounded-[6px]" />
       </div>
-      <p className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1">
         <Skeleton className="w-full" />
         <Skeleton className="w-full" />
         <Skeleton className="w-3/4" />
-      </p>
+      </div>
     </div>
 
     <div className="flex gap-[4px]">

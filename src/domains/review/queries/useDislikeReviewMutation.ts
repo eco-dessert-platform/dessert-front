@@ -18,7 +18,7 @@ const useDislikeReviewMutation = (id: number) => {
         (oldData) =>
           updateInfiniteQueryCache(oldData, { value: id, key: 'id' }, (oldItem) => ({
             ...oldItem,
-            like: oldItem.like + 1,
+            like: oldItem.like - 1,
             isLiked: false
           }))
       );

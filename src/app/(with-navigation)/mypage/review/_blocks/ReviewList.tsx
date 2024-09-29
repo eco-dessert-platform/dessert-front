@@ -2,6 +2,7 @@
 
 import Review from '@/domains/review/components/Review';
 import useMyReviewQuery from '@/domains/review/queries/useMyReviewQuery';
+import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -12,6 +13,9 @@ const ReviewList = () => {
   useEffect(() => {
     if (inView) fetchNextPage();
   }, [inView, fetchNextPage]);
+
+  if (!reviews || reviews.length === 0)
+    return <SadBbangleBox className="absoulte-center">작성된 리뷰가 없어요.</SadBbangleBox>;
 
   return (
     <section className="flex flex-col divide-y divide-gray-200">
@@ -46,6 +50,7 @@ const ReviewList = () => {
               isBest={isBest}
               date={formmatedDate}
               isMine={isMine}
+              usedIn="review-list"
             />
           );
         }

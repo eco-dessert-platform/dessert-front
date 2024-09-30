@@ -41,7 +41,6 @@ const NicknameInput = () => {
         autoComplete="off"
         required
         maxLength={20}
-        value={nickname}
         className="typo-title-14-medium"
         button={
           <ButtonNewver

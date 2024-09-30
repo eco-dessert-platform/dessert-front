@@ -46,9 +46,6 @@ module.exports = {
       { hostname: 'bbangle-bucket.s3.ap-northeast-2.amazonaws.com' },
       { hostname: 'bbangle-bucket.kr.object.ncloudstorage.com' },
       { hostname: 'firebasestorage.googleapis.com' },
-      { hostname: 'k.kakaocdn.net' },
-      { hostname: 't1.kakaocdn.net' },
-      { hostname: 'img1.kakaocdn.net' },
       { hostname: '*.kakaocdn.net' },
       { hostname: 'bbangree-oven.cdn.ntruss.com' },
       { hostname: 'smartstore.naver.com' }

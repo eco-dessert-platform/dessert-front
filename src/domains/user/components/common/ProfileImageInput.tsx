@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { useFormContext } from 'react-hook-form';
@@ -12,21 +12,32 @@ const ProfileImageInput = () => {
   const { register, watch, setValue } = useFormContext();
   const [previewImg, setPreviewImg] = useState<string>('');
 
+  const objectUrlRef = useRef<string | null>(null);
+
   const profileImg = watch('profileImg');
 
   useEffect(() => {
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+    }
     if (profileImg && typeof profileImg === 'string') {
       setPreviewImg(profileImg);
     } else if (profileImg instanceof File) {
-      setPreviewImg(URL.createObjectURL(profileImg));
+      const objectUrl = URL.createObjectURL(profileImg);
+      setPreviewImg(objectUrl);
+      objectUrlRef.current = objectUrl;
     }
+    return () => {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
+    };
   }, [profileImg]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setValue('profileImg', file);
-      setPreviewImg(URL.createObjectURL(file));
     } else {
       console.error('파일이 없습니다.');
     }

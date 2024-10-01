@@ -9,7 +9,7 @@ export const MAIN_CATEGORIES_TYPE = [
     id: 1,
     shape: 'bread',
     title: '빵',
-    subCategories: ['전체', '식빵·모닝빵', '베이글·도넛', '케이크', '타르트·파이']
+    subCategories: ['전체', '식빵·모닝빵', '베이글·도넛', '케이크', '타르트·파이', '기타']
   },
   {
     id: 2,
@@ -22,8 +22,7 @@ export const MAIN_CATEGORIES_TYPE = [
       '잼·청',
       '아이스크림',
       '요거트',
-      '그래놀라',
-      '기타'
+      '그래놀라'
     ]
   }
 ];

@@ -6,8 +6,9 @@ export const FILTER_VALUES = {
     name: '카테고리',
     kind: {
       [MAIN_CATEGORIES_TYPE[0].title]: [
-        ...MAIN_CATEGORIES_TYPE[1].subCategories,
-        ...MAIN_CATEGORIES_TYPE[2].subCategories.slice(1)
+        ...MAIN_CATEGORIES_TYPE[1].subCategories.filter((subCategory) => subCategory !== '기타'),
+        ...MAIN_CATEGORIES_TYPE[2].subCategories.slice(1),
+        '기타'
       ],
       [MAIN_CATEGORIES_TYPE[1].title]: MAIN_CATEGORIES_TYPE[1].subCategories,
       [MAIN_CATEGORIES_TYPE[2].title]: MAIN_CATEGORIES_TYPE[2].subCategories

@@ -29,7 +29,7 @@ const ButtonSection = ({ filterFamilyId }: ButtonSectionProps) => {
   };
 
   return (
-    <PaddingWrapper className="flex gap-[10px] justify-center items-center">
+    <PaddingWrapper className="flex gap-[10px] justify-between items-center fixed bottom-0 w-full bg-white">
       <ButtonNewver
         color="border-white"
         size="lg"

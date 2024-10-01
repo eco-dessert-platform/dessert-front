@@ -32,7 +32,7 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
     toggle();
     setMainCategory(title);
     if (subCategories.length === 0) {
-      setFilterValue((prev) => ({ ...prev, category: INIT_FILTER_VALUE.category }));
+      setFilterValue(INIT_FILTER_VALUE);
       router.push(PATH.mainProductList);
     }
   };

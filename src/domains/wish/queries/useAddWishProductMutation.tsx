@@ -1,19 +1,21 @@
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { IProductType } from '@/domains/product/types/productType';
+import { IStoreProductType } from '@/domains/store/types/store';
+import { isLoggedinState } from '@/shared/atoms/login';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
+import PATH from '@/shared/constants/path';
 import useModal from '@/shared/hooks/useModal';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
-import { ERROR_MESSAGE } from '@/shared/constants/error';
-import { isLoggedinState } from '@/shared/atoms/login';
-import PATH from '@/shared/constants/path';
 import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
-import { IProductType } from '@/domains/product/types/productType';
 import { Cursor } from '@/shared/types/response';
-import { IStoreProductType } from '@/domains/store/types/store';
-import wishService from './service';
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
-import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
+import wishService from './service';
 
 const useAddWishProductMutation = () => {
   const { openToast } = useToastNewVer();
@@ -65,8 +67,12 @@ const useAddWishProductMutation = () => {
     openToast({
       message: '💖 찜한 상품에 추가했어요',
       action: (
-        <button type="button" className="hover:underline" onClick={openFolderSelectModal}>
-          편집
+        <button
+          type="button"
+          className="typo-body-12-regular-underline "
+          onClick={openFolderSelectModal}
+        >
+          수정
         </button>
       )
     });

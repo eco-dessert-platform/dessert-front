@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 import { useRecoilValue } from 'recoil';
 
@@ -15,6 +15,8 @@ import { BellIcon } from '@/shared/components/icons';
 import ImageWithFallback from '@/shared/components/ImageWithFallback';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { cn } from '@/shared/utils/cn';
 
 interface ProductImageProps {
@@ -28,7 +30,8 @@ const ProductImage = ({
   ranking
 }: ProductImageProps) => {
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
-
+  const { openToast } = useToastNewVer();
+  const [isPopping, setIsPopping] = useState(false);
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
@@ -37,12 +40,16 @@ const ProductImage = ({
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
     if (isLoggedIn) {
       addMutate({ productId: boardId, folderId: selectedWishFolder });
+      setIsPopping(true);
+    } else {
+      openToast({ message: ERROR_MESSAGE.requiredLogin });
     }
     e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
     deleteMutate({ productId: boardId });
+    setIsPopping(false);
     e.preventDefault();
   };
 
@@ -69,9 +76,13 @@ const ProductImage = ({
           }
         />
       </div>
-
-      <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px]">
-        <HeartButton isActive={isWished} shape="shadow" onClick={isWished ? hate : like} />
+      <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px] ">
+        <HeartButton
+          isActive={isWished}
+          className={isPopping ? 'animate-heart-pop' : ''}
+          shape="shadow"
+          onClick={isWished ? hate : like}
+        />
       </div>
       <div className="absolute z-10 top-[6px] left-[6px] w-full flex flex-wrap gap-[6px]">
         {popular && <Badge type="ranking">{ranking}</Badge>}

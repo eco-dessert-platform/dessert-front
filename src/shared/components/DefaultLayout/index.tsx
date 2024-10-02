@@ -26,7 +26,7 @@ const DefaultLayout = ({ main, header, footer }: Props) => {
       <main
         id={ELEMENT_ID.main}
         style={{
-          paddingBottom: footerHeight
+          paddingBottom: footerHeight || 0
         }}
         className="max-w-[600px]  w-full min-h-screen shadow-lg mx-auto relative flex-1"
       >

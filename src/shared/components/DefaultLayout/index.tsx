@@ -1,5 +1,7 @@
+'use client';
+
 import { ELEMENT_ID } from '@/shared/constants/elementId';
-import { ReactNode } from 'react';
+import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
 
 interface Props {
   main: ReactNode;
@@ -7,18 +9,40 @@ interface Props {
   header?: ReactNode;
 }
 
-const DefaultLayout = ({ main, header, footer }: Props) => (
-  <div className="flex flex-col min-h-screen w-full max-w-[600px] mx-auto shadow-lg">
-    {header && <header className="sticky top-0  w-full mx-auto z-header">{header}</header>}
-    <main id={ELEMENT_ID.main} className=" w-full mx-auto relative flex-1">
-      {main}
-    </main>
-    {footer && (
-      <footer id={ELEMENT_ID.footer} className=" w-full mx-auto shrink-0 sticky bottom-0 z-footer">
-        {footer}
-      </footer>
-    )}
-  </div>
-);
+const DefaultLayout = ({ main, header, footer }: Props) => {
+  const [footerHeight, setFooterHeight] = useState<number>();
+  const footerRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    if (!footerRef.current) return;
+    setFooterHeight(footerRef.current.clientHeight);
+  }, [footerRef.current?.clientHeight]);
+
+  return (
+    <>
+      {header && (
+        <header className="sticky max-w-[600px] top-0 w-full mx-auto z-header">{header}</header>
+      )}
+      <main
+        id={ELEMENT_ID.main}
+        style={{
+          paddingBottom: footerHeight
+        }}
+        className="max-w-[600px]  w-full min-h-screen shadow-lg mx-auto relative flex-1"
+      >
+        {main}
+      </main>
+      {footer && (
+        <footer
+          ref={footerRef}
+          id={ELEMENT_ID.footer}
+          className="max-w-[600px] w-full mx-auto  fixed left-1/2 -translate-x-1/2 bottom-0 z-footer"
+        >
+          {footer}
+        </footer>
+      )}
+    </>
+  );
+};
 
 export default DefaultLayout;

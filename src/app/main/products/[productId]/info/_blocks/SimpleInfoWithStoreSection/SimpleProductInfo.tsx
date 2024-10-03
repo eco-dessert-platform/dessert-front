@@ -13,22 +13,25 @@ import { useParams } from 'next/navigation';
 import { BoardReviewRateResponse } from '@/domains/review/types/review';
 
 interface Props {
-  boardData: IBoardDetailType;
-  ratingData: BoardReviewRateResponse;
+  title: IBoardDetailType['title'];
+  price: IBoardDetailType['price'];
+  discountRate: IBoardDetailType['discountRate'];
+  rating: BoardReviewRateResponse['rating'];
+  count: BoardReviewRateResponse['count'];
 }
 
-const SimpleProductInfo = ({ boardData, ratingData }: Props) => {
+const SimpleProductInfo = ({ title, price, discountRate, rating, count }: Props) => {
   const { productId } = useParams<{ productId: string }>();
-  if (!ratingData) return <PaddingWrapper>스토어 정보를 찾을 수 없어요.</PaddingWrapper>;
+
   return (
     <PaddingWrapper>
       <div className="typo-title-16-regular leading-130 font-normal text-gray-800 mb-[2px]">
-        {boardData.title}
+        {title}
       </div>
       <div className="flex justify-between items-center">
         <div className="typo-heading-18-semibold">
-          <span className="text-secondaryOrangeRed mr-[4px]">{boardData.discountRate || null}</span>
-          {boardData.price.toLocaleString()}
+          <span className="text-secondaryOrangeRed mr-[4px]">{discountRate || null}</span>
+          {price.toLocaleString()}
           <span className="typo-title-16-semibold">원</span>
         </div>
         <Link
@@ -36,8 +39,8 @@ const SimpleProductInfo = ({ boardData, ratingData }: Props) => {
           className="flex items-center gap-[2px]"
         >
           <StarIcon size="md" color="yellow" />
-          <span className="typo-title-14-medium text-gray-800">{ratingData?.rating}</span>
-          <span className="typo-body-12-regular text-gray-500">({ratingData?.count}) </span>
+          <span className="typo-title-14-medium text-gray-800">{rating}</span>
+          <span className="typo-body-12-regular text-gray-500">({count}) </span>
           <ArrowIcons shape="forward-12" />
         </Link>
       </div>

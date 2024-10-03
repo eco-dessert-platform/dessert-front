@@ -1,9 +1,9 @@
-import BoardDetailsSection from '@/blocks/main/(detail)/products/[productId]/info/BoardDetailSection';
-import BoardImagesSection from '@/blocks/main/(detail)/products/[productId]/info/BoardImagesSection';
-import ProductOptionsSetion from '@/blocks/main/(detail)/products/[productId]/info/ProductOptionsSection';
-import ReviewBadgeSection from '@/blocks/main/(detail)/products/[productId]/info/ReviewBadgeSection';
-import SimpleInfoWithStoreSection from '@/blocks/main/(detail)/products/[productId]/info/SimpleInfoWithStoreSection';
 import TopButton from '../_blocks/TopButton';
+import BoardDetailsSection from './_blocks/BoardDetailSection';
+import BoardImagesSection from './_blocks/BoardImagesSection';
+import ProductOptionsSetion from './_blocks/ProductOptionsSection';
+import ReviewBadgeSection from './_blocks/ReviewBadgeSection';
+import SimpleInfoWithStoreSection from './_blocks/SimpleInfoWithStoreSection';
 
 interface Props {
   params: { productId: string };

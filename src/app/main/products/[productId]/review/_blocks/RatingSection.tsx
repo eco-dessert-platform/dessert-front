@@ -26,7 +26,7 @@ const RatingSection = async ({ params: { productId } }: Props) => {
       <div className="flex gap-[4px] items-center">
         <StarRating value={rating} starSize="small" />
         <div className="text-gray-700">
-          <span className="typo-title-14-semibold">{rating}</span>
+          <span className="typo-title-14-semibold mr-[1px]">{rating}</span>
           <span className="typo-title-14-regular">({count})</span>
         </div>
       </div>

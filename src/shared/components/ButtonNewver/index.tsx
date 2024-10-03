@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/shared/utils/cn';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'border-white' | 'black' | 'border-primary' | 'primary' | 'gray';
+  color?: 'border-white' | 'black' | 'border-primary' | 'primary' | 'gray' | 'primary-border';
   size?: 'md' | 'lg';
   radius?: 'round' | 'square';
 }
@@ -21,7 +21,9 @@ export const buttonVariants = cva(
         black: 'bg-black text-white',
         'border-primary':
           'bg-white border border-primaryOrangeRed text-primaryOrangeRed hover:bg-black/[0.02] active:bg-black/[0.04]',
-        primary: 'text-white bg-primaryOrangeRed  hover:brightness-[.96] active:brightness-90'
+        primary: 'text-white bg-primaryOrangeRed  hover:brightness-[.96] active:brightness-90',
+        'primary-border':
+          'text-primaryOrangeRed border border-primaryOrangeRed bg-white  hover:brightness-[.96] active:brightness-90'
       },
       size: {
         md: 'h-[46px]',

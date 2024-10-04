@@ -1,7 +1,7 @@
 'use client';
 
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
-import useGetReivewRatingQuery from '@/domains/review/queries/useGetReviewRatingQuery';
+import useGetReviewRatingQuery from '@/domains/review/queries/useGetReviewRatingQuery';
 import DeliveryFeeSection from './DeliveryFeeSection';
 import DetailStoreInfo from './DetailStoreInfo';
 import SimpleProductInfo from './SimpleProductInfo';
@@ -22,7 +22,7 @@ const SimpleInfoWithStoreSection = ({ productId }: Props) => {
     }
   } = useGetBoardDetailQuery(productId);
 
-  const { data: ratingData = { rating: 0, count: 0 } } = useGetReivewRatingQuery(Number(productId));
+  const { data: ratingData = { rating: 0, count: 0 } } = useGetReviewRatingQuery(Number(productId));
 
   return (
     <>

@@ -46,7 +46,7 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
   if (!data || data.boardsCount === 0) {
     return (
       <SadBbangleBox className="h-[calc(100vh-220px)]">
-        <p>{keyword}에 대한 검색 결과가 없어요 😥</p>
+        <p>{keyword}에 대한 검색 결과가 없어요.</p>
         <p>다른 키워드로 검색해보세요!</p>
       </SadBbangleBox>
     );

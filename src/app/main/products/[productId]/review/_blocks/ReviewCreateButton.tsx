@@ -34,7 +34,13 @@ const ReviewCreateButton = ({ productId }: Props) => {
   };
 
   return (
-    <ButtonNewver color="border-primary" size="md" radius="round" onClick={handleButtonClick}>
+    <ButtonNewver
+      color="border-primary"
+      className="w-full"
+      size="md"
+      radius="round"
+      onClick={handleButtonClick}
+    >
       리뷰 작성
     </ButtonNewver>
   );

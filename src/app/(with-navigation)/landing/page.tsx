@@ -1,9 +1,8 @@
 import React from 'react';
-
-import Desc from '@/blocks/landing/pageSection/Desc';
-import Intro from '@/blocks/landing/pageSection/Intro';
-import Participate from '@/blocks/landing/pageSection/Participate';
-import Schedule from '@/blocks/landing/pageSection/Schedule';
+import Intro from './_blocks/pageSection/Intro';
+import Desc from './_blocks/pageSection/Desc';
+import Participate from './_blocks/pageSection/Participate';
+import Schedule from './_blocks/pageSection/Schedule';
 
 const LandingPage = () => (
   <>

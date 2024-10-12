@@ -30,7 +30,11 @@ const SimpleProductInfo = ({ title, price, discountRate, rating, count }: Props)
       </div>
       <div className="flex justify-between items-center">
         <div className="typo-heading-18-semibold">
-          <span className="text-secondaryOrangeRed mr-[4px]">{`${discountRate  }%` || null}</span>
+          <span className="text-secondaryOrangeRed mr-[4px]">
+            <span className="text-secondaryOrangeRed mr-[4px]">
+              {discountRate > 0 ? `${discountRate}%` : null}
+            </span>
+          </span>
           {price.toLocaleString()}
           <span className="typo-title-16-semibold">원</span>
         </div>

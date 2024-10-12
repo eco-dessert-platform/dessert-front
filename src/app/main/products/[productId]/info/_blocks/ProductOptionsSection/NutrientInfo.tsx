@@ -25,7 +25,7 @@ const NutrientInfo = ({ product: { nutrient } }: Props) => (
           >
             <div className="typo-body-12-medium text-gray-700">{nutirentEngToKr(key)}</div>
             <div className="typo-title-16-semibold text-gray-900">
-              {value !== -1 ? `${value  }g` : '-'}
+              {value !== -1 ? `${value}g` : '-'}
             </div>
           </div>
         );

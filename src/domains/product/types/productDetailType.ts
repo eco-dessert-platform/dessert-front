@@ -55,6 +55,7 @@ export interface IBoardDetailType {
   price: number;
   purchaseUrl: string;
   deliveryFee: number;
+  discountRate: number;
   freeShippingConditions: number;
   isWished: boolean;
   boardImages: string[];
@@ -64,4 +65,12 @@ export interface IReviewBadgeType {
   rating: string;
   count: string;
   badges: string[];
+}
+
+export interface IReviewRatingType {
+  rating: string;
+  count: string;
+  taste: { good: number; bad: number };
+  brix: { sweet: number; plain: number };
+  texture: { soft: number; dry: number };
 }

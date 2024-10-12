@@ -12,7 +12,7 @@ const ReviewBadgeSection = async ({ productId }: Props) => {
 
   return (
     <DetailSectionWrapper title="리뷰 대표 뱃지">
-      {count !== 0 ? <HasNoReview /> : <HasReview productId={productId} />}
+      {count === 0 ? <HasNoReview /> : <HasReview productId={productId} />}
     </DetailSectionWrapper>
   );
 };

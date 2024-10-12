@@ -1,5 +1,5 @@
 import TopButton from '@/shared/components/TopButton';
-import BoardDetailsSection from './_blocks/BoardDetailSection';
+import BoardDetailsSection from './_blocks/BoardDetailsSection';
 import BoardImagesSection from './_blocks/BoardImagesSection';
 import ProductOptionsSection from './_blocks/ProductOptionsSection';
 import ReviewBadgeSection from './_blocks/ReviewBadgeSection';

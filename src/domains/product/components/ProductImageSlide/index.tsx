@@ -48,7 +48,7 @@ const ProductImageSlide = ({ boardImages, isSoldOut, onChange }: ImgSliderProps)
             fill
             className="size-full rounded-[4px] object-cover"
             fallback={
-              <SadBbangleBox className="border rounded-[4px] size-full">
+              <SadBbangleBox className="border rounded-[4px] size-full typo-body-12-regular">
                 이미지를 불러오지 못 했어요.
               </SadBbangleBox>
             }

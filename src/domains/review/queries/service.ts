@@ -20,13 +20,12 @@ class ReviewService extends Service {
   }
 
   async getReview({ boardId, cursorId }: { boardId: number; cursorId: number }) {
-    const params =
-      cursorId === INITIAL_CURSOR
-        ? `boardId=${boardId}`
-        : `boardId=${boardId}&cursorId=${cursorId}`;
-    const res = await this.fetchExtend.get(`/review/list/${boardId}?${params}`);
+    const params = cursorId === INITIAL_CURSOR ? '' : `?cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(`/review/list/${boardId}${params}`);
+
     const { result, success, code, message }: ResultResponse<Cursor<ReviewType[]>> =
       await res.json();
+
     if (!success || !res.ok) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;
   }

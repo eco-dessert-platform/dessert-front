@@ -1,9 +1,9 @@
-import BoardDetailsSection from '@/blocks/main/(detail)/products/[productId]/info/BoardDetailSection';
-import BoardImagesSection from '@/blocks/main/(detail)/products/[productId]/info/BoardImagesSection';
-import ProductOptionsSetion from '@/blocks/main/(detail)/products/[productId]/info/ProductOptionsSection';
-import ReviewBadgeSection from '@/blocks/main/(detail)/products/[productId]/info/ReviewBadgeSection';
-import SimpleInfoWithStoreSection from '@/blocks/main/(detail)/products/[productId]/info/SimpleInfoWithStoreSection';
 import TopButton from '@/shared/components/TopButton';
+import BoardDetailsSection from './_blocks/BoardDetailsSection';
+import BoardImagesSection from './_blocks/BoardImagesSection';
+import ProductOptionsSection from './_blocks/ProductOptionsSection';
+import ReviewBadgeSection from './_blocks/ReviewBadgeSection';
+import SimpleInfoWithStoreSection from './_blocks/SimpleInfoWithStoreSection';
 
 interface Props {
   params: { productId: string };
@@ -16,7 +16,7 @@ const ProductDetailPage = ({ params: { productId } }: Props) => {
       <BoardImagesSection productId={id} />
       <SimpleInfoWithStoreSection productId={id} />
       <ReviewBadgeSection productId={id} />
-      <ProductOptionsSetion productId={id} />
+      <ProductOptionsSection productId={id} />
       <BoardDetailsSection productId={id} />
       <TopButton />
     </>

@@ -6,9 +6,9 @@ import { productQueryKey } from '@/shared/queries/queryKey';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GenerateMetadataProps } from '@/shared/types/generateMetadata';
 import { getDynamicMetadata } from '@/shared/utils/metadata';
-import FixedPurchaseButtonSection from '@/blocks/main/(detail)/products/[productId]/info/FixedPurchaseButtonSection';
+
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
-import ShareButton from './_blocks/ShareButton';
+import FixedPurchaseButtonSection from './info/_blocks/FixedPurchaseButtonSection';
 
 export const generateMetadata = async (props: GenerateMetadataProps) =>
   getDynamicMetadata('product-detail', props);
@@ -43,7 +43,6 @@ const ProductDetailLayout = async ({ params: { productId }, children }: DetailIn
           <>
             <Header
               title={`[${storeData.title}] ${boardData.title}`}
-              content={<ShareButton />}
               back
               className="sticky top-0 bg-white z-50"
             />

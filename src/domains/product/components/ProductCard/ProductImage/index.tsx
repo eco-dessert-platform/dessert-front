@@ -70,7 +70,7 @@ const ProductImage = ({
           className="object-cover rounded-[6px]"
           fill
           fallback={
-            <SadBbangleBox className="border bg-gray-50  rounded-[6px] size-full">
+            <SadBbangleBox className="border bg-gray-50 rounded-[6px] size-full typo-body-12-regular">
               이미지가 없습니다.
             </SadBbangleBox>
           }

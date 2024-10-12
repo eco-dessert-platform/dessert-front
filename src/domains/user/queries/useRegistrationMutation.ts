@@ -36,7 +36,7 @@ const useRegistrationMutation = () => {
   const onSuccess = async () => {
     await revalidateTag(QUERY_KEY.profile);
     openToast({ message: '프로필 등록이 완료되었어요.' });
-    push(PATH.preferenceCreate);
+    push(PATH.recommendationCreate({ progress: 1 }));
   };
 
   const onError = (e: Error) => {

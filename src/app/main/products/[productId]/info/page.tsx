@@ -1,4 +1,4 @@
-import TopButton from '../_blocks/TopButton';
+import TopButton from '@/shared/components/TopButton';
 import BoardDetailsSection from './_blocks/BoardDetailSection';
 import BoardImagesSection from './_blocks/BoardImagesSection';
 import ProductOptionsSetion from './_blocks/ProductOptionsSection';

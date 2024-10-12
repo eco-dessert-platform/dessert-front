@@ -9,22 +9,24 @@ interface Props {
   type: AlarmType;
   isAlarming: boolean;
   onClick: () => void;
+  disabled?: boolean;
   className?: string;
 }
 
-const AlarmButton = ({ type, isAlarming, onClick, className }: Props) => {
+const AlarmButton = ({ type, isAlarming, onClick, disabled = false, className }: Props) => {
   const isMounted = useIsMounted();
 
   return (
     <button
       type="button"
       className={cn(
-        `flex justify-center items-center gap-x-[2px] p-[6px] w-full border-[1px] border-gray-200 rounded-[4px]
-        typo-body-12-medium ${isAlarming ? 'bg-gray-50 text-gray-800' : 'bg-gray-900 text-white'}
-        `,
+        'flex justify-center items-center gap-x-[2px] p-[6px] w-full border-[1px] border-gray-200 rounded-[4px] typo-body-12-medium',
+        'disabled:bg-gray-300 disabled:text-white',
+        isAlarming ? 'bg-gray-50 text-gray-800' : 'bg-gray-900 text-white',
         className
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {isAlarming && (
         <span className={cn(isMounted && ALARM[type].animation)}>{ALARM[type].icon}</span>

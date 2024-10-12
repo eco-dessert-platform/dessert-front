@@ -6,6 +6,7 @@ import GrayDivider from '@/shared/components/GrayDivider';
 import StoreInfoSection from '@/blocks/store/StoreInfoSection';
 import StoreBestProductsSection from '@/blocks/store/StoreBestProductsSection';
 import StoreAllProductsSection from '@/blocks/store/StoreAllProductsSection';
+import TopButton from '@/shared/components/TopButton';
 
 interface Props {
   params: { id: string };
@@ -40,13 +41,16 @@ const MainStoreDetailPage = async ({ params: { id } }: Props) => {
   ]);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <StoreInfoSection storeInfo={storeInfo} />
-      <GrayDivider color="gray100" className="h-[4px]" />
-      <StoreBestProductsSection storeInfo={storeInfo} />
-      <GrayDivider color="gray100" />
-      <StoreAllProductsSection storeInfo={storeInfo} />
-    </HydrationBoundary>
+    <>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <StoreInfoSection storeInfo={storeInfo} />
+        <GrayDivider color="gray100" className="h-[4px]" />
+        <StoreBestProductsSection storeInfo={storeInfo} />
+        <GrayDivider color="gray100" />
+        <StoreAllProductsSection storeInfo={storeInfo} />
+      </HydrationBoundary>
+      <TopButton />
+    </>
   );
 };
 

@@ -21,15 +21,21 @@ const useSilentLoginMutation = () => {
 
   const onSuccess = async ({ accessToken }: ResultType) => {
     await login({ accessToken });
-    const { isPreferenceAssigned, isFullyAssigned } = await userService.getMyPreferenceStatus();
-    if (!isPreferenceAssigned) {
+    const { isPreferenceAssigned, isFullyAssigned, isSurveyed } =
+      await userService.getMyRecommendationStatus();
+    if (!isFullyAssigned) {
       openToast({ message: '약관 동의를 완료해주세요.' });
       push(PATH.profileRegistration);
       return;
     }
-    if (!isFullyAssigned) {
+    if (!isPreferenceAssigned) {
       openToast({ message: '맞춤 추천 설문을 완료해주세요.' });
-      push(PATH.preferenceCreate);
+      push(PATH.recommendationCreate({ progress: 1 }));
+      return;
+    }
+    if (!isSurveyed) {
+      openToast({ message: '맞춤 추천 설문을 완료해주세요.' });
+      push(PATH.recommendationCreate({ progress: 2 }));
     }
   };
 

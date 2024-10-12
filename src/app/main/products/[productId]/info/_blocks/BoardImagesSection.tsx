@@ -28,7 +28,7 @@ const BoardImagesSection = ({ productId }: { productId: number }) => {
       <div className="relative">
         {haveBoardImages ? (
           <ProductImageSlide
-            boardImages={imageArray as string[]}
+            boardImages={imageArray}
             isSoldOut={isAllProductSoldOut}
             onChange={setSwiperIndex}
           />

@@ -4,6 +4,7 @@ import Search from '@/blocks/home/SearchSection';
 import CategorySection from '@/blocks/home/CategorySection';
 import BestProductsSection from '@/blocks/home/BestProductsSection';
 import RecommendationSection from '@/blocks/home/RecommendationSection';
+import TopButton from '@/shared/components/TopButton';
 
 const Home = () => (
   <>
@@ -13,6 +14,7 @@ const Home = () => (
     <CategorySection />
     <RecommendationSection />
     <BestProductsSection />
+    <TopButton />
   </>
 );
 

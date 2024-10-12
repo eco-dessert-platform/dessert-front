@@ -6,6 +6,7 @@ import searchService from '@/domains/search/queries/service';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import TopButton from '@/shared/components/TopButton';
 
 interface SearchProductsProps {
   searchParams: { query?: string };
@@ -32,6 +33,7 @@ const SearchProducts = async ({ searchParams: { query: keyword = '' } }: SearchP
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SearchProductList keyword={keyword} />
       </HydrationBoundary>
+      <TopButton />
     </>
   );
 };

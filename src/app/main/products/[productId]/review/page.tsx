@@ -2,6 +2,7 @@ import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { reivewQueryOption } from '@/domains/review/queries/useReviewQuery';
 import reviewService from '@/domains/review/queries/service';
+import TopButton from '@/shared/components/TopButton';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ReviewList from './_blocks/ReviewList';
 import RatingSection from './_blocks/RatingSection';
@@ -42,6 +43,7 @@ const ReviewListPage = async ({ params }: Props) => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ReviewList />
       </HydrationBoundary>
+      <TopButton />
     </>
   );
 };

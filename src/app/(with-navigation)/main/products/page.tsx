@@ -7,11 +7,12 @@ import productService from '@/domains/product/queries/service';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import TopButton from '@/shared/components/TopButton';
 
 const ProductListPage = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({
-    queryKey: [...productQueryKey.list('main'), { filter: INIT_FILTER_VALUE }],
+    queryKey: [...productQueryKey.lists(), { filter: INIT_FILTER_VALUE }],
     queryFn: async ({ pageParam: cursorId }: { pageParam: number }) => {
       const result = await productService.getAllCategoryProducts({
         cursorId,
@@ -29,6 +30,7 @@ const ProductListPage = async () => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MainProductList />
       </HydrationBoundary>
+      <TopButton />
     </>
   );
 };

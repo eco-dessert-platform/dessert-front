@@ -21,12 +21,12 @@ const DateAlarmModal = ({
     id: productOptionId,
     title: productOptionName,
     orderAvailableDate: { startDate },
-    isNotified
+    notified
   }
 }: Props) => {
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();
-  const [isSelected, setIsSelected] = useState(isNotified);
+  const [isSelected, setIsSelected] = useState(notified);
   const { mutate: addAlarm } = useAddAlarmMutation({
     pushCategory: 'bbangcketing',
     productId: Number(productId),
@@ -45,7 +45,7 @@ const DateAlarmModal = ({
   };
 
   const handleApply = async () => {
-    if (isNotified !== isSelected) {
+    if (notified !== isSelected) {
       if (isSelected) addAlarmWithFcmToken();
       else cancelAlarm();
     }

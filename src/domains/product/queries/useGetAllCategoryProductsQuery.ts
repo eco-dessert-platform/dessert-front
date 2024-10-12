@@ -7,7 +7,7 @@ import { Cursor } from '@/shared/types/response';
 import { GetNextPageParamFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 export const useGetAllCategoryProductsQuery = (query: IFilterType) => {
-  const queryKey = [...productQueryKey.list('main'), { filter: query }];
+  const queryKey = [...productQueryKey.lists(), { filter: query }];
 
   const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
     const result = await productService.getAllCategoryProducts({ cursorId, filterValue: query });

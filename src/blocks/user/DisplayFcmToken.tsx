@@ -45,7 +45,11 @@ const DisplayFcmToken = () => {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full" aria-hidden="true" onClick={handleClick} />
+    <div
+      className="absolute top-0 left-0 w-full h-full z-header"
+      aria-hidden="true"
+      onClick={handleClick}
+    />
   );
 };
 

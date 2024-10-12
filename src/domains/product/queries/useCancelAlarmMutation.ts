@@ -6,7 +6,6 @@ import { ProductOptionResponse } from '@/domains/product/types/productDetailType
 import alarmService from '@/domains/alarm/queries/service';
 import { ALARM } from '@/domains/alarm/constants';
 import { AlarmType } from '@/domains/alarm/types';
-import { transformWeekArrayToObject } from '@/domains/product/utils/transformWeek';
 
 interface Props {
   pushCategory: AlarmType;
@@ -29,15 +28,18 @@ export const useCancelAlarmMutation = ({ pushCategory, productId, productOptionI
     const previousQueryData: ProductOptionResponse | undefined =
       queryClient.getQueryData(productOptionQueryKey);
     queryClient.setQueryData(productOptionQueryKey, (prev: ProductOptionResponse) => {
-      const newProducts = prev.products.map((productOption) =>
-        productOption.id === productOptionId
-          ? {
+      const newProducts = prev.products.map((productOption) => {
+        if (productOption.id === productOptionId) {
+          if (pushCategory === 'bbangcketing' && productOption.orderType === 'WEEK')
+            return {
               ...productOption,
-              isNotified: false,
-              appliedOrderWeek: transformWeekArrayToObject([])
-            }
-          : productOption
-      );
+              notified: false,
+              appliedOrderWeek: []
+            };
+          return { ...productOption, notified: false };
+        }
+        return productOption;
+      });
       return { ...prev, products: newProducts };
     });
     return previousQueryData;

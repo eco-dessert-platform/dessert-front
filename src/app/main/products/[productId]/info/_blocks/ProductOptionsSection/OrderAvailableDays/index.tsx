@@ -1,10 +1,6 @@
 'use client';
 
-import { useRouter, useParams } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
-import PATH from '@/shared/constants/path';
-import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import { useParams } from 'next/navigation';
 import useModal from '@/shared/hooks/useModal';
 import usePopup from '@/shared/hooks/usePopup';
 import useWebView from '@/shared/hooks/useWebView';
@@ -14,11 +10,11 @@ import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import { ORDER_TYPE } from '@/domains/product/constants/orderType';
 import { AlarmType } from '@/domains/alarm/types';
 import { isWeekProductOption, isDateProductOption } from '@/domains/product/utils/typeGuard';
+import useCheckLogin from '@/domains/product/hooks/useCheckLogin';
 import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
 import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
 import MobileAppPopup from '@/domains/alarm/components/alert-box/MobileAppPopup';
-import ReadyForServicePopup from '@/domains/alarm/components/alert-box/ReadyForServicePopup';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
 import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import TypeOfDate from './TypeOfDate';
@@ -29,17 +25,15 @@ interface Props {
 }
 
 const OrderAvailableDays = ({ product }: Props) => {
-  const { id: productOptionId, orderType, isSoldout, isNotified } = product;
+  const { id: productOptionId, orderType, isSoldout, notified } = product;
   const isWeek = orderType === 'WEEK' && isWeekProductOption(product);
   const isDate = orderType === 'DATE' && isDateProductOption(product);
 
-  const { openToast } = useToastNewVer();
   const { openModal } = useModal();
   const { openPopup } = usePopup();
-  const { push } = useRouter();
   const { productId } = useParams<{ productId: string }>();
   const { isWebView } = useWebView();
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const { checkLogin } = useCheckLogin();
   const mutationProps = {
     pushCategory: (isSoldout ? 'restock' : 'bbangcketing') as AlarmType,
     productId: Number(productId),
@@ -48,20 +42,16 @@ const OrderAvailableDays = ({ product }: Props) => {
   const { mutate: addAlarm } = useAddAlarmMutation(mutationProps);
   const { mutate: cancelAlarm } = useCancelAlarmMutation(mutationProps);
 
-  /* eslint-disable */
   const handleRestockBtnClick = () => {
     if (!isWebView) {
       openPopup(<MobileAppPopup type="restock" />);
       return;
     }
 
-    if (!isLoggedIn) {
-      openToast({ message: '알림 신청을 하려면 먼저 로그인해주세요.' });
-      push(PATH.login);
-      return;
-    }
+    const isLoggedIn = checkLogin();
+    if (!isLoggedIn) return;
 
-    if (isNotified) {
+    if (notified) {
       openPopup(<CancelAlarmPopup type="restock" cancelAlarm={cancelAlarm} />);
     } else {
       openPopup(
@@ -76,11 +66,8 @@ const OrderAvailableDays = ({ product }: Props) => {
       return;
     }
 
-    if (!isLoggedIn) {
-      openToast({ message: '알림 신청을 하려면 먼저 로그인해주세요.' });
-      push(PATH.login);
-      return;
-    }
+    const isLoggedIn = checkLogin();
+    if (!isLoggedIn) return;
 
     if (isWeek) {
       openModal(<WeekAlarmModal product={product} />);
@@ -88,7 +75,6 @@ const OrderAvailableDays = ({ product }: Props) => {
       openModal(<DateAlarmModal product={product} />);
     }
   };
-  /* eslint-enable */
 
   return (
     <div>
@@ -102,11 +88,9 @@ const OrderAvailableDays = ({ product }: Props) => {
         </div>
         <AlarmButton
           type={isSoldout ? 'restock' : 'bbangcketing'}
-          isAlarming={isNotified}
-          // onClick={isSoldout ? handleRestockBtnClick : handleBbangcketingBtnClick}
-          onClick={() =>
-            openPopup(<ReadyForServicePopup type={isSoldout ? 'restock' : 'bbangcketing'} />)
-          }
+          isAlarming={notified}
+          onClick={isSoldout ? handleRestockBtnClick : handleBbangcketingBtnClick}
+          disabled={isDate && new Date(product.orderAvailableDate.startDate) <= new Date()}
           className="max-w-max"
         />
       </div>

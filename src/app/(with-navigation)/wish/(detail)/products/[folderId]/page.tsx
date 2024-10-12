@@ -3,6 +3,7 @@ import WishProductSortSelect from '@/domains/wish/components/WishProductSortSele
 import { wishProductListoptions } from '@/domains/wish/queries/useWishProductListQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { wishSortDictionary } from '@/domains/wish/constants';
+import TopButton from '@/shared/components/TopButton';
 import WishProductList from './_blocks/WishProductList';
 
 interface Props {
@@ -30,6 +31,7 @@ const WishProductsDetail = async ({ params }: Props) => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <WishProductList />
       </HydrationBoundary>
+      <TopButton />
     </>
   );
 };

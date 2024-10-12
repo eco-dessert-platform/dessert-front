@@ -3,11 +3,21 @@ import { Cursor, ResultResponse, DefaultResponse } from '@/shared/types/response
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import Service from '@/shared/queries/service';
-import { transformPreferenceToEng } from '@/domains/user/utils/transformPreference';
+import {
+  processKrArrayToEngString,
+  processEngStringToKrArray,
+  translateObjectValuesEngToKr,
+  translateObjectValuesKrToEng
+} from '@/domains/user/utils/recommendation';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 import { notificationQueryKey, userProfileQueryKey } from './queryKey';
 import { UserProfileType, WithdrawResponse } from '../types/profile';
-import { PreferenceType, PreferenceResultType } from '../types/preference';
+import {
+  RecommendationStep1Type,
+  RecommendationStep2Type,
+  RecommendationStep1ResultType,
+  RecommendationStep2ResultType
+} from '../types/recommendation';
 import { KakaoAuthResponse, LoginResponse, SocialType } from '../types/login';
 import { KAKAO } from '../constants/socialLogin';
 
@@ -57,37 +67,65 @@ class UserService extends Service {
     return result;
   }
 
-  async addPreference(preference: Array<PreferenceType>) {
+  async addRecommendationStep1(recommendationStep1: RecommendationStep1Type) {
+    const { preferenceType } = recommendationStep1;
     const res = await this.fetchExtend.post('/preference', {
       body: JSON.stringify({
-        preferenceType: preference
-          .map((ele) => transformPreferenceToEng(ele))
-          .join('_')
-          .replace(' ', '_')
-          .toUpperCase()
+        preferenceType: processKrArrayToEngString(preferenceType)
       })
     });
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async getPreference() {
-    const res = await this.fetchExtend.get('/preference', { cache: 'no-store' });
-    const { result, success, code, message }: ResultResponse<PreferenceResultType> =
-      await res.json();
+  async addRecommendationStep2(recommendationStep2: RecommendationStep2Type) {
+    const res = await this.fetchExtend.post('/surveys/recommendation', {
+      body: JSON.stringify(translateObjectValuesKrToEng(recommendationStep2))
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result.preferenceType;
   }
 
-  async updatePreference(preference: Array<PreferenceType>) {
+  async getRecommendationStep1() {
+    const res = await this.fetchExtend.get('/preference', {
+      cache: 'no-store',
+      next: { tags: ['recommendation-step1'] }
+    });
+    const {
+      result: { preferenceType },
+      success,
+      code,
+      message
+    }: ResultResponse<RecommendationStep1ResultType> = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    const recommendationStep1 = { preferenceType: processEngStringToKrArray(preferenceType) };
+    return recommendationStep1;
+  }
+
+  async getRecommendationStep2() {
+    const res = await this.fetchExtend.get('/surveys/recommendation', {
+      next: { tags: ['recommendation-step2'] }
+    });
+    const { result, success, code, message }: ResultResponse<RecommendationStep2ResultType> =
+      await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return translateObjectValuesEngToKr(result);
+  }
+
+  async updateRecommendationStep1(recommendationStep1: RecommendationStep1Type) {
+    const { preferenceType } = recommendationStep1;
     const res = await this.fetchExtend.put('/preference', {
       body: JSON.stringify({
-        preferenceType: preference
-          .map((ele) => transformPreferenceToEng(ele))
-          .join('_')
-          .replace(' ', '_')
-          .toUpperCase()
+        preferenceType: processKrArrayToEngString(preferenceType)
       })
+    });
+    const { success, code, message }: DefaultResponse = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+  }
+
+  async updateRecommendationStep2(recommendationStep2: RecommendationStep2Type) {
+    const res = await this.fetchExtend.put('/surveys/recommendation', {
+      body: JSON.stringify(translateObjectValuesKrToEng(recommendationStep2))
     });
     const { success, code, message }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
@@ -135,15 +173,18 @@ class UserService extends Service {
     return result;
   }
 
-  async getMyPreferenceStatus() {
+  async getMyRecommendationStatus() {
     const res = await this.fetchExtend.get('/members/status');
     const {
       result,
       success,
       code,
       message
-    }: ResultResponse<{ isFullyAssigned: boolean; isPreferenceAssigned: boolean }> =
-      await res.json();
+    }: ResultResponse<{
+      isFullyAssigned: boolean;
+      isPreferenceAssigned: boolean;
+      isSurveyed: boolean;
+    }> = await res.json();
     if (!res.ok || !success) {
       throw new Error(ERROR_MESSAGE.api({ code, message }));
     }

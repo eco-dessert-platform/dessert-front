@@ -5,13 +5,13 @@ module.exports = {
   theme: {
     extend: {
       zIndex: {
+        topButton: 500,
         toast: 1000,
         popup: 1000,
         modal: 1000,
-        tooltip: 1000,
+        tooltip: 5000,
         header: 4999,
         footer: 4999,
-        bottomButton: 5000,
         backdrop: 9999
       },
 

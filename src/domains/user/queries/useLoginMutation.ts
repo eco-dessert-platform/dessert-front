@@ -21,14 +21,19 @@ export function useSocialLoginMutation() {
 
   const onSuccess = async ({ accessToken, refreshToken }: LoginResponse) => {
     await login({ accessToken, refreshToken });
-    const { isFullyAssigned, isPreferenceAssigned } = await userService.getMyPreferenceStatus();
+    const { isFullyAssigned, isPreferenceAssigned, isSurveyed } =
+      await userService.getMyRecommendationStatus();
 
-    if (!isPreferenceAssigned) {
+    if (!isFullyAssigned) {
       replace(PATH.profileRegistration);
       return;
     }
-    if (!isFullyAssigned) {
-      replace(PATH.preferenceCreate);
+    if (!isPreferenceAssigned) {
+      replace(PATH.recommendationCreate({ progress: 1 }));
+      return;
+    }
+    if (!isSurveyed) {
+      replace(PATH.recommendationCreate({ progress: 2 }));
       return;
     }
 

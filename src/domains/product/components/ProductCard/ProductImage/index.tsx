@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 import { useRecoilValue } from 'recoil';
 
@@ -8,13 +8,16 @@ import { IProductType } from '@/domains/product/types/productType';
 import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
-import HeartButton from '@/shared/components/HeartButton';
+import { isLoggedinState } from '@/shared/atoms/login';
 import Badge from '@/shared/components/Badge';
+import HeartButton from '@/shared/components/HeartButton';
 import { BellIcon } from '@/shared/components/icons';
-import { cn } from '@/shared/utils/cn';
-import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
 import ImageWithFallback from '@/shared/components/ImageWithFallback';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
+import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
+import { cn } from '@/shared/utils/cn';
 
 interface ProductImageProps {
   product: IProductType;
@@ -27,17 +30,26 @@ const ProductImage = ({
   ranking
 }: ProductImageProps) => {
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
-
+  const { openToast } = useToastNewVer();
+  const [isPopping, setIsPopping] = useState(false);
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
+  const isLoggedIn = useRecoilValue(isLoggedinState);
+
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: boardId, folderId: selectedWishFolder });
+    if (isLoggedIn) {
+      addMutate({ productId: boardId, folderId: selectedWishFolder });
+      setIsPopping(true);
+    } else {
+      openToast({ message: ERROR_MESSAGE.requiredLogin });
+    }
     e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
     deleteMutate({ productId: boardId });
+    setIsPopping(false);
     e.preventDefault();
   };
 
@@ -58,15 +70,19 @@ const ProductImage = ({
           className="object-cover rounded-[6px]"
           fill
           fallback={
-            <SadBbangleBox className="border rounded-[6px] size-full">
-              이미지를 불러오지 못 했어요.
+            <SadBbangleBox className="border bg-gray-50  rounded-[6px] size-full">
+              이미지가 없습니다.
             </SadBbangleBox>
           }
         />
       </div>
-
-      <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px]">
-        <HeartButton isActive={isWished} shape="shadow" onClick={isWished ? hate : like} />
+      <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px] ">
+        <HeartButton
+          isActive={isWished}
+          className={isPopping ? 'animate-heart-pop' : ''}
+          shape="shadow"
+          onClick={isWished ? hate : like}
+        />
       </div>
       <div className="absolute z-10 top-[6px] left-[6px] w-full flex flex-wrap gap-[6px]">
         {popular && <Badge type="ranking">{ranking}</Badge>}

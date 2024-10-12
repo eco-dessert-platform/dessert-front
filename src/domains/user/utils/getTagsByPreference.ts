@@ -1,4 +1,4 @@
-import { PreferenceType } from '@/domains/user/types/preference';
+import { PreferenceType } from '@/domains/user/types/recommendation';
 
 export const getTagsByPreference = (preference: PreferenceType) => {
   switch (preference) {

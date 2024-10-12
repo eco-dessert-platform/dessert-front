@@ -51,7 +51,7 @@ export const useCancelAlarmMutation = ({ pushCategory }: Props) => {
 
         const newProducts = prev.products.map((productOption) =>
           productOption.id === productOptionId
-            ? { ...productOption, isNotified: false }
+            ? { ...productOption, notified: false }
             : productOption
         );
         return { ...prev, products: newProducts };

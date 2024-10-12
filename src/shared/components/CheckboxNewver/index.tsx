@@ -11,7 +11,12 @@ const CheckBoxNewver = (
   ref: ForwardedRef<HTMLInputElement>
 ) => (
   <div role="checkbox" aria-checked={props.checked} className={cn('relative', className)}>
-    <input ref={ref} type="checkbox" className="opacity-0 absolute size-full " {...props} />
+    <input
+      ref={ref}
+      type="checkbox"
+      className="opacity-0 absolute size-full cursor-pointer"
+      {...props}
+    />
     {props.checked ? <CheckIcon shape="checkbox-on" /> : <CheckIcon shape="checkbox-off" />}
   </div>
 );

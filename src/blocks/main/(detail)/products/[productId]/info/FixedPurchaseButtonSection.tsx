@@ -8,9 +8,10 @@ import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
-import ButtonNewver from '@/shared/components/ButtonNewver';
+import ButtonNewver, { buttonVariants } from '@/shared/components/ButtonNewver';
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
 import { useParams } from 'next/navigation';
+import { cn } from '@/shared/utils/cn';
 
 const FixedPurchaseButtonSection = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -38,13 +39,15 @@ const FixedPurchaseButtonSection = () => {
 
   return (
     <div className="bg-white max-w-[600px] w-full mx-auto p-[16px] flex items-center gap-[10px]">
-      <div>
-        <HeartButton
-          shape="default"
-          isActive={boardData.isWished}
-          onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
-        />
-      </div>
+      <HeartButton
+        shape="default"
+        isActive={boardData.isWished}
+        onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
+        className={cn(
+          buttonVariants({ size: 'lg', color: 'border-white', radius: 'round' }),
+          'min-w-max w-[56px] p-0'
+        )}
+      />
       <div className="flex-1">
         <ButtonNewver color="black" className="w-full" size="lg" onClick={gotoPurchaseUrl}>
           구매하러 가기

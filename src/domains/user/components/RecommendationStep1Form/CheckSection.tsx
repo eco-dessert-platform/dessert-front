@@ -1,6 +1,6 @@
 'use client';
 
-import { PreferenceFormType } from '@/domains/user/types/preference';
+import { RecommendationType } from '@/domains/user/types/recommendation';
 import { useFormContext } from 'react-hook-form';
 import CheckBoxNewver from '@/shared/components/CheckboxNewver';
 import { selectInputVariants } from '@/shared/style/variants';
@@ -26,8 +26,8 @@ const ITEMS = [
 ] as const;
 
 const CheckSection = () => {
-  const { watch, register } = useFormContext<PreferenceFormType>();
-  const preferences = watch('preferenceType');
+  const { watch, register } = useFormContext<RecommendationType>();
+  const preferences = watch('step1.preferenceType');
 
   return (
     <div className="flex flex-col gap-[8px]">
@@ -42,7 +42,8 @@ const CheckSection = () => {
             className={cn(
               selectInputVariants({ outline: true, checked }),
               'flex p-[10px] gap-[12px] items-center',
-              disabled && 'opacity-70'
+              disabled && 'opacity-70',
+              checked && 'typo-title-14-semibold'
             )}
             htmlFor={item.title}
           >
@@ -51,7 +52,9 @@ const CheckSection = () => {
               value={item.title}
               checked={checked}
               disabled={disabled}
-              {...register('preferenceType')}
+              {...register('step1.preferenceType', {
+                required: true
+              })}
             />
             <div className="flex flex-col">
               <div className="typo-title-14-semibold">{item.title}</div>

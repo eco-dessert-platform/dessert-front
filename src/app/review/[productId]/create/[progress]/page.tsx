@@ -19,7 +19,7 @@ const ReviewCreatePage = ({ params: { productId, progress } }: ReviewCreatePageP
         content={<span className="typo-title-16-medium text-gray-500">{progressNum}/2</span>}
         back
       />
-      <ReviewCreateForm progress={progressNum} />;
+      <ReviewCreateForm progress={progressNum} />
     </>
   );
 };

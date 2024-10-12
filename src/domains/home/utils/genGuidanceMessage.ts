@@ -1,4 +1,4 @@
-import { PreferenceType } from '@/domains/user/types/preference';
+import { PreferenceType } from '@/domains/user/types/recommendation';
 import { getTagsByPreference } from '@/domains/user/utils/getTagsByPreference';
 import { attachPostPosition } from '@/shared/utils/attachPostPosition';
 

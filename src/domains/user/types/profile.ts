@@ -30,3 +30,8 @@ export interface UserProfileType {
 export interface WithdrawResponse {
   message: string;
 }
+
+export interface WithdrawFormType {
+  deleteReasons: Array<string>;
+  isAgreeChecked: boolean;
+}

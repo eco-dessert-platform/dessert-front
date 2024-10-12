@@ -2,13 +2,17 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRecoilValue } from 'recoil';
 
-import HeartButton from '@/shared/components/HeartButton';
-import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import PATH from '@/shared/constants/path';
+import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
 import useAddWishStoreMutation from '@/domains/wish/queries/useAddWishStoreMutation';
 import useDeleteWishStoreMutation from '@/domains/wish/queries/useDeleteWishStoreMutation';
-import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
+import { isLoggedinState } from '@/shared/atoms/login';
+import HeartButton from '@/shared/components/HeartButton';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { ERROR_MESSAGE } from '@/shared/constants/error';
+import PATH from '@/shared/constants/path';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 
 interface Props {
   storeId: number;
@@ -18,13 +22,19 @@ const DetailStoreInfo = ({ storeId }: Props) => {
   const { data: storeData } = useGetStoreInfoQuery({ storeId });
   const { mutate: addMutate } = useAddWishStoreMutation(storeId);
   const { mutate: deleteMutate } = useDeleteWishStoreMutation(storeId);
+  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const { openToast } = useToastNewVer();
 
   if (!storeData) return <PaddingWrapper>스토어 정보를 찾을 수 없어요.</PaddingWrapper>;
 
   const wishMutate = storeData.isWished ? deleteMutate : addMutate;
 
   const handleWish = (e: React.MouseEvent<HTMLButtonElement>) => {
-    wishMutate();
+    if (isLoggedIn) {
+      wishMutate();
+    } else {
+      openToast({ message: ERROR_MESSAGE.requiredLogin });
+    }
     e.preventDefault();
   };
 

@@ -40,13 +40,13 @@ export const useAddAlarmMutation = ({
     queryClient.setQueryData(productOptionQueryKey, (prev: ProductOptionResponse) => {
       const newProducts = prev.products.map((productOption) => {
         if (productOption.id === productOptionId) {
-          if (pushType === 'WEEK' && days)
+          if (productOption.orderType === 'WEEK' && days)
             return {
               ...productOption,
-              isNotified: true,
+              notified: true,
               appliedOrderWeek: transformWeekArrayToObject(days)
             };
-          if (pushType === 'DATE') return { ...productOption, isNotified: true };
+          return { ...productOption, notified: true };
         }
         return productOption;
       });

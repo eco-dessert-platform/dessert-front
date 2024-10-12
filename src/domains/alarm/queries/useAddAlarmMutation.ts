@@ -52,7 +52,7 @@ export const useAddAlarmMutation = ({ pushCategory }: Props) => {
 
         const newProducts = prev.products.map((productOption) =>
           productOption.id === productOptionId
-            ? { ...productOption, isNotified: true }
+            ? { ...productOption, notified: true }
             : productOption
         );
         return { ...prev, products: newProducts };

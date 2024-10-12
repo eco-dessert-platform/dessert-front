@@ -3,7 +3,7 @@ import BoardImagesSection from '@/blocks/main/(detail)/products/[productId]/info
 import ProductOptionsSetion from '@/blocks/main/(detail)/products/[productId]/info/ProductOptionsSection';
 import ReviewBadgeSection from '@/blocks/main/(detail)/products/[productId]/info/ReviewBadgeSection';
 import SimpleInfoWithStoreSection from '@/blocks/main/(detail)/products/[productId]/info/SimpleInfoWithStoreSection';
-import TopButton from '../_blocks/TopButton';
+import TopButton from '@/shared/components/TopButton';
 
 interface Props {
   params: { productId: string };

@@ -12,7 +12,7 @@ import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
 import OrderAvailableDays from './OrderAvailableDays';
 
-const ProductOptionsSetion = ({ productId }: { productId: number }) => {
+const ProductOptionsSection = ({ productId }: { productId: number }) => {
   const { data: productOption } = useGetProductOptionQuery(productId);
   const [activeOption, setActiveOption] = useState<{ [key: number]: boolean }>({});
 
@@ -45,4 +45,4 @@ const ProductOptionsSetion = ({ productId }: { productId: number }) => {
   );
 };
 
-export default ProductOptionsSetion;
+export default ProductOptionsSection;

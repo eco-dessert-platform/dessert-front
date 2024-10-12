@@ -43,6 +43,7 @@ module.exports = {
   images: {
     remotePatterns: [
       { hostname: 'd37g3q9mfan3cw.cloudfront.net' },
+      { hostname: 'd41zmgwrjn4bn.cloudfront.net' },
       { hostname: 'bbangle-bucket.s3.ap-northeast-2.amazonaws.com' },
       { hostname: 'bbangle-bucket.kr.object.ncloudstorage.com' },
       { hostname: 'firebasestorage.googleapis.com' },

@@ -16,10 +16,10 @@ const BoardImagesSection = ({ productId }: { productId: number }) => {
   const [swiperIndex, setSwiperIndex] = useState(0);
   const { data: boardDetail } = useGetBoardDetailQuery(productId);
   const { data: productOption } = useGetProductOptionQuery(productId);
-
   const imageArray = [boardDetail?.profile, ...(boardDetail?.boardImages ?? [])].filter(
-    (item) => item !== undefined && item !== null
+    (item): item is string => item !== undefined && item !== null
   );
+
   const haveBoardImages = imageArray.length > 0;
   const isAllProductSoldOut = productOption?.products.every((product) => product.isSoldout);
 

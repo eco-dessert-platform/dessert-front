@@ -1,22 +1,12 @@
-import { ResultResponse } from '@/shared/types/response';
-import fetchExtend from '@/shared/utils/api';
-import { throwApiError } from '@/shared/utils/error';
 import { useMutation } from '@tanstack/react-query';
 
-import { NicknameDoubleCheckResponse } from '../types/profile';
+import userService from './service';
 
 const useNicknameDoubleCheckMutation = () => {
   const mutationFn = async (nickname: string) => {
-    const res = await fetchExtend.get(`/profile/doublecheck?nickname=${nickname}`);
-    const { result, success, message, code }: ResultResponse<NicknameDoubleCheckResponse> =
-      await res.json();
-
-    if (!res.ok || !success) {
-      throwApiError({ code, message });
-    }
+    const result = await userService.getNickCheck(nickname);
     return result;
   };
-
   return useMutation({
     mutationFn
   });

@@ -11,7 +11,7 @@ import {
 } from '@/domains/user/utils/recommendation';
 import { NotificationDetailType, NotificationType } from '../types/notification';
 import { notificationQueryKey, userProfileQueryKey } from './queryKey';
-import { UserProfileType, WithdrawResponse } from '../types/profile';
+import { NicknameDoubleCheckResponse, UserProfileType, WithdrawResponse } from '../types/profile';
 import {
   RecommendationStep1Type,
   RecommendationStep2Type,
@@ -22,6 +22,15 @@ import { KakaoAuthResponse, LoginResponse, SocialType } from '../types/login';
 import { KAKAO } from '../constants/socialLogin';
 
 class UserService extends Service {
+  async getNickCheck(nickname: string) {
+    const res = await this.fetchExtend.get(`/profile/doublecheck?nickname=${nickname}`);
+    const { result, success, message, code }: ResultResponse<NicknameDoubleCheckResponse> =
+      await res.json();
+
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
+  }
+
   async getNotifications(cursorId: number) {
     const params = cursorId === INITIAL_CURSOR ? '' : `?cursorId=${cursorId}`;
     const res = await this.fetchExtend.get(`/notification${params}`);

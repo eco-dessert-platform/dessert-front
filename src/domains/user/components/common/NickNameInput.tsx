@@ -1,45 +1,51 @@
 'use client';
 
 import { useId } from 'react';
-
 import { useFormContext } from 'react-hook-form';
-
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import Input from '@/shared/components/Input';
-
 import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
 
 const NicknameInput = () => {
   const inputId = useId();
-
-  const { mutate, data } = useNicknameDoubleCheckMutation();
-
-  const { register, watch, setValue } = useFormContext();
+  const { mutate, data, reset } = useNicknameDoubleCheckMutation();
+  const { watch, setValue } = useFormContext();
 
   const nickname = watch('nickname');
 
   const nickDoubleCheck = () => {
     mutate(nickname || '', {
       onSuccess: (res) => {
-        if (!res.isValid) {
-          setValue('nickname', '');
+        if (res.isValid) {
+          setValue('nickname', nickname, { shouldDirty: true });
+          setValue('isNickDoubleChecked', true);
+        } else {
+          setValue('isNickDoubleChecked', false);
         }
       },
       onError: (error) => {
         console.error('닉네임 중복 체크 실패:', error);
+        setValue('isNickDoubleChecked', false);
       }
     });
+  };
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('nickname', e.target.value);
+    setValue('isNickDoubleChecked', false);
+    reset();
   };
 
   return (
     <div className="w-full">
       <Input
         id={inputId}
-        {...register('nickname')}
         placeholder="닉네임을 입력해 주세요."
         label="닉네임"
         autoComplete="off"
         required
+        value={nickname}
+        onChange={onInputChange}
         maxLength={20}
         className="typo-title-14-medium"
         button={

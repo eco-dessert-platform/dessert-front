@@ -25,7 +25,7 @@ const BBANGLE_LOGO_IMAGE = {
 
 const staticMetadata: StaticMetadataType = {
   root: {
-    metadataBase: new URL('https://www.bbangle.store'),
+    metadataBase: new URL('https://www.bbanggree.com'),
     title: {
       template: '%s | 빵그리의 오븐',
       default: '빵그리의 오븐'

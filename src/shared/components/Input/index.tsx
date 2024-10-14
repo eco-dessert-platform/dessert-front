@@ -16,7 +16,10 @@ const Input = (
   return (
     <div id={id} className="w-full">
       {label && (
-        <label className="inline-block mb-[6px] typo-title-14-semibold" htmlFor={inputId}>
+        <label
+          className="inline-block mb-[6px] typo-title-14-semibold text-gray-700"
+          htmlFor={inputId}
+        >
           {label} {required && <span className="text-primaryOrangeRed">*</span>}
         </label>
       )}

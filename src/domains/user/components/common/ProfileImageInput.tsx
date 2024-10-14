@@ -58,7 +58,7 @@ const ProfileImageInput = () => {
         />
       )}
       <div className="absolute bottom-0 flex justify-center items-center h-[26px] w-full text-white bg-gray-800/50 typo-title-14-semibold">
-        편집
+        {!profileImg ? '추가' : '수정'}
       </div>
     </ImageInput>
   );

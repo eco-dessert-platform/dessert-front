@@ -52,8 +52,8 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col gap-[81px] px-[16px] m-[16px] pt-[70px]">
       <LoginLogoSection
-        title="안녕하세요👋 빵그리의 오븐입니다 :)"
-        subTitle="여러분들이 원하는 비건 베이커리들을 함께 만나봐요!"
+        title="여러분이 원하는 건강 디저트를 만나봐요!"
+        subTitle="3초 로그인으로 더욱 다양한 빵그리 서비스를 경험해보세요"
       />
       <div className="flex flex-col gap-3">
         <KakaoLoginButton />

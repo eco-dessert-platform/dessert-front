@@ -1,7 +1,8 @@
 import DefaultLayout from '@/shared/components/DefaultLayout';
 import Header from '@/shared/components/Header';
 import { ReactNode } from 'react';
-import { REGISTRATION_DEFAULT_VALUE } from '@/domains/user/constants/registration';
+
+import { REGISTRATION_DEFAULT_VALUE } from '@/domains/user/constants/profile';
 import RegistrationFormProvider from './_blocks/RegistrationcFormProvider';
 import ButtonSection from './_blocks/ButtonSection';
 

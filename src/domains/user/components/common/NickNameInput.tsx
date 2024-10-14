@@ -17,6 +17,7 @@ const NicknameInput = () => {
     mutate(nickname || '', {
       onSuccess: (res) => {
         if (res.isValid) {
+          setValue('nickname', nickname, { shouldDirty: true });
           setValue('isNickDoubleChecked', true);
         } else {
           setValue('isNickDoubleChecked', false);

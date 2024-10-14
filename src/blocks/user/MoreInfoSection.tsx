@@ -37,7 +37,12 @@ const LOGGEDIN_INFOS = [
   { href: PATH.myReview, icon: <WriteIcon />, content: '내가 작성한 리뷰' },
   { href: PATH.bbangcketing, icon: <ThumbsUpIcon />, content: '빵겟팅/재입고 알림 관리' },
   { href: '#', icon: <SettingIcon />, content: '상품 추천하기' },
-  { href: '#', icon: <InquiryIcon />, content: '문의하기' }
+  { href: '#', icon: <InquiryIcon />, content: '문의하기' },
+  {
+    href: PATH.privacyPolicy,
+    icon: <LockIcon />,
+    content: '개인정보 수집 및 이용'
+  }
 ];
 
 const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (

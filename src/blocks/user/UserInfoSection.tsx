@@ -17,6 +17,7 @@ const UserInfoSection = async () => {
             {profileImg ? (
               <Image
                 src={profileImg}
+                unoptimized
                 width={30}
                 height={30}
                 alt={`${nickname}'s profile image`}

@@ -19,7 +19,7 @@ const RecommendationUpdateLayout = async ({ children }: RecommendationUpdateLayo
       defaultValues={{ step1: recommendationStep1, step2: recommendationStep2 }}
     >
       <DefaultLayout
-        header={<Header title="맞춤 추천 수정하기" />}
+        header={<Header title="맞춤 추천 수정하기" back />}
         main={children}
         footer={<ButtonSection />}
       />

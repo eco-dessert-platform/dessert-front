@@ -19,6 +19,9 @@ export const metadata = getStaticMetadata('root');
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ko">
+    <head>
+      <meta name="google-site-verification" content="PrpME1IVVESozFHxEKcgSVkL8preaJpDFYJ5Rtsjygk" />
+    </head>
     <body className={pretendard.className}>
       <RootLayoutProvider>
         <SilentLogin />
@@ -27,8 +30,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
         <AlertContainer />
       </RootLayoutProvider>
       <KaKaoChatScript />
+      <GAScript />
     </body>
-    <GAScript />
   </html>
 );
 

@@ -36,7 +36,7 @@ module.exports = {
       }
     },
     serverActions: {
-      allowedOrigins: ['www.bbangle.store']
+      allowedOrigins: ['www.bbangle.store', 'www.bbanggree.com']
     }
   },
 

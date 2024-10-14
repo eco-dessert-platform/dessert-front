@@ -3,7 +3,7 @@
 import { cn } from '@/shared/utils/cn';
 import { selectInputVariants } from '@/shared/style/variants';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import RadioNewver from '@/shared/components/RadioNewver';
+import CheckboxNewver from '@/shared/components/CheckboxNewver';
 
 interface OptionType extends React.InputHTMLAttributes<HTMLInputElement> {}
 
@@ -14,7 +14,7 @@ interface Props {
   options: Array<OptionType>;
 }
 
-const RadioQuestion = ({ title, subTitle, required = false, options }: Props) => (
+const CheckboxQuestion = ({ title, subTitle, required = false, options }: Props) => (
   <div>
     <PaddingWrapper className="pb-[10px]">
       <h4 className="typo-title-16-semibold text-gray-900">
@@ -37,7 +37,7 @@ const RadioQuestion = ({ title, subTitle, required = false, options }: Props) =>
               checked && 'typo-title-14-semibold'
             )}
           >
-            <RadioNewver id={id} {...option} />
+            <CheckboxNewver id={id} {...option} />
             {value}
           </label>
         );
@@ -46,4 +46,4 @@ const RadioQuestion = ({ title, subTitle, required = false, options }: Props) =>
   </div>
 );
 
-export default RadioQuestion;
+export default CheckboxQuestion;

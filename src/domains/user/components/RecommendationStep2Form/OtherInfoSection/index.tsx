@@ -13,8 +13,8 @@ const OtherInfoSection = () => {
         기타 정보
       </h3>
       <RadioQuestion
-        title="채식 지향이신가요?"
-        subTitle="채식인 경우에 1개만 선택해주세요."
+        title="베지테리언이신가요?"
+        subTitle="베지테리언이신 경우 먹지않는 음식을 선택해주세요"
         options={RECOMMENDATION.step2.isVegetarians.map((option) => ({
           value: option,
           checked: isVegetarians.includes(option),

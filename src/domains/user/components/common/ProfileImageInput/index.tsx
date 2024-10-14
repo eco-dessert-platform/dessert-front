@@ -46,7 +46,7 @@ const ProfileImageInput = () => {
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setValue('profileImg', file);
+      setValue('profileImg', file, { shouldDirty: true });
     } else {
       console.error('파일이 없습니다.');
     }
@@ -62,7 +62,7 @@ const ProfileImageInput = () => {
     if (option === '변경') {
       fileInputRef.current?.click();
     } else if (option === '삭제') {
-      setValue('profileImg', '');
+      setValue('profileImg', '', { shouldDirty: true });
       setPreviewImg('');
     }
   };

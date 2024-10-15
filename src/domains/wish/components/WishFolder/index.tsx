@@ -39,7 +39,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
     openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
   };
 
-  const updateFolderName: MouseEventHandler<HTMLButtonElement> = () => {
+  const updateFolderName = () => {
     if (isDefaultFolder) {
       openPopup(<DefaultFolderAlertPopup />);
       return;
@@ -58,8 +58,9 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   return (
     <div className="flex flex-col gap-[6.5px] rounded-[6px] overflow-hidden">
       <Link
-        href={`${PATH.wishProductList}/${id}`}
+        href={`${PATH.wishProductList}/${isEditing ? '' : id}`}
         className="relative flex justify-center items-center after:pb-[100%] w-full"
+        onClick={() => isEditing && updateFolderName()}
       >
         <FolderThumbnail thumbnailList={thumbnailList} />
 

@@ -10,5 +10,6 @@ export const wishSortDictionary = new Dictionary({
   담은순: 'WISHLIST_RECENT'
 });
 
-export const NEW_WISH_FOLDER_KEY = 'CREATE_NEW_WISH';
+/* TODO
+  확실한 기본 Key 값 추가 고려 */
 export const DEFAULT_FOLDER_NAME = '기본 폴더';

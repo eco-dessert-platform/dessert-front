@@ -6,17 +6,17 @@ import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import Modal from '@/shared/components/Modal';
 import { CreateWishFolderReqeust } from '../../types/form';
-import { NEW_WISH_FOLDER_KEY } from '../../constants';
 
 interface Props {
   onValidSubmit: SubmitHandler<CreateWishFolderReqeust>;
-  prevTitle: string;
+  prevTitle?: string;
 }
 
 const UpdateWishFolderModal = ({ onValidSubmit, prevTitle }: Props) => {
   const MAX_LENGTH = 12;
+
   const { register, handleSubmit, watch } = useForm<CreateWishFolderReqeust>({
-    defaultValues: { title: NEW_WISH_FOLDER_KEY === prevTitle ? '' : prevTitle }
+    defaultValues: { title: prevTitle ?? '' }
   });
   const isDisable = prevTitle === watch('title');
 
@@ -38,7 +38,7 @@ const UpdateWishFolderModal = ({ onValidSubmit, prevTitle }: Props) => {
             </div>
           </div>
           {/* TODO 색상 코드 확인 후 disable에 대한 bg 컬러 변경 */}
-          <Button type="submit" disabled={isDisable} className={isDisable ? 'bg-gray-600' : ''}>
+          <Button type="submit" disabled={isDisable} className={isDisable ? 'bg-gray-300' : ''}>
             확인
           </Button>
         </form>

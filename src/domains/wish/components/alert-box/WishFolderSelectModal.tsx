@@ -14,6 +14,7 @@ import { selectedWishFolderState } from '../../atoms/wishFolder';
 import useMoveWishProduct from '../../queries/useMoveWishProduct';
 import UpdateWishFolderModal from './UpdateWishFolderModal';
 import useCreateWishFolderMutation from '../../queries/useCreateWishFolderMutation';
+import { NEW_WISH_FOLDER_KEY } from '../../constants';
 
 interface Props {
   productId: number;
@@ -34,6 +35,7 @@ const WishFolderSelectModal = ({ productId }: Props) => {
   const openCreateWishFolderModal = () => {
     openModal(
       <UpdateWishFolderModal
+        prevTitle={NEW_WISH_FOLDER_KEY}
         onValidSubmit={({ title }) => {
           createWishFolder(title);
           closeModal();

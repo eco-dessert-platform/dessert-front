@@ -13,6 +13,7 @@ import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
 import FolderThumbnail from '../common/FolderThumbnail';
 import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
 import DefaultFolderAlertPopup from '../alert-box/DefaultFolderAlertPopup';
+import { DEFAULT_FOLDER_NAME } from '../../constants';
 
 interface WishFolderProps {
   id: number;
@@ -20,8 +21,6 @@ interface WishFolderProps {
   name: string;
   count: number;
 }
-
-const DEFAULT_FOLDER_NAME = '기본 폴더';
 
 const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   const isEditing = useRecoilValue(isWishFolderEditingState);
@@ -48,6 +47,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
 
     openModal(
       <UpdateWishFolderModal
+        prevTitle={name}
         onValidSubmit={({ title }) => {
           updateWishFolderTitle({ title, folderId: id }, { onSuccess: closeModal });
         }}

@@ -28,6 +28,7 @@ const WishFolderEditButtonSection = () => {
   const createFolder = () => {
     openModal(
       <UpdateWishFolderModal
+        prevTitle="NEW_FOLDER"
         onValidSubmit={({ title }) => {
           createFolderMutate(title);
           closeModal();

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useMemo } from 'react';
 import usePopup from '@/shared/hooks/usePopup';
 import useModal from '@/shared/hooks/useModal';
 import { CloseIcon } from '@/shared/components/icons';
@@ -20,11 +20,14 @@ interface WishFolderProps {
   count: number;
 }
 
+const DEFAULT_FOLDER_NAME = '기본 폴더';
+
 const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   const isEditing = useRecoilValue(isWishFolderEditingState);
   const { openPopup } = usePopup();
   const { openModal } = useModal();
   const { mutate: updateWishFolderTitle } = useUpdateWishFolderMutation();
+  const isDefaultFolder = useMemo(() => DEFAULT_FOLDER_NAME === name, [name]);
 
   const deleteFolder: MouseEventHandler<HTMLButtonElement> = (e) => {
     openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
@@ -47,7 +50,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
         href={`${PATH.wishProductList}/${id}`}
         className="relative flex justify-center items-center after:pb-[100%] w-full"
       >
-        {isEditing && (
+        {!isDefaultFolder && isEditing && (
           <button
             aria-label="delete folder"
             type="button"
@@ -61,7 +64,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
         <FolderThumbnail thumbnailList={thumbnailList} />
       </Link>
       <div className="flex justify-between items-center">
-        {isEditing ? (
+        {!isDefaultFolder && isEditing ? (
           <button
             aria-label="update folder"
             type="button"

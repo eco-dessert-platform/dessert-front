@@ -1,4 +1,7 @@
+import ImageWithFallback from '@/shared/components/ImageWithFallback';
+import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import { BbangleIcon } from '@/shared/components/icons';
+import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
@@ -24,7 +27,19 @@ const FolderThumbnail = ({ thumbnailList, size = 'lg' }: Props) => {
         <div className="grid grid-cols-2 grid-rows-2 size-full gap-[2px]">
           {thumbnailList.map((thumbnail) => (
             <div key={thumbnail} className="relative size-full">
-              <Image src={thumbnail} fill alt="thumbnail" />
+              <ImageWithFallback
+                src={thumbnail}
+                alt="상품사진"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                className="object-cover rounded-[6px]"
+                fill
+                fallback={
+                  <SadBbangleBox className="border bg-gray-50 rounded-[6px] size-full typo-body-12-regular">
+                    no image
+                  </SadBbangleBox>
+                }
+              />
             </div>
           ))}
         </div>

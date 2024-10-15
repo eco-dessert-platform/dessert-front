@@ -10,7 +10,7 @@ interface StaticMetadataType {
   [route: string]: Metadata;
 }
 
-const IS_DEV_MOD = process.env.NEXT_PUBLIC_DEV_SETTING;
+const IS_DEV_MOD: boolean = JSON.parse(process.env.NEXT_PUBLIC_DEV_SETTING ?? 'false');
 
 const BBANGLE_LOGO_IMAGE = {
   og: {

@@ -12,6 +12,7 @@ import { isWishFolderEditingState } from '../../atoms/wishFolder';
 import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
 import FolderThumbnail from '../common/FolderThumbnail';
 import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
+import DefaultFolderAlertPopup from '../alert-box/DefaultFolderAlertPopup';
 
 interface WishFolderProps {
   id: number;
@@ -30,11 +31,21 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   const isDefaultFolder = useMemo(() => DEFAULT_FOLDER_NAME === name, [name]);
 
   const deleteFolder: MouseEventHandler<HTMLButtonElement> = (e) => {
-    openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
     e.preventDefault();
+    if (isDefaultFolder) {
+      openPopup(<DefaultFolderAlertPopup />);
+      return;
+    }
+
+    openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
   };
 
   const updateFolderName: MouseEventHandler<HTMLButtonElement> = () => {
+    if (isDefaultFolder) {
+      openPopup(<DefaultFolderAlertPopup />);
+      return;
+    }
+
     openModal(
       <UpdateWishFolderModal
         onValidSubmit={({ title }) => {
@@ -50,6 +61,8 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
         href={`${PATH.wishProductList}/${id}`}
         className="relative flex justify-center items-center after:pb-[100%] w-full"
       >
+        <FolderThumbnail thumbnailList={thumbnailList} />
+
         {!isDefaultFolder && isEditing && (
           <button
             aria-label="delete folder"
@@ -60,8 +73,6 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
             <CloseIcon shape="black" />
           </button>
         )}
-
-        <FolderThumbnail thumbnailList={thumbnailList} />
       </Link>
       <div className="flex justify-between items-center">
         {!isDefaultFolder && isEditing ? (

@@ -2,9 +2,10 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import Button from '@/shared/components/Button';
+
 import Input from '@/shared/components/Input';
 import Modal from '@/shared/components/Modal';
+import ButtonNewver from '@/shared/components/ButtonNewver';
 import { CreateWishFolderReqeust } from '../../types/form';
 
 interface Props {
@@ -38,9 +39,9 @@ const UpdateWishFolderModal = ({ onValidSubmit, prevTitle }: Props) => {
             </div>
           </div>
           {/* TODO 색상 코드 확인 후 disable에 대한 bg 컬러 변경 */}
-          <Button type="submit" disabled={isDisable} className={isDisable ? 'bg-gray-300' : ''}>
+          <ButtonNewver type="submit" disabled={isDisable} className="bg-black">
             확인
-          </Button>
+          </ButtonNewver>
         </form>
       </PaddingWrapper>
     </Modal>

@@ -26,7 +26,7 @@ const DEFAULT_FOLDER_NAME = '기본 폴더';
 const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   const isEditing = useRecoilValue(isWishFolderEditingState);
   const { openPopup } = usePopup();
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const { mutate: updateWishFolderTitle } = useUpdateWishFolderMutation();
   const isDefaultFolder = useMemo(() => DEFAULT_FOLDER_NAME === name, [name]);
 
@@ -49,7 +49,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
     openModal(
       <UpdateWishFolderModal
         onValidSubmit={({ title }) => {
-          updateWishFolderTitle({ title, folderId: id });
+          updateWishFolderTitle({ title, folderId: id }, { onSuccess: closeModal });
         }}
       />
     );

@@ -37,6 +37,7 @@ const UpdateWishFolderModal = ({ onValidSubmit, prevTitle }: Props) => {
               <span className="text-gray-400">/{MAX_LENGTH}</span>
             </div>
           </div>
+          {/* TODO 색상 코드 확인 후 disable에 대한 bg 컬러 변경 */}
           <Button type="submit" disabled={isDisable} className={isDisable ? 'bg-gray-600' : ''}>
             확인
           </Button>

@@ -6,7 +6,10 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Input from '@/shared/components/Input';
 import Modal from '@/shared/components/Modal';
 import ButtonNewver from '@/shared/components/ButtonNewver';
+import usePopup from '@/shared/hooks/usePopup';
 import { CreateWishFolderReqeust } from '../../types/form';
+import { DEFAULT_FOLDER_NAME } from '../../constants';
+import DefaultFolderAlertPopup from './DefaultFolderAlertPopup';
 
 interface Props {
   onValidSubmit: SubmitHandler<CreateWishFolderReqeust>;
@@ -19,12 +22,25 @@ const UpdateWishFolderModal = ({ onValidSubmit, prevTitle }: Props) => {
   const { register, handleSubmit, watch } = useForm<CreateWishFolderReqeust>({
     defaultValues: { title: prevTitle ?? '' }
   });
-  const isDisable = prevTitle === watch('title');
+
+  /* TODO
+  "기본 폴더"에 대한 임시 방편 - 백엔드와의 논의 후 결정 */
+  const { openPopup } = usePopup();
+  const onSubmit: SubmitHandler<CreateWishFolderReqeust> = (data) => {
+    if (data.title === DEFAULT_FOLDER_NAME) {
+      openPopup(<DefaultFolderAlertPopup />);
+      return;
+    }
+
+    onValidSubmit(data);
+  };
+
+  const isDisable = prevTitle === watch('title') || DEFAULT_FOLDER_NAME === watch('title');
 
   return (
     <Modal title="찜 폴더">
       <PaddingWrapper>
-        <form onSubmit={handleSubmit(onValidSubmit)} className="flex flex-col gap-[16px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[16px]">
           <div className="flex flex-col items-end gap-[4px]">
             <Input
               {...register('title', { required: true })}

@@ -20,10 +20,8 @@ const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: Sel
   const { openModal } = useModal();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!isFiltered) {
-      openModal(<FilterModal filterFamilyId={filterFamilyId} />);
-      return;
-    }
+    openModal(<FilterModal filterFamilyId={filterFamilyId} />);
+
     if (closeRef.current && e.target instanceof Element && closeRef.current.contains(e.target))
       onReset();
   };

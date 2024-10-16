@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useMemo } from 'react';
 import usePopup from '@/shared/hooks/usePopup';
 import useModal from '@/shared/hooks/useModal';
 import { CloseIcon } from '@/shared/components/icons';
@@ -12,6 +12,8 @@ import { isWishFolderEditingState } from '../../atoms/wishFolder';
 import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
 import FolderThumbnail from '../common/FolderThumbnail';
 import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
+import DefaultFolderAlertPopup from '../alert-box/DefaultFolderAlertPopup';
+import { DEFAULT_FOLDER_NAME } from '../../constants';
 
 interface WishFolderProps {
   id: number;
@@ -23,19 +25,31 @@ interface WishFolderProps {
 const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   const isEditing = useRecoilValue(isWishFolderEditingState);
   const { openPopup } = usePopup();
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const { mutate: updateWishFolderTitle } = useUpdateWishFolderMutation();
+  const isDefaultFolder = useMemo(() => DEFAULT_FOLDER_NAME === name, [name]);
 
   const deleteFolder: MouseEventHandler<HTMLButtonElement> = (e) => {
-    openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
     e.preventDefault();
+    if (isDefaultFolder) {
+      openPopup(<DefaultFolderAlertPopup />);
+      return;
+    }
+
+    openPopup(<DeleteWishFolderPopup folderName={name} folderId={id} />);
   };
 
-  const updateFolderName: MouseEventHandler<HTMLButtonElement> = () => {
+  const updateFolderName = () => {
+    if (isDefaultFolder) {
+      openPopup(<DefaultFolderAlertPopup />);
+      return;
+    }
+
     openModal(
       <UpdateWishFolderModal
+        prevTitle={name}
         onValidSubmit={({ title }) => {
-          updateWishFolderTitle({ title, folderId: id });
+          updateWishFolderTitle({ title, folderId: id }, { onSuccess: closeModal });
         }}
       />
     );
@@ -44,10 +58,13 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   return (
     <div className="flex flex-col gap-[6.5px] rounded-[6px] overflow-hidden">
       <Link
-        href={`${PATH.wishProductList}/${id}`}
+        href={`${PATH.wishProductList}/${isEditing ? '' : id}`}
         className="relative flex justify-center items-center after:pb-[100%] w-full"
+        onClick={() => isEditing && updateFolderName()}
       >
-        {isEditing && (
+        <FolderThumbnail thumbnailList={thumbnailList} />
+
+        {!isDefaultFolder && isEditing && (
           <button
             aria-label="delete folder"
             type="button"
@@ -57,11 +74,9 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
             <CloseIcon shape="black" />
           </button>
         )}
-
-        <FolderThumbnail thumbnailList={thumbnailList} />
       </Link>
       <div className="flex justify-between items-center">
-        {isEditing ? (
+        {!isDefaultFolder && isEditing ? (
           <button
             aria-label="update folder"
             type="button"

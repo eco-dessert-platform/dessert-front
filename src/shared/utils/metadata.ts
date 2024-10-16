@@ -10,6 +10,8 @@ interface StaticMetadataType {
   [route: string]: Metadata;
 }
 
+const IS_DEV_MOD: boolean = JSON.parse(process.env.NEXT_PUBLIC_DEV_SETTING ?? 'false');
+
 const BBANGLE_LOGO_IMAGE = {
   og: {
     url: '/opengraph-image.png',
@@ -113,10 +115,12 @@ const generateProductDetailMetadata = async ({
   params
 }: GenerateMetadataProps): Promise<Metadata> => {
   if (!params?.productId) return {};
+
   const id = Number(params.productId);
   const product = await productService.getBoardDetail(id);
   const store = await productService.getStoreInfo(id);
   const productOptions = await productService.getProductOption(id);
+
   return {
     title: `[${store.title}] ${product.title}`,
     description: productOptions.products.map((item) => item.title).join(', '),
@@ -148,9 +152,11 @@ const generateStoreDetailMetadata = async ({
   params
 }: GenerateMetadataProps): Promise<Metadata> => {
   if (!params?.id) return {};
+
   const storeId = Number(params.id);
   const storeInfo = await storeService.getStoreInfo(storeId);
   const storeBestProducts = await storeService.getStoreBestProducts(storeId);
+
   return {
     title: storeInfo.storeName,
     description: `${storeInfo.introduce}. ${storeBestProducts.map((product) => product.title).join(', ')}`,
@@ -178,12 +184,18 @@ const generateStoreDetailMetadata = async ({
   };
 };
 
-export const getStaticMetadata = (route: StaticRoute): Metadata => staticMetadata[route];
+export const getStaticMetadata = (route: StaticRoute): Metadata => {
+  if (IS_DEV_MOD) return {};
+
+  return staticMetadata[route];
+};
 
 export const getDynamicMetadata = (
   route: DynamicRoute,
   dynamicParams: GenerateMetadataProps
 ): Metadata | Promise<Metadata> | undefined => {
+  if (IS_DEV_MOD) return undefined;
+
   switch (route) {
     case 'product-detail':
       return generateProductDetailMetadata(dynamicParams);

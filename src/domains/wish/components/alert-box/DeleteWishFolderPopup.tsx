@@ -36,7 +36,7 @@ const DeleteWishFolderPopup = ({ folderName, folderId }: DeleteWishFolderPopupPr
           취소
         </Button>
         <Button onClick={deleteWishFolder} variants="primary-black">
-          확인
+          삭제
         </Button>
       </PaddingWrapper>
     </Popup>

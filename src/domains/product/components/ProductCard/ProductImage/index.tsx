@@ -61,17 +61,16 @@ const ProductImage = ({
           "after:content-['Sold_Out'] after:size-full after:flex-center after:absolute after:inset-0 after:bg-black/[0.3] after:text-gray-300 after:typo-heading-20-semibold after:rounded-[6px]"
       )}
     >
-      <div className="relative aspect-square ">
+      <div className="relative w-full aspect-square">
         <ImageWithFallback
           src={thumbnail}
           alt="상품사진"
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
-          className="object-cover rounded-[6px]"
           fill
           fallback={
-            <SadBbangleBox className="border bg-gray-50 rounded-[6px] size-full typo-body-12-regular">
-              이미지가 없습니다.
+            <SadBbangleBox className="flex flex-col items-center justify-center border bg-gray-50 rounded-[6px] w-full h-full">
+              <p className="text-center text-sm md:text-base lg:text-lg">이미지가 없습니다.</p>
             </SadBbangleBox>
           }
         />

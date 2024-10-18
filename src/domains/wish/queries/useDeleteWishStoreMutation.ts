@@ -34,6 +34,7 @@ const useDeleteWishStoreMutation = (storeId: number) => {
   };
 
   const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: storeQueryKey.lists() });
     openToast({ message: '💖 찜한 스토어에서 삭제했어요' });
   };
 

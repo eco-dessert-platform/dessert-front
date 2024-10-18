@@ -21,7 +21,7 @@ interface WishStroeProps {
 const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
   const [isWishedLocal, setIsWishedLocal] = useState(isWished);
   const { mutate: addMutate } = useAddWishStoreMutation(id);
-  const { mutate: deleteMutate } = useDeleteWishStoreMutation(id);
+  const { mutate: deleteMutate } = useDeleteWishStoreMutation({ storeId: id, storeName: title });
 
   const like = () => {
     setIsWishedLocal(true);

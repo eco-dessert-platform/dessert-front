@@ -6,7 +6,13 @@ import { IStoreType } from '@/domains/store/types/store';
 import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';
 
-const useDeleteWishStoreMutation = (storeId: number) => {
+const useDeleteWishStoreMutation = ({
+  storeId,
+  storeName
+}: {
+  storeId: number;
+  storeName: string;
+}) => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
@@ -35,7 +41,7 @@ const useDeleteWishStoreMutation = (storeId: number) => {
 
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: storeQueryKey.lists() });
-    openToast({ message: '💖 찜한 스토어에서 삭제했어요' });
+    openToast({ message: `💖 ${storeName}을 찜한 스토어에서 삭제했어요.` });
   };
 
   const onError = ({ message }: Error) => {

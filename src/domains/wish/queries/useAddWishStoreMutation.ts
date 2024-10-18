@@ -33,7 +33,7 @@ const useAddWishStoreMutation = (storeId: number) => {
   };
 
   const onSuccess = () => {
-    openToast({ message: '💖 찜한 상품에 추가했어요' });
+    openToast({ message: '💖 찜한 스토어 리스트에 추가했어요.' });
   };
 
   const onError = ({ message }: Error) => {

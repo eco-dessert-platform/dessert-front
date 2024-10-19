@@ -21,7 +21,10 @@ interface Props {
 const DetailStoreInfo = ({ storeId }: Props) => {
   const { data: storeData } = useGetStoreInfoQuery({ storeId });
   const { mutate: addMutate } = useAddWishStoreMutation(storeId);
-  const { mutate: deleteMutate } = useDeleteWishStoreMutation(storeId);
+  const { mutate: deleteMutate } = useDeleteWishStoreMutation({
+    storeId,
+    storeName: storeData ? storeData.storeName : ''
+  });
   const isLoggedIn = useRecoilValue(isLoggedinState);
   const { openToast } = useToastNewVer();
 

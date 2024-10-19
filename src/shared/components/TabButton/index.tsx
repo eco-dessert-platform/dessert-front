@@ -28,6 +28,9 @@ const TabButton = ({ children, active = false, className, ...props }: TabButtonP
       <motion.div
         layoutId="tab"
         className="absolute z-10 -bottom-[2px] h-[2px] bg-gray-900 w-full"
+        initial={{ opacity: 0, scaleY: 0 }}
+        animate={{ opacity: 1, scaleY: 1 }}
+        transition={{ duration: 0.3 }}
       />
     )}
   </button>

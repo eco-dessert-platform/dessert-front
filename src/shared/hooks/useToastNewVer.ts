@@ -24,7 +24,7 @@ const useToastNewVer = () => {
 
     setTimeout(() => {
       closeToast(id);
-    }, 5 * SECOND);
+    }, 1.5 * SECOND);
   };
 
   return { openToast, closeToast };

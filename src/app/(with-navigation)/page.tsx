@@ -7,15 +7,15 @@ import RecommendationSection from '@/blocks/home/RecommendationSection';
 import TopButton from '@/shared/components/TopButton';
 
 const Home = () => (
-  <>
-    <HomeLogoSection />
-    <Search />
-    <Banner />
-    <CategorySection />
-    <RecommendationSection />
-    <BestProductsSection />
-    <TopButton />
-  </>
-);
+    <>
+      <HomeLogoSection />
+      <Search />
+      <Banner />
+      <CategorySection />
+      <RecommendationSection />
+      <BestProductsSection />
+      <TopButton />
+    </>
+  );
 
 export default Home;

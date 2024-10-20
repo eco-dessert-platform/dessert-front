@@ -51,6 +51,7 @@ const useDeleteWishProductMutation = () => {
   const onSuccess = ({ productId }: { productId: number }) => {
     queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
     queryClient.invalidateQueries({ queryKey: productQueryKey.detail(productId) });
+    queryClient.invalidateQueries({ queryKey: productQueryKey.lists() });
     openToast({ message: '💖 찜한 상품에서 삭제했어요' });
   };
 

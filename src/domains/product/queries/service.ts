@@ -34,6 +34,18 @@ class ProductService extends Service {
     return result;
   }
 
+  // 데이터팀 요청으로 추가하는 random api
+  async getProductsRandom({ cursorId }: { cursorId: number }) {
+    const cursorIdQueryString = cursorId === INITIAL_CURSOR ? '' : `?cursorId=${cursorId}`;
+    const res = await this.fetchExtend.get(`/boards-random${cursorIdQueryString}`);
+
+    const { success, result, code, message }: ResultResponse<Cursor<Array<IProductType>>> =
+      await res.json();
+
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+    return result;
+  }
+
   async getBoardsCount({ filterValue }: { filterValue: Omit<IFilterType, 'sort'> }) {
     const filterValueQueryString = transformFilterValueToQueryString(filterValue);
 

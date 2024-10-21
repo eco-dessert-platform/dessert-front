@@ -11,7 +11,7 @@ interface RecommendationCreateLayoutProps {
 const RecommendationCreateLayout = ({ children }: RecommendationCreateLayoutProps) => (
   <RecommendationFormProvider defaultValues={RECOMMENDATION_PROVIDER_DEFAULT_VALUE}>
     <DefaultLayout
-      header={<Header title="맞춤 추천 받기" back />}
+      header={<Header title="맞춤 추천 받기" />}
       main={children}
       footer={<ButtonSection />}
     />

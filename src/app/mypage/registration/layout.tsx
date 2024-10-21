@@ -13,7 +13,7 @@ interface Props {
 const Layout = ({ children }: Props) => (
   <RegistrationFormProvider defaultValues={REGISTRATION_DEFAULT_VALUE}>
     <DefaultLayout
-      header={<Header title="프로필 등록" back />}
+      header={<Header title="프로필 등록" />}
       main={children}
       footer={<ButtonSection />}
     />

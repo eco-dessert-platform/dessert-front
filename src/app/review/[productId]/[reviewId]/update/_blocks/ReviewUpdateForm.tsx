@@ -19,7 +19,7 @@ const ReviewUpdateForm = ({ progress }: Props) => {
 
   const onValidSubmit: SubmitHandler<IReviewWriteForm> = ({ badges, images, ...rest }) => {
     const review = {
-      urls: images.urls || null,
+      urls: images.urls || [],
       badges: [badges.taste, badges.brix, badges.texture].map((badge) => badge.toUpperCase()),
       ...rest
     };

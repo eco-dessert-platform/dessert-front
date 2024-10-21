@@ -18,6 +18,8 @@ import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { cn } from '@/shared/utils/cn';
+import Link from 'next/link';
+import PATH from '@/shared/constants/path';
 
 interface ProductImageProps {
   product: IProductType;
@@ -42,7 +44,14 @@ const ProductImage = ({
       addMutate({ productId: boardId, folderId: selectedWishFolder });
       setIsPopping(true);
     } else {
-      openToast({ message: ERROR_MESSAGE.requiredLogin });
+      openToast({
+        message: ERROR_MESSAGE.requiredLogin,
+        action: (
+          <Link className="hover:underline" href={PATH.login}>
+            로그인
+          </Link>
+        )
+      });
     }
     e.preventDefault();
   };

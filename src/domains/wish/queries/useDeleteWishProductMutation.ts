@@ -4,13 +4,19 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { Cursor } from '@/shared/types/response';
 import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { IStoreProductType } from '@/domains/store/types/store';
+import { useRecoilValue } from 'recoil';
 import wishService from './service';
 import { wishQueryKey } from './queryKey';
 import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
+import { wishSortDictionary } from '../constants';
+import { wishProductSortState } from '../atoms/sort';
 
 const useDeleteWishProductMutation = () => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
+
+  const sortOptionKr = useRecoilValue(wishProductSortState);
+  const sortOptionEng = wishSortDictionary.translate(sortOptionKr);
 
   const mutationFn = async ({ productId }: { productId: number }) => {
     await wishService.deleteWishProduct({ productId });
@@ -51,7 +57,9 @@ const useDeleteWishProductMutation = () => {
   const onSuccess = ({ productId }: { productId: number }) => {
     queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
     queryClient.invalidateQueries({ queryKey: productQueryKey.detail(productId) });
-    queryClient.invalidateQueries({ queryKey: productQueryKey.lists() });
+    queryClient.invalidateQueries({
+      queryKey: productQueryKey.list({ type: 'wish', sort: sortOptionEng })
+    });
     openToast({ message: '💖 찜한 상품에서 삭제했어요' });
   };
 

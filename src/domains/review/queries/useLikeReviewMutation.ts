@@ -23,6 +23,11 @@ const useLikeReviewMutation = (id: number) => {
           }))
       );
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: reviewQueryKey.detail(id)
+      });
+    },
     onError: () => {
       openToast({ message: '도움돼요 실패했어요.' });
       queryClient.resetQueries({ queryKey: reviewQueryKey.lists() });

@@ -29,11 +29,10 @@ const Review = ({
 }: ReviewProps) => (
   <PaddingWrapper className="flex flex-col gap-[4px]">
     <div className="flex items-center justify-between">
-      <div className="flex gap-[4px]">
+      <div className="flex w-full gap-[4px]">
         {isBest && <Badge type="best">BEST</Badge>}
-        <span className="typo-title-14-medium">{nickname}</span>
+        <span className="typo-title-14-medium">{nickname || '네이버 리뷰'}</span>
       </div>
-
       {isMine && <KebabMenu reviewId={id} boardId={boardId} usedIn={usedIn} />}
     </div>
 

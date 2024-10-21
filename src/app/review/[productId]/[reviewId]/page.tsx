@@ -1,21 +1,25 @@
-import reviewService from '@/domains/review/queries/service';
-import DefaultLayout from '@/shared/components/DefaultLayout';
 import Header from '@/shared/components/Header';
-import Review from '@/domains/review/components/Review';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { reviewDetailQueryOptions } from '@/domains/review/queries/useReviewDetailQuery';
+import ReviewSection from './_blocks/ReviewSection';
 
 interface Props {
   params: { reviewId: string };
 }
 
 const ReviewDetailPage = async ({ params: { reviewId } }: Props) => {
-  const review = await reviewService.getReviewDetail(Number(reviewId));
-  const formattedDate = new Date(review.date).toLocaleDateString('ko-KR');
+  const queryClient = new QueryClient();
+  const { queryFn, queryKey } = reviewDetailQueryOptions(Number(reviewId));
+  await queryClient.prefetchQuery({
+    queryKey,
+    queryFn
+  });
 
   return (
-    <DefaultLayout
-      header={<Header title="리뷰 상세" back />}
-      main={<Review {...review} date={formattedDate} usedIn="review-detail" />}
-    />
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Header title="리뷰 상세" back />
+      <ReviewSection reviewId={reviewId} />
+    </HydrationBoundary>
   );
 };
 

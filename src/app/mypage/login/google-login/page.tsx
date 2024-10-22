@@ -7,16 +7,20 @@ import { useEffect, useState } from 'react';
 
 const GoogleLoginLoadingPage = () => {
   const [showRedirectMessage, setShowRedirectMessage] = useState(false);
-
   useEffect(() => {
     const isInKakaoInAppBrowser = () => {
       const userAgent = navigator.userAgent || window.opera;
-      return /KAKAOTALK/i.test(userAgent);
+      return /KAKAOTALK/i.test(userAgent); // 카카오톡 인앱 브라우저 감지
     };
 
     if (isInKakaoInAppBrowser()) {
+      // 카카오톡 인앱 브라우저에서 외부 브라우저로 리디렉트
       setShowRedirectMessage(true);
-    } else {
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showRedirectMessage) {
       // 카카오톡 인앱 브라우저가 아닌 경우에만 구글 로그인 처리
       const { hash } = window.location;
       const params = new URLSearchParams(hash.substring(1));
@@ -36,7 +40,7 @@ const GoogleLoginLoadingPage = () => {
       window.opener.postMessage(message, window.location.origin);
       window.close();
     }
-  }, []);
+  });
 
   const handleOpenInExternalBrowser = () => {
     const currentUrl = window.location.href;

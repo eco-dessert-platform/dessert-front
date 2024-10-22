@@ -27,13 +27,9 @@ const KakaoLoginLoadingPage = () => {
 
     // 현재 URL에서 "code" 파라미터를 제거
     const url = new URL(currentUrl);
-    url.searchParams.delete('code'); // "code" 파라미터 삭제
-
-    // "code" 파라미터가 제거된 URL 생성
-    const cleanUrl = `${url.origin}${url.pathname}`; // "code" 파라미터가 없는 기본 URL
+    const cleanUrl = `${url.origin}/mypage/login`; // "/mypage/login" 경로로 변경
     const encodedUrl = encodeURIComponent(cleanUrl);
 
-    // "code" 값이 제거된 URL을 외부 브라우저로 열기
     window.location.href = `kakaotalk://web/openExternal?url=${encodedUrl}`;
   };
 

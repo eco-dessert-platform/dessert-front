@@ -38,19 +38,15 @@ const KakaoLoginLoadingPage = () => {
     return (
       <div>
         <p>현재 페이지는 카카오톡 인앱 브라우저에서 원활히 작동하지 않습니다.</p>
-        <a
-          href={`kakaotalk://web/openExternal?url=${encodeURIComponent(APP_URL)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        {/* 외부 브라우저로 강제 이동 (새 창 열기) */}
+        <a href={`${APP_URL}`} target="_blank" rel="noopener noreferrer">
           외부 브라우저로 이동하기
         </a>
         <p>또는 아래 버튼을 클릭하세요:</p>
-        {/* 버튼에 type="button" 명시 */}
         <button
           type="button"
           onClick={() => {
-            window.location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(APP_URL)}`;
+            window.open(`${APP_URL}`, '_blank');
           }}
         >
           외부 브라우저로 강제 이동

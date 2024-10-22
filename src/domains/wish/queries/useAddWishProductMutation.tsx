@@ -79,6 +79,11 @@ const useAddWishProductMutation = () => {
   };
 
   const onError = ({ message }: Error) => {
+    if (typeof message !== 'string') {
+      console.error('Invalid message type:', message);
+      return;
+    }
+
     switch (message) {
       case ERROR_MESSAGE.requiredLogin:
         openToast({

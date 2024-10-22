@@ -10,19 +10,14 @@ const KakaoLoginLoadingPage = () => {
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
 
-  // 인앱 브라우저 감지를 위한 상태 선언
   const [isKakaoInAppBrowser, setIsKakaoInAppBrowser] = useState(false);
 
   useEffect(() => {
     const useragt = navigator.userAgent.toLowerCase();
-    const isKakaoInApp = useragt.match(/kakaotalk/i);
+    const isKakaoInApp = useragt.includes('kakaotalk');
 
-    // 카카오톡 인앱 브라우저 감지 시
     if (isKakaoInApp) {
       setIsKakaoInAppBrowser(true);
-
-      // 카카오톡 인앱 브라우저에서 외부 브라우저로 리디렉션
-      window.location.href = `kakaotalk://web/openExternal?url=${  encodeURIComponent(APP_URL)}`;
     }
   }, []);
 
@@ -39,14 +34,27 @@ const KakaoLoginLoadingPage = () => {
     window.close();
   }, [code]);
 
-  // 인앱 브라우저에서 접근 시 안내 메시지 표시
   if (isKakaoInAppBrowser) {
     return (
       <div>
         <p>현재 페이지는 카카오톡 인앱 브라우저에서 원활히 작동하지 않습니다.</p>
-        <a href={window.location.href} target="_blank" rel="noopener noreferrer">
-          외부 브라우저로 이동합니다
+        <a
+          href={`kakaotalk://web/openExternal?url=${encodeURIComponent(APP_URL)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          외부 브라우저로 이동하기
         </a>
+        <p>또는 아래 버튼을 클릭하세요:</p>
+        {/* 버튼에 type="button" 명시 */}
+        <button
+          type="button"
+          onClick={() => {
+            window.location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(APP_URL)}`;
+          }}
+        >
+          외부 브라우저로 강제 이동
+        </button>
       </div>
     );
   }

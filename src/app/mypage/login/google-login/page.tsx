@@ -16,6 +16,25 @@ const GoogleLoginLoadingPage = () => {
 
     if (isInKakaoInAppBrowser()) {
       setShowRedirectMessage(true);
+    } else {
+      // 카카오톡 인앱 브라우저가 아닌 경우에만 구글 로그인 처리
+      const { hash } = window.location;
+      const params = new URLSearchParams(hash.substring(1));
+      const token = params.get('access_token');
+      if (!token) return;
+
+      const message = JSON.stringify({
+        type: LOGIN_TYPE,
+        data: { socialType: 'GOOGLE', code: token }
+      });
+
+      if (!window.opener) {
+        window.location.replace(`${APP_URL}?message=${message}`);
+        return;
+      }
+
+      window.opener.postMessage(message, window.location.origin);
+      window.close();
     }
   }, []);
 
@@ -27,25 +46,6 @@ const GoogleLoginLoadingPage = () => {
 
     window.location.href = `kakaotalk://web/openExternal?url=${encodedUrl}`;
   };
-  useEffect(() => {
-    const { hash } = window.location;
-    const params = new URLSearchParams(hash.substring(1));
-    const token = params.get('access_token');
-    if (!token) return;
-
-    const message = JSON.stringify({
-      type: LOGIN_TYPE,
-      data: { socialType: 'GOOGLE', code: token }
-    });
-
-    if (!window.opener) {
-      window.location.replace(`${APP_URL}?message=${message}`);
-      return;
-    }
-
-    window.opener.postMessage(message, window.location.origin);
-    window.close();
-  });
 
   return showRedirectMessage ? (
     <div style={{ marginTop: '20px', textAlign: 'center' }}>

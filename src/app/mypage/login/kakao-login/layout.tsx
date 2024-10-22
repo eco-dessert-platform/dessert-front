@@ -5,7 +5,7 @@ import { PropsWithChildren, Suspense, useEffect } from 'react';
 const Layout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     function isInKakaoInAppBrowser() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const userAgent = navigator.userAgent || window.opera;
       return /KAKAOTALK/i.test(userAgent);
     }
 
@@ -16,12 +16,11 @@ const Layout = ({ children }: PropsWithChildren) => {
         const isiOS = /iPhone|iPad|iPod/i.test(userAgent);
 
         if (isiOS) {
-          // iOS 기기에서는 사파리로 열도록 처리
-          window.open(currentUrl, '_blank');
+          // iOS 기기에서는 window.open 대신 window.location.href를 사용
+          window.location.href = currentUrl;
         } else {
-          // Android 기기에서는 Chrome으로 열도록 처리
-          window.location.href =
-            `intent:${  currentUrl  }#Intent;scheme=https;package=com.android.chrome;end;`;
+          // Android 기기에서는 window.location.href를 사용해 안전하게 리디렉트
+          window.location.href = `intent://${currentUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
         }
       }
     }

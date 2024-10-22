@@ -86,7 +86,7 @@ class ReviewService extends Service {
   }
 
   async likeReview(id: number) {
-    const res = await this.fetchExtend.get(`/review/like/${id}`);
+    const res = await this.fetchExtend.post(`/review/like/${id}`);
     const { code, message, success }: DefaultResponse = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }

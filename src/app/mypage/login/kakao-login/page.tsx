@@ -20,6 +20,9 @@ const KakaoLoginLoadingPage = () => {
     // 카카오톡 인앱 브라우저 감지 시
     if (isKakaoInApp) {
       setIsKakaoInAppBrowser(true);
+
+      // 카카오톡 인앱 브라우저에서 외부 브라우저로 리디렉션
+      window.location.href = `kakaotalk://web/openExternal?url=${  encodeURIComponent(APP_URL)}`;
     }
   }, []);
 
@@ -38,7 +41,6 @@ const KakaoLoginLoadingPage = () => {
 
   // 인앱 브라우저에서 접근 시 안내 메시지 표시
   if (isKakaoInAppBrowser) {
-    window.location.replace(APP_URL);
     return (
       <div>
         <p>현재 페이지는 카카오톡 인앱 브라우저에서 원활히 작동하지 않습니다.</p>

@@ -12,8 +12,10 @@ const Layout = ({ children }: PropsWithChildren) => {
 
     if (isKakaoInApp) {
       setIsKakaoInAppBrowser(true);
-      const currentUrl = encodeURIComponent(window.location.href);
-      window.location.href = currentUrl;
+      setTimeout(() => {
+        const currentUrl = window.location.href;
+        window.location.href = currentUrl;
+      }, 5000);
     }
   }, []);
 

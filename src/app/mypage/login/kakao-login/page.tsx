@@ -15,18 +15,12 @@ const KakaoLoginLoadingPage = () => {
 
     const message = JSON.stringify({ type: LOGIN_TYPE, data: { code, socialType: 'KAKAO' } });
 
-    // 카카오톡 인앱 브라우저 감지
-    const isKakaoInAppBrowser = /KAKAOTALK/i.test(navigator.userAgent);
-
-    if (isKakaoInAppBrowser) {
-      // 인앱 브라우저에서 window.opener 사용 없이 리디렉션
+    if (!window.opener) {
       window.location.replace(`${APP_URL}?message=${message}`);
-    } else if (window.opener) {
-        window.opener.postMessage(message, window.location.origin);
-        window.close();
-      } else {
-        window.location.replace(`${APP_URL}?message=${message}`);
-      }
+      return;
+    }
+    window.opener.postMessage(message, window.location.origin);
+    window.close();
   }, [code]);
 
   return <Loading />;

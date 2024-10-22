@@ -16,10 +16,20 @@ const GoogleLoginButton = () => {
   };
 
   const openGoogleLoginPopup = () => {
-    const query = new URLSearchParams(queryObject);
-    const popup = window.open(`${GOOGLE.authUrl}?${query}`, '_blank', 'width=400, height=650');
-    if (!popup) return;
-    setPopup({ type: 'GOOGLE', window: popup });
+    const isInKakaoInAppBrowser = () => {
+      const userAgent = navigator.userAgent || window.opera;
+      return /KAKAOTALK/i.test(userAgent);
+    };
+
+    if (isInKakaoInAppBrowser()) {
+      const cleanUrl = `${window.location.origin}/mypage/login`;
+      window.location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(cleanUrl)}`;
+    } else {
+      const query = new URLSearchParams(queryObject);
+      const popup = window.open(`${GOOGLE.authUrl}?${query}`, '_blank', 'width=400, height=650');
+      if (!popup) return;
+      setPopup({ type: 'GOOGLE', window: popup });
+    }
   };
 
   return (

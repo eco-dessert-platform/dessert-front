@@ -49,7 +49,7 @@ const GoogleLoginLoadingPage = () => {
       <ButtonNewver
         type="button"
         onClick={handleOpenInExternalBrowser}
-        className="p-[10px 20px] bg-gray-500 rounded-[6px] mt-[10px]"
+        className="p-[10px 20px] rounded-[6px] mt-[10px]"
       >
         외부 브라우저로 열기
       </ButtonNewver>

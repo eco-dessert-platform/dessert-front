@@ -40,6 +40,7 @@ const ProductImage = ({
   const isLoggedIn = useRecoilValue(isLoggedinState);
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
     if (isLoggedIn) {
       addMutate({ productId: boardId, folderId: selectedWishFolder });
       setIsPopping(true);
@@ -53,13 +54,12 @@ const ProductImage = ({
         )
       });
     }
-    e.preventDefault();
   };
 
   const hate: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
     deleteMutate({ productId: boardId });
     setIsPopping(false);
-    e.preventDefault();
   };
 
   return (
@@ -74,6 +74,7 @@ const ProductImage = ({
         <ImageWithFallback
           src={thumbnail}
           alt="상품사진"
+          className="rounded-[6px]"
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
           fill

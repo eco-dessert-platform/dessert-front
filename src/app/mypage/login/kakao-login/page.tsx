@@ -24,16 +24,9 @@ const KakaoLoginLoadingPage = () => {
 
   const handleOpenInExternalBrowser = () => {
     const currentUrl = window.location.href;
-    const userAgent = navigator.userAgent || window.opera;
-    const isiOS = /iPhone|iPad|iPod/i.test(userAgent);
+    const encodedUrl = encodeURIComponent(currentUrl);
 
-    if (isiOS) {
-      window.location.replace(currentUrl); // iOS: 사파리로 열기
-    } else {
-      window.location.replace(
-        `intent://${currentUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`
-      ); // Android: Chrome으로 리다이렉션
-    }
+    window.location.href = `kakaotalk://web/openExternal?url=${encodedUrl}`;
   };
 
   useEffect(() => {
@@ -55,7 +48,7 @@ const KakaoLoginLoadingPage = () => {
       <button
         type="button"
         onClick={handleOpenInExternalBrowser}
-        style={{ padding: '10px 20px', fontSize: '16px' }}
+        style={{ padding: '10px 20px', background: 'gray', fontSize: '16px' }}
       >
         외부 브라우저로 열기
       </button>

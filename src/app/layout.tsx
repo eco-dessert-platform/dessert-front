@@ -24,9 +24,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
     const isKakaoInAppBrowser = /KAKAOTALK/i.test(userAgent);
 
     if (isKakaoInAppBrowser) {
-      // 카카오톡 인앱 브라우저에서 외부 브라우저로 리디렉션
-      const targetUrl = 'https://www.bbanggree.com'; // 외부 브라우저로 이동할 URL
-      window.location.href = `kakaotalk://web/openExternal?url=${  encodeURIComponent(targetUrl)}`;
+      // 현재 접속한 URL을 가져와 외부 브라우저로 리디렉션
+      const currentUrl = window.location.href;
+      window.location.href = `kakaotalk://web/openExternal?url=${  encodeURIComponent(currentUrl)}`;
     }
   }, []);
 

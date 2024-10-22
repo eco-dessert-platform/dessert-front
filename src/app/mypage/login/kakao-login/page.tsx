@@ -20,12 +20,6 @@ const KakaoLoginLoadingPage = () => {
     // 카카오톡 인앱 브라우저 감지 시
     if (isKakaoInApp) {
       setIsKakaoInAppBrowser(true);
-
-      // 5초 후에 리디렉션
-      setTimeout(() => {
-        const currentUrl = window.location.href;
-        window.location.href = currentUrl;
-      }, 5000);
     }
   }, []);
 
@@ -44,11 +38,12 @@ const KakaoLoginLoadingPage = () => {
 
   // 인앱 브라우저에서 접근 시 안내 메시지 표시
   if (isKakaoInAppBrowser) {
+    window.location.replace(APP_URL);
     return (
       <div>
         <p>현재 페이지는 카카오톡 인앱 브라우저에서 원활히 작동하지 않습니다.</p>
         <a href={window.location.href} target="_blank" rel="noopener noreferrer">
-          외부 브라우저에서 열기
+          외부 브라우저로 이동합니다
         </a>
       </div>
     );

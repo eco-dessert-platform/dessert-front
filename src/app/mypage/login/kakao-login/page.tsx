@@ -1,5 +1,6 @@
 'use client';
 
+import ButtonNewver from '@/shared/components/ButtonNewver';
 import Loading from '@/shared/components/Loading';
 import { LOGIN_TYPE } from '@/shared/constants/message';
 import { APP_URL } from '@/shared/constants/url';
@@ -24,10 +25,8 @@ const KakaoLoginLoadingPage = () => {
 
   const handleOpenInExternalBrowser = () => {
     const currentUrl = window.location.href;
-
-    // 현재 URL에서 "code" 파라미터를 제거
     const url = new URL(currentUrl);
-    const cleanUrl = `${url.origin}/mypage/login`; // "/mypage/login" 경로로 변경
+    const cleanUrl = `${url.origin}/mypage/login`;
     const encodedUrl = encodeURIComponent(cleanUrl);
 
     window.location.href = `kakaotalk://web/openExternal?url=${encodedUrl}`;
@@ -49,13 +48,13 @@ const KakaoLoginLoadingPage = () => {
   return showRedirectMessage ? (
     <div style={{ marginTop: '20px', textAlign: 'center' }}>
       <p>이 페이지는 외부 브라우저에서 열어야 합니다.</p>
-      <button
+      <ButtonNewver
         type="button"
         onClick={handleOpenInExternalBrowser}
-        style={{ padding: '10px 20px', background: 'gray', fontSize: '16px' }}
+        className="p-[10px 20px] bg-gray-500 rounded-[6px] mt-[10px]"
       >
         외부 브라우저로 열기
-      </button>
+      </ButtonNewver>
     </div>
   ) : (
     <Loading />

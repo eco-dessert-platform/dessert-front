@@ -1,23 +1,33 @@
 'use client';
 
-import { PropsWithChildren, useEffect, Suspense } from 'react';
+import { PropsWithChildren, useEffect, useState, Suspense } from 'react';
 
 const Layout = ({ children }: PropsWithChildren) => {
+  // isKakaoInAppBrowser 상태 선언
+  const [isKakaoInAppBrowser, setIsKakaoInAppBrowser] = useState(false);
+
   useEffect(() => {
     const useragt = navigator.userAgent.toLowerCase();
-    const isKakaoInAppBrowser = useragt.match(/kakaotalk/i);
+    const isKakaoInApp = useragt.match(/kakaotalk/i);
 
-    if (isKakaoInAppBrowser) {
-      const currentUrl = window.location.href;
-
-      // 외부 브라우저로 리디렉션 시도
-      setTimeout(() => {
-        window.location.replace(
-          `kakaotalk://web/openExternal?url=${  encodeURIComponent(currentUrl)}`
-        );
-      }, 100); // 약간의 지연 후 리디렉션 시도
+    if (isKakaoInApp) {
+      setIsKakaoInAppBrowser(true);
+      const currentUrl = encodeURIComponent(window.location.href);
+      window.location.href = currentUrl;
     }
   }, []);
+
+  if (isKakaoInAppBrowser) {
+    // 카카오 인앱 브라우저일 때 사용자에게 안내 메시지와 링크를 표시
+    return (
+      <div>
+        <p>현재 페이지는 카카오톡 인앱 브라우저에서 원활히 작동하지 않습니다.</p>
+        <a href={window.location.href} target="_blank" rel="noopener noreferrer">
+          외부 브라우저에서 열기
+        </a>
+      </div>
+    );
+  }
 
   return <Suspense>{children}</Suspense>;
 };

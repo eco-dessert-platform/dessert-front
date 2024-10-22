@@ -1,5 +1,5 @@
 import '@/global/global.css';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import localFont from 'next/font/local';
 import KaKaoChatScript from '@/global/KaKaoChatScript';
 import RootLayoutProvider from '@/global/RootLayoutProvider';
@@ -17,22 +17,39 @@ const pretendard = localFont({
 
 export const metadata = getStaticMetadata('root');
 
-const RootLayout = ({ children }: { children: ReactNode }) => (
-  <html lang="ko">
-    <head>
-      <meta name="google-site-verification" content="PrpME1IVVESozFHxEKcgSVkL8preaJpDFYJ5Rtsjygk" />
-    </head>
-    <body className={pretendard.className}>
-      <RootLayoutProvider>
-        <SilentLogin />
-        <ReceiveMessageFromApp />
-        {children}
-        <AlertContainer />
-      </RootLayoutProvider>
-      <KaKaoChatScript />
-      <GAScript />
-    </body>
-  </html>
-);
+const RootLayout = ({ children }: { children: ReactNode }) => {
+  useEffect(() => {
+    // 카카오톡 인앱 브라우저 감지
+    const userAgent = navigator.userAgent || window.opera;
+    const isKakaoInAppBrowser = /KAKAOTALK/i.test(userAgent);
+
+    if (isKakaoInAppBrowser) {
+      // 카카오톡 인앱 브라우저에서 외부 브라우저로 리디렉션
+      const targetUrl = 'https://www.bbanggree.com'; // 외부 브라우저로 이동할 URL
+      window.location.href = `kakaotalk://web/openExternal?url=${  encodeURIComponent(targetUrl)}`;
+    }
+  }, []);
+
+  return (
+    <html lang="ko">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="PrpME1IVVESozFHxEKcgSVkL8preaJpDFYJ5Rtsjygk"
+        />
+      </head>
+      <body className={pretendard.className}>
+        <RootLayoutProvider>
+          <SilentLogin />
+          <ReceiveMessageFromApp />
+          {children}
+          <AlertContainer />
+        </RootLayoutProvider>
+        <KaKaoChatScript />
+        <GAScript />
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;

@@ -12,6 +12,8 @@ const NicknameInput = () => {
   const { watch, setValue } = useFormContext();
 
   const nickname = watch('nickname');
+  const nicknameLength = nickname.length;
+  const nicknameClass = nicknameLength === 0 ? 'text-gray-400' : 'text-gray-600';
   const MAX_LENGTH = 20;
 
   const nickDoubleCheck = () => {
@@ -65,10 +67,7 @@ const NicknameInput = () => {
         <div className="mt-[4px] float-start text-gray-600 typo-body-12-medium">{data.message}</div>
       )}
       <p className="mt-[4px] float-end text-gray-600 typo-body-12-medium">
-        <span className={nickname.length === 0 ? 'text-gray-400' : 'text-gray-600'}>
-          {nickname.length}
-        </span>
-        / {MAX_LENGTH}
+        <span className={nicknameClass}>{nicknameLength}</span>/ {MAX_LENGTH}
       </p>
     </div>
   );

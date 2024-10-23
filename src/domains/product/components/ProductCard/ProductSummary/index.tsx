@@ -10,7 +10,7 @@ const ProductSummary = ({
   product: { storeName, title, discountRate, price, reviewRate, reviewCount, tags }
 }: ProductSummaryProps) => (
   <div className="mt-[6px]">
-    <p className="text-gray-400 typo-body-11-regular">{storeName}</p>
+    <p className="text-gray-600 typo-body-11-regular">{storeName}</p>
     <h3 className="text-gray-800 typo-body-12-regular overflow-hidden text-ellipsis whitespace-nowrap">
       {title}
     </h3>

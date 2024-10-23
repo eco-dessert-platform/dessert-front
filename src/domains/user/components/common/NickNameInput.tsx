@@ -12,6 +12,9 @@ const NicknameInput = () => {
   const { watch, setValue } = useFormContext();
 
   const nickname = watch('nickname');
+  const nicknameLength = nickname.length;
+  const nicknameClass = nicknameLength === 0 ? 'text-gray-400' : 'text-gray-600';
+  const MAX_LENGTH = 20;
 
   const nickDoubleCheck = () => {
     mutate(nickname || '', {
@@ -46,7 +49,7 @@ const NicknameInput = () => {
         required
         value={nickname}
         onChange={onInputChange}
-        maxLength={20}
+        maxLength={MAX_LENGTH}
         className="typo-title-14-medium"
         button={
           <ButtonNewver
@@ -61,8 +64,11 @@ const NicknameInput = () => {
         }
       />
       {data?.message && (
-        <div className="mt-[4px] text-gray-600 typo-body-12-medium">{data.message}</div>
+        <div className="mt-[4px] float-start text-gray-600 typo-body-12-medium">{data.message}</div>
       )}
+      <p className="mt-[4px] float-end text-gray-600 typo-body-12-medium">
+        <span className={nicknameClass}>{nicknameLength}</span>/ {MAX_LENGTH}
+      </p>
     </div>
   );
 };

@@ -13,16 +13,13 @@ import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGet
 import { IProductType } from '@/domains/product/types/productType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
-import { useGetProductsRandomQuery } from '@/domains/product/queries/useGetProductsRandomQuery';
 
-const ProductsList = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+const ProductsList = () => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.home));
 
-  const randomQuery = useGetProductsRandomQuery();
   const allCategoryQuery = useGetAllCategoryProductsQuery(filterValue);
-  const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = isLoggedIn
-    ? randomQuery
-    : allCategoryQuery;
+  const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    allCategoryQuery;
 
   const { ref, inView } = useInView();
 

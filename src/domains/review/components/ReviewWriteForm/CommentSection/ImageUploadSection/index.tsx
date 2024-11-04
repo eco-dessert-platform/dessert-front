@@ -11,7 +11,7 @@ import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutat
 import PreviewImage from './PreviewImage';
 
 const ImageUploadSection = () => {
-  const { mutate: imageUploadMuate, data: images, isSuccess } = useImageUploadMutation(['review']);
+  const { mutate: imageUploadMutate, data: images, isSuccess } = useImageUploadMutation(['review']);
   const { register, setValue, watch, getValues } = useFormContext<IReviewWriteForm>();
   const { openToast } = useToastNewVer();
 
@@ -23,12 +23,13 @@ const ImageUploadSection = () => {
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
+
     if (!files || files.length === 0) return;
     if (files.length > 5) {
       openToast({ message: '최대 5개까지 업로드할 수 있습니다' });
       return;
     }
-    imageUploadMuate(files);
+    imageUploadMutate(files);
   };
 
   const handleImageRemove = (idxToRemove: number) => {

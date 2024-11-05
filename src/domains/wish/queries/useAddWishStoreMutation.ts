@@ -6,7 +6,12 @@ import { storeQueryKey } from '@/shared/queries/queryKey';
 import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import wishService from './service';
 
-const useAddWishStoreMutation = (storeId: number) => {
+interface Params {
+  storeId: number;
+  storeName: string;
+}
+
+const useAddWishStoreMutation = ({ storeId, storeName }: Params) => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
@@ -33,7 +38,7 @@ const useAddWishStoreMutation = (storeId: number) => {
   };
 
   const onSuccess = () => {
-    openToast({ message: '💖 찜한 스토어 리스트에 추가했어요.' });
+    openToast({ message: `💖 ${storeName}을 찜한 스토어 리스트에 추가했어요.` });
   };
 
   const onError = ({ message }: Error) => {

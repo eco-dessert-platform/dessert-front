@@ -65,7 +65,7 @@ const useAddWishProductMutation = () => {
 
     const openFolderSelectModal = () => openModal(<WishFolderSelectModal productId={productId} />);
     openToast({
-      message: '💖 찜한 상품에 추가했어요',
+      message: '💖 기본 폴더에 찜한 상품을 추가했어요',
       action: (
         <button
           type="button"

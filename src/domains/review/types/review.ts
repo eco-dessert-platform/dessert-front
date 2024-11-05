@@ -44,7 +44,7 @@ export interface IReviewWriteForm {
   content: string;
   boardId: number;
   images: {
-    files?: FileList;
+    files?: File[];
     urls?: string[];
   };
 }

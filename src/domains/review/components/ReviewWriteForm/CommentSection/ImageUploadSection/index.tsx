@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { CameraIcon } from '@/shared/components/icons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import ImageInput from '@/shared/components/ImageInput';
@@ -11,6 +11,7 @@ import useImageUploadMutation from '@/domains/review/queries/useImageUploadMutat
 import PreviewImage from './PreviewImage';
 
 const ImageUploadSection = () => {
+  const [saveImage, setSaveImage] = useState<File[]>([]);
   const { mutate: imageUploadMutate, data: images, isSuccess } = useImageUploadMutation(['review']);
   const { register, setValue, watch, getValues } = useFormContext<IReviewWriteForm>();
   const { openToast } = useToastNewVer();
@@ -25,24 +26,24 @@ const ImageUploadSection = () => {
     const { files } = e.target;
 
     if (!files || files.length === 0) return;
-    if (files.length > 5) {
+    if (files.length + saveImage.length > 5) {
       openToast({ message: '최대 5개까지 업로드할 수 있습니다' });
       return;
     }
-    imageUploadMutate(files);
+
+    const newList = [...saveImage, ...Array.from(files)];
+
+    setSaveImage(newList);
+    imageUploadMutate(newList);
   };
 
   const handleImageRemove = (idxToRemove: number) => {
-    const dataTransfer = new DataTransfer();
     const files = getValues('images.files');
     const urls = getValues('images.urls');
     const filteredFiles = files && Array.from(files).filter((_, idx) => idx !== idxToRemove);
     const filteredUrls = urls?.filter((_, idx) => idx !== idxToRemove);
 
-    filteredFiles?.forEach((file) => {
-      dataTransfer.items.add(file);
-    });
-    setValue('images.files', dataTransfer.files);
+    setValue('images.files', filteredFiles);
     setValue('images.urls', filteredUrls);
   };
 

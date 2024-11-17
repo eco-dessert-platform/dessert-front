@@ -7,7 +7,7 @@ const useImageUploadMutation = (key: MutationKey) => {
 
   return useMutation({
     mutationKey: key,
-    mutationFn: (images: FileList) => reviewService.uploadImage(images),
+    mutationFn: (images: File[]) => reviewService.uploadImage(images),
     onError: (error) => {
       openToast({ message: error.message });
     }

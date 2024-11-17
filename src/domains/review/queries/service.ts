@@ -67,10 +67,10 @@ class ReviewService extends Service {
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
   }
 
-  async uploadImage(images: FileList) {
+  async uploadImage(images: File[]) {
     const formData = new FormData();
 
-    Array.from(images).forEach((image) => {
+    images.forEach((image) => {
       formData.append('images', image);
     });
     formData.append('category', 'REVIEW');

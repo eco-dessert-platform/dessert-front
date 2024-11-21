@@ -17,4 +17,5 @@ export interface IProductType {
   isBbangcketing: boolean;
   isSoldOut: boolean;
   discountRate: number;
+  similarityType?: string;
 }

@@ -1,10 +1,15 @@
 export const productQueryKey = {
   all: ['product'],
   lists: () => [...productQueryKey.all, 'list'],
+  similar: (productId: number) => [...productQueryKey.all, 'similar', productId],
   list: (filter: string | object) => [...productQueryKey.lists(), filter],
   details: () => [...productQueryKey.all, 'detail'],
   detail: (id: number, type?: string) =>
     [...productQueryKey.details(), id, type].filter((value) => !!value)
+};
+
+export const similarQueryKey = {
+  similar: (productId: number) => ['similar', productId]
 };
 
 export const storeQueryKey = {

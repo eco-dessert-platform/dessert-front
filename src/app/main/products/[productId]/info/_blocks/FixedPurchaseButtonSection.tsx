@@ -47,7 +47,7 @@ const FixedPurchaseButtonSection = () => {
           <PaddingWrapper className="py-[16px] flex flex-col gap-y-[10px]">
             <div className="grid grid-cols-3 gap-[16px]">
               {similarProducts.map((item) => (
-                <ProductCard key={item.boardId} product={item} />
+                <ProductCard key={item.boardId} product={item} isSimilarProduct />
               ))}
             </div>
           </PaddingWrapper>

@@ -25,11 +25,13 @@ interface ProductImageProps {
   product: IProductType;
   popular?: boolean;
   ranking?: number;
+  isSimilarProduct?: boolean;
 }
 const ProductImage = ({
   product: { boardId, thumbnail, isWished, isBundled, isBbangcketing, isSoldOut },
   popular,
-  ranking
+  ranking,
+  isSimilarProduct
 }: ProductImageProps) => {
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
   const { openToast } = useToastNewVer();
@@ -85,14 +87,17 @@ const ProductImage = ({
           }
         />
       </div>
-      <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px] ">
-        <HeartButton
-          isActive={isWished}
-          className={isPopping ? 'animate-heart-pop' : ''}
-          shape="shadow"
-          onClick={isWished ? hate : like}
-        />
-      </div>
+      {isSimilarProduct || (
+        <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px] ">
+          <HeartButton
+            isActive={isWished}
+            className={isPopping ? 'animate-heart-pop' : ''}
+            shape="shadow"
+            onClick={isWished ? hate : like}
+          />
+        </div>
+      )}
+
       <div className="absolute z-10 top-[6px] left-[6px] w-full flex flex-wrap gap-[6px]">
         {popular && <Badge type="ranking">{ranking}</Badge>}
         {isBundled && <Badge type="bundle">묶음상품</Badge>}

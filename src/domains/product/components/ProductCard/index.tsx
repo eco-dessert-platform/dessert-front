@@ -10,11 +10,17 @@ interface ProductCardProps {
   product: IProductType;
   popular?: boolean;
   ranking?: number;
+  isSimilarProduct?: boolean;
 }
 
-const ProductCard = ({ product, popular, ranking }: ProductCardProps) => (
+const ProductCard = ({ product, popular, ranking, isSimilarProduct }: ProductCardProps) => (
   <Link href={`/main/products/${product.boardId}/info`} className="relative">
-    <ProductImage product={product} popular={popular} ranking={ranking} />
+    <ProductImage
+      product={product}
+      popular={popular}
+      ranking={ranking}
+      isSimilarProduct={isSimilarProduct}
+    />
     <ProductSummary product={product} />
   </Link>
 );

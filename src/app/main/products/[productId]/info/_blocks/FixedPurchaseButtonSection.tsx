@@ -25,6 +25,8 @@ const FixedPurchaseButtonSection = () => {
   const pathname = usePathname();
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
+  const isLoggedIn = useRecoilValue(isLoggedinState);
+
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
   const { data: similarProducts } = useGetSimilarProductsQuery(Number(productId));
@@ -42,7 +44,7 @@ const FixedPurchaseButtonSection = () => {
   const addToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     addMutate({ productId: boardData.boardId, folderId: selectedWishFolder });
-    if (isLoggedinState) {
+    if (isLoggedIn) {
       setTimeout(() => {
         openModal(
           <Modal title="이런 건강 디저트는 어때요?">

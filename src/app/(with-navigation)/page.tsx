@@ -4,12 +4,13 @@ import CategorySection from '@/blocks/home/CategorySection';
 import BestProductsSection from '@/blocks/home/BestProductsSection';
 import RecommendationSection from '@/blocks/home/RecommendationSection';
 import TopButton from '@/shared/components/TopButton';
+import Banner from '@/blocks/home/Banner';
 
 const Home = () => (
   <>
     <HomeLogoSection />
     <Search />
-    {/* <Banner /> */}
+    <Banner />
     <CategorySection />
     <RecommendationSection />
     <BestProductsSection />

@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       zIndex: {
         topButton: 500,
-        toast: 1000,
+        toast: 9999,
         popup: 1000,
         modal: 1000,
         tooltip: 5000,

@@ -17,6 +17,7 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Modal from '@/shared/components/Modal';
 import ProductCard from '@/domains/product/components/ProductCard';
 import useGetSimilarProductsQuery from '@/domains/product/queries/useGetSimilarProducts';
+import { isLoggedinState } from '@/shared/atoms/login';
 
 const FixedPurchaseButtonSection = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -41,19 +42,21 @@ const FixedPurchaseButtonSection = () => {
   const addToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     addMutate({ productId: boardData.boardId, folderId: selectedWishFolder });
-    setTimeout(() => {
-      openModal(
-        <Modal title="이런 건강 디저트는 어때요?">
-          <PaddingWrapper className="py-[16px] flex flex-col gap-y-[10px]">
-            <div className="grid grid-cols-3 gap-[16px]">
-              {similarProducts.map((item) => (
-                <ProductCard key={item.boardId} product={item} isSimilarProduct />
-              ))}
-            </div>
-          </PaddingWrapper>
-        </Modal>
-      );
-    }, 500);
+    if (isLoggedinState) {
+      setTimeout(() => {
+        openModal(
+          <Modal title="이런 건강 디저트는 어때요?">
+            <PaddingWrapper className="py-[16px] flex flex-col gap-y-[10px]">
+              <div className="grid grid-cols-3 gap-[16px]">
+                {similarProducts.map((item) => (
+                  <ProductCard key={item.boardId} product={item} isSimilarProduct />
+                ))}
+              </div>
+            </PaddingWrapper>
+          </Modal>
+        );
+      }, 500);
+    }
   };
 
   const deleteToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {

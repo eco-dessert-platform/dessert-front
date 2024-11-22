@@ -6,16 +6,18 @@ import { twMerge } from 'tailwind-merge';
 
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
+import ShareButton from '@/app/main/products/[productId]/_blocks/ShareButton';
 import ArrowIcons from '../icons/ArrowIcons';
 
 interface HeaderProps {
   title?: String;
   content?: React.ReactNode;
   back?: boolean;
+  share?: boolean;
   className?: string;
 }
 
-const Header = ({ title, content, back = false, className }: HeaderProps) => {
+const Header = ({ title, content, back = false, share = false, className }: HeaderProps) => {
   const goBackHandler = () => {
     window.history.back();
   };
@@ -41,6 +43,7 @@ const Header = ({ title, content, back = false, className }: HeaderProps) => {
         <h2 className="typo-title-16-medium line-clamp-2">{title}</h2>
         {content}
       </div>
+      {share && <ShareButton />}
     </PaddingWrapper>
   );
 };

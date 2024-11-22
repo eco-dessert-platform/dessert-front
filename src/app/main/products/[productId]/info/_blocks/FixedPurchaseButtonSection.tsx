@@ -45,7 +45,6 @@ const FixedPurchaseButtonSection = () => {
   const addToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     addMutate({ productId: boardData.boardId, folderId: selectedWishFolder });
-
     if (isLoggedIn) {
       setTimeout(() => {
         openModal(

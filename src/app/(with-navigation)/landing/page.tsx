@@ -1,16 +1,8 @@
 import React from 'react';
-import Intro from './_blocks/pageSection/Intro';
-import Desc from './_blocks/pageSection/Desc';
-import Participate from './_blocks/pageSection/Participate';
-import Schedule from './_blocks/pageSection/Schedule';
+import Image from 'next/image';
 
 const LandingPage = () => (
-  <>
-    <Intro />
-    <Desc />
-    <Participate />
-    <Schedule />
-  </>
+  <Image src="/assets/images/banner-detail.png" alt="banner" width={600} height={600} />
 );
 
 export default LandingPage;

@@ -26,7 +26,7 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
   const setMainCategory = useSetRecoilState(mainCategoryState(FILTER_FAMILY_ID.main));
   const setFilterValue = useSetRecoilState(filterValueState(FILTER_FAMILY_ID.main));
 
-  const { isActive, toggle } = useToggle();
+  const { isActive, toggle } = useToggle(true);
 
   const handleCategoryClick = () => {
     toggle();

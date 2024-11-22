@@ -7,7 +7,7 @@ type Params = Omit<Parameters<typeof wishService.getWishProductList>[0], 'cursor
 
 export const wishProductListoptions = ({ folderId, sort }: Params) =>
   infiniteQueryOptions({
-    queryKey: productQueryKey.list({ type: 'wish', sort }),
+    queryKey: productQueryKey.list({ type: 'wish', folderId, sort }),
     queryFn: ({ pageParam }) =>
       wishService.getWishProductList({ cursorId: pageParam, folderId, sort }),
     initialPageParam: INITIAL_CURSOR,

@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 
 import { useRecoilValue } from 'recoil';
 
@@ -10,22 +10,54 @@ import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishPr
 import HeartButton from '@/shared/components/HeartButton';
 import ButtonNewver, { buttonVariants } from '@/shared/components/ButtonNewver';
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { cn } from '@/shared/utils/cn';
+import useModal from '@/shared/hooks/useModal';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import Modal from '@/shared/components/Modal';
+import ProductCard from '@/domains/product/components/ProductCard';
+import useGetSimilarProductsQuery from '@/domains/product/queries/useGetSimilarProducts';
+
+import { isLoggedinState } from '@/shared/atoms/login';
 
 const FixedPurchaseButtonSection = () => {
   const { productId } = useParams<{ productId: string }>();
+  const { openModal, closeModal, modal } = useModal();
+  const pathname = usePathname();
   const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
+  const { data: similarProducts } = useGetSimilarProductsQuery(Number(productId));
   const { data: boardData } = useGetBoardDetailQuery(Number(productId));
 
+  useEffect(() => {
+    if (modal) {
+      closeModal();
+    }
+  }, [pathname]);
+
   if (!boardData) return 'data not found';
+  if (!similarProducts) return null;
 
   const addToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {
-    addMutate({ productId: boardData.boardId, folderId: selectedWishFolder });
     e.preventDefault();
+    addMutate({ productId: boardData.boardId, folderId: selectedWishFolder });
+    if (isLoggedinState) {
+      setTimeout(() => {
+        openModal(
+          <Modal title="이런 건강 디저트는 어때요?">
+            <PaddingWrapper className="py-[16px] flex flex-col gap-y-[10px]">
+              <div className="grid grid-cols-3 gap-[16px]">
+                {similarProducts.map((item) => (
+                  <ProductCard key={item.boardId} product={item} isSimilarProduct />
+                ))}
+              </div>
+            </PaddingWrapper>
+          </Modal>
+        );
+      }, 500);
+    }
   };
 
   const deleteToWishlist: MouseEventHandler<HTMLButtonElement> = (e) => {

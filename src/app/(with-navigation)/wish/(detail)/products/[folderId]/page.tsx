@@ -12,8 +12,9 @@ interface Props {
 
 const WishProductsDetail = async ({ params }: Props) => {
   const queryClient = new QueryClient();
+  const folderId = Number(params.folderId);
   const options = wishProductListoptions({
-    folderId: Number(params.folderId),
+    folderId,
     sort: wishSortDictionary.translate('담은순')
   });
   await queryClient.prefetchInfiniteQuery({

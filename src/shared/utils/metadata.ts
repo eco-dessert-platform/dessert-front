@@ -122,6 +122,7 @@ const generateProductDetailMetadata = async ({
   const productOptions = await productService.getProductOption(id);
 
   return {
+    metadataBase: new URL('https://www.bbanggree.com'),
     title: `[${store.title}] ${product.title}`,
     description: productOptions.products.map((item) => item.title).join(', '),
     openGraph: {
@@ -158,6 +159,7 @@ const generateStoreDetailMetadata = async ({
   const storeBestProducts = await storeService.getStoreBestProducts(storeId);
 
   return {
+    metadataBase: new URL('https://www.bbanggree.com'),
     title: storeInfo.storeName,
     description: `${storeInfo.introduce}. ${storeBestProducts.map((product) => product.title).join(', ')}`,
     openGraph: {

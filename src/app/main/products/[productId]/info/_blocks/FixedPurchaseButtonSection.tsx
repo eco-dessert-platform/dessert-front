@@ -17,6 +17,7 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Modal from '@/shared/components/Modal';
 import ProductCard from '@/domains/product/components/ProductCard';
 import useGetSimilarProductsQuery from '@/domains/product/queries/useGetSimilarProducts';
+
 import { isLoggedinState } from '@/shared/atoms/login';
 
 const FixedPurchaseButtonSection = () => {

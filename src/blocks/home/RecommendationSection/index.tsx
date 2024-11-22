@@ -21,7 +21,7 @@ const RecommendationSection = async () => {
               <span>🥐</span>
             </div>
             <div className="w-full">
-              <p className="text-primaryOrangeRed typo-title-14-semibold">맞춤 추천 받으러가기</p>
+              <p className="text-primaryOrangeRed typo-title-14-semibold">맞춤 추천 받기</p>
               <p className="text-gray-600 typo-body-11-regular">
                 맞춤 추천은 내가 좋아할만한 빵/과자들을 보여줘요!
               </p>

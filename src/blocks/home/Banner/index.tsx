@@ -5,7 +5,7 @@ import { BLUR_DATA_URL } from '@/shared/constants/blurDataUrl';
 import Link from 'next/link';
 
 const Banner = () => (
-  <Link href="/landing" passHref>
+  <Link href="/landing">
     <PaddingWrapper className="py-0">
       <Image
         src="/assets/images/new-banner.png"

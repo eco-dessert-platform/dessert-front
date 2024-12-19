@@ -5,6 +5,8 @@ import { ELEMENT_ID } from '@/shared/constants/elementId';
 import { cn } from '@/shared/utils/cn';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 
+const DISTANCE_FROM_FOOTER = 16;
+
 const TopButton = () => {
   const [scrolled, setScrolled] = useState(false);
   const [translateY, setTranslateY] = useState(0);
@@ -12,8 +14,20 @@ const TopButton = () => {
   useEffect(() => {
     const footer = document.getElementById(ELEMENT_ID.footer);
     if (!footer) return;
-    const DISTANCE_FROM_FOOTER = 16;
-    setTranslateY(-footer.clientHeight - DISTANCE_FROM_FOOTER);
+
+    const observer = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === footer) {
+          setTranslateY(-footer.clientHeight - DISTANCE_FROM_FOOTER);
+        }
+      });
+    });
+
+    observer.observe(footer);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {

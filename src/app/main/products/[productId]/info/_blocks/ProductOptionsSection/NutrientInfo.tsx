@@ -1,5 +1,5 @@
 import { ProductOptionType } from '@/domains/product/types/productDetailType';
-import { nutirentEngToKr } from '@/domains/product/utils/transfromTag';
+import { nutrientEngToKr } from '@/domains/product/utils/transfromTag';
 
 interface Props {
   product: ProductOptionType;
@@ -24,7 +24,7 @@ const NutrientInfo = ({ product: { nutrient } }: Props) => (
             key={key}
             className="bg-gray-50 rounded-[6px] py-[4px] px-[10px] w-fit flex-1 flex flex-col items-center justify-center"
           >
-            <div className="typo-body-12-medium text-gray-700">{nutirentEngToKr(key)}</div>
+            <div className="typo-body-12-medium text-gray-700">{nutrientEngToKr(key)}</div>
             <div className="typo-title-16-semibold text-gray-900">
               {value !== -1 ? `${value}g` : '-'}
             </div>

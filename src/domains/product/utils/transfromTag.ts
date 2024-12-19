@@ -107,7 +107,7 @@ export function transformSortToEng(sort: string): string {
   return sort;
 }
 
-export const nutirentEngToKr = (item: string) => {
+export const nutrientEngToKr = (item: string) => {
   switch (item) {
     case 'sugars':
       return '당류';

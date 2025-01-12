@@ -8,7 +8,7 @@ interface Props {
 const IngredientInfo = ({
   product: { glutenFreeTag, highProteinTag, veganTag, ketogenicTag, sugarFreeTag }
 }: Props) => (
-  <div className="flex gap-[4px] mt-[16px]">
+  <div className="flex gap-[4px]">
     {glutenFreeTag && <Tag>글루텐프리</Tag>}
     {highProteinTag && <Tag>고단백</Tag>}
     {sugarFreeTag && <Tag>저당</Tag>}

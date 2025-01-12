@@ -40,12 +40,14 @@ const ProductDetailLayout = async ({ params: { productId }, children }: DetailIn
     <HydrationBoundary state={dehydrate(queryClient)}>
       <DefaultLayout
         header={
-          <div className="h-[104px]">
-            <div className="w-[600px] fixed top-0">
-              <Header title={`[${storeData.title}] ${boardData.title}`} back className="relative" />
-              <ProductDetailTabs />
-            </div>
-          </div>
+          <>
+            <Header
+              title={`[${storeData.title}] ${boardData.title}`}
+              back
+              className="sticky top-0 bg-white z-50"
+            />
+            <ProductDetailTabs />
+          </>
         }
         main={children}
         footer={<FixedPurchaseButtonSection />}

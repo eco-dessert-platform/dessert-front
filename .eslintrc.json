@@ -41,8 +41,7 @@
     "import/prefer-default-export": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/react-in-jsx-scope": "off",
-    "consistent-return": "off"
+    "react/react-in-jsx-scope": "off"
   },
   "ignorePatterns": ["*.config.*", "node_modules", "*.d.ts"]
 }

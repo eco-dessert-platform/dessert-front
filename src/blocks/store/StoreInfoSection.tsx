@@ -24,7 +24,6 @@ const StoreInfoSection = ({ storeInfo }: Props) => {
           width={46}
           height={46}
           className="rounded-[6px]"
-          unoptimized
         />
         <div className="flex flex-col items-center gap-[4px]">
           <div className="flex items-center gap-[2px]">

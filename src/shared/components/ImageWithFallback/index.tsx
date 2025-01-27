@@ -10,7 +10,7 @@ interface Props extends ImageProps {
 const ImageWithFallback = ({ fallback, ...props }: Props) => {
   const [isError, setIsError] = useState(false);
 
-  return isError ? fallback : <Image unoptimized onError={() => setIsError(true)} {...props} />;
+  return isError ? fallback : <Image onError={() => setIsError(true)} {...props} />;
 };
 
 export default ImageWithFallback;

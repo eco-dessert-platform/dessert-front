@@ -19,7 +19,7 @@ const DefaultLayout = ({ main, header, footer }: Props) => {
   }, [footerRef.current?.clientHeight]);
 
   return (
-    <>
+    <div className="min-h-screen">
       {header && (
         <header className="sticky max-w-[600px] top-0 w-full mx-auto z-header">{header}</header>
       )}
@@ -28,7 +28,7 @@ const DefaultLayout = ({ main, header, footer }: Props) => {
         style={{
           paddingBottom: footerHeight || 0
         }}
-        className="max-w-[600px]  w-full min-h-screen shadow-lg mx-auto relative flex-1"
+        className="max-w-[600px] w-full min-h-screen shadow-lg mx-auto relative flex-1"
       >
         {main}
       </main>
@@ -41,7 +41,7 @@ const DefaultLayout = ({ main, header, footer }: Props) => {
           {footer}
         </footer>
       )}
-    </>
+    </div>
   );
 };
 

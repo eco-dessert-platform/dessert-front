@@ -13,19 +13,20 @@ const BadgeSection = async ({ params: { productId } }: Props) => {
     category: { [key: string]: number },
     key1: BadgeShapeType,
     key2: BadgeShapeType
-  ): BadgeShapeType => category[key1] > category[key2] ? key1 : key2;
+  ): BadgeShapeType => (category[key1] > category[key2] ? key1 : key2);
 
   const textureBadge = getBadgeShape(texture, 'dry', 'soft');
   const brixBadge = getBadgeShape(brix, 'plain', 'sweet');
   const tasteBadge = getBadgeShape(taste, 'bad', 'good');
 
-  const shouldRenderBadge = (category: { [key: string]: number }) => Object.values(category).some((value) => value !== 0);
+  const shouldRenderBadge = (category: { [key: string]: number }) =>
+    Object.values(category).some((value) => value !== 0);
 
   return (
     <div className="flex gap-[10px] w-full">
+      {shouldRenderBadge(taste) && <ReviewBadge className="w-1/3" shape={tasteBadge} />}
       {shouldRenderBadge(texture) && <ReviewBadge className="w-1/3" shape={textureBadge} />}
       {shouldRenderBadge(brix) && <ReviewBadge className="w-1/3" shape={brixBadge} />}
-      {shouldRenderBadge(taste) && <ReviewBadge className="w-1/3" shape={tasteBadge} />}
     </div>
   );
 };

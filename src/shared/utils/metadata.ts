@@ -10,8 +10,6 @@ interface StaticMetadataType {
   [route: string]: Metadata;
 }
 
-const IS_DEV_MOD: boolean = JSON.parse(process.env.NEXT_PUBLIC_DEV_SETTING ?? 'false');
-
 const BBANGLE_LOGO_IMAGE = {
   og: {
     url: '/opengraph-image.png',
@@ -186,18 +184,12 @@ const generateStoreDetailMetadata = async ({
   };
 };
 
-export const getStaticMetadata = (route: StaticRoute): Metadata => {
-  if (IS_DEV_MOD) return {};
-
-  return staticMetadata[route];
-};
+export const getStaticMetadata = (route: StaticRoute): Metadata => staticMetadata[route];
 
 export const getDynamicMetadata = (
   route: DynamicRoute,
   dynamicParams: GenerateMetadataProps
 ): Metadata | Promise<Metadata> | undefined => {
-  if (IS_DEV_MOD) return undefined;
-
   switch (route) {
     case 'product-detail':
       return generateProductDetailMetadata(dynamicParams);

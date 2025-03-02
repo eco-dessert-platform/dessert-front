@@ -3,7 +3,7 @@
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
 import useGetReviewRatingQuery from '@/domains/review/queries/useGetReviewRatingQuery';
 import DeliveryFeeSection from './DeliveryFeeSection';
-import DetailStoreInfo from './DetailStoreInfo';
+// import DetailStoreInfo from './DetailStoreInfo';
 import SimpleProductInfo from './SimpleProductInfo';
 
 interface Props {
@@ -26,7 +26,7 @@ const SimpleInfoWithStoreSection = ({ productId }: Props) => {
 
   return (
     <>
-      <DetailStoreInfo storeId={boardData.storeId} />
+      {/* <DetailStoreInfo storeId={boardData.storeId} /> */}
       <SimpleProductInfo
         title={boardData.title}
         price={boardData.price}

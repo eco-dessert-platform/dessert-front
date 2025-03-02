@@ -11,6 +11,7 @@ export const useGetStoreInfoQuery = ({ storeId }: Props) => {
 
   const queryFn = async () => {
     const data = await storeService.getStoreInfo(storeId);
+
     return data;
   };
 

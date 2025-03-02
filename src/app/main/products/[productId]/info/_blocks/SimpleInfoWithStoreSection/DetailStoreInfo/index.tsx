@@ -21,6 +21,7 @@ interface Props {
 
 const DetailStoreInfo = ({ storeId }: Props) => {
   const { data: storeData } = useGetStoreInfoQuery({ storeId });
+  // console.log('🚀 ~ DetailStoreInfo ~ storeData:', storeData);
   const { mutate: addMutate } = useAddWishStoreMutation({
     storeId,
     storeName: storeData?.storeName ?? '🏠'

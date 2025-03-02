@@ -32,6 +32,7 @@ const FixedPurchaseButtonSection = () => {
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
   const { data: similarProducts } = useGetSimilarProductsQuery(Number(productId));
   const { data: boardData } = useGetBoardDetailQuery(Number(productId));
+  console.log('🚀 ~ FixedPurchaseButtonSection ~ boardData:', boardData);
 
   useEffect(() => {
     if (modal) {

@@ -24,14 +24,14 @@ class Service {
       Referer: this.baseUrl
     };
     this.fetchExtend = {
-      get: this.get.bind(this),
-      delete: this.delete.bind(this),
-      head: this.head.bind(this),
-      options: this.options.bind(this),
-      post: this.post.bind(this),
-      postForm: this.postForm.bind(this),
-      put: this.put.bind(this),
-      patch: this.patch.bind(this)
+      get: (url, init) => this.request('GET', url, init),
+      delete: (url, init) => this.request('DELETE', url, init),
+      head: (url, init) => this.request('HEAD', url, init),
+      options: (url, init) => this.request('OPTIONS', url, init),
+      post: (url, init) => this.request('POST', url, init),
+      postForm: (url, init) => this.request('POST', url, init, true),
+      put: (url, init) => this.request('PUT', url, init),
+      patch: (url, init) => this.request('PATCH', url, init)
     };
   }
 

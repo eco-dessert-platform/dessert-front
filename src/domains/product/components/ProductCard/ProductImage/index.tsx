@@ -80,6 +80,7 @@ const ProductImage = ({
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
           fill
+          sizes="33vw"
           fallback={
             <SadBbangleBox className="flex flex-col items-center justify-center border bg-gray-50 rounded-[6px] w-full h-full">
               <p className="text-center text-sm md:text-base lg:text-lg">이미지가 없습니다.</p>

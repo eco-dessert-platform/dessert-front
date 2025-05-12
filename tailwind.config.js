@@ -119,6 +119,24 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar-hide'), // 이미 존재하는 플러그인
     function ({ addUtilities }) {
+      const scrollUtilities = {
+        '.clean-scrollbar': {
+          'scrollbar-width': 'thin',
+          'scrollbar-color': 'rgba(0, 0, 0, 0.1) transparent',
+        },
+        '.clean-scrollbar::-webkit-scrollbar': {
+          height: '6px',
+          width: '6px',
+        },
+        '.clean-scrollbar::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '.clean-scrollbar::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          borderRadius: '10px',
+          border: 'none',
+        }
+      }
       const centerUtilities = {
         '.absoulte-center': {
           '@apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2': {}
@@ -235,7 +253,7 @@ module.exports = {
           'letter-spacing': '-0.02em'
         }
       };
-      addUtilities({ ...typoUtilities, ...centerUtilities });
+      addUtilities({ ...typoUtilities, ...centerUtilities, ...scrollUtilities });
     }
   ]
 };

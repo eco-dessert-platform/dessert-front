@@ -13,7 +13,6 @@
 !.yarn/sdks
 !.yarn/versions
 
-.idea/
 
 # testing
 /coverage

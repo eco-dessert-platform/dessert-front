@@ -5,6 +5,7 @@ import { RecentSearchKeywordsResultType, IAllProductsType } from '@/domains/sear
 import { IFilterType } from '@/domains/product/types/filterType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import { IProductType } from '@/domains/product/types/productType';
 
 class SearchService extends Service {
   async getPopularKeywords() {
@@ -67,7 +68,16 @@ class SearchService extends Service {
       await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result;
+
+    // result.content가 배열이 아니면 배열로 변환 (IProductType[]로 보장)
+    const content: IProductType[] = Array.isArray(result.content) ? result.content : [];
+
+    return {
+      totalCount: content.length, // content가 배열일 때 length로 totalCount 계산
+      nextCursor: result.nextCursor,
+      hasNext: result.hasNext,
+      content // IProductType[] 배열로 반환
+    };
   }
 }
 

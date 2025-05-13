@@ -1,8 +1,9 @@
 import { useInfiniteQuery, GetNextPageParamFunction } from '@tanstack/react-query';
 import { IFilterType } from '@/domains/product/types/filterType';
+import { IAllProductsType } from '@/domains/search/types';
 import searchService from '@/domains/search/queries/service';
 import { productQueryKey } from '@/shared/queries/queryKey';
-import { IResponse } from '@/shared/types/response';
+import { Cursor } from '@/shared/types/response';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
 interface QueryHookProps {
@@ -13,17 +14,17 @@ interface QueryHookProps {
 export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookProps) => {
   const queryKey = [...productQueryKey.list('search'), { filter: filterValue, keyword }];
 
-  const queryFn = async ({ pageParam }: { pageParam: number }): Promise<IResponse> => {
-    const result = await searchService.getSearchProducts({
-      keyword,
-      filterValue,
-      cursorId: pageParam
-    });
-    return result; // 반환값은 이미 IResponse 타입에 맞춰짐
+  const queryFn = async ({ pageParam: cursorId }: { pageParam: number }) => {
+    const result = await searchService.getSearchProducts({ keyword, filterValue, cursorId });
+    return result;
   };
 
-  const getNextPageParam: GetNextPageParamFunction<number, IResponse> = (lastPage) =>
-    lastPage.hasNext ? lastPage.nextCursor : undefined;
+  const getNextPageParam: GetNextPageParamFunction<number, Cursor<IAllProductsType>> = (
+    lastPage
+  ) => {
+    const nextPageParam = lastPage.hasNext ? lastPage.nextCursor : undefined;
+    return nextPageParam;
+  };
 
   return useInfiniteQuery({
     queryKey,
@@ -35,8 +36,8 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
     refetchOnWindowFocus: false,
     staleTime: Infinity,
     select: ({ pages }) => {
-      const products = pages.map((page) => page.content).flat();
-      const boardsCount = pages[0]?.totalCount || 0;
+      const products = pages.map((page) => page.content.boards).flat();
+      const boardsCount = pages[0]?.content.itemAllCount || 0;
       return { products, boardsCount };
     }
   });

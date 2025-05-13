@@ -14,7 +14,6 @@ const ImageInput = (
 
   return (
     <label htmlFor={inputId} className={twMerge(`inline-block cursor-pointer`, className)}>
-      +
       <input ref={ref} id={inputId} type="file" accept="image/*" hidden={!!children} {...props} />
       {children}
     </label>

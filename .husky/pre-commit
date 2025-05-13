@@ -2,11 +2,5 @@
 
 . "$(dirname "$0")/_/husky.sh"
 
-if grep -qEi "Microsoft|WSL" /proc/version; then
-  echo "Running in Linux - using yarn directly"
-  yarn lint-staged
-  yarn check-types
-else
-  echo "Running from Windows - use WSL with NVM/Node 22"
-  wsl bash ./scripts/wsl-pre-commit.sh
-fi
+yarn lint-staged
+yarn check-types

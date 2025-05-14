@@ -22,9 +22,10 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
     return result; // 반환값은 이미 IResponse 타입에 맞춰짐
   };
 
-  const getNextPageParam: GetNextPageParamFunction<number, IResponse> = (lastPage) =>
-    lastPage.hasNext ? lastPage.nextCursor : undefined;
-
+  const getNextPageParam: GetNextPageParamFunction<number, IResponse> = (lastPage) => {
+    const result = lastPage.hasNext ? lastPage.nextCursor : undefined;
+    return result;
+  };
   return useInfiniteQuery({
     queryKey,
     queryFn,

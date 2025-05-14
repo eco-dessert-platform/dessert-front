@@ -69,14 +69,13 @@ class SearchService extends Service {
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
 
-    // result.content가 배열이 아니면 배열로 변환 (IProductType[]로 보장)
     const content: IProductType[] = Array.isArray(result.content) ? result.content : [];
 
     return {
-      totalCount: content.length, // content가 배열일 때 length로 totalCount 계산
+      totalCount: content.length,
       nextCursor: result.nextCursor,
       hasNext: result.hasNext,
-      content // IProductType[] 배열로 반환
+      content
     };
   }
 }

@@ -19,7 +19,7 @@ export const useGetSearchProductsQuery = ({ keyword, filterValue }: QueryHookPro
       filterValue,
       cursorId: pageParam
     });
-    return result; // 반환값은 이미 IResponse 타입에 맞춰짐
+    return result;
   };
 
   const getNextPageParam: GetNextPageParamFunction<number, IResponse> = (lastPage) => {

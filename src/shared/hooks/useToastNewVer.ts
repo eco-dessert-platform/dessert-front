@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { toastStateNewVer } from '@/shared/atoms/alert';
 import { useSetRecoilState } from 'recoil';
 import { SECOND } from '../constants/time';
@@ -12,6 +12,10 @@ const useToastNewVer = () => {
       return newToasts;
     });
   };
+
+  const resetToast = useCallback(() => {
+    setToast([]);
+  }, [setToast]);
 
   const openToast = ({ message, action }: { message: string; action?: ReactNode }) => {
     const id = message;
@@ -31,7 +35,7 @@ const useToastNewVer = () => {
     }, 3 * SECOND);
   };
 
-  return { openToast, closeToast };
+  return { openToast, closeToast, resetToast };
 };
 
 export default useToastNewVer;

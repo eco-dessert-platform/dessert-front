@@ -3,6 +3,7 @@
 import { toastStateNewVer } from '@/shared/atoms/alert';
 import ToastPop from '@/shared/components/ToastPop';
 import { ELEMENT_ID } from '@/shared/constants/elementId';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { AnimatePresence, motion, useSpring } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
@@ -13,6 +14,7 @@ const ToastContainer = () => {
   const translateY = useSpring(0);
   const pathname = usePathname();
   const footerRef = useRef<HTMLElement | null>(null);
+  const { resetToast } = useToastNewVer();
 
   useEffect(() => {
     const footer = document.getElementById(ELEMENT_ID.footer);
@@ -21,7 +23,9 @@ const ToastContainer = () => {
 
     translateY.set(-footer.clientHeight);
     footerRef.current = footer;
-  }, [pathname, translateY]);
+
+    resetToast();
+  }, [pathname, translateY, resetToast]);
 
   return (
     <motion.div

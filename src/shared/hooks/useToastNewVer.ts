@@ -6,7 +6,7 @@ import { SECOND } from '../constants/time';
 const useToastNewVer = () => {
   const setToast = useSetRecoilState(toastStateNewVer);
 
-  const closeToast = (id: number) => {
+  const closeToast = (id: string) => {
     setToast((toasts) => {
       const newToasts = toasts.filter((toast) => toast.id !== id);
       return newToasts;
@@ -14,10 +14,14 @@ const useToastNewVer = () => {
   };
 
   const openToast = ({ message, action }: { message: string; action?: ReactNode }) => {
-    const id = Date.now();
+    const id = message;
 
-    setToast((toasts) => {
-      const newToasts = [...toasts];
+    setToast((prevToasts) => {
+      if (prevToasts.some((toasts) => toasts.id === id)) {
+        return prevToasts;
+      }
+
+      const newToasts = [...prevToasts];
       newToasts.unshift({ message, action, id });
       return newToasts;
     });

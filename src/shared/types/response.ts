@@ -1,3 +1,5 @@
+import { IProductType } from '@/domains/product/types/productType';
+
 export interface DefaultResponse {
   success: boolean;
   code: number;
@@ -22,4 +24,8 @@ export interface Cursor<T> {
   nextCursor: number;
   hasNext: boolean;
   content: T;
+}
+
+export interface IResponse extends Cursor<IProductType[]> {
+  totalCount: number;
 }

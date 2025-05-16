@@ -5,7 +5,7 @@ interface SliderProps {
   className?: string;
 }
 
-const Slider = ({ children, className }: SliderProps) => {
+const ScrollSlider = ({ children, className }: SliderProps) => {
   const slideRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const Slider = ({ children, className }: SliderProps) => {
   );
 };
 
-export default Slider;
+export default ScrollSlider;

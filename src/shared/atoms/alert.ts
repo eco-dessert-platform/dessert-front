@@ -25,7 +25,7 @@ export const toastState = atom<ReactNode[]>({
   default: []
 });
 
-export const toastStateNewVer = atom<{ message: string; id: number; action: ReactNode }[]>({
+export const toastStateNewVer = atom<{ message: string; id: string; action: ReactNode }[]>({
   key: 'toastStateNewVer',
   default: []
 });

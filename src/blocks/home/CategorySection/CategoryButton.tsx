@@ -19,7 +19,7 @@ const CategoryButton = ({ name, icon }: CategoryButtonProps) => {
   return (
     <Link
       href={PATH.mainProductList}
-      className="flex flex-col gap-1 items-center py-[11px] px-[22px] hover:opacity-70 transition-opacity"
+      className="flex flex-col gap-1 items-center py-[11px] w-[90px] hover:opacity-70 transition-opacity"
       onClick={handleClickButton}
     >
       <div className="w-[46px] h-[46px] bg-gray-100 rounded-[16px] p-[11px]">{icon}</div>

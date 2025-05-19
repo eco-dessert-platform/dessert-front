@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { KeyboardEvent } from 'react';
 import FilterModal from '@/domains/product/components/alert-box/FilterModal';
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { CloseIcon } from '@/shared/components/icons';
@@ -16,14 +16,21 @@ interface SelectProps {
 }
 
 const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: SelectProps) => {
-  const closeRef = useRef<HTMLSpanElement>(null);
   const { openModal } = useModal();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     openModal(<FilterModal filterFamilyId={filterFamilyId} />);
+  };
 
-    if (closeRef.current && e.target instanceof Element && closeRef.current.contains(e.target))
-      onReset();
+  const handleResetClick = (e: React.MouseEvent | KeyboardEvent) => {
+    e.stopPropagation();
+    onReset();
+  };
+
+  const handleResetKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleResetClick(e);
+    }
   };
 
   return (
@@ -39,9 +46,21 @@ const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: Sel
       )}
     >
       <span>{text}</span>
-      <span ref={closeRef}>
-        {isFiltered ? <CloseIcon shape="no-bg-16-orange" /> : <ArrowIcons shape="down" />}
-      </span>
+      {isFiltered ? (
+        <span
+          role="button"
+          tabIndex={0}
+          onClick={handleResetClick}
+          onKeyDown={handleResetKeyDown}
+          aria-label="reset filter"
+        >
+          <CloseIcon shape="no-bg-16-orange" />
+        </span>
+      ) : (
+        <span>
+          <ArrowIcons shape="down" />
+        </span>
+      )}
     </button>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import Input from '@/shared/components/Input';
@@ -10,6 +10,7 @@ const NicknameInput = () => {
   const inputId = useId();
   const { mutate, data, reset } = useNicknameDoubleCheckMutation();
   const { watch, setValue } = useFormContext();
+  const [isNickNameTouched, setIsNickNameTouched] = useState(false);
 
   const nickname = watch('nickname');
   const nicknameLength = nickname.length;
@@ -17,6 +18,8 @@ const NicknameInput = () => {
   const MAX_LENGTH = 20;
 
   const nickDoubleCheck = () => {
+    if (!isNickNameTouched) return;
+
     mutate(nickname || '', {
       onSuccess: (res) => {
         if (res.isValid) {
@@ -34,6 +37,7 @@ const NicknameInput = () => {
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsNickNameTouched(true);
     setValue('nickname', e.target.value);
     setValue('isNickDoubleChecked', false);
     reset();

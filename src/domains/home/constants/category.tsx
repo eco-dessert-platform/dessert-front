@@ -2,7 +2,6 @@ import {
   AllIcon,
   GlutenFreeIcon,
   LowFatIcon,
-  LowSugarIcon,
   ProteinIcon,
   VeganIcon
 } from '@/domains/product/assets/category/icons';
@@ -10,32 +9,27 @@ import {
 export const CATEGORY = [
   {
     id: 1,
-    name: '전체',
+    name: '새로 나왔어요',
     icon: <AllIcon />
   },
   {
     id: 2,
-    name: '고단백',
+    name: '전체',
     icon: <ProteinIcon />
   },
   {
     id: 3,
-    name: '저당',
-    icon: <LowSugarIcon />
+    name: '단백질 듬뿍',
+    icon: <GlutenFreeIcon />
   },
   {
     id: 4,
-    name: '저지방',
+    name: '칼로리 다운',
     icon: <LowFatIcon />
   },
   {
     id: 5,
-    name: '글루텐프리',
-    icon: <GlutenFreeIcon />
-  },
-  {
-    id: 6,
-    name: '비건',
+    name: '속 편한 즐거움',
     icon: <VeganIcon />
   }
 ];

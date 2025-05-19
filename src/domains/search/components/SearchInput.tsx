@@ -19,7 +19,7 @@ const SearchInput = ({
 }: SearchInputProps) => (
   <div
     className={cn(
-      'flex items-center gap-[6px] px-[16px] py-[10px] w-full rounded-[50px] cursor-pointer',
+      'flex items-center gap-[6px] px-[16px] py-[10px] w-full rounded-[50px] ',
       warning ? 'border-[1px] border-secondaryOrangeRed bg-secondaryPink' : 'bg-redGray-30'
     )}
   >

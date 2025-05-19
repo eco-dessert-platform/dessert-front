@@ -5,6 +5,7 @@ import { RecentSearchKeywordsResultType, IAllProductsType } from '@/domains/sear
 import { IFilterType } from '@/domains/product/types/filterType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
+import { IProductType } from '@/domains/product/types/productType';
 
 class SearchService extends Service {
   async getPopularKeywords() {
@@ -67,7 +68,15 @@ class SearchService extends Service {
       await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result;
+
+    const content: IProductType[] = Array.isArray(result.content) ? result.content : [];
+
+    return {
+      totalCount: content.length,
+      nextCursor: result.nextCursor,
+      hasNext: result.hasNext,
+      content
+    };
   }
 }
 

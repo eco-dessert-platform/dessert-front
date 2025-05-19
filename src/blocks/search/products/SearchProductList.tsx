@@ -17,25 +17,26 @@ interface SearchProductListProps {
 
 const SearchProductList = ({ keyword }: SearchProductListProps) => {
   const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.search));
-  const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetSearchProductsQuery({
-      keyword,
-      filterValue
-    });
+
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetSearchProductsQuery({ keyword, filterValue });
+
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (!inView) return;
-    fetchNextPage();
-  }, [inView, fetchNextPage]);
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  if (isFetching && !isFetchingNextPage) {
+  if (isLoading) {
     return (
       <PaddingWrapper>
         <SkeletonProductCardList />
       </PaddingWrapper>
     );
   }
+
   if (isError) {
     return (
       <SadBbangleBox className="h-[calc(100vh-220px)]">
@@ -43,7 +44,10 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
       </SadBbangleBox>
     );
   }
-  if (!data || data.boardsCount === 0) {
+
+  const products = data?.products ?? [];
+
+  if (products.length === 0) {
     return (
       <SadBbangleBox className="h-[calc(100vh-220px)]">
         <p>{keyword}에 대한 검색 결과가 없어요.</p>
@@ -55,10 +59,11 @@ const SearchProductList = ({ keyword }: SearchProductListProps) => {
   return (
     <PaddingWrapper className="pb-[36px]">
       <div className="grid grid-cols-2 gap-[16px]">
-        {data.products.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.boardId} product={product} />
         ))}
       </div>
+
       {hasNextPage && (
         <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList row={1} col={2} />

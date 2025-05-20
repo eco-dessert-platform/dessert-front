@@ -15,20 +15,19 @@ const NicknameInput = () => {
 
   const [isNickNameTouched, setIsNickNameTouched] = useState(false);
   const [isNickNameMessageVisible, setIsNickNameMessageVisible] = useState(false);
-  const [lastCheckedNickname, setLastCheckedNickname] = useState('');
 
   const nickname = watch('nickname');
   const nicknameLength = nickname.length;
   const nicknameClass = nicknameLength === 0 ? 'text-gray-400' : 'text-gray-600';
 
   const checkResult = (isValid: boolean) => {
-    setValue('isNickDoubleChecked', isValid);
-    setLastCheckedNickname(nickname);
+    setIsNickNameTouched(false);
     setIsNickNameMessageVisible(true);
+    setValue('isNickDoubleChecked', isValid, isValid ? { shouldDirty: true } : undefined);
   };
 
   const nickDoubleCheck = () => {
-    if (!isNickNameTouched || nickname === lastCheckedNickname) return;
+    if (!isNickNameTouched) return;
 
     mutate(nickname, {
       onSuccess: (res) => {

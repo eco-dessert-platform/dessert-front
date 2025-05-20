@@ -23,8 +23,6 @@ const ToastContainer = () => {
 
     translateY.set(-footer.clientHeight);
     footerRef.current = footer;
-
-    resetToast();
   }, [pathname, translateY, resetToast]);
 
   return (

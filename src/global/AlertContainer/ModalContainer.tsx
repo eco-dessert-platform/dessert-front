@@ -1,6 +1,6 @@
 'use client';
 
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 import { MouseEventHandler } from 'react';
 import useModal from '@/shared/hooks/useModal';
 import { AnimatePresence } from 'framer-motion';
@@ -8,7 +8,7 @@ import { modalState } from '@/shared/atoms/alert';
 import BackDrop from '@/shared/components/BackDrop';
 
 const ModalContainer = () => {
-  const modal = useRecoilValue(modalState);
+  const modal = useAtomValue(modalState);
   const { closeModal } = useModal();
 
   const modalVisible = !!modal;

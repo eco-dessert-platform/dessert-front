@@ -14,8 +14,8 @@ import {
   ThumbsUpIcon,
   WriteIcon
 } from '@/domains/user/components/icons';
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai'; // Replaced useRecoilValue with useAtom
+import { isLoggedinAtom } from '@/shared/atoms/login'; // Updated to use Jotai atom
 
 interface MoreInfoItemProps {
   icon: ReactNode;
@@ -40,7 +40,7 @@ const LOGGEDIN_INFOS = [
   { href: '#', icon: <InquiryIcon />, content: '문의하기' },
   {
     href: PATH.privacyPolicy,
-    icon: <LockIcon />,
+    icon: <LockIcon /> ,
     content: '개인정보 수집 및 이용'
   }
 ];
@@ -53,7 +53,7 @@ const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (
 );
 
 const MoreInfoSection = () => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom); // Replaced useRecoilValue with useAtom
   const information = isLoggedIn ? LOGGEDIN_INFOS : INFOS;
 
   return (

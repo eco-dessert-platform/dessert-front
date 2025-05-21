@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
 import { MouseEventHandler, useMemo } from 'react';
+import { useAtom } from 'jotai';
 import usePopup from '@/shared/hooks/usePopup';
 import useModal from '@/shared/hooks/useModal';
 import { CloseIcon } from '@/shared/components/icons';
 import PATH from '@/shared/constants/path';
 import DeleteWishFolderPopup from '../alert-box/DeleteWishFolderPopup';
-import { isWishFolderEditingState } from '../../atoms/wishFolder';
+import { isWishFolderEditingAtom } from '../../atoms/wishFolder'; // Updated to use Jotai's atom
 import UpdateWishFolderModal from '../alert-box/UpdateWishFolderModal';
 import FolderThumbnail from '../common/FolderThumbnail';
 import useUpdateWishFolderMutation from '../../queries/useUpdateWishFolderMutation';
@@ -23,7 +23,7 @@ interface WishFolderProps {
 }
 
 const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
-  const isEditing = useRecoilValue(isWishFolderEditingState);
+  const [isEditing] = useAtom(isWishFolderEditingAtom);
   const { openPopup } = usePopup();
   const { openModal, closeModal } = useModal();
   const { mutate: updateWishFolderTitle } = useUpdateWishFolderMutation();

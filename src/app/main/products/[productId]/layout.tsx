@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
 import DefaultLayout from '@/shared/components/DefaultLayout';
@@ -10,8 +10,7 @@ import { getDynamicMetadata } from '@/shared/utils/metadata';
 import ProductDetailTabs from './_blocks/ProductDetailTabs';
 import FixedPurchaseButtonSection from './info/_blocks/FixedPurchaseButtonSection';
 
-export const generateMetadata = async (props: GenerateMetadataProps) =>
-  getDynamicMetadata('product-detail', props);
+export const generateMetadata = async (props: GenerateMetadataProps) => getDynamicMetadata('product-detail', props);
 
 interface DetailInfoLayoutProps {
   params: { productId: string };
@@ -19,22 +18,27 @@ interface DetailInfoLayoutProps {
 }
 
 const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) => {
-  const id = Number(params.productId);
+  if (!params?.productId) return null; // params.productId가 없을 때 처리
+
+  // 비동기 처리로 수정
+  const id = await Number(params.productId);
+
   const queryClient = new QueryClient();
 
+  // 데이터 비동기 처리, return await 제거
   const [boardData, storeData] = await Promise.all([
     queryClient.fetchQuery({
       queryKey: productQueryKey.detail(id, 'board-detail'),
-      queryFn: () => productService.getBoardDetail(id)
+      queryFn: () => productService.getBoardDetail(id),
     }),
     queryClient.fetchQuery({
       queryKey: productQueryKey.detail(id, 'store-info'),
-      queryFn: () => productService.getStoreInfo(id)
+      queryFn: () => productService.getStoreInfo(id),
     }),
     queryClient.prefetchQuery({
       queryKey: productQueryKey.detail(id, 'product-option'),
-      queryFn: () => productService.getProductOption(id)
-    })
+      queryFn: () => productService.getProductOption(id),
+    }),
   ]);
 
   return (
@@ -56,4 +60,5 @@ const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) 
     </HydrationBoundary>
   );
 };
+
 export default ProductDetailLayout;

@@ -1,7 +1,7 @@
 'use client';
 
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import { ThumbsUpIcon } from '@/shared/components/icons';
 import { cn } from '@/shared/utils/cn';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const LikeButton = ({ id, isLiked, like }: Props) => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const { mutate: addLike } = useLikeReviewMutation(id);
   const { mutate: removeLike } = useDislikeReviewMutation(id);
 
@@ -45,7 +45,7 @@ const LikeButton = ({ id, isLiked, like }: Props) => {
     <button
       type="button"
       className={cn(
-        'typo-body-12-regular flex items-center gap-[4px] rounded-full  px-[8px] py-[4px]',
+        'typo-body-12-regular flex items-center gap-[4px] rounded-full px-[8px] py-[4px]',
         isLiked ? 'text-primaryOrangeRed bg-secondaryPink' : 'text-gray-500 bg-redGray-30'
       )}
       onClick={handleButtonClick}

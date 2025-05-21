@@ -2,7 +2,6 @@
 
 import { useRef } from 'react';
 import FilterModal from '@/domains/product/components/alert-box/FilterModal';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { CloseIcon } from '@/shared/components/icons';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import useModal from '@/shared/hooks/useModal';
@@ -11,16 +10,15 @@ import { cn } from '@/shared/utils/cn';
 interface SelectProps {
   text: string;
   isFiltered?: boolean;
-  filterFamilyId: FilterFamilyIDType;
   onReset: () => void;
 }
 
-const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: SelectProps) => {
+const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
   const closeRef = useRef<HTMLSpanElement>(null);
   const { openModal } = useModal();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    openModal(<FilterModal filterFamilyId={filterFamilyId} />);
+    openModal(<FilterModal  />);
 
     if (closeRef.current && e.target instanceof Element && closeRef.current.contains(e.target))
       onReset();

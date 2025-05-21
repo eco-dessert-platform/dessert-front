@@ -3,30 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'Pretendard';
-    src: url('/fonts/Pretendard-Black.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-  }
+    @font-face {
+        font-family: 'Pretendard';
+        src: url('/assets/fonts/PretendardVariable.woff2') format('woff2');
+        font-weight: 45 920; /* 가변 폰트 범위 */
+        font-style: normal;
+        font-display: swap;
+    }
+
 
   html {
     font-family:
@@ -72,6 +56,7 @@
 
   html,
   body {
+      font-family: 'Pretendard', sans-serif;
     height: 100%;
   }
 }

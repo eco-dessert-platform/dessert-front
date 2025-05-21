@@ -7,10 +7,12 @@ import DefaultLayout from '@/shared/components/DefaultLayout';
 import PhotoList from './_blocks/PhotoList';
 
 interface Props {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }
 
-const ReviewPhotosPage = async ({ params: { productId } }: Props) => {
+const ReviewPhotosPage = async ({ params }: Props) => {  
+  const { productId } = await params;
+
   const boardId = Number(productId);
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({

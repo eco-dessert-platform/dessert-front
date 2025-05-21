@@ -1,7 +1,13 @@
 import type { StorybookConfig } from '@storybook/nextjs';
 
 const config: StorybookConfig = {
-  framework: '@storybook/nextjs',
+  framework: {
+    name: '@storybook/nextjs',
+    options: {
+      nextConfigPath: './next.config.js',
+      appDirectory: true,
+    },
+  },
 
   stories: [
     '../src/**/*.mdx',

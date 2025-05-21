@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 
 import { IProductType } from '@/domains/product/types/productType';
 import { IStoreProductType } from '@/domains/store/types/store';
-import { isLoggedinState } from '@/shared/atoms/login';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import PATH from '@/shared/constants/path';
 import useModal from '@/shared/hooks/useModal';
@@ -12,7 +12,7 @@ import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { Cursor } from '@/shared/types/response';
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
+import { updateInfiniteQueryCache } from '@/shared/utils/queryCache';
 import WishFolderSelectModal from '../components/alert-box/WishFolderSelectModal';
 import { wishQueryKey } from './queryKey';
 import wishService from './service';
@@ -20,7 +20,7 @@ import wishService from './service';
 const useAddWishProductMutation = () => {
   const { openToast } = useToastNewVer();
   const { openModal } = useModal();
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const queryClient = useQueryClient();
 
   const mutationFn = async ({ productId, folderId }: { productId: number; folderId: number }) => {
@@ -79,10 +79,6 @@ const useAddWishProductMutation = () => {
   };
 
   const onError = ({ message }: Error) => {
-    if (typeof message !== 'string') {
-      console.error('Invalid message type:', message);
-      return;
-    }
 
     switch (message) {
       case ERROR_MESSAGE.requiredLogin:

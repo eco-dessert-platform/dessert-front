@@ -1,21 +1,16 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { filterValueState, tagsTempState } from '@/domains/product/atoms';
+import { useAtom } from 'jotai';
+import { filterValueAtom, tagsAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { cn } from '@/shared/utils/cn';
 
-interface TagsSectionProps {
-  filterFamilyId: FilterFamilyIDType;
-}
-
-const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
-  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
-  const [selectedTags, setSelectedTags] = useRecoilState(tagsTempState(filterFamilyId));
+const TagsSection = () => {
+  const [filterValue] = useAtom(filterValueAtom);
+  const [selectedTags, setSelectedTags] = useAtom(tagsAtom);
   const uniqueValue = '전체';
 
   useEffect(() => {

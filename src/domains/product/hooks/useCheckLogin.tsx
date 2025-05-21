@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import PATH from '@/shared/constants/path';
 
 const useCheckLogin = () => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const { openToast } = useToastNewVer();
 
   const checkLogin = (): boolean => {

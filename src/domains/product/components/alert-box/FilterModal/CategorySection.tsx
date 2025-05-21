@@ -1,24 +1,18 @@
 import { useEffect } from 'react';
+import { useAtom } from 'jotai';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-
-import { categoryTempState, filterValueState, mainCategoryState } from '@/domains/product/atoms';
+import { categoryAtom, filterValueAtom, mainCategoryAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { cn } from '@/shared/utils/cn';
 import useCategory from '@/domains/product/hooks/useCategory';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Radio from '@/shared/components/Radio';
 
-interface CategorySectionProps {
-  filterFamilyId: FilterFamilyIDType;
-}
-
-const CategorySection = ({ filterFamilyId }: CategorySectionProps) => {
-  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
-  const [selectedCategory, setSelectedCategory] = useRecoilState(categoryTempState(filterFamilyId));
-  const mainCategory = useRecoilValue(mainCategoryState(filterFamilyId));
-  const { elaborateCategory, simplifyCategory } = useCategory(filterFamilyId);
+const CategorySection = () => {
+  const [filterValue] = useAtom(filterValueAtom);
+  const [selectedCategory, setSelectedCategory] = useAtom(categoryAtom);
+  const [mainCategory] = useAtom(mainCategoryAtom);
+  const { elaborateCategory, simplifyCategory } = useCategory();
 
   useEffect(() => {
     setSelectedCategory(filterValue.category);

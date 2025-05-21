@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
+import { useSetAtom } from 'jotai';
 
-import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { filterValueAtom } from '@/domains/product/atoms'; // Using the Jotai atom here
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import useCategory from '@/domains/product/hooks/useCategory';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
@@ -13,8 +12,8 @@ interface SubCategoryItemProps {
 }
 
 const SubCategoryItem = ({ categoryItem }: SubCategoryItemProps) => {
-  const setFilterValue = useSetRecoilState(filterValueState(FILTER_FAMILY_ID.main));
-  const { elaborateCategory } = useCategory(FILTER_FAMILY_ID.main);
+  const setFilterValue = useSetAtom(filterValueAtom); // Use filterValueAtom instead of filterValueState
+  const { elaborateCategory } = useCategory();
 
   const clickCategory = (selectedItem: string) => {
     setFilterValue({ ...INIT_FILTER_VALUE, category: elaborateCategory(selectedItem) });

@@ -12,15 +12,16 @@ import PhotoSection from './_blocks/PhotoSection';
 import ReviewCreateButton from './_blocks/ReviewCreateButton';
 
 interface Props {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }
 
 const ReviewListPage = async ({ params }: Props) => {
-  const productId = Number(params.productId);
+  const { productId } = await params;
   const queryClient = new QueryClient();
-  const { queryKey, queryFn, initialPageParam } = reivewQueryOption(productId);
+  const { queryKey, queryFn, initialPageParam } = reivewQueryOption(Number(productId));
+
   const [{ content: reviewPhotos }] = await Promise.all([
-    reviewService.getReviewPhotos({ boardId: productId, cursorId: INITIAL_CURSOR }),
+    reviewService.getReviewPhotos({ boardId: Number(productId), cursorId: INITIAL_CURSOR }),
     queryClient.fetchInfiniteQuery({
       queryKey,
       queryFn,
@@ -28,17 +29,19 @@ const ReviewListPage = async ({ params }: Props) => {
     })
   ]);
 
+  const resolvedParams = { productId };
+
   return (
     <>
       <PaddingWrapper className="flex flex-col gap-[16px] border-b-[6px] border-gray-100">
-        <RatingSection params={params} />
-        <BadgeSection params={params} />
-        <GaugeSection params={params} />
+        <RatingSection params={resolvedParams} />
+        <BadgeSection params={resolvedParams} />
+        <GaugeSection params={resolvedParams} />
       </PaddingWrapper>
       <PaddingWrapper className="typo-title-14-semibold">리뷰</PaddingWrapper>
       <PaddingWrapper className="flex flex-col gap-[16px] border-b-[6px] border-gray-100">
-        <ReviewCreateButton productId={productId} />
-        <PhotoSection photos={reviewPhotos} productId={productId} />
+        <ReviewCreateButton productId={Number(productId)} />
+        <PhotoSection photos={reviewPhotos} productId={Number(productId)} />
       </PaddingWrapper>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ReviewList />

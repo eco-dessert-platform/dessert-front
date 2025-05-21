@@ -1,12 +1,12 @@
 'use client';
 
 import GoogleIcon from '@/domains/user/assets/google_logo.svg';
-import { socialLoginPopupState } from '@/domains/user/atoms/login';
+import { socialLoginPopupAtom } from '@/domains/user/atoms/login';
 import { GOOGLE } from '@/domains/user/constants/socialLogin';
-import { useSetRecoilState } from 'recoil';
+import { useSetAtom } from 'jotai';
 
 const GoogleLoginButton = () => {
-  const setPopup = useSetRecoilState(socialLoginPopupState);
+  const setPopup = useSetAtom(socialLoginPopupAtom);
   const queryObject = {
     client_id: GOOGLE.clientId,
     clientsecret: GOOGLE.clientSecret,

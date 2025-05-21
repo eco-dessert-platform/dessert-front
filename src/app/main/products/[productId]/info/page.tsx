@@ -6,10 +6,12 @@ import ReviewBadgeSection from './_blocks/ReviewBadgeSection';
 import SimpleInfoWithStoreSection from './_blocks/SimpleInfoWithStoreSection';
 
 interface Props {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }
 
-const ProductDetailPage = ({ params: { productId } }: Props) => {
+const ProductDetailPage = async ({ params }: Props) => {  
+  const { productId } = await params;
+
   const id = Number(productId);
   return (
     <>

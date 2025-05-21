@@ -1,11 +1,11 @@
 'use client';
 
-import { useRecoilValue } from 'recoil';
 import { AnimatePresence } from 'framer-motion';
 import { fullScreenModalState } from '@/shared/atoms/alert';
+import { useAtomValue } from 'jotai';
 
 const FullScreenModalContainer = () => {
-  const fullScreenModal = useRecoilValue(fullScreenModalState);
+  const fullScreenModal = useAtomValue(fullScreenModalState);
   const visible = !!fullScreenModal;
 
   return (

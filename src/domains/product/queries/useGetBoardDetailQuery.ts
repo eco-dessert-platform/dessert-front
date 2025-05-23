@@ -4,12 +4,13 @@ import { productQueryKey } from '@/shared/queries/queryKey';
 import productService from './service';
 
 const useGetBoardDetailQuery = (productId: number) => {
-  const queryKey = productQueryKey.detail(productId, 'board-detail');
-  const queryFn = () => productService.getBoardDetail(productId);
+  const queryKey = productQueryKey.detail(productId, 'product-info');
+  const queryFn = () => productService.getProductInfo(productId);
 
   return useQuery({
     queryKey,
-    queryFn
+    queryFn,
+    select: (data) => data.board
   });
 };
 

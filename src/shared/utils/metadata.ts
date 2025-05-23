@@ -115,32 +115,30 @@ const generateProductDetailMetadata = async ({
   if (!params?.productId) return {};
 
   const id = Number(params.productId);
-  const product = await productService.getBoardDetail(id);
-  const store = await productService.getStoreInfo(id);
-  const productOptions = await productService.getProductOption(id);
+  const { board, store, products: productOptions } = await productService.getProductInfo(id);
 
   return {
     metadataBase: new URL('https://www.bbanggree.com'),
-    title: `[${store.title}] ${product.title}`,
-    description: productOptions.products.map((item) => item.title).join(', '),
+    title: `[${store.storeTitle}] ${board.boardTitle}`,
+    description: productOptions.map((item) => item.title).join(', '),
     openGraph: {
       title: '빵그리의 오븐',
-      description: `[${store.title}] ${product.title}`,
+      description: `[${store.storeTitle}] ${board.boardTitle}`,
       images: [
         {
-          url: product.profile,
-          alt: `${product.title} 상품 이미지`
+          url: board.boardProfile,
+          alt: `${board.boardTitle} 상품 이미지`
         }
       ]
     },
     twitter: {
       card: 'summary',
       title: '빵그리의 오븐',
-      description: `[${store.title}] ${product.title}`,
+      description: `[${store.storeTitle}] ${board.boardTitle}`,
       images: [
         {
-          url: product.profile,
-          alt: `${product.title} 상품 이미지`
+          url: board.boardProfile,
+          alt: `${board.boardTitle} 상품 이미지`
         }
       ]
     }

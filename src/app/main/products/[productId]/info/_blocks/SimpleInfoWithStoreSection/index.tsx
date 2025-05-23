@@ -12,25 +12,25 @@ interface Props {
 }
 
 const SimpleInfoWithStoreSection = ({ productId }: Props) => {
-  const {
-    data: boardData = {
-      storeId: 0,
-      title: '',
-      price: 0,
-      discountRate: 0,
-      deliveryFee: 0,
-      freeShippingConditions: 0
-    }
-  } = useGetBoardDetailQuery(productId);
+  const { data } = useGetBoardDetailQuery(productId);
+
+  const boardData = data ?? {
+    boardId: 0,
+    boardTitle: '',
+    boardPrice: 0,
+    discountRate: 0,
+    deliveryFee: 0,
+    freeShippingConditions: 0
+  };
 
   const { data: ratingData = { rating: 0, count: 0 } } = useGetReviewRatingQuery(Number(productId));
 
   return (
     <>
-      <DetailStoreInfo storeId={boardData.storeId} />
+      <DetailStoreInfo storeId={boardData.boardId} />
       <SimpleProductInfo
-        title={boardData.title}
-        price={boardData.price}
+        title={boardData.boardTitle}
+        price={boardData.boardPrice}
         discountRate={boardData.discountRate}
         rating={ratingData.rating}
         count={ratingData.count}

@@ -76,8 +76,8 @@ const FixedPurchaseButtonSection = () => {
     <div className="bg-white max-w-[600px] w-full mx-auto p-[16px] flex items-center gap-[10px]">
       <HeartButton
         shape="default"
-        isActive={boardData.isWished}
-        onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
+        isActive={boardData.isBoardWished}
+        onClick={boardData.isBoardWished ? deleteToWishlist : addToWishlist}
         className={cn(
           buttonVariants({ size: 'lg', color: 'border-white', radius: 'round' }),
           'min-w-max w-[56px] p-0'

@@ -22,20 +22,10 @@ const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) 
   const id = Number(params.productId);
   const queryClient = new QueryClient();
 
-  const [boardData, storeData] = await Promise.all([
-    queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(id, 'board-detail'),
-      queryFn: () => productService.getBoardDetail(id)
-    }),
-    queryClient.fetchQuery({
-      queryKey: productQueryKey.detail(id, 'store-info'),
-      queryFn: () => productService.getStoreInfo(id)
-    }),
-    queryClient.prefetchQuery({
-      queryKey: productQueryKey.detail(id, 'product-option'),
-      queryFn: () => productService.getProductOption(id)
-    })
-  ]);
+  const { board: boardData, store: storeData } = await queryClient.fetchQuery({
+    queryKey: productQueryKey.detail(id, 'product-info'),
+    queryFn: () => productService.getProductInfo(id)
+  });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -43,7 +33,7 @@ const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) 
         header={
           <>
             <Header
-              title={`[${storeData.title}] ${boardData.title}`}
+              title={`[${storeData.storeTitle}] ${boardData.boardTitle}`}
               back
               className="sticky top-0 bg-white z-50"
             />

@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 import DetailSectionWrapper from '@/domains/product/components/DetailSectionWrapper';
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
+import { ProductOptionType } from '@/domains/product/types/productDetailType';
+import { ProductType } from '@/domains/product/types/productInfoType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-
 import CategoryOption from './CategoryOption';
 import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
@@ -25,18 +25,18 @@ const ProductOptionsSection = ({ productId }: { productId: number }) => {
 
   return (
     <DetailSectionWrapper title="상품 옵션">
-      {productOption?.products.map((product: ProductOptionType) => (
+      {productOption?.map((product: ProductType) => (
         <div key={product.id}>
           <CategoryOption
-            product={product}
+            product={product as unknown as ProductOptionType}
             isExpended={activeOption[product.id]}
             onClick={() => handleCategoryClick(product.id)}
           />
           {activeOption[product.id] && (
             <PaddingWrapper className="flex pt-0 flex-col gap-4">
-              <IngredientInfo product={product} />
-              <OrderAvailableDays product={product} />
-              <NutrientInfo product={product} />
+              <IngredientInfo product={product as unknown as ProductOptionType} />
+              <OrderAvailableDays product={product as unknown as ProductOptionType} />
+              <NutrientInfo product={product as unknown as ProductOptionType} />
             </PaddingWrapper>
           )}
         </div>

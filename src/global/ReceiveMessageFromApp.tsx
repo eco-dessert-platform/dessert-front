@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import { MessageType } from '@/shared/types/message';
-import { fcmTokenState } from '@/domains/alarm/atoms';
+import { fcmTokenAtom } from '@/domains/alarm/atoms';
 import { FCM_TYPE } from '@/shared/constants/message';
 
 const ReceiveMessageFromApp = () => {
-  const setFcmToken = useSetRecoilState(fcmTokenState);
+  const [, setFcmToken] = useAtom(fcmTokenAtom);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {

@@ -14,8 +14,8 @@ import {
   ThumbsUpIcon,
   WriteIcon
 } from '@/domains/user/components/icons';
-import { useAtom } from 'jotai'; // Replaced useRecoilValue with useAtom
-import { isLoggedinAtom } from '@/shared/atoms/login'; // Updated to use Jotai atom
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 
 interface MoreInfoItemProps {
   icon: ReactNode;
@@ -53,7 +53,7 @@ const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (
 );
 
 const MoreInfoSection = () => {
-  const [isLoggedIn] = useAtom(isLoggedinAtom); // Replaced useRecoilValue with useAtom
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const information = isLoggedIn ? LOGGEDIN_INFOS : INFOS;
 
   return (

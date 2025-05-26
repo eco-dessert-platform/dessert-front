@@ -7,7 +7,7 @@ import { popupState } from '@/shared/atoms/alert';
 import BackDrop from '@/shared/components/BackDrop';
 
 const PopupContainer = () => {
-  const popup = useAtomValue(popupState); // useRecoilValue -> useAtomValue
+  const popup = useAtomValue(popupState);
   const { closePopup } = usePopup();
 
   const popupVisible = !!popup;

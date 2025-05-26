@@ -4,7 +4,7 @@ import { toastStateNewVer } from '@/shared/atoms/alert';
 import { SECOND } from '../constants/time';
 
 const useToastNewVer = () => {
-  const setToast = useSetAtom(toastStateNewVer); // useSetRecoilState → useSetAtom
+  const setToast = useSetAtom(toastStateNewVer);
 
   const closeToast = useCallback((id: string) => {
     setToast((toasts) => toasts.filter((toast) => toast.id !== id));

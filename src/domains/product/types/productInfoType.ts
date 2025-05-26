@@ -31,7 +31,7 @@ type Nutrient = {
 };
 
 type OrderType = {
-  orderType: 'WEEK';
+  orderType: 'WEEK' | 'DATE';
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;

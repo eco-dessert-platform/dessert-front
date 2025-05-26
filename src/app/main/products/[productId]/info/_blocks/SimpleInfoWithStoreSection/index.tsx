@@ -15,6 +15,7 @@ const SimpleInfoWithStoreSection = ({ productId }: Props) => {
   const { data } = useGetBoardDetailQuery(productId);
 
   const boardData = data ?? {
+    storeId: 0,
     boardId: 0,
     boardTitle: '',
     boardPrice: 0,
@@ -27,7 +28,7 @@ const SimpleInfoWithStoreSection = ({ productId }: Props) => {
 
   return (
     <>
-      <DetailStoreInfo storeId={boardData.boardId} />
+      <DetailStoreInfo storeId={boardData.storeId} />
       <SimpleProductInfo
         title={boardData.boardTitle}
         price={boardData.boardPrice}

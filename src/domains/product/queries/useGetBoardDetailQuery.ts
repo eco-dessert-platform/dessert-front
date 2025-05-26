@@ -10,7 +10,7 @@ const useGetBoardDetailQuery = (productId: number) => {
   return useQuery({
     queryKey,
     queryFn,
-    select: (data) => data.board
+    select: (data) => ({ ...data.board, ...data.store })
   });
 };
 

@@ -18,6 +18,7 @@ type Board = {
   isBoardWished: boolean;
   boardImages: string[];
   boardDetail: string;
+  isBundled: boolean;
 };
 
 type Nutrient = {

@@ -110,16 +110,19 @@ const staticMetadata: StaticMetadataType = {
 };
 
 const generateProductDetailMetadata = async ({
-                                               params
-                                             }: GenerateMetadataProps): Promise<Metadata> => {
-  if (!params?.productId) {
+  params
+}: GenerateMetadataProps): Promise<Metadata> => {
+  // Await params before accessing its properties
+  const resolvedParams = await params;
+
+  if (!resolvedParams?.productId) {
     return {
       title: '상품 상세 | 빵그리의 오븐',
-      description: '상품 정보를 불러올 수 없습니다.',
+      description: '상품 정보를 불러올 수 없습니다.'
     };
   }
 
-  const id = Number(params.productId);
+  const id = Number(resolvedParams.productId);
 
   try {
     const product = await productService.getBoardDetail(id);
@@ -156,20 +159,20 @@ const generateProductDetailMetadata = async ({
     console.error('메타데이터 생성 중 에러:', e);
     return {
       title: '상품 상세 | 빵그리의 오븐',
-      description: '상품 정보를 불러올 수 없습니다.',
+      description: '상품 정보를 불러올 수 없습니다.'
     };
   }
 };
 
-
-
-
 const generateStoreDetailMetadata = async ({
   params
 }: GenerateMetadataProps): Promise<Metadata> => {
-  if (!params?.id) return {};
+  // Await params before accessing its properties
+  const resolvedParams = await params;
 
-  const storeId = Number(params.id);
+  if (!resolvedParams?.id) return {};
+
+  const storeId = Number(resolvedParams.id);
   const storeInfo = await storeService.getStoreInfo(storeId);
   const storeBestProducts = await storeService.getStoreBestProducts(storeId);
 

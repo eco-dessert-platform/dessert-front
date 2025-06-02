@@ -53,7 +53,7 @@ const TopButton = () => {
       type="button"
       aria-label="top button"
       className={cn(
-        'fixed z-topButton bottom-0 right-[16px] sm:right-[calc(50%-300px+16px)] w-[46px] h-[46px] flex-center rounded-full bg-white shadow-[0_0_4px_0_rgba(0,0,0,0.16)] invisible',
+        'fixed z-top-button bottom-0 right-[16px] sm:right-[calc(50%-300px+16px)] w-[46px] h-[46px] flex-center rounded-full bg-white shadow-[0_0_4px_0_rgba(0,0,0,0.16)] invisible',
         scrolled && translateY !== 0 && 'visible'
       )}
       style={{

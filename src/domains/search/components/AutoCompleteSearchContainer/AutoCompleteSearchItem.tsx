@@ -23,7 +23,7 @@ const AutoCompleteSearchItem = ({ text, keyword }: AutoCompleteSearchItemProps) 
         ) : (
           <>
             {startText}
-            <span className="text-primaryOrangeRed">{highlightedText}</span>
+            <span className="text-primary-orange-red">{highlightedText}</span>
             {endText}
           </>
         )}

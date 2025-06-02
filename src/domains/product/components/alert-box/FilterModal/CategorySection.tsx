@@ -33,7 +33,7 @@ const CategorySection = () => {
               key={category}
               className={cn(
                 'h-[37px] p-[8px] rounded-[8px]',
-                isSelected ? 'bg-secondaryPink' : 'bg-blueGray-30'
+                isSelected ? 'bg-secondary-pink' : 'bg-blue-gray-30'
               )}
               isChecked={isSelected}
               onChange={() => handleClick(category)}
@@ -41,7 +41,7 @@ const CategorySection = () => {
               <div
                 className={
                   isSelected
-                    ? 'typo-title-14-semibold text-primaryOrangeRed'
+                    ? 'typo-title-14-semibold text-primary-orange-red'
                     : 'typo-title-14-regular text-gray-800'
                 }
               >

@@ -30,8 +30,8 @@ const SimpleProductInfo = ({ title, price, discountRate, rating, count }: Props)
       </div>
       <div className="flex justify-between items-center">
         <div className="typo-heading-18-semibold">
-          <span className="text-secondaryOrangeRed mr-[4px]">
-            <span className="text-secondaryOrangeRed mr-[4px]">
+          <span className="text-secondary-orange-red mr-[4px]">
+            <span className="text-secondary-orange-red mr-[4px]">
               {discountRate > 0 ? `${discountRate}%` : null}
             </span>
           </span>

@@ -46,7 +46,7 @@ const LikeButton = ({ id, isLiked, like }: Props) => {
       type="button"
       className={cn(
         'typo-body-12-regular flex items-center gap-[4px] rounded-full px-[8px] py-[4px]',
-        isLiked ? 'text-primaryOrangeRed bg-secondaryPink' : 'text-gray-500 bg-redGray-30'
+        isLiked ? 'text-primary-orange-red bg-secondary-pink' : 'text-gray-500 bg-red-gray-30'
       )}
       onClick={handleButtonClick}
     >

@@ -30,7 +30,7 @@ const PhotoSection = ({ photos, productId }: Props) => {
           onClick={() =>
             openFullScreenModal(<PhotoSlideModal photos={photos.slice(0, 4)} initSlideIdx={idx} />)
           }
-          className="w-full aspect-square object-cover border-solid border-[1px] border-gray-300 rounded-[6px] cursor-pointer"
+          className="w-full aspect-square object-cover border-solid border border-gray-300 rounded-[6px] cursor-pointer"
         />
       ))}
       {fourthImage && (
@@ -45,7 +45,7 @@ const PhotoSection = ({ photos, productId }: Props) => {
             width={80}
             height={80}
             blurDataURL={BLUR_DATA_URL}
-            className="w-full aspect-square object-cover border-solid border-[1px] border-gray-300 rounded-[6px]"
+            className="w-full aspect-square object-cover border-solid border border-gray-300 rounded-[6px]"
           />
         </Link>
       )}

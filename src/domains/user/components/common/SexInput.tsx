@@ -15,7 +15,7 @@ const SexInput = () => {
   return (
     <div>
       <span className="inline-block mb-[6px] typo-title-14-semibold text-gray-700">
-        성별 <span className="text-primaryOrangeRed"> *</span>
+        성별 <span className="text-primary-orange-red"> *</span>
       </span>
       <span className="w-full inline-flex gap-4">
         <Radio isChecked={isManSelected} value="MAN" {...register('sex')}>

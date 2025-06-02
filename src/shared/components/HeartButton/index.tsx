@@ -6,7 +6,7 @@ import { HeartIcon } from '../icons';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive: boolean;
-  shape?: 'shadow' | 'nav' | 'default';
+  shape?: 'shadow-sm' | 'nav' | 'default';
 }
 
 const HeartButton = ({ isActive, shape = 'default', onClick, ...rest }: Props) => {

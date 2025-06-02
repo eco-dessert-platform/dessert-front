@@ -10,8 +10,8 @@ const CLASS = {
   default: 'border-gray-200 text-gray-700 bg-transparent',
   tag: 'border-gray-200 text-gray-600 bg-white',
   bundle:
-    'text-white border-secondaryOrangeRed bg-secondaryOrangeRed w-[50px] h-[20px] p-0 typo-body-11-semibold',
-  best: 'text-white border-primaryOrangeRed bg-primaryOrangeRed',
+    'text-white border-secondary-orange-red bg-secondary-orange-red w-[50px] h-[20px] p-0 typo-body-11-semibold',
+  best: 'text-white border-primary-orange-red bg-primary-orange-red',
   ranking: 'text-gray-900 border-gray-100 bg-white size-[20px] p-0 typo-body-11-semibold',
   bbangcketing:
     'text-gray-700 border-gray-200 bg-white h-[20px] pl-[4px] gap-x-[2px] typo-body-11-semibold'

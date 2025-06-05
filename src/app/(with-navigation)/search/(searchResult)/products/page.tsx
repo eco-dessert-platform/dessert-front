@@ -1,5 +1,5 @@
 import SortingFilterSection from '@/blocks/main/(list)/SortingFilterSection';
-import SearchProductList from '@/blocks/search/products/SearchProductList'; // 동적 임포트 제거
+import SearchProductList from '@/blocks/search/products/SearchProductList';
 import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import TopButton from '@/shared/components/TopButton';
 
@@ -7,12 +7,16 @@ interface SearchProductsProps {
   searchParams: { query?: string };
 }
 
-const SearchProducts = ({ searchParams: { query: keyword = '' } }: SearchProductsProps) => (
-  <>
-    <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.search} />
-    <SearchProductList keyword={keyword} />
-    <TopButton />
-  </>
-);
+const SearchProducts = async ({ searchParams }: SearchProductsProps) => {
+  const keyword = searchParams.query ?? '';
+
+  return (
+    <>
+      <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.search} />
+      <SearchProductList keyword={keyword} />
+      <TopButton />
+    </>
+  );
+};
 
 export default SearchProducts;

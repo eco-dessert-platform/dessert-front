@@ -20,7 +20,7 @@ const Input = (
           className="inline-block mb-[6px] typo-title-14-semibold text-gray-700"
           htmlFor={inputId}
         >
-          {label} {required && <span className="text-primaryOrangeRed">*</span>}
+          {label} {required && <span className="text-primary-orange-red">*</span>}
         </label>
       )}
       <div className="relative w-full">

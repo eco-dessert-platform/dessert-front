@@ -20,7 +20,7 @@ const TypeOfWeek = ({ availableDays }: Props) => {
           className={cn(
             'rounded-full typo-body-12-regular w-[24px] h-[24px] flex items-center justify-center',
             availableWeekList.includes(transformDayToEng(dayKr))
-              ? 'text-primaryOrangeRed bg-subColorPink typo-body-12-medium'
+              ? 'text-primary-orange-red bg-sub-color-pink typo-body-12-medium'
               : 'text-gray-600 bg-gray-50 '
           )}
         >

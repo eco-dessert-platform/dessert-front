@@ -12,11 +12,11 @@ import PhotoSection from './_blocks/PhotoSection';
 import ReviewCreateButton from './_blocks/ReviewCreateButton';
 
 interface Props {
-  params: Promise<{ productId: string }>;
+  params: { productId: string };
 }
 
 const ReviewListPage = async ({ params }: Props) => {
-  const { productId } = await params;
+  const { productId } = params;
   const queryClient = new QueryClient();
   const { queryKey, queryFn, initialPageParam } = reivewQueryOption(Number(productId));
 

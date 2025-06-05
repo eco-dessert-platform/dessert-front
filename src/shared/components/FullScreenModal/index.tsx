@@ -25,7 +25,7 @@ const FullScreenModal = ({ children, className }: Props) => {
       <button
         type="button"
         aria-label="close button"
-        className="absolute top-[16px] right-[16px] z-[1000]"
+        className="absolute top-[16px] right-[16px] z-1000"
         onClick={closeFullScreenModal}
       >
         <CloseIcon shape="black" />

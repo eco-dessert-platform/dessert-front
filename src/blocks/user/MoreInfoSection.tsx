@@ -40,13 +40,13 @@ const LOGGEDIN_INFOS = [
   { href: '#', icon: <InquiryIcon />, content: '문의하기' },
   {
     href: PATH.privacyPolicy,
-    icon: <LockIcon /> ,
+    icon: <LockIcon />,
     content: '개인정보 수집 및 이용'
   }
 ];
 
 const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (
-  <PaddingWrapper className="flex items-center gap-[8px] border-solid border-b-[1px] border-gray-100">
+  <PaddingWrapper className="flex items-center gap-[8px] border-solid border-b border-gray-100">
     {icon}
     <p className="typo-title-14-medium">{content}</p>
   </PaddingWrapper>

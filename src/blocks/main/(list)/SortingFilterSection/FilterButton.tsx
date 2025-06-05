@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import React, { KeyboardEvent } from 'react';
 import FilterModal from '@/domains/product/components/alert-box/FilterModal';
 import { CloseIcon } from '@/shared/components/icons';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
@@ -14,14 +14,21 @@ interface SelectProps {
 }
 
 const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
-  const closeRef = useRef<HTMLSpanElement>(null);
   const { openModal } = useModal();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     openModal(<FilterModal />);
+  };
 
-    if (closeRef.current && e.target instanceof Element && closeRef.current.contains(e.target))
-      onReset();
+  const handleResetClick = (e: React.MouseEvent | KeyboardEvent) => {
+    e.stopPropagation();
+    onReset();
+  };
+
+  const handleResetKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleResetClick(e);
+    }
   };
 
   return (
@@ -30,16 +37,28 @@ const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
       aria-label="filter button"
       onClick={handleClick}
       className={cn(
-        'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border rounded-[50px] cursor-pointer',
+        'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] rounded-[50px] cursor-pointer',
         isFiltered
-          ? 'border-primary-orange-red text-primary-orange-red typo-body-12-bold'
+          ? 'border-primaryOrangeRed text-primaryOrangeRed typo-body-12-bold'
           : 'border-gray-200 text-gray-900 typo-body-12-regular'
       )}
     >
       <span>{text}</span>
-      <span ref={closeRef}>
-        {isFiltered ? <CloseIcon shape="no-bg-16-orange" /> : <ArrowIcons shape="down" />}
-      </span>
+      {isFiltered ? (
+        <span
+          role="button"
+          tabIndex={0}
+          onClick={handleResetClick}
+          onKeyDown={handleResetKeyDown}
+          aria-label="reset filter"
+        >
+          <CloseIcon shape="no-bg-16-orange" />
+        </span>
+      ) : (
+        <span>
+          <ArrowIcons shape="down" />
+        </span>
+      )}
     </button>
   );
 };

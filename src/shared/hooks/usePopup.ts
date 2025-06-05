@@ -1,9 +1,9 @@
-import { popupState } from '@/shared/atoms/alert';
 import { ReactNode } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetAtom } from 'jotai';
+import { popupState } from '@/shared/atoms/alert';
 
 const usePopup = () => {
-  const setPopup = useSetRecoilState(popupState);
+  const setPopup = useSetAtom(popupState);
 
   const openPopup = (popup: ReactNode) => setPopup(popup);
   const closePopup = () => setPopup(null);

@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 
 export const getCookie = async (name: string) => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   return cookieStore.get(name);
 };
 
@@ -16,7 +16,7 @@ export const setCookie = async ({
   value: string;
   expires?: number; // 단위: ms
 }) => {
-  cookies().set({
+  (await cookies()).set({
     name,
     value,
     httpOnly: true,
@@ -26,5 +26,5 @@ export const setCookie = async ({
 };
 
 export const deleteCookie = async (key: string) => {
-  cookies().delete(key);
+  (await cookies()).delete(key);
 };

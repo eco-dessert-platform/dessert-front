@@ -1,9 +1,9 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 import useWebview from '@/shared/hooks/useWebView';
-import { fcmTokenState } from '@/domains/alarm/atoms';
+import { fcmTokenAtom } from '@/domains/alarm/atoms';
 import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
 import { FCM_TYPE } from '@/shared/constants/message';
 
@@ -15,7 +15,7 @@ import ButtonNewver from '@/shared/components/ButtonNewver';
 const DisplayFcmToken = () => {
   const { openPopup, closePopup } = usePopup();
   const { isWebView } = useWebview();
-  const fcmToken = useRecoilValue(fcmTokenState);
+  const [fcmToken] = useAtom(fcmTokenAtom);
   const countClicked = useRef(0);
 
   useEffect(() => {

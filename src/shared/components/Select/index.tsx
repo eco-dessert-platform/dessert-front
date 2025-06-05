@@ -39,12 +39,12 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
         </span>
       </button>
       {isExpended && (
-        <ul className="absolute mt-[8px] top-full left-1/2 -translate-x-2/4 z-[101] w-max rounded-[10px] shadow bg-white">
+        <ul className="absolute mt-[8px] top-full left-1/2 -translate-x-2/4 z-101 w-max rounded-[10px] shadow-sm bg-white">
           {options.map((option, index) => {
             const firstOption = index === 0;
             const lastOption = index === options.length - 1;
 
-            const borderStyle = lastOption ? 'border-b-0' : 'border-b-[1px]';
+            const borderStyle = lastOption ? 'border-b-0' : 'border-b';
 
             let hoverRoundedStyle = '';
             if (firstOption) hoverRoundedStyle = 'hover:rounded-t-[10px]';

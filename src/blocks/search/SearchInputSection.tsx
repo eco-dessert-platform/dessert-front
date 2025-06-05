@@ -80,7 +80,7 @@ const SearchInputSection = () => {
         />
       </PaddingWrapper>
       {showAutoComplete && (
-        <div className="absolute top-full z-[20] w-full">
+        <div className="absolute top-full z-20 w-full">
           <AutoCompleteSearchContainer keyword={debouncedText.trim()} />
         </div>
       )}

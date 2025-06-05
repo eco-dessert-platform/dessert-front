@@ -65,7 +65,7 @@ const ImageUploadSection = () => {
             <span
               className={
                 uploadedImagesUrl && uploadedImagesUrl.length > 0
-                  ? 'text-primaryOrangeRed'
+                  ? 'text-primary-orange-red'
                   : 'text-gray-500'
               }
             >

@@ -22,7 +22,7 @@ const PreviewImage = ({ imageSrc, onRemove }: PreviewImageProps) => (
           className="flex w-[64px] h-[64px] flex-col items-center justify-center border bg-gray-50 rounded-[6px] "
         />
       }
-      className="min-w-[64px] h-[64px] border-[1px] border-gray-300 rounded-[6px] object-cover object-center"
+      className="min-w-[64px] h-[64px] border border-gray-300 rounded-[6px] object-cover object-center"
     />
     <button
       type="button"

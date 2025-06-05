@@ -30,7 +30,7 @@ const Modal = ({ title, children, className }: UpModalProps) => {
         duration: 0.2
       }}
       className={twMerge(
-        'absolute w-full max-w-[600px] max-h-[90vh] bg-white z-[5001] rounded-t-[12px] overflow-y-scroll scrollbar-hide',
+        'absolute w-full max-w-[600px] max-h-[90vh] bg-white z-5001 rounded-t-[12px] overflow-y-scroll scrollbar-hide',
         className
       )}
     >

@@ -19,7 +19,7 @@ const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
   const { productId, storeName, productTitle, boardThumbnail, subscribed } = data;
 
   return (
-    <div className="flex flex-col gap-y-[10px] p-[16px] w-full border-[1px] border-gray-100 rounded-[10px]">
+    <div className="flex flex-col gap-y-[10px] p-[16px] w-full border border-gray-100 rounded-[10px]">
       <div className="flex justify-between items-start gap-x-[10px]">
         <Image
           src={boardThumbnail}

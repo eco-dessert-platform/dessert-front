@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
 import DefaultLayout from '@/shared/components/DefaultLayout';
@@ -14,14 +14,20 @@ export const generateMetadata = async (props: GenerateMetadataProps) =>
   getDynamicMetadata('product-detail', props);
 
 interface DetailInfoLayoutProps {
-  params: { productId: string };
+  params: Promise<{ productId: string }>; // Promise 타입으로 변경
   children: ReactNode;
 }
 
 const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) => {
-  const id = Number(params.productId);
+  const resolvedParams = await params;
+
+  if (!resolvedParams?.productId) return null;
+
+  const id = Number(resolvedParams.productId);
+
   const queryClient = new QueryClient();
 
+  // 데이터 비동기 처리
   const [boardData, storeData] = await Promise.all([
     queryClient.fetchQuery({
       queryKey: productQueryKey.detail(id, 'board-detail'),
@@ -56,4 +62,5 @@ const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) 
     </HydrationBoundary>
   );
 };
+
 export default ProductDetailLayout;

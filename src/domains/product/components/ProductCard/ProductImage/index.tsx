@@ -2,13 +2,13 @@
 
 import { MouseEventHandler, useState } from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 
 import { IProductType } from '@/domains/product/types/productType';
-import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
+import { selectedWishFolderAtom } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import Badge from '@/shared/components/Badge';
 import HeartButton from '@/shared/components/HeartButton';
 import { BellIcon } from '@/shared/components/icons';
@@ -27,19 +27,20 @@ interface ProductImageProps {
   ranking?: number;
   isSimilarProduct?: boolean;
 }
+
 const ProductImage = ({
-  product: { boardId, thumbnail, isWished, isBundled, isBbangcketing, isSoldOut },
-  popular,
-  ranking,
-  isSimilarProduct
-}: ProductImageProps) => {
-  const selectedWishFolder = useRecoilValue(selectedWishFolderState);
+                        product: { boardId, thumbnail, isWished, isBundled, isBbangcketing, isSoldOut },
+                        popular,
+                        ranking,
+                        isSimilarProduct
+                      }: ProductImageProps) => {
+  const [selectedWishFolder] = useAtom(selectedWishFolderAtom);
   const { openToast } = useToastNewVer();
   const [isPopping, setIsPopping] = useState(false);
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -69,7 +70,7 @@ const ProductImage = ({
       className={cn(
         'w-full bg-cover bg-center rounded-[6px] relative',
         isSoldOut &&
-          "after:content-['Sold_Out'] after:size-full after:flex-center after:absolute after:inset-0 after:bg-black/[0.3] after:text-gray-300 after:typo-heading-20-semibold after:rounded-[6px]"
+        "after:content-['Sold_Out'] after:size-full after:flex-center after:absolute after:inset-0 after:bg-black/[0.3] after:text-gray-300 after:typo-heading-20-semibold after:rounded-[6px]"
       )}
     >
       <div className="relative w-full aspect-square">
@@ -112,4 +113,5 @@ const ProductImage = ({
     </div>
   );
 };
+
 export default ProductImage;

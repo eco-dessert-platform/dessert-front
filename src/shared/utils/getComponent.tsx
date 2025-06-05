@@ -1,4 +1,4 @@
-import { Children, ReactNode, isValidElement } from 'react';
+import { Children, ReactNode, isValidElement, type JSX } from 'react';
 
 interface Props {
   children: ReactNode;

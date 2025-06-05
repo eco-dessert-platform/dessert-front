@@ -7,8 +7,8 @@ export const selectInputVariants = cva('cursor-pointer rounded-[8px]', {
       false: 'border-none'
     },
     checked: {
-      true: 'bg-secondaryPink border-primaryOrangeRed text-primaryOrangeRed',
-      false: 'bg-redGray-30 border-transparent'
+      true: 'bg-secondary-pink border-primary-orange-red text-primary-orange-red',
+      false: 'bg-red-gray-30 border-transparent'
     }
   }
 });

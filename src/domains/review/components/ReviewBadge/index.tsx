@@ -12,8 +12,8 @@ interface ReviewBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 const ReviewBadge = ({ shape, isActive = false, className, ...props }: ReviewBadgeProps) => (
   <div
     className={cn(
-      `flex flex-col  justify-center items-center gap-[4px] h-[100px] border-[2px] rounded-[10px]
-    ${isActive ? 'border-primaryOrangeRed bg-secondaryPink' : 'border-gray-100 bg-white'}
+      `flex flex-col  justify-center items-center gap-[4px] h-[100px] border-2 rounded-[10px]
+    ${isActive ? 'border-primary-orange-red bg-secondary-pink' : 'border-gray-100 bg-white'}
   `,
       className
     )}

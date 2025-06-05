@@ -1,13 +1,12 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
-import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useAtom } from 'jotai';
+import { filterValueAtom } from '@/domains/product/atoms'; // Change to Jotai atom
 import { useGetSearchProductsQuery } from '@/domains/search/queries/useGetSearchProductsQuery';
 
 const SearchBoardCount = () => {
-  const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.search));
+  const [filterValue] = useAtom(filterValueAtom);
   const searchParams = useSearchParams();
   const query = searchParams.get('query');
   const { data } = useGetSearchProductsQuery({ keyword: query || '', filterValue });

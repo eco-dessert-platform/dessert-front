@@ -3,17 +3,21 @@
 import { FORM_ID } from '@/domains/user/constants/form';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 const ButtonSection = () => {
   const {
     formState: { isDirty },
-    watch
+    watch,
+    setValue
   } = useFormContext();
 
-  const isNickDoubleChecked = watch('isNickDoubleChecked');
+  useEffect(() => {
+    setValue('isNickDoubleChecked', true);
+  }, []);
 
+  const isNickDoubleChecked = watch('isNickDoubleChecked');
   const isDisabled = !isNickDoubleChecked || !isDirty;
 
   return (

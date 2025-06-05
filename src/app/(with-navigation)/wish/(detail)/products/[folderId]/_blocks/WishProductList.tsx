@@ -8,13 +8,13 @@ import SkeletonProductCardList from '@/domains/product/components/SkeletonProduc
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { wishProductSortState } from '@/domains/wish/atoms/sort';
+import { useAtom } from 'jotai';
+import { wishProductSortAtom } from '@/domains/wish/atoms/sort';
 import { wishSortDictionary } from '@/domains/wish/constants';
 
 const WishProductList = () => {
   const { folderId } = useParams<{ folderId: string }>();
-  const sortOptionKr = useRecoilValue(wishProductSortState);
+  const [sortOptionKr] = useAtom(wishProductSortAtom);
   const sortOptionEng = wishSortDictionary.translate(sortOptionKr);
   const {
     data: wishProducts,

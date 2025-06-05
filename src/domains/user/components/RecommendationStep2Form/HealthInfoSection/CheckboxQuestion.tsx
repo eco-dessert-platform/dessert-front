@@ -19,7 +19,7 @@ const CheckboxQuestion = ({ title, subTitle, required = false, options }: Props)
     <PaddingWrapper className="pb-[10px]">
       <h4 className="typo-title-16-semibold text-gray-900">
         {title}
-        {required && <span className="text-primaryOrangeRed">*</span>}
+        {required && <span className="text-primary-orange-red">*</span>}
       </h4>
       <p className="typo-title-14-regular text-gray-700">{subTitle}</p>
     </PaddingWrapper>

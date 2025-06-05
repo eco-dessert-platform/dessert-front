@@ -1,22 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import { useInView } from 'react-intersection-observer';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
-import { filterValueState } from '@/domains/product/atoms';
+import { filterValueAtom } from '@/domains/product/atoms';
 import ProductCard from '@/domains/product/components/ProductCard';
 import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const MainProductList = () => {
-  const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.main));
+  const filterValue = useAtomValue(filterValueAtom);
+
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAllCategoryProductsQuery(filterValue);
+
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const MainProductList = () => {
       </PaddingWrapper>
     );
   }
+
   if (isError) {
     return (
       <SadBbangleBox className="h-[calc(100vh-270px)]">
@@ -38,6 +39,7 @@ const MainProductList = () => {
       </SadBbangleBox>
     );
   }
+
   if (!data || data.products.length === 0) {
     return (
       <SadBbangleBox className="h-[calc(100vh-270px)]">
@@ -53,6 +55,7 @@ const MainProductList = () => {
           <ProductCard key={product.boardId} product={product} />
         ))}
       </div>
+
       {hasNextPage && (
         <div ref={ref} className="pt-[16px]">
           <SkeletonProductCardList row={1} col={2} />

@@ -9,8 +9,8 @@ import PATH from '@/shared/constants/path';
 import useAddWishStoreMutation from '@/domains/wish/queries/useAddWishStoreMutation';
 import useDeleteWishStoreMutation from '@/domains/wish/queries/useDeleteWishStoreMutation';
 import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import StoreSkeleton from './StoreSkeleton';
@@ -21,7 +21,6 @@ interface Props {
 
 const DetailStoreInfo = ({ storeId }: Props) => {
   const { data: storeData } = useGetStoreInfoQuery({ storeId });
-  // console.log('🚀 ~ DetailStoreInfo ~ storeData:', storeData);
   const { mutate: addMutate } = useAddWishStoreMutation({
     storeId,
     storeName: storeData?.storeName ?? '🏠'
@@ -31,7 +30,7 @@ const DetailStoreInfo = ({ storeId }: Props) => {
     storeName: storeData?.storeName ?? '🏠'
   });
 
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const { openToast } = useToastNewVer();
 
   if (!storeData) return <StoreSkeleton />;
@@ -61,4 +60,5 @@ const DetailStoreInfo = ({ storeId }: Props) => {
     </Link>
   );
 };
+
 export default DetailStoreInfo;

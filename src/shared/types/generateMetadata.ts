@@ -1,3 +1,3 @@
 export interface GenerateMetadataProps {
-  params?: { [key: string]: string | string[] | undefined };
+  params?: Promise<{ [key: string]: string | string[] | undefined }>;
 }

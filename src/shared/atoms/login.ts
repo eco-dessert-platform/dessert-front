@@ -1,6 +1,3 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
-export const isLoggedinState = atom({
-  key: 'isLoggedinState',
-  default: false
-});
+export const isLoggedinAtom = atom(false); // Default value is false

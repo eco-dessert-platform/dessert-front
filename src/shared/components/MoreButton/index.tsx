@@ -26,7 +26,7 @@ const MoreButton = ({ isMore, onClick }: MoreButtonProps) => {
     }
   };
   return (
-    <PaddingWrapper className="flex w-full pt-[30px] px-[16px] absolute bottom-0 bg-gradient-to-t from-white via-[80.75%] via-white to-white/0 to-[116.09%]">
+    <PaddingWrapper className="flex w-full pt-[30px] px-[16px] absolute bottom-0 bg-linear-to-t from-white via-[80.75%] via-white to-white/0 to-[116.09%]">
       <button
         type="button"
         className="text-center text-gray-600 py-[13px] w-full border border-solid border-gray-200 rounded-[8px] typo-body-12-medium"

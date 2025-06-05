@@ -12,7 +12,7 @@ interface Props {
 const Layout = async ({ children }: Props) => {
   const myProfile = await userService.getUserProfile();
   return (
-    <UpdateFormProvider defaultValues={{ ...myProfile, isNickDoubleChecked: true }}>
+    <UpdateFormProvider defaultValues={myProfile}>
       <DefaultLayout
         header={<Header title="프로필 수정" back />}
         main={children}

@@ -1,3 +1,4 @@
+// src/app/(with-navigation)/mypage/alarm/bbangcketing/page.tsx
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { alarmQueryKey } from '@/domains/alarm/queries/queryKey';
 import alarmService from '@/domains/alarm/queries/service';
@@ -12,7 +13,7 @@ const BbancketingPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <BbancketingProductList />
+      <BbancketingProductList/>
     </HydrationBoundary>
   );
 };

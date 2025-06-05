@@ -1,6 +1,3 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
-export const uploadImageUrlsState = atom<Array<string>>({
-  key: 'uploadImageUrls',
-  default: []
-});
+export const uploadImageUrlsAtom = atom<Array<string>>([]);

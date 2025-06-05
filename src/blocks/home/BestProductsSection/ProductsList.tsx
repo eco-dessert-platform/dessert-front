@@ -1,21 +1,19 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import { useInView } from 'react-intersection-observer';
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 
-import { filterValueState } from '@/domains/product/atoms';
+import { filterValueAtom } from '@/domains/product/atoms';
 import ProductCard from '@/domains/product/components/ProductCard';
 import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
 import { IProductType } from '@/domains/product/types/productType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
 
 const ProductsList = () => {
-  const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.home));
+  const [filterValue] = useAtom(filterValueAtom);
 
   const allCategoryQuery = useGetAllCategoryProductsQuery(filterValue);
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =

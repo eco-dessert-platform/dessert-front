@@ -1,9 +1,6 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
-export const fcmTokenState = atom<{ data?: string; error?: string }>({
-  key: 'fcmToken',
-  default: {
-    data: '',
-    error: ''
-  }
+export const fcmTokenAtom = atom<{ data?: string; error?: string }>({
+  data: '',
+  error: ''
 });

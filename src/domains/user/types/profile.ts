@@ -25,7 +25,6 @@ export interface UserProfileType {
   nickname: string | null;
   sex: string;
   birthDate: string | null;
-  isNickDoubleChecked?: boolean;
 }
 
 export interface WithdrawResponse {

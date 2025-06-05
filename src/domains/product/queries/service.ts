@@ -37,12 +37,11 @@ class ProductService extends Service {
   async getBoardsCount({ filterValue }: { filterValue: Omit<IFilterType, 'sort'> }) {
     const filterValueQueryString = transformFilterValueToQueryString(filterValue);
 
-    const res = await this.fetchExtend.get(`/boards?${filterValueQueryString}`);
-    const { success, result, code, message }: ResultResponse<Cursor<Array<IProductType>>> =
-      await res.json();
+    const res = await this.fetchExtend.get(`/boards/count?${filterValueQueryString}`);
+    const { success, result, code, message }: ResultResponse<number> = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
-    return result.totalCount;
+    return result;
   }
 
   async getStoreInfo(productId: number) {

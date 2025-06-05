@@ -1,25 +1,19 @@
+'use client';
+
 import { useEffect } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-
-import { filterValueState, orderAvailableTodayTempState } from '@/domains/product/atoms';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
+import { filterValueAtom, orderAvailableTodayAtom } from '@/domains/product/atoms';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
-interface OrderAvailableCheckBoxProps {
-  filterFamilyId: FilterFamilyIDType;
-}
-
-const IsOrderAvailableCheckbox = ({ filterFamilyId }: OrderAvailableCheckBoxProps) => {
-  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
-  const [orderAvailableToday, setOrderAvailableToday] = useRecoilState(
-    orderAvailableTodayTempState(filterFamilyId)
-  );
+const IsOrderAvailableCheckbox = () => {
+  const filterValue = useAtomValue(filterValueAtom);
+  const [orderAvailableToday, setOrderAvailableToday] = useAtom(orderAvailableTodayAtom);
 
   useEffect(() => {
     setOrderAvailableToday(filterValue.orderAvailableToday);
-  }, [filterValue, setOrderAvailableToday]);
+  }, [filterValue.orderAvailableToday, setOrderAvailableToday]);
 
   const handleCheckChange = () => {
     setOrderAvailableToday((prev) => !prev);

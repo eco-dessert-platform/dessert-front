@@ -42,8 +42,11 @@ class Service {
     const fullUrl =
       url.startsWith('http://') || url.startsWith('https://') ? url : `${this.baseUrl}${url}`;
 
+    // console.log(`${fullUrl}에 대해 api 응답됨`)
+
     const res = await fetch(fullUrl, {
       method,
+      next: { revalidate: 60 },
       ...config,
       headers: {
         ...this.headers,
@@ -52,6 +55,18 @@ class Service {
         ...config?.headers
       }
     });
+
+    if (!res.ok) {
+      // 다시 요청하도록 하기 위해 캐시가 안되도록 처리
+      throw new Error(`API 응답 실패: ${res.status}`);
+    }
+
+    const data = await res.clone().json(); // res.json()은 한 번만 호출 가능해서 clone 필요
+    // ❗ 비어 있는 데이터도 캐싱하지 않도록 예외 처리
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      throw new Error('빈 응답, 캐시하지 않음');
+    }
+
     return res;
   }
 

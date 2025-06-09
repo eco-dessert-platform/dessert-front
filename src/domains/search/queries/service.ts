@@ -72,7 +72,7 @@ class SearchService extends Service {
     const content: IProductType[] = Array.isArray(result.content) ? result.content : [];
 
     return {
-      totalCount: content.length,
+      totalCount: result.totalCount,
       nextCursor: result.nextCursor,
       hasNext: result.hasNext,
       content

@@ -39,7 +39,7 @@ const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
       className={cn(
         'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] rounded-[50px] cursor-pointer',
         isFiltered
-          ? 'border-primaryOrangeRed text-primaryOrangeRed typo-body-12-bold'
+          ? 'border-primary-orange-red text-primary-orange-red typo-body-12-bold'
           : 'border-gray-200 text-gray-900 typo-body-12-regular'
       )}
     >

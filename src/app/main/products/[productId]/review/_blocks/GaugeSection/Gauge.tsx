@@ -9,10 +9,30 @@ interface Props {
 
 const Gauge = ({ left, right }: Props) => {
   const total = left.value + right.value;
-  const leftPercentage = (left.value / total) * 100;
-  const rightPercentage = (right.value / total) * 100;
+  const leftPercentage = total === 0 ? 0 : (left.value / total) * 100;
+  const rightPercentage = total === 0 ? 0 : (right.value / total) * 100;
 
-  const isLeftGreater = leftPercentage > rightPercentage;
+  const isZeroTotal = total === 0;
+  const isLeftGreater = !isZeroTotal && leftPercentage > rightPercentage;
+
+  let leftBarColor = 'bg-gray-300';
+  let rightBarColor = 'bg-gray-300';
+  let leftTextColor = 'text-gray-400';
+  let rightTextColor = 'text-gray-400';
+
+  if (!isZeroTotal) {
+    if (isLeftGreater) {
+      leftBarColor = 'bg-gray-800';
+      rightBarColor = 'bg-gray-300';
+      leftTextColor = 'text-gray-800';
+      rightTextColor = 'text-gray-400';
+    } else {
+      leftBarColor = 'bg-gray-300';
+      rightBarColor = 'bg-gray-800';
+      leftTextColor = 'text-gray-400';
+      rightTextColor = 'text-gray-800';
+    }
+  }
 
   return (
     <div className="flex flex-col gap-[4px]">
@@ -20,35 +40,22 @@ const Gauge = ({ left, right }: Props) => {
         <div className="w-1/2 h-full">
           <div
             style={{ width: `${leftPercentage}%` }}
-            className={cn(
-              'ml-auto h-full rounded-l-full',
-              isLeftGreater ? 'bg-gray-800' : 'bg-gray-300'
-            )}
+            className={cn('ml-auto h-full rounded-l-full', leftBarColor)}
           />
         </div>
         <div className="w-1/2 h-full">
           <div
             style={{ width: `${rightPercentage}%` }}
-            className={cn('h-full rounded-r-full', isLeftGreater ? 'bg-gray-300' : 'bg-gray-800')}
+            className={cn('h-full rounded-r-full', rightBarColor)}
           />
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div
-          className={cn(
-            'flex gap-[2px] items-center',
-            isLeftGreater ? 'text-gray-800' : 'text-gray-400'
-          )}
-        >
+        <div className={cn('flex gap-[2px] items-center', leftTextColor)}>
           <span className="typo-body-12-semibold">{left.text}</span>
           <span className="typo-body-11-semibold">{left.value}</span>
         </div>
-        <div
-          className={cn(
-            'flex gap-[2px] items-center',
-            isLeftGreater ? 'text-gray-400' : 'text-gray-800'
-          )}
-        >
+        <div className={cn('flex gap-[2px] items-center', rightTextColor)}>
           <span className="typo-body-11-semibold">{right.value}</span>
           <span className="typo-body-12-semibold">{right.text}</span>
         </div>

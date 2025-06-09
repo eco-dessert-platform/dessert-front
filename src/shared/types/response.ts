@@ -23,6 +23,7 @@ export interface ResultResponse<T> extends DefaultResponse {
 export interface Cursor<T> {
   nextCursor: number;
   hasNext: boolean;
+  totalCount: number;
   content: T;
 }
 

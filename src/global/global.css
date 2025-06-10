@@ -32,22 +32,12 @@
     --color-secondary-orange-red: #ED5F5F;
 
 
-
     --text-11: 11px;
     --text-12: 12px;
     --text-14: 14px;
     --text-16: 16px;
     --text-18: 18px;
     --text-20: 20px;
-
-    --z-topButton: 500;
-    --z-toast:9999;
-    --z-popup:1000;
-    --z-modal:1000;
-    --z-tooltip:5000;
-    --z-header:4999;
-    --z-footer:4999;
-    --z-backdrop:9999;
 
 
     --leading-120: '1.2';
@@ -103,7 +93,6 @@
     }
 
 }
-
 
 
 

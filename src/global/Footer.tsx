@@ -53,7 +53,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="z-footer h-[70px] flex justify-between items-center sticky bottom-0 w-full bg-white border-t border-gray-100">
+    <div className="z-footer sticky bottom-0 flex h-[70px] w-full items-center justify-between border-t border-gray-100 bg-white">
       {menu.map((item) => {
         const isHomePage = pathname === '/';
         const isHomeLink = item.href === '/';
@@ -79,11 +79,11 @@ const Footer = () => {
           <Link
             key={item.title}
             href={item.href}
-            className="flex flex-col items-center justify-center gap-[2px] w-1/5 cursor-pointer"
+            className="flex w-1/5 cursor-pointer flex-col items-center justify-center gap-[2px]"
           >
             {isActive ? item.activeIcon : item.defaultIcon}
             <span
-              className={`${isActive ? 'text-primary-orange-red typo-body-12-semibold' : 'text-gray-500 typo-body-12-regular'}`}
+              className={`${isActive ? 'text-primary-orange-red typo-body-12-semibold' : 'typo-body-12-regular text-gray-500'}`}
             >
               {item.title}
             </span>

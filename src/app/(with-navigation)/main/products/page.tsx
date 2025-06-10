@@ -25,7 +25,7 @@ const ProductListPage = async () => {
 
   return (
     <>
-      <CategoryTab  />
+      <CategoryTab />
       <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.main} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MainProductList />

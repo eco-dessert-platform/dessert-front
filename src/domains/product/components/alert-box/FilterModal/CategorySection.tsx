@@ -25,14 +25,14 @@ const CategorySection = () => {
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
       <div className="typo-title-14-semibold text-gray-700">카테고리</div>
-      <div className="flex gap-[10px] flex-wrap">
+      <div className="flex flex-wrap gap-[10px]">
         {FILTER_VALUES.category.kind[mainCategory].map((category) => {
           const isSelected = simplifyCategory(selectedCategory) === category;
           return (
             <Radio
               key={category}
               className={cn(
-                'h-[37px] p-[8px] rounded-[8px]',
+                'h-[37px] rounded-[8px] p-[8px]',
                 isSelected ? 'bg-secondary-pink' : 'bg-blue-gray-30'
               )}
               isChecked={isSelected}

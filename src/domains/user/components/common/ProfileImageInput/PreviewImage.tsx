@@ -15,9 +15,9 @@ const PreviewImage = ({ previewImg, bottomText, className, onClick }: Props) => 
     {previewImg ? (
       <Image src={previewImg} alt="profile preview" width={100} height={100} />
     ) : (
-      <BbangleIcon shape="smile" className="w-[80px] h-[80px] fill-gray-300 translate-y-[-10px]" />
+      <BbangleIcon shape="smile" className="h-[80px] w-[80px] translate-y-[-10px] fill-gray-300" />
     )}
-    <div className="absolute bottom-0 flex justify-center items-center h-[26px] w-full text-white bg-gray-800/50 typo-body-14-semibold">
+    <div className="typo-body-14-semibold absolute bottom-0 flex h-[26px] w-full items-center justify-center bg-gray-800/50 text-white">
       {bottomText}
     </div>
   </ImageInput>

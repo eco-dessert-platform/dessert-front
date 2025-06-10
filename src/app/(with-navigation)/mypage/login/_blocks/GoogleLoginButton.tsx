@@ -35,11 +35,11 @@ const GoogleLoginButton = () => {
   return (
     <button
       type="button"
-      className="border border-gray-100 rounded-[10px] flex gap-[8px] items-center justify-center h-[52px] bg-white shadow-sm text-black"
+      className="flex h-[52px] items-center justify-center gap-[8px] rounded-[10px] border border-gray-100 bg-white text-black shadow-sm"
       onClick={openGoogleLoginPopup}
     >
       <GoogleIcon />
-      <div className="text-black typo-title-16-medium">구글 시작하기</div>
+      <div className="typo-title-16-medium text-black">구글 시작하기</div>
     </button>
   );
 };

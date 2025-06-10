@@ -1,6 +1,12 @@
 import { atom } from 'jotai';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
-import { MainCategoryType, ICategoryType, IFilterType, IPriceType, ITagsType } from '@/domains/product/types/filterType';
+import {
+  MainCategoryType,
+  ICategoryType,
+  IFilterType,
+  IPriceType,
+  ITagsType
+} from '@/domains/product/types/filterType';
 
 export const categoryAtom = atom<ICategoryType>(INIT_FILTER_VALUE.category);
 export const tagsAtom = atom<ITagsType>(INIT_FILTER_VALUE.tags);

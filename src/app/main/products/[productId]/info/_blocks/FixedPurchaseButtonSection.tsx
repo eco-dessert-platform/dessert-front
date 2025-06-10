@@ -48,7 +48,7 @@ const FixedPurchaseButtonSection = () => {
       setTimeout(() => {
         openModal(
           <Modal title="이런 건강 디저트는 어때요?">
-            <PaddingWrapper className="py-[16px] flex flex-col gap-y-[10px]">
+            <PaddingWrapper className="flex flex-col gap-y-[10px] py-[16px]">
               <div className="grid grid-cols-3 gap-[16px]">
                 {similarProducts.map((item) => (
                   <ProductCard key={item.boardId} product={item} isSimilarProduct />
@@ -71,14 +71,14 @@ const FixedPurchaseButtonSection = () => {
   };
 
   return (
-    <div className="bg-white max-w-[600px] w-full mx-auto p-[16px] flex items-center gap-[10px]">
+    <div className="mx-auto flex w-full max-w-[600px] items-center gap-[10px] bg-white p-[16px]">
       <HeartButton
         shape="default"
         isActive={boardData.isWished}
         onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
         className={cn(
           buttonVariants({ size: 'lg', color: 'border-white', radius: 'round' }),
-          'min-w-max w-[56px] p-0'
+          'w-[56px] min-w-max p-0'
         )}
       />
       <div className="flex-1">

@@ -11,9 +11,9 @@ const UserInfoSection = async () => {
 
   return (
     <PaddingWrapper className="flex flex-col gap-[16px]">
-      <div className="flex justify-between items-center">
-        <div className="flex justify-between items-center gap-[6px]">
-          <div className="bg-gray-100 rounded-[6px] ">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-[6px]">
+          <div className="rounded-[6px] bg-gray-100">
             {profileImg ? (
               <Image
                 src={profileImg}
@@ -23,16 +23,16 @@ const UserInfoSection = async () => {
                 className="rounded-lg"
               />
             ) : (
-              <BbangleIcon shape="smile" className="w-[30px] h-[30px]" />
+              <BbangleIcon shape="smile" className="h-[30px] w-[30px]" />
             )}
           </div>
-          <p className="text-gray-900 typo-title-16-semibold">{nickname}</p>
+          <p className="typo-title-16-semibold text-gray-900">{nickname}</p>
         </div>
         <Link href={PATH.profileUpdate}>
-          <p className="text-gray-500 typo-body-11-regular">프로필 수정</p>
+          <p className="typo-body-11-regular text-gray-500">프로필 수정</p>
         </Link>
       </div>
-      <p className="text-gray-800 typo-title-14-regular">반가워요 :) 무엇을 도와드릴까요?</p>
+      <p className="typo-title-14-regular text-gray-800">반가워요 :) 무엇을 도와드릴까요?</p>
     </PaddingWrapper>
   );
 };

@@ -7,7 +7,7 @@ interface Props {
   params: Promise<{ reviewId: string }>;
 }
 
-const ReviewDetailPage = async ({ params }: Props) => {  
+const ReviewDetailPage = async ({ params }: Props) => {
   const { reviewId } = await params;
 
   const queryClient = new QueryClient();

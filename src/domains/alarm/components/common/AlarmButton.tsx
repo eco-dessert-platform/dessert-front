@@ -20,7 +20,7 @@ const AlarmButton = ({ type, isAlarming, onClick, disabled = false, className }:
     <button
       type="button"
       className={cn(
-        'flex justify-center items-center gap-x-[2px] p-[6px] w-full border border-gray-200 rounded-[4px] typo-body-12-medium',
+        'typo-body-12-medium flex w-full items-center justify-center gap-x-[2px] rounded-[4px] border border-gray-200 p-[6px]',
         'disabled:bg-gray-300 disabled:text-white',
         isAlarming ? 'bg-gray-50 text-gray-800' : 'bg-gray-900 text-white',
         className

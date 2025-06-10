@@ -23,9 +23,9 @@ describe('<Review /> 테스트', () => {
   const renderWithProviders = (children: ReactNode) => {
     const push = vi.fn();
     return render(
-        <AppRouterContextProviderMock router={{ push }}>
-          <CleanQueryProvider>{children}</CleanQueryProvider>
-        </AppRouterContextProviderMock>
+      <AppRouterContextProviderMock router={{ push }}>
+        <CleanQueryProvider>{children}</CleanQueryProvider>
+      </AppRouterContextProviderMock>
     );
   };
 

@@ -46,7 +46,7 @@ const ButtonNewver = ({
     type="button"
     className={cn(
       buttonVariants({ size, color, radius }),
-      'disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed',
+      'disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white',
       className
     )}
     {...props}

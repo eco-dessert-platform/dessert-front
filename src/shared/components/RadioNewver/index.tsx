@@ -14,7 +14,7 @@ const RadioNewver = (
     <input
       ref={ref}
       type="radio"
-      className="opacity-0 absolute size-full cursor-pointer"
+      className="absolute size-full cursor-pointer opacity-0"
       {...props}
     />
     {props.checked ? <CheckIcon shape="radio-on" /> : <CheckIcon shape="radio-off" />}

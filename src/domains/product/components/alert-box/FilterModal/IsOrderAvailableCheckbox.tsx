@@ -22,7 +22,7 @@ const IsOrderAvailableCheckbox = () => {
   return (
     <PaddingWrapper className="mb-[100px]">
       <CheckBox
-        className="text-gray-800 typo-title-14-regular"
+        className="typo-title-14-regular text-gray-800"
         isChecked={orderAvailableToday}
         onChange={handleCheckChange}
       >

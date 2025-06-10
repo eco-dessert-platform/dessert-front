@@ -13,10 +13,10 @@ const MainCategoryItem = ({ shape, title, hasSubCategory, onClick }: MainCategor
     type="button"
     aria-label={`${title}`}
     onClick={onClick}
-    className="flex p-[16px] gap-[6px] items-center w-full border-solid border-b border-gray-100"
+    className="flex w-full items-center gap-[6px] border-b border-solid border-gray-100 p-[16px]"
   >
     <ProductCategoryIcons shape={shape} />
-    <div className="flew-grow flex-1 text-gray-900 text-start font-semibold">{title}</div>
+    <div className="flew-grow flex-1 text-start font-semibold text-gray-900">{title}</div>
     <div>{hasSubCategory && <ArrowIcons shape="bottom" />}</div>
   </button>
 );

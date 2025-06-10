@@ -23,8 +23,8 @@ const WishStroeList = () => {
 
   if (!data || data.length === 0)
     return (
-      <div className="w-[360px] h-[360px] flex flex-col gap-[2px] mx-auto justify-center items-center">
-        <BbangleCryIcon  />
+      <div className="mx-auto flex h-[360px] w-[360px] flex-col items-center justify-center gap-[2px]">
+        <BbangleCryIcon />
         <div className="text-[14px] text-gray-500">찜한 스토어가 없어요!</div>
       </div>
     );

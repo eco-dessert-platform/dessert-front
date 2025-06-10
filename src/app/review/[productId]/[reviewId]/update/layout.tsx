@@ -10,7 +10,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Layout = async ({ params, children }: Props) => {  
+const Layout = async ({ params, children }: Props) => {
   const { productId, reviewId } = await params;
 
   if (!productId || !reviewId) throw new Error('비정상적인 접근');

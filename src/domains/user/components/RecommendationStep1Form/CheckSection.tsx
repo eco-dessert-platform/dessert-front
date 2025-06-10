@@ -41,7 +41,7 @@ const CheckSection = () => {
             key={item.title}
             className={cn(
               selectInputVariants({ outline: true, checked }),
-              'flex p-[10px] gap-[12px] items-center',
+              'flex items-center gap-[12px] p-[10px]',
               disabled && 'opacity-70',
               checked && 'typo-title-14-semibold'
             )}

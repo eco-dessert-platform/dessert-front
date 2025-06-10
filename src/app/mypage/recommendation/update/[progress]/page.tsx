@@ -5,7 +5,7 @@ interface Props {
   params: Promise<{ progress: string }>;
 }
 
-const RecommendationUpdatePage = async ({ params }: Props) => {  
+const RecommendationUpdatePage = async ({ params }: Props) => {
   const { progress } = await params;
 
   const progressNum = Number(progress);

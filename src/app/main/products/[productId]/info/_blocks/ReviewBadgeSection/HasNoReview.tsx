@@ -10,7 +10,7 @@ const HasNoReview = () => {
 
   return (
     <PaddingWrapper className="text-center">
-      <p className="text-gray-500 text-[14px] mb-[16px] font-medium ">대표 배지가 아직 없어요.</p>
+      <p className="mb-[16px] text-[14px] font-medium text-gray-500">대표 배지가 아직 없어요.</p>
       <ReviewCreateButton productId={Number(productId)} />
     </PaddingWrapper>
   );

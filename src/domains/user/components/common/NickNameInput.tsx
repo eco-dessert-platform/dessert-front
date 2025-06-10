@@ -72,9 +72,9 @@ const NicknameInput = () => {
         }
       />
       {data?.message && isNickNameMessageVisible && (
-        <div className="mt-[4px] float-start text-gray-600 typo-body-12-medium">{data.message}</div>
+        <div className="typo-body-12-medium float-start mt-[4px] text-gray-600">{data.message}</div>
       )}
-      <p className="mt-[4px] float-end text-gray-600 typo-body-12-medium">
+      <p className="typo-body-12-medium float-end mt-[4px] text-gray-600">
         <span className={nicknameClass}>{nicknameLength}</span>/ {MAX_LENGTH}
       </p>
     </div>

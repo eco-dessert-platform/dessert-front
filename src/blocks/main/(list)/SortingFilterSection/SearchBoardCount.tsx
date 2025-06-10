@@ -11,7 +11,7 @@ const SearchBoardCount = () => {
   const query = searchParams.get('query');
   const { data } = useGetSearchProductsQuery({ keyword: query || '', filterValue });
 
-  return <span className="text-gray-800 typo-body-12-medium">총 {data?.boardsCount ?? ''}개</span>;
+  return <span className="typo-body-12-medium text-gray-800">총 {data?.boardsCount ?? ''}개</span>;
 };
 
 export default SearchBoardCount;

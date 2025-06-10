@@ -22,10 +22,10 @@ const ProfileUpdateForm = () => {
 
   return (
     <form id={FORM_ID.profileUpdate} className="px-[16px]" onSubmit={handleSubmit(onSubmit)}>
-      <div className="my-[16px] flex justify-center items-center">
+      <div className="my-[16px] flex items-center justify-center">
         <ProfileImageInput />
       </div>
-      <div className="flex flex-col gap-[20px] mb-[36px]">
+      <div className="mb-[36px] flex flex-col gap-[20px]">
         <NicknameInput />
         <SexInput />
         <BirthdayInput />

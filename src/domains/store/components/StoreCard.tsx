@@ -34,8 +34,8 @@ const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
   };
 
   return (
-    <PaddingWrapper className="flex gap-[10px] justify-between border-b border-gray-100">
-      <div className="w-[40px] h-[40px] rounded-[6px] shrink-0">
+    <PaddingWrapper className="flex justify-between gap-[10px] border-b border-gray-100">
+      <div className="h-[40px] w-[40px] shrink-0 rounded-[6px]">
         {imgSrc ? (
           <ImageWithFallback
             src={imgSrc}
@@ -45,7 +45,7 @@ const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
             fallback={
-              <div className="border bg-gray-50 rounded-[6px] size-full typo-body-12-regular flex items-center justify-center">
+              <div className="typo-body-12-regular flex size-full items-center justify-center rounded-[6px] border bg-gray-50">
                 <BbangleIcon shape="smile-small" />
               </div>
             }
@@ -55,14 +55,14 @@ const StoreCard = ({ id, imgSrc, title, desc, isWished }: WishStroeProps) => {
         )}
       </div>
 
-      <div className="flex flex-col w-full overflow-hidden">
+      <div className="flex w-full flex-col overflow-hidden">
         <div className="flex justify-between">
           <Link href={`/main/stores/${id}`} className="typo-title-14-semibold">
             {title}
           </Link>
           <HeartButton isActive={isWishedLocal} onClick={isWishedLocal ? hate : like} />
         </div>
-        <p className="text-gray-600 truncate typo-body-12-regular">{desc}</p>
+        <p className="typo-body-12-regular truncate text-gray-600">{desc}</p>
       </div>
     </PaddingWrapper>
   );

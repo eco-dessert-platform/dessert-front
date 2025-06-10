@@ -13,9 +13,9 @@ const useAuth = () => {
   };
 
   const login = async ({
-                         accessToken,
-                         refreshToken
-                       }: {
+    accessToken,
+    refreshToken
+  }: {
     accessToken: string;
     refreshToken?: string;
   }) => {

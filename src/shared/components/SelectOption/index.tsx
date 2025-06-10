@@ -6,7 +6,7 @@ interface Props {
 }
 
 const SelectOption = ({ options, onClick }: Props) => (
-  <ul className="absolute mb-[-190px] left-1/2 -translate-x-2/4 z-5501 w-max rounded-[10px] shadow-sm bg-white">
+  <ul className="absolute left-1/2 z-5501 mb-[-190px] w-max -translate-x-2/4 rounded-[10px] bg-white shadow-sm">
     {options.map((option, index) => {
       const firstOption = index === 0;
       const lastOption = index === options.length - 1;
@@ -20,7 +20,7 @@ const SelectOption = ({ options, onClick }: Props) => (
       return (
         <li
           key={option}
-          className={`px-[16px] py-[10px] typo-body-12-medium border-gray-100 cursor-pointer hover:bg-gray-50 ${borderStyle} ${hoverRoundedStyle}`}
+          className={`typo-body-12-medium cursor-pointer border-gray-100 px-[16px] py-[10px] hover:bg-gray-50 ${borderStyle} ${hoverRoundedStyle}`}
         >
           <button type="button" onClick={() => onClick(option)}>
             {option}

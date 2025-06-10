@@ -5,8 +5,8 @@ const config: StorybookConfig = {
     name: '@storybook/nextjs',
     options: {
       nextConfigPath: './next.config.js',
-      appDirectory: true,
-    },
+      appDirectory: true
+    }
   },
 
   stories: [

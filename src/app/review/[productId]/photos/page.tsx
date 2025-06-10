@@ -10,7 +10,7 @@ interface Props {
   params: Promise<{ productId: string }>;
 }
 
-const ReviewPhotosPage = async ({ params }: Props) => {  
+const ReviewPhotosPage = async ({ params }: Props) => {
   const { productId } = await params;
 
   const boardId = Number(productId);

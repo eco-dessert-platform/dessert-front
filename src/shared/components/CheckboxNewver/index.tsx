@@ -14,7 +14,7 @@ const CheckBoxNewver = (
     <input
       ref={ref}
       type="checkbox"
-      className="opacity-0 absolute size-full cursor-pointer"
+      className="absolute size-full cursor-pointer opacity-0"
       {...props}
     />
     {props.checked ? <CheckIcon shape="checkbox-on" /> : <CheckIcon shape="checkbox-off" />}

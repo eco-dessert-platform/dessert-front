@@ -6,7 +6,7 @@ interface ViewLinkWrapperProps {
 }
 
 const ViewLinkWrapper = ({ href, children }: ViewLinkWrapperProps) => (
-  <div className="flex justify-between items-center w-full">
+  <div className="flex w-full items-center justify-between">
     <p>{children}</p>
     <Link href={href} className="typo-body-12-regular-underline text-gray-500">
       보기

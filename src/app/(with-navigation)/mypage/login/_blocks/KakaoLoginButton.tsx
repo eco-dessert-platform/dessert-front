@@ -23,11 +23,11 @@ const KakaoLoginButton = () => {
   return (
     <button
       type="button"
-      className="rounded-[10px] flex gap-[8px] items-center justify-center h-[52px] bg-kakao shadow-sm text-black"
+      className="bg-kakao flex h-[52px] items-center justify-center gap-[8px] rounded-[10px] text-black shadow-sm"
       onClick={openKakaoLoginPopup}
     >
       <KakaoIcon />
-      <div className="text-black/[0.85] typo-title-16-medium">카카오톡 시작하기</div>
+      <div className="typo-title-16-medium text-black/[0.85]">카카오톡 시작하기</div>
     </button>
   );
 };

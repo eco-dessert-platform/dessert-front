@@ -36,26 +36,26 @@ const Gauge = ({ left, right }: Props) => {
 
   return (
     <div className="flex flex-col gap-[4px]">
-      <div className="bg-gray-100 rounded-full h-[8px] flex gap-0 items-center justify-center">
-        <div className="w-1/2 h-full">
+      <div className="flex h-[8px] items-center justify-center gap-0 rounded-full bg-gray-100">
+        <div className="h-full w-1/2">
           <div
             style={{ width: `${leftPercentage}%` }}
             className={cn('ml-auto h-full rounded-l-full', leftBarColor)}
           />
         </div>
-        <div className="w-1/2 h-full">
+        <div className="h-full w-1/2">
           <div
             style={{ width: `${rightPercentage}%` }}
             className={cn('h-full rounded-r-full', rightBarColor)}
           />
         </div>
       </div>
-      <div className="flex justify-between items-center">
-        <div className={cn('flex gap-[2px] items-center', leftTextColor)}>
+      <div className="flex items-center justify-between">
+        <div className={cn('flex items-center gap-[2px]', leftTextColor)}>
           <span className="typo-body-12-semibold">{left.text}</span>
           <span className="typo-body-11-semibold">{left.value}</span>
         </div>
-        <div className={cn('flex gap-[2px] items-center', rightTextColor)}>
+        <div className={cn('flex items-center gap-[2px]', rightTextColor)}>
           <span className="typo-body-11-semibold">{right.value}</span>
           <span className="typo-body-12-semibold">{right.text}</span>
         </div>

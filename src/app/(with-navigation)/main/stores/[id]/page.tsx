@@ -12,7 +12,8 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
-const MainStoreDetailPage = async ({ params }: Props) => {  // Destructuring in the parameter
+const MainStoreDetailPage = async ({ params }: Props) => {
+  // Destructuring in the parameter
   const { id } = await params;
 
   const storeId = Number(id);

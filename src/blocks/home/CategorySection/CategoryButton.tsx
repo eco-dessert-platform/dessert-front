@@ -50,11 +50,11 @@ const CategoryButton = ({ name, icon }: CategoryButtonProps) => {
   return (
     <Link
       href={PATH.mainProductList}
-      className="flex flex-col gap-1 items-center py-[11px] w-[90px] hover:opacity-70 transition-opacity"
+      className="flex w-[90px] flex-col items-center gap-1 py-[11px] transition-opacity hover:opacity-70"
       onClick={handleClickButton}
     >
-      <div className="w-[46px] h-[46px] bg-gray-100 rounded-[16px] p-[11px]">{icon}</div>
-      <div className="text-gray-800 typo-body-12-regular whitespace-nowrap">{name}</div>
+      <div className="h-[46px] w-[46px] rounded-[16px] bg-gray-100 p-[11px]">{icon}</div>
+      <div className="typo-body-12-regular whitespace-nowrap text-gray-800">{name}</div>
     </Link>
   );
 };

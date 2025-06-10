@@ -13,7 +13,7 @@ const BadgeSection = () => {
 
   return (
     <PaddingWrapper className="pt-0">
-      <div className="grid grid-rows-3 grid-cols-2 gap-[10px] max-w-[600px]">
+      <div className="grid max-w-[600px] grid-cols-2 grid-rows-3 gap-[10px]">
         {badges.map(({ kind, text, id }) => (
           <label key={id} htmlFor={id} aria-label={text}>
             <ReviewBadge

@@ -7,8 +7,8 @@ interface ProductTagProps {
 }
 
 const ProductTag = ({ tag }: ProductTagProps) => (
-  <div className="h-[21px] bg-white rounded-sm border border-solid border-gray-200 justify-center items-center gap-1 inline-flex">
-    <span className="text-gray-600 px-[6px] py-[2px] leading-150 text-11 font-normal">
+  <div className="inline-flex h-[21px] items-center justify-center gap-1 rounded-sm border border-solid border-gray-200 bg-white">
+    <span className="text-11 px-[6px] py-[2px] leading-150 font-normal text-gray-600">
       {transformTagToKr(tag)}
     </span>
   </div>

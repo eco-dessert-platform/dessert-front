@@ -21,14 +21,14 @@ const DefaultLayout = ({ main, header, footer }: Props) => {
   return (
     <div className="min-h-screen">
       {header && (
-        <header className="sticky max-w-[600px] top-0 w-full mx-auto z-header">{header}</header>
+        <header className="z-header sticky top-0 mx-auto w-full max-w-[600px]">{header}</header>
       )}
       <main
         id={ELEMENT_ID.main}
         style={{
           paddingBottom: footerHeight || 0
         }}
-        className="max-w-[600px] w-full min-h-screen shadow-lg mx-auto relative flex-1"
+        className="relative mx-auto min-h-screen w-full max-w-[600px] flex-1 shadow-lg"
       >
         {main}
       </main>
@@ -36,7 +36,7 @@ const DefaultLayout = ({ main, header, footer }: Props) => {
         <footer
           ref={footerRef}
           id={ELEMENT_ID.footer}
-          className="max-w-[600px] w-full mx-auto  fixed left-1/2 -translate-x-1/2 bottom-0 z-footer bg-white"
+          className="z-footer fixed bottom-0 left-1/2 mx-auto w-full max-w-[600px] -translate-x-1/2 bg-white"
         >
           {footer}
         </footer>

@@ -14,10 +14,10 @@ const ReadyForServicePopup = ({ type }: Props) => {
 
   return (
     <Popup>
-      <PaddingWrapper className="text-center typo-title-16-medium">
+      <PaddingWrapper className="typo-title-16-medium text-center">
         {ALARM[type].name} 알림
       </PaddingWrapper>
-      <PaddingWrapper className="text-center typo-title-14-regular">
+      <PaddingWrapper className="typo-title-14-regular text-center">
         서비스 준비 중입니다.
       </PaddingWrapper>
       <PaddingWrapper className="py-[10px]">

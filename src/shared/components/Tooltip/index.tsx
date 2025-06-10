@@ -51,13 +51,13 @@ const Tooltip = ({
 
     openTooltip(
       <div
-        className="fixed max-w-max z-tooltip"
+        className="z-tooltip fixed max-w-max"
         style={getPlacementStyle(anchorRef, placement, distance)}
       >
         <PolygonIcon className="absolute" style={getArrowPositionStyle(placement, arrowPosition)} />
         <div
           className={cn(
-            'max-w-[300px] min-w-min px-[8px] py-[6px] rounded-[4px] bg-gray-800 whitespace-pre-line text-wrap break-all typo-body-11-regular text-white',
+            'typo-body-11-regular max-w-[300px] min-w-min rounded-[4px] bg-gray-800 px-[8px] py-[6px] text-wrap break-all whitespace-pre-line text-white',
             className
           )}
         >

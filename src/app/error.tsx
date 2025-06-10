@@ -6,13 +6,22 @@ import SadBbangleBox from '@/shared/components/SadBbangleBox';
 import { BbangleIcon } from '@/shared/components/icons';
 import PATH from '@/shared/constants/path';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { startTransition, useEffect } from 'react';
 import DefaultLayout from '@/shared/components/DefaultLayout';
+import { useRouter } from 'next/navigation';
 
 const Error = ({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) => {
+  const router = useRouter();
   useEffect(() => {
     console.error(error.digest);
   });
+
+  const handleReset = () => {
+    startTransition(() => {
+      router.refresh();
+      reset();
+    });
+  };
 
   return (
     <DefaultLayout
@@ -28,7 +37,7 @@ const Error = ({ error, reset }: { error: Error & { digest?: string }; reset: ()
           <SadBbangleBox>
             <div>일시적인 오류가 발생했어요.</div>
             <div>다시 시도해주세요.</div>
-            <ButtonNewver className="mt-[16px]" onClick={reset} color="black">
+            <ButtonNewver className="mt-[16px]" onClick={handleReset} color="black">
               다시 시도하기
             </ButtonNewver>
           </SadBbangleBox>

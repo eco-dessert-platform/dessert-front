@@ -16,9 +16,9 @@ const PriceSlide = ({ price, onPriceChange }: PriceSlideProps) => {
   const rightPercent = 100 - (maxPrice / LIMIT_MAX_PRICE) * 100;
 
   return (
-    <div className="relative flex flex-col justify-center h-[24px]">
+    <div className="relative flex h-[24px] flex-col justify-center">
       <SlideBar left={leftPercent} right={rightPercent} />
-      <div className="absolute top-0 w-full h-[24px]">
+      <div className="absolute top-0 h-[24px] w-full">
         <RangeInput value={price[0]} onChange={(newValue) => onPriceChange([newValue, price[1]])} />
         <RangeInput value={price[1]} onChange={(newValue) => onPriceChange([price[0], newValue])} />
       </div>

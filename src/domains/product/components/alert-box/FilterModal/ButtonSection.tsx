@@ -29,7 +29,7 @@ const ButtonSection = () => {
       tags,
       price,
       orderAvailableToday,
-      sort: INIT_FILTER_VALUE.sort,
+      sort: INIT_FILTER_VALUE.sort
     });
     closeModal();
   };
@@ -42,7 +42,7 @@ const ButtonSection = () => {
   };
 
   return (
-    <PaddingWrapper className="flex gap-[10px] justify-between items-center fixed bottom-0 w-full bg-white">
+    <PaddingWrapper className="fixed bottom-0 flex w-full items-center justify-between gap-[10px] bg-white">
       <ButtonNewver
         color="border-white"
         size="lg"

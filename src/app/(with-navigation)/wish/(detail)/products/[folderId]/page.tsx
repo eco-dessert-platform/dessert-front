@@ -10,10 +10,10 @@ interface Props {
   params: Promise<{ folderId: string }>;
 }
 
-const WishProductsDetail = async ({ params }: Props) => {  
+const WishProductsDetail = async ({ params }: Props) => {
   const { folderId } = await params;
   const queryClient = new QueryClient();
-  const folderIdNumber = Number(folderId);  // Converting folderId to a number
+  const folderIdNumber = Number(folderId); // Converting folderId to a number
   const options = wishProductListoptions({
     folderId: folderIdNumber,
     sort: wishSortDictionary.translate('담은순')
@@ -27,7 +27,7 @@ const WishProductsDetail = async ({ params }: Props) => {
 
   return (
     <>
-      <PaddingWrapper className="pb-[12px] border-b border-gray-100 flex justify-end">
+      <PaddingWrapper className="flex justify-end border-b border-gray-100 pb-[12px]">
         <WishProductSortSelect />
       </PaddingWrapper>
 

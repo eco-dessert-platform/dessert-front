@@ -18,12 +18,12 @@ const FolderThumbnail = ({ thumbnailList, size = 'lg' }: Props) => {
   return (
     <div
       className={twMerge(
-        'flex justify-center items-center border border-gray-100 rounded-[6px]',
+        'flex items-center justify-center rounded-[6px] border border-gray-100',
         sizeClass
       )}
     >
       {hasThumbnail && thumbnailCount > 1 && (
-        <div className="grid grid-cols-2 grid-rows-2 size-full gap-[2px]">
+        <div className="grid size-full grid-cols-2 grid-rows-2 gap-[2px]">
           {thumbnailList.map((thumbnail) => (
             <div key={thumbnail} className="relative size-full">
               <ImageWithFallback
@@ -31,10 +31,10 @@ const FolderThumbnail = ({ thumbnailList, size = 'lg' }: Props) => {
                 alt="상품사진"
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
-                className="object-cover rounded-[6px]"
+                className="rounded-[6px] object-cover"
                 fill
                 fallback={
-                  <SadBbangleBox className="border bg-gray-50 rounded-[6px] size-full typo-body-12-regular">
+                  <SadBbangleBox className="typo-body-12-regular size-full rounded-[6px] border bg-gray-50">
                     no image
                   </SadBbangleBox>
                 }
@@ -50,10 +50,10 @@ const FolderThumbnail = ({ thumbnailList, size = 'lg' }: Props) => {
             alt="상품사진"
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
-            className="object-cover rounded-[6px]"
+            className="rounded-[6px] object-cover"
             fill
             fallback={
-              <SadBbangleBox className="border bg-gray-50 rounded-[6px] size-full typo-body-12-regular">
+              <SadBbangleBox className="typo-body-12-regular size-full rounded-[6px] border bg-gray-50">
                 no image
               </SadBbangleBox>
             }

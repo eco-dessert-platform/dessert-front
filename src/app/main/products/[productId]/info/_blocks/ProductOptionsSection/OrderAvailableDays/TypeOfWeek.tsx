@@ -18,10 +18,10 @@ const TypeOfWeek = ({ availableDays }: Props) => {
         <div
           key={dayKr}
           className={cn(
-            'rounded-full typo-body-12-regular w-[24px] h-[24px] flex items-center justify-center',
+            'typo-body-12-regular flex h-[24px] w-[24px] items-center justify-center rounded-full',
             availableWeekList.includes(transformDayToEng(dayKr))
               ? 'text-primary-orange-red bg-sub-color-pink typo-body-12-medium'
-              : 'text-gray-600 bg-gray-50 '
+              : 'bg-gray-50 text-gray-600'
           )}
         >
           {dayKr}

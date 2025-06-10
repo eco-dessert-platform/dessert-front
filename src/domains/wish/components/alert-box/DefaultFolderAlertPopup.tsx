@@ -8,7 +8,7 @@ const DefaultFolderAlertPopup = () => {
 
   return (
     <Popup>
-      <PaddingWrapper className="text-center mt-[16px]">
+      <PaddingWrapper className="mt-[16px] text-center">
         기본 폴더는 수정 및 삭제하실 수 없습니다.
       </PaddingWrapper>
       <PaddingWrapper>

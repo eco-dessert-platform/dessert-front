@@ -18,7 +18,7 @@ const CategoryTab = () => {
   const handleClick = (newCategory: string) => {
     setFilterValue((prev) => ({
       ...prev,
-      category: elaborateCategory(newCategory),
+      category: elaborateCategory(newCategory)
     }));
   };
 
@@ -29,7 +29,7 @@ const CategoryTab = () => {
           drag="x"
           dragConstraints={tabContainerRef}
           dragElastic={0}
-          className="min-w-max overflow-x-scroll scrollbar-hide"
+          className="scrollbar-hide min-w-max overflow-x-scroll"
         >
           <div className="flex w-full">
             {FILTER_VALUES.category.kind[mainCategory].map((category, index) => {

@@ -14,10 +14,10 @@ const MobileAppPopup = ({ type }: Props) => {
 
   return (
     <Popup>
-      <PaddingWrapper className="text-center typo-title-16-medium">
+      <PaddingWrapper className="typo-title-16-medium text-center">
         {ALARM[type].name} 알림
       </PaddingWrapper>
-      <PaddingWrapper className="text-center typo-title-14-regular">
+      <PaddingWrapper className="typo-title-14-regular text-center">
         {ALARM[type].name} 알림 신청은 모바일 앱에서만 가능해요!
         <br />
         모바일에서 빵그리의 오븐을 설치해주세요.

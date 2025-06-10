@@ -26,7 +26,7 @@ const PriceInputContainer = ({ minPrice, maxPrice, onPriceChange }: PriceInputCo
   }, [onPriceChange, debouncedPrice]);
 
   return (
-    <div className="flex gap-[6px] items-center">
+    <div className="flex items-center gap-[6px]">
       <PriceInput value={tmpMinPrice} onChange={setTmpMinPrice} />
       ~
       <PriceInput value={tmpMaxPrice} onChange={setTmpMaxPrice} />

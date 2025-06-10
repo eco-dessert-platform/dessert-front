@@ -29,11 +29,11 @@ interface ProductImageProps {
 }
 
 const ProductImage = ({
-                        product: { boardId, thumbnail, isWished, isBundled, isBbangcketing, isSoldOut },
-                        popular,
-                        ranking,
-                        isSimilarProduct
-                      }: ProductImageProps) => {
+  product: { boardId, thumbnail, isWished, isBundled, isBbangcketing, isSoldOut },
+  popular,
+  ranking,
+  isSimilarProduct
+}: ProductImageProps) => {
   const [selectedWishFolder] = useAtom(selectedWishFolderAtom);
   const { openToast } = useToastNewVer();
   const [isPopping, setIsPopping] = useState(false);
@@ -68,12 +68,12 @@ const ProductImage = ({
   return (
     <div
       className={cn(
-        'w-full bg-cover bg-center rounded-[6px] relative',
+        'relative w-full rounded-[6px] bg-cover bg-center',
         isSoldOut &&
-        "after:content-['Sold_Out'] after:size-full after:flex-center after:absolute after:inset-0 after:bg-black/[0.3] after:text-gray-300 after:typo-heading-20-semibold after:rounded-[6px]"
+          "after:flex-center after:typo-heading-20-semibold after:absolute after:inset-0 after:size-full after:rounded-[6px] after:bg-black/[0.3] after:text-gray-300 after:content-['Sold_Out']"
       )}
     >
-      <div className="relative w-full aspect-square">
+      <div className="relative aspect-square w-full">
         <ImageWithFallback
           src={thumbnail}
           alt="상품사진"
@@ -83,14 +83,14 @@ const ProductImage = ({
           fill
           sizes="33vw"
           fallback={
-            <SadBbangleBox className="flex flex-col items-center justify-center border bg-gray-50 rounded-[6px] w-full h-full">
+            <SadBbangleBox className="flex h-full w-full flex-col items-center justify-center rounded-[6px] border bg-gray-50">
               <p className="text-center text-sm md:text-base lg:text-lg">이미지가 없습니다.</p>
             </SadBbangleBox>
           }
         />
       </div>
       {isSimilarProduct || (
-        <div className="absolute z-10 bottom-[9px] right-[9px] h-[20px] ">
+        <div className="absolute right-[9px] bottom-[9px] z-10 h-[20px]">
           <HeartButton
             isActive={isWished}
             className={isPopping ? 'animate-heart-pop' : ''}
@@ -100,7 +100,7 @@ const ProductImage = ({
         </div>
       )}
 
-      <div className="absolute z-10 top-[6px] left-[6px] w-full flex flex-wrap gap-[6px]">
+      <div className="absolute top-[6px] left-[6px] z-10 flex w-full flex-wrap gap-[6px]">
         {popular && <Badge type="ranking">{ranking}</Badge>}
         {isBundled && <Badge type="bundle">묶음상품</Badge>}
         {isBbangcketing && (

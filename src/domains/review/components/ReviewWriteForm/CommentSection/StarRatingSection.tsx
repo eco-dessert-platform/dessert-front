@@ -15,7 +15,7 @@ const StarRatingSection = () => {
   const { register, watch } = useFormContext<IReviewWriteForm>();
 
   return (
-    <div className="flex flex-col items-center mb-[28px]">
+    <div className="mb-[28px] flex flex-col items-center">
       <PaddingWrapper className="typo-title-16-semibold text-center text-gray-900">
         {attachPostPosition(data?.title || 'OOO', '은')} 만족했나요?
       </PaddingWrapper>

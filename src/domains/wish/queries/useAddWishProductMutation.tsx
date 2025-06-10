@@ -69,7 +69,7 @@ const useAddWishProductMutation = () => {
       action: (
         <button
           type="button"
-          className="typo-body-12-regular-underline "
+          className="typo-body-12-regular-underline"
           onClick={openFolderSelectModal}
         >
           수정
@@ -79,7 +79,6 @@ const useAddWishProductMutation = () => {
   };
 
   const onError = ({ message }: Error) => {
-
     switch (message) {
       case ERROR_MESSAGE.requiredLogin:
         openToast({

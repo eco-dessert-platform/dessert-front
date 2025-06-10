@@ -23,7 +23,7 @@ const RatingSection = async ({ params: { productId } }: Props) => {
           <QuestionMarkIcon />
         </Tooltip>
       </div>
-      <div className="flex gap-[4px] items-center">
+      <div className="flex items-center gap-[4px]">
         <StarRating value={rating} starSize="small" />
         <div className="text-gray-700">
           <span className="typo-title-14-semibold mr-px">{rating}</span>

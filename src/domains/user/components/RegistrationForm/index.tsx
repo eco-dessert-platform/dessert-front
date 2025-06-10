@@ -23,10 +23,10 @@ const RegistrationForm = () => {
 
   return (
     <form id={FORM_ID.profileRegist} className="px-[16px]" onSubmit={handleSubmit(onSubmit)}>
-      <div className="my-[16px] flex justify-center items-center">
+      <div className="my-[16px] flex items-center justify-center">
         <ProfileImageInput />
       </div>
-      <div className="flex flex-col gap-[20px] mb-[56px]">
+      <div className="mb-[56px] flex flex-col gap-[20px]">
         <NicknameInput />
         <SexInput />
         <BirthdayInput />

@@ -7,8 +7,6 @@ import PriceInputContainer from '@/domains/product/components/alert-box/FilterMo
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import PriceSlide from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceSlide';
 
-
-
 const PriceSection = () => {
   const [filterValue] = useAtom(filterValueAtom);
   const [price, setPrice] = useAtom(priceAtom);

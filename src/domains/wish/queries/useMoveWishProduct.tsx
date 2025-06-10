@@ -9,10 +9,10 @@ const useMoveWishProduct = () => {
   const queryClient = useQueryClient();
 
   const mutationFn = async ({
-                              productId,
-                              folderId,
-                              folderName
-                            }: {
+    productId,
+    folderId,
+    folderName
+  }: {
     productId: number;
     folderId: number;
     folderName: string;
@@ -22,7 +22,7 @@ const useMoveWishProduct = () => {
     return { productId, folderName };
   };
 
-  const onSuccess = ({  folderName }: {  folderName: string }) => {
+  const onSuccess = ({ folderName }: { folderName: string }) => {
     queryClient.invalidateQueries({ queryKey: wishQueryKey.folders() });
 
     openToast({

@@ -25,7 +25,7 @@ const Header = ({ title, content, back = false, share = false, className }: Head
   return (
     <PaddingWrapper
       className={twMerge(
-        'sticky top-0 z-header flex bg-white items-center h-[60px] py-[10px]',
+        'z-header sticky top-0 flex h-[60px] items-center bg-white py-[10px]',
         className
       )}
     >
@@ -39,7 +39,7 @@ const Header = ({ title, content, back = false, share = false, className }: Head
           <ArrowIcons shape="back" />
         </button>
       )}
-      <div className="flex justify-between items-center w-full ">
+      <div className="flex w-full items-center justify-between">
         <h2 className="typo-title-16-medium line-clamp-2">{title}</h2>
         {content}
       </div>

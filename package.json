@@ -7,6 +7,8 @@
     "build": "next build && cp -r ./public ./.next/standalone/public && cp -r ./.next/static ./.next/standalone/.next/static",
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "prepare": "husky install",
     "postinstall": "husky install",
     "check-types": "tsc --noemit",

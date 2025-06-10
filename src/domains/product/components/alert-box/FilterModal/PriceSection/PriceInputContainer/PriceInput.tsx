@@ -36,7 +36,7 @@ const PriceInput = ({ value, onChange }: PriceInputProps) => {
   return (
     <div
       className={twMerge(
-        `flex items-center ${INPUT_STYLE} font-bold text-14 leading-150 tracking-tight-2`,
+        `flex items-center ${INPUT_STYLE} text-14 tracking-tight-2 leading-150 font-bold`,
         'py-[8px]'
       )}
     >
@@ -45,7 +45,7 @@ const PriceInput = ({ value, onChange }: PriceInputProps) => {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         onFocus={(e) => e.target.select()}
-        className={`p-0 border-none rounded-none text-right ${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}
+        className={`rounded-none border-none p-0 text-right ${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}
       />
       <span className={`${isLimitValue ? 'text-gray-500' : 'text-gray-900'}`}>원</span>
     </div>

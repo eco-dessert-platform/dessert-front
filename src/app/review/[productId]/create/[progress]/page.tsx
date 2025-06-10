@@ -6,7 +6,7 @@ interface ReviewCreatePageProps {
   params: Promise<{ productId: string | null; progress: string | null }>;
 }
 
-const ReviewCreatePage = async ({ params }: ReviewCreatePageProps) => {  
+const ReviewCreatePage = async ({ params }: ReviewCreatePageProps) => {
   const { productId, progress } = await params;
 
   const progressNum = Number(progress);

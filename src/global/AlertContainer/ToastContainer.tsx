@@ -31,7 +31,7 @@ const ToastContainer = () => {
         translateY,
         translateX: '-50%'
       }}
-      className="fixed bottom-0 w-[calc(100%-32px)] max-w-[calc(600px-32px)] z-toast left-1/2"
+      className="z-toast fixed bottom-0 left-1/2 w-[calc(100%-32px)] max-w-[calc(600px-32px)]"
     >
       <AnimatePresence>
         {toasts.map(({ message, id, action }, index) => (

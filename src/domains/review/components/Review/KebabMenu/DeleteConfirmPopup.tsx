@@ -9,14 +9,14 @@ interface Props {
 }
 const DeleteConfirmPopup = ({ onCancel, onDelete }: Props) => (
   <Popup>
-    <PaddingWrapper className="text-center typo-title-16-medium">리뷰 삭제</PaddingWrapper>
-    <PaddingWrapper className="text-center typo-title-14-regular">
+    <PaddingWrapper className="typo-title-16-medium text-center">리뷰 삭제</PaddingWrapper>
+    <PaddingWrapper className="typo-title-14-regular text-center">
       삭제한 후에 복구할 수 없어요.
       <br />
       리뷰를 삭제할까요?
     </PaddingWrapper>
 
-    <PaddingWrapper className="flex gap-[10px] justify-between items-center ">
+    <PaddingWrapper className="flex items-center justify-between gap-[10px]">
       <ButtonNewver color="border-white" size="lg" className="flex-1 gap-[2px]" onClick={onCancel}>
         취소
       </ButtonNewver>

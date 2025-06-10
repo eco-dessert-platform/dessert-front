@@ -73,7 +73,7 @@ const ProfileImageInput = () => {
         previewImg={previewImg}
         bottomText={!previewImg ? '추가' : '수정'}
         onClick={onPreviewClick}
-        className="relative flex justify-center items-center border rounded-full overflow-hidden w-[100px] h-[100px] bg-gray-100"
+        className="relative flex h-[100px] w-[100px] items-center justify-center overflow-hidden rounded-full border bg-gray-100"
       />
 
       <ImageInput

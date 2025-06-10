@@ -44,7 +44,7 @@ const StoreAllProductsSection = ({ storeInfo: { storeId, storeName } }: Props) =
 
   return (
     <PaddingWrapper className="pb-[36px]">
-      <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">전체상품</h5>
+      <h5 className="typo-title-14-semibold mb-[10px] text-gray-800">전체상품</h5>
       <div className="grid grid-cols-2 gap-[16px]">
         {products.map((product) => (
           <ProductCard key={product.boardId} product={{ ...product, storeId, storeName }} />

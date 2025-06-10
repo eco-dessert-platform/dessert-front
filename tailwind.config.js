@@ -8,16 +8,16 @@ module.exports = {
   theme: {
     extend: {
       zIndex: {
-        'topButton': '500',
-        'toast': '9999',
-        'popup': '1000',
-        'modal': '1000',
-        'tooltip': '5000',
-        'header': '4999',
-        'footer': '4999',
-        'backdrop': '9999',
-      },
-    },
+        topButton: '500',
+        toast: '9999',
+        popup: '1000',
+        modal: '1000',
+        tooltip: '5000',
+        header: '4999',
+        footer: '4999',
+        backdrop: '9999'
+      }
+    }
   },
   plugins: [
     require('tailwind-scrollbar-hide'), // 이미 존재하는 플러그인

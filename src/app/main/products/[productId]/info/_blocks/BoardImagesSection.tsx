@@ -36,12 +36,12 @@ const BoardImagesSection = ({ productId }: { productId: number }) => {
           <ImgNone />
         )}
         {productOption?.boardIsBundled && (
-          <div className="absolute top-[10px] left-[10px] z-10 ">
+          <div className="absolute top-[10px] left-[10px] z-10">
             <Badge type="bundle">묶음상품</Badge>
           </div>
         )}
         {haveBoardImages && (
-          <div className="absolute bottom-[10px] right-[10px] w-[37px] h-[21px] px-2.5 py-0.5 bg-black/60  rounded-[50px] justify-center items-center gap-2.5 inline-flex z-10">
+          <div className="absolute right-[10px] bottom-[10px] z-10 inline-flex h-[21px] w-[37px] items-center justify-center gap-2.5 rounded-[50px] bg-black/60 px-2.5 py-0.5">
             <ImageCounter index={swiperIndex} total={imageArray.length} />
           </div>
         )}

@@ -6,7 +6,8 @@ interface Props {
   params: Promise<{ progress: string }>;
 }
 
-const ReviewUpdatePage = async ({ params }: Props) => {  // Destructuring props here
+const ReviewUpdatePage = async ({ params }: Props) => {
+  // Destructuring props here
   const { progress } = await params;
   const progressNum = Number(progress);
 

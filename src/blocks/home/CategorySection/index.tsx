@@ -7,7 +7,7 @@ import { CATEGORY } from '@/domains/home/constants/category';
 
 const CategorySection = () => (
   <PaddingWrapper>
-    <ScrollSlider className="w-full h-full flex justify-center overflow-x-auto scroll-smooth clean-scrollbar">
+    <ScrollSlider className="clean-scrollbar flex h-full w-full justify-center overflow-x-auto scroll-smooth">
       {CATEGORY.map((category) => (
         <CategoryButton key={category.id} name={category.name} icon={category.icon} />
       ))}

@@ -10,7 +10,7 @@ const Agree = () => {
   const isAgreeChecked = watch('isAgreeChecked');
 
   return (
-    <label htmlFor="agree" className="flex gap-[4px] items-center cursor-pointer">
+    <label htmlFor="agree" className="flex cursor-pointer items-center gap-[4px]">
       <CheckBoxNewver
         id="agree"
         checked={isAgreeChecked}

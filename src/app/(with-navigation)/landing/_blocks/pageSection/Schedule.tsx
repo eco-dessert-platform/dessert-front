@@ -20,7 +20,7 @@ const Schedule = () => (
     />
 
     <ButtonNewver
-      className="bg-[#2A51FF] text-[3.2vw] md:text-[2.1vw] lg:text-[2vw] w-[80%] absolute bottom-5 left-0 right-0 rounded-[10px] py-[28px] m-auto"
+      className="absolute right-0 bottom-5 left-0 m-auto w-[80%] rounded-[10px] bg-[#2A51FF] py-[28px] text-[3.2vw] md:text-[2.1vw] lg:text-[2vw]"
       onClick={() => window.open('https://www.instagram.com/bbanggrees_oven/', '_blank')}
     >
       참여하러 가기

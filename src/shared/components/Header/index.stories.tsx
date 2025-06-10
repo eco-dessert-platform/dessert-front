@@ -8,7 +8,7 @@ const meta: Meta<typeof Header> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full max-w-[600px] h-screen m-auto shadow-lg shadow-slate-100">
+      <div className="m-auto h-screen w-full max-w-[600px] shadow-lg shadow-slate-100">
         <Story />
       </div>
     )

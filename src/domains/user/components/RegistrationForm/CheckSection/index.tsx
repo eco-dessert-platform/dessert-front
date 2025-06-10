@@ -30,7 +30,7 @@ const CheckSection = ({ className }: Props) => {
   };
 
   return (
-    <div className={twMerge('flex flex-col gap-[16px] w-full', className)}>
+    <div className={twMerge('flex w-full flex-col gap-[16px]', className)}>
       <CheckBox name="" isChecked={allChecked} onChange={checkAll}>
         <span className="typo-title-16-medium text-gray-900">모두 동의합니다.</span>
       </CheckBox>

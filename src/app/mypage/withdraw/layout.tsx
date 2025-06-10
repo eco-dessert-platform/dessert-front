@@ -12,7 +12,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const defaultValues: WithdrawFormType = {
     deleteReasons: [],
-    isAgreeChecked: false,
+    isAgreeChecked: false
   };
 
   return (

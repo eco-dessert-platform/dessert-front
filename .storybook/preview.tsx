@@ -19,10 +19,10 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-        <QueryClientProvider client={queryClient}>
-          <Story />
-          <AlertContainer />
-        </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <Story />
+        <AlertContainer />
+      </QueryClientProvider>
     )
   ]
 };

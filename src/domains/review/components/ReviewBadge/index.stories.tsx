@@ -12,7 +12,7 @@ export default meta;
 type Story = StoryObj<typeof ReviewBadge>;
 
 const Template = ({ isActive = false }: { isActive?: boolean }) => (
-  <div className="grid grid-rows-3 grid-cols-2 gap-[10px] max-w-[600px]">
+  <div className="grid max-w-[600px] grid-cols-2 grid-rows-3 gap-[10px]">
     {BADGE_SHAPES.map((shape) => (
       <ReviewBadge shape={shape} isActive={isActive} />
     ))}
@@ -31,7 +31,7 @@ const ClickStory = () => {
   };
 
   return (
-    <div className="grid grid-rows-3 grid-cols-2 gap-[10px] max-w-[600px]">
+    <div className="grid max-w-[600px] grid-cols-2 grid-rows-3 gap-[10px]">
       {BADGE_SHAPES.map((shape) => {
         const { kind } = BADGE[shape];
         return (

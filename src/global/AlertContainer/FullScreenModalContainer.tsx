@@ -11,7 +11,7 @@ const FullScreenModalContainer = () => {
   return (
     <AnimatePresence>
       {visible && (
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 z-9999 w-full max-w-[600px] mx-auto h-screen">
+        <div className="fixed top-0 left-1/2 z-9999 mx-auto h-screen w-full max-w-[600px] -translate-x-1/2">
           {fullScreenModal}
         </div>
       )}

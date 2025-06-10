@@ -22,7 +22,7 @@ const MoreSection = ({ className }: Props) => {
   };
 
   return (
-    <div className={twMerge('flex justify-between typo-body-12-regular', className)}>
+    <div className={twMerge('typo-body-12-regular flex justify-between', className)}>
       <Link href={PATH.withdraw}>
         <button type="button" className="text-gray-600">
           회원탈퇴

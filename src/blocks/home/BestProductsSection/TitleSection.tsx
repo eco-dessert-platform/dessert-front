@@ -22,26 +22,26 @@ const TitleSection = async () => {
 
   return (
     <PaddingWrapper>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         {isLoggedIn ? (
           <div className="flex items-center gap-x-[6px]">
-            <h2 className="text-gray-900 typo-heading-18-semibold">개인 맞춤 상품</h2>
+            <h2 className="typo-heading-18-semibold text-gray-900">개인 맞춤 상품</h2>
             <Link
               href={PATH.recommendationUpdate({ progress: 1 })}
-              className="px-[10px] py-[2px] rounded-[50px] bg-gray-100 text-gray-700 typo-body-12-semibold"
+              className="typo-body-12-semibold rounded-[50px] bg-gray-100 px-[10px] py-[2px] text-gray-700"
             >
               수정
             </Link>
           </div>
         ) : (
-          <h2 className="text-gray-900 typo-heading-18-semibold">인기상품</h2>
+          <h2 className="typo-heading-18-semibold text-gray-900">인기상품</h2>
         )}
-        <Link href={PATH.mainProductList} className="text-gray-600 typo-body-11-semibold">
+        <Link href={PATH.mainProductList} className="typo-body-11-semibold text-gray-600">
           더보기
         </Link>
       </div>
       {isLoggedIn && preference && (
-        <p className="mt-[6px] typo-body-12-regular text-gray-600 whitespace-pre-line">
+        <p className="typo-body-12-regular mt-[6px] whitespace-pre-line text-gray-600">
           {genGuidanceMessage(preference)}
         </p>
       )}

@@ -13,7 +13,7 @@ const BbancketingPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <BbancketingProductList/>
+      <BbancketingProductList />
     </HydrationBoundary>
   );
 };

@@ -37,14 +37,14 @@ const TagsSection = () => {
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
       <div className="typo-title-14-semibold text-gray-700">성분</div>
-      <div className="flex gap-[10px] flex-wrap">
+      <div className="flex flex-wrap gap-[10px]">
         {FILTER_VALUES.tags.kind.map((tag) => {
           const isSelected = !!selectedTags?.includes(tag);
           return (
             <CheckBox
               key={tag}
               className={cn(
-                'h-[37px] p-[8px] rounded-[8px]',
+                'h-[37px] rounded-[8px] p-[8px]',
                 isSelected ? 'bg-secondary-pink' : 'bg-blue-gray-30'
               )}
               name="category"

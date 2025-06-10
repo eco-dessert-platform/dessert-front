@@ -24,8 +24,8 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
   const { elaborateCategory, simplifyCategory } = useCategory();
 
   return (
-    <PaddingWrapper className="flex flex-col gap-y-[10px] pb-[12px] border-b border-gray-100">
-      <div className="flex justify-between items-center">
+    <PaddingWrapper className="flex flex-col gap-y-[10px] border-b border-gray-100 pb-[12px]">
+      <div className="flex items-center justify-between">
         {filterFamilyId === 'main' && <MainBoardCount />}
         {filterFamilyId === 'search' && <SearchBoardCount />}
         <ProductSortSelect />

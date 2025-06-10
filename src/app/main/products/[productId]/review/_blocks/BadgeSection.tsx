@@ -23,7 +23,7 @@ const BadgeSection = async ({ params: { productId } }: Props) => {
     Object.values(category).some((value) => value !== 0);
 
   return (
-    <div className="flex gap-[10px] w-full">
+    <div className="flex w-full gap-[10px]">
       {shouldRenderBadge(taste) && <ReviewBadge className="w-1/3" shape={tasteBadge} />}
       {shouldRenderBadge(texture) && <ReviewBadge className="w-1/3" shape={textureBadge} />}
       {shouldRenderBadge(brix) && <ReviewBadge className="w-1/3" shape={brixBadge} />}

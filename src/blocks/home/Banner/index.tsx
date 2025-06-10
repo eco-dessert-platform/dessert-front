@@ -14,7 +14,7 @@ const Banner = () => (
         height={100}
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}
-        className="object-contain rounded-[8px] cursor-pointer"
+        className="cursor-pointer rounded-[8px] object-contain"
       />
     </PaddingWrapper>
   </Link>

@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
   });
 
   return (
-    <PaddingWrapper className="typo-body-12-medium [&>ul]:list-disc [&>ul]:ml-4 [&>ol]:ml-4 [&>ol]:list-decimal [&>h1]:typo-heading-20-semibold [&>h2]:typo-heading-18-semibold [&>h3]:typo-title-16-regular">
+    <PaddingWrapper className="typo-body-12-medium [&>h1]:typo-heading-20-semibold [&>h2]:typo-heading-18-semibold [&>h3]:typo-title-16-regular [&>ol]:ml-4 [&>ol]:list-decimal [&>ul]:ml-4 [&>ul]:list-disc">
       <ReactMarkdown>{data}</ReactMarkdown>
     </PaddingWrapper>
   );

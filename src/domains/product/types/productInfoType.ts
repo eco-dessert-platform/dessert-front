@@ -26,12 +26,12 @@ type Nutrient = {
   protein: number;
   carbohydrates: number;
   fat: number;
-  weight: number | null;
-  calories: number | null;
+  weight: number;
+  calories: number;
 };
 
-type OrderType = {
-  orderType: 'WEEK' | 'DATE';
+export type OrderType = {
+  orderType: 'WEEK' | 'DATE' | 'RESTOCK';
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;
@@ -39,8 +39,8 @@ type OrderType = {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-  orderStartDate: string | null;
-  orderEndDate: string | null;
+  orderStartDate: string;
+  orderEndDate: string;
 };
 
 export type ProductType = {

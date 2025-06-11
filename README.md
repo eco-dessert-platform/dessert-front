@@ -1,6 +1,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=gradient&text=빵그리 FE&desc=부제목 입력하는곳&fontAlignY=30&descAlignY=55" style="width: 100%;" />
 
 Git
+
 ```
 ✨ 새로운 기능 추가 및 기존 기능 요구사항에 맞춰 수정
 🐛 기능에 대한 버그 수정

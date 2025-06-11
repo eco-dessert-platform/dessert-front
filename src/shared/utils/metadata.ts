@@ -133,9 +133,6 @@ const generateProductDetailMetadata = async ({
       store,
       products: productOptions
     } = await productService.getProductInfo(id);
-    // const product = await productService.getBoardDetail(id);
-    // const store = await productService.getStoreInfo(id);
-    // const productOptions = await productService.getProductOption(id);
 
     return {
       metadataBase: new URL('https://www.bbanggree.com'),

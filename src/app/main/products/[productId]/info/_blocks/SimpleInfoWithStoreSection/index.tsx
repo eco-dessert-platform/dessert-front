@@ -3,7 +3,6 @@
 import useGetBoardDetailQuery from '@/domains/product/queries/useGetBoardDetailQuery';
 import useGetReviewRatingQuery from '@/domains/review/queries/useGetReviewRatingQuery';
 import DeliveryFeeSection from './DeliveryFeeSection';
-// import DetailStoreInfo from './DetailStoreInfo';
 import SimpleProductInfo from './SimpleProductInfo';
 import DetailStoreInfo from './DetailStoreInfo';
 
@@ -11,18 +10,20 @@ interface Props {
   productId: number;
 }
 
+const initData = {
+  storeId: 0,
+  boardId: 0,
+  boardTitle: '',
+  boardPrice: 0,
+  discountRate: 0,
+  deliveryFee: 0,
+  freeShippingConditions: 0
+};
+
 const SimpleInfoWithStoreSection = ({ productId }: Props) => {
   const { data } = useGetBoardDetailQuery(productId);
 
-  const boardData = data ?? {
-    storeId: 0,
-    boardId: 0,
-    boardTitle: '',
-    boardPrice: 0,
-    discountRate: 0,
-    deliveryFee: 0,
-    freeShippingConditions: 0
-  };
+  const boardData = data ?? initData;
 
   const { data: ratingData = { rating: 0, count: 0 } } = useGetReviewRatingQuery(Number(productId));
 

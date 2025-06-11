@@ -29,7 +29,7 @@ const Participate = () => {
     }, 1 * SECOND);
 
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [targetDate, calculateTimeLeft]);
 
   return (
     <div className="relative">

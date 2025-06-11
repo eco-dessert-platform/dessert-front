@@ -36,7 +36,7 @@ const FixedPurchaseButtonSection = () => {
     if (modal) {
       closeModal();
     }
-  }, [pathname]);
+  }, [pathname, closeModal]);
 
   if (!boardData) return 'data not found';
   if (!similarProducts) return null;

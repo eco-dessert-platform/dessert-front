@@ -7,7 +7,7 @@ services:
     image: dessert_fe
     restart: always
     expose:
-      - "3000"
+      - '3000'
     environment:
       - NODE_ENV=production
 
@@ -16,7 +16,7 @@ services:
     container_name: dessert_fe_nginx
     restart: always
     ports:
-      - "8855:80"
+      - '8855:80'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:

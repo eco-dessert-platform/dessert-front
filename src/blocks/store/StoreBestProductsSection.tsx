@@ -23,7 +23,7 @@ const StoreBestProductsSection = ({ storeInfo: { storeId, storeName } }: Props) 
 
   return (
     <PaddingWrapper>
-      <h5 className="mb-[10px] typo-title-14-semibold text-gray-800">인기상품</h5>
+      <h5 className="typo-title-14-semibold mb-[10px] text-gray-800">인기상품</h5>
       <div className="grid grid-cols-3 gap-x-[10px]">
         {products.map((product, i) => {
           const { reviewRate, reviewCount, tags, ...rest } = product;

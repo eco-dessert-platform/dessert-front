@@ -17,7 +17,7 @@ const RecentKeywordSection = () => {
   };
 
   return (
-    <div className="flex gap-[8px] overflow-x-auto scrollbar-hide">
+    <div className="scrollbar-hide flex gap-[8px] overflow-x-auto">
       {recentKeywords?.map((item) => (
         <RecentKeyword key={item.keyword} title={item.keyword} onClick={() => handleDelete(item)} />
       ))}

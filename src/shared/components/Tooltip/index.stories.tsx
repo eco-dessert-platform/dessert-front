@@ -8,7 +8,7 @@ const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   decorators: [
     (Story) => (
-      <div className="flex justify-center items-center w-full h-[80vh]">
+      <div className="flex h-[80vh] w-full items-center justify-center">
         <Story />
       </div>
     )
@@ -46,7 +46,7 @@ export const Default: Story = {
 
 export const Placement: Story = {
   render: () => (
-    <div className="grid grid-rows-4 grid-cols-3 gap-x-10 gap-y-10 min-w-[300px] justify-items-center">
+    <div className="grid min-w-[300px] grid-cols-3 grid-rows-4 justify-items-center gap-x-10 gap-y-10">
       {PLACEMENT.map((placement) => Template({ anchorText: placement, placement }))}
     </div>
   )

@@ -77,10 +77,10 @@ const OrderAvailableDays = ({ product }: Props) => {
 
   return (
     <div>
-      <h2 className="text-gray-500 text-12 leading-150 font-semibold pb-0">
+      <h2 className="text-12 pb-0 leading-150 font-semibold text-gray-500">
         주문 가능 {ORDER_TYPE[orderType.orderType]}
       </h2>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div className="flex gap-[4px]">
           {isWeek && <TypeOfWeek availableDays={product.orderType} />}
           {isDate && (

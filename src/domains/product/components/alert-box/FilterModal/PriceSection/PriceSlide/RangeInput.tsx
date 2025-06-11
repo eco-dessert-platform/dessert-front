@@ -25,7 +25,7 @@ const RangeInput = ({ value, onChange }: RageInputProps) => {
       min={LIMIT_MIN_PRICE}
       max={LIMIT_MAX_PRICE}
       step={PRICE_RANGE_STEP}
-      className="absolute top-0 w-full h-full appearance-none bg-transparent pointer-events-none"
+      className="pointer-events-none absolute top-0 h-full w-full appearance-none bg-transparent"
     />
   );
 };

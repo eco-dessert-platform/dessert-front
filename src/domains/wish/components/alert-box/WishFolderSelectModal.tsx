@@ -42,7 +42,7 @@ const WishFolderSelectModal = ({ productId }: Props) => {
   };
 
   return (
-    <Modal title="찜 폴더" className="font-semibold text-[14px] text-gray-800">
+    <Modal title="찜 폴더" className="text-[14px] font-semibold text-gray-800">
       <div className="flex flex-col">
         <button
           type="button"
@@ -50,7 +50,7 @@ const WishFolderSelectModal = ({ productId }: Props) => {
           onClick={openCreateWishFolderModal}
         >
           <PaddingWrapper className="flex items-center gap-[10px]">
-            <div className="flex justify-center items-center size-[26px] bg-gray-100 rounded-[6px] border border-gray-200">
+            <div className="flex size-[26px] items-center justify-center rounded-[6px] border border-gray-200 bg-gray-100">
               <PlusIcon />
             </div>
             새 폴더 만들기

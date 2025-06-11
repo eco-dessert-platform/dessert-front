@@ -23,7 +23,7 @@ const ImageSlider = ({ images }: Props) => {
         {images?.map(({ url, id }, idx) => (
           <div
             key={id}
-            className="relative size-[64px] aspect-square rounded-[6px] overflow-hidden"
+            className="relative aspect-square size-[64px] overflow-hidden rounded-[6px]"
           >
             <ImageWithFallback
               fallback={<Skeleton className="size-full rounded-none" />}
@@ -34,7 +34,7 @@ const ImageSlider = ({ images }: Props) => {
               onClick={() =>
                 openFullScreenModal(<PhotoSlideModal photos={images} initSlideIdx={idx} />)
               }
-              className="object-cover cursor-pointer"
+              className="cursor-pointer object-cover"
             />
           </div>
         ))}

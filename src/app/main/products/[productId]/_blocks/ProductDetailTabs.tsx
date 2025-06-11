@@ -14,11 +14,11 @@ const ProductDetailTabs = () => {
 
   return (
     <div className="flex w-full">
-      <Link href={infoPath} replace className="w-full h-full">
+      <Link href={infoPath} replace className="h-full w-full">
         <TabButton active={pathname === infoPath}>상품</TabButton>
       </Link>
 
-      <Link href={reviewPath} replace className="w-full h-full">
+      <Link href={reviewPath} replace className="h-full w-full">
         <TabButton active={pathname === reviewPath}>리뷰</TabButton>
       </Link>
     </div>

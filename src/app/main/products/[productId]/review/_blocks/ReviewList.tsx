@@ -17,7 +17,7 @@ const ReviewList = () => {
   }, [inView, fetchNextPage]);
 
   if (!reviews || reviews.length === 0)
-    return <SadBbangleBox className="size-[300px] mx-auto">작성된 리뷰가 없어요.</SadBbangleBox>;
+    return <SadBbangleBox className="mx-auto size-[300px]">작성된 리뷰가 없어요.</SadBbangleBox>;
 
   return (
     <section className="flex flex-col divide-y divide-gray-200">

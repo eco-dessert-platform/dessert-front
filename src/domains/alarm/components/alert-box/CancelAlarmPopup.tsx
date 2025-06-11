@@ -20,10 +20,10 @@ const CancelAlarmPopup = ({ type, cancelAlarm }: Props) => {
 
   return (
     <Popup>
-      <PaddingWrapper className="text-center typo-title-16-medium">
+      <PaddingWrapper className="typo-title-16-medium text-center">
         {ALARM[type].name} 알림
       </PaddingWrapper>
-      <PaddingWrapper className="text-center typo-title-14-regular">
+      <PaddingWrapper className="typo-title-14-regular text-center">
         {ALARM[type].name} 알림을 해제할까요?
       </PaddingWrapper>
       <PaddingWrapper className="flex justify-around gap-x-[10px] py-[10px]">

@@ -2,7 +2,7 @@ import BbangleCryIcon from '@public/assets/icons/bbangle-cry.svg';
 
 const WithdrawLogoSection = () => (
   <div className="mb-[40px] flex flex-col items-center">
-    <div className="flex justify-center items-center w-[80px] h-[80px]">
+    <div className="flex h-[80px] w-[80px] items-center justify-center">
       <BbangleCryIcon />
     </div>
     <div className="text-center">

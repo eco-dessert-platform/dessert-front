@@ -11,7 +11,7 @@ const WishFolderGrid = () => {
   }
 
   return (
-    <div className="grid gap-[16px] grid-cols-2">
+    <div className="grid grid-cols-2 gap-[16px]">
       {wishList?.map(({ folderId, title, count, productImages }) => (
         <WishFolder
           key={folderId}

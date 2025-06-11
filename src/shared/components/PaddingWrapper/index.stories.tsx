@@ -18,7 +18,7 @@ export default meta;
 const Template: StoryObj<PaddingWrapperProps> = {
   render: (args) => (
     <PaddingWrapper {...args}>
-      <div className="bg-lightblue-500 w-full h-[50px] text-center ">Sample content</div>
+      <div className="bg-lightblue-500 h-[50px] w-full text-center">Sample content</div>
     </PaddingWrapper>
   )
 };

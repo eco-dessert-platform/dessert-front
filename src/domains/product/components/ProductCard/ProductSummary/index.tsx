@@ -10,16 +10,16 @@ const ProductSummary = ({
   product: { storeName, title, discountRate, price, reviewRate, reviewCount, tags }
 }: ProductSummaryProps) => (
   <div className="mt-[6px]">
-    <p className="text-gray-600 typo-body-11-regular">{storeName}</p>
-    <h3 className="text-gray-800 typo-body-12-regular overflow-hidden text-ellipsis whitespace-nowrap">
+    <p className="typo-body-11-regular text-gray-600">{storeName}</p>
+    <h3 className="typo-body-12-regular overflow-hidden text-ellipsis whitespace-nowrap text-gray-800">
       {title}
     </h3>
-    <div className="flex items-center gap-x-[2px] typo-title-14-medium">
+    <div className="typo-title-14-medium flex items-center gap-x-[2px]">
       {discountRate > 0 && <span className="text-secondary-orange-red">{discountRate}%</span>}
       <span className="text-gray-900">{price.toLocaleString()}원</span>
     </div>
     {reviewRate !== undefined && reviewCount !== undefined && (
-      <div className="mb-[4px] flex gap-[2px] items-center">
+      <div className="mb-[4px] flex items-center gap-[2px]">
         <div className="flex items-center">
           <StarIcon size="sm" color="yellow" />
           <p className="typo-body-11-semibold text-gray-800">{reviewRate.toFixed(1)}</p>

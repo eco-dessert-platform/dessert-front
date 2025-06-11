@@ -19,15 +19,15 @@ const SearchInput = ({
 }: SearchInputProps) => (
   <div
     className={cn(
-      'flex items-center gap-[6px] px-[16px] py-[10px] w-full rounded-[50px] ',
-      warning ? 'border border-secondary-orange-red bg-secondary-pink' : 'bg-red-gray-30'
+      'flex w-full items-center gap-[6px] rounded-[50px] px-[16px] py-[10px]',
+      warning ? 'border-secondary-orange-red bg-secondary-pink border' : 'bg-red-gray-30'
     )}
   >
     {warning ? <SearchIcon shape="red-16" /> : <SearchIcon shape="gray-16" />}
     <input
       type="text"
       className={cn(
-        'flex-1 p-0 text-gray-900 border-none rounded-none outline-hidden typo-title-14-medium',
+        'typo-title-14-medium flex-1 rounded-none border-none p-0 text-gray-900 outline-hidden',
         warning ? 'bg-secondary-pink' : 'bg-red-gray-30'
       )}
       value={value}

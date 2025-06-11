@@ -29,7 +29,7 @@ const CategoryTab = () => {
           drag="x"
           dragConstraints={tabContainerRef}
           dragElastic={0}
-          className="min-w-max overflow-x-scroll scrollbar-hide"
+          className="scrollbar-hide min-w-max overflow-x-scroll"
         >
           <div className="flex w-full">
             {FILTER_VALUES.category.kind[mainCategory].map((category, index) => {

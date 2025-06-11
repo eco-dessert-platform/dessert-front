@@ -52,14 +52,14 @@ const ImageUploadSection = () => {
   const uploadedImagesUrl = watch('images.urls');
 
   return (
-    <PaddingWrapper className="flex gap-x-[5px] overflow-x-scroll scrollbar-hide">
+    <PaddingWrapper className="scrollbar-hide flex gap-x-[5px] overflow-x-scroll">
       <ImageInput
         {...fileInputRegister}
         multiple
-        className="flex flex-col justify-center items-center min-w-[64px] h-[64px] border-[1.5px] border-gray-300 rounded-[6px]"
+        className="flex h-[64px] min-w-[64px] flex-col items-center justify-center rounded-[6px] border-[1.5px] border-gray-300"
       >
         <CameraIcon />
-        <div className="flex gap-x-[2px] typo-body-11-regular text-gray-500">
+        <div className="typo-body-11-regular flex gap-x-[2px] text-gray-500">
           사진
           <p>
             <span

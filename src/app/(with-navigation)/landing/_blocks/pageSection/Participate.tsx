@@ -43,9 +43,9 @@ const Participate = () => {
         className="object-contain"
       />
 
-      <PaddingWrapper className="bg-white py-[50px] text-[4.3vw] md:text-[3vw] lg:text-[3vw] w-[85%] rounded-md flex justify-between m-auto">
-        <span className="text-[#2A51FF] font-medium">이벤트 종료까지 </span>
-        <span className="text-[#2A51FF] font-medium">
+      <PaddingWrapper className="m-auto flex w-[85%] justify-between rounded-md bg-white py-[50px] text-[4.3vw] md:text-[3vw] lg:text-[3vw]">
+        <span className="font-medium text-[#2A51FF]">이벤트 종료까지 </span>
+        <span className="font-medium text-[#2A51FF]">
           {timeLeft.days}일 <span className="mx-1">{timeLeft.hours}시간</span>
           <span className="mx-1">{timeLeft.minutes}분</span>
           {timeLeft.seconds}초

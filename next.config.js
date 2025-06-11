@@ -13,7 +13,7 @@ module.exports = {
       { hostname: 'bbangree-oven.cdn.ntruss.com' },
       { hostname: 'smartstore.naver.com' }
     ],
-    formats: ['image/webp'],
+    formats: ['image/webp']
   },
 
   output: 'standalone',
@@ -23,23 +23,21 @@ module.exports = {
     rules: {
       '*.svg': {
         loaders: ['@svgr/webpack'],
-        as: '*.js',
-      },
-    },
+        as: '*.js'
+      }
+    }
   },
 
   // webpack 설정
   webpack: (config) => {
     // @ts-expect-error 타입 에러 무시
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg')
-    );
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
 
     config.module.rules.push(
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/,
+        resourceQuery: /url/
       },
       {
         test: /\.svg$/i,
@@ -50,13 +48,13 @@ module.exports = {
             loader: '@svgr/webpack',
             options: {
               typescript: true,
-              ext: 'tsx',
-            },
-          },
-        ],
+              ext: 'tsx'
+            }
+          }
+        ]
       }
     );
     fileLoaderRule.exclude = /\.svg$/i;
     return config;
-  },
+  }
 };

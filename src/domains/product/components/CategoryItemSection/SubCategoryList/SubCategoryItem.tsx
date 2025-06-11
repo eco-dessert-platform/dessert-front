@@ -24,9 +24,9 @@ const SubCategoryItem = ({ categoryItem }: SubCategoryItemProps) => {
       <button
         type="button"
         onClick={() => clickCategory(categoryItem)}
-        className="flex p-[16px] gap-[6px] bg-red-gray-30 items-center w-full border-solid border-r-[0.5px] border-b-[0.5px] border-gray-200 hover:bg-gray-200"
+        className="bg-red-gray-30 flex w-full items-center gap-[6px] border-r-[0.5px] border-b-[0.5px] border-solid border-gray-200 p-[16px] hover:bg-gray-200"
       >
-        <div className="font-medium text-start text-gray-700 text-14 grow">{categoryItem}</div>
+        <div className="text-14 grow text-start font-medium text-gray-700">{categoryItem}</div>
         <div>
           <ArrowIcons shape="medium-forward" />
         </div>

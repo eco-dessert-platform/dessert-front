@@ -40,7 +40,7 @@ const ProductDetailLayout = async ({ params, children }: DetailInfoLayoutProps) 
             <Header
               title={`[${storeData.storeTitle}] ${boardData.boardTitle}`}
               back
-              className="sticky top-0 bg-white z-50"
+              className="sticky top-0 z-50 bg-white"
             />
             <ProductDetailTabs />
           </>

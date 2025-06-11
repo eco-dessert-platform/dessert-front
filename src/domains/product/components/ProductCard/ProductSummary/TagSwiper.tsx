@@ -40,7 +40,7 @@ const TagSwiper = ({ tag }: TagSwiperProps) => {
   }, [tag]);
 
   return (
-    <div ref={tagContainerRef} className="flex items-center justify-between w-full">
+    <div ref={tagContainerRef} className="flex w-full items-center justify-between">
       <div className="flex gap-[4px] whitespace-nowrap">
         {tagFilter.slice(0, maxTagsToShow).map((item, index) => (
           <div
@@ -48,7 +48,7 @@ const TagSwiper = ({ tag }: TagSwiperProps) => {
             ref={(el) => {
               tagRefs.current[index] = el;
             }}
-            className="px-[6px] py-[2px] bg-white rounded-[4px] border border-solid border-gray-200 text-gray-600 typo-body-11-regular"
+            className="typo-body-11-regular rounded-[4px] border border-solid border-gray-200 bg-white px-[6px] py-[2px] text-gray-600"
           >
             {item}
           </div>

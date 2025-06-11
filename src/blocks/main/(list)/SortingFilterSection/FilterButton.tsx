@@ -37,10 +37,10 @@ const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
       aria-label="filter button"
       onClick={handleClick}
       className={cn(
-        'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] rounded-[50px] cursor-pointer',
+        'flex cursor-pointer items-center gap-[4px] rounded-[50px] border-[1px] border-solid p-[8px] pl-[12px]',
         isFiltered
           ? 'border-primary-orange-red text-primary-orange-red typo-body-12-bold'
-          : 'border-gray-200 text-gray-900 typo-body-12-regular'
+          : 'typo-body-12-regular border-gray-200 text-gray-900'
       )}
     >
       <span>{text}</span>

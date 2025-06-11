@@ -50,7 +50,7 @@ const LoginPage = () => {
   }, [message, kakaoMutate, googleMutate]);
 
   return (
-    <div className="flex flex-col gap-[81px] px-[16px] m-[16px] pt-[70px]">
+    <div className="m-[16px] flex flex-col gap-[81px] px-[16px] pt-[70px]">
       <LoginLogoSection
         title="여러분이 원하는 건강 디저트를 만나봐요!"
         subTitle="3초 로그인으로 더욱 다양한 빵그리 서비스를 경험해보세요"

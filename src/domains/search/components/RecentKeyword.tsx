@@ -7,7 +7,7 @@ interface RecentKeywordProps {
 }
 
 const RecentKeyword = ({ title, onClick }: RecentKeywordProps) => (
-  <div className="flex items-center justify-center gap-[4px] pl-[12px] pr-[8px] py-[8px] min-w-max bg-white border border-solid border-gray-200 rounded-[50px]">
+  <div className="flex min-w-max items-center justify-center gap-[4px] rounded-[50px] border border-solid border-gray-200 bg-white py-[8px] pr-[8px] pl-[12px]">
     <Link href={`/search/products?query=${title}`} className="typo-body-12-medium text-gray-700">
       {title}
     </Link>

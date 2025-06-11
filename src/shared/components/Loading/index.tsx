@@ -5,7 +5,7 @@ import BackDrop from '../BackDrop';
 
 const Loading = () => (
   <BackDrop isVisible>
-    <div className="relative w-[50px] h-[50px]">
+    <div className="relative h-[50px] w-[50px]">
       <Image src="/assets/images/loading.gif" alt="Loading..." layout="fill" objectFit="contain" />
     </div>
   </BackDrop>

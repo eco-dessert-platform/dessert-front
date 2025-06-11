@@ -20,7 +20,7 @@ const MyPage = async () => {
         <DisplayFcmToken />
       </div>
       {isLoggedIn ? <UserInfoSection /> : <LoginSection />}
-      <div className="w-full h-[6px] bg-gray-100" />
+      <div className="h-[6px] w-full bg-gray-100" />
       <MoreInfoSection />
     </>
   );

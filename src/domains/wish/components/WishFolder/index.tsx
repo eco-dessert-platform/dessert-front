@@ -56,10 +56,10 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-[6.5px] rounded-[6px] overflow-hidden">
+    <div className="flex flex-col gap-[6.5px] overflow-hidden rounded-[6px]">
       <Link
         href={`${PATH.wishProductList}/${isEditing ? '' : id}`}
-        className="relative flex justify-center items-center after:pb-[100%] w-full"
+        className="relative flex w-full items-center justify-center after:pb-[100%]"
         onClick={() => isEditing && updateFolderName()}
       >
         <FolderThumbnail thumbnailList={thumbnailList} />
@@ -68,14 +68,14 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
           <button
             aria-label="delete folder"
             type="button"
-            className="p-[4px] rounded-full absolute top-[6px] right-[6px]"
+            className="absolute top-[6px] right-[6px] rounded-full p-[4px]"
             onClick={deleteFolder}
           >
             <CloseIcon shape="black" />
           </button>
         )}
       </Link>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         {!isDefaultFolder && isEditing ? (
           <button
             aria-label="update folder"
@@ -89,7 +89,7 @@ const WishFolder = ({ id, thumbnailList, name, count }: WishFolderProps) => {
           <div className="typo-title-14-medium">{name}</div>
         )}
 
-        <div className="text-gray-500 typo-body-12-regular">({count})</div>
+        <div className="typo-body-12-regular text-gray-500">({count})</div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const OtherInfoSection = () => {
 
   return (
     <section className="mb-[8px]">
-      <h3 className="w-full px-[16px] py-[10px] bg-gray-100 typo-title-14-semibold text-gray-700">
+      <h3 className="typo-title-14-semibold w-full bg-gray-100 px-[16px] py-[10px] text-gray-700">
         기타 정보
       </h3>
       <CheckboxQuestion

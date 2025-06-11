@@ -14,11 +14,11 @@ interface Props {
 const CategoryOption = ({ product: { title, isSoldout }, isExpended, onClick }: Props) => (
   <PaddingWrapper
     className={cn(
-      'border-b border-gray-100 typo-title-14-regular text-gray-800 ',
+      'typo-title-14-regular border-b border-gray-100 text-gray-800',
       isSoldout && 'bg-gray-100'
     )}
   >
-    <button type="button" onClick={onClick} className="flex items-center justify-between w-full">
+    <button type="button" onClick={onClick} className="flex w-full items-center justify-between">
       <div className="flex gap-x-[5px]">
         <span>{isSoldout && '(품절)'}</span>
         <span>{title}</span>

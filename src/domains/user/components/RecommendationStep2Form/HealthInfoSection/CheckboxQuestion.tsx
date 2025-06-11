@@ -23,7 +23,7 @@ const CheckboxQuestion = ({ title, subTitle, required = false, options }: Props)
       </h4>
       <p className="typo-title-14-regular text-gray-700">{subTitle}</p>
     </PaddingWrapper>
-    <PaddingWrapper className="pt-0 flex flex-wrap gap-[10px]">
+    <PaddingWrapper className="flex flex-wrap gap-[10px] pt-0">
       {options.map((option) => {
         const { checked, name, value } = option;
         const id = `${name}/${value}`;
@@ -32,7 +32,7 @@ const CheckboxQuestion = ({ title, subTitle, required = false, options }: Props)
             key={id}
             htmlFor={id}
             className={cn(
-              'flex min-w-max p-[8px] gap-[6px] items-center typo-title-14-regular text-gray-900',
+              'typo-title-14-regular flex min-w-max items-center gap-[6px] p-[8px] text-gray-900',
               selectInputVariants({ outline: false, checked }),
               checked && 'typo-title-14-semibold'
             )}

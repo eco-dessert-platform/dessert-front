@@ -29,7 +29,7 @@ const ProductImageSlide = ({ boardImages, isSoldOut, onChange }: ImgSliderProps)
       onActiveIndexChange={(swiperCore) => {
         onChange(swiperCore.activeIndex);
       }}
-      className="w-full aspect-square"
+      className="aspect-square w-full"
     >
       {boardImages.map((image) => (
         <SwiperSlide
@@ -37,7 +37,7 @@ const ProductImageSlide = ({ boardImages, isSoldOut, onChange }: ImgSliderProps)
           className={cn(
             'relative size-full',
             isSoldOut &&
-              "after:content-['Sold_Out'] after:size-full after:flex-center after:absolute after:inset-0 after:bg-black/[0.3] after:text-gray-300 after:text-[40px] after:font-semibold after:rounded-[4px]"
+              "after:flex-center after:absolute after:inset-0 after:size-full after:rounded-[4px] after:bg-black/[0.3] after:text-[40px] after:font-semibold after:text-gray-300 after:content-['Sold_Out']"
           )}
         >
           <ImageWithFallback
@@ -48,7 +48,7 @@ const ProductImageSlide = ({ boardImages, isSoldOut, onChange }: ImgSliderProps)
             fill
             className="size-full rounded-[4px] object-cover"
             fallback={
-              <SadBbangleBox className="border rounded-[4px] size-full typo-body-12-regular">
+              <SadBbangleBox className="typo-body-12-regular size-full rounded-[4px] border">
                 이미지를 불러오지 못 했어요.
               </SadBbangleBox>
             }
@@ -59,14 +59,14 @@ const ProductImageSlide = ({ boardImages, isSoldOut, onChange }: ImgSliderProps)
       <button
         type="button"
         aria-label="왼쪽 버튼"
-        className={cn('swiper-button-prev after:hidden invisible', isMultipleImages && 'visible')}
+        className={cn('swiper-button-prev invisible after:hidden', isMultipleImages && 'visible')}
       >
         <ArrowIcon shape="left" />
       </button>
       <button
         type="button"
         aria-label="오른쪽 버튼"
-        className={cn('swiper-button-next after:hidden invisible', isMultipleImages && 'visible')}
+        className={cn('swiper-button-next invisible after:hidden', isMultipleImages && 'visible')}
       >
         <ArrowIcon shape="right" />
       </button>

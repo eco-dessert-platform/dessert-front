@@ -4,7 +4,7 @@ interface ImageCounterProps {
 }
 
 const ImageCounter = ({ index, total }: ImageCounterProps) => (
-  <div className="text-white text-11 font-medium">
+  <div className="text-11 font-medium text-white">
     {index + 1}/{total}
   </div>
 );

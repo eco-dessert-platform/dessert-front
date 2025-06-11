@@ -9,10 +9,10 @@ const ReviewSkeleton = () => (
     <div className="flex flex-col gap-[8px]">
       <StarRating />
       <div className="flex gap-[4px]">
-        <Skeleton className="size-[64px] aspect-square rounded-[6px]" />
-        <Skeleton className="size-[64px] aspect-square rounded-[6px]" />
-        <Skeleton className="size-[64px] aspect-square rounded-[6px]" />
-        <Skeleton className="size-[64px] aspect-square rounded-[6px]" />
+        <Skeleton className="aspect-square size-[64px] rounded-[6px]" />
+        <Skeleton className="aspect-square size-[64px] rounded-[6px]" />
+        <Skeleton className="aspect-square size-[64px] rounded-[6px]" />
+        <Skeleton className="aspect-square size-[64px] rounded-[6px]" />
       </div>
       <div className="flex flex-col gap-1">
         <Skeleton className="w-full" />

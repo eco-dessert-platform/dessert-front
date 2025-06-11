@@ -27,7 +27,7 @@ const WishProductsDetail = async ({ params }: Props) => {
 
   return (
     <>
-      <PaddingWrapper className="pb-[12px] border-b border-gray-100 flex justify-end">
+      <PaddingWrapper className="flex justify-end border-b border-gray-100 pb-[12px]">
         <WishProductSortSelect />
       </PaddingWrapper>
 

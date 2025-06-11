@@ -24,10 +24,10 @@ const PhotoSlideModal = ({ photos, initSlideIdx = 0 }: Props) => (
       }}
       scrollbar={{ draggable: true }}
       cssMode
-      className="w-full h-full"
+      className="h-full w-full"
     >
       {photos.map(({ id, url }) => (
-        <SwiperSlide key={id} className="w-full h-full bg-white">
+        <SwiperSlide key={id} className="h-full w-full bg-white">
           <Image
             src={url}
             alt="리뷰 이미지"

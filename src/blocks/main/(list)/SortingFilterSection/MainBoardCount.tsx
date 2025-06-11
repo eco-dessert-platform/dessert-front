@@ -9,7 +9,7 @@ const MainBoardCount = () => {
   const { sort, ...filterValueWithoutSort } = filterValue;
   const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 
-  return <span className="text-gray-800 typo-body-12-medium">총 {boardsCount ?? ''}개</span>;
+  return <span className="typo-body-12-medium text-gray-800">총 {boardsCount ?? ''}개</span>;
 };
 
 export default MainBoardCount;

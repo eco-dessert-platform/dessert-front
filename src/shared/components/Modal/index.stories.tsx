@@ -7,7 +7,7 @@ const meta: Meta<typeof Modal> = {
   component: Modal,
   decorators: [
     (Story) => (
-      <div className="w-full max-w-[600px] h-screen m-auto flex justify-center items-center shadow-lg shadow-slate-100">
+      <div className="m-auto flex h-screen w-full max-w-[600px] items-center justify-center shadow-lg shadow-slate-100">
         <Story />
       </div>
     )

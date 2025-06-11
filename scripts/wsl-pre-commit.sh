@@ -12,3 +12,4 @@ echo "✅ Yarn version: $(yarn --version)"
 
 yarn lint-staged
 yarn check-types
+yarn format

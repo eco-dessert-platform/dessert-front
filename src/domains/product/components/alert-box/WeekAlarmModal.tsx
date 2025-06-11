@@ -59,7 +59,7 @@ const WeekAlarmModal = ({ id: productOptionId, orderType }: Props) => {
 
   return (
     <Modal title="요일별 알림 신청">
-      <PaddingWrapper className="py-[10px] flex flex-col gap-y-[10px]">
+      <PaddingWrapper className="flex flex-col gap-y-[10px] py-[10px]">
         {orderAvailableWeekArr.map((dayEn) => {
           const dayKr = transformDayToKr(dayEn);
           return (

@@ -83,7 +83,7 @@ const Footer = () => {
           >
             {isActive ? item.activeIcon : item.defaultIcon}
             <span
-              className={`${isActive ? 'text-primaryOrangeRed typo-body-12-semibold' : 'text-gray-500 typo-body-12-regular'}`}
+              className={`${isActive ? 'text-primary-orange-red typo-body-12-semibold' : 'text-gray-500 typo-body-12-regular'}`}
             >
               {item.title}
             </span>

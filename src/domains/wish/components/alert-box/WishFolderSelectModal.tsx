@@ -1,19 +1,18 @@
 'use client';
 
-/* 기획상 순환이 발생 */
-/* eslint-disable import/no-cycle */
-
-import { useSetRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import Modal from '@/shared/components/Modal';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { PlusIcon } from '@/shared/components/icons';
 import useModal from '@/shared/hooks/useModal';
+import dynamic from 'next/dynamic';
 import FolderThumbnail from '../common/FolderThumbnail';
 import useWishFolderListQuery from '../../queries/useWishFolderListQuery';
-import { selectedWishFolderState } from '../../atoms/wishFolder';
-import useMoveWishProduct from '../../queries/useMoveWishProduct';
-import UpdateWishFolderModal from './UpdateWishFolderModal';
 import useCreateWishFolderMutation from '../../queries/useCreateWishFolderMutation';
+import { selectedWishFolderAtom } from '../../atoms/wishFolder';
+import useMoveWishProduct from '../../queries/useMoveWishProduct';
+
+const UpdateWishFolderModal = dynamic(() => import('./UpdateWishFolderModal'), { ssr: false });
 
 interface Props {
   productId: number;
@@ -21,7 +20,7 @@ interface Props {
 
 const WishFolderSelectModal = ({ productId }: Props) => {
   const { data } = useWishFolderListQuery();
-  const setSelectedWishFolder = useSetRecoilState(selectedWishFolderState);
+  const [, setSelectedWishFolder] = useAtom(selectedWishFolderAtom);
   const { mutate } = useMoveWishProduct();
   const { openModal, closeModal } = useModal();
   const { mutate: createWishFolder } = useCreateWishFolderMutation();
@@ -37,7 +36,6 @@ const WishFolderSelectModal = ({ productId }: Props) => {
         onValidSubmit={({ title }) => {
           createWishFolder(title);
           closeModal();
-          openModal(<WishFolderSelectModal productId={productId} />);
         }}
       />
     );
@@ -45,7 +43,7 @@ const WishFolderSelectModal = ({ productId }: Props) => {
 
   return (
     <Modal title="찜 폴더" className="font-semibold text-[14px] text-gray-800">
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <button
           type="button"
           className="border-t border-gray-100"

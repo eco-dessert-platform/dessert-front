@@ -17,7 +17,7 @@ const SubcategoryList = ({ subCategories }: SubcategoryListProps) => (
       ease: 'easeInOut'
     }}
     style={{ originY: 0 }}
-    className="bg-redGray-30"
+    className="bg-red-gray-30"
   >
     <div className="grid grid-cols-2">
       {subCategories.map((categoryItem) => (

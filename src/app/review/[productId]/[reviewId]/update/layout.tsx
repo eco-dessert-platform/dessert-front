@@ -6,14 +6,16 @@ import ReviewUpdateFormProvider from './_blocks/ReviewUpdateFormProvider';
 import ButtonSection from './_blocks/ButtonSection';
 
 interface Props {
-  params: { productId: string; reviewId: string };
+  params: Promise<{ productId: string; reviewId: string }>;
   children: ReactNode;
 }
 
 const Layout = async ({ params, children }: Props) => {
-  if (!params.productId || !params.reviewId) throw new Error('비정상적인 접근');
+  const { productId, reviewId } = await params;
 
-  const { queryFn, queryKey } = reviewDetailQueryOptions(Number(params.reviewId));
+  if (!productId || !reviewId) throw new Error('비정상적인 접근');
+
+  const { queryFn, queryKey } = reviewDetailQueryOptions(Number(reviewId));
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey,

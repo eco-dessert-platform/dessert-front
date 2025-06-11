@@ -4,18 +4,18 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { Cursor } from '@/shared/types/response';
 import { productQueryKey, storeQueryKey } from '@/shared/queries/queryKey';
 import { IStoreProductType } from '@/domains/store/types/store';
-import { useRecoilValue } from 'recoil';
-import wishService from './service';
+import { useAtom } from 'jotai';
+import { updateInfiniteQueryCache } from '@/shared/utils/queryCache'; // Moved this import up
+import wishService from './service'; // This is now below
 import { wishQueryKey } from './queryKey';
-import { updateInfiniteQueryCache } from '../../../shared/utils/queryCache';
 import { wishSortDictionary } from '../constants';
-import { wishProductSortState } from '../atoms/sort';
+import { wishProductSortAtom } from '../atoms/sort';
 
 const useDeleteWishProductMutation = () => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
-  const sortOptionKr = useRecoilValue(wishProductSortState);
+  const [sortOptionKr] = useAtom(wishProductSortAtom);
   const sortOptionEng = wishSortDictionary.translate(sortOptionKr);
 
   const mutationFn = async ({ productId }: { productId: number }) => {

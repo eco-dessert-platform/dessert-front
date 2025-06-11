@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 
 import { useGetStoreInfoQuery } from '@/domains/store/queries/useGetStoreInfoQuery';
 import useAddWishStoreMutation from '@/domains/wish/queries/useAddWishStoreMutation';
 import useDeleteWishStoreMutation from '@/domains/wish/queries/useDeleteWishStoreMutation';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import HeartButton from '@/shared/components/HeartButton';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
@@ -28,7 +28,8 @@ const DetailStoreInfo = ({ storeId }: Props) => {
     storeId,
     storeName: storeData?.storeName ?? '🏠'
   });
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+
+  const [isLoggedIn] = useAtom(isLoggedinAtom); // Use Jotai atom to get login state
   const { openToast } = useToastNewVer();
 
   if (!storeData) return <PaddingWrapper>스토어 정보를 찾을 수 없어요.</PaddingWrapper>;
@@ -58,4 +59,5 @@ const DetailStoreInfo = ({ storeId }: Props) => {
     </Link>
   );
 };
+
 export default DetailStoreInfo;

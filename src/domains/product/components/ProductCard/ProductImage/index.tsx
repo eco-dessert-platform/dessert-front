@@ -2,13 +2,13 @@
 
 import { MouseEventHandler, useState } from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 
 import { IProductType } from '@/domains/product/types/productType';
-import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
+import { selectedWishFolderAtom } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import Badge from '@/shared/components/Badge';
 import HeartButton from '@/shared/components/HeartButton';
 import { BellIcon } from '@/shared/components/icons';
@@ -27,19 +27,20 @@ interface ProductImageProps {
   ranking?: number;
   isSimilarProduct?: boolean;
 }
+
 const ProductImage = ({
   product: { boardId, thumbnail, isWished, isBundled, isBbangcketing, isSoldOut },
   popular,
   ranking,
   isSimilarProduct
 }: ProductImageProps) => {
-  const selectedWishFolder = useRecoilValue(selectedWishFolderState);
+  const [selectedWishFolder] = useAtom(selectedWishFolderAtom);
   const { openToast } = useToastNewVer();
   const [isPopping, setIsPopping] = useState(false);
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
 
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
 
   const like: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -112,4 +113,5 @@ const ProductImage = ({
     </div>
   );
 };
+
 export default ProductImage;

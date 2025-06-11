@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import LoginLogoSection from '@/blocks/user/login/LoginLogoSection';
-import { socialLoginPopupState } from '@/domains/user/atoms/login';
+import { socialLoginPopupAtom } from '@/domains/user/atoms/login';
 import { SocialType } from '@/domains/user/types/login';
 import {
   useGoogleLoginMutation,
@@ -14,7 +14,7 @@ import KakaoLoginButton from './_blocks/KakaoLoginButton';
 import GoogleLoginButton from './_blocks/GoogleLoginButton';
 
 const LoginPage = () => {
-  const [popup, setPopup] = useRecoilState(socialLoginPopupState);
+  const [popup, setPopup] = useAtom(socialLoginPopupAtom);
   const [message, setMessage] = useState<{ code: string; socialType: SocialType }>();
   const { mutate: kakaoMutate } = useKakaoLoginMutation();
   const { mutate: googleMutate } = useGoogleLoginMutation();

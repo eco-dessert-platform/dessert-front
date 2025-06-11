@@ -1,20 +1,15 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { filterValueState, priceTempState } from '@/domains/product/atoms';
+import { useAtom } from 'jotai';
+import { filterValueAtom, priceAtom } from '@/domains/product/atoms';
 import PriceInputContainer from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceInputContainer';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import PriceSlide from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceSlide';
 
-interface PriceSectionProps {
-  filterFamilyId: FilterFamilyIDType;
-}
-
-const PriceSection = ({ filterFamilyId }: PriceSectionProps) => {
-  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
-  const [price, setPrice] = useRecoilState(priceTempState(filterFamilyId));
+const PriceSection = () => {
+  const [filterValue] = useAtom(filterValueAtom);
+  const [price, setPrice] = useAtom(priceAtom);
 
   useEffect(() => {
     setPrice(filterValue.price);

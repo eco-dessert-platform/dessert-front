@@ -13,7 +13,6 @@ const ButtonSection = () => {
   } = useFormContext();
 
   const isNickDoubleChecked = watch('isNickDoubleChecked');
-
   const isDisabled = !isNickDoubleChecked || !isDirty;
 
   return (

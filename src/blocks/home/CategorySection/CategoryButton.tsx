@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
-import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useAtom } from 'jotai';
+import { filterValueAtom } from '@/domains/product/atoms';
 import PATH from '@/shared/constants/path';
 
 function getCategoryFilterOption(name: string) {
@@ -38,11 +37,11 @@ function getCategoryFilterOption(name: string) {
 
 interface CategoryButtonProps {
   name: string;
-  icon: React.ReactElement;
+  icon: React.ReactNode;
 }
 
 const CategoryButton = ({ name, icon }: CategoryButtonProps) => {
-  const setFilterValue = useSetRecoilState(filterValueState(FILTER_FAMILY_ID.main));
+  const [, setFilterValue] = useAtom(filterValueAtom);
 
   const handleClickButton = () => {
     setFilterValue((prev) => ({ ...prev, ...getCategoryFilterOption(name) }));

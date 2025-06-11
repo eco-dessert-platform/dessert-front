@@ -1,25 +1,18 @@
 'use client';
 
 import { useId, useRef } from 'react';
-
 import { LayoutGroup, motion } from 'framer-motion';
-import { useRecoilState, useRecoilValue } from 'recoil';
-
-import { filterValueState, mainCategoryState } from '@/domains/product/atoms';
+import { useAtom } from 'jotai';
+import { filterValueAtom, mainCategoryAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import useCategory from '@/domains/product/hooks/useCategory';
 import TabButton from '@/shared/components/TabButton';
 
-interface Props {
-  filterFamilyId: FilterFamilyIDType;
-}
-
-const CategoryTab = ({ filterFamilyId }: Props) => {
+const CategoryTab = () => {
   const id = useId();
-  const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
-  const mainCategory = useRecoilValue(mainCategoryState(filterFamilyId));
-  const { elaborateCategory, simplifyCategory } = useCategory(filterFamilyId);
+  const [filterValue, setFilterValue] = useAtom(filterValueAtom);
+  const [mainCategory] = useAtom(mainCategoryAtom);
+  const { elaborateCategory, simplifyCategory } = useCategory();
   const tabContainerRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (newCategory: string) => {

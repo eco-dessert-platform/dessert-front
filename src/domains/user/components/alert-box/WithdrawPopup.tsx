@@ -35,7 +35,7 @@ const WithdrawPopup = () => {
             type="submit"
             form={FORM_ID.withdraw}
             value="탈퇴하기"
-            className="text-primaryOrangeRed typo-title-14-medium cursor-pointer"
+            className="text-primary-orange-red typo-title-14-medium cursor-pointer"
           />
         </PaddingWrapper>
       </div>

@@ -1,5 +1,3 @@
-'use client';
-
 import BbangleSmileIcon from '@public/assets/icons/bbangle-smile.svg';
 import BbangleCryIcon from '@public/assets/icons/bbangle-cry.svg';
 import BbanglVerticalNameIcon from '@public/assets/icons/bbangle-vertical-name.svg';
@@ -14,17 +12,17 @@ interface Props {
 const BbangleIcon = ({ shape, className }: Props) => {
   switch (shape) {
     case 'vertical-name':
-      return <BbanglVerticalNameIcon />;
+      return <BbanglVerticalNameIcon className={className} />;
     case 'horizontal-name':
-      return <BbangleHorizontalNameIcon />;
+      return <BbangleHorizontalNameIcon className={className} />;
     case 'smile':
       return <BbangleSmileIcon className={className} />;
     case 'cry':
-      return <BbangleCryIcon />;
+      return <BbangleCryIcon className={className} />;
     case 'smile-small':
-      return <BbangleSmaileSmallIcon />;
+      return <BbangleSmaileSmallIcon className={className} />;
     default:
-      return <BbangleSmileIcon />;
+      return <BbangleSmileIcon className={className} />;
   }
 };
 

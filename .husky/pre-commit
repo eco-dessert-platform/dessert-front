@@ -20,4 +20,4 @@ fi
 
 # 그 외 (Windows 직접 실행 시)
 echo "Running from Windows - use WSL with NVM/Node 22"
-wsl bash ./scripts/wsl-pre-commit.sh
+wsl -d Ubuntu bash ./scripts/wsl-pre-commit.sh

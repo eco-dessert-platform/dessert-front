@@ -7,16 +7,18 @@ import TopButton from '@/shared/components/TopButton';
 import WishProductList from './_blocks/WishProductList';
 
 interface Props {
-  params: { folderId: string };
+  params: Promise<{ folderId: string }>;
 }
 
 const WishProductsDetail = async ({ params }: Props) => {
+  const { folderId } = await params;
   const queryClient = new QueryClient();
-  const folderId = Number(params.folderId);
+  const folderIdNumber = Number(folderId); // Converting folderId to a number
   const options = wishProductListoptions({
-    folderId,
+    folderId: folderIdNumber,
     sort: wishSortDictionary.translate('담은순')
   });
+
   await queryClient.prefetchInfiniteQuery({
     queryKey: options.queryKey,
     queryFn: options.queryFn,

@@ -1,10 +1,9 @@
 'use client';
 
 import { MouseEventHandler, useEffect } from 'react';
+import { useAtom } from 'jotai';
 
-import { useRecoilValue } from 'recoil';
-
-import { selectedWishFolderState } from '@/domains/wish/atoms/wishFolder';
+import { selectedWishFolderAtom } from '@/domains/wish/atoms/wishFolder';
 import useAddWishProductMutation from '@/domains/wish/queries/useAddWishProductMutation';
 import useDeleteWishProductMutation from '@/domains/wish/queries/useDeleteWishProductMutation';
 import HeartButton from '@/shared/components/HeartButton';
@@ -18,21 +17,20 @@ import Modal from '@/shared/components/Modal';
 import ProductCard from '@/domains/product/components/ProductCard';
 import useGetSimilarProductsQuery from '@/domains/product/queries/useGetSimilarProducts';
 
-import { isLoggedinState } from '@/shared/atoms/login';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 
 const FixedPurchaseButtonSection = () => {
   const { productId } = useParams<{ productId: string }>();
   const { openModal, closeModal, modal } = useModal();
   const pathname = usePathname();
-  const selectedWishFolder = useRecoilValue(selectedWishFolderState);
 
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [selectedWishFolder] = useAtom(selectedWishFolderAtom);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
 
   const { mutate: addMutate } = useAddWishProductMutation();
   const { mutate: deleteMutate } = useDeleteWishProductMutation();
   const { data: similarProducts } = useGetSimilarProductsQuery(Number(productId));
   const { data: boardData } = useGetBoardDetailQuery(Number(productId));
-  console.log('🚀 ~ FixedPurchaseButtonSection ~ boardData:', boardData);
 
   useEffect(() => {
     if (modal) {

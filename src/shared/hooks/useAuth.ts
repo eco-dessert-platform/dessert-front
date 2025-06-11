@@ -1,11 +1,11 @@
 import { deleteCookie, setCookie } from '@/shared/actions/cookie';
 import { TOKEN } from '@/shared/constants/token';
-import { useSetRecoilState } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import { getExpFromToken } from '@/domains/user/utils/jwt';
 
 const useAuth = () => {
-  const setLogin = useSetRecoilState(isLoggedinState);
+  const [, setLogin] = useAtom(isLoggedinAtom);
 
   const logout = async () => {
     await Promise.all([deleteCookie(TOKEN.accessToken), deleteCookie(TOKEN.refreshToken)]);

@@ -7,10 +7,10 @@ import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { AnimatePresence, motion, useSpring } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
 const ToastContainer = () => {
-  const toasts = useRecoilValue(toastStateNewVer);
+  const toasts = useAtomValue(toastStateNewVer);
   const translateY = useSpring(0);
   const pathname = usePathname();
   const footerRef = useRef<HTMLElement | null>(null);

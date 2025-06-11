@@ -1,12 +1,8 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 import { DEFAULT_FOLDER_ID } from '../constants';
 
-export const isWishFolderEditingState = atom({
-  key: 'wishFolder',
-  default: false
-});
+// Atom for editing state of the wish folder
+export const isWishFolderEditingAtom = atom(false);
 
-export const selectedWishFolderState = atom({
-  key: 'selectedWishFolder',
-  default: DEFAULT_FOLDER_ID
-});
+// Atom for selected wish folder
+export const selectedWishFolderAtom = atom(DEFAULT_FOLDER_ID);

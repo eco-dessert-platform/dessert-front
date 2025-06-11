@@ -20,7 +20,7 @@ const bgColor = {
 };
 
 const GrayDivider = ({ color = 'gray50', className }: GrayDividerProps) => (
-  <hr className={twMerge(`h-[1px] border-0 ${bgColor[color]}`, className)} />
+  <hr className={twMerge(`h-px border-0 ${bgColor[color]}`, className)} />
 );
 
 export default GrayDivider;

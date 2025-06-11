@@ -1,12 +1,11 @@
 'use client';
 
-import { useRecoilValue } from 'recoil';
-import { filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useAtomValue } from 'jotai';
+import { filterValueAtom } from '@/domains/product/atoms';
 import { useGetBoardsCountQuery } from '@/domains/product/queries/useGetBoardsCountQuery';
 
 const MainBoardCount = () => {
-  const filterValue = useRecoilValue(filterValueState(FILTER_FAMILY_ID.main));
+  const filterValue = useAtomValue(filterValueAtom);
   const { sort, ...filterValueWithoutSort } = filterValue;
   const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 

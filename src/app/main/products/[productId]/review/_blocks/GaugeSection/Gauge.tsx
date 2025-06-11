@@ -9,7 +9,6 @@ interface Props {
 
 const Gauge = ({ left, right }: Props) => {
   const total = left.value + right.value;
-
   const leftPercentage = total === 0 ? 0 : (left.value / total) * 100;
   const rightPercentage = total === 0 ? 0 : (right.value / total) * 100;
 

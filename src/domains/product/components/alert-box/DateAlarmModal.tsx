@@ -6,23 +6,24 @@ import useModal from '@/shared/hooks/useModal';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import useAddAlarmWithFcmToken from '@/domains/alarm/hooks/useAddAlarmWithFcmToken';
-import { DateProductOptionType } from '@/domains/product/types/productDetailType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Modal from '@/shared/components/Modal';
 import Checkbox from '@/shared/components/Checkbox';
 import ButtonNewver from '@/shared/components/ButtonNewver';
+import { ProductType } from '../../types/productInfoType';
 
 interface Props {
-  product: DateProductOptionType;
+  product: ProductType;
+  notified: boolean;
 }
 
 const DateAlarmModal = ({
   product: {
     id: productOptionId,
     title: productOptionName,
-    orderAvailableDate: { startDate },
-    notified
-  }
+    orderType: { orderStartDate: startDate }
+  },
+  notified = false
 }: Props) => {
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();

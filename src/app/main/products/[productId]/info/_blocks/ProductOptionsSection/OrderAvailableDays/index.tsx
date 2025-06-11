@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-// import useModal from '@/shared/hooks/useModal';
+import useModal from '@/shared/hooks/useModal';
 import usePopup from '@/shared/hooks/usePopup';
 import useWebView from '@/shared/hooks/useWebView';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
@@ -9,14 +9,14 @@ import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarm
 import { ORDER_TYPE } from '@/domains/product/constants/orderType';
 import { AlarmType } from '@/domains/alarm/types';
 import useCheckLogin from '@/domains/product/hooks/useCheckLogin';
-// import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
-// import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
+import WeekAlarmModal from '@/domains/product/components/alert-box/WeekAlarmModal';
+import DateAlarmModal from '@/domains/product/components/alert-box/DateAlarmModal';
 import AlarmButton from '@/domains/alarm/components/common/AlarmButton';
 import MobileAppPopup from '@/domains/alarm/components/alert-box/MobileAppPopup';
 import AddAlarmPopup from '@/domains/alarm/components/alert-box/AddAlarmPopup';
 import CancelAlarmPopup from '@/domains/alarm/components/alert-box/CancelAlarmPopup';
 import { ProductType } from '@/domains/product/types/productInfoType';
-// import TypeOfDate from './TypeOfDate';
+import TypeOfDate from './TypeOfDate';
 import TypeOfWeek from './TypeOfWeek';
 
 interface Props {
@@ -28,7 +28,7 @@ const OrderAvailableDays = ({ product }: Props) => {
   const isWeek = orderType.orderType === 'WEEK';
   const isDate = orderType.orderType === 'DATE';
 
-  // const { openModal } = useModal();
+  const { openModal } = useModal();
   const { openPopup } = usePopup();
   const { productId } = useParams<{ productId: string }>();
   const { isWebView } = useWebView();
@@ -62,17 +62,17 @@ const OrderAvailableDays = ({ product }: Props) => {
   const handleBbangcketingBtnClick = () => {
     if (!isWebView) {
       openPopup(<MobileAppPopup type="bbangcketing" />);
-      // return;
+      return;
     }
 
-    // const isLoggedIn = checkLogin();
-    // if (!isLoggedIn) return;
+    const isLoggedIn = checkLogin();
+    if (!isLoggedIn) return;
 
-    // if (isWeek) {
-    //   openModal(<WeekAlarmModal product={{id: productOptionId, ...orderType}} />);
-    // } else if (isDate) {
-    // openModal(<DateAlarmModal product={product} />);
-    // }
+    if (isWeek) {
+      openModal(<WeekAlarmModal id={productOptionId} orderType={orderType} />);
+    } else if (isDate) {
+      openModal(<DateAlarmModal product={product} notified={false} />);
+    }
   };
 
   return (
@@ -83,7 +83,14 @@ const OrderAvailableDays = ({ product }: Props) => {
       <div className="flex justify-between items-center">
         <div className="flex gap-[4px]">
           {isWeek && <TypeOfWeek availableDays={product.orderType} />}
-          {/* {isDate && <TypeOfDate availableDays={product.orderType} />} */}
+          {isDate && (
+            <TypeOfDate
+              availableDays={{
+                startDate: orderType.orderStartDate,
+                endDate: orderType.orderEndDate
+              }}
+            />
+          )}
         </div>
         <AlarmButton
           type={isSoldout ? 'restock' : 'bbangcketing'}

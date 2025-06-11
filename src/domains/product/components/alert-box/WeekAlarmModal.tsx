@@ -6,7 +6,6 @@ import useModal from '@/shared/hooks/useModal';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import useAddAlarmWithFcmToken from '@/domains/alarm/hooks/useAddAlarmWithFcmToken';
-// import { WeekProductOptionType } from '@/domains/product/types/productDetailType';
 import { DayEnType } from '@/domains/product/types/dayType';
 import { transformDayToKr } from '@/domains/product/utils/transformDay';
 import { transformWeekObjectToArray } from '@/domains/product/utils/transformWeek';

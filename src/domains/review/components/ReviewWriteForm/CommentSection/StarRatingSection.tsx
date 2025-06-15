@@ -17,7 +17,7 @@ const StarRatingSection = () => {
   return (
     <div className="mb-[28px] flex flex-col items-center">
       <PaddingWrapper className="typo-title-16-semibold text-center text-gray-900">
-        {attachPostPosition(data?.title || 'OOO', '은')} 만족했나요?
+        {attachPostPosition(data?.boardTitle || 'OOO', '은')} 만족했나요?
       </PaddingWrapper>
       <StarRating
         {...register('rate', { required: true })}

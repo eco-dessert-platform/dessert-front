@@ -7,11 +7,13 @@ interface Props {
 }
 
 const BoardDetailsSection = async ({ productId }: Props) => {
-  const { boardDetails } = await productService.getBoardDetail(productId);
+  const {
+    board: { boardImages }
+  } = await productService.getProductInfo(productId);
 
   return (
     <div className="w-full p-0 pt-[16px]">
-      {boardDetails?.map((item) => (
+      {boardImages?.map((item) => (
         <Image key={item} src={item} alt="상세" width={600} height={100} className="m-auto" />
       ))}
     </div>

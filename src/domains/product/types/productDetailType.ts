@@ -26,6 +26,7 @@ interface BaseProductOptionType {
   orderType: OrderType;
   isSoldout: boolean;
   notified: boolean;
+  isBbangketting: boolean;
 }
 
 export interface WeekProductOptionType extends BaseProductOptionType {

@@ -36,7 +36,7 @@ const FixedPurchaseButtonSection = () => {
     if (modal) {
       closeModal();
     }
-  }, [pathname]);
+  }, [pathname, closeModal]);
 
   if (!boardData) return 'data not found';
   if (!similarProducts) return null;
@@ -74,8 +74,8 @@ const FixedPurchaseButtonSection = () => {
     <div className="mx-auto flex w-full max-w-[600px] items-center gap-[10px] bg-white p-[16px]">
       <HeartButton
         shape="default"
-        isActive={boardData.isWished}
-        onClick={boardData.isWished ? deleteToWishlist : addToWishlist}
+        isActive={boardData.isBoardWished}
+        onClick={boardData.isBoardWished ? deleteToWishlist : addToWishlist}
         className={cn(
           buttonVariants({ size: 'lg', color: 'border-white', radius: 'round' }),
           'w-[56px] min-w-max p-0'

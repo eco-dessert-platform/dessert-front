@@ -3,10 +3,9 @@
 import { useState } from 'react';
 
 import DetailSectionWrapper from '@/domains/product/components/DetailSectionWrapper';
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOptionQuery';
+import { ProductType } from '@/domains/product/types/productInfoType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
-
 import CategoryOption from './CategoryOption';
 import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
@@ -25,7 +24,7 @@ const ProductOptionsSection = ({ productId }: { productId: number }) => {
 
   return (
     <DetailSectionWrapper title="상품 옵션">
-      {productOption?.products.map((product: ProductOptionType) => (
+      {productOption?.map((product: ProductType) => (
         <div key={product.id}>
           <CategoryOption
             product={product}

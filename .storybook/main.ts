@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
+import path from 'path';
 
 const config: StorybookConfig = {
   framework: {
@@ -73,6 +74,12 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack']
     });
+
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      jotai: path.resolve(__dirname, '../node_modules/jotai')
+    };
 
     return config;
   },

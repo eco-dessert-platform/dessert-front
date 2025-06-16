@@ -9,12 +9,14 @@ import { IProductType } from '@/domains/product/types/productType';
 
 class SearchService extends Service {
   async getPopularKeywords() {
-    const res = await this.fetchExtend.get('/search/best-keyword', {
-      next: { revalidate: 60 * 60 }
-    });
+    const res = await this.fetchExtend.get('/search/best-keyword');
     const { success, code, message, list }: ListResponse<Array<string>> = await res.json();
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+
+    // 임의로 오류 발생
+    // const isSuccess = Math.random() < 0.5;
+    // if (!res.ok || !success || isSuccess) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return list;
   }
 

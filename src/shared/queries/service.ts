@@ -14,9 +14,9 @@ interface FetchInstance {
 class Service {
   public fetchExtend: FetchInstance;
 
-  private baseUrl: string;
+  private readonly baseUrl: string;
 
-  private headers: Record<string, string>;
+  private readonly headers: Record<string, string>;
 
   constructor() {
     this.baseUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1`;
@@ -53,38 +53,6 @@ class Service {
       }
     });
     return res;
-  }
-
-  private get(url: string, init?: RequestInit) {
-    return this.request('GET', url, init);
-  }
-
-  private post(url: string, init?: RequestInit) {
-    return this.request('POST', url, init);
-  }
-
-  private postForm(url: string, init?: RequestInit) {
-    return this.request('POST', url, init, true);
-  }
-
-  private put(url: string, init?: RequestInit) {
-    return this.request('PUT', url, init);
-  }
-
-  private patch(url: string, init?: RequestInit) {
-    return this.request('PATCH', url, init);
-  }
-
-  private delete(url: string, init?: RequestInit) {
-    return this.request('DELETE', url, init);
-  }
-
-  private options(url: string, init?: RequestInit) {
-    return this.request('OPTIONS', url, init);
-  }
-
-  private head(url: string, init?: RequestInit) {
-    return this.request('HEAD', url, init);
   }
 }
 

@@ -16,12 +16,12 @@ const BoardImagesSection = ({ productId }: { productId: number }) => {
   const [swiperIndex, setSwiperIndex] = useState(0);
   const { data: boardDetail } = useGetBoardDetailQuery(productId);
   const { data: productOption } = useGetProductOptionQuery(productId);
-  const imageArray = [boardDetail?.profile, ...(boardDetail?.boardImages ?? [])].filter(
+  const imageArray = [boardDetail?.boardProfile, ...(boardDetail?.boardImages ?? [])].filter(
     (item): item is string => item !== undefined && item !== null
   );
 
   const haveBoardImages = imageArray.length > 0;
-  const isAllProductSoldOut = productOption?.products.every((product) => product.isSoldout);
+  const isAllProductSoldOut = productOption?.every((product) => product.isSoldout);
 
   return (
     <PaddingWrapper className="pb-0">
@@ -35,7 +35,7 @@ const BoardImagesSection = ({ productId }: { productId: number }) => {
         ) : (
           <ImgNone />
         )}
-        {productOption?.boardIsBundled && (
+        {boardDetail?.isBundled && (
           <div className="absolute top-[10px] left-[10px] z-10">
             <Badge type="bundle">묶음상품</Badge>
           </div>

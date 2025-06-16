@@ -1,12 +1,12 @@
 import React from 'react';
 
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { cn } from '@/shared/utils/cn';
+import { ProductType } from '@/domains/product/types/productInfoType';
 
 interface Props {
-  product: ProductOptionType;
+  product: ProductType;
   isExpended: boolean;
   onClick: () => void;
 }

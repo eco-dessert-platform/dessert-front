@@ -10,8 +10,6 @@ import searchService from '@/domains/search/queries/service';
 
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
-
-
 interface SearchProductsProps {
   searchParams: { query?: string };
 }

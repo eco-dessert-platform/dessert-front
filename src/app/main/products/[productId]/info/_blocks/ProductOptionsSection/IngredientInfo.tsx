@@ -1,8 +1,8 @@
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
+import { ProductType } from '@/domains/product/types/productInfoType';
 import Tag from '@/shared/components/Tag';
 
 interface Props {
-  product: ProductOptionType;
+  product: ProductType;
 }
 
 const IngredientInfo = ({

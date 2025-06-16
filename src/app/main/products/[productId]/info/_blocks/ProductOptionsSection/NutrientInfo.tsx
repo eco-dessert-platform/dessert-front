@@ -1,8 +1,8 @@
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
+import { ProductType } from '@/domains/product/types/productInfoType';
 import { nutrientEngToKr } from '@/domains/product/utils/transfromTag';
 
 interface Props {
-  product: ProductOptionType;
+  product: ProductType;
 }
 
 const NUTRIENT_ORDER = ['carbohydrates', 'sugars', 'protein', 'fat'] as const;

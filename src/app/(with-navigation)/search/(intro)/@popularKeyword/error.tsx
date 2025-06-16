@@ -19,7 +19,7 @@ const PopularKeywordError = ({
   const router = useRouter();
 
   const handleReset = () => {
-    // todo 이부분 애러처리 꿔야 할거 같다. > 일괄적으로 reset 만으로 동작하게끔
+    // todo 이부분 애러처리 바꿔야 할거 같다. > 일괄적으로 reset 만으로 동작하게끔
     startTransition(() => {
       reset();
       router.refresh();

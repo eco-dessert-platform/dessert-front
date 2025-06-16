@@ -45,6 +45,7 @@ const ProductImageSlide = ({ boardImages, isSoldOut, onChange }: ImgSliderProps)
             alt="상품 이미지"
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
+            sizes="(max-width: 610px) 100vw, 600px"
             fill
             className="size-full rounded-[4px] object-cover"
             fallback={

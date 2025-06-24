@@ -1,47 +1,47 @@
 # Workflow name
-name: 'Chromatic Deployment'
+# name: 'Chromatic Deployment'
 
-on:
-  pull_request:
-    paths:
-      - '**/*.stories.*'
-    branches: ['master', 'develop']
+# on:
+#   pull_request:
+#     paths:
+#       - '**/*.stories.*'
+#     branches: ['master', 'develop']
 
-jobs:
-  chromatic-deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
+# jobs:
+#   chromatic-deploy:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       pull-requests: write
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4.1.1
+#         with:
+#           fetch-depth: 0
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4.0.2
+#       - name: Setup Node.js environment
+#         uses: actions/setup-node@v4.0.2
 
-      - name: 환경 변수를 설정합니다.
-        run: echo "CHROMATIC_PROJECT_TOKEN=$CHROMATIC_PROJECT_TOKEN" >> .env
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+#       - name: 환경 변수를 설정합니다.
+#         run: echo "CHROMATIC_PROJECT_TOKEN=$CHROMATIC_PROJECT_TOKEN" >> .env
+#         env:
+#           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
-      - name: Set Yarn Version & install
-        run: |
-          corepack enable && corepack prepare yarn@4.1.1
-          yarn install --immutable
+#       - name: Set Yarn Version & install
+#         run: |
+#           corepack enable && corepack prepare yarn@4.1.1
+#           yarn install --immutable
 
-      - name: Publish Chromatic
-        id: chromatic
-        uses: chromaui/action@latest
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Publish Chromatic
+#         id: chromatic
+#         uses: chromaui/action@latest
+#         with:
+#           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+#           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create comment PR
-        uses: thollander/actions-comment-pull-request@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: '📖 storybook: ${{ steps.chromatic.outputs.storybookUrl }}'
+#       - name: Create comment PR
+#         uses: thollander/actions-comment-pull-request@v2
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           message: '📖 storybook: ${{ steps.chromatic.outputs.storybookUrl }}'

@@ -17,13 +17,13 @@ const AutoCompleteSearchItem = ({ text, keyword }: AutoCompleteSearchItemProps) 
 
   return (
     <Link href={`/search/products?query=${text}`}>
-      <div className="p-[16px] border-b border-solid border-gray-100 bg-white text-gray-900 typo-title-14-regular">
+      <div className="typo-title-14-regular border-b border-solid border-gray-100 bg-white p-[16px] text-gray-900">
         {noMatched ? (
           text
         ) : (
           <>
             {startText}
-            <span className="text-primaryOrangeRed">{highlightedText}</span>
+            <span className="text-primary-orange-red">{highlightedText}</span>
             {endText}
           </>
         )}

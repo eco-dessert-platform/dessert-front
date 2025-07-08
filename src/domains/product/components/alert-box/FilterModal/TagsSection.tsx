@@ -1,21 +1,16 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { filterValueState, tagsTempState } from '@/domains/product/atoms';
+import { useAtom } from 'jotai';
+import { filterValueAtom, tagsAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { cn } from '@/shared/utils/cn';
 
-interface TagsSectionProps {
-  filterFamilyId: FilterFamilyIDType;
-}
-
-const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
-  const filterValue = useRecoilValue(filterValueState(filterFamilyId));
-  const [selectedTags, setSelectedTags] = useRecoilState(tagsTempState(filterFamilyId));
+const TagsSection = () => {
+  const [filterValue] = useAtom(filterValueAtom);
+  const [selectedTags, setSelectedTags] = useAtom(tagsAtom);
   const uniqueValue = '전체';
 
   useEffect(() => {
@@ -42,15 +37,15 @@ const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
   return (
     <PaddingWrapper className="flex flex-col gap-[10px] pb-[26px]">
       <div className="typo-title-14-semibold text-gray-700">성분</div>
-      <div className="flex gap-[10px] flex-wrap">
+      <div className="flex flex-wrap gap-[10px]">
         {FILTER_VALUES.tags.kind.map((tag) => {
           const isSelected = !!selectedTags?.includes(tag);
           return (
             <CheckBox
               key={tag}
               className={cn(
-                'h-[37px] p-[8px] rounded-[8px]',
-                isSelected ? 'bg-secondaryPink' : 'bg-blueGray-30'
+                'h-[37px] rounded-[8px] p-[8px]',
+                isSelected ? 'bg-secondary-pink' : 'bg-blue-gray-30'
               )}
               name="category"
               isChecked={isSelected}
@@ -59,7 +54,7 @@ const TagsSection = ({ filterFamilyId }: TagsSectionProps) => {
               <span
                 className={
                   isSelected
-                    ? 'typo-title-14-semibold text-primaryOrangeRed'
+                    ? 'typo-title-14-semibold text-primary-orange-red'
                     : 'typo-title-14-regular text-gray-800'
                 }
               >

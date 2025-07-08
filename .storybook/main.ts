@@ -1,7 +1,14 @@
 import type { StorybookConfig } from '@storybook/nextjs';
+import path from 'path';
 
 const config: StorybookConfig = {
-  framework: '@storybook/nextjs',
+  framework: {
+    name: '@storybook/nextjs',
+    options: {
+      nextConfigPath: './next.config.js',
+      appDirectory: true
+    }
+  },
 
   stories: [
     '../src/**/*.mdx',
@@ -67,6 +74,12 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack']
     });
+
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      jotai: path.resolve(__dirname, '../node_modules/jotai')
+    };
 
     return config;
   },

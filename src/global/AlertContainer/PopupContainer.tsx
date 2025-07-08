@@ -1,13 +1,13 @@
 'use client';
 
-import { useRecoilValue } from 'recoil';
 import { MouseEventHandler } from 'react';
+import { useAtomValue } from 'jotai';
 import usePopup from '@/shared/hooks/usePopup';
 import { popupState } from '@/shared/atoms/alert';
 import BackDrop from '@/shared/components/BackDrop';
 
 const PopupContainer = () => {
-  const popup = useRecoilValue(popupState);
+  const popup = useAtomValue(popupState);
   const { closePopup } = usePopup();
 
   const popupVisible = !!popup;

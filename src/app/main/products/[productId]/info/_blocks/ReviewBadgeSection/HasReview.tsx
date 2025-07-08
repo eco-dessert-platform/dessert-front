@@ -17,7 +17,7 @@ const HasReview = async ({ productId }: Props) => {
         <ReviewBadge
           key={badge}
           shape={badge.toLowerCase() as keyof typeof BADGE}
-          className="flex-1 max-h-[100px]"
+          className="max-h-[100px] flex-1"
         />
       ))}
     </PaddingWrapper>

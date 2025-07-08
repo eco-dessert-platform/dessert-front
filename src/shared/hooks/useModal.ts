@@ -1,9 +1,9 @@
-import { modalState } from '@/shared/atoms/alert';
 import { ReactNode, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
+import { modalState } from '@/shared/atoms/alert';
 
 const useModal = () => {
-  const [modal, setModal] = useRecoilState(modalState);
+  const [modal, setModal] = useAtom(modalState);
 
   const openModal = (el: ReactNode) => setModal(el);
   const closeModal = () => setModal(null);

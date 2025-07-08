@@ -19,10 +19,10 @@ const PreviewImage = ({ imageSrc, onRemove }: PreviewImageProps) => (
       fallback={
         <BbangleIcon
           shape="smile"
-          className="flex w-[64px] h-[64px] flex-col items-center justify-center border bg-gray-50 rounded-[6px] "
+          className="flex h-[64px] w-[64px] flex-col items-center justify-center rounded-[6px] border bg-gray-50"
         />
       }
-      className="min-w-[64px] h-[64px] border-[1px] border-gray-300 rounded-[6px] object-cover object-center"
+      className="h-[64px] min-w-[64px] rounded-[6px] border border-gray-300 object-cover object-center"
     />
     <button
       type="button"

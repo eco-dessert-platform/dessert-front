@@ -1,8 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
+import React, { KeyboardEvent } from 'react';
 import FilterModal from '@/domains/product/components/alert-box/FilterModal';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { CloseIcon } from '@/shared/components/icons';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import useModal from '@/shared/hooks/useModal';
@@ -11,19 +10,25 @@ import { cn } from '@/shared/utils/cn';
 interface SelectProps {
   text: string;
   isFiltered?: boolean;
-  filterFamilyId: FilterFamilyIDType;
   onReset: () => void;
 }
 
-const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: SelectProps) => {
-  const closeRef = useRef<HTMLSpanElement>(null);
+const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
   const { openModal } = useModal();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    openModal(<FilterModal filterFamilyId={filterFamilyId} />);
+  const handleClick = () => {
+    openModal(<FilterModal />);
+  };
 
-    if (closeRef.current && e.target instanceof Element && closeRef.current.contains(e.target))
-      onReset();
+  const handleResetClick = (e: React.MouseEvent | KeyboardEvent) => {
+    e.stopPropagation();
+    onReset();
+  };
+
+  const handleResetKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleResetClick(e);
+    }
   };
 
   return (
@@ -32,16 +37,28 @@ const FilterButton = ({ text, isFiltered = false, filterFamilyId, onReset }: Sel
       aria-label="filter button"
       onClick={handleClick}
       className={cn(
-        'flex items-center gap-[4px] p-[8px] pl-[12px] border-solid border-[1px] rounded-[50px] cursor-pointer',
+        'flex cursor-pointer items-center gap-[4px] rounded-[50px] border-[1px] border-solid p-[8px] pl-[12px]',
         isFiltered
-          ? 'border-primaryOrangeRed text-primaryOrangeRed typo-body-12-bold'
-          : 'border-gray-200 text-gray-900 typo-body-12-regular'
+          ? 'border-primary-orange-red text-primary-orange-red typo-body-12-bold'
+          : 'typo-body-12-regular border-gray-200 text-gray-900'
       )}
     >
       <span>{text}</span>
-      <span ref={closeRef}>
-        {isFiltered ? <CloseIcon shape="no-bg-16-orange" /> : <ArrowIcons shape="down" />}
-      </span>
+      {isFiltered ? (
+        <span
+          role="button"
+          tabIndex={0}
+          onClick={handleResetClick}
+          onKeyDown={handleResetKeyDown}
+          aria-label="reset filter"
+        >
+          <CloseIcon shape="no-bg-16-orange" />
+        </span>
+      ) : (
+        <span>
+          <ArrowIcons shape="down" />
+        </span>
+      )}
     </button>
   );
 };

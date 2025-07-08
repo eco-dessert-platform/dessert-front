@@ -2,5 +2,24 @@
 
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged
-yarn check-types
+# macOS인 경우
+if [ "$(uname)" = "Darwin" ]; then
+  echo "Running on macOS - using yarn directly"
+  yarn lint-staged
+  yarn check-types
+  yarn format
+  exit 0
+fi
+
+# WSL/Linux인 경우
+if grep -qEi "Microsoft|WSL" /proc/version; then
+  echo "Running in WSL - using yarn directly"
+  yarn lint-staged
+  yarn check-types
+  yarn format
+  exit 0
+fi
+
+# 그 외 (Windows 직접 실행 시)
+echo "Running from Windows - use WSL with NVM/Node 22"
+wsl -d Ubuntu bash ./scripts/wsl-pre-commit.sh

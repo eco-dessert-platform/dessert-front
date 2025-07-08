@@ -6,7 +6,6 @@ import useModal from '@/shared/hooks/useModal';
 import { useAddAlarmMutation } from '@/domains/product/queries/useAddAlarmMutation';
 import { useCancelAlarmMutation } from '@/domains/product/queries/useCancelAlarmMutation';
 import useAddAlarmWithFcmToken from '@/domains/alarm/hooks/useAddAlarmWithFcmToken';
-import { WeekProductOptionType } from '@/domains/product/types/productDetailType';
 import { DayEnType } from '@/domains/product/types/dayType';
 import { transformDayToKr } from '@/domains/product/utils/transformDay';
 import { transformWeekObjectToArray } from '@/domains/product/utils/transformWeek';
@@ -14,21 +13,16 @@ import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Modal from '@/shared/components/Modal';
 import Checkbox from '@/shared/components/Checkbox';
 import ButtonNewver from '@/shared/components/ButtonNewver';
+import { OrderType } from '../../types/productInfoType';
 
 interface Props {
-  product: WeekProductOptionType;
+  id: number;
+  orderType: OrderType;
 }
 
-const WeekAlarmModal = ({
-  product: {
-    id: productOptionId,
-    orderAvailableWeek: orderAvailableWeekObject,
-    appliedOrderWeek: appliedOrderWeekObject
-  }
-}: Props) => {
-  const orderAvailableWeekArr = transformWeekObjectToArray(orderAvailableWeekObject);
-  const appliedOrderWeekArr =
-    appliedOrderWeekObject && transformWeekObjectToArray(appliedOrderWeekObject);
+const WeekAlarmModal = ({ id: productOptionId, orderType }: Props) => {
+  const orderAvailableWeekArr = transformWeekObjectToArray(orderType);
+  const appliedOrderWeekArr = orderType && transformWeekObjectToArray(orderType);
 
   const { closeModal } = useModal();
   const { productId } = useParams<{ productId: string }>();
@@ -64,7 +58,7 @@ const WeekAlarmModal = ({
 
   return (
     <Modal title="요일별 알림 신청">
-      <PaddingWrapper className="py-[10px] flex flex-col gap-y-[10px]">
+      <PaddingWrapper className="flex flex-col gap-y-[10px] py-[10px]">
         {orderAvailableWeekArr.map((dayEn) => {
           const dayKr = transformDayToKr(dayEn);
           return (

@@ -21,7 +21,7 @@ const Template = () => {
     <div className="flex w-full">
       <Radio isChecked={isActive} onChange={handleToggle}>
         <div
-          className={`text-gray-900 text-14 leading-150 tracking-tight-2 ${isActive ? 'font-semibold' : 'font-normal'}`}
+          className={`text-14 tracking-tight-2 leading-150 text-gray-900 ${isActive ? 'font-semibold' : 'font-normal'}`}
         >
           text
         </div>

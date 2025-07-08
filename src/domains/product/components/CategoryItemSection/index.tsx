@@ -1,16 +1,14 @@
 'use client';
 
 import React from 'react';
-
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { useSetRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 
 import PATH from '@/shared/constants/path';
 import useToggle from '@/shared/hooks/useToggle';
 
-import { mainCategoryState, filterValueState } from '@/domains/product/atoms';
-import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { mainCategoryAtom, filterValueAtom } from '@/domains/product/atoms';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
@@ -23,8 +21,9 @@ interface CategoryItemProps {
 
 const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps) => {
   const router = useRouter();
-  const setMainCategory = useSetRecoilState(mainCategoryState(FILTER_FAMILY_ID.main));
-  const setFilterValue = useSetRecoilState(filterValueState(FILTER_FAMILY_ID.main));
+
+  const [, setMainCategory] = useAtom(mainCategoryAtom);
+  const [, setFilterValue] = useAtom(filterValueAtom);
 
   const { isActive, toggle } = useToggle(true);
 
@@ -36,6 +35,7 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
       router.push(PATH.mainProductList);
     }
   };
+
   return (
     <>
       <MainCategoryItem
@@ -51,4 +51,5 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
     </>
   );
 };
+
 export default CategoryItemSection;

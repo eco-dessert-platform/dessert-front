@@ -25,13 +25,13 @@ const SimpleProductInfo = ({ title, price, discountRate, rating, count }: Props)
 
   return (
     <PaddingWrapper>
-      <div className="typo-title-16-regular leading-130 font-normal text-gray-800 mb-[2px]">
+      <div className="typo-title-16-regular mb-[2px] leading-130 font-normal text-gray-800">
         {title}
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div className="typo-heading-18-semibold">
-          <span className="text-secondaryOrangeRed mr-[4px]">
-            <span className="text-secondaryOrangeRed mr-[4px]">
+          <span className="text-secondary-orange-red mr-[4px]">
+            <span className="text-secondary-orange-red mr-[4px]">
               {discountRate > 0 ? `${discountRate}%` : null}
             </span>
           </span>

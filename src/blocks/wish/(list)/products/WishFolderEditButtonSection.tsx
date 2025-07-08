@@ -1,18 +1,18 @@
 'use client';
 
 import Button from '@/shared/components/Button';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import useModal from '@/shared/hooks/useModal';
-import { isWishFolderEditingState } from '@/domains/wish/atoms/wishFolder';
+import { isWishFolderEditingAtom } from '@/domains/wish/atoms/wishFolder';
 import UpdateWishFolderModal from '@/domains/wish/components/alert-box/UpdateWishFolderModal';
 import useCreateWishFolderMutation from '@/domains/wish/queries/useCreateWishFolderMutation';
 import useWishFolderListQuery from '@/domains/wish/queries/useWishFolderListQuery';
 import { useMemo } from 'react';
 
 const WishFolderEditButtonSection = () => {
-  const { data: wishList } = useWishFolderListQuery();
+  const { data: wishList, isLoading } = useWishFolderListQuery();
   const { mutate: createFolderMutate } = useCreateWishFolderMutation();
-  const [isEditing, setIsEditing] = useRecoilState(isWishFolderEditingState);
+  const [isEditing, setIsEditing] = useAtom(isWishFolderEditingAtom);
   const { openModal, closeModal } = useModal();
 
   const isSingleFolder = useMemo(() => !wishList || wishList.length === 1, [wishList]);
@@ -35,6 +35,10 @@ const WishFolderEditButtonSection = () => {
       />
     );
   };
+
+  if (isLoading) {
+    return <div>로딩 중...</div>; // 로딩 중 상태 처리
+  }
 
   return (
     <div className="flex justify-end gap-[6px] pb-[10px]">

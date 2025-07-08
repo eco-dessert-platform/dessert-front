@@ -22,7 +22,7 @@ const DeleteReasonList = () => {
         <label
           key={content}
           htmlFor={content}
-          className="flex gap-[6px] items-center cursor-pointer"
+          className="flex cursor-pointer items-center gap-[6px]"
         >
           <CheckBoxNewver
             id={content}

@@ -9,10 +9,13 @@ import StoreAllProductsSection from '@/blocks/store/StoreAllProductsSection';
 import TopButton from '@/shared/components/TopButton';
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-const MainStoreDetailPage = async ({ params: { id } }: Props) => {
+const MainStoreDetailPage = async ({ params }: Props) => {
+  // Destructuring in the parameter
+  const { id } = await params;
+
   const storeId = Number(id);
   const queryClient = new QueryClient();
   const [storeInfo] = await Promise.all([

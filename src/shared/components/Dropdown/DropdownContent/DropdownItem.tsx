@@ -7,7 +7,7 @@ interface Props {
 
 const DropdownItem = ({ children, onClick }: Props) => (
   <button
-    className="hover:bg-redGray-50 bg-white w-full text-center  p-[10px] h-full typo-body-12-regular"
+    className="hover:bg-red-gray-50 typo-body-12-regular h-full w-full bg-white p-[10px] text-center"
     type="button"
     onClick={onClick}
   >

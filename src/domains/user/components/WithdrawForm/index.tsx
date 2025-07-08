@@ -18,13 +18,13 @@ const WithdrawForm = () => {
   return (
     <form id={FORM_ID.withdraw} onSubmit={handleSubmit(onValid)}>
       <div>
-        <p className="mb-[8px] typo-title-14-semibold">
+        <p className="typo-title-14-semibold mb-[8px]">
           계정을 삭제하는 이유를 알려주세요😢
-          <span className="typo-title-14-semibold text-primaryOrangeRed">*&nbsp;</span>
+          <span className="typo-title-14-semibold text-primary-orange-red">*&nbsp;</span>
           <span className="typo-body-12-semibold text-gray-400">(다중 선택 가능)</span>
         </p>
         <DeleteReasonList />
-        <div className="flex justify-center mt-[20px] mb-[32px]">
+        <div className="mt-[20px] mb-[32px] flex justify-center">
           <Agree />
         </div>
       </div>

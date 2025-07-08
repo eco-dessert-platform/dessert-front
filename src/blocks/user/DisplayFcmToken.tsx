@@ -1,9 +1,9 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 import useWebview from '@/shared/hooks/useWebView';
-import { fcmTokenState } from '@/domains/alarm/atoms';
+import { fcmTokenAtom } from '@/domains/alarm/atoms';
 import { sendMessageToApp } from '@/shared/utils/sendMessageToApp';
 import { FCM_TYPE } from '@/shared/constants/message';
 
@@ -15,7 +15,7 @@ import ButtonNewver from '@/shared/components/ButtonNewver';
 const DisplayFcmToken = () => {
   const { openPopup, closePopup } = usePopup();
   const { isWebView } = useWebview();
-  const fcmToken = useRecoilValue(fcmTokenState);
+  const [fcmToken] = useAtom(fcmTokenAtom);
   const countClicked = useRef(0);
 
   useEffect(() => {
@@ -23,8 +23,8 @@ const DisplayFcmToken = () => {
     openPopup(
       <Popup>
         <PaddingWrapper>
-          <h5 className="mb-[16px] text-center typo-title-16-semibold">fcmToken 값</h5>
-          <p className="mb-[16px] break-all typo-title-14-regular">
+          <h5 className="typo-title-16-semibold mb-[16px] text-center">fcmToken 값</h5>
+          <p className="typo-title-14-regular mb-[16px] break-all">
             {fcmToken.data}
             {fcmToken.error && `fcmToken 값을 가져오지 못했습니다.\n${fcmToken.error}`}
           </p>
@@ -46,7 +46,7 @@ const DisplayFcmToken = () => {
 
   return (
     <div
-      className="absolute top-0 left-0 w-full h-full z-header"
+      className="z-header absolute top-0 left-0 h-full w-full"
       aria-hidden="true"
       onClick={handleClick}
     />

@@ -16,7 +16,7 @@ const StarRating = (
   const id = useId();
 
   return (
-    <label htmlFor={id} aria-label="별점" className="block relative max-w-fit">
+    <label htmlFor={id} aria-label="별점" className="relative block max-w-fit">
       <Stars rating={Number(value) as RatingType} size={starSize} />
       <input
         ref={ref}
@@ -28,7 +28,7 @@ const StarRating = (
         max={5}
         step={0.5}
         disabled={!editable}
-        className={`absolute left-0 top-0 w-full h-full opacity-0 ${editable ? 'cursor-pointer' : ''}`}
+        className={`absolute top-0 left-0 h-full w-full opacity-0 ${editable ? 'cursor-pointer' : ''}`}
         {...props}
       />
     </label>

@@ -58,7 +58,7 @@ const PhotoList = ({ boardId }: Props) => {
           onClick={() =>
             openFullScreenModal(<PhotoSlideModal photos={photos} initSlideIdx={idx} />)
           }
-          className="w-full aspect-square object-cover border-solid border-[1px] border-gray-300 rounded-[6px] cursor-pointer"
+          className="aspect-square w-full cursor-pointer rounded-[6px] border border-solid border-gray-300 object-cover"
         />
       ))}
       {hasNextPage && <PhotoSkeleton ref={ref} count={3} />}

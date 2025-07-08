@@ -10,7 +10,7 @@ const PhotoSkeleton = ({ count = 1 }: Props, ref: React.ForwardedRef<HTMLDivElem
       <div
         key={num}
         ref={ref}
-        className="w-full aspect-square rounded-[6px] bg-gray-300 animate-pulse"
+        className="aspect-square w-full animate-pulse rounded-[6px] bg-gray-300"
       />
     ))}
   </>

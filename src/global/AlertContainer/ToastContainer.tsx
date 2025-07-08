@@ -3,16 +3,18 @@
 import { toastStateNewVer } from '@/shared/atoms/alert';
 import ToastPop from '@/shared/components/ToastPop';
 import { ELEMENT_ID } from '@/shared/constants/elementId';
+import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import { AnimatePresence, motion, useSpring } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtomValue } from 'jotai';
 
 const ToastContainer = () => {
-  const toasts = useRecoilValue(toastStateNewVer);
+  const toasts = useAtomValue(toastStateNewVer);
   const translateY = useSpring(0);
   const pathname = usePathname();
   const footerRef = useRef<HTMLElement | null>(null);
+  const { resetToast } = useToastNewVer();
 
   useEffect(() => {
     const footer = document.getElementById(ELEMENT_ID.footer);
@@ -21,7 +23,7 @@ const ToastContainer = () => {
 
     translateY.set(-footer.clientHeight);
     footerRef.current = footer;
-  }, [pathname, translateY]);
+  }, [pathname, translateY, resetToast]);
 
   return (
     <motion.div
@@ -29,7 +31,7 @@ const ToastContainer = () => {
         translateY,
         translateX: '-50%'
       }}
-      className="fixed bottom-0 w-[calc(100%-32px)] max-w-[calc(600px-32px)] z-toast left-1/2"
+      className="z-toast fixed bottom-0 left-1/2 w-[calc(100%-32px)] max-w-[calc(600px-32px)]"
     >
       <AnimatePresence>
         {toasts.map(({ message, id, action }, index) => (

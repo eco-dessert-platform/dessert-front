@@ -1,12 +1,12 @@
 'use client';
 
-import { useSetRecoilState } from 'recoil';
-import { socialLoginPopupState } from '@/domains/user/atoms/login';
+import { useSetAtom } from 'jotai';
+import { socialLoginPopupAtom } from '@/domains/user/atoms/login';
 import KakaoIcon from '@/domains/user/assets/kakao_logo.svg';
 import { KAKAO } from '@/domains/user/constants/socialLogin';
 
 const KakaoLoginButton = () => {
-  const setPopup = useSetRecoilState(socialLoginPopupState);
+  const setPopup = useSetAtom(socialLoginPopupAtom);
   const queryObject = {
     client_id: KAKAO.client_id,
     redirect_uri: KAKAO.redirect_uri,
@@ -23,11 +23,11 @@ const KakaoLoginButton = () => {
   return (
     <button
       type="button"
-      className="rounded-[10px] flex gap-[8px] items-center justify-center h-[52px] bg-kakao shadow text-black"
+      className="bg-kakao flex h-[52px] items-center justify-center gap-[8px] rounded-[10px] text-black shadow-sm"
       onClick={openKakaoLoginPopup}
     >
       <KakaoIcon />
-      <div className="text-black/[0.85] typo-title-16-medium">카카오톡 시작하기</div>
+      <div className="typo-title-16-medium text-black/[0.85]">카카오톡 시작하기</div>
     </button>
   );
 };

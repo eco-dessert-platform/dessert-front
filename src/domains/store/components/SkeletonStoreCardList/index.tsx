@@ -7,7 +7,7 @@ interface SkeletonStoreListProps {
 }
 
 const SkeletonStoreList = ({ row = 6 }: SkeletonStoreListProps) => (
-  <PaddingWrapper className="gap-x-[16px] py-0 gap-y-[16px] border-b border-gray-100">
+  <PaddingWrapper className="gap-x-[16px] gap-y-[16px] border-b border-gray-100 py-0">
     {Array.from({ length: row }, (_, idx) => idx + 1).map((item) => (
       <SkeletonStoreCard key={item} />
     ))}

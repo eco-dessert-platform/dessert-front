@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useAtom } from 'jotai';
 
-import { useRecoilState } from 'recoil';
-
-import { filterValueState } from '@/domains/product/atoms';
+import { filterValueAtom } from '@/domains/product/atoms'; // Change to Jotai atom
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { getIngredientTag, getPriceTag } from '@/domains/product/utils/getTag';
@@ -21,19 +20,18 @@ interface Props {
 }
 
 const SortingFilterSection = ({ filterFamilyId }: Props) => {
-  const [filterValue, setFilterValue] = useRecoilState(filterValueState(filterFamilyId));
-  const { elaborateCategory, simplifyCategory } = useCategory(filterFamilyId);
+  const [filterValue, setFilterValue] = useAtom(filterValueAtom);
+  const { elaborateCategory, simplifyCategory } = useCategory();
 
   return (
-    <PaddingWrapper className="flex flex-col gap-y-[10px] pb-[12px] border-b border-gray-100">
-      <div className="flex justify-between items-center">
+    <PaddingWrapper className="flex flex-col gap-y-[10px] border-b border-gray-100 pb-[12px]">
+      <div className="flex items-center justify-between">
         {filterFamilyId === 'main' && <MainBoardCount />}
         {filterFamilyId === 'search' && <SearchBoardCount />}
-        <ProductSortSelect filterFamilyId={filterFamilyId} />
+        <ProductSortSelect />
       </div>
       <div className="flex gap-[4px]">
         <FilterButton
-          filterFamilyId={filterFamilyId}
           text={
             simplifyCategory(filterValue.category) === INIT_FILTER_VALUE.category
               ? FILTER_VALUES.category.name
@@ -48,7 +46,6 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
           }}
         />
         <FilterButton
-          filterFamilyId={filterFamilyId}
           text={
             isEqualArray(filterValue.tags, INIT_FILTER_VALUE.tags)
               ? FILTER_VALUES.tags.name
@@ -60,7 +57,6 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
           }}
         />
         <FilterButton
-          filterFamilyId={filterFamilyId}
           text={
             isEqualArray(filterValue.price, INIT_FILTER_VALUE.price)
               ? FILTER_VALUES.price.name
@@ -75,4 +71,5 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
     </PaddingWrapper>
   );
 };
+
 export default SortingFilterSection;

@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { RecoilRoot } from 'recoil';
 import { cleanup, render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import { AppRouterContextProviderMock, CleanQueryProvider } from '@/__tests__/utils/test-providers';
@@ -24,11 +23,9 @@ describe('<Review /> 테스트', () => {
   const renderWithProviders = (children: ReactNode) => {
     const push = vi.fn();
     return render(
-      <RecoilRoot>
-        <AppRouterContextProviderMock router={{ push }}>
-          <CleanQueryProvider>{children}</CleanQueryProvider>
-        </AppRouterContextProviderMock>
-      </RecoilRoot>
+      <AppRouterContextProviderMock router={{ push }}>
+        <CleanQueryProvider>{children}</CleanQueryProvider>
+      </AppRouterContextProviderMock>
     );
   };
 

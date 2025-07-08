@@ -23,11 +23,13 @@ const BestProductsSection = async () => {
     initialPageParam: INITIAL_CURSOR
   });
 
+  // 쿼리 실행 시간 측정을 종료하고 출력
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <TitleSection />
       {/* 임시로 random 데이터 노출 시 카테고리 탭 노출하지 않도록 함 */}
-      <CategoryTab filterFamilyId="home" />
+      <CategoryTab />
       <ProductsList />
     </HydrationBoundary>
   );

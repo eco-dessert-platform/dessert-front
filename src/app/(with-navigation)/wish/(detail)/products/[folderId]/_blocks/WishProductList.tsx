@@ -8,13 +8,13 @@ import SkeletonProductCardList from '@/domains/product/components/SkeletonProduc
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { wishProductSortState } from '@/domains/wish/atoms/sort';
+import { useAtom } from 'jotai';
+import { wishProductSortAtom } from '@/domains/wish/atoms/sort';
 import { wishSortDictionary } from '@/domains/wish/constants';
 
 const WishProductList = () => {
   const { folderId } = useParams<{ folderId: string }>();
-  const sortOptionKr = useRecoilValue(wishProductSortState);
+  const [sortOptionKr] = useAtom(wishProductSortAtom);
   const sortOptionEng = wishSortDictionary.translate(sortOptionKr);
   const {
     data: wishProducts,
@@ -29,7 +29,7 @@ const WishProductList = () => {
 
   if (!wishProducts || wishProducts?.length === 0) {
     return (
-      <div className="text-gray-500 leading-150 text-[14px] mx-auto flex flex-col gap-[2px] justify-center items-center w-[360px] h-[360px]">
+      <div className="mx-auto flex h-[360px] w-[360px] flex-col items-center justify-center gap-[2px] text-[14px] leading-150 text-gray-500">
         <BbangleIcon shape="cry" />
         <div>찜한 상품이 없어요!</div>
       </div>

@@ -4,10 +4,12 @@ import { reviewDetailQueryOptions } from '@/domains/review/queries/useReviewDeta
 import ReviewSection from './_blocks/ReviewSection';
 
 interface Props {
-  params: { reviewId: string };
+  params: Promise<{ reviewId: string }>;
 }
 
-const ReviewDetailPage = async ({ params: { reviewId } }: Props) => {
+const ReviewDetailPage = async ({ params }: Props) => {
+  const { reviewId } = await params;
+
   const queryClient = new QueryClient();
   const { queryFn, queryKey } = reviewDetailQueryOptions(Number(reviewId));
   await queryClient.prefetchQuery({

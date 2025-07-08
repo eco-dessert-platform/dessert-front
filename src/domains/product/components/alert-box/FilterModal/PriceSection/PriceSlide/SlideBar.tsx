@@ -4,9 +4,9 @@ interface SlideBarProps {
 }
 
 const SlideBar = ({ left, right }: SlideBarProps) => (
-  <div className="relative my-[4px] w-full h-[12px] rounded-[50px] bg-blueGray-50">
+  <div className="bg-blue-gray-50 relative my-[4px] h-[12px] w-full rounded-[50px]">
     <div
-      className="absolute h-[12px] rounded-[50px] bg-primaryOrangeRed"
+      className="bg-primary-orange-red absolute h-[12px] rounded-[50px]"
       style={{ left: `${left}%`, right: `${right}%` }}
     />
   </div>

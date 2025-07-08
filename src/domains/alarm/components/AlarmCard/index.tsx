@@ -19,8 +19,8 @@ const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
   const { productId, storeName, productTitle, boardThumbnail, subscribed } = data;
 
   return (
-    <div className="flex flex-col gap-y-[10px] p-[16px] w-full border-[1px] border-gray-100 rounded-[10px]">
-      <div className="flex justify-between items-start gap-x-[10px]">
+    <div className="flex w-full flex-col gap-y-[10px] rounded-[10px] border border-gray-100 p-[16px]">
+      <div className="flex items-start justify-between gap-x-[10px]">
         <Image
           src={boardThumbnail}
           alt="상품 이미지"
@@ -28,13 +28,13 @@ const AlarmCard = ({ type, data, onAlarm, onDelete }: Props) => {
           height={40}
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
-          className="w-[40px] h-[40px] object-cover rounded-[6px]"
+          className="h-[40px] w-[40px] rounded-[6px] object-cover"
         />
         <div className="w-full overflow-hidden">
           <Link href={`/main/products/${productId}/info`}>
             <h6 className="typo-title-14-semibold text-gray-900">{storeName}</h6>
           </Link>
-          <p className="typo-body-12-regular text-gray-600 line-clamp-2 text-ellipsis overflow-hidden break-words">
+          <p className="typo-body-12-regular line-clamp-2 overflow-hidden break-words text-ellipsis text-gray-600">
             {productTitle}
           </p>
         </div>

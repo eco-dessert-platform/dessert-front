@@ -20,8 +20,8 @@ export const buttonVariants = cva(
           'bg-white border border-gray-200 text-black hover:bg-black/[0.02] active:bg-black/[0.04] ',
         black: 'bg-black text-white',
         'border-primary':
-          'bg-white border border-primaryOrangeRed text-primaryOrangeRed hover:bg-black/[0.02] active:bg-black/[0.04]',
-        primary: 'text-white bg-primaryOrangeRed  hover:brightness-[.96] active:brightness-90'
+          'bg-white border border-primary-orange-red text-primary-orange-red hover:bg-black/[0.02] active:bg-black/[0.04]',
+        primary: 'text-white bg-primary-orange-red  hover:brightness-[.96] active:brightness-90'
       },
       size: {
         md: 'h-[46px]',
@@ -46,7 +46,7 @@ const ButtonNewver = ({
     type="button"
     className={cn(
       buttonVariants({ size, color, radius }),
-      'disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed',
+      'disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white',
       className
     )}
     {...props}

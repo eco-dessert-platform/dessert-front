@@ -1,9 +1,9 @@
-import { useRecoilValue } from 'recoil';
-import { mainCategoryState } from '@/domains/product/atoms';
-import { ICategoryType, FilterFamilyIDType } from '@/domains/product/types/filterType';
+import { useAtom } from 'jotai';
+import { mainCategoryAtom } from '@/domains/product/atoms';
+import { ICategoryType } from '@/domains/product/types/filterType';
 
-const useCategory = (filterFamilyId: FilterFamilyIDType) => {
-  const mainCategory = useRecoilValue(mainCategoryState(filterFamilyId));
+const useCategory = () => {
+  const [mainCategory] = useAtom(mainCategoryAtom);
 
   const elaborateCategory = (category: ICategoryType): ICategoryType => {
     let elaboratedCategory = category;

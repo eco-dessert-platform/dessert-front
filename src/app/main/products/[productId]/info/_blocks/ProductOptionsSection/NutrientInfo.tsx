@@ -1,16 +1,16 @@
-import { ProductOptionType } from '@/domains/product/types/productDetailType';
+import { ProductType } from '@/domains/product/types/productInfoType';
 import { nutrientEngToKr } from '@/domains/product/utils/transfromTag';
 
 interface Props {
-  product: ProductOptionType;
+  product: ProductType;
 }
 
 const NUTRIENT_ORDER = ['carbohydrates', 'sugars', 'protein', 'fat'] as const;
 
 const NutrientInfo = ({ product: { nutrient } }: Props) => (
   <div>
-    <div className="flex justify-between items-center">
-      <h2 className="text-gray-500 text-12 leading-150 font-semibold ">영양정보</h2>
+    <div className="flex items-center justify-between">
+      <h2 className="text-12 leading-150 font-semibold text-gray-500">영양정보</h2>
       {(nutrient.weight || nutrient.calories) && (
         <p className="typo-body-12-semibold text-gray-700">{`총 내용량 ${nutrient.weight}g/${nutrient.calories}kcal`}</p>
       )}
@@ -22,7 +22,7 @@ const NutrientInfo = ({ product: { nutrient } }: Props) => (
         return (
           <li
             key={key}
-            className="bg-gray-50 rounded-[6px] py-[4px] px-[10px] w-fit flex-1 flex flex-col items-center justify-center"
+            className="flex w-fit flex-1 flex-col items-center justify-center rounded-[6px] bg-gray-50 px-[10px] py-[4px]"
           >
             <div className="typo-body-12-medium text-gray-700">{nutrientEngToKr(key)}</div>
             <div className="typo-title-16-semibold text-gray-900">

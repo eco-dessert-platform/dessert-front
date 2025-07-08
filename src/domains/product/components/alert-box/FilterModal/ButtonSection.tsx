@@ -1,35 +1,48 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
+'use client';
 
-import { filterValueState, filterValueTempState } from '@/domains/product/atoms';
+import { useAtom } from 'jotai';
+import {
+  filterValueAtom,
+  categoryAtom,
+  tagsAtom,
+  priceAtom,
+  orderAvailableTodayAtom
+} from '@/domains/product/atoms';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
-import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import useModal from '@/shared/hooks/useModal';
 import ResetIcon from '@public/assets/icons/reset.svg';
 
-interface ButtonSectionProps {
-  filterFamilyId: FilterFamilyIDType;
-}
+const ButtonSection = () => {
+  const [, setFilterValue] = useAtom(filterValueAtom);
+  const [category, setCategory] = useAtom(categoryAtom);
+  const [tags, setTags] = useAtom(tagsAtom);
+  const [price, setPrice] = useAtom(priceAtom);
+  const [orderAvailableToday, setOrderAvailableToday] = useAtom(orderAvailableTodayAtom);
 
-const ButtonSection = ({ filterFamilyId }: ButtonSectionProps) => {
-  const setFilterValue = useSetRecoilState(filterValueState(filterFamilyId));
-  const [tempFilterValue, setTempFilterValue] = useRecoilState(
-    filterValueTempState(filterFamilyId)
-  );
   const { closeModal } = useModal();
 
   const handleConfirm = () => {
-    setFilterValue(tempFilterValue);
+    setFilterValue({
+      category,
+      tags,
+      price,
+      orderAvailableToday,
+      sort: INIT_FILTER_VALUE.sort
+    });
     closeModal();
   };
 
   const handleReset = () => {
-    setTempFilterValue(INIT_FILTER_VALUE);
+    setCategory(INIT_FILTER_VALUE.category);
+    setTags(INIT_FILTER_VALUE.tags);
+    setPrice(INIT_FILTER_VALUE.price);
+    setOrderAvailableToday(INIT_FILTER_VALUE.orderAvailableToday);
   };
 
   return (
-    <PaddingWrapper className="flex gap-[10px] justify-between items-center fixed bottom-0 w-full bg-white">
+    <PaddingWrapper className="fixed bottom-0 flex w-full items-center justify-between gap-[10px] bg-white">
       <ButtonNewver
         color="border-white"
         size="lg"

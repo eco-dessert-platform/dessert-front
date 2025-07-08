@@ -8,7 +8,6 @@ class StoreService extends Service {
   async getStoreInfo(storeId: number) {
     const res = await this.fetchExtend.get(`/stores/${storeId}`);
     const { result, success, code, message }: ResultResponse<IStoreType> = await res.json();
-    console.log('🚀 ~ StoreService ~ getStoreInfo ~ res:', res);
 
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
     return result;

@@ -1,6 +1,3 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
-export const wishProductSortState = atom({
-  default: '담은순',
-  key: 'wishProductSortState'
-});
+export const wishProductSortAtom = atom('담은순');

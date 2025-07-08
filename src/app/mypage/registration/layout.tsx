@@ -1,9 +1,10 @@
+'use client';
+
 import DefaultLayout from '@/shared/components/DefaultLayout';
 import Header from '@/shared/components/Header';
 import { ReactNode } from 'react';
-
 import { REGISTRATION_DEFAULT_VALUE } from '@/domains/user/constants/profile';
-import RegistrationFormProvider from './_blocks/RegistrationcFormProvider';
+import RegistrationFormProvider from './_blocks/RegistrationFormProvider';
 import ButtonSection from './_blocks/ButtonSection';
 
 interface Props {

@@ -47,7 +47,7 @@ const Comment = ({ comment, boardId, reviewId }: Props) => {
           <button
             type="button"
             onClick={showEntire}
-            className="float-right mt-[42px] [shape-outside:border-box] text-gray-500"
+            className="float-right mt-[42px] text-gray-500 [shape-outside:border-box]"
           >
             더보기
           </button>
@@ -58,7 +58,7 @@ const Comment = ({ comment, boardId, reviewId }: Props) => {
         </Link>
       </div>
 
-      <div className="overflow-hidden h-0 typo-title-14-regular">
+      <div className="typo-title-14-regular h-0 overflow-hidden">
         <p ref={originalCommentRef}>{comment}</p>
       </div>
     </>

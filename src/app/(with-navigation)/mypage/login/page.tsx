@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import LoginLogoSection from '@/blocks/user/login/LoginLogoSection';
-import { socialLoginPopupState } from '@/domains/user/atoms/login';
+import { socialLoginPopupAtom } from '@/domains/user/atoms/login';
 import { SocialType } from '@/domains/user/types/login';
 import {
   useGoogleLoginMutation,
@@ -14,7 +14,7 @@ import KakaoLoginButton from './_blocks/KakaoLoginButton';
 import GoogleLoginButton from './_blocks/GoogleLoginButton';
 
 const LoginPage = () => {
-  const [popup, setPopup] = useRecoilState(socialLoginPopupState);
+  const [popup, setPopup] = useAtom(socialLoginPopupAtom);
   const [message, setMessage] = useState<{ code: string; socialType: SocialType }>();
   const { mutate: kakaoMutate } = useKakaoLoginMutation();
   const { mutate: googleMutate } = useGoogleLoginMutation();
@@ -50,7 +50,7 @@ const LoginPage = () => {
   }, [message, kakaoMutate, googleMutate]);
 
   return (
-    <div className="flex flex-col gap-[81px] px-[16px] m-[16px] pt-[70px]">
+    <div className="m-[16px] flex flex-col gap-[81px] px-[16px] pt-[70px]">
       <LoginLogoSection
         title="여러분이 원하는 건강 디저트를 만나봐요!"
         subTitle="3초 로그인으로 더욱 다양한 빵그리 서비스를 경험해보세요"

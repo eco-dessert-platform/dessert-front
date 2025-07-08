@@ -3,10 +3,12 @@ import Header from '@/shared/components/Header';
 import ReviewCreateForm from '../_blocks/ReviewCreateForm';
 
 interface ReviewCreatePageProps {
-  params: { productId: string | null; progress: string | null };
+  params: Promise<{ productId: string | null; progress: string | null }>;
 }
 
-const ReviewCreatePage = ({ params: { productId, progress } }: ReviewCreatePageProps) => {
+const ReviewCreatePage = async ({ params }: ReviewCreatePageProps) => {
+  const { productId, progress } = await params;
+
   const progressNum = Number(progress);
 
   if (!(progressNum === 1 || progressNum === 2)) notFound();

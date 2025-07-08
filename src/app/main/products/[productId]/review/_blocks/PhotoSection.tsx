@@ -30,14 +30,14 @@ const PhotoSection = ({ photos, productId }: Props) => {
           onClick={() =>
             openFullScreenModal(<PhotoSlideModal photos={photos.slice(0, 4)} initSlideIdx={idx} />)
           }
-          className="w-full aspect-square object-cover border-solid border-[1px] border-gray-300 rounded-[6px] cursor-pointer"
+          className="aspect-square w-full cursor-pointer rounded-[6px] border border-solid border-gray-300 object-cover"
         />
       ))}
       {fourthImage && (
         <Link
           key={fourthImage.id}
           href={PATH.reviewPhotos(productId)}
-          className="relative after:content-['+더보기'] after:flex-center after:absolute after:inset-0 after:bg-black/50 after:size-full after:text-white after:rounded-[6px]"
+          className="after:flex-center relative after:absolute after:inset-0 after:size-full after:rounded-[6px] after:bg-black/50 after:text-white after:content-['+더보기']"
         >
           <Image
             src={fourthImage.url}
@@ -45,7 +45,7 @@ const PhotoSection = ({ photos, productId }: Props) => {
             width={80}
             height={80}
             blurDataURL={BLUR_DATA_URL}
-            className="w-full aspect-square object-cover border-solid border-[1px] border-gray-300 rounded-[6px]"
+            className="aspect-square w-full rounded-[6px] border border-solid border-gray-300 object-cover"
           />
         </Link>
       )}

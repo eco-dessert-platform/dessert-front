@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 
-import { BbangleIcon } from '../icons';
+import BbangleCryIcon from '@public/assets/icons/bbangle-cry.svg';
 
 interface SadBbangleBoxProps {
   className?: string;
@@ -8,9 +8,9 @@ interface SadBbangleBoxProps {
 }
 
 const SadBbangleBox = ({ className, children }: SadBbangleBoxProps) => (
-  <div className={twMerge('flex flex-col items-center justify-center w-full gap-[2px]', className)}>
-    <BbangleIcon shape="cry" />
-    <div className="text-gray-500 text-center typo-title-12-regular">{children}</div>
+  <div className={twMerge('flex w-full flex-col items-center justify-center gap-[2px]', className)}>
+    <BbangleCryIcon />
+    <div className="typo-title-12-regular text-center text-gray-500">{children}</div>
   </div>
 );
 

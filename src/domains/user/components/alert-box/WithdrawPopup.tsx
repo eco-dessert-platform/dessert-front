@@ -15,10 +15,10 @@ const WithdrawPopup = () => {
   return (
     <Popup>
       <div>
-        <PaddingWrapper className="text-center typo-title-16-medium">
+        <PaddingWrapper className="typo-title-16-medium text-center">
           정말로 탈퇴 하시겠어요?
         </PaddingWrapper>
-        <PaddingWrapper className="text-center typo-title-14-regular">
+        <PaddingWrapper className="typo-title-14-regular text-center">
           탈퇴 버튼 선택시,
           <br />
           계정은 삭제되며 복구되지 않습니다.
@@ -35,7 +35,7 @@ const WithdrawPopup = () => {
             type="submit"
             form={FORM_ID.withdraw}
             value="탈퇴하기"
-            className="text-primaryOrangeRed typo-title-14-medium cursor-pointer"
+            className="text-primary-orange-red typo-title-14-medium cursor-pointer"
           />
         </PaddingWrapper>
       </div>

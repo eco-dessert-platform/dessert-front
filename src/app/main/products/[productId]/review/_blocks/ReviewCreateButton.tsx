@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const ReviewCreateButton = ({ productId }: Props) => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const { openToast } = useToastNewVer();
   const { push } = useRouter();
 

@@ -1,7 +1,7 @@
 const DescriptionSection = () => (
-  <div className="flex items-center justify-center gap-2 typo-title-16-semibold text-gray-900 mb-[16px]">
+  <div className="typo-title-16-semibold mb-[16px] flex items-center justify-center gap-2 text-gray-900">
     <p>
-      빵그리의 오븐을 찾은 이유를 <span className="text-primaryOrangeRed">최대 2가지 </span>
+      빵그리의 오븐을 찾은 이유를 <span className="text-primary-orange-red">최대 2가지 </span>
       선택해주세요
     </p>
   </div>

@@ -14,8 +14,8 @@ import {
   ThumbsUpIcon,
   WriteIcon
 } from '@/domains/user/components/icons';
-import { useRecoilValue } from 'recoil';
-import { isLoggedinState } from '@/shared/atoms/login';
+import { useAtom } from 'jotai';
+import { isLoggedinAtom } from '@/shared/atoms/login';
 
 interface MoreInfoItemProps {
   icon: ReactNode;
@@ -46,14 +46,14 @@ const LOGGEDIN_INFOS = [
 ];
 
 const MoreInfoItem = ({ icon, content }: MoreInfoItemProps) => (
-  <PaddingWrapper className="flex items-center gap-[8px] border-solid border-b-[1px] border-gray-100">
+  <PaddingWrapper className="flex items-center gap-[8px] border-b border-solid border-gray-100">
     {icon}
     <p className="typo-title-14-medium">{content}</p>
   </PaddingWrapper>
 );
 
 const MoreInfoSection = () => {
-  const isLoggedIn = useRecoilValue(isLoggedinState);
+  const [isLoggedIn] = useAtom(isLoggedinAtom);
   const information = isLoggedIn ? LOGGEDIN_INFOS : INFOS;
 
   return (

@@ -3,18 +3,20 @@ import userService from '@/domains/user/queries/service';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 
 interface NotificationDetailProps {
-  params: {
+  params: Promise<{
     id: number;
-  };
+  }>;
 }
 
-const NotificationDetail = async ({ params: { id } }: NotificationDetailProps) => {
+const NotificationDetail = async ({ params }: NotificationDetailProps) => {
+  const { id } = await params;
+
   const notification = await userService.getNotificationDetail(id);
 
   return (
     <>
       <NotificationTitle title={notification.title} date={notification.createdAt} isBigTitle />
-      <PaddingWrapper className="text-gray-900 typo-title-14-regular">
+      <PaddingWrapper className="typo-title-14-regular text-gray-900">
         {notification.content}
       </PaddingWrapper>
     </>

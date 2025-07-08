@@ -17,10 +17,10 @@ const Input = (
     <div id={id} className="w-full">
       {label && (
         <label
-          className="inline-block mb-[6px] typo-title-14-semibold text-gray-700"
+          className="typo-title-14-semibold mb-[6px] inline-block text-gray-700"
           htmlFor={inputId}
         >
-          {label} {required && <span className="text-primaryOrangeRed">*</span>}
+          {label} {required && <span className="text-primary-orange-red">*</span>}
         </label>
       )}
       <div className="relative w-full">
@@ -31,7 +31,7 @@ const Input = (
           required={required}
           {...props}
         />
-        {button && <div className="absolute -translate-y-1/2 top-1/2 right-4">{button}</div>}
+        {button && <div className="absolute top-1/2 right-4 -translate-y-1/2">{button}</div>}
       </div>
     </div>
   );

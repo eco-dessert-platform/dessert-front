@@ -17,7 +17,7 @@ const StoreInfoSection = ({ storeInfo }: Props) => {
 
   return (
     <PaddingWrapper className="pt-0">
-      <div className="flex flex-col justify-center items-center gap-[10px]">
+      <div className="flex flex-col items-center justify-center gap-[10px]">
         <Image
           src={storeInfo.profile}
           alt="스토어 이미지"

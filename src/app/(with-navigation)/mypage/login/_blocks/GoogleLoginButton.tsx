@@ -1,12 +1,12 @@
 'use client';
 
 import GoogleIcon from '@/domains/user/assets/google_logo.svg';
-import { socialLoginPopupState } from '@/domains/user/atoms/login';
+import { socialLoginPopupAtom } from '@/domains/user/atoms/login';
 import { GOOGLE } from '@/domains/user/constants/socialLogin';
-import { useSetRecoilState } from 'recoil';
+import { useSetAtom } from 'jotai';
 
 const GoogleLoginButton = () => {
-  const setPopup = useSetRecoilState(socialLoginPopupState);
+  const setPopup = useSetAtom(socialLoginPopupAtom);
   const queryObject = {
     client_id: GOOGLE.clientId,
     clientsecret: GOOGLE.clientSecret,
@@ -35,11 +35,11 @@ const GoogleLoginButton = () => {
   return (
     <button
       type="button"
-      className="border border-gray-100 rounded-[10px] flex gap-[8px] items-center justify-center h-[52px] bg-white shadow text-black"
+      className="flex h-[52px] items-center justify-center gap-[8px] rounded-[10px] border border-gray-100 bg-white text-black shadow-sm"
       onClick={openGoogleLoginPopup}
     >
       <GoogleIcon />
-      <div className="text-black typo-title-16-medium">구글 시작하기</div>
+      <div className="typo-title-16-medium text-black">구글 시작하기</div>
     </button>
   );
 };

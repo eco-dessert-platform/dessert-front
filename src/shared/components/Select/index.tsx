@@ -27,11 +27,11 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
   }, []);
 
   return (
-    <div className="selectEl relative inline-block text-gray-900 typo-body-12-medium text-center">
+    <div className="selectEl typo-body-12-medium relative inline-block text-center text-gray-900">
       <button
         type="button"
         onClick={() => setIsExpended(!isExpended)}
-        className="flex items-center gap-[4px] rounded-[50px] cursor-pointer"
+        className="flex cursor-pointer items-center gap-[4px] rounded-[50px]"
       >
         {selectedOption}
         <span className={cn(isExpended && 'rotate-180 transition-all')}>
@@ -39,12 +39,12 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
         </span>
       </button>
       {isExpended && (
-        <ul className="absolute mt-[8px] top-full left-1/2 -translate-x-2/4 z-[101] w-max rounded-[10px] shadow bg-white">
+        <ul className="absolute top-full left-1/2 z-101 mt-[8px] w-max -translate-x-2/4 rounded-[10px] bg-white shadow-sm">
           {options.map((option, index) => {
             const firstOption = index === 0;
             const lastOption = index === options.length - 1;
 
-            const borderStyle = lastOption ? 'border-b-0' : 'border-b-[1px]';
+            const borderStyle = lastOption ? 'border-b-0' : 'border-b';
 
             let hoverRoundedStyle = '';
             if (firstOption) hoverRoundedStyle = 'hover:rounded-t-[10px]';
@@ -53,7 +53,7 @@ const Select = ({ options, selectedOption, onChange }: SelectProps) => {
             return (
               <li
                 key={option}
-                className={`px-[16px] py-[10px] border-gray-100 cursor-pointer hover:bg-gray-50 ${borderStyle} ${hoverRoundedStyle}`}
+                className={`cursor-pointer border-gray-100 px-[16px] py-[10px] hover:bg-gray-50 ${borderStyle} ${hoverRoundedStyle}`}
               >
                 <button
                   type="button"

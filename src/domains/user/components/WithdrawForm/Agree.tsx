@@ -10,7 +10,7 @@ const Agree = () => {
   const isAgreeChecked = watch('isAgreeChecked');
 
   return (
-    <label htmlFor="agree" className="flex gap-[4px] items-center cursor-pointer">
+    <label htmlFor="agree" className="flex cursor-pointer items-center gap-[4px]">
       <CheckBoxNewver
         id="agree"
         checked={isAgreeChecked}
@@ -19,7 +19,7 @@ const Agree = () => {
       <p
         className={cn(
           'typo-body-12-medium',
-          isAgreeChecked ? 'text-primaryOrangeRed' : 'text-gray-900'
+          isAgreeChecked ? 'text-primary-orange-red' : 'text-gray-900'
         )}
       >
         회원탈퇴 유의사항을 확인했으며 이에 동의합니다.

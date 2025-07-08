@@ -20,12 +20,12 @@ const FullScreenModal = ({ children, className }: Props) => {
         ease: 'linear',
         duration: 0.2
       }}
-      className={cn('relative w-full h-full bg-white', className)}
+      className={cn('relative h-full w-full bg-white', className)}
     >
       <button
         type="button"
         aria-label="close button"
-        className="absolute top-[16px] right-[16px] z-[1000]"
+        className="absolute top-[16px] right-[16px] z-1000"
         onClick={closeFullScreenModal}
       >
         <CloseIcon shape="black" />

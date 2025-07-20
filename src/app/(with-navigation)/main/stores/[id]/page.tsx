@@ -46,7 +46,7 @@ const MainStoreDetailPage = async ({ params }: Props) => {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <StoreInfoSection storeInfo={storeInfo} />
+        <StoreInfoSection storeId={storeId} />
         <GrayDivider color="gray100" className="h-[4px]" />
         <StoreBestProductsSection storeInfo={storeInfo} />
         <GrayDivider color="gray100" />

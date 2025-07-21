@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import StarButton from '@/shared/components/StarButton';
@@ -18,22 +17,16 @@ interface Props {
 
 const StoreInfoSection = ({ storeId }: Props) => {
   const { data: storeInfo } = useGetStoreInfoQuery({ storeId });
-  const [isLiked, setIsLiked] = useState(storeInfo?.isWished || false);
   const [isLoggedIn] = useAtom(isLoggedinAtom);
+  const isLiked = storeInfo?.isWished || false;
 
   const { mutate: addMutate } = useAddWishStoreMutation({
     storeId,
-    storeName: storeInfo?.storeName ?? '🏠',
-    successCallback: () => {
-      setIsLiked(true);
-    }
+    storeName: storeInfo?.storeName ?? '🏠'
   });
   const { mutate: deleteMutate } = useDeleteWishStoreMutation({
     storeId,
-    storeName: storeInfo?.storeName ?? '🏠',
-    successCallback: () => {
-      setIsLiked(false);
-    }
+    storeName: storeInfo?.storeName ?? '🏠'
   });
   const { openToast } = useToastNewVer();
 

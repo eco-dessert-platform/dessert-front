@@ -1,5 +1,7 @@
+'use client';
+
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import useAuth from '@/shared/hooks/useAuth';
 import PATH from '@/shared/constants/path';
@@ -7,10 +9,12 @@ import { LoginResponse, SocialType } from '../types/login';
 import userService from './service';
 
 export function useSocialLoginMutation() {
+  const queryParams = useSearchParams();
   const { openToast } = useToastNewVer();
   const { replace } = useRouter();
   const { login } = useAuth();
 
+  const redirectTo = queryParams.get('from') ?? PATH.home;
   const mutationFn = ({
     socialToken,
     socialType
@@ -38,7 +42,7 @@ export function useSocialLoginMutation() {
     }
 
     openToast({ message: '로그인 되었어요.' });
-    replace(PATH.home);
+    replace(redirectTo);
   };
 
   const onError = () => {

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { isLoggedinAtom } from '@/shared/atoms/login';
@@ -8,6 +7,7 @@ import { ERROR_MESSAGE } from '@/shared/constants/error';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import useToastNewVer from '@/shared/hooks/useToastNewVer';
 import PATH from '@/shared/constants/path';
+import RequiredLoginToast from '@/shared/components/RequiredLoginToast';
 
 interface Props {
   productId: number;
@@ -25,11 +25,7 @@ const ReviewCreateButton = ({ productId }: Props) => {
     }
     openToast({
       message: ERROR_MESSAGE.requiredLogin,
-      action: (
-        <Link className="hover:underline" href={PATH.login}>
-          로그인
-        </Link>
-      )
+      action: <RequiredLoginToast />
     });
   };
 

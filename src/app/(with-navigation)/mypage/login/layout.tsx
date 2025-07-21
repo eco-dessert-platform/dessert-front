@@ -1,5 +1,6 @@
 import Header from '@/shared/components/Header';
-import { ReactNode } from 'react';
+import Loading from '@/shared/components/Loading';
+import { ReactNode, Suspense } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -8,7 +9,7 @@ interface Props {
 const Layout = ({ children }: Props) => (
   <>
     <Header back />
-    {children}
+    <Suspense fallback={<Loading />}>{children}</Suspense>
   </>
 );
 

@@ -9,9 +9,10 @@ import wishService from './service';
 interface Params {
   storeId: number;
   storeName: string;
+  successCallback?: () => void;
 }
 
-const useAddWishStoreMutation = ({ storeId, storeName }: Params) => {
+const useAddWishStoreMutation = ({ storeId, storeName, successCallback }: Params) => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
 
@@ -29,7 +30,7 @@ const useAddWishStoreMutation = ({ storeId, storeName }: Params) => {
         }))
     );
     queryClient.setQueriesData<IStoreType>(
-      { queryKey: storeQueryKey.detail(storeId) },
+      { queryKey: storeQueryKey.detail(storeId, 'info') },
       (oldData) => {
         if (!oldData) return oldData;
         return { ...oldData, isWished: true };
@@ -39,6 +40,7 @@ const useAddWishStoreMutation = ({ storeId, storeName }: Params) => {
 
   const onSuccess = () => {
     openToast({ message: `💖 ${storeName}을 찜한 스토어 리스트에 추가했어요.` });
+    if (successCallback) successCallback();
   };
 
   const onError = ({ message }: Error) => {

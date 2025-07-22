@@ -53,7 +53,7 @@ const CheckSection = () => {
               checked={checked}
               disabled={disabled}
               {...register('step1.preferenceType', {
-                required: true
+                required: false
               })}
             />
             <div className="flex flex-col">

@@ -6,6 +6,7 @@ import { SubmitHandler, useFormContext } from 'react-hook-form';
 import { FORM_ID } from '@/domains/user/constants/form';
 import RecommendationStep1Form from '@/domains/user/components/RecommendationStep1Form';
 import RecommendationStep2Form from '@/domains/user/components/RecommendationStep2Form';
+import { RECOMMENDATION_PROVIDER_DEFAULT_VALUE } from '@/domains/user/constants/recommendation';
 
 interface Props {
   progress: 1 | 2;
@@ -16,7 +17,7 @@ const RecommendationCreateForm = ({ progress }: Props) => {
   const { mutateStep1, mutateStep2 } = useAddRecommendationMutation();
 
   const onStep1Valid: SubmitHandler<RecommendationType> = ({ step1 }) => {
-    mutateStep1(step1);
+    mutateStep1(step1 || RECOMMENDATION_PROVIDER_DEFAULT_VALUE.step1);
   };
 
   const onStep2Valid: SubmitHandler<RecommendationType> = ({ step2 }) => {

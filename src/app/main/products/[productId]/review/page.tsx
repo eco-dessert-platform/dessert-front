@@ -41,6 +41,7 @@ const ReviewListPage = async ({ params }: Props) => {
       <PaddingWrapper className="typo-title-14-semibold">리뷰</PaddingWrapper>
       <PaddingWrapper className="flex flex-col gap-[16px] border-b-[6px] border-gray-100">
         <ReviewCreateButton productId={Number(productId)} />
+
         <PhotoSection photos={reviewPhotos} productId={Number(productId)} />
       </PaddingWrapper>
       <HydrationBoundary state={dehydrate(queryClient)}>

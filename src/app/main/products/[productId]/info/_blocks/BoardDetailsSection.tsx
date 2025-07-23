@@ -1,21 +1,38 @@
-import Image from 'next/image';
 
 import productService from '@/domains/product/queries/service';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import React from 'react';
+
 
 interface Props {
   productId: number;
 }
 
+
+const MarkdownImage = (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+  /* eslint-disable @next/next/no-img-element */
+  <img alt="상품 상세" {...props} className="w-full h-auto" />
+);
+
+
 const BoardDetailsSection = async ({ productId }: Props) => {
   const {
-    board: { boardImages }
+    board: { boardDetail }
   } = await productService.getProductInfo(productId);
 
   return (
     <div className="w-full p-0 pt-[16px]">
-      {boardImages?.map((item) => (
-        <Image key={item} src={item} alt="상세" width={600} height={100} className="m-auto" />
-      ))}
+      {boardDetail && (
+        <ReactMarkdown
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            img: MarkdownImage,
+          }}
+        >
+          {boardDetail}
+        </ReactMarkdown>
+      )}
     </div>
   );
 };

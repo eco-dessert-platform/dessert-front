@@ -49,7 +49,7 @@ const TitleSection = async () => {
       {isLoggedIn && preference && (
         <p className="typo-body-12-regular mt-[6px] whitespace-pre-line text-gray-600">
           {preference?.[0] === undefined
-            ? `${nickname} 님을 위한 위한 맞춤 추천 설정을 해보세요!`
+            ? `${nickname}님을 위한 위한 맞춤 추천 설정을 해보세요!`
             : genGuidanceMessage(preference)}
         </p>
       )}

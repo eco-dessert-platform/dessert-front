@@ -10,8 +10,7 @@ import { RecommendationType } from '@/domains/user/types/recommendation';
 const ButtonSection = () => {
   const { progress } = useParams<{ progress: '1' | '2' }>();
   const { watch } = useFormContext<RecommendationType>();
-  const { step1, step2 } = watch();
-  const isStep1Disabled = step1.preferenceType.length === 0;
+  const { step2 } = watch();
   const isStep2Disabled =
     !(step2.dietLimitation.length > 0) ||
     !(step2.healthConcerns.length > 0) ||
@@ -20,8 +19,7 @@ const ButtonSection = () => {
   const config = {
     '1': {
       children: '다음',
-      form: FORM_ID.recommendationUpdateStep1,
-      disabled: isStep1Disabled
+      form: FORM_ID.recommendationUpdateStep1
     },
     '2': {
       children: '수정 완료',

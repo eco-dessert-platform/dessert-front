@@ -1,7 +1,11 @@
 export const attachPostPosition = (
-  word: string,
+  word: string | undefined,
   postPosition: '은' | '는' | '이' | '가' | '을' | '를' | '과' | '와'
 ) => {
+  if (!word || typeof word !== 'string') {
+    return postPosition;
+  }
+
   const lastIdx = word.length - 1;
   const lastCharCode = word.charCodeAt(lastIdx);
 

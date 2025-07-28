@@ -39,8 +39,12 @@ export const recommendationDictionary = new Dictionary({
   해당없음: 'NOT_APPLICABLE'
 });
 
-export const processKrArrayToEngString = (preferenceType: Array<PreferenceType>): string =>
-  preferenceType.map((ele) => recommendationDictionary.translate(ele)).join('_');
+export const processKrArrayToEngString = (preferenceType: Array<PreferenceType>): string => {
+  if (preferenceType.length === 0) {
+    return 'NONE';
+  }
+  return preferenceType.map((ele) => recommendationDictionary.translate(ele)).join('_');
+};
 
 export const processEngStringToKrArray = (preferenceType: string): Array<PreferenceType> =>
   preferenceType

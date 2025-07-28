@@ -8,10 +8,12 @@ import wishService from './service';
 
 const useDeleteWishStoreMutation = ({
   storeId,
-  storeName
+  storeName,
+  successCallback
 }: {
   storeId: number;
   storeName: string;
+  successCallback?: () => void;
 }) => {
   const { openToast } = useToastNewVer();
   const queryClient = useQueryClient();
@@ -31,7 +33,7 @@ const useDeleteWishStoreMutation = ({
     );
 
     queryClient.setQueriesData<IStoreType>(
-      { queryKey: storeQueryKey.detail(storeId) },
+      { queryKey: storeQueryKey.detail(storeId, 'info') },
       (oldData) => {
         if (!oldData) return oldData;
         return { ...oldData, isWished: false };
@@ -42,6 +44,7 @@ const useDeleteWishStoreMutation = ({
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: storeQueryKey.lists() });
     openToast({ message: `💖 ${storeName}을 찜한 스토어에서 삭제했어요.` });
+    if (successCallback) successCallback();
   };
 
   const onError = ({ message }: Error) => {

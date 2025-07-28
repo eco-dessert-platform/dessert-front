@@ -11,10 +11,16 @@ const TitleSection = async () => {
   const isLoggedIn = !!accessToken;
 
   let preference;
+  let nickname;
+
   if (isLoggedIn) {
     try {
-      const recommendationStep1 = await userService.getRecommendationStep1();
+      const [recommendationStep1, userProfile] = await Promise.all([
+        userService.getRecommendationStep1(),
+        userService.getUserProfile()
+      ]);
       preference = recommendationStep1.preferenceType;
+      nickname = userProfile.nickname;
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
     }
@@ -42,7 +48,9 @@ const TitleSection = async () => {
       </div>
       {isLoggedIn && preference && (
         <p className="typo-body-12-regular mt-[6px] whitespace-pre-line text-gray-600">
-          {genGuidanceMessage(preference)}
+          {preference?.[0] === undefined
+            ? `${nickname}님을 위한 위한 맞춤 추천 설정을 해보세요!`
+            : genGuidanceMessage(preference)}
         </p>
       )}
     </PaddingWrapper>

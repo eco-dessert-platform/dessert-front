@@ -31,7 +31,7 @@ const ProductOptionsSection = ({ productId }: { productId: number }) => {
             onClick={() => handleCategoryClick(product.id)}
           />
           {activeOption[product.id] && (
-            <PaddingWrapper className="flex flex-col gap-4 pt-0 pt-[16px]">
+            <PaddingWrapper className="flex flex-col gap-4 pt-[16px]">
               <OrderAvailableDays product={product} />
               <NutrientInfo product={product} />
             </PaddingWrapper>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, startTransition } from 'react';
+import { startTransition, useEffect } from 'react';
 import Button from '@/shared/components/Button';
 import { RefreshIcon } from '@/shared/components/icons';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
@@ -13,9 +13,8 @@ interface Props {
 }
 
 const CategoryOption = ({ product, isExpended, onClick }: Props) => {
-
   const visible = !(
-    product.orderType.orderType === "WEEK" &&
+    product.orderType.orderType === 'WEEK' &&
     product.orderType.monday &&
     product.orderType.tuesday &&
     product.orderType.wednesday &&
@@ -31,7 +30,6 @@ const CategoryOption = ({ product, isExpended, onClick }: Props) => {
     product.nutrient.calories === null
   );
 
-
   return (
     <PaddingWrapper
       className={cn(
@@ -39,9 +37,11 @@ const CategoryOption = ({ product, isExpended, onClick }: Props) => {
         product.isSoldout && 'bg-gray-100'
       )}
     >
-      <button type="button"  onClick={visible ? onClick : undefined}
-
-              className="flex w-full items-center justify-between">
+      <button
+        type="button"
+        onClick={visible ? onClick : undefined}
+        className="flex w-full items-center justify-between"
+      >
         <div className="flex gap-x-[5px]">
           <span>{product.isSoldout && '(품절)'}</span>
           <span>{product.title}</span>

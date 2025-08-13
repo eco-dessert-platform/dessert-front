@@ -1,20 +1,16 @@
-
 import productService from '@/domains/product/queries/service';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import React from 'react';
 
-
 interface Props {
   productId: number;
 }
 
-
 const MarkdownImage = (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
   /* eslint-disable @next/next/no-img-element */
-  <img alt="상품 상세" {...props} className="w-full h-auto" />
+  <img alt="상품 상세" {...props} className="h-auto w-full" />
 );
-
 
 const BoardDetailsSection = async ({ productId }: Props) => {
   const {
@@ -27,7 +23,7 @@ const BoardDetailsSection = async ({ productId }: Props) => {
         <ReactMarkdown
           rehypePlugins={[rehypeRaw]}
           components={{
-            img: MarkdownImage,
+            img: MarkdownImage
           }}
         >
           {boardDetail}

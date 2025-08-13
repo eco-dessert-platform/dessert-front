@@ -3,7 +3,7 @@ import productService from '@/domains/product/queries/service';
 import Header from '@/shared/components/Header';
 import DefaultLayout from '@/shared/components/DefaultLayout';
 import { productQueryKey } from '@/shared/queries/queryKey';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { GenerateMetadataProps } from '@/shared/types/generateMetadata';
 import { getDynamicMetadata } from '@/shared/utils/metadata';
 

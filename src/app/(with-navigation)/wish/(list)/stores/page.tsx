@@ -2,7 +2,7 @@ import WishStroeList from '@/blocks/wish/(list)/stores/WishStoreList';
 import { storeQueryKey } from '@/shared/queries/queryKey';
 import wishService from '@/domains/wish/queries/service';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 const WishStoresPage = async () => {
   const queryClient = new QueryClient();

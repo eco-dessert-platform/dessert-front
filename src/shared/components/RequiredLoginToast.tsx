@@ -14,8 +14,8 @@ const RequiredLoginToast = () => {
 
   return (
     <Link className="hover:underline" href={`${PATH.login}?from=${encodedPath}`}>
-        로그인
-      </Link>
+      로그인
+    </Link>
   );
 };
 

@@ -1,4 +1,4 @@
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { reivewQueryOption } from '@/domains/review/queries/useReviewQuery';
 import reviewService from '@/domains/review/queries/service';

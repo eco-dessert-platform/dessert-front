@@ -20,7 +20,7 @@ const SearchInput = ({
   <div
     className={cn(
       'flex w-full items-center gap-[6px] rounded-[50px] px-[16px] py-[10px]',
-      warning ? 'border-secondaryOrangeRed bg-secondaryPink border-[1px]' : 'bg-redGray-30'
+      warning ? 'border-secondaryOrangeRed bg-secondary-pink border-[1px]' : 'bg-red-gray-30'
     )}
   >
     {warning ? <SearchIcon shape="red-16" /> : <SearchIcon shape="gray-16" />}
@@ -28,7 +28,7 @@ const SearchInput = ({
       type="text"
       className={cn(
         'typo-title-14-medium flex-1 rounded-none border-none bg-pink-500 p-0 text-gray-900 outline-hidden',
-        warning ? 'bg-secondaryPink' : 'bg-redGray-30'
+        warning ? 'bg-secondary-pink' : 'bg-red-gray-30'
       )}
       value={value}
       onChange={onChange}

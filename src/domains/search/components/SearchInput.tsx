@@ -20,7 +20,7 @@ const SearchInput = ({
   <div
     className={cn(
       'flex w-full items-center gap-[6px] rounded-[50px] px-[16px] py-[10px]',
-      warning ? 'border-secondaryOrangeRed bg-secondary-pink border-[1px]' : 'bg-red-gray-30'
+      warning ? 'border-secondary-orange-red bg-secondary-pink border-[1px]' : 'bg-red-gray-30'
     )}
   >
     {warning ? <SearchIcon shape="red-16" /> : <SearchIcon shape="gray-16" />}

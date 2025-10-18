@@ -35,7 +35,6 @@ const CheckSection = ({ className }: Props) => {
         <span className="typo-title-16-medium text-gray-900">모두 동의합니다.</span>
       </CheckBox>
       <GrayDivider color="gray100" />
-      <p className="typo-body-12-regular text-primary-orange-red">유효성체크문구영역</p>
       <CheckBox
         name="isTermsOfServiceAccepted"
         isChecked={watch('isTermsOfServiceAccepted')}

@@ -2,7 +2,6 @@
 
 import { useId, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import ButtonNewver from '@/shared/components/ButtonNewver';
 import Input from '@/shared/components/Input';
 import useNicknameDoubleCheckMutation from '../../queries/useNicknameDoubleCheckMutation';
 
@@ -60,15 +59,13 @@ const NicknameInput = () => {
         maxLength={MAX_LENGTH}
         className="typo-title-14-medium"
         button={
-          <ButtonNewver
+          <button 
             type="button"
-            color="gray"
-            radius="square"
-            className="typo-body-12-medium my-[14px] h-[30px] min-w-[64px] px-0"
             onClick={nickDoubleCheck}
+            className="typo-body-12-medium my-[14px] h-[30px] min-w-[64px] px-0 rounded-[10px] text-gray-50 bg-gray-700 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white"
           >
-            중복확인
-          </ButtonNewver>
+              중복확인
+          </button>
         }
       />
       {data?.message && isNickNameMessageVisible && (

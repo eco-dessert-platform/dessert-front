@@ -33,7 +33,7 @@ const SearchProducts = async ({ searchParams: { query: keyword = '' } }: SearchP
 
   return (
     <>
-      <CategoryTab />
+      <CategoryTab filterFamilyId={FILTER_FAMILY_ID.search} />
       <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.search} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SearchProductList keyword={keyword} />

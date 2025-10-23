@@ -1,14 +1,13 @@
 'use client';
 
 import React from 'react';
-import { useAtom } from 'jotai';
 
-import { filterValueAtom } from '@/domains/product/atoms'; // Change to Jotai atom
 import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { FILTER_VALUES, INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import { getIngredientTag, getPriceTag } from '@/domains/product/utils/getTag';
 import { isEqualArray } from '@/domains/product/utils/isEqualArray';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { useFilter } from '@/shared/hooks/useFilter';
 import ProductSortSelect from './ProductSortSelect';
 import FilterButton from './FilterButton';
 import MainBoardCount from './MainBoardCount';
@@ -19,17 +18,18 @@ interface Props {
 }
 
 const SortingFilterSection = ({ filterFamilyId }: Props) => {
-  const [filterValue, setFilterValue] = useAtom(filterValueAtom);
+  const [filterValue, setFilterValue] = useFilter(filterFamilyId);
 
   return (
     <PaddingWrapper className="flex flex-col gap-y-[10px] border-b border-gray-100 pb-[12px]">
       <div className="flex items-center justify-between">
         {filterFamilyId === 'main' && <MainBoardCount />}
         {filterFamilyId === 'search' && <SearchBoardCount />}
-        <ProductSortSelect />
+        <ProductSortSelect filterFamilyId={filterFamilyId} />
       </div>
       <div className="flex gap-[4px]">
         <FilterButton
+          filterFamilyId={filterFamilyId}
           text={
             isEqualArray(filterValue.tags, INIT_FILTER_VALUE.tags)
               ? FILTER_VALUES.tags.name
@@ -41,6 +41,7 @@ const SortingFilterSection = ({ filterFamilyId }: Props) => {
           }}
         />
         <FilterButton
+          filterFamilyId={filterFamilyId}
           text={
             isEqualArray(filterValue.price, INIT_FILTER_VALUE.price)
               ? FILTER_VALUES.price.name

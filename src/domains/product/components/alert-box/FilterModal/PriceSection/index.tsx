@@ -2,13 +2,20 @@
 
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { filterValueAtom, priceAtom } from '@/domains/product/atoms';
-import PriceInputContainer from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceInputContainer';
-import PaddingWrapper from '@/shared/components/PaddingWrapper';
-import PriceSlide from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceSlide';
 
-const PriceSection = () => {
-  const [filterValue] = useAtom(filterValueAtom);
+import { priceAtom } from '@/domains/product/atoms';
+import PriceInputContainer from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceInputContainer';
+import PriceSlide from '@/domains/product/components/alert-box/FilterModal/PriceSection/PriceSlide';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
+import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { useFilter } from '@/shared/hooks/useFilter';
+
+interface Props {
+  filterFamilyId: FilterFamilyIDType;
+}
+
+const PriceSection = ({ filterFamilyId }: Props) => {
+  const [filterValue] = useFilter(filterFamilyId);
   const [price, setPrice] = useAtom(priceAtom);
 
   useEffect(() => {

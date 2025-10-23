@@ -2,22 +2,24 @@
 
 import React, { KeyboardEvent } from 'react';
 import FilterModal from '@/domains/product/components/alert-box/FilterModal';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import { CloseIcon } from '@/shared/components/icons';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import useModal from '@/shared/hooks/useModal';
 import { cn } from '@/shared/utils/cn';
 
 interface SelectProps {
+  filterFamilyId: FilterFamilyIDType;
   text: string;
   isFiltered?: boolean;
   onReset: () => void;
 }
 
-const FilterButton = ({ text, isFiltered = false, onReset }: SelectProps) => {
+const FilterButton = ({ filterFamilyId, text, isFiltered = false, onReset }: SelectProps) => {
   const { openModal } = useModal();
 
   const handleClick = () => {
-    openModal(<FilterModal />);
+    openModal(<FilterModal filterFamilyId={filterFamilyId} />);
   };
 
   const handleResetClick = (e: React.MouseEvent | KeyboardEvent) => {

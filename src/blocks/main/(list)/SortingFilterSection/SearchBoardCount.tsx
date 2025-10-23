@@ -1,12 +1,12 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useAtom } from 'jotai';
-import { filterValueAtom } from '@/domains/product/atoms'; // Change to Jotai atom
 import { useGetSearchProductsQuery } from '@/domains/search/queries/useGetSearchProductsQuery';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useFilter } from '@/shared/hooks/useFilter';
 
 const SearchBoardCount = () => {
-  const [filterValue] = useAtom(filterValueAtom);
+  const [filterValue] = useFilter(FILTER_FAMILY_ID.search);
   const searchParams = useSearchParams();
   const query = searchParams.get('query');
   const { data } = useGetSearchProductsQuery({ keyword: query || '', filterValue });

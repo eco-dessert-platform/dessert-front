@@ -5,11 +5,9 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 
+import { mainCategoryAtom } from '@/domains/product/atoms';
 import PATH from '@/shared/constants/path';
 import useToggle from '@/shared/hooks/useToggle';
-
-import { mainCategoryAtom, filterValueAtom } from '@/domains/product/atoms';
-import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
 
@@ -23,7 +21,6 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
   const router = useRouter();
 
   const [, setMainCategory] = useAtom(mainCategoryAtom);
-  const [, setFilterValue] = useAtom(filterValueAtom);
 
   const { isActive, toggle } = useToggle(true);
 
@@ -31,7 +28,6 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
     toggle();
     setMainCategory(title);
     if (subCategories.length === 0) {
-      setFilterValue(INIT_FILTER_VALUE);
       router.push(PATH.mainProductList);
     }
   };

@@ -1,6 +1,7 @@
 import ProductsList from '@/blocks/home/BestProductsSection/ProductsList';
 import TitleSection from '@/blocks/home/BestProductsSection/TitleSection';
 import CategoryTab from '@/domains/product/components/CategoryTab';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import productService from '@/domains/product/queries/service';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
@@ -29,7 +30,7 @@ const BestProductsSection = async () => {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <TitleSection />
       {/* 임시로 random 데이터 노출 시 카테고리 탭 노출하지 않도록 함 */}
-      <CategoryTab />
+      <CategoryTab filterFamilyId={FILTER_FAMILY_ID.home} />
       <ProductsList />
     </HydrationBoundary>
   );

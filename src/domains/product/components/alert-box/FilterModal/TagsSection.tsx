@@ -2,14 +2,20 @@
 
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { filterValueAtom, tagsAtom } from '@/domains/product/atoms';
+import { tagsAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import { cn } from '@/shared/utils/cn';
+import { useFilter } from '@/shared/hooks/useFilter';
 
-const TagsSection = () => {
-  const [filterValue] = useAtom(filterValueAtom);
+interface Props {
+  filterFamilyId: FilterFamilyIDType;
+}
+
+const TagsSection = ({ filterFamilyId }: Props) => {
+  const [filterValue] = useFilter(filterFamilyId);
   const [selectedTags, setSelectedTags] = useAtom(tagsAtom);
   const uniqueValue = '전체';
 

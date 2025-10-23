@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 
-import { categoryAtom, filterValueAtom, mainCategoryAtom } from '@/domains/product/atoms';
+import { categoryAtom, mainCategoryAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
-import { cn } from '@/shared/utils/cn';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import useCategory from '@/domains/product/hooks/useCategory';
+import { cn } from '@/shared/utils/cn';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import Radio from '@/shared/components/Radio';
+import { useFilter } from '@/shared/hooks/useFilter';
 
 const CategorySection = () => {
-  const [filterValue] = useAtom(filterValueAtom);
+  const [filterValue] = useFilter(FILTER_FAMILY_ID.home);
   const [selectedCategory, setSelectedCategory] = useAtom(categoryAtom);
   const [mainCategory] = useAtom(mainCategoryAtom);
   const { elaborateCategory, simplifyCategory } = useCategory();

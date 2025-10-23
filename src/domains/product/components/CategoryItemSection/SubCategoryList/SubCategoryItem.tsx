@@ -1,18 +1,18 @@
 import Link from 'next/link';
-import { useSetAtom } from 'jotai';
 
-import { filterValueAtom } from '@/domains/product/atoms'; // Using the Jotai atom here
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import useCategory from '@/domains/product/hooks/useCategory';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import ArrowIcons from '@/shared/components/icons/ArrowIcons';
 import PATH from '@/shared/constants/path';
+import { useFilter } from '@/shared/hooks/useFilter';
 
 interface SubCategoryItemProps {
   categoryItem: string;
 }
 
 const SubCategoryItem = ({ categoryItem }: SubCategoryItemProps) => {
-  const setFilterValue = useSetAtom(filterValueAtom); // Use filterValueAtom instead of filterValueState
+  const [, setFilterValue] = useFilter(FILTER_FAMILY_ID.main);
   const { elaborateCategory } = useCategory();
 
   const clickCategory = (selectedItem: string) => {

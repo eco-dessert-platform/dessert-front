@@ -16,7 +16,7 @@ const UserInfoSection = async () => {
           <div className="rounded-[6px] bg-gray-100">
             {profileImg ? (
               <Image
-                src={profileImg}
+                src={`${profileImg}`}
                 width={30}
                 height={30}
                 alt={`${nickname}'s profile image`}

@@ -49,6 +49,12 @@ module.exports = {
         }
       };
       const typoUtilities = {
+        '.typo-error-24-medium': {
+          'font-size': '24px',
+          'font-weight': 500,
+          'line-height': '150%',
+          'letter-spacing': '-0.02em'
+        },
         '.typo-heading-20-semibold': {
           'font-size': '20px',
           'font-weight': 600,

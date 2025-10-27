@@ -2,20 +2,25 @@
 
 import { useAtom } from 'jotai';
 import {
-  filterValueAtom,
   categoryAtom,
   tagsAtom,
   priceAtom,
   orderAvailableTodayAtom
 } from '@/domains/product/atoms';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import ButtonNewver from '@/shared/components/ButtonNewver';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import useModal from '@/shared/hooks/useModal';
+import { useFilter } from '@/shared/hooks/useFilter';
 import ResetIcon from '@public/assets/icons/reset.svg';
 
-const ButtonSection = () => {
-  const [, setFilterValue] = useAtom(filterValueAtom);
+interface Props {
+  filterFamilyId: FilterFamilyIDType;
+}
+
+const ButtonSection = ({ filterFamilyId }: Props) => {
+  const [, setFilterValue] = useFilter(filterFamilyId);
   const [category, setCategory] = useAtom(categoryAtom);
   const [tags, setTags] = useAtom(tagsAtom);
   const [price, setPrice] = useAtom(priceAtom);

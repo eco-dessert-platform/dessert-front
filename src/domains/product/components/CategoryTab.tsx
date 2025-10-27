@@ -3,14 +3,20 @@
 import { useId, useRef } from 'react';
 import { LayoutGroup, motion } from 'framer-motion';
 import { useAtom } from 'jotai';
-import { filterValueAtom, mainCategoryAtom } from '@/domains/product/atoms';
+import { mainCategoryAtom } from '@/domains/product/atoms';
 import { FILTER_VALUES } from '@/domains/product/constants/filterValues';
 import useCategory from '@/domains/product/hooks/useCategory';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import TabButton from '@/shared/components/TabButton';
+import { useFilter } from '@/shared/hooks/useFilter';
 
-const CategoryTab = () => {
+interface Props {
+  filterFamilyId: FilterFamilyIDType;
+}
+
+const CategoryTab = ({ filterFamilyId }: Props) => {
   const id = useId();
-  const [filterValue, setFilterValue] = useAtom(filterValueAtom);
+  const [filterValue, setFilterValue] = useFilter(filterFamilyId);
   const [mainCategory] = useAtom(mainCategoryAtom);
   const { elaborateCategory, simplifyCategory } = useCategory();
   const tabContainerRef = useRef<HTMLDivElement>(null);

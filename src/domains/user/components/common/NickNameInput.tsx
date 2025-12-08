@@ -59,12 +59,12 @@ const NicknameInput = () => {
         maxLength={MAX_LENGTH}
         className="typo-title-14-medium"
         button={
-          <button 
+          <button
             type="button"
             onClick={nickDoubleCheck}
-            className="typo-body-12-medium my-[14px] h-[30px] min-w-[64px] px-0 rounded-[10px] text-gray-50 bg-gray-700 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white"
+            className="typo-body-12-medium my-[14px] h-[30px] min-w-[64px] rounded-[10px] bg-gray-700 px-0 text-gray-50 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white"
           >
-              중복확인
+            중복확인
           </button>
         }
       />

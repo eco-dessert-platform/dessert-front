@@ -1,7 +1,7 @@
 import NotificationListSection from '@/blocks/user/(policy)/NotificationListSection';
 import { notificationQueryKey } from '@/domains/user/queries/queryKey';
 import userService from '@/domains/user/queries/service';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
 const Notifications = async () => {

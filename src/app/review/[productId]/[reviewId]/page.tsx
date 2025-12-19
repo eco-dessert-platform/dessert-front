@@ -1,5 +1,5 @@
 import Header from '@/shared/components/Header';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { reviewDetailQueryOptions } from '@/domains/review/queries/useReviewDetailQuery';
 import ReviewSection from './_blocks/ReviewSection';
 

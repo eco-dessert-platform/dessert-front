@@ -1,11 +1,12 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
-import { filterValueAtom } from '@/domains/product/atoms';
 import { useGetBoardsCountQuery } from '@/domains/product/queries/useGetBoardsCountQuery';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { useFilter } from '@/shared/hooks/useFilter';
 
 const MainBoardCount = () => {
-  const filterValue = useAtomValue(filterValueAtom);
+  const [filterValue] = useFilter(FILTER_FAMILY_ID.main);
+
   const { sort, ...filterValueWithoutSort } = filterValue;
   const { data: boardsCount } = useGetBoardsCountQuery(filterValueWithoutSort);
 

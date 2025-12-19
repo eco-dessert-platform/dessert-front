@@ -5,13 +5,14 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 
+import { mainCategoryAtom } from '@/domains/product/atoms';
 import PATH from '@/shared/constants/path';
 import useToggle from '@/shared/hooks/useToggle';
-
-import { mainCategoryAtom, filterValueAtom } from '@/domains/product/atoms';
-import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
+import { useFilter } from '@/shared/hooks/useFilter';
 import MainCategoryItem from './MainCategoryItem';
 import SubcategoryList from './SubCategoryList';
+import { FILTER_FAMILY_ID } from '../../constants/filterFamilyID';
+import { INIT_FILTER_VALUE } from '../../constants/filterValues';
 
 interface CategoryItemProps {
   shape: string;
@@ -23,15 +24,15 @@ const CategoryItemSection = ({ shape, title, subCategories }: CategoryItemProps)
   const router = useRouter();
 
   const [, setMainCategory] = useAtom(mainCategoryAtom);
-  const [, setFilterValue] = useAtom(filterValueAtom);
+  const [, setFilterValue] = useFilter(FILTER_FAMILY_ID.main);
 
   const { isActive, toggle } = useToggle(true);
 
   const handleCategoryClick = () => {
     toggle();
+    setFilterValue(INIT_FILTER_VALUE);
     setMainCategory(title);
     if (subCategories.length === 0) {
-      setFilterValue(INIT_FILTER_VALUE);
       router.push(PATH.mainProductList);
     }
   };

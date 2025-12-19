@@ -1,14 +1,20 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 
-import { filterValueAtom, orderAvailableTodayAtom } from '@/domains/product/atoms';
+import { orderAvailableTodayAtom } from '@/domains/product/atoms';
+import { FilterFamilyIDType } from '@/domains/product/types/filterType';
 import CheckBox from '@/shared/components/Checkbox';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
+import { useFilter } from '@/shared/hooks/useFilter';
 
-const IsOrderAvailableCheckbox = () => {
-  const filterValue = useAtomValue(filterValueAtom);
+interface Props {
+  filterFamilyId: FilterFamilyIDType;
+}
+
+const IsOrderAvailableCheckbox = ({ filterFamilyId }: Props) => {
+  const [filterValue] = useFilter(filterFamilyId);
   const [orderAvailableToday, setOrderAvailableToday] = useAtom(orderAvailableTodayAtom);
 
   useEffect(() => {

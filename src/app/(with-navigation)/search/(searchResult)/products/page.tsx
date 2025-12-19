@@ -7,6 +7,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { productQueryKey } from '@/shared/queries/queryKey';
 import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 import searchService from '@/domains/search/queries/service';
+import CategoryTab from '@/domains/product/components/CategoryTab';
 
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 
@@ -32,6 +33,7 @@ const SearchProducts = async ({ searchParams: { query: keyword = '' } }: SearchP
 
   return (
     <>
+      <CategoryTab filterFamilyId={FILTER_FAMILY_ID.search} />
       <SortingFilterSection filterFamilyId={FILTER_FAMILY_ID.search} />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SearchProductList keyword={keyword} />

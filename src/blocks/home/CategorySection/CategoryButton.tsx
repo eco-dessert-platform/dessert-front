@@ -1,7 +1,9 @@
 import Link from 'next/link';
-import { useAtom } from 'jotai';
-import { filterValueAtom } from '@/domains/product/atoms';
+
 import PATH from '@/shared/constants/path';
+import { useFilter } from '@/shared/hooks/useFilter';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
+import { INIT_FILTER_VALUE } from '@/domains/product/constants/filterValues';
 
 function getCategoryFilterOption(name: string) {
   switch (name) {
@@ -41,10 +43,10 @@ interface CategoryButtonProps {
 }
 
 const CategoryButton = ({ name, icon }: CategoryButtonProps) => {
-  const [, setFilterValue] = useAtom(filterValueAtom);
+  const [, setFilterValue] = useFilter(FILTER_FAMILY_ID.main);
 
   const handleClickButton = () => {
-    setFilterValue((prev) => ({ ...prev, ...getCategoryFilterOption(name) }));
+    setFilterValue({ ...INIT_FILTER_VALUE, ...getCategoryFilterOption(name) });
   };
 
   return (

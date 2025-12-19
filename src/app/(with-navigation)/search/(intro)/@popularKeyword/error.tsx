@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, startTransition } from 'react';
+import { startTransition, useEffect } from 'react';
 import Button from '@/shared/components/Button';
 import { RefreshIcon } from '@/shared/components/icons';
 
@@ -28,6 +28,7 @@ const PopularKeywordError = ({
 
   return (
     <div className="typo-title-14-regular flex flex-col items-center text-gray-500">
+      <p className="typo-error-24-medium">404</p>
       <p>네트워크 문제로 일시적인 오류가 발생했어요.</p>
       <p>다시 시도해주세요.</p>
       <Button

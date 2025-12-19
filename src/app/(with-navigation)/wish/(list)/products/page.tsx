@@ -1,4 +1,4 @@
-import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { wishQueryKey } from '@/domains/wish/queries/queryKey';
 import wishService from '@/domains/wish/queries/service';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';

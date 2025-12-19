@@ -2,17 +2,17 @@
 
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useAtomValue } from 'jotai';
 
-import { filterValueAtom } from '@/domains/product/atoms';
 import ProductCard from '@/domains/product/components/ProductCard';
 import SkeletonProductCardList from '@/domains/product/components/SkeletonProductCardList';
 import { useGetAllCategoryProductsQuery } from '@/domains/product/queries/useGetAllCategoryProductsQuery';
+import { FILTER_FAMILY_ID } from '@/domains/product/constants/filterFamilyID';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import SadBbangleBox from '@/shared/components/SadBbangleBox';
+import { useFilter } from '@/shared/hooks/useFilter';
 
 const MainProductList = () => {
-  const filterValue = useAtomValue(filterValueAtom);
+  const [filterValue] = useFilter(FILTER_FAMILY_ID.main);
 
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAllCategoryProductsQuery(filterValue);

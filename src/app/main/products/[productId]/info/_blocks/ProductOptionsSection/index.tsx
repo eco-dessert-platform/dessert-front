@@ -7,7 +7,6 @@ import useGetProductOptionQuery from '@/domains/product/queries/useGetProductOpt
 import { ProductType } from '@/domains/product/types/productInfoType';
 import PaddingWrapper from '@/shared/components/PaddingWrapper';
 import CategoryOption from './CategoryOption';
-import IngredientInfo from './IngredientInfo';
 import NutrientInfo from './NutrientInfo';
 import OrderAvailableDays from './OrderAvailableDays';
 
@@ -32,8 +31,7 @@ const ProductOptionsSection = ({ productId }: { productId: number }) => {
             onClick={() => handleCategoryClick(product.id)}
           />
           {activeOption[product.id] && (
-            <PaddingWrapper className="flex flex-col gap-4 pt-0">
-              <IngredientInfo product={product} />
+            <PaddingWrapper className="flex flex-col gap-4 pt-[16px]">
               <OrderAvailableDays product={product} />
               <NutrientInfo product={product} />
             </PaddingWrapper>

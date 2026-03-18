@@ -35,7 +35,7 @@
     "eslint-config-prettier": "^9.1.0",
     "framer-motion": "^11.1.7",
     "jotai": "^2.12.4",
-    "next": "15.3.2",
+    "next": "15.3.6",
     "qs": "^6.12.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",

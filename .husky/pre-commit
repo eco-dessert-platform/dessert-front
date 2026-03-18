@@ -4,7 +4,11 @@
 
 # macOS인 경우
 if [ "$(uname)" = "Darwin" ]; then
-  echo "Running on macOS - using yarn directly"
+  echo "Running on macOS - using yarn with corepack"
+  # Yarn 4를 사용하기 위해 corepack 활성화
+  corepack enable 2>/dev/null || true
+  corepack prepare yarn@4.2.2 --activate 2>/dev/null || true
+  
   yarn lint-staged
   yarn check-types
   yarn format
@@ -12,8 +16,12 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # WSL/Linux인 경우
-if grep -qEi "Microsoft|WSL" /proc/version; then
-  echo "Running in WSL - using yarn directly"
+if [ -f /proc/version ] && grep -qEi "Microsoft|WSL" /proc/version 2>/dev/null; then
+  echo "Running in WSL - using yarn with corepack"
+  # Yarn 4를 사용하기 위해 corepack 활성화
+  corepack enable 2>/dev/null || true
+  corepack prepare yarn@4.2.2 --activate 2>/dev/null || true
+  
   yarn lint-staged
   yarn check-types
   yarn format
@@ -22,4 +30,33 @@ fi
 
 # 그 외 (Windows 직접 실행 시)
 echo "Running from Windows - use WSL with NVM/Node 22"
-wsl -d Ubuntu bash ./scripts/wsl-pre-commit.sh
+# Windows에서 실행 시, 현재 Git 저장소 경로를 가져와서 WSL로 전달
+GIT_DIR=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+
+# Windows 경로를 WSL 경로로 변환
+# \\wsl.localhost\Ubuntu\home\... -> /home/...
+# C:\Users\... -> /mnt/c/Users/...
+convert_to_wsl_path() {
+  local win_path="$1"
+  local wsl_path
+  
+  # 백슬래시를 슬래시로 변환
+  wsl_path=$(echo "$win_path" | sed 's|\\|/|g')
+  
+  # \\wsl.localhost/Ubuntu/ 또는 //wsl.localhost/Ubuntu/ 경로 처리
+  if echo "$wsl_path" | grep -qE '^//?wsl\.localhost/Ubuntu/'; then
+    wsl_path=$(echo "$wsl_path" | sed 's|^//*wsl\.localhost/Ubuntu/|/|')
+  # C:/ 같은 Windows 드라이브 경로 처리
+  elif echo "$wsl_path" | grep -qE '^[A-Z]:/'; then
+    drive=$(echo "$wsl_path" | cut -c1 | tr '[:upper:]' '[:lower:]')
+    wsl_path=$(echo "$wsl_path" | sed "s|^[A-Z]:/|/mnt/$drive/|")
+  fi
+  
+  echo "$wsl_path"
+}
+
+WSL_PATH=$(convert_to_wsl_path "$GIT_DIR")
+echo "Converting path: $GIT_DIR -> $WSL_PATH"
+
+# WSL에서 실행
+wsl -d Ubuntu bash -c "cd '$WSL_PATH' && bash ./scripts/wsl-pre-commit.sh"

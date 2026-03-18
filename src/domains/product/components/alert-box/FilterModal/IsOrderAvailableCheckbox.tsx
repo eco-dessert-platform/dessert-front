@@ -13,7 +13,6 @@ interface Props {
   filterFamilyId: FilterFamilyIDType;
 }
 
-
 const IsOrderAvailableCheckbox = ({ filterFamilyId }: Props) => {
   const [filterValue] = useFilter(filterFamilyId);
   const [orderAvailableToday, setOrderAvailableToday] = useAtom(orderAvailableTodayAtom);

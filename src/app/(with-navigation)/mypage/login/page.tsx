@@ -11,7 +11,7 @@ import {
 } from '@/domains/user/queries/useLoginMutation';
 import { LOGIN_TYPE } from '@/shared/constants/message';
 import KakaoLoginButton from './_blocks/KakaoLoginButton';
-import GoogleLoginButton from './_blocks/GoogleLoginButton';
+// import GoogleLoginButton from './_blocks/GoogleLoginButton';
 
 const LoginPage = () => {
   const [popup, setPopup] = useAtom(socialLoginPopupAtom);
@@ -57,7 +57,7 @@ const LoginPage = () => {
       />
       <div className="flex flex-col gap-3">
         <KakaoLoginButton />
-        <GoogleLoginButton />
+        {/* <GoogleLoginButton /> */}
       </div>
     </div>
   );

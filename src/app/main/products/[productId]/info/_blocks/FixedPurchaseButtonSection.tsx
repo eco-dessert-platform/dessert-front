@@ -66,19 +66,6 @@ const ExternalPurchaseButton = ({ purchaseUrl }: { purchaseUrl: string }) => {
   );
 };
 
-const getShippingScheduleText = ({ orderType }: ProductType) => {
-  if (orderType.orderType !== 'DATE' || !orderType.orderEndDate) return null;
-
-  const date = new Date(orderType.orderEndDate);
-  if (Number.isNaN(date.getTime())) return null;
-
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const weekday = date.toLocaleDateString('ko-KR', { weekday: 'short' });
-
-  return `${month}월 ${day}일(${weekday}) 이내 발송 예정`;
-};
-
 type SelectedOption = {
   productId: number;
   quantity: number;
@@ -222,64 +209,51 @@ const PurchaseOptionBottomSheet = ({
             )}
           </div>
 
-          {selectedProducts.map(({ product, quantity }) => {
-            const shippingScheduleText = getShippingScheduleText(product);
+          {selectedProducts.map(({ product, quantity }) => (
+            <div
+              key={product.id}
+              className="mt-[12px] flex flex-col gap-[14px] rounded-[8px] bg-gray-50 p-[14px]"
+            >
+              <div className="flex items-start justify-between gap-[12px]">
+                <p className="typo-title-14-semibold text-gray-900">{product.title}</p>
+                <button
+                  type="button"
+                  aria-label="선택한 옵션 삭제"
+                  className={cn('cursor-pointer', isSingleOption && 'cursor-not-allowed opacity-0')}
+                  disabled={isSingleOption}
+                  onClick={() => resetSelectedOption(product.id)}
+                >
+                  <CloseIcon shape="no-bg-24" />
+                </button>
+              </div>
 
-            return (
-              <div
-                key={product.id}
-                className="mt-[12px] flex flex-col gap-[14px] rounded-[8px] bg-gray-50 p-[14px]"
-              >
-                <div className="flex items-start justify-between gap-[12px]">
-                  <p className="typo-title-14-semibold text-gray-900">{product.title}</p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-[14px]">
                   <button
                     type="button"
-                    aria-label="선택한 옵션 삭제"
-                    className={cn(
-                      'cursor-pointer',
-                      isSingleOption && 'cursor-not-allowed opacity-0'
-                    )}
-                    disabled={isSingleOption}
-                    onClick={() => resetSelectedOption(product.id)}
+                    aria-label="수량 줄이기"
+                    className="size-[28px] cursor-pointer rounded-full bg-white text-gray-900 disabled:cursor-not-allowed disabled:text-gray-300"
+                    disabled={quantity === 1}
+                    onClick={() => updateQuantity(product.id, quantity - 1)}
                   >
-                    <CloseIcon shape="no-bg-24" />
+                    -
+                  </button>
+                  <span className="typo-title-14-medium min-w-[20px] text-center">{quantity}</span>
+                  <button
+                    type="button"
+                    aria-label="수량 늘리기"
+                    className="size-[28px] cursor-pointer rounded-full bg-white text-gray-900"
+                    onClick={() => updateQuantity(product.id, quantity + 1)}
+                  >
+                    +
                   </button>
                 </div>
-
-                {shippingScheduleText && (
-                  <p className="typo-body-12-medium text-gray-500">{shippingScheduleText}</p>
-                )}
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-[14px]">
-                    <button
-                      type="button"
-                      aria-label="수량 줄이기"
-                      className="size-[28px] cursor-pointer rounded-full bg-white text-gray-900 disabled:cursor-not-allowed disabled:text-gray-300"
-                      disabled={quantity === 1}
-                      onClick={() => updateQuantity(product.id, quantity - 1)}
-                    >
-                      -
-                    </button>
-                    <span className="typo-title-14-medium min-w-[20px] text-center">
-                      {quantity}
-                    </span>
-                    <button
-                      type="button"
-                      aria-label="수량 늘리기"
-                      className="size-[28px] cursor-pointer rounded-full bg-white text-gray-900"
-                      onClick={() => updateQuantity(product.id, quantity + 1)}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <span className="typo-title-14-semibold">
-                    {(product.price * quantity).toLocaleString()}원
-                  </span>
-                </div>
+                <span className="typo-title-14-semibold">
+                  {(product.price * quantity).toLocaleString()}원
+                </span>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         <div className="-mx-[16px] shrink-0 border-t border-gray-100 bg-white px-[16px] pt-[18px] pb-[20px]">

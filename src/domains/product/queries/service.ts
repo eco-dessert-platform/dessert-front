@@ -2,7 +2,7 @@ import { IFilterType } from '@/domains/product/types/filterType';
 import { IProductType } from '@/domains/product/types/productType';
 import { transformFilterValueToQueryString } from '@/domains/product/utils/transformFilterValueToQueryString';
 import { IProductInfoType } from '@/domains/product/types/productInfoType';
-import { IReviewBadgeType } from '@/domains/product/types/productDetailType';
+import { IReviewBadgeType, ProductOptionResponse } from '@/domains/product/types/productDetailType';
 import { INITIAL_CURSOR } from '@/shared/constants/cursor';
 import { ERROR_MESSAGE } from '@/shared/constants/error';
 import Service from '@/shared/queries/service';
@@ -43,6 +43,19 @@ class ProductService extends Service {
   async getProductInfo(productId: number) {
     const res = await this.fetchExtend.get(`/boards/${productId}/new`);
     const { result, success, message, code }: ResultResponse<IProductInfoType> = await res.json();
+    if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
+
+    return result;
+  }
+
+  async getProductOptionStatus(productId: number) {
+    const res = await this.fetchExtend.get(`/boards/${productId}/product`);
+    const {
+      result,
+      success,
+      message,
+      code
+    }: ResultResponse<Pick<ProductOptionResponse, 'isSoldOut'>> = await res.json();
     if (!res.ok || !success) throw new Error(ERROR_MESSAGE.api({ code, message }));
 
     return result;

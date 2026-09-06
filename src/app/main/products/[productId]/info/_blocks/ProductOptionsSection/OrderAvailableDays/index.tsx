@@ -27,6 +27,8 @@ const OrderAvailableDays = ({ product }: Props) => {
   const { id: productOptionId, orderType, isSoldout, isBbangketting: notified } = product;
   const isWeek = orderType.orderType === 'WEEK';
   const isDate = orderType.orderType === 'DATE';
+  const { orderStartDate, orderEndDate } = orderType;
+  const hasOrderDate = !!orderStartDate && !!orderEndDate;
 
   const { openModal } = useModal();
   const { openPopup } = usePopup();
@@ -70,7 +72,7 @@ const OrderAvailableDays = ({ product }: Props) => {
 
     if (isWeek) {
       openModal(<WeekAlarmModal id={productOptionId} orderType={orderType} />);
-    } else if (isDate) {
+    } else if (isDate && hasOrderDate) {
       openModal(<DateAlarmModal product={product} notified={false} />);
     }
   };
@@ -83,11 +85,11 @@ const OrderAvailableDays = ({ product }: Props) => {
       <div className="flex items-center justify-between">
         <div className="flex gap-[4px]">
           {isWeek && <TypeOfWeek availableDays={product.orderType} />}
-          {isDate && (
+          {isDate && hasOrderDate && (
             <TypeOfDate
               availableDays={{
-                startDate: orderType.orderStartDate,
-                endDate: orderType.orderEndDate
+                startDate: orderStartDate,
+                endDate: orderEndDate
               }}
             />
           )}
@@ -96,7 +98,7 @@ const OrderAvailableDays = ({ product }: Props) => {
           type={isSoldout ? 'restock' : 'bbangcketing'}
           isAlarming={notified}
           onClick={isSoldout ? handleRestockBtnClick : handleBbangcketingBtnClick}
-          disabled={isDate && new Date(orderType.orderStartDate ?? 0) <= new Date()}
+          disabled={isDate && (!hasOrderDate || new Date(orderStartDate) <= new Date())}
           className="max-w-max"
         />
       </div>

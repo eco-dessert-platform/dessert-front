@@ -12,6 +12,7 @@ export { default as BellIcon } from './BellIcon';
 export { default as TimerIcon } from './TimerIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ArrowIcon } from './ArrowIcons';
+export { default as CartIcon } from './CartIcon';
 
 export { default as PlusIcon } from '@public/assets/icons/plus.svg';
 

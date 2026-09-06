@@ -45,6 +45,7 @@ export type ProductOptionType = WeekProductOptionType | DateProductOptionType;
 
 export interface ProductOptionResponse {
   boardIsBundled: boolean;
+  isSoldOut: boolean;
   products: Array<ProductOptionType>;
 }
 

@@ -39,8 +39,8 @@ export type OrderType = {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-  orderStartDate: string;
-  orderEndDate: string;
+  orderStartDate: string | null;
+  orderEndDate: string | null;
 };
 
 export type ProductType = {

@@ -1,20 +1,12 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { modalState } from '@/shared/atoms/alert';
 
 const useModal = () => {
   const [modal, setModal] = useAtom(modalState);
 
-  const openModal = (el: ReactNode) => setModal(el);
-  const closeModal = () => setModal(null);
-
-  useEffect(() => {
-    if (modal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [modal]);
+  const openModal = useCallback((el: ReactNode) => setModal(el), [setModal]);
+  const closeModal = useCallback(() => setModal(null), [setModal]);
 
   return { modal, openModal, closeModal };
 };

@@ -53,6 +53,8 @@ const DateAlarmModal = ({
     closeModal();
   };
 
+  if (!startDate) return null;
+
   const date = new Date(startDate).toLocaleDateString('ko-KR', {
     month: 'numeric',
     day: 'numeric',
